@@ -267,19 +267,38 @@
             margin-top: 8px;
         }
         
+        .tags-manager {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            min-height: 40px;
+            padding: 12px;
+            background: #000;
+            border-radius: 4px;
+            border: 1px solid #333;
+        }
+        
         .tag-item {
             background: #333;
-            padding: 6px 12px;
-            border-radius: 4px;
+            padding: 8px 12px;
+            border-radius: 20px;
             font-size: 13px;
             display: flex;
             align-items: center;
             gap: 8px;
+            transition: background 0.2s;
+        }
+        
+        .tag-item:hover {
+            background: #444;
         }
         
         .tag-remove {
             cursor: pointer;
             color: #999;
+            font-size: 16px;
+            line-height: 1;
+            transition: color 0.2s;
         }
         
         .tag-remove:hover {
@@ -402,12 +421,20 @@
                         <input type="text" id="heroPhoto" placeholder="photo.png">
                     </div>
                     <div class="form-group">
-                        <label>Tools (comma-separated)</label>
-                        <input type="text" id="heroTools" placeholder="Rive, Cursor, Figma, LottieFiles, After Effects">
+                        <label>Software Tags (Black)</label>
+                        <div id="toolsTagsList" class="tags-manager"></div>
+                        <div style="display: flex; gap: 8px; margin-top: 8px;">
+                            <input type="text" id="newToolTag" placeholder="Add new software tag" style="flex: 1;">
+                            <button type="button" class="btn-small" onclick="addToolTag()">Add</button>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Skills (comma-separated)</label>
-                        <input type="text" id="heroSkills" placeholder="UX motion, Motion systems, Interaction design">
+                        <label>Skill Tags (White)</label>
+                        <div id="skillsTagsList" class="tags-manager"></div>
+                        <div style="display: flex; gap: 8px; margin-top: 8px;">
+                            <input type="text" id="newSkillTag" placeholder="Add new skill tag" style="flex: 1;">
+                            <button type="button" class="btn-small" onclick="addSkillTag()">Add</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -579,8 +606,8 @@
             document.getElementById('heroName').value = contentData.hero.name;
             document.getElementById('heroSubtitle').value = contentData.hero.subtitle;
             document.getElementById('heroPhoto').value = contentData.hero.photo;
-            document.getElementById('heroTools').value = contentData.hero.tags.tools.join(', ');
-            document.getElementById('heroSkills').value = contentData.hero.tags.skills.join(', ');
+            renderToolsTags();
+            renderSkillsTags();
             
             // About
             document.getElementById('aboutPhoto').value = contentData.aboutMe.photo;
@@ -609,6 +636,85 @@
             // Experience
             renderExperience();
         }
+        
+        // Tags Management
+        function renderToolsTags() {
+            const list = document.getElementById('toolsTagsList');
+            list.innerHTML = contentData.hero.tags.tools.map((tag, i) => `
+                <div class="tag-item">
+                    <span>${tag}</span>
+                    <span class="tag-remove" onclick="removeToolTag(${i})">×</span>
+                </div>
+            `).join('');
+        }
+        
+        function renderSkillsTags() {
+            const list = document.getElementById('skillsTagsList');
+            list.innerHTML = contentData.hero.tags.skills.map((tag, i) => `
+                <div class="tag-item">
+                    <span>${tag}</span>
+                    <span class="tag-remove" onclick="removeSkillTag(${i})">×</span>
+                </div>
+            `).join('');
+        }
+        
+        function addToolTag() {
+            const input = document.getElementById('newToolTag');
+            const tag = input.value.trim();
+            if (tag) {
+                contentData.hero.tags.tools.push(tag);
+                input.value = '';
+                renderToolsTags();
+                showSuccess();
+            }
+        }
+        
+        function addSkillTag() {
+            const input = document.getElementById('newSkillTag');
+            const tag = input.value.trim();
+            if (tag) {
+                contentData.hero.tags.skills.push(tag);
+                input.value = '';
+                renderSkillsTags();
+                showSuccess();
+            }
+        }
+        
+        function removeToolTag(index) {
+            contentData.hero.tags.tools.splice(index, 1);
+            renderToolsTags();
+            showSuccess();
+        }
+        
+        function removeSkillTag(index) {
+            contentData.hero.tags.skills.splice(index, 1);
+            renderSkillsTags();
+            showSuccess();
+        }
+        
+        // Enter key to add tags
+        document.addEventListener('DOMContentLoaded', () => {
+            const newToolInput = document.getElementById('newToolTag');
+            const newSkillInput = document.getElementById('newSkillTag');
+            
+            if (newToolInput) {
+                newToolInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        addToolTag();
+                    }
+                });
+            }
+            
+            if (newSkillInput) {
+                newSkillInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        addSkillTag();
+                    }
+                });
+            }
+        });
         
         // Render Projects
         function renderProjects() {
@@ -770,8 +876,7 @@
             contentData.hero.name = document.getElementById('heroName').value;
             contentData.hero.subtitle = document.getElementById('heroSubtitle').value;
             contentData.hero.photo = document.getElementById('heroPhoto').value;
-            contentData.hero.tags.tools = document.getElementById('heroTools').value.split(',').map(s => s.trim());
-            contentData.hero.tags.skills = document.getElementById('heroSkills').value.split(',').map(s => s.trim());
+            // Tags are already updated in real-time by add/remove functions
             
             // Update About
             contentData.aboutMe.photo = document.getElementById('aboutPhoto').value;
