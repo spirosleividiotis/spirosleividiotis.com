@@ -126,13 +126,18 @@ function initializeExperience() {
     const visualPlaceholders = document.querySelectorAll('.visual-placeholder');
     const isMobile = checkIfMobile();
     
+    if (experienceItems.length === 0) {
+        console.log('Experience items not found, will retry on contentLoaded');
+        return;
+    }
+    
     // Keep track of the previous active index
     let previousExperienceIndex = 0;
     let isAnimating = false;
 
-// Only enable hover switching on desktop
-if (!isMobile) {
-    experienceItems.forEach((item, currentIndex) => {
+    // Only enable hover switching on desktop
+    if (!isMobile) {
+        experienceItems.forEach((item, currentIndex) => {
         item.addEventListener('mouseenter', () => {
             // Prevent rapid transitions while animating
             if (isAnimating) return;
@@ -230,7 +235,10 @@ if (!isMobile) {
 function initializeQontoRoles() {
     const qontoDetail = document.getElementById('qonto');
     
-    if (!qontoDetail) return;
+    if (!qontoDetail) {
+        console.log('Qonto detail not found, will retry on contentLoaded');
+        return;
+    }
     
     const jobTitle = qontoDetail.querySelector('.job-title');
     const contentWrapper = qontoDetail.querySelector('.experience-content-wrapper');
@@ -1268,15 +1276,20 @@ document.addEventListener('click', function(e) {
 // INITIALIZE ON LOAD
 // ===================================
 
-// Initialize experience and role navigation on page load
-initializeExperience();
-initializeQontoRoles();
-
-// Reinitialize when content is loaded
-window.addEventListener('contentLoaded', () => {
-    console.log('Content loaded, reinitializing experience and roles');
+// Initialize experience and role navigation after DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing experience and roles');
     initializeExperience();
     initializeQontoRoles();
+});
+
+// Reinitialize when content is loaded (from content-loader.js)
+window.addEventListener('contentLoaded', () => {
+    console.log('Content loaded, reinitializing experience and roles');
+    setTimeout(() => {
+        initializeExperience();
+        initializeQontoRoles();
+    }, 200);
 });
 
 // ===================================
