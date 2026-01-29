@@ -86,30 +86,32 @@ setInterval(updateTime, 1000);
 // SMOOTH SCROLL
 // ===================================
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        
-        // Skip if href is just "#" or if element has id (handled elsewhere)
-        if (href === '#' || this.id) {
-            return;
-        }
-        
-        e.preventDefault();
-        const target = document.querySelector(href);
-        
-        if (target) {
-            const headerOffset = 120;
-            const elementPosition = target.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+function initializeSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
             
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-        }
+            // Skip if href is just "#" or if element has id (handled elsewhere)
+            if (href === '#' || this.id) {
+                return;
+            }
+            
+            e.preventDefault();
+            const target = document.querySelector(href);
+            
+            if (target) {
+                const headerOffset = 120;
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
-});
+}
 
 // ===================================
 // EXPERIENCE SWITCHING (Hover-based with vertical slide)
@@ -432,8 +434,12 @@ function initializeQontoRoles() {
 // Check if mobile - disable cursor on mobile
 const isMobileDevice = window.innerWidth <= 768;
 
-if (!isMobileDevice) {
+function initializeCursor() {
+    if (isMobileDevice) return;
+    
     const cursorDot = document.querySelector('.cursor-dot');
+    if (!cursorDot) return;
+    
     let mouseX = 0;
     let mouseY = 0;
     let currentX = 0;
@@ -458,14 +464,9 @@ if (!isMobileDevice) {
         requestAnimationFrame(animateCursor);
     }
 
-    if (cursorDot) {
-        animateCursor();
-    }
-}
+    animateCursor();
 
-// Hover effect on interactive elements (Desktop only)
-if (!isMobileDevice) {
-    const cursorDot = document.querySelector('.cursor-dot');
+    // Hover effect on interactive elements
     const interactiveElements = document.querySelectorAll('a:not(.footer-link):not(.location-link):not(.hero-link):not(.nav-link):not(.reel-link), button, .experience-item');
     const reelLink = document.getElementById('reelLink');
     const projectCards = document.querySelectorAll('.work-card');
@@ -476,28 +477,26 @@ if (!isMobileDevice) {
     const heroName = document.getElementById('heroName');
     const heroPhoto = document.getElementById('heroPhoto');
 
-    if (cursorDot) {
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursorDot.classList.add('cursor-hover');
-                cursorDot.classList.remove('cursor-project', 'cursor-arrow-only');
-                // Hide text for hover cursor (just dot)
-                const cursorText = cursorDot.querySelector('.cursor-text');
-                if (cursorText) {
-                    cursorText.style.display = 'none';
-                }
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                cursorDot.classList.remove('cursor-hover');
-                // Reset to default if no other class is active
-                if (!cursorDot.classList.contains('cursor-project') && 
-                    !cursorDot.classList.contains('cursor-arrow-only')) {
-                    resetCursorToDefault();
-                }
-            });
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursorDot.classList.add('cursor-hover');
+            cursorDot.classList.remove('cursor-project', 'cursor-arrow-only');
+            // Hide text for hover cursor (just dot)
+            const cursorText = cursorDot.querySelector('.cursor-text');
+            if (cursorText) {
+                cursorText.style.display = 'none';
+            }
         });
-    }
+        
+        el.addEventListener('mouseleave', () => {
+            cursorDot.classList.remove('cursor-hover');
+            // Reset to default if no other class is active
+            if (!cursorDot.classList.contains('cursor-project') && 
+                !cursorDot.classList.contains('cursor-arrow-only')) {
+                resetCursorToDefault();
+            }
+        });
+    });
 }
 
 // Project cards image gallery functionality (works on all devices)
@@ -554,15 +553,75 @@ function resetCursorToDefault() {
     }
 }
 
-// Cursor effects for desktop only
-if (!isMobileDevice) {
+// Initialize project card cursors
+function initializeProjectCursors() {
+    if (isMobileDevice) return;
+    
+    const cursorDot = document.querySelector('.cursor-dot');
+    const projectCards = document.querySelectorAll('.work-card');
+    
+    if (!cursorDot || projectCards.length === 0) return;
+    
+    projectCards.forEach(card => {
+        // Clone to remove old listeners
+        const newCard = card.cloneNode(true);
+        card.parentNode.replaceChild(newCard, card);
+        
+        newCard.addEventListener('mouseenter', () => {
+            // Always show "come on, click" on hover
+            cursorDot.classList.add('cursor-project');
+            const cursorText = cursorDot.querySelector('.cursor-text');
+            if (cursorText) {
+                cursorText.textContent = 'come on, click';
+                cursorText.style.display = 'block';
+                cursorText.style.opacity = '1';
+            }
+            const cursorArrow = cursorDot.querySelector('.cursor-arrow');
+            if (cursorArrow) {
+                cursorArrow.style.display = '';
+                cursorArrow.style.opacity = '';
+            }
+            cursorDot.classList.remove('cursor-hover', 'cursor-arrow-only', 'cursor-password');
+        });
+        
+        newCard.addEventListener('mouseleave', () => {
+            resetCursorToDefault();
+            
+            // Reset project info and image
+            const projectInfo = newCard.querySelector('.project-info');
+            if (projectInfo) {
+                projectInfo.classList.remove('hidden');
+            }
+            const projectName = newCard.querySelector('.project-name')?.textContent;
+            if (projectName && projectImageIndices[projectName] !== undefined) {
+                projectImageIndices[projectName] = 0;
+            }
+        });
+        
+        // Add click handler - just open modal directly
+        newCard.addEventListener('click', (e) => {
+            cursorDot.classList.add('clicked');
+            setTimeout(() => {
+                cursorDot.classList.remove('clicked');
+            }, 300);
+            
+            // Open project modal (password handled inside)
+            openProjectModal(newCard);
+        });
+    });
+}
+
+// Move all cursor hover effects to be called during initialization
+function initializeCursorHoverEffects() {
+    if (isMobileDevice) return;
+    
     const cursorDot = document.querySelector('.cursor-dot');
     const footerLinks = document.querySelectorAll('.footer-link');
     const locationLink = document.querySelector('.location-link');
     const heroLinks = document.querySelectorAll('.hero-link');
     const navLinks = document.querySelectorAll('.nav-link');
     
-    if (cursorDot) {
+    if (!cursorDot) return;
         // Password protection state
         let passwordUnlocked = false;
         let passwordInputActive = false;
@@ -661,63 +720,6 @@ if (!isMobileDevice) {
                     hidePasswordInput();
                 }
             }
-        });
-        
-        // Function to initialize project card cursors
-        function initializeProjectCursors() {
-            const projectCards = document.querySelectorAll('.work-card');
-            
-            projectCards.forEach(card => {
-                card.addEventListener('mouseenter', () => {
-                    // Always show "come on, click" on hover
-                    cursorDot.classList.add('cursor-project');
-                    const cursorText = cursorDot.querySelector('.cursor-text');
-                    if (cursorText) {
-                        cursorText.textContent = 'come on, click';
-                        cursorText.style.display = 'block';
-                        cursorText.style.opacity = '1';
-                    }
-                    const cursorArrow = cursorDot.querySelector('.cursor-arrow');
-                    if (cursorArrow) {
-                        cursorArrow.style.display = '';
-                        cursorArrow.style.opacity = '';
-                    }
-                    cursorDot.classList.remove('cursor-hover', 'cursor-arrow-only', 'cursor-password');
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    resetCursorToDefault();
-                    
-                    // Reset project info and image
-                    const projectInfo = card.querySelector('.project-info');
-                    if (projectInfo) {
-                        projectInfo.classList.remove('hidden');
-                    }
-                    const projectName = card.querySelector('.project-name')?.textContent;
-                    if (projectName && projectImageIndices[projectName] !== undefined) {
-                        projectImageIndices[projectName] = 0;
-                    }
-                });
-                
-                // Add click handler - just open modal directly
-                card.addEventListener('click', (e) => {
-                    cursorDot.classList.add('clicked');
-                    setTimeout(() => {
-                        cursorDot.classList.remove('clicked');
-                    }, 300);
-                    
-                    // Open project modal (password handled inside)
-                    openProjectModal(card);
-                });
-            });
-        }
-        
-        // Initialize project cursors on load
-        initializeProjectCursors();
-        
-        // Reinitialize when content is loaded
-        window.addEventListener('contentLoaded', () => {
-            initializeProjectCursors();
         });
         
         // Arrow cursor only (no text) for footer links
@@ -829,41 +831,45 @@ if (!isMobileDevice) {
     }
 }
 
-// Amsterdam link music player (works on all devices)
-const locationLink = document.querySelector('.location-link');
-if (locationLink) {
-    locationLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        const musicPlayer = document.getElementById('musicPlayer');
-        const audioPlayer = document.getElementById('audioPlayer');
-        
-        musicPlayer.classList.add('active');
-        
-        // Auto-play
-        audioPlayer.play().catch(err => {
-            console.log('Audio autoplay prevented. Click play button to start:', err);
+// Initialize modals and players
+function initializeModalsAndPlayers() {
+    // Amsterdam link music player (works on all devices)
+    const locationLink = document.querySelector('.location-link');
+    if (locationLink) {
+        locationLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            const musicPlayer = document.getElementById('musicPlayer');
+            const audioPlayer = document.getElementById('audioPlayer');
+            
+            if (musicPlayer) musicPlayer.classList.add('active');
+            
+            // Auto-play
+            if (audioPlayer) {
+                audioPlayer.play().catch(err => {
+                    console.log('Audio autoplay prevented. Click play button to start:', err);
+                });
+            }
         });
-    });
-}
+    }
 
-// ===================================
-// MUSIC PLAYER
-// ===================================
+    // ===================================
+    // MUSIC PLAYER
+    // ===================================
 
-const musicPlayer = document.getElementById('musicPlayer');
-const audioPlayer = document.getElementById('audioPlayer');
-const playPauseBtn = document.getElementById('playPauseBtn');
-const closePlayerBtn = document.getElementById('closePlayer');
-const progressFill = document.getElementById('progressFill');
-const currentTimeEl = document.getElementById('currentTime');
-const durationEl = document.getElementById('duration');
+    const musicPlayer = document.getElementById('musicPlayer');
+    const audioPlayer = document.getElementById('audioPlayer');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const closePlayerBtn = document.getElementById('closePlayer');
+    const progressFill = document.getElementById('progressFill');
+    const currentTimeEl = document.getElementById('currentTime');
+    const durationEl = document.getElementById('duration');
 
-// Set volume to 30%
-if (audioPlayer) {
-    audioPlayer.volume = 0.3;
-}
+    // Set volume to 30%
+    if (audioPlayer) {
+        audioPlayer.volume = 0.3;
+    }
 
-if (audioPlayer && playPauseBtn) {
+    if (audioPlayer && playPauseBtn) {
     const playIcon = playPauseBtn.querySelector('.play-icon');
     const pauseIcon = playPauseBtn.querySelector('.pause-icon');
     const progressBar = document.querySelector('.progress-bar');
@@ -962,62 +968,78 @@ if (audioPlayer && playPauseBtn) {
             audioPlayer.currentTime = 0;
         });
     }
-}
+    }
+    
+    function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
 
-function formatTime(seconds) {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-}
-
-// Arrow cursor for Download CV
-if (downloadCv) {
+    // Arrow cursor for Download CV
+    const downloadCv = document.getElementById('downloadCv');
+    const cursorDot = document.querySelector('.cursor-dot');
+    if (downloadCv && cursorDot) {
     downloadCv.addEventListener('mouseenter', () => {
         cursorDot.classList.add('cursor-arrow-only');
         cursorDot.classList.remove('cursor-hover', 'cursor-project');
     });
     
-    downloadCv.addEventListener('mouseleave', () => {
-        cursorDot.classList.remove('cursor-arrow-only');
-    });
-}
+        downloadCv.addEventListener('mouseleave', () => {
+            cursorDot.classList.remove('cursor-arrow-only');
+        });
+    }
 
-// Arrow cursor for hero links (about me, cv)
-heroLinks.forEach(link => {
+    // Arrow cursor for hero links (about me, cv)
+    const heroLinks = document.querySelectorAll('.hero-link');
+    heroLinks.forEach(link => {
     link.addEventListener('mouseenter', () => {
         cursorDot.classList.add('cursor-arrow-only');
         cursorDot.classList.remove('cursor-hover', 'cursor-project');
     });
     
-    link.addEventListener('mouseleave', () => {
-        cursorDot.classList.remove('cursor-arrow-only');
+        link.addEventListener('mouseleave', () => {
+            cursorDot.classList.remove('cursor-arrow-only');
+        });
     });
-});
 
-// Reel Video Player
+    // Reel Video Player
     const reelLinkForVideo = document.getElementById('reelLink');
-const videoPlayer = document.getElementById('videoPlayer');
-const videoClose = document.getElementById('videoClose');
-const videoPlayerElement = document.getElementById('videoPlayerElement');
+    const videoPlayer = document.getElementById('videoPlayer');
+    const videoClose = document.getElementById('videoClose');
+    const videoPlayerElement = document.getElementById('videoPlayerElement');
 
-if (reelLinkForVideo) {
-    reelLinkForVideo.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        if (videoPlayer) {
-            videoPlayer.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            document.body.classList.add('video-player-active');
-            if (videoPlayerElement) {
-                videoPlayerElement.play();
+            reelLinkForVideo.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (videoPlayer) {
+                videoPlayer.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                document.body.classList.add('video-player-active');
+                if (videoPlayerElement) {
+                    videoPlayerElement.play();
+                }
             }
-        }
-    });
-}
+        });
+    }
 
-if (videoClose) {
-    videoClose.addEventListener('click', function() {
-        if (videoPlayer) {
+    if (videoClose) {
+        videoClose.addEventListener('click', function() {
+            if (videoPlayer) {
+                videoPlayer.classList.remove('active');
+                document.body.style.overflow = '';
+                document.body.classList.remove('video-player-active');
+                if (videoPlayerElement) {
+                    videoPlayerElement.pause();
+                    videoPlayerElement.currentTime = 0;
+                }
+            }
+        });
+    }
+
+    // Close video player on Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && videoPlayer && videoPlayer.classList.contains('active')) {
             videoPlayer.classList.remove('active');
             document.body.style.overflow = '';
             document.body.classList.remove('video-player-active');
@@ -1027,141 +1049,55 @@ if (videoClose) {
             }
         }
     });
-}
 
-// Close video player on Escape
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && videoPlayer && videoPlayer.classList.contains('active')) {
-        videoPlayer.classList.remove('active');
-        document.body.style.overflow = '';
-        document.body.classList.remove('video-player-active');
-        if (videoPlayerElement) {
-            videoPlayerElement.pause();
-            videoPlayerElement.currentTime = 0;
-        }
-    }
-});
+    // About Me Modal
+    const aboutModal = document.getElementById('aboutModal');
+    const aboutMeLink = document.getElementById('aboutMeLink');
+    const aboutClose = document.getElementById('aboutClose');
+    const aboutOverlay = document.getElementById('aboutOverlay');
 
-// About Me Modal
-const aboutModal = document.getElementById('aboutModal');
-const aboutMeLink = document.getElementById('aboutMeLink');
-const aboutClose = document.getElementById('aboutClose');
-const aboutOverlay = document.getElementById('aboutOverlay');
+    console.log('About modal setup:', { aboutModal, aboutMeLink });
 
-console.log('About modal setup:', { aboutModal, aboutMeLink });
-
-if (aboutMeLink) {
-    aboutMeLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('About me link clicked!');
-        
-        if (aboutModal) {
-            aboutModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            console.log('Modal should be visible now');
-        }
-    });
-}
-
-if (aboutClose) {
-    aboutClose.addEventListener('click', function() {
-        aboutModal.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-}
-
-if (aboutOverlay) {
-    aboutOverlay.addEventListener('click', function() {
-        aboutModal.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-}
-
-// Close on Escape
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && aboutModal && aboutModal.classList.contains('active')) {
-        aboutModal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-});
-
-// ===================================
-// GRID LINK & MODAL
-// ===================================
-
-// Grid Modal - using setTimeout to ensure DOM is ready
-setTimeout(function() {
-    const gridModal = document.getElementById('gridModal');
-    const gridLink = document.getElementById('gridLink');
-    const gridClose = document.getElementById('gridClose');
-    const gridOverlay = document.getElementById('gridOverlay');
-    const projectsSection = document.getElementById('work');
-    
-    if (!gridLink || !gridModal || !projectsSection) {
-        return;
-    }
-    
-    // Grid link is always visible for now - we'll add scroll detection later
-    gridLink.classList.add('visible');
-    
-    if (gridClose) {
-        gridClose.addEventListener('click', function() {
-            gridModal.classList.remove('active');
-            document.body.style.overflow = '';
+    if (aboutMeLink) {
+        aboutMeLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('About me link clicked!');
+            
+            if (aboutModal) {
+                aboutModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                console.log('Modal should be visible now');
+            }
         });
     }
-    
-    if (gridOverlay) {
-        gridOverlay.addEventListener('click', function() {
-            gridModal.classList.remove('active');
-            document.body.style.overflow = '';
+
+    if (aboutClose) {
+        aboutClose.addEventListener('click', function() {
+            if (aboutModal) {
+                aboutModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         });
     }
-    
+
+    if (aboutOverlay) {
+        aboutOverlay.addEventListener('click', function() {
+            if (aboutModal) {
+                aboutModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
     // Close on Escape
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && gridModal && gridModal.classList.contains('active')) {
-            gridModal.classList.remove('active');
+        if (e.key === 'Escape' && aboutModal && aboutModal.classList.contains('active')) {
+            if (aboutModal) aboutModal.classList.remove('active');
             document.body.style.overflow = '';
         }
     });
-}, 500);
-
-if (gridClose) {
-    gridClose.addEventListener('click', function() {
-        gridModal.classList.remove('active');
-        document.body.style.overflow = '';
-    });
 }
-
-if (gridOverlay) {
-    gridOverlay.addEventListener('click', function() {
-        gridModal.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-}
-
-// Close grid modal on Escape
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && gridModal && gridModal.classList.contains('active')) {
-        gridModal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-});
-
-
-// Arrow cursor for navigation links
-navLinks.forEach(link => {
-    link.addEventListener('mouseenter', () => {
-        cursorDot.classList.add('cursor-arrow-only');
-        cursorDot.classList.remove('cursor-hover', 'cursor-project');
-    });
-    
-    link.addEventListener('mouseleave', () => {
-        cursorDot.classList.remove('cursor-arrow-only');
-    });
-});
 
 // Hero name photo reveal
 let photoTimeout;
@@ -1366,33 +1302,33 @@ document.addEventListener('click', function(e) {
 // INITIALIZE ON LOAD
 // ===================================
 
-// Initialize experience and role navigation after DOM is ready
+// Master initialization function
+function initializeAll() {
+    console.log('Initializing all event listeners');
+    initializeSmoothScroll();
+    initializeCursor();
+    initializeCursorHoverEffects();
+    initializeModalsAndPlayers();
+    initializeExperience();
+    initializeQontoRoles();
+    initializeProjectCursors();
+}
+
+// Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, waiting for content');
-    // Don't initialize here - wait for content to load
+    console.log('DOM loaded, initializing');
+    initializeAll();
 });
 
 // Reinitialize when content is loaded (from content-loader.js)
 window.addEventListener('contentLoaded', () => {
-    console.log('Content loaded event received, initializing experience and roles');
+    console.log('Content loaded event received, reinitializing');
     setTimeout(() => {
-        console.log('Running initialization now');
+        console.log('Running reinitialization now');
         initializeExperience();
         initializeQontoRoles();
+        initializeProjectCursors();
     }, 300);
-});
-
-// Also try after page load as fallback
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        console.log('Page load complete, checking if initialization needed');
-        const experienceItems = document.querySelectorAll('.experience-item');
-        if (experienceItems.length > 0 && !experienceInitialized) {
-            console.log('Initializing from load event');
-            initializeExperience();
-            initializeQontoRoles();
-        }
-    }, 500);
 });
 
 // ===================================
