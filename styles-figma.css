@@ -1431,6 +1431,19 @@ section {
     display: block;
 }
 
+.project-body-text {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 40px;
+}
+
+.project-body-text p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #CCCCCC;
+    margin: 0;
+}
+
 /* 2-column Grid */
 .project-grid {
     display: grid;

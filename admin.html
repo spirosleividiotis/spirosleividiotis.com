@@ -472,7 +472,11 @@
                     </div>
                     <div class="form-group">
                         <label>Audio File</label>
-                        <input type="text" id="musicFile" placeholder="music.mp3">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <input type="text" id="musicFile" placeholder="music.mp3" style="flex: 1;">
+                            <button type="button" class="btn-small btn-secondary" onclick="clearField('musicFile')">Remove</button>
+                        </div>
+                        <small style="color: #666; display: block; margin-top: 4px;">📁 Add MP3 file to root folder, then enter filename here</small>
                     </div>
                 </div>
                 
@@ -480,7 +484,11 @@
                     <h2>Reel Video</h2>
                     <div class="form-group">
                         <label>Video File</label>
-                        <input type="text" id="reelFile" placeholder="reel.mp4">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <input type="text" id="reelFile" placeholder="reel.mp4" style="flex: 1;">
+                            <button type="button" class="btn-small btn-secondary" onclick="clearField('reelFile')">Remove</button>
+                        </div>
+                        <small style="color: #666; display: block; margin-top: 4px;">📁 Add MP4 file to root folder, then enter filename here</small>
                     </div>
                 </div>
                 
@@ -496,7 +504,11 @@
                     </div>
                     <div class="form-group">
                         <label>CV File</label>
-                        <input type="text" id="cvFile" placeholder="cv.pdf">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <input type="text" id="cvFile" placeholder="cv.pdf" style="flex: 1;">
+                            <button type="button" class="btn-small btn-secondary" onclick="clearField('cvFile')">Remove</button>
+                        </div>
+                        <small style="color: #666; display: block; margin-top: 4px;">📁 Add PDF file to root folder, then enter filename here</small>
                     </div>
                 </div>
             </div>
@@ -758,14 +770,26 @@
                         
                         <div style="background: #1a1a1a; padding: 16px; border-radius: 4px; margin-top: 20px;">
                             <h4 style="margin-bottom: 12px; font-weight: 400;">Project Content</h4>
+                            
                             <div class="form-group">
-                                <label>Hero Image (optional, wide)</label>
-                                <input type="text" id="project-hero-${project.id}" value="${project.media.hero || ''}" placeholder="Leave empty for no hero. Add filename like: hero.jpg">
+                                <label>Body Text (optional)</label>
+                                <textarea id="project-body-${project.id}" rows="6" placeholder="Add project description, context, or any text content here...">${project.bodyText || ''}</textarea>
+                                <small style="color: #666; margin-top: 4px; display: block;">This text will appear between the hero image and grid</small>
                             </div>
+                            
                             <div class="form-group">
-                                <label>Grid Items (comma-separated filenames)</label>
-                                <textarea id="project-grid-${project.id}" rows="3" placeholder="image1.jpg, video1.mp4, gif1.gif">${(project.media.grid || []).join(', ')}</textarea>
-                                <small style="color: #999; margin-top: 4px; display: block;">Add images/GIFs/videos for the 2-column grid. Leave empty if no content yet.</small>
+                                <label>Hero Image (optional, wide banner)</label>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <input type="text" id="project-hero-${project.id}" value="${project.media.hero || ''}" placeholder="hero-image.jpg" style="flex: 1;">
+                                    <button type="button" class="btn-small btn-secondary" onclick="clearProjectField(${project.id}, 'hero')">Remove</button>
+                                </div>
+                                <small style="color: #666; margin-top: 4px; display: block;">📁 Add image/video to root folder, then enter filename here</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Grid Assets (2-column layout)</label>
+                                <textarea id="project-grid-${project.id}" rows="4" placeholder="image1.jpg, video1.mp4, gif1.gif">${(project.media.grid || []).join(', ')}</textarea>
+                                <small style="color: #666; margin-top: 4px; display: block;">📁 Add files to root folder, then list filenames separated by commas. Supports: JPG, PNG, GIF, MP4</small>
                             </div>
                         </div>
                         
@@ -790,6 +814,9 @@
                 project.password = document.getElementById(`project-pwd-${id}`).value;
             }
             
+            // Update body text
+            project.bodyText = document.getElementById(`project-body-${id}`).value.trim();
+            
             // Update media
             project.media.hero = document.getElementById(`project-hero-${id}`).value.trim();
             const gridValue = document.getElementById(`project-grid-${id}`).value.trim();
@@ -797,6 +824,20 @@
             
             renderProjects();
             showSuccess();
+        }
+        
+        // Helper function to clear a field
+        function clearField(fieldId) {
+            document.getElementById(fieldId).value = '';
+        }
+        
+        // Helper function to clear project-specific fields
+        function clearProjectField(projectId, fieldType) {
+            if (fieldType === 'hero') {
+                document.getElementById(`project-hero-${projectId}`).value = '';
+            } else if (fieldType === 'grid') {
+                document.getElementById(`project-grid-${projectId}`).value = '';
+            }
         }
         
         // Render Experience

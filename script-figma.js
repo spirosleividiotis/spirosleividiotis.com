@@ -1117,6 +1117,7 @@ function openProjectModal(card) {
 
 function loadProjectContent(projectData, projectName) {
     const modalHero = document.getElementById('projectHero');
+    const modalBodyText = document.getElementById('projectBodyText');
     const modalGrid = document.getElementById('projectGrid');
     
     // Load project media if available
@@ -1134,6 +1135,12 @@ function loadProjectContent(projectData, projectName) {
                     modalHero.innerHTML = `<img src="${heroFile}" alt="${projectName}">`;
                 }
             }
+        }
+        
+        // Body text (between hero and grid)
+        if (projectData.bodyText && projectData.bodyText.trim() && modalBodyText) {
+            modalBodyText.style.display = 'block';
+            modalBodyText.innerHTML = `<p>${projectData.bodyText.replace(/\n/g, '<br>')}</p>`;
         }
         
         // Grid items
