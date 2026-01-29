@@ -481,7 +481,7 @@
                         <label>Profile Photo</label>
                         <div class="file-upload-container">
                             <div class="file-upload-row">
-                                <input type="text" id="heroPhoto" placeholder="Upload or enter URL" style="flex: 1;" readonly>
+                                <input type="text" id="heroPhoto" placeholder="Paste Cloudinary URL or click Upload" style="flex: 1;">
                                 <button type="button" class="btn-upload" onclick="uploadFile('heroPhoto', 'image')">Upload Photo</button>
                                 <button type="button" class="btn-small btn-secondary" onclick="removeFile('heroPhoto')">Remove</button>
                             </div>
@@ -515,7 +515,7 @@
                         <label>About Me Photo</label>
                         <div class="file-upload-container">
                             <div class="file-upload-row">
-                                <input type="text" id="aboutPhoto" placeholder="Upload or enter URL" style="flex: 1;" readonly>
+                                <input type="text" id="aboutPhoto" placeholder="Paste Cloudinary URL or click Upload" style="flex: 1;">
                                 <button type="button" class="btn-upload" onclick="uploadFile('aboutPhoto', 'image')">Upload Photo</button>
                                 <button type="button" class="btn-small btn-secondary" onclick="removeFile('aboutPhoto')">Remove</button>
                             </div>
@@ -539,6 +539,16 @@
             
             <!-- Media Tab -->
             <div id="mediaTab" class="tab-content">
+                <div style="background: #1a1a1a; padding: 16px; border-radius: 6px; margin-bottom: 20px; border-left: 3px solid #22c55e;">
+                    <strong>💡 How to use your Cloudinary files:</strong>
+                    <ol style="margin: 8px 0 0 20px; color: #999; font-size: 14px;">
+                        <li>Click "Browse Library" to open your Cloudinary media library in a new tab</li>
+                        <li>Find the file you want, click it, then copy the URL</li>
+                        <li>Paste the URL into the field here</li>
+                        <li>OR click "Upload" to upload a new file</li>
+                    </ol>
+                </div>
+                
                 <div class="section">
                     <h2>Music Player</h2>
                     <div class="form-group">
@@ -549,8 +559,9 @@
                         <label>Audio File</label>
                         <div class="file-upload-container">
                             <div class="file-upload-row">
-                                <input type="text" id="musicFile" placeholder="Upload or enter URL" style="flex: 1;" readonly>
+                                <input type="text" id="musicFile" placeholder="Upload, browse library, or paste URL" style="flex: 1;">
                                 <button type="button" class="btn-upload" onclick="uploadFile('musicFile', 'auto')">Upload Audio</button>
+                                <button type="button" class="btn-small" onclick="window.open('https://console.cloudinary.com/console/c-3932f658ea9d31b91b5eafc4127ae1/media_library/folders/home', '_blank')" style="background: #22c55e;">Browse Library</button>
                                 <button type="button" class="btn-small btn-secondary" onclick="removeFile('musicFile')">Remove</button>
                             </div>
                             <div id="musicFile-preview" class="file-preview"></div>
@@ -564,8 +575,9 @@
                         <label>Video File</label>
                         <div class="file-upload-container">
                             <div class="file-upload-row">
-                                <input type="text" id="reelFile" placeholder="Upload or enter URL" style="flex: 1;" readonly>
+                                <input type="text" id="reelFile" placeholder="Paste Cloudinary URL or click Upload" style="flex: 1;">
                                 <button type="button" class="btn-upload" onclick="uploadFile('reelFile', 'video')">Upload Video</button>
+                                <button type="button" class="btn-small" onclick="window.open('https://console.cloudinary.com/console/c-3932f658ea9d31b91b5eafc4127ae1/media_library/folders/home', '_blank')" style="background: #22c55e;">Browse Library</button>
                                 <button type="button" class="btn-small btn-secondary" onclick="removeFile('reelFile')">Remove</button>
                             </div>
                             <div id="reelFile-preview" class="file-preview"></div>
@@ -587,8 +599,9 @@
                         <label>CV File (PDF)</label>
                         <div class="file-upload-container">
                             <div class="file-upload-row">
-                                <input type="text" id="cvFile" placeholder="Upload or enter URL" style="flex: 1;" readonly>
+                                <input type="text" id="cvFile" placeholder="Paste Cloudinary URL or click Upload" style="flex: 1;">
                                 <button type="button" class="btn-upload" onclick="uploadFile('cvFile', 'raw')">Upload PDF</button>
+                                <button type="button" class="btn-small" onclick="window.open('https://console.cloudinary.com/console/c-3932f658ea9d31b91b5eafc4127ae1/media_library/folders/home', '_blank')" style="background: #22c55e;">Browse Library</button>
                                 <button type="button" class="btn-small btn-secondary" onclick="removeFile('cvFile')">Remove</button>
                             </div>
                             <div id="cvFile-preview" class="file-preview"></div>
@@ -956,7 +969,7 @@
                                 <label>Hero Image (optional, wide banner)</label>
                                 <div class="file-upload-container">
                                     <div class="file-upload-row">
-                                        <input type="text" id="project-hero-${project.id}" value="${project.media.hero || ''}" placeholder="Upload or enter URL" style="flex: 1;" readonly>
+                                        <input type="text" id="project-hero-${project.id}" value="${project.media.hero || ''}" placeholder="Paste Cloudinary URL or click Upload" style="flex: 1;">
                                         <button type="button" class="btn-upload" onclick="uploadProjectFile(${project.id}, 'hero')">Upload</button>
                                         <button type="button" class="btn-small btn-secondary" onclick="clearProjectField(${project.id}, 'hero')">Remove</button>
                                     </div>
