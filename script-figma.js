@@ -570,32 +570,25 @@ if (!isMobileDevice) {
             const projectCards = document.querySelectorAll('.work-card');
             
             projectCards.forEach(card => {
-                const isPasswordProtected = card.getAttribute('data-password-protected') === 'true';
-                
                 card.addEventListener('mouseenter', () => {
-                    // Always show "come on, click" on hover, unless password input is active
-                    if (!passwordInputActive) {
-                        cursorDot.classList.add('cursor-project');
-                        const cursorText = cursorDot.querySelector('.cursor-text');
-                        if (cursorText) {
-                            cursorText.textContent = 'come on, click';
-                            cursorText.style.display = 'block';
-                            cursorText.style.opacity = '1';
-                        }
-                        const cursorArrow = cursorDot.querySelector('.cursor-arrow');
-                        if (cursorArrow) {
-                            cursorArrow.style.display = '';
-                            cursorArrow.style.opacity = '';
-                        }
-                        cursorDot.classList.remove('cursor-hover', 'cursor-arrow-only', 'cursor-password');
+                    // Always show "come on, click" on hover
+                    cursorDot.classList.add('cursor-project');
+                    const cursorText = cursorDot.querySelector('.cursor-text');
+                    if (cursorText) {
+                        cursorText.textContent = 'come on, click';
+                        cursorText.style.display = 'block';
+                        cursorText.style.opacity = '1';
                     }
+                    const cursorArrow = cursorDot.querySelector('.cursor-arrow');
+                    if (cursorArrow) {
+                        cursorArrow.style.display = '';
+                        cursorArrow.style.opacity = '';
+                    }
+                    cursorDot.classList.remove('cursor-hover', 'cursor-arrow-only', 'cursor-password');
                 });
                 
                 card.addEventListener('mouseleave', () => {
-                    // Reset to default cursor (no text, just dot) unless password input is active
-                    if (!passwordInputActive) {
-                        resetCursorToDefault();
-                    }
+                    resetCursorToDefault();
                     
                     // Reset project info and image
                     const projectInfo = card.querySelector('.project-info');
@@ -608,22 +601,14 @@ if (!isMobileDevice) {
                     }
                 });
                 
-                // Add click handler
+                // Add click handler - just open modal directly
                 card.addEventListener('click', (e) => {
                     cursorDot.classList.add('clicked');
                     setTimeout(() => {
                         cursorDot.classList.remove('clicked');
                     }, 300);
                     
-                    // Handle password protection
-                    if (isPasswordProtected && !passwordUnlocked) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        showPasswordInput();
-                        return;
-                    }
-                    
-                    // Open project modal
+                    // Open project modal (password handled inside)
                     openProjectModal(card);
                 });
             });
@@ -1127,6 +1112,7 @@ function openProjectModal(card) {
     const projectName = card.querySelector('.project-name')?.textContent;
     const projectCompany = card.querySelector('.project-company')?.textContent;
     const projectId = card.getAttribute('data-project-id');
+    const isPasswordProtected = card.getAttribute('data-password-protected') === 'true';
     
     // Get project data from window.projectsData (loaded by content-loader.js)
     const projectData = window.projectsData?.find(p => p.id == projectId);
@@ -1134,40 +1120,98 @@ function openProjectModal(card) {
     const modal = document.getElementById('projectModal');
     const modalTitle = document.getElementById('projectModalTitle');
     const modalSubtitle = document.getElementById('projectModalSubtitle');
+    const passwordGate = document.getElementById('projectPasswordGate');
+    const passwordInput = document.getElementById('passwordGateInput');
+    const passwordError = document.getElementById('passwordGateError');
+    const modalBody = document.getElementById('projectModalBody');
     const modalHero = document.getElementById('projectHero');
     const modalGrid = document.getElementById('projectGrid');
     
-    if (!modal || !modalTitle || !modalSubtitle || !modalHero || !modalGrid) {
-        console.error('Project modal elements not found');
-        return;
-    }
+    if (!modal) return;
     
     // Set title and subtitle
-    modalTitle.textContent = projectName || 'Project';
-    modalSubtitle.textContent = projectCompany || '';
+    if (modalTitle) modalTitle.textContent = projectName || 'Project';
+    if (modalSubtitle) modalSubtitle.textContent = projectCompany || '';
     
     // Clear previous content
-    modalHero.innerHTML = '';
-    modalGrid.innerHTML = '';
-    modalHero.style.display = 'none';
+    if (modalHero) {
+        modalHero.innerHTML = '';
+        modalHero.style.display = 'none';
+    }
+    if (modalGrid) modalGrid.innerHTML = '';
+    if (passwordError) passwordError.classList.remove('show');
+    if (passwordInput) passwordInput.value = '';
+    
+    // Check if password protected
+    if (isPasswordProtected && projectData?.password) {
+        // Show password gate, hide content
+        if (passwordGate) passwordGate.style.display = 'flex';
+        if (modalBody) modalBody.style.display = 'none';
+        
+        // Store project data for later
+        modal.dataset.projectId = projectId;
+        modal.dataset.projectName = projectName;
+        
+        // Focus password input
+        setTimeout(() => {
+            if (passwordInput) passwordInput.focus();
+        }, 300);
+        
+        // Handle password submission
+        const handlePasswordSubmit = (e) => {
+            if (e.key === 'Enter' || e.type === 'blur') {
+                const enteredPassword = passwordInput.value.trim();
+                if (enteredPassword === projectData.password) {
+                    // Correct password - show content
+                    loadProjectContent(projectData, projectName);
+                    if (passwordGate) passwordGate.style.display = 'none';
+                    if (modalBody) modalBody.style.display = 'block';
+                } else if (enteredPassword) {
+                    // Wrong password - show error
+                    if (passwordError) passwordError.classList.add('show');
+                    if (passwordInput) passwordInput.value = '';
+                }
+            }
+        };
+        
+        passwordInput?.removeEventListener('keypress', handlePasswordSubmit);
+        passwordInput?.addEventListener('keypress', handlePasswordSubmit);
+    } else {
+        // No password - show content directly
+        if (passwordGate) passwordGate.style.display = 'none';
+        if (modalBody) modalBody.style.display = 'block';
+        loadProjectContent(projectData, projectName);
+    }
+    
+    // Show modal
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    document.body.classList.add('project-modal-open');
+}
+
+function loadProjectContent(projectData, projectName) {
+    const modalHero = document.getElementById('projectHero');
+    const modalGrid = document.getElementById('projectGrid');
     
     // Load project media if available
     if (projectData && projectData.media) {
         // Hero image
         if (projectData.media.hero && projectData.media.hero.trim()) {
-            modalHero.style.display = 'block';
-            const heroFile = projectData.media.hero.trim();
-            const heroExt = heroFile.split('.').pop().toLowerCase();
-            
-            if (heroExt === 'mp4' || heroExt === 'webm') {
-                modalHero.innerHTML = `<video src="${heroFile}" autoplay loop muted playsinline></video>`;
-            } else {
-                modalHero.innerHTML = `<img src="${heroFile}" alt="${projectName}">`;
+            if (modalHero) {
+                modalHero.style.display = 'block';
+                const heroFile = projectData.media.hero.trim();
+                const heroExt = heroFile.split('.').pop().toLowerCase();
+                
+                if (heroExt === 'mp4' || heroExt === 'webm') {
+                    modalHero.innerHTML = `<video src="${heroFile}" autoplay loop muted playsinline></video>`;
+                } else {
+                    modalHero.innerHTML = `<img src="${heroFile}" alt="${projectName}">`;
+                }
             }
         }
         
         // Grid items
-        if (projectData.media.grid && projectData.media.grid.length > 0) {
+        if (projectData.media.grid && projectData.media.grid.length > 0 && modalGrid) {
             modalGrid.innerHTML = projectData.media.grid.map(file => {
                 const ext = file.split('.').pop().toLowerCase();
                 const isVideo = ext === 'mp4' || ext === 'webm';
@@ -1183,11 +1227,6 @@ function openProjectModal(card) {
             }).join('');
         }
     }
-    
-    // Show modal
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    document.body.classList.add('project-modal-open');
 }
 
 function closeProjectModal() {
@@ -1216,9 +1255,10 @@ document.addEventListener('keydown', function(e) {
 // Close project modal when clicking outside (on the modal background)
 document.addEventListener('click', function(e) {
     const modal = document.getElementById('projectModal');
+    const modalWrapper = document.querySelector('.project-modal-wrapper');
     if (modal && modal.classList.contains('active')) {
-        // Check if click is directly on the modal (background) and not on its content
-        if (e.target === modal) {
+        // Check if click is on modal background (not on wrapper content)
+        if (e.target === modal && !modalWrapper?.contains(e.target)) {
             closeProjectModal();
         }
     }

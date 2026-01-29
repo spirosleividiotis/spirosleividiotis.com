@@ -1359,16 +1359,13 @@ section {
     width: 100%;
     height: 100%;
     z-index: 10000;
-    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.8);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-    overflow-y: auto;
-    overflow-x: hidden;
-    cursor: default;
-}
-
-.project-modal * {
     cursor: default;
 }
 
@@ -1377,32 +1374,43 @@ section {
     pointer-events: all;
 }
 
-.project-modal::-webkit-scrollbar {
+.project-modal-wrapper {
+    width: 95%;
+    height: 95%;
+    background: #000000;
+    border-radius: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    cursor: default;
+}
+
+.project-modal-wrapper::-webkit-scrollbar {
     width: 6px;
 }
 
-.project-modal::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
+.project-modal-wrapper::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
 }
 
-.project-modal::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
+.project-modal-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 3px;
 }
 
-.project-modal::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.3);
+.project-modal-wrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .project-modal-close {
-    position: fixed;
-    top: 40px;
-    right: 80px;
+    position: absolute;
+    top: 30px;
+    right: 30px;
     background: transparent;
     border: none;
-    color: #0A0A0A;
+    color: #FFFFFF;
     cursor: pointer;
-    z-index: 10001;
+    z-index: 10002;
     padding: 8px;
     display: flex;
     align-items: center;
@@ -1414,29 +1422,57 @@ section {
     opacity: 0.6;
 }
 
+.project-modal-wrapper {
+    width: 95%;
+    height: 95%;
+    background: #000000;
+    border-radius: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    cursor: default;
+}
+
+.project-modal-wrapper::-webkit-scrollbar {
+    width: 6px;
+}
+
+.project-modal-wrapper::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.project-modal-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+.project-modal-wrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
 .project-modal-content {
-    max-width: 1600px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 80px 80px 120px;
+    padding: 80px 60px 100px;
 }
 
 .project-modal-header {
-    margin-bottom: 80px;
+    margin-bottom: 60px;
 }
 
 .project-modal-title {
-    font-size: 64px;
-    font-weight: 600;
+    font-size: 32px;
+    font-weight: 500;
     letter-spacing: -0.02em;
-    color: #0A0A0A;
-    margin-bottom: 12px;
-    line-height: 1.1;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+    line-height: 1.2;
 }
 
 .project-modal-subtitle {
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 400;
-    color: #6b6b6b;
+    color: #999999;
     letter-spacing: -0.01em;
 }
 
@@ -1446,12 +1482,69 @@ section {
     gap: 40px;
 }
 
+/* Password Gate */
+.project-password-gate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    padding: 60px 20px;
+}
+
+.password-gate-content {
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.password-gate-label {
+    font-size: 14px;
+    color: #999999;
+    margin-bottom: 16px;
+    text-transform: lowercase;
+}
+
+.password-gate-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #FFFFFF;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+}
+
+.password-gate-input:focus {
+    outline: none;
+    border-color: #666;
+}
+
+.password-gate-error {
+    font-size: 13px;
+    color: #999999;
+    line-height: 1.6;
+    display: none;
+}
+
+.password-gate-error.show {
+    display: block;
+}
+
+.password-gate-error a {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
 /* Hero Image (wide, optional) */
 .project-hero {
     width: 100%;
     aspect-ratio: 16/9;
-    background: #f5f5f5;
-    border-radius: 12px;
+    background: #1a1a1a;
+    border-radius: 8px;
     overflow: hidden;
 }
 
@@ -1467,14 +1560,14 @@ section {
 .project-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
+    gap: 30px;
 }
 
 .project-grid-item {
     width: 100%;
     aspect-ratio: 1;
-    background: #f5f5f5;
-    border-radius: 12px;
+    background: #1a1a1a;
+    border-radius: 8px;
     overflow: hidden;
     position: relative;
 }
@@ -1496,7 +1589,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #d0d0d0;
+    color: #333;
     font-size: 14px;
 }
 
@@ -2518,6 +2611,11 @@ section {
     }
     
     /* Project Modal */
+    .project-modal-wrapper {
+        width: 98%;
+        height: 98%;
+    }
+    
     .project-modal-close {
         top: 20px;
         right: 20px;
@@ -2532,15 +2630,19 @@ section {
     }
     
     .project-modal-title {
-        font-size: 32px;
+        font-size: 24px;
     }
     
     .project-modal-subtitle {
-        font-size: 16px;
+        font-size: 14px;
     }
     
     .project-grid {
         grid-template-columns: 1fr;
         gap: 20px;
+    }
+    
+    .password-gate-content {
+        padding: 0 20px;
     }
 }

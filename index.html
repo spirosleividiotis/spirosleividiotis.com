@@ -270,32 +270,44 @@
         </div>
     </section>
 
-    <!-- Project Modal (Full-screen) -->
+    <!-- Project Modal (95% full screen, black) -->
     <div class="project-modal" id="projectModal">
-        <button class="project-modal-close" id="projectModalClose">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
-        
-        <div class="project-modal-content">
-            <div class="project-modal-header">
-                <div>
+        <div class="project-modal-wrapper">
+            <button class="project-modal-close" id="projectModalClose">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            
+            <div class="project-modal-content">
+                <div class="project-modal-header">
                     <h2 class="project-modal-title" id="projectModalTitle">Project Title</h2>
                     <p class="project-modal-subtitle" id="projectModalSubtitle">Company</p>
                 </div>
-            </div>
-            
-            <div class="project-modal-body" id="projectModalBody">
-                <!-- Hero image (optional, wide) -->
-                <div class="project-hero" id="projectHero" style="display: none;">
-                    <!-- Hero content will be inserted here -->
+                
+                <!-- Password Gate (shows if password protected) -->
+                <div class="project-password-gate" id="projectPasswordGate" style="display: none;">
+                    <div class="password-gate-content">
+                        <p class="password-gate-label">enter password</p>
+                        <input type="password" class="password-gate-input" id="passwordGateInput" placeholder="••••••">
+                        <p class="password-gate-error" id="passwordGateError">
+                            Please contact me at <a href="mailto:spirosleividiotis@gmail.com">spirosleividiotis@gmail.com</a> if you haven't received the password.
+                        </p>
+                    </div>
                 </div>
                 
-                <!-- 2-column grid for images/gifs/videos -->
-                <div class="project-grid" id="projectGrid">
-                    <!-- Grid items will be inserted here -->
+                <!-- Project Content (shows after password or if no password) -->
+                <div class="project-modal-body" id="projectModalBody">
+                    <!-- Hero image (optional, wide) -->
+                    <div class="project-hero" id="projectHero" style="display: none;">
+                        <!-- Hero content will be inserted here -->
+                    </div>
+                    
+                    <!-- 2-column grid for images/gifs/videos -->
+                    <div class="project-grid" id="projectGrid">
+                        <!-- Grid items will be inserted here -->
+                    </div>
                 </div>
             </div>
         </div>
