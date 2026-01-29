@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio CMS - Admin</title>
+    
+    <!-- Cloudinary Upload Widget -->
+    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+    
     <style>
         * {
             margin: 0;
@@ -212,6 +216,63 @@
             display: flex;
         }
         
+        /* File Upload */
+        .file-upload-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .file-upload-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-upload {
+            padding: 8px 16px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+        
+        .btn-upload:hover {
+            background: #2563eb;
+        }
+        
+        .file-preview {
+            display: none;
+            margin-top: 8px;
+            padding: 12px;
+            background: #000;
+            border-radius: 4px;
+            border: 1px solid #333;
+        }
+        
+        .file-preview.show {
+            display: block;
+        }
+        
+        .file-preview img,
+        .file-preview video {
+            max-width: 200px;
+            max-height: 150px;
+            border-radius: 4px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .file-preview-info {
+            font-size: 12px;
+            color: #999;
+            word-break: break-all;
+        }
+        
         /* Items List */
         .items-list {
             display: flex;
@@ -417,8 +478,15 @@
                         <textarea id="heroSubtitle" rows="4"></textarea>
                     </div>
                     <div class="form-group">
-                        <label>Photo</label>
-                        <input type="text" id="heroPhoto" placeholder="photo.png">
+                        <label>Profile Photo</label>
+                        <div class="file-upload-container">
+                            <div class="file-upload-row">
+                                <input type="text" id="heroPhoto" placeholder="Upload or enter URL" style="flex: 1;" readonly>
+                                <button type="button" class="btn-upload" onclick="uploadFile('heroPhoto', 'image')">Upload Photo</button>
+                                <button type="button" class="btn-small btn-secondary" onclick="removeFile('heroPhoto')">Remove</button>
+                            </div>
+                            <div id="heroPhoto-preview" class="file-preview"></div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Software Tags (Black)</label>
@@ -444,8 +512,15 @@
                 <div class="section">
                     <h2>About Me Modal</h2>
                     <div class="form-group">
-                        <label>Photo</label>
-                        <input type="text" id="aboutPhoto" placeholder="photo.png">
+                        <label>About Me Photo</label>
+                        <div class="file-upload-container">
+                            <div class="file-upload-row">
+                                <input type="text" id="aboutPhoto" placeholder="Upload or enter URL" style="flex: 1;" readonly>
+                                <button type="button" class="btn-upload" onclick="uploadFile('aboutPhoto', 'image')">Upload Photo</button>
+                                <button type="button" class="btn-small btn-secondary" onclick="removeFile('aboutPhoto')">Remove</button>
+                            </div>
+                            <div id="aboutPhoto-preview" class="file-preview"></div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Paragraph 1</label>
@@ -472,11 +547,14 @@
                     </div>
                     <div class="form-group">
                         <label>Audio File</label>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <input type="text" id="musicFile" placeholder="music.mp3" style="flex: 1;">
-                            <button type="button" class="btn-small btn-secondary" onclick="clearField('musicFile')">Remove</button>
+                        <div class="file-upload-container">
+                            <div class="file-upload-row">
+                                <input type="text" id="musicFile" placeholder="Upload or enter URL" style="flex: 1;" readonly>
+                                <button type="button" class="btn-upload" onclick="uploadFile('musicFile', 'auto')">Upload Audio</button>
+                                <button type="button" class="btn-small btn-secondary" onclick="removeFile('musicFile')">Remove</button>
+                            </div>
+                            <div id="musicFile-preview" class="file-preview"></div>
                         </div>
-                        <small style="color: #666; display: block; margin-top: 4px;">📁 Add MP3 file to root folder, then enter filename here</small>
                     </div>
                 </div>
                 
@@ -484,11 +562,14 @@
                     <h2>Reel Video</h2>
                     <div class="form-group">
                         <label>Video File</label>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <input type="text" id="reelFile" placeholder="reel.mp4" style="flex: 1;">
-                            <button type="button" class="btn-small btn-secondary" onclick="clearField('reelFile')">Remove</button>
+                        <div class="file-upload-container">
+                            <div class="file-upload-row">
+                                <input type="text" id="reelFile" placeholder="Upload or enter URL" style="flex: 1;" readonly>
+                                <button type="button" class="btn-upload" onclick="uploadFile('reelFile', 'video')">Upload Video</button>
+                                <button type="button" class="btn-small btn-secondary" onclick="removeFile('reelFile')">Remove</button>
+                            </div>
+                            <div id="reelFile-preview" class="file-preview"></div>
                         </div>
-                        <small style="color: #666; display: block; margin-top: 4px;">📁 Add MP4 file to root folder, then enter filename here</small>
                     </div>
                 </div>
                 
@@ -503,12 +584,15 @@
                         <input type="url" id="locationLink" placeholder="https://open.spotify.com/...">
                     </div>
                     <div class="form-group">
-                        <label>CV File</label>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <input type="text" id="cvFile" placeholder="cv.pdf" style="flex: 1;">
-                            <button type="button" class="btn-small btn-secondary" onclick="clearField('cvFile')">Remove</button>
+                        <label>CV File (PDF)</label>
+                        <div class="file-upload-container">
+                            <div class="file-upload-row">
+                                <input type="text" id="cvFile" placeholder="Upload or enter URL" style="flex: 1;" readonly>
+                                <button type="button" class="btn-upload" onclick="uploadFile('cvFile', 'raw')">Upload PDF</button>
+                                <button type="button" class="btn-small btn-secondary" onclick="removeFile('cvFile')">Remove</button>
+                            </div>
+                            <div id="cvFile-preview" class="file-preview"></div>
                         </div>
-                        <small style="color: #666; display: block; margin-top: 4px;">📁 Add PDF file to root folder, then enter filename here</small>
                     </div>
                 </div>
             </div>
@@ -567,6 +651,78 @@
         const ADMIN_PASSWORD = '310890';
         let contentData = null;
         
+        // Cloudinary Configuration
+        // You'll need to create a free account at cloudinary.com and get these values
+        const CLOUDINARY_CLOUD_NAME = 'YOUR_CLOUD_NAME'; // Replace with your Cloudinary cloud name
+        const CLOUDINARY_UPLOAD_PRESET = 'YOUR_UPLOAD_PRESET'; // Replace with your unsigned upload preset
+        
+        // File Upload Function
+        function uploadFile(fieldId, resourceType = 'auto') {
+            // Check if Cloudinary is configured
+            if (CLOUDINARY_CLOUD_NAME === 'YOUR_CLOUD_NAME') {
+                alert('⚠️ Cloudinary not configured yet!\n\nPlease:\n1. Create free account at cloudinary.com\n2. Get your Cloud Name and Upload Preset\n3. Update admin.html with your credentials');
+                return;
+            }
+            
+            const widget = cloudinary.createUploadWidget(
+                {
+                    cloudName: CLOUDINARY_CLOUD_NAME,
+                    uploadPreset: CLOUDINARY_UPLOAD_PRESET,
+                    sources: ['local', 'url', 'camera'],
+                    multiple: false,
+                    resourceType: resourceType,
+                    maxFileSize: 100000000, // 100MB
+                    clientAllowedFormats: resourceType === 'video' ? ['mp4', 'webm', 'mov'] : 
+                                         resourceType === 'raw' ? ['pdf'] : 
+                                         ['jpg', 'png', 'gif', 'webp', 'mp3', 'wav', 'mp4'],
+                    folder: 'portfolio'
+                },
+                (error, result) => {
+                    if (!error && result && result.event === 'success') {
+                        const url = result.info.secure_url;
+                        document.getElementById(fieldId).value = url;
+                        showFilePreview(fieldId, url, result.info.resource_type);
+                        console.log('✅ File uploaded:', url);
+                    }
+                }
+            );
+            
+            widget.open();
+        }
+        
+        // Show file preview after upload
+        function showFilePreview(fieldId, url, resourceType) {
+            const previewDiv = document.getElementById(`${fieldId}-preview`);
+            if (!previewDiv) return;
+            
+            let previewHTML = '';
+            
+            if (resourceType === 'image') {
+                previewHTML = `<img src="${url}" alt="Preview"><div class="file-preview-info">✅ Uploaded</div>`;
+            } else if (resourceType === 'video') {
+                previewHTML = `<video src="${url}" controls></video><div class="file-preview-info">✅ Uploaded</div>`;
+            } else if (url.endsWith('.pdf')) {
+                previewHTML = `<div class="file-preview-info">📄 PDF uploaded ✅</div>`;
+            } else if (url.endsWith('.mp3') || url.endsWith('.wav')) {
+                previewHTML = `<div class="file-preview-info">🎵 Audio uploaded ✅</div>`;
+            } else {
+                previewHTML = `<div class="file-preview-info">✅ File uploaded</div>`;
+            }
+            
+            previewDiv.innerHTML = previewHTML;
+            previewDiv.classList.add('show');
+        }
+        
+        // Remove file
+        function removeFile(fieldId) {
+            document.getElementById(fieldId).value = '';
+            const previewDiv = document.getElementById(`${fieldId}-preview`);
+            if (previewDiv) {
+                previewDiv.classList.remove('show');
+                previewDiv.innerHTML = '';
+            }
+        }
+        
         // Login/Logout
         function login() {
             const password = document.getElementById('passwordInput').value;
@@ -618,11 +774,17 @@
             document.getElementById('heroName').value = contentData.hero.name;
             document.getElementById('heroSubtitle').value = contentData.hero.subtitle;
             document.getElementById('heroPhoto').value = contentData.hero.photo;
+            if (contentData.hero.photo) {
+                showFilePreview('heroPhoto', contentData.hero.photo, 'image');
+            }
             renderToolsTags();
             renderSkillsTags();
             
             // About
             document.getElementById('aboutPhoto').value = contentData.aboutMe.photo;
+            if (contentData.aboutMe.photo) {
+                showFilePreview('aboutPhoto', contentData.aboutMe.photo, 'image');
+            }
             document.getElementById('aboutBio1').value = contentData.aboutMe.bio[0] || '';
             document.getElementById('aboutBio2').value = contentData.aboutMe.bio[1] || '';
             document.getElementById('aboutBio3').value = contentData.aboutMe.bio[2] || '';
@@ -630,10 +792,21 @@
             // Media
             document.getElementById('musicTitle').value = contentData.music.title;
             document.getElementById('musicFile').value = contentData.music.file;
+            if (contentData.music.file) {
+                showFilePreview('musicFile', contentData.music.file, 'audio');
+            }
+            
             document.getElementById('reelFile').value = contentData.reel.file;
+            if (contentData.reel.file) {
+                showFilePreview('reelFile', contentData.reel.file, 'video');
+            }
+            
             document.getElementById('locationText').value = contentData.header.location.text;
             document.getElementById('locationLink').value = contentData.header.location.link;
             document.getElementById('cvFile').value = contentData.header.cvFile;
+            if (contentData.header.cvFile) {
+                showFilePreview('cvFile', contentData.header.cvFile, 'raw');
+            }
             
             // Footer
             document.getElementById('footerEmail').value = contentData.footer.email;
@@ -779,17 +952,26 @@
                             
                             <div class="form-group">
                                 <label>Hero Image (optional, wide banner)</label>
-                                <div style="display: flex; align-items: center; gap: 8px;">
-                                    <input type="text" id="project-hero-${project.id}" value="${project.media.hero || ''}" placeholder="hero-image.jpg" style="flex: 1;">
-                                    <button type="button" class="btn-small btn-secondary" onclick="clearProjectField(${project.id}, 'hero')">Remove</button>
+                                <div class="file-upload-container">
+                                    <div class="file-upload-row">
+                                        <input type="text" id="project-hero-${project.id}" value="${project.media.hero || ''}" placeholder="Upload or enter URL" style="flex: 1;" readonly>
+                                        <button type="button" class="btn-upload" onclick="uploadProjectFile(${project.id}, 'hero')">Upload</button>
+                                        <button type="button" class="btn-small btn-secondary" onclick="clearProjectField(${project.id}, 'hero')">Remove</button>
+                                    </div>
+                                    <div id="project-hero-${project.id}-preview" class="file-preview"></div>
                                 </div>
-                                <small style="color: #666; margin-top: 4px; display: block;">📁 Add image/video to root folder, then enter filename here</small>
                             </div>
                             
                             <div class="form-group">
                                 <label>Grid Assets (2-column layout)</label>
-                                <textarea id="project-grid-${project.id}" rows="4" placeholder="image1.jpg, video1.mp4, gif1.gif">${(project.media.grid || []).join(', ')}</textarea>
-                                <small style="color: #666; margin-top: 4px; display: block;">📁 Add files to root folder, then list filenames separated by commas. Supports: JPG, PNG, GIF, MP4</small>
+                                <div class="file-upload-container">
+                                    <div class="file-upload-row">
+                                        <button type="button" class="btn-upload" onclick="uploadProjectGridFiles(${project.id})" style="width: 100%;">Upload Grid Images/Videos (Multiple Files)</button>
+                                    </div>
+                                    <textarea id="project-grid-${project.id}" rows="4" placeholder="Uploaded URLs will appear here..." readonly>${(project.media.grid || []).join(', ')}</textarea>
+                                    <button type="button" class="btn-small btn-secondary" onclick="clearProjectField(${project.id}, 'grid')" style="margin-top: 8px;">Clear All Grid Assets</button>
+                                    <div id="project-grid-${project.id}-preview" class="file-preview"></div>
+                                </div>
                             </div>
                         </div>
                         
@@ -831,12 +1013,93 @@
             document.getElementById(fieldId).value = '';
         }
         
+        // Upload project hero file
+        function uploadProjectFile(projectId, fieldType) {
+            if (CLOUDINARY_CLOUD_NAME === 'YOUR_CLOUD_NAME') {
+                alert('⚠️ Cloudinary not configured yet!');
+                return;
+            }
+            
+            const widget = cloudinary.createUploadWidget(
+                {
+                    cloudName: CLOUDINARY_CLOUD_NAME,
+                    uploadPreset: CLOUDINARY_UPLOAD_PRESET,
+                    sources: ['local', 'url'],
+                    multiple: false,
+                    resourceType: 'auto',
+                    maxFileSize: 100000000,
+                    clientAllowedFormats: ['jpg', 'png', 'gif', 'webp', 'mp4', 'webm'],
+                    folder: 'portfolio/projects'
+                },
+                (error, result) => {
+                    if (!error && result && result.event === 'success') {
+                        const url = result.info.secure_url;
+                        document.getElementById(`project-${fieldType}-${projectId}`).value = url;
+                        showFilePreview(`project-${fieldType}-${projectId}`, url, result.info.resource_type);
+                    }
+                }
+            );
+            widget.open();
+        }
+        
+        // Upload multiple grid files for project
+        function uploadProjectGridFiles(projectId) {
+            if (CLOUDINARY_CLOUD_NAME === 'YOUR_CLOUD_NAME') {
+                alert('⚠️ Cloudinary not configured yet!');
+                return;
+            }
+            
+            const widget = cloudinary.createUploadWidget(
+                {
+                    cloudName: CLOUDINARY_CLOUD_NAME,
+                    uploadPreset: CLOUDINARY_UPLOAD_PRESET,
+                    sources: ['local', 'url'],
+                    multiple: true,
+                    resourceType: 'auto',
+                    maxFileSize: 100000000,
+                    clientAllowedFormats: ['jpg', 'png', 'gif', 'webp', 'mp4', 'webm'],
+                    folder: 'portfolio/projects'
+                },
+                (error, result) => {
+                    if (!error && result && result.event === 'success') {
+                        const url = result.info.secure_url;
+                        const textarea = document.getElementById(`project-grid-${projectId}`);
+                        const currentValue = textarea.value.trim();
+                        const newValue = currentValue ? `${currentValue}, ${url}` : url;
+                        textarea.value = newValue;
+                        
+                        // Show preview
+                        const previewDiv = document.getElementById(`project-grid-${projectId}-preview`);
+                        if (previewDiv) {
+                            const existingPreview = previewDiv.innerHTML;
+                            const newPreview = result.info.resource_type === 'image' 
+                                ? `<img src="${url}" alt="Grid item">` 
+                                : `<video src="${url}" controls></video>`;
+                            previewDiv.innerHTML = existingPreview + newPreview;
+                            previewDiv.classList.add('show');
+                        }
+                    }
+                }
+            );
+            widget.open();
+        }
+        
         // Helper function to clear project-specific fields
         function clearProjectField(projectId, fieldType) {
             if (fieldType === 'hero') {
                 document.getElementById(`project-hero-${projectId}`).value = '';
+                const previewDiv = document.getElementById(`project-hero-${projectId}-preview`);
+                if (previewDiv) {
+                    previewDiv.classList.remove('show');
+                    previewDiv.innerHTML = '';
+                }
             } else if (fieldType === 'grid') {
                 document.getElementById(`project-grid-${projectId}`).value = '';
+                const previewDiv = document.getElementById(`project-grid-${projectId}-preview`);
+                if (previewDiv) {
+                    previewDiv.classList.remove('show');
+                    previewDiv.innerHTML = '';
+                }
             }
         }
         
