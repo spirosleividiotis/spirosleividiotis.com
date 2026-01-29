@@ -19,16 +19,21 @@ The CMS has 7 tabs for editing different sections:
 - Biography text (3 paragraphs)
 
 #### 3. **Music & Reel** - Media files
-- Music player song and file
-- Reel video file
+- Music player song and file (with Remove button)
+- Reel video file (with Remove button)
 - Amsterdam Spotify link
-- CV file
+- CV file (with Remove button)
+- **📁 Pro tip:** Add your files to the root folder first, then enter the filename
 
 #### 4. **Projects** - Portfolio projects
 - Project name and company
 - Background colors
 - Password protection (for specific projects)
+- **NEW:** Body text field - add descriptions between hero and grid
+- **NEW:** Hero image - wide banner at the top
+- **NEW:** Grid assets - 2-column layout for images/videos
 - Click "Edit" on any project to modify
+- Remove buttons for clearing hero/grid assets
 
 #### 5. **Experience** - Work history
 - Company names and images
@@ -64,15 +69,26 @@ The CMS has 7 tabs for editing different sections:
 
 ## Adding Media Files (Images, Videos, Audio)
 
-### For Images/Photos:
-1. Add your image to the `portfolio-deploy` folder
-2. In the CMS, use just the filename (e.g., `my-photo.jpg`)
-3. Save and push
+### File Upload Workflow (IMPORTANT):
+1. **First:** Add your file to the `portfolio-deploy` folder on your computer
+2. **Then:** Go to the CMS and enter just the filename (e.g., `my-photo.jpg`)
+3. **Save:** Click "Save Changes & Download"
+4. **Push:** Commit and push BOTH the file AND `content.json` to GitHub
 
-### For Videos/Audio:
-1. Add your media file to the `portfolio-deploy` folder
-2. In the CMS, update the filename (e.g., `reel.mp4` or `music.mp3`)
-3. Save and push
+### For CV / Music / Reel:
+1. Add your file to `portfolio-deploy` folder
+2. In CMS, enter the filename in the field
+3. Use the "Remove" button to clear the field if needed
+4. Files should be in the root folder (same level as `index.html`)
+
+### For Project Assets:
+1. Add your images/videos to `portfolio-deploy` folder
+2. In the project edit form:
+   - **Body Text:** Add description/context (optional)
+   - **Hero Image:** Enter filename for wide banner (optional)
+   - **Grid Assets:** Enter comma-separated filenames for 2-column grid
+3. Example grid: `image1.jpg, video1.mp4, animation.gif`
+4. Use "Remove" buttons to clear fields
 
 ### Tips:
 - Use descriptive filenames: `qonto-project-1.jpg` instead of `image1.jpg`
