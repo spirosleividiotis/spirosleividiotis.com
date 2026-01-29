@@ -962,6 +962,33 @@ function initializeModalsAndPlayers() {
             document.body.style.overflow = '';
         }
     });
+    
+    // Close about modal when clicking outside (on modal background)
+    if (aboutModal) {
+        aboutModal.addEventListener('click', function(e) {
+            // Close if clicking directly on the modal (not on the content inside)
+            if (e.target === aboutModal) {
+                aboutModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+    
+    // Close video player when clicking outside (on modal background)
+    if (videoPlayer) {
+        videoPlayer.addEventListener('click', function(e) {
+            // Close if clicking directly on the video player (not on the video element)
+            if (e.target === videoPlayer) {
+                videoPlayer.classList.remove('active');
+                document.body.style.overflow = '';
+                document.body.classList.remove('video-player-active');
+                if (videoPlayerElement) {
+                    videoPlayerElement.pause();
+                    videoPlayerElement.currentTime = 0;
+                }
+            }
+        });
+    }
 }
 
 // Hero name photo reveal
