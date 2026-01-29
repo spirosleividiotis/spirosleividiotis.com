@@ -1145,6 +1145,14 @@ function loadProjectContent(projectData, projectName) {
         return;
     }
     
+    // CRITICAL: Reset modal for standard projects (clear custom HTML)
+    if (modalBodyText) {
+        modalBodyText.innerHTML = '';
+        modalBodyText.style.display = 'none';
+    }
+    if (modalHero) modalHero.style.display = 'none';
+    if (modalGrid) modalGrid.innerHTML = '';
+    
     // Load project media if available (standard projects)
     if (projectData && projectData.media) {
         // Hero image

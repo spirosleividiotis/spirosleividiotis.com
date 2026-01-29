@@ -889,12 +889,30 @@ section {
     overflow: hidden;
 }
 
+.work-visual::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    z-index: 1;
+    transition: background 0.4s ease;
+    pointer-events: none;
+}
+
+.work-card:hover .work-visual::before {
+    background: rgba(0, 0, 0, 0.8);
+}
+
 .project-info {
     position: absolute;
     top: 100px;
     right: 80px;
     text-align: left;
     transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 2;
 }
 
 .project-info.hidden {
