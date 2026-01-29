@@ -483,6 +483,7 @@
                             <div class="file-upload-row">
                                 <input type="text" id="heroPhoto" placeholder="Paste Cloudinary URL or click Upload" style="flex: 1;">
                                 <button type="button" class="btn-upload" onclick="uploadFile('heroPhoto', 'image')">Upload Photo</button>
+                                <button type="button" class="btn-small" onclick="window.open('https://console.cloudinary.com/console/c-3932f658ea9d31b91b5eafc4127ae1/media_library/folders/home', '_blank')" style="background: #22c55e;">Browse Library</button>
                                 <button type="button" class="btn-small btn-secondary" onclick="removeFile('heroPhoto')">Remove</button>
                             </div>
                             <div id="heroPhoto-preview" class="file-preview"></div>
@@ -517,6 +518,7 @@
                             <div class="file-upload-row">
                                 <input type="text" id="aboutPhoto" placeholder="Paste Cloudinary URL or click Upload" style="flex: 1;">
                                 <button type="button" class="btn-upload" onclick="uploadFile('aboutPhoto', 'image')">Upload Photo</button>
+                                <button type="button" class="btn-small" onclick="window.open('https://console.cloudinary.com/console/c-3932f658ea9d31b91b5eafc4127ae1/media_library/folders/home', '_blank')" style="background: #22c55e;">Browse Library</button>
                                 <button type="button" class="btn-small btn-secondary" onclick="removeFile('aboutPhoto')">Remove</button>
                             </div>
                             <div id="aboutPhoto-preview" class="file-preview"></div>
@@ -644,7 +646,15 @@
                     </div>
                     <div class="form-group">
                         <label>Logo File</label>
-                        <input type="text" id="footerLogo" placeholder="logo.svg">
+                        <div class="file-upload-container">
+                            <div class="file-upload-row">
+                                <input type="text" id="footerLogo" placeholder="Paste Cloudinary URL or click Upload" style="flex: 1;">
+                                <button type="button" class="btn-upload" onclick="uploadFile('footerLogo', 'image')">Upload</button>
+                                <button type="button" class="btn-small" onclick="window.open('https://console.cloudinary.com/console/c-3932f658ea9d31b91b5eafc4127ae1/media_library/folders/home', '_blank')" style="background: #22c55e;">Browse</button>
+                                <button type="button" class="btn-small btn-secondary" onclick="removeFile('footerLogo')">Remove</button>
+                            </div>
+                            <div id="footerLogo-preview" class="file-preview"></div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Year</label>
@@ -836,6 +846,9 @@
             document.getElementById('footerDribbble').value = contentData.footer.social.find(s => s.name === 'dribbble')?.url || '';
             document.getElementById('footerLinkedin').value = contentData.footer.social.find(s => s.name === 'linkedin')?.url || '';
             document.getElementById('footerLogo').value = contentData.footer.logo;
+            if (contentData.footer.logo) {
+                showFilePreview('footerLogo', contentData.footer.logo, 'image');
+            }
             document.getElementById('footerYear').value = contentData.footer.year;
             
             // Projects
@@ -979,6 +992,7 @@
                                     <div class="file-upload-row">
                                         <input type="text" id="project-hero-${project.id}" value="${project.media.hero || ''}" placeholder="Paste Cloudinary URL or click Upload" style="flex: 1;">
                                         <button type="button" class="btn-upload" onclick="uploadProjectFile(${project.id}, 'hero')">Upload</button>
+                                        <button type="button" class="btn-small" onclick="window.open('https://console.cloudinary.com/console/c-3932f658ea9d31b91b5eafc4127ae1/media_library/folders/home', '_blank')" style="background: #22c55e;">Browse</button>
                                         <button type="button" class="btn-small btn-secondary" onclick="clearProjectField(${project.id}, 'hero')">Remove</button>
                                     </div>
                                     <div id="project-hero-${project.id}-preview" class="file-preview"></div>
@@ -988,10 +1002,11 @@
                             <div class="form-group">
                                 <label>Grid Assets (2-column layout)</label>
                                 <div class="file-upload-container">
-                                    <div class="file-upload-row">
-                                        <button type="button" class="btn-upload" onclick="uploadProjectGridFiles(${project.id})" style="width: 100%;">Upload Grid Images/Videos (Multiple Files)</button>
+                                    <div class="file-upload-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                                        <button type="button" class="btn-upload" onclick="uploadProjectGridFiles(${project.id})">Upload Multiple Files</button>
+                                        <button type="button" class="btn-small" onclick="window.open('https://console.cloudinary.com/console/c-3932f658ea9d31b91b5eafc4127ae1/media_library/folders/home', '_blank')" style="background: #22c55e;">Browse Library</button>
                                     </div>
-                                    <textarea id="project-grid-${project.id}" rows="4" placeholder="Uploaded URLs will appear here..." readonly>${(project.media.grid || []).join(', ')}</textarea>
+                                    <textarea id="project-grid-${project.id}" rows="4" placeholder="Paste URLs (comma-separated) or use Upload..." style="margin-top: 8px;">${(project.media.grid || []).join(', ')}</textarea>
                                     <button type="button" class="btn-small btn-secondary" onclick="clearProjectField(${project.id}, 'grid')" style="margin-top: 8px;">Clear All Grid Assets</button>
                                     <div id="project-grid-${project.id}-preview" class="file-preview"></div>
                                 </div>
@@ -1109,6 +1124,36 @@
             widget.open();
         }
         
+        // Upload experience company image
+        function uploadExperienceImage(expId) {
+            if (CLOUDINARY_CLOUD_NAME === 'YOUR_CLOUD_NAME') {
+                alert('⚠️ Cloudinary not configured yet!');
+                return;
+            }
+            
+            const widget = cloudinary.createUploadWidget(
+                {
+                    cloudName: CLOUDINARY_CLOUD_NAME,
+                    uploadPreset: CLOUDINARY_UPLOAD_PRESET,
+                    sources: ['local', 'url', 'media_library'],
+                    multiple: false,
+                    resourceType: 'image',
+                    maxFileSize: 100000000,
+                    clientAllowedFormats: ['jpg', 'png', 'gif', 'webp'],
+                    folder: 'portfolio/experience',
+                    showAdvancedOptions: true
+                },
+                (error, result) => {
+                    if (!error && result && result.event === 'success') {
+                        const url = result.info.secure_url;
+                        document.getElementById(`exp-image-${expId}`).value = url;
+                        showFilePreview(`exp-image-${expId}`, url, 'image');
+                    }
+                }
+            );
+            widget.open();
+        }
+        
         // Helper function to clear project-specific fields
         function clearProjectField(projectId, fieldType) {
             if (fieldType === 'hero') {
@@ -1149,7 +1194,15 @@
                         </div>
                         <div class="form-group">
                             <label>Company Image</label>
-                            <input type="text" id="exp-image-${exp.id}" value="${exp.image}">
+                            <div class="file-upload-container">
+                                <div class="file-upload-row">
+                                    <input type="text" id="exp-image-${exp.id}" value="${exp.image}" placeholder="Paste Cloudinary URL or click Upload" style="flex: 1;">
+                                    <button type="button" class="btn-upload" onclick="uploadExperienceImage('${exp.id}')">Upload</button>
+                                    <button type="button" class="btn-small" onclick="window.open('https://console.cloudinary.com/console/c-3932f658ea9d31b91b5eafc4127ae1/media_library/folders/home', '_blank')" style="background: #22c55e;">Browse</button>
+                                    <button type="button" class="btn-small btn-secondary" onclick="removeFile('exp-image-${exp.id}')">Remove</button>
+                                </div>
+                                <div id="exp-image-${exp.id}-preview" class="file-preview"></div>
+                            </div>
                         </div>
                         ${exp.roles.map((role, i) => `
                             <div style="background: #1a1a1a; padding: 16px; border-radius: 4px; margin-top: 16px;">
@@ -1176,6 +1229,13 @@
                     </div>
                 </div>
             `).join('');
+            
+            // Show previews for existing experience images
+            contentData.experience.forEach(exp => {
+                if (exp.image) {
+                    showFilePreview(`exp-image-${exp.id}`, exp.image, 'image');
+                }
+            });
         }
         
         function toggleExpEdit(id) {
