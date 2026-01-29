@@ -1,7 +1,7 @@
 {
   "hero": {
     "name": "Spiros<br>Leividiotis",
-    "subtitle": "Staff Motion Designer specializing in interaction design, motion systems, and design system implementation. I help teams ship motion that's consistent, scalable, and implementation-ready—from Lottie pipelines and Rive prototypes to production-ready animations and cross-platform guidelines.",
+    "subtitle": "Staff-level motion designer focused on UX motion and motion systems. I help teams ship motion that's consistent, scalable, and implementation-ready—turning principles into patterns, guidelines, and Lottie-ready handoff with design systems and engineering.",
     "photo": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694889/photo_vf6t7t.jpg",
     "tags": {
       "tools": [
@@ -39,14 +39,14 @@
       "text": "amsterdam",
       "link": "https://open.spotify.com/track/2KvbLliAjjZNOipthec7Fh?si=885ff3e35661451e"
     },
-    "cvFile": "https://res.cloudinary.com/dnbmyyc9x/raw/upload/v1769702209/portfolio/Spiros_Leividiotis_CV_2K26_oad50u.pdf"
+    "cvFile": "cv.pdf#view=Fit"
   },
   "aboutMe": {
     "photo": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694889/photo_vf6t7t.jpg",
     "bio": [
-      "I'm Spiros, a Staff Motion Designer based in Amsterdam, Netherlands, working at the intersection of product design, motion, and design systems. I use motion as a functional tool—to clarify interactions, reinforce hierarchy, and improve usability at scale.\n",
-      "Over 4 years at Qonto, I built the company's motion design system from scratch, partnered with designers and engineers on autonomous adoption, and expanded into cross-platform design system work. I focus on building reusable, well-documented patterns that teams can confidently implement across complex products.",
-      "Outside of work, I spend time cycling and hanging out with Finn, my Westie—who has strong opinions about walk schedules and none about motion design. I care deeply about craft, consistency, and pragmatism, and I believe great motion should feel invisible: intentional, purposeful, and grounded in real user needs."
+      "I'm Spiros, a Staff Motion Designer based in Amsterdam, Netherlands, working at the intersection of product design, animation, and design systems. I use motion as a functional tool—to clarify interactions, reinforce hierarchy, and improve usability at scale.",
+      "Currently working remotely at Qonto, I collaborate closely with product designers and engineers on product experiences and design systems. I focus on building reusable, well-documented motion patterns that teams can confidently use across complex products.",
+      "Outside of work, I spend a lot of time cycling and hanging out with Finn, my Westie—who has strong opinions about walk schedules and absolutely none about motion design. I care deeply about craft, consistency, and pragmatism, and I believe great motion should feel invisible: intentional, purposeful, and grounded in real user needs."
     ]
   },
   "music": {
