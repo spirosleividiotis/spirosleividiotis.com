@@ -59,21 +59,23 @@
   "projects": [
     {
       "id": 1,
-      "name": "Qonto Motion System",
+      "name": "Building a Motion System",
       "company": "Qonto",
       "color": "#141414",
-      "passwordProtected": false,
+      "passwordProtected": true,
       "customUrl": "motion-system-content.html",
       "bodyText": "",
       "media": {
         "hero": "motion-system/motion/Motion/Comp_5.gif",
         "grid": []
-      }
+      },
+      "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769721871/portfolio/3_2_bbvdcl.gif",
+      "password": "spiros2026"
     },
     {
       "id": 2,
-      "name": "Checkout Experience",
-      "company": "Flink",
+      "name": "Vibe coding a System Motion tool",
+      "company": "Qonto",
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
@@ -81,7 +83,8 @@
       "media": {
         "hero": "",
         "grid": []
-      }
+      },
+      "cardPreview": ""
     },
     {
       "id": 3,
