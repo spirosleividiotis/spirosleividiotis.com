@@ -1896,10 +1896,24 @@ section {
     
     body {
         cursor: auto !important;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+        -webkit-overflow-scrolling: touch;
+        overflow-x: hidden !important;
+    }
+    
+    html {
+        overflow-x: hidden !important;
     }
     
     .cursor-dot {
         display: none !important;
+    }
+    
+    /* Touch-friendly: larger tap targets */
+    a, button {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
     }
     
     /* Consistent spacing */
@@ -1969,25 +1983,17 @@ section {
         color: #000000;
     }
     
-    /* Header meta */
+    /* Header meta - HIDE on mobile */
     .header-meta {
-        position: relative !important;
-        top: auto !important;
-        right: auto !important;
-        align-items: flex-start;
-        font-size: 16px;
-        gap: 8px;
-        transform: none !important;
+        display: none !important;
     }
     
     .location-link {
-        font-size: 16px;
-        color: #000000;
+        display: none !important;
     }
     
     .time {
-        font-size: 16px;
-        color: #757575;
+        display: none !important;
     }
     
     /* Hero content */
@@ -2214,6 +2220,14 @@ section {
         margin-left: 0 !important;
     }
     
+    /* Reel link */
+    .reel-link {
+        margin-left: 0 !important;
+        margin-top: 24px !important;
+        font-size: 16px !important;
+        color: #757575 !important;
+    }
+    
     .work-grid {
         display: flex;
         flex-direction: column;
@@ -2372,57 +2386,90 @@ section {
     .modal-close {
         top: 20px;
         right: 20px;
+        /* Larger touch target */
+        min-width: 44px;
+        min-height: 44px;
+        padding: 12px !important;
+    }
+    
+    /* Project modal */
+    .project-modal-wrapper {
+        width: 100%;
+        height: 100vh;
+        max-height: none;
+        border-radius: 0;
+        border: none !important;
+    }
+    
+    .project-modal-header {
+        padding: 20px;
+    }
+    
+    .project-modal-title {
+        font-size: 20px !important;
+    }
+    
+    .project-modal-company {
+        font-size: 14px !important;
+    }
+    
+    .project-body-text {
+        padding: 0 20px;
+        margin: 32px auto;
+    }
+    
+    .project-body-text p {
+        font-size: 16px;
+    }
+    
+    #projectHero img,
+    #projectHero video {
+        width: 100%;
+        height: auto;
+    }
+    
+    #projectGrid {
+        grid-template-columns: 1fr !important;
+        gap: 16px;
+        padding: 20px;
+    }
+    
+    /* Video player */
+    .video-player-content {
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+    }
+    
+    video {
+        max-width: 100%;
+        max-height: 80vh;
+    }
+    
+    /* Password gate */
+    .project-password-gate {
+        padding: 32px 20px;
+    }
+    
+    .password-input {
+        font-size: 18px;
+        padding: 16px;
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .password-error {
+        font-size: 14px;
+        padding: 16px 20px;
     }
     
     /* ===================================
-       MUSIC PLAYER
+       MUSIC PLAYER - HIDE on mobile
        =================================== */
     
     .music-player {
-        position: fixed !important;
+        display: none !important;
     }
-    
-    .player-content {
-        padding: 12px 20px;
-        gap: 12px;
-    }
-    
-    .player-icon {
-        font-size: 14px;
-    }
-    
-    .player-title {
-        font-size: 11px;
-    }
-    
-    .player-controls {
-        gap: 12px;
-        min-width: 0;
-        flex: 1;
-    }
-    
-    .player-btn {
-        padding: 4px;
-    }
-    
-    .player-btn svg {
-        width: 14px;
-        height: 14px;
-    }
-    
-    .player-progress {
-        gap: 8px;
-    }
-    
-    .player-time {
-        font-size: 11px;
-        gap: 6px;
-    }
-    
-    .volume-control {
-        display: none;
-    }
-}
 
 /* ===================================
    RESPONSIVE
