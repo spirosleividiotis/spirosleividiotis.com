@@ -823,7 +823,7 @@
     </div>
     
     <script>
-        const ADMIN_PASSWORD = '310890';
+        const ADMIN_PASSWORD = 'Thisbleedingcity2101!';
         let contentData = null;
         
         // Cloudinary Configuration
@@ -964,6 +964,11 @@
             // Show selected tab
             document.getElementById(tabName + 'Tab').classList.add('active');
             event.target.classList.add('active');
+            
+            // Populate Motion System fields when that tab is opened
+            if (tabName === 'motionSystem') {
+                populateMotionSystemFields();
+            }
         }
         
         // Load Content
@@ -1677,30 +1682,51 @@
         
         // Populate Motion System fields in CMS
         function populateMotionSystemFields() {
-            document.getElementById('motionIntro').value = motionSystemData.intro || '';
-            document.getElementById('motionMeta').value = motionSystemData.meta || '';
+            // Only populate if elements exist (tab is loaded)
+            const introField = document.getElementById('motionIntro');
+            if (!introField) return; // Tab not loaded yet, skip
             
-            // Principle GIFs previews
-            motionSystemData.step1.principleGifs.forEach((gif, i) => {
-                if (gif) {
-                    showFilePreview(`principle-gif-${i + 1}`, gif, 'image');
-                }
-            });
-            
-            // Render primitive tokens
-            renderPrimitiveTokens();
-            
-            // Render interactive examples
-            renderInteractiveExamples();
-            
-            // Render base & common tokens
-            renderBaseTokens();
-            renderCommonTokens();
+            try {
+                document.getElementById('motionIntro').value = motionSystemData.intro || '';
+                document.getElementById('motionMeta').value = motionSystemData.meta || '';
+                document.getElementById('motionProblemLabel').value = motionSystemData.problem.label || 'Context';
+                document.getElementById('motionProblemTitle').value = motionSystemData.problem.title || '';
+                document.getElementById('motionProblemContent').value = motionSystemData.problem.content || '';
+                document.getElementById('motionStep1Title').value = motionSystemData.step1.title || '';
+                document.getElementById('motionStep1Content').value = motionSystemData.step1.content || '';
+                document.getElementById('motionStep2Title').value = motionSystemData.step2.title || '';
+                document.getElementById('motionStep2Content').value = motionSystemData.step2.content || '';
+                document.getElementById('motionStep3Title').value = motionSystemData.step3.title || '';
+                document.getElementById('motionStep3Content').value = motionSystemData.step3.content || '';
+                document.getElementById('motionImpactLabel').value = motionSystemData.impact.label || 'Impact';
+                document.getElementById('motionImpactTitle').value = motionSystemData.impact.title || '';
+                document.getElementById('motionImpactContent').value = motionSystemData.impact.content || '';
+                
+                // Principle GIFs previews
+                motionSystemData.step1.principleGifs.forEach((gif, i) => {
+                    if (gif) {
+                        showFilePreview(`principle-gif-${i + 1}`, gif, 'image');
+                    }
+                });
+                
+                // Render primitive tokens
+                renderPrimitiveTokens();
+                
+                // Render interactive examples
+                renderInteractiveExamples();
+                
+                // Render base & common tokens
+                renderBaseTokens();
+                renderCommonTokens();
+            } catch (error) {
+                console.error('Error populating Motion System fields:', error);
+            }
         }
         
         // Render primitive tokens list
         function renderPrimitiveTokens() {
             const list = document.getElementById('primitiveTokensList');
+            if (!list) return; // Element doesn't exist yet
             list.innerHTML = motionSystemData.step2.primitiveTokens.map((token, index) => `
                 <div class="item" style="margin-bottom: 12px;">
                     <div style="display: flex; gap: 12px; align-items: center;">
@@ -1729,6 +1755,7 @@
         // Render interactive examples list
         function renderInteractiveExamples() {
             const list = document.getElementById('interactiveExamplesList');
+            if (!list) return; // Element doesn't exist yet
             list.innerHTML = motionSystemData.interactiveExamples.map((example, index) => `
                 <div class="item" style="margin-bottom: 12px;">
                     <div style="display: flex; flex-direction: column; gap: 8px;">
@@ -1753,6 +1780,7 @@
         // Render base tokens list
         function renderBaseTokens() {
             const list = document.getElementById('baseTokensList');
+            if (!list) return; // Element doesn't exist yet
             list.innerHTML = motionSystemData.step3.baseTokens.map((token, index) => `
                 <div class="item" style="margin-bottom: 12px;">
                     <div style="display: flex; gap: 12px; align-items: center;">
@@ -1781,6 +1809,7 @@
         // Render common tokens list
         function renderCommonTokens() {
             const list = document.getElementById('commonTokensList');
+            if (!list) return; // Element doesn't exist yet
             list.innerHTML = motionSystemData.step3.commonTokens.map((token, index) => `
                 <div class="item" style="margin-bottom: 12px;">
                     <div style="display: flex; gap: 12px; align-items: center;">
