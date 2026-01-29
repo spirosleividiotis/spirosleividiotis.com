@@ -610,11 +610,11 @@ if (!isMobileDevice) {
                     e.preventDefault();
                     e.stopPropagation();
                     showPasswordInput();
-                    return; // Don't proceed with image cycling
+                    return;
                 }
                 
-                // Handle image cycling (for all projects, including unlocked password-protected ones)
-                cycleProjectImage(card);
+                // Open project modal
+                openProjectModal(card);
             });
         });
         
@@ -1097,6 +1097,98 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Click listener added successfully');
     } else {
         console.error('Could not find hero elements');
+    }
+});
+
+// ===================================
+// PROJECT MODAL (Full-screen)
+// ===================================
+
+function openProjectModal(card) {
+    const projectName = card.querySelector('.project-name')?.textContent;
+    const projectCompany = card.querySelector('.project-company')?.textContent;
+    const projectId = card.getAttribute('data-project-id');
+    
+    // Get project data from window.projectsData (loaded by content-loader.js)
+    const projectData = window.projectsData?.find(p => p.id == projectId);
+    
+    const modal = document.getElementById('projectModal');
+    const modalTitle = document.getElementById('projectModalTitle');
+    const modalSubtitle = document.getElementById('projectModalSubtitle');
+    const modalHero = document.getElementById('projectHero');
+    const modalGrid = document.getElementById('projectGrid');
+    
+    if (!modal || !modalTitle || !modalSubtitle || !modalHero || !modalGrid) {
+        console.error('Project modal elements not found');
+        return;
+    }
+    
+    // Set title and subtitle
+    modalTitle.textContent = projectName || 'Project';
+    modalSubtitle.textContent = projectCompany || '';
+    
+    // Clear previous content
+    modalHero.innerHTML = '';
+    modalGrid.innerHTML = '';
+    modalHero.style.display = 'none';
+    
+    // Load project media if available
+    if (projectData && projectData.media) {
+        // Hero image
+        if (projectData.media.hero && projectData.media.hero.trim()) {
+            modalHero.style.display = 'block';
+            const heroFile = projectData.media.hero.trim();
+            const heroExt = heroFile.split('.').pop().toLowerCase();
+            
+            if (heroExt === 'mp4' || heroExt === 'webm') {
+                modalHero.innerHTML = `<video src="${heroFile}" autoplay loop muted playsinline></video>`;
+            } else {
+                modalHero.innerHTML = `<img src="${heroFile}" alt="${projectName}">`;
+            }
+        }
+        
+        // Grid items
+        if (projectData.media.grid && projectData.media.grid.length > 0) {
+            modalGrid.innerHTML = projectData.media.grid.map(file => {
+                const ext = file.split('.').pop().toLowerCase();
+                const isVideo = ext === 'mp4' || ext === 'webm';
+                
+                return `
+                    <div class="project-grid-item">
+                        ${isVideo ? 
+                            `<video src="${file}" loop muted playsinline onmouseenter="this.play()" onmouseleave="this.pause(); this.currentTime=0;"></video>` :
+                            `<img src="${file}" alt="${projectName}">`
+                        }
+                    </div>
+                `;
+            }).join('');
+        }
+    }
+    
+    // Show modal
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeProjectModal() {
+    const modal = document.getElementById('projectModal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+// Project modal close button
+const projectModalClose = document.getElementById('projectModalClose');
+if (projectModalClose) {
+    projectModalClose.addEventListener('click', closeProjectModal);
+}
+
+// Close project modal on Escape
+document.addEventListener('keydown', function(e) {
+    const modal = document.getElementById('projectModal');
+    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+        closeProjectModal();
     }
 });
 

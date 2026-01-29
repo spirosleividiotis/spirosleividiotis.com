@@ -382,7 +382,6 @@
                 <button class="tab" onclick="switchTab('media')">Music & Reel</button>
                 <button class="tab" onclick="switchTab('projects')">Projects</button>
                 <button class="tab" onclick="switchTab('experience')">Experience</button>
-                <button class="tab" onclick="switchTab('grid')">Grid Images</button>
                 <button class="tab" onclick="switchTab('footer')">Footer</button>
             </div>
             
@@ -488,15 +487,6 @@
                 <div class="section">
                     <h2>Experience</h2>
                     <div class="items-list" id="experienceList"></div>
-                </div>
-            </div>
-            
-            <!-- Grid Tab -->
-            <div id="gridTab" class="tab-content">
-                <div class="section">
-                    <h2>Grid Modal Images</h2>
-                    <p style="color: #999; margin-bottom: 20px;">Add filenames for your grid images (GIFs, PNGs, JPGs, videos)</p>
-                    <div id="gridImagesList"></div>
                 </div>
             </div>
             
@@ -618,9 +608,6 @@
             
             // Experience
             renderExperience();
-            
-            // Grid
-            renderGridImages();
         }
         
         // Render Projects
@@ -647,7 +634,7 @@
                             <input type="text" id="project-company-${project.id}" value="${project.company}">
                         </div>
                         <div class="form-group">
-                            <label>Background Color</label>
+                            <label>Background Color (for card)</label>
                             <input type="text" id="project-color-${project.id}" value="${project.color}">
                         </div>
                         <div class="form-group">
@@ -662,7 +649,21 @@
                             <input type="text" id="project-pwd-${project.id}" value="${project.password || ''}">
                         </div>
                         ` : ''}
-                        <button class="btn-small" onclick="updateProject(${project.id})">Update Project</button>
+                        
+                        <div style="background: #1a1a1a; padding: 16px; border-radius: 4px; margin-top: 20px;">
+                            <h4 style="margin-bottom: 12px; font-weight: 400;">Project Content</h4>
+                            <div class="form-group">
+                                <label>Hero Image (optional, wide)</label>
+                                <input type="text" id="project-hero-${project.id}" value="${project.media.hero || ''}" placeholder="Leave empty for no hero. Add filename like: hero.jpg">
+                            </div>
+                            <div class="form-group">
+                                <label>Grid Items (comma-separated filenames)</label>
+                                <textarea id="project-grid-${project.id}" rows="3" placeholder="image1.jpg, video1.mp4, gif1.gif">${(project.media.grid || []).join(', ')}</textarea>
+                                <small style="color: #999; margin-top: 4px; display: block;">Add images/GIFs/videos for the 2-column grid. Leave empty if no content yet.</small>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-small" onclick="updateProject(${project.id})" style="margin-top: 16px;">Update Project</button>
                     </div>
                 </div>
             `).join('');
@@ -682,6 +683,12 @@
             if (project.passwordProtected && document.getElementById(`project-pwd-${id}`)) {
                 project.password = document.getElementById(`project-pwd-${id}`).value;
             }
+            
+            // Update media
+            project.media.hero = document.getElementById(`project-hero-${id}`).value.trim();
+            const gridValue = document.getElementById(`project-grid-${id}`).value.trim();
+            project.media.grid = gridValue ? gridValue.split(',').map(s => s.trim()).filter(s => s) : [];
+            
             renderProjects();
             showSuccess();
         }
@@ -757,17 +764,6 @@
             showSuccess();
         }
         
-        // Render Grid Images
-        function renderGridImages() {
-            const list = document.getElementById('gridImagesList');
-            list.innerHTML = contentData.gridImages.map((img, i) => `
-                <div class="form-group">
-                    <label>Image ${i + 1} (${img.size}, ${img.type})</label>
-                    <input type="text" id="grid-${i}" value="${img.file}" placeholder="filename.jpg or filename.gif">
-                </div>
-            `).join('');
-        }
-        
         // Save Changes
         function saveChanges() {
             // Update Hero
@@ -801,11 +797,6 @@
             ];
             contentData.footer.logo = document.getElementById('footerLogo').value;
             contentData.footer.year = document.getElementById('footerYear').value;
-            
-            // Update Grid Images
-            contentData.gridImages.forEach((img, i) => {
-                img.file = document.getElementById(`grid-${i}`).value;
-            });
             
             // Download JSON
             const dataStr = JSON.stringify(contentData, null, 2);

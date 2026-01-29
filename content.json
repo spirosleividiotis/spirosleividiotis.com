@@ -43,12 +43,10 @@
       "color": "#141414",
       "passwordProtected": true,
       "password": "310890",
-      "images": [
-        { "type": "default", "background": "#141414" },
-        { "type": "gradient", "background": "#FFFFFF", "gradient": "radial-gradient(circle at 50% 50%, #E0E0E0 0%, #FFFFFF 70%)" },
-        { "type": "default", "background": "#141414" }
-      ],
-      "media": []
+      "media": {
+        "hero": "",
+        "grid": []
+      }
     },
     {
       "id": 2,
@@ -56,12 +54,10 @@
       "company": "Flink",
       "color": "#141414",
       "passwordProtected": false,
-      "images": [
-        { "type": "default", "background": "#141414" },
-        { "type": "default", "background": "#141414" },
-        { "type": "default", "background": "#141414" }
-      ],
-      "media": []
+      "media": {
+        "hero": "",
+        "grid": []
+      }
     },
     {
       "id": 3,
@@ -69,12 +65,10 @@
       "company": "Delivery Hero",
       "color": "#141414",
       "passwordProtected": false,
-      "images": [
-        { "type": "default", "background": "#141414" },
-        { "type": "default", "background": "#141414" },
-        { "type": "default", "background": "#141414" }
-      ],
-      "media": []
+      "media": {
+        "hero": "",
+        "grid": []
+      }
     },
     {
       "id": 4,
@@ -82,12 +76,10 @@
       "company": "Folket",
       "color": "#141414",
       "passwordProtected": false,
-      "images": [
-        { "type": "default", "background": "#141414" },
-        { "type": "default", "background": "#141414" },
-        { "type": "default", "background": "#141414" }
-      ],
-      "media": []
+      "media": {
+        "hero": "",
+        "grid": []
+      }
     },
     {
       "id": 5,
@@ -95,25 +87,21 @@
       "company": "Freelance",
       "color": "#141414",
       "passwordProtected": false,
-      "images": [
-        { "type": "default", "background": "#141414" },
-        { "type": "default", "background": "#141414" },
-        { "type": "default", "background": "#141414" }
-      ],
-      "media": []
+      "media": {
+        "hero": "",
+        "grid": []
+      }
     },
     {
       "id": 6,
-      "name": "Portfolio Site",
+      "name": "Animations Showcase",
       "company": "Personal",
       "color": "#141414",
       "passwordProtected": false,
-      "images": [
-        { "type": "default", "background": "#141414" },
-        { "type": "default", "background": "#141414" },
-        { "type": "default", "background": "#141414" }
-      ],
-      "media": []
+      "media": {
+        "hero": "",
+        "grid": []
+      }
     }
   ],
   "experience": [
@@ -175,26 +163,6 @@
         }
       ]
     }
-  ],
-  "gridImages": [
-    { "size": "large", "file": "", "type": "image" },
-    { "size": "medium", "file": "", "type": "image" },
-    { "size": "small", "file": "", "type": "gif" },
-    { "size": "medium", "file": "", "type": "image" },
-    { "size": "large", "file": "", "type": "image" },
-    { "size": "small", "file": "", "type": "gif" },
-    { "size": "small", "file": "", "type": "image" },
-    { "size": "medium", "file": "", "type": "image" },
-    { "size": "small", "file": "", "type": "image" },
-    { "size": "large", "file": "", "type": "image" },
-    { "size": "medium", "file": "", "type": "gif" },
-    { "size": "small", "file": "", "type": "image" },
-    { "size": "medium", "file": "", "type": "image" },
-    { "size": "small", "file": "", "type": "image" },
-    { "size": "large", "file": "", "type": "image" },
-    { "size": "medium", "file": "", "type": "gif" },
-    { "size": "small", "file": "", "type": "image" },
-    { "size": "medium", "file": "", "type": "image" }
   ],
   "footer": {
     "email": "spirosleividiotis@gmail.com",
