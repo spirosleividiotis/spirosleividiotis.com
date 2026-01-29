@@ -1,7 +1,7 @@
 {
   "hero": {
     "name": "Spiros<br>Leividiotis",
-    "subtitle": "Staff-level motion designer focused on UX motion and motion systems. I help teams ship motion that's consistent, scalable, and implementation-ready—turning principles into patterns, guidelines, and Lottie-ready handoff with design systems and engineering.",
+    "subtitle": "Staff-level motion designer focused on UX motion and motion systems. I help teams ship motion that's consistent, scalable, and implementation-ready\u2014turning principles into patterns, guidelines, and Lottie-ready handoff with design systems and engineering.",
     "photo": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694889/photo_vf6t7t.jpg",
     "tags": {
       "tools": [
@@ -44,13 +44,13 @@
   "aboutMe": {
     "photo": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694889/photo_vf6t7t.jpg",
     "bio": [
-      "I'm Spiros, a Staff Motion Designer based in Amsterdam, Netherlands, working at the intersection of product design, animation, and design systems. I use motion as a functional tool—to clarify interactions, reinforce hierarchy, and improve usability at scale.",
+      "I'm Spiros, a Staff Motion Designer based in Amsterdam, Netherlands, working at the intersection of product design, animation, and design systems. I use motion as a functional tool\u2014to clarify interactions, reinforce hierarchy, and improve usability at scale.",
       "Currently working remotely at Qonto, I collaborate closely with product designers and engineers on product experiences and design systems. I focus on building reusable, well-documented motion patterns that teams can confidently use across complex products.",
-      "Outside of work, I spend a lot of time cycling and hanging out with Finn, my Westie—who has strong opinions about walk schedules and absolutely none about motion design. I care deeply about craft, consistency, and pragmatism, and I believe great motion should feel invisible: intentional, purposeful, and grounded in real user needs."
+      "Outside of work, I spend a lot of time cycling and hanging out with Finn, my Westie\u2014who has strong opinions about walk schedules and absolutely none about motion design. I care deeply about craft, consistency, and pragmatism, and I believe great motion should feel invisible: intentional, purposeful, and grounded in real user needs."
     ]
   },
   "music": {
-    "title": "Lost in Amsterdam — Parov Stelar",
+    "title": "Lost in Amsterdam \u2014 Parov Stelar",
     "file": "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769694887/Parov_Stelar_-_Lost_In_Amsterdam_Official_Audio_z6lurq.mp3"
   },
   "reel": {
@@ -59,7 +59,7 @@
   "projects": [
     {
       "id": 1,
-      "name": "Building a Motion System",
+      "name": "Qonto Motion System",
       "company": "Qonto",
       "color": "#141414",
       "passwordProtected": true,
@@ -78,13 +78,12 @@
       "company": "Flink",
       "color": "#141414",
       "passwordProtected": true,
+      "password": "spiros2026",
       "bodyText": "",
       "media": {
         "hero": "",
         "grid": []
-      },
-      "cardPreview": "",
-      "password": "spiros2026"
+      }
     },
     {
       "id": 3,
@@ -92,13 +91,12 @@
       "company": "Delivery Hero",
       "color": "#141414",
       "passwordProtected": true,
+      "password": "spiros2026",
       "bodyText": "",
       "media": {
         "hero": "",
         "grid": []
-      },
-      "cardPreview": "",
-      "password": "spiros2026"
+      }
     },
     {
       "id": 4,
@@ -106,13 +104,12 @@
       "company": "Folket",
       "color": "#141414",
       "passwordProtected": true,
+      "password": "spiros2026",
       "bodyText": "",
       "media": {
         "hero": "",
         "grid": []
-      },
-      "cardPreview": "",
-      "password": "spiros2026"
+      }
     },
     {
       "id": 5,
@@ -120,13 +117,12 @@
       "company": "Freelance",
       "color": "#141414",
       "passwordProtected": true,
+      "password": "spiros2026",
       "bodyText": "",
       "media": {
         "hero": "",
         "grid": []
-      },
-      "cardPreview": "",
-      "password": "spiros2026"
+      }
     },
     {
       "id": 6,
@@ -134,13 +130,12 @@
       "company": "Personal",
       "color": "#141414",
       "passwordProtected": true,
+      "password": "spiros2026",
       "bodyText": "",
       "media": {
         "hero": "",
         "grid": []
-      },
-      "cardPreview": "",
-      "password": "spiros2026"
+      }
     }
   ],
   "experience": [
@@ -171,7 +166,7 @@
             "start": "2022",
             "end": "2024"
           },
-          "description": "Delivered web motion end-to-end (concept → assets). Set early guidelines and delivery workflow. Prototyped interactions and micro-motions for key pages."
+          "description": "Delivered web motion end-to-end (concept \u2192 assets). Set early guidelines and delivery workflow. Prototyped interactions and micro-motions for key pages."
         }
       ]
     },
