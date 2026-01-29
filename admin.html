@@ -854,6 +854,13 @@
             // Projects
             renderProjects();
             
+            // Show previews for existing project card previews
+            contentData.projects.forEach(project => {
+                if (project.cardPreview) {
+                    showFilePreview(`project-preview-${project.id}`, project.cardPreview, 'auto');
+                }
+            });
+            
             // Experience
             renderExperience();
         }
@@ -961,8 +968,27 @@
                             <input type="text" id="project-company-${project.id}" value="${project.company}">
                         </div>
                         <div class="form-group">
-                            <label>Background Color (for card)</label>
-                            <input type="text" id="project-color-${project.id}" value="${project.color}">
+                            <label>Card Preview Type</label>
+                            <select id="project-preview-type-${project.id}" onchange="toggleProjectPreviewType(${project.id})" style="width: 100%; padding: 8px; background: #1a1a1a; border: 1px solid #333; color: #fff; border-radius: 4px;">
+                                <option value="color" ${!project.cardPreview ? 'selected' : ''}>Solid Color</option>
+                                <option value="media" ${project.cardPreview ? 'selected' : ''}>Image/GIF/Video</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="project-color-group-${project.id}" style="display: ${!project.cardPreview ? 'block' : 'none'};">
+                            <label>Background Color</label>
+                            <input type="text" id="project-color-${project.id}" value="${project.color}" placeholder="#141414">
+                        </div>
+                        <div class="form-group" id="project-preview-group-${project.id}" style="display: ${project.cardPreview ? 'block' : 'none'};">
+                            <label>Card Preview (Image/GIF/Video)</label>
+                            <div class="file-upload-container">
+                                <div class="file-upload-row">
+                                    <input type="text" id="project-preview-${project.id}" value="${project.cardPreview || ''}" placeholder="Paste Cloudinary URL or click Upload" style="flex: 1;">
+                                    <button type="button" class="btn-upload" onclick="uploadFile('project-preview-${project.id}', 'auto')">Upload</button>
+                                    <button type="button" class="btn-small" onclick="window.open('https://console.cloudinary.com/console/c-3932f658ea9d31b91b5eafc4127ae1/media_library/folders/home', '_blank')" style="background: #22c55e;">Browse</button>
+                                    <button type="button" class="btn-small btn-secondary" onclick="removeFile('project-preview-${project.id}')">Remove</button>
+                                </div>
+                                <div id="project-preview-${project.id}-preview" class="file-preview"></div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>
@@ -1030,11 +1056,35 @@
             }
         }
         
+        function toggleProjectPreviewType(id) {
+            const previewType = document.getElementById(`project-preview-type-${id}`).value;
+            const colorGroup = document.getElementById(`project-color-group-${id}`);
+            const previewGroup = document.getElementById(`project-preview-group-${id}`);
+            
+            if (previewType === 'color') {
+                colorGroup.style.display = 'block';
+                previewGroup.style.display = 'none';
+            } else {
+                colorGroup.style.display = 'none';
+                previewGroup.style.display = 'block';
+            }
+        }
+        
         function updateProject(id) {
             const project = contentData.projects.find(p => p.id === id);
             project.name = document.getElementById(`project-name-${id}`).value;
             project.company = document.getElementById(`project-company-${id}`).value;
-            project.color = document.getElementById(`project-color-${id}`).value;
+            
+            // Update preview type
+            const previewType = document.getElementById(`project-preview-type-${id}`).value;
+            if (previewType === 'color') {
+                project.color = document.getElementById(`project-color-${id}`).value;
+                project.cardPreview = ''; // Clear media preview
+            } else {
+                project.cardPreview = document.getElementById(`project-preview-${id}`).value.trim();
+                project.color = '#141414'; // Default color as fallback
+            }
+            
             project.passwordProtected = document.getElementById(`project-password-${id}`).checked;
             if (project.passwordProtected && document.getElementById(`project-pwd-${id}`)) {
                 project.password = document.getElementById(`project-pwd-${id}`).value;
@@ -1131,35 +1181,6 @@
         }
         
         // Upload experience company image
-        function uploadExperienceImage(expId) {
-            if (CLOUDINARY_CLOUD_NAME === 'YOUR_CLOUD_NAME') {
-                alert('⚠️ Cloudinary not configured yet!');
-                return;
-            }
-            
-            const widget = cloudinary.createUploadWidget(
-                {
-                    cloudName: CLOUDINARY_CLOUD_NAME,
-                    uploadPreset: CLOUDINARY_UPLOAD_PRESET,
-                    sources: ['local', 'url', 'media_library'],
-                    multiple: false,
-                    resourceType: 'image',
-                    maxFileSize: 100000000,
-                    clientAllowedFormats: ['jpg', 'png', 'gif', 'webp'],
-                    folder: 'portfolio/experience',
-                    showAdvancedOptions: true
-                },
-                (error, result) => {
-                    if (!error && result && result.event === 'success') {
-                        const url = result.info.secure_url;
-                        document.getElementById(`exp-image-${expId}`).value = url;
-                        showFilePreview(`exp-image-${expId}`, url, 'image');
-                    }
-                }
-            );
-            widget.open();
-        }
-        
         // Helper function to clear project-specific fields
         function clearProjectField(projectId, fieldType) {
             if (fieldType === 'hero') {
@@ -1199,11 +1220,11 @@
                             <input type="text" id="exp-company-${exp.id}" value="${exp.company}">
                         </div>
                         <div class="form-group">
-                            <label>Company Image</label>
+                            <label>Company Image/GIF/Video</label>
                             <div class="file-upload-container">
                                 <div class="file-upload-row">
                                     <input type="text" id="exp-image-${exp.id}" value="${exp.image}" placeholder="Paste Cloudinary URL or click Upload" style="flex: 1;">
-                                    <button type="button" class="btn-upload" onclick="uploadExperienceImage('${exp.id}')">Upload</button>
+                                    <button type="button" class="btn-upload" onclick="uploadFile('exp-image-${exp.id}', 'auto')">Upload</button>
                                     <button type="button" class="btn-small" onclick="window.open('https://console.cloudinary.com/console/c-3932f658ea9d31b91b5eafc4127ae1/media_library/folders/home', '_blank')" style="background: #22c55e;">Browse</button>
                                     <button type="button" class="btn-small btn-secondary" onclick="removeFile('exp-image-${exp.id}')">Remove</button>
                                 </div>
@@ -1236,10 +1257,10 @@
                 </div>
             `).join('');
             
-            // Show previews for existing experience images
+            // Show previews for existing experience images/videos
             contentData.experience.forEach(exp => {
                 if (exp.image) {
-                    showFilePreview(`exp-image-${exp.id}`, exp.image, 'image');
+                    showFilePreview(`exp-image-${exp.id}`, exp.image, 'auto');
                 }
             });
         }

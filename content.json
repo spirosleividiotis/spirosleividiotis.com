@@ -68,73 +68,67 @@
       "media": {
         "hero": "",
         "grid": []
-      },
-      "password": "spiros2026"
+      }
     },
     {
       "id": 2,
       "name": "Checkout Experience",
       "company": "Flink",
       "color": "#141414",
-      "passwordProtected": true,
+      "passwordProtected": false,
       "bodyText": "",
       "media": {
         "hero": "",
         "grid": []
-      },
-      "password": "spiros2026"
+      }
     },
     {
       "id": 3,
       "name": "Brand Guidelines",
       "company": "Delivery Hero",
       "color": "#141414",
-      "passwordProtected": true,
+      "passwordProtected": false,
       "bodyText": "",
       "media": {
         "hero": "",
         "grid": []
-      },
-      "password": "spiros2026"
+      }
     },
     {
       "id": 4,
       "name": "Interactive Stories",
       "company": "Folket",
       "color": "#141414",
-      "passwordProtected": true,
+      "passwordProtected": false,
       "bodyText": "",
       "media": {
         "hero": "",
         "grid": []
-      },
-      "password": "spiros2026"
+      }
     },
     {
       "id": 5,
       "name": "Design Tokens",
       "company": "Freelance",
       "color": "#141414",
-      "passwordProtected": true,
+      "passwordProtected": false,
       "bodyText": "",
       "media": {
         "hero": "",
         "grid": []
-      },
-      "password": "spiros2026"
+      }
     },
     {
       "id": 6,
       "name": "Animations Showcase",
       "company": "Personal",
       "color": "#141414",
-      "passwordProtected": true,
+      "passwordProtected": false,
       "bodyText": "",
       "media": {
         "hero": "",
         "grid": []
-      },
-      "password": "spiros2026"
+      }
     }
   ],
   "experience": [

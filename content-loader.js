@@ -108,10 +108,18 @@ function updateProjects(projects) {
     const workGrid = document.querySelector('.work-grid');
     if (!workGrid) return;
     
-    workGrid.innerHTML = projects.map((project, index) => `
+    workGrid.innerHTML = projects.map((project, index) => {
+        const hasPreview = project.cardPreview && project.cardPreview.trim();
+        const fileExt = hasPreview ? project.cardPreview.split('.').pop().toLowerCase() : '';
+        const isVideo = fileExt === 'mp4' || fileExt === 'webm' || fileExt === 'mov';
+        
+        return `
         <article class="work-card" ${project.passwordProtected ? 'data-password-protected="true"' : ''} data-project-id="${project.id}">
-            <div class="work-visual work-color-${index + 1}" style="background: ${project.color};">
-                <div class="project-info">
+            <div class="work-visual work-color-${index + 1}" style="background: ${hasPreview ? 'transparent' : project.color};">
+                ${hasPreview ? (isVideo ? 
+                    `<video src="${project.cardPreview}" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;"></video>` :
+                    `<img src="${project.cardPreview}" alt="${project.name}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">`) : ''}
+                <div class="project-info" style="position: relative; z-index: 1;">
                     <div class="project-text-mask">
                         <h3 class="project-name">${project.name}</h3>
                     </div>
@@ -121,7 +129,8 @@ function updateProjects(projects) {
                 </div>
             </div>
         </article>
-    `).join('');
+        `;
+    }).join('');
     
     // Store project data globally for password check
     window.projectsData = projects;
@@ -185,9 +194,17 @@ function updateExperience(experience) {
     // Update visuals
     const experienceVisual = document.querySelector('.experience-visual');
     if (experienceVisual) {
-        experienceVisual.innerHTML = experience.map((exp, i) => `
-            <div class="visual-placeholder ${i === 0 ? 'active' : ''}" data-visual="${exp.id}" style="background-image: url('${exp.image}');"></div>
-        `).join('');
+        experienceVisual.innerHTML = experience.map((exp, i) => {
+            const hasImage = exp.image && exp.image.trim();
+            const fileExt = hasImage ? exp.image.split('.').pop().toLowerCase() : '';
+            const isVideo = fileExt === 'mp4' || fileExt === 'webm' || fileExt === 'mov';
+            
+            return `
+            <div class="visual-placeholder ${i === 0 ? 'active' : ''}" data-visual="${exp.id}" ${hasImage && !isVideo ? `style="background-image: url('${exp.image}');"` : ''}>
+                ${hasImage && isVideo ? `<video src="${exp.image}" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>` : ''}
+            </div>
+            `;
+        }).join('');
     }
     
     // Store experience data globally for role switching
