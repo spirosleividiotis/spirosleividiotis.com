@@ -1,0 +1,124 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "name": "Qonto Motion System",
+      "company": "Qonto",
+      "color": "#141414",
+      "passwordProtected": true,
+      "images": [
+        { "type": "default", "background": "#141414" },
+        { "type": "gradient", "background": "#FFFFFF", "gradient": "radial-gradient(circle at 50% 50%, #E0E0E0 0%, #FFFFFF 70%)" },
+        { "type": "default", "background": "#141414" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Checkout Experience",
+      "company": "Flink",
+      "color": "#141414",
+      "passwordProtected": false,
+      "images": [
+        { "type": "default", "background": "#141414" },
+        { "type": "default", "background": "#141414" },
+        { "type": "default", "background": "#141414" }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Brand Guidelines",
+      "company": "Delivery Hero",
+      "color": "#141414",
+      "passwordProtected": false,
+      "images": [
+        { "type": "default", "background": "#141414" },
+        { "type": "default", "background": "#141414" },
+        { "type": "default", "background": "#141414" }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Interactive Stories",
+      "company": "Folket",
+      "color": "#141414",
+      "passwordProtected": false,
+      "images": [
+        { "type": "default", "background": "#141414" },
+        { "type": "default", "background": "#141414" },
+        { "type": "default", "background": "#141414" }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Design Tokens",
+      "company": "Freelance",
+      "color": "#141414",
+      "passwordProtected": false,
+      "images": [
+        { "type": "default", "background": "#141414" },
+        { "type": "default", "background": "#141414" },
+        { "type": "default", "background": "#141414" }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Portfolio Site",
+      "company": "Personal",
+      "color": "#141414",
+      "passwordProtected": false,
+      "images": [
+        { "type": "default", "background": "#141414" },
+        { "type": "default", "background": "#141414" },
+        { "type": "default", "background": "#141414" }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "id": 1,
+      "company": "Qonto",
+      "roles": [
+        {
+          "title": "Staff Motion Designer - Design System",
+          "period": "2025-now",
+          "description": "Own motion system principles, patterns, and docs. Partner with DS + engineering on implementation and QA. Drive adoption with reusable assets and handoff standards."
+        },
+        {
+          "title": "Staff Motion and Website Designer",
+          "period": "2024 - 2025",
+          "description": "Led website motion direction and consistency. Built scalable templates/patterns for faster delivery. Shipped implementation-ready motion with performance in mind."
+        },
+        {
+          "title": "Senior Motion and Website Designer",
+          "period": "2022 - 2024",
+          "description": "Delivered web motion end-to-end (concept → assets). Set early guidelines and delivery workflow. Prototyped interactions and micro-motions for key pages."
+        }
+      ],
+      "image": "qonto.png"
+    },
+    {
+      "id": 2,
+      "company": "Flink",
+      "period": "2021 - 2022",
+      "role": "Senior Motion Designer",
+      "description": "Led motion for product + marketing. Defined Flink's motion language from scratch. Collaborated with product/brand to deliver motion for app launches and campaigns.",
+      "image": "flink.png"
+    },
+    {
+      "id": 3,
+      "company": "Delivery Hero",
+      "period": "2020 - 2021",
+      "role": "Motion Designer",
+      "description": "Executed motion for product features and internal comms. Supported brand campaigns with explainer videos and motion templates. Worked across multiple brands in the Delivery Hero portfolio.",
+      "image": "delivery-hero.png"
+    },
+    {
+      "id": 4,
+      "company": "Folket",
+      "period": "2018 - 2020",
+      "role": "Motion Designer",
+      "description": "Split time between an embedded client team (Skandia) and agency projects. Partnered with clients to storyboard, iterate, and deliver animated videos. Adapted styleframes and concepts into finished motion across multiple formats.",
+      "image": "folket.png"
+    }
+  ]
+}
