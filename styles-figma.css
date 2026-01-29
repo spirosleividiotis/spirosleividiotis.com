@@ -1287,6 +1287,7 @@ section {
     overflow-x: hidden;
     position: relative;
     cursor: default;
+    z-index: 10001;
 }
 
 .project-modal-wrapper::-webkit-scrollbar {
@@ -1314,12 +1315,13 @@ section {
     border: none;
     color: #FFFFFF;
     cursor: pointer;
-    z-index: 10002;
+    z-index: 10003;
     padding: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: opacity 0.2s ease;
+    pointer-events: auto;
 }
 
 .project-modal-close:hover {
