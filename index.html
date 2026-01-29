@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Spiros Leividiotis - Staff-level motion designer">
+    <title>Spiros Leividiotis</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <link rel="stylesheet" href="styles-figma.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Hero (with header merged) -->
+    <section class="hero" data-scroll-section>
+        <div class="container">
+            <!-- About Me & CV Links -->
+            <div class="hero-links">
+                <a href="#" class="hero-link" id="aboutMeLink">about me</a>
+                <a href="cv.pdf" target="_blank" class="hero-link">download cv</a>
+            </div>
+            
+            <!-- Header Navigation -->
+            <header class="header">
+                <div class="header-inner">
+                    <nav class="nav">
+                        <a href="#experience" class="nav-link">experience</a>
+                        <a href="#work" class="nav-link">projects</a>
+                        <a href="#contact" class="nav-link">contact</a>
+                    </nav>
+                    <div class="header-meta">
+                        <a href="https://open.spotify.com/track/2KvbLliAjjZNOipthec7Fh?si=885ff3e35661451e" target="_blank" class="location location-link">amsterdam</a>
+                        <span class="time" id="liveTime">00:00</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Hero Content -->
+            <div class="hero-content">
+                <div class="hero-name-container">
+                    <h1 class="hero-name" id="heroName">Spiros<br>Leividiotis</h1>
+                    <div class="hero-photo" id="heroPhoto"></div>
+                </div>
+                
+                <div class="hero-right">
+                    <p class="hero-subtitle">
+                        Staff-level motion designer focused on UX motion and motion systems. 
+                        I help teams ship motion that's consistent, scalable, and implementation-ready—turning 
+                        principles into patterns, guidelines, and Lottie-ready handoff with design systems 
+                        and engineering.
+                    </p>
+                    
+                    <div class="tags-grid">
+                        <div class="tag tag-black">Rive</div>
+                        <div class="tag tag-black">Cursor</div>
+                        <div class="tag tag-black">Figma</div>
+                        <div class="tag tag-black">LottieFiles</div>
+                        <div class="tag tag-black">After Effects</div>
+                        <div style="flex-basis: 100%; height: 0;"></div>
+                        <div class="tag">UX motion</div>
+                        <div class="tag">Motion systems</div>
+                        <div class="tag">Interaction design</div>
+                        <div class="tag">Lottie pipelines</div>
+                        <div class="tag">Web & product experiences</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="experience" id="experience" data-scroll-section>
+        <div class="container">
+            <h2 class="experience-title-main">experience</h2>
+            <div class="experience-layout">
+                <!-- Left: Services/Companies List -->
+                <div class="experience-sidebar">
+                    <h3 class="sidebar-label">experience</h3>
+                    
+                    <div class="experience-list">
+                        <div class="experience-item active" data-experience="qonto">
+                            <span class="item-name">Qonto</span>
+                        </div>
+                        <div class="experience-item" data-experience="flink">
+                            <span class="item-name">Flink</span>
+                        </div>
+                        <div class="experience-item" data-experience="delivery-hero">
+                            <span class="item-name">Delivery Hero</span>
+                        </div>
+                        <div class="experience-item" data-experience="folket">
+                            <span class="item-name">Folket</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Middle: Description Content -->
+                <div class="experience-content">
+                    <div class="experience-details-wrapper">
+                        <div class="experience-detail active" id="qonto" data-role-index="0">
+                            <h2 class="company-name">Qonto</h2>
+                            <div class="job-title-wrapper">
+                                <p class="job-title">Staff Motion Designer - Design System</p>
+                                <div class="role-navigation">
+                                    <button class="role-arrow role-arrow-left inactive" data-direction="prev">
+                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 2L4 6L8 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <span class="role-indicator">1/3</span>
+                                    <button class="role-arrow role-arrow-right" data-direction="next">
+                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="experience-content-wrapper">
+                                <p class="experience-description">
+                                    Own motion system principles, patterns, and docs. Partner with DS + engineering on implementation and QA. Drive adoption with reusable assets and handoff standards.
+                                </p>
+                                
+                                <div class="experience-timeline">
+                                    <span class="timeline-year">2025</span>
+                                    <span class="timeline-line"></span>
+                                    <span class="timeline-end">Now</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="experience-detail" id="flink">
+                            <h2 class="company-name">Flink</h2>
+                            <p class="job-title">Senior Motion Designer</p>
+                            <p class="experience-description">
+                                Set motion direction across product and brand. Built repeatable workflow for production and handoff. Delivered motion for key launches and campaigns.
+                            </p>
+                            
+                            <div class="experience-timeline">
+                                <span class="timeline-year">2021</span>
+                                <span class="timeline-line"></span>
+                                <span class="timeline-end">2022</span>
+                            </div>
+                        </div>
+                        
+                        <div class="experience-detail" id="delivery-hero">
+                            <h2 class="company-name">Delivery Hero</h2>
+                            <p class="job-title">Motion Designer</p>
+                            <p class="experience-description">
+                                Created motion and visual assets for digital products and comms. Worked with design and marketing to ship high-volume work fast. Maintained quality and consistency across channels.
+                            </p>
+                            
+                            <div class="experience-timeline">
+                                <span class="timeline-year">2020</span>
+                                <span class="timeline-line"></span>
+                                <span class="timeline-end">2021</span>
+                            </div>
+                        </div>
+                        
+                        <div class="experience-detail" id="folket">
+                            <h2 class="company-name">Folket</h2>
+                            <p class="job-title">Motion Designer</p>
+                            <p class="experience-description">
+                                Split time between an embedded client team (Skandia) and agency projects. Partnered with clients to storyboard, iterate, and deliver animated videos. Adapted styleframes and concepts into finished motion across multiple formats.
+                            </p>
+                            
+                            <div class="experience-timeline">
+                                <span class="timeline-year">2018</span>
+                                <span class="timeline-line"></span>
+                                <span class="timeline-end">2020</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right: Visual/Image -->
+                <div class="experience-visual">
+                    <div class="visual-placeholder active" data-visual="qonto"></div>
+                    <div class="visual-placeholder" data-visual="flink"></div>
+                    <div class="visual-placeholder" data-visual="delivery-hero"></div>
+                    <div class="visual-placeholder" data-visual="folket"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="selected-work" id="work" data-scroll-section>
+        <div class="container">
+            <a href="#" class="reel-link" id="reelLink" onclick="event.preventDefault(); const m=document.getElementById('videoPlayer'); const v=document.getElementById('videoPlayerElement'); if(m){m.classList.add('active'); document.body.style.overflow='hidden'; document.body.classList.add('video-player-active'); if(v){v.play();}} return false;">reel</a>
+            <h2 class="section-title">projects</h2>
+            <div class="work-grid">
+                <article class="work-card" data-password-protected="true">
+                    <div class="work-visual work-color-1">
+                        <div class="project-info">
+                            <div class="project-text-mask">
+                                <h3 class="project-name">Qonto Motion System</h3>
+                            </div>
+                            <div class="project-text-mask">
+                                <p class="project-company">Qonto</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="work-card">
+                    <div class="work-visual work-color-2">
+                        <div class="project-info">
+                            <div class="project-text-mask">
+                                <h3 class="project-name">Checkout Experience</h3>
+                            </div>
+                            <div class="project-text-mask">
+                                <p class="project-company">Flink</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="work-card">
+                    <div class="work-visual work-color-3">
+                        <div class="project-info">
+                            <div class="project-text-mask">
+                                <h3 class="project-name">Brand Guidelines</h3>
+                            </div>
+                            <div class="project-text-mask">
+                                <p class="project-company">Delivery Hero</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="work-card">
+                    <div class="work-visual work-color-4">
+                        <div class="project-info">
+                            <div class="project-text-mask">
+                                <h3 class="project-name">Interactive Stories</h3>
+                            </div>
+                            <div class="project-text-mask">
+                                <p class="project-company">Folket</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="work-card">
+                    <div class="work-visual work-color-5">
+                        <div class="project-info">
+                            <div class="project-text-mask">
+                                <h3 class="project-name">Design Tokens</h3>
+                            </div>
+                            <div class="project-text-mask">
+                                <p class="project-company">Freelance</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="work-card">
+                    <div class="work-visual work-color-6">
+                        <div class="project-info">
+                            <div class="project-text-mask">
+                                <h3 class="project-name">Portfolio Site</h3>
+                            </div>
+                            <div class="project-text-mask">
+                                <p class="project-company">Personal</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grid Link (appears when scrolling between experience and projects) -->
+    <a href="#" class="grid-link" id="gridLink" onclick="event.preventDefault(); const m=document.getElementById('gridModal'); if(m){m.classList.add('active'); document.body.style.overflow='hidden';} return false;">
+        <span class="grid-text">grid</span>
+    </a>
+
+    <!-- Grid Modal -->
+    <div class="grid-modal" id="gridModal">
+        <div class="modal-overlay" id="gridOverlay"></div>
+        <div class="grid-content">
+            <button class="modal-close" id="gridClose" onclick="const m=document.getElementById('gridModal'); if(m){m.classList.remove('active'); document.body.style.overflow='';} return false;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="grid-container">
+                <!-- Grid items will be added here -->
+                <div class="grid-item grid-item-large">
+                    <div class="grid-placeholder">Image 1</div>
+                </div>
+                <div class="grid-item grid-item-medium">
+                    <div class="grid-placeholder">Image 2</div>
+                </div>
+                <div class="grid-item grid-item-small">
+                    <div class="grid-placeholder">GIF 1</div>
+                </div>
+                <div class="grid-item grid-item-medium">
+                    <div class="grid-placeholder">Image 3</div>
+                </div>
+                <div class="grid-item grid-item-large">
+                    <div class="grid-placeholder">Image 4</div>
+                </div>
+                <div class="grid-item grid-item-small">
+                    <div class="grid-placeholder">GIF 2</div>
+                </div>
+                <div class="grid-item grid-item-small">
+                    <div class="grid-placeholder">Image 5</div>
+                </div>
+                <div class="grid-item grid-item-medium">
+                    <div class="grid-placeholder">Image 6</div>
+                </div>
+                <div class="grid-item grid-item-small">
+                    <div class="grid-placeholder">Image 7</div>
+                </div>
+                <div class="grid-item grid-item-large">
+                    <div class="grid-placeholder">Image 8</div>
+                </div>
+                <div class="grid-item grid-item-medium">
+                    <div class="grid-placeholder">GIF 3</div>
+                </div>
+                <div class="grid-item grid-item-small">
+                    <div class="grid-placeholder">Image 9</div>
+                </div>
+                <div class="grid-item grid-item-medium">
+                    <div class="grid-placeholder">Image 10</div>
+                </div>
+                <div class="grid-item grid-item-small">
+                    <div class="grid-placeholder">Image 11</div>
+                </div>
+                <div class="grid-item grid-item-large">
+                    <div class="grid-placeholder">Image 12</div>
+                </div>
+                <div class="grid-item grid-item-medium">
+                    <div class="grid-placeholder">GIF 4</div>
+                </div>
+                <div class="grid-item grid-item-small">
+                    <div class="grid-placeholder">Image 13</div>
+                </div>
+                <div class="grid-item grid-item-medium">
+                    <div class="grid-placeholder">Image 14</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Modal -->
+    <div class="project-modal" id="projectModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="modal-body">
+                <h2 class="modal-title" id="modalTitle">Project Title</h2>
+                <p class="modal-company" id="modalCompany">Company</p>
+                <div class="modal-description" id="modalDescription">
+                    <!-- Project details will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Me Modal -->
+    <div class="about-modal" id="aboutModal">
+        <div class="modal-overlay" id="aboutOverlay"></div>
+        <div class="about-content">
+            <button class="modal-close" id="aboutClose">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="about-inner">
+                <div class="about-photo">
+                    <img src="photo.png" alt="Spiros Leividiotis">
+                </div>
+                <div class="about-text">
+                    <p>I'm Spiros, a Staff Motion Designer based in Amsterdam, Netherlands, working at the intersection of product design, animation, and design systems. I use motion as a functional tool—to clarify interactions, reinforce hierarchy, and improve usability at scale.</p>
+                    
+                    <p>Currently working remotely at Qonto, I collaborate closely with product designers and engineers on product experiences and design systems. I focus on building reusable, well-documented motion patterns that teams can confidently use across complex products.</p>
+                    
+                    <p>Outside of work, I spend a lot of time cycling and hanging out with Finn, my Westie—who has strong opinions about walk schedules and absolutely none about motion design. I care deeply about craft, consistency, and pragmatism, and I believe great motion should feel invisible: intentional, purposeful, and grounded in real user needs.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot">
+        <span class="cursor-text">come on, click</span>
+        <div class="cursor-password-input" style="display: none;">
+            <span class="cursor-password-label">enter password</span>
+            <input type="password" class="cursor-password-field" id="cursorPasswordField" placeholder="" autofocus>
+        </div>
+        <svg class="cursor-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 6H10M10 6L6 2M10 6L6 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <div class="player-content">
+            <div class="player-info">
+                <span class="player-title">Lost in Amsterdam — Parov Stelar</span>
+            </div>
+            
+            <div class="player-controls">
+                <button class="player-btn" id="playPauseBtn">
+                    <svg class="play-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M3 2L13 8L3 14V2Z" fill="currentColor"/>
+                    </svg>
+                    <svg class="pause-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display: none;">
+                        <rect x="4" y="2" width="3" height="12" fill="currentColor"/>
+                        <rect x="9" y="2" width="3" height="12" fill="currentColor"/>
+                    </svg>
+                </button>
+                
+                <div class="player-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+                
+                <div class="player-time">
+                    <span id="currentTime">0:00</span>
+                    <span id="duration">3:28</span>
+                </div>
+                
+                <div class="volume-control">
+                    <button class="player-btn volume-btn" id="volumeBtn">
+                        <svg class="volume-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M7 4L4 6H2V10H4L7 12V4Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10 6C10.5 6.5 11 7.5 11 8C11 8.5 10.5 9.5 10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <svg class="volume-mute-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display: none;">
+                            <path d="M7 4L4 6H2V10H4L7 12V4Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10 6L13 10M13 6L10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="30">
+                </div>
+                
+                <button class="player-btn player-close" id="closePlayer">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audioPlayer" src="music.mp3"></audio>
+
+    <!-- Video Player (Reel) -->
+    <div class="video-player" id="videoPlayer">
+        <button class="player-close" id="videoClose" onclick="const m=document.getElementById('videoPlayer'); const v=document.getElementById('videoPlayerElement'); if(m){m.classList.remove('active'); document.body.style.overflow=''; document.body.classList.remove('video-player-active'); if(v){v.pause(); v.currentTime=0;}} return false;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="video-player-content">
+            <video id="videoPlayerElement" controls>
+                <source src="reel.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact" data-scroll-section>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <span class="footer-label">hit me up:</span>
+                    <a href="mailto:spirosleividiotis@gmail.com" class="footer-link">spirosleividiotis@gmail.com</a>
+                </div>
+                
+                <div class="footer-right">
+                    <span class="footer-label">find me:</span>
+                    <a href="https://dribbble.com/spirosleividiotis" target="_blank" class="footer-link">dribbble</a>
+                    <a href="https://www.linkedin.com/in/sleividiotis/" target="_blank" class="footer-link">linkedin</a>
+                </div>
+            </div>
+            
+            <p class="footer-credit">
+                <img src="logo.svg" alt="Spiros Leividiotis logo" class="footer-logo">
+                2026 Spiros Leividiotis
+            </p>
+        </div>
+    </footer>
+
+    <script src="script-figma.js"></script>
+    <script>
+        // Emergency about me fix
+        console.log('Emergency script loaded');
+        window.addEventListener('load', function() {
+            console.log('Page fully loaded');
+            const link = document.getElementById('aboutMeLink');
+            const modal = document.getElementById('aboutModal');
+            const overlay = document.getElementById('aboutOverlay');
+            console.log('Link:', link);
+            console.log('Modal:', modal);
+            
+            function closeModal() {
+                if (modal) {
+                    modal.classList.remove('active');
+                    modal.style.opacity = '0';
+                    modal.style.pointerEvents = 'none';
+                    document.body.style.overflow = '';
+                }
+            }
+            
+            if (link) {
+                link.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('LINK CLICKED!');
+                    if (modal) {
+                        modal.classList.add('active');
+                        modal.style.display = 'flex';
+                        modal.style.opacity = '1';
+                        modal.style.pointerEvents = 'all';
+                        document.body.style.overflow = 'hidden';
+                        console.log('Modal activated');
+                    }
+                    return false;
+                };
+            }
+            
+            const close = document.getElementById('aboutClose');
+            if (close) {
+                close.onclick = closeModal;
+            }
+            
+            // Click outside to close
+            if (modal) {
+                modal.onclick = function(e) {
+                    if (e.target === modal || e.target === overlay) {
+                        closeModal();
+                    }
+                };
+            }
+            
+            // Escape key to close
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
