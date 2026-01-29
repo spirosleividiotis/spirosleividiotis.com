@@ -1,5 +1,13 @@
 # Portfolio CMS - Quick Guide
 
+## ⚠️ FIRST TIME SETUP: Enable File Uploads
+**Before you can upload photos/videos, follow the setup guide:**
+📄 See **`CLOUDINARY-SETUP.md`** for step-by-step instructions (takes 5 minutes)
+
+Once set up, you can upload files directly from the CMS! 🎉
+
+---
+
 ## How to Update Your Site Content
 
 ### Step 1: Access the CMS
@@ -67,28 +75,45 @@ The CMS has 7 tabs for editing different sections:
 5. Vercel will automatically rebuild (takes ~1 minute)
 6. Your site is live with the new content! 🎉
 
-## Adding Media Files (Images, Videos, Audio)
+## 📤 Uploading Files (After Cloudinary Setup)
 
-### File Upload Workflow (IMPORTANT):
-1. **First:** Add your file to the `portfolio-deploy` folder on your computer
-2. **Then:** Go to the CMS and enter just the filename (e.g., `my-photo.jpg`)
-3. **Save:** Click "Save Changes & Download"
-4. **Push:** Commit and push BOTH the file AND `content.json` to GitHub
+### Easy File Upload Workflow:
+1. **Click** the "Upload" button next to any file field
+2. **Drag & drop** or browse for your file
+3. **Wait** for upload (progress bar shows status)
+4. **Done!** File automatically saves with preview
 
-### For CV / Music / Reel:
-1. Add your file to `portfolio-deploy` folder
-2. In CMS, enter the filename in the field
-3. Use the "Remove" button to clear the field if needed
-4. Files should be in the root folder (same level as `index.html`)
+### For Each Section:
 
-### For Project Assets:
-1. Add your images/videos to `portfolio-deploy` folder
-2. In the project edit form:
-   - **Body Text:** Add description/context (optional)
-   - **Hero Image:** Enter filename for wide banner (optional)
-   - **Grid Assets:** Enter comma-separated filenames for 2-column grid
-3. Example grid: `image1.jpg, video1.mp4, animation.gif`
-4. Use "Remove" buttons to clear fields
+#### CV / Music / Reel:
+- Click **"Upload PDF"** / **"Upload Audio"** / **"Upload Video"**
+- Select file (max 100MB)
+- See preview after upload
+- Click "Remove" to clear
+
+#### Profile Photos:
+- Click **"Upload Photo"** 
+- Select image (JPG, PNG, GIF)
+- Preview shows immediately
+- Click "Remove" to clear
+
+#### Project Assets:
+1. **Hero Image:**
+   - Click "Upload" next to hero field
+   - Select one wide banner image/video
+2. **Grid Assets:**
+   - Click "Upload Grid Images (Multiple Files)"
+   - Select multiple images/videos at once
+   - They'll appear in the 2-column grid
+3. **Body Text:**
+   - Just type directly in the textarea
+   - Use Enter for line breaks
+
+### Supported Formats:
+- **Images:** JPG, PNG, GIF, WebP
+- **Videos:** MP4, WebM
+- **Audio:** MP3, WAV
+- **Documents:** PDF
 
 ### Tips:
 - Use descriptive filenames: `qonto-project-1.jpg` instead of `image1.jpg`
@@ -107,11 +132,11 @@ git commit -m "Update content"
 git push
 ```
 
-### Add new media files:
+### After uploading files via CMS:
 ```bash
-git add *.jpg *.png *.mp4 *.mp3
+# Files are already in the cloud, just save content.json
 git add content.json
-git commit -m "Add new media and update content"
+git commit -m "Update content with new media URLs"
 git push
 ```
 
