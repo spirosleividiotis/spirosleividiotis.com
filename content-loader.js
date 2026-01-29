@@ -34,29 +34,12 @@ async function loadContent() {
         console.log('✓ Content loaded successfully');
         
         // Dispatch event to notify other scripts that content is loaded
-        window.dispatchEvent(new Event('contentLoaded'));
-        
-        // Reinitialize event listeners for projects and experience
         setTimeout(() => {
-            reinitializeEventListeners();
-        }, 100);
+            window.dispatchEvent(new Event('contentLoaded'));
+        }, 150);
     } catch (error) {
         console.error('Error loading content:', error);
     }
-}
-
-// Reinitialize event listeners after content is loaded
-function reinitializeEventListeners() {
-    // Reinitialize experience hover events
-    const experienceItems = document.querySelectorAll('.experience-item');
-    experienceItems.forEach((item, currentIndex) => {
-        // Remove old listeners by cloning
-        const newItem = item.cloneNode(true);
-        item.parentNode.replaceChild(newItem, item);
-    });
-    
-    // Dispatch event so script-figma.js can reinitialize its listeners
-    window.dispatchEvent(new Event('reinitializeListeners'));
 }
 
 // Update Hero Section

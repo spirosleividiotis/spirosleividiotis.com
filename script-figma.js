@@ -120,7 +120,12 @@ function checkIfMobile() {
     return window.innerWidth <= 768;
 }
 
+// Store initialization state to prevent duplicate listeners
+let experienceInitialized = false;
+
 function initializeExperience() {
+    console.log('initializeExperience called');
+    
     const experienceItems = document.querySelectorAll('.experience-item');
     const experienceDetails = document.querySelectorAll('.experience-detail');
     const visualPlaceholders = document.querySelectorAll('.visual-placeholder');
@@ -131,14 +136,23 @@ function initializeExperience() {
         return;
     }
     
+    console.log(`Found ${experienceItems.length} experience items`);
+    
     // Keep track of the previous active index
     let previousExperienceIndex = 0;
     let isAnimating = false;
 
     // Only enable hover switching on desktop
     if (!isMobile) {
-        experienceItems.forEach((item, currentIndex) => {
-        item.addEventListener('mouseenter', () => {
+        console.log('Adding experience hover listeners');
+        // Get fresh references after content load
+        const freshItems = document.querySelectorAll('.experience-item');
+        const freshDetails = document.querySelectorAll('.experience-detail');
+        const freshVisuals = document.querySelectorAll('.visual-placeholder');
+        
+        freshItems.forEach((item, currentIndex) => {
+            item.addEventListener('mouseenter', () => {
+                console.log(`Experience item ${currentIndex} hovered`);
             // Prevent rapid transitions while animating
             if (isAnimating) return;
             
@@ -156,14 +170,14 @@ function initializeExperience() {
             }, 750);
             
             // Update active states for items
-            experienceItems.forEach(i => i.classList.remove('active'));
+            freshItems.forEach(i => i.classList.remove('active'));
             item.classList.add('active');
             
             // Determine slide direction
             const slideUp = currentIndex < previousExperienceIndex;
             
             // Switch content (text boxes) with vertical slide animation
-            experienceDetails.forEach((detail) => {
+            freshDetails.forEach((detail) => {
                 if (detail.id === targetExperience) {
                     // Remove any exit classes
                     detail.classList.remove('exit-up', 'exit-down');
@@ -192,7 +206,7 @@ function initializeExperience() {
             });
             
             // Switch visuals (opposite direction)
-            visualPlaceholders.forEach((visual) => {
+            freshVisuals.forEach((visual) => {
                 const visualTarget = visual.getAttribute('data-visual');
                 if (visualTarget === targetExperience) {
                     // Remove any exit classes
@@ -233,12 +247,16 @@ function initializeExperience() {
 // ===================================
 
 function initializeQontoRoles() {
+    console.log('initializeQontoRoles called');
+    
     const qontoDetail = document.getElementById('qonto');
     
     if (!qontoDetail) {
         console.log('Qonto detail not found, will retry on contentLoaded');
         return;
     }
+    
+    console.log('Qonto detail found');
     
     const jobTitle = qontoDetail.querySelector('.job-title');
     const contentWrapper = qontoDetail.querySelector('.experience-content-wrapper');
@@ -249,7 +267,12 @@ function initializeQontoRoles() {
     const leftArrow = qontoDetail.querySelector('.role-arrow-left');
     const rightArrow = qontoDetail.querySelector('.role-arrow-right');
     
-    if (!leftArrow || !rightArrow) return;
+    if (!leftArrow || !rightArrow) {
+        console.log('Arrows not found');
+        return;
+    }
+    
+    console.log('Arrows found, attaching listeners');
     
     // Qonto role data (from experience data if available)
     const qontoRoles = window.experienceData?.find(e => e.id === 'qonto')?.roles || [
@@ -320,19 +343,86 @@ function initializeQontoRoles() {
         }, 200);
     }
     
-    // Add click handlers to arrows
-    leftArrow.addEventListener('click', (e) => {
+    // Clone arrows to remove old listeners
+    const newLeftArrow = leftArrow.cloneNode(true);
+    const newRightArrow = rightArrow.cloneNode(true);
+    leftArrow.parentNode.replaceChild(newLeftArrow, leftArrow);
+    rightArrow.parentNode.replaceChild(newRightArrow, rightArrow);
+    
+    // Add click handlers to new arrows
+    newLeftArrow.addEventListener('click', (e) => {
+        console.log('Left arrow clicked');
         e.stopPropagation();
         cycleQontoRole('prev');
     });
     
-    rightArrow.addEventListener('click', (e) => {
+    newRightArrow.addEventListener('click', (e) => {
+        console.log('Right arrow clicked');
         e.stopPropagation();
         cycleQontoRole('next');
     });
     
+    // Update references for updateRoleArrows
+    const updateRoleArrowsLocal = () => {
+        const freshLeftArrow = qontoDetail.querySelector('.role-arrow-left');
+        const freshRightArrow = qontoDetail.querySelector('.role-arrow-right');
+        
+        if (currentQontoRoleIndex === 0) {
+            freshLeftArrow?.classList.add('inactive');
+        } else {
+            freshLeftArrow?.classList.remove('inactive');
+        }
+        
+        if (currentQontoRoleIndex === qontoRoles.length - 1) {
+            freshRightArrow?.classList.add('inactive');
+        } else {
+            freshRightArrow?.classList.remove('inactive');
+        }
+    };
+    
+    // Update cycleQontoRole to use local updateRoleArrows
+    function cycleQontoRoleLocal(direction) {
+        console.log(`Cycling role: ${direction}, current index: ${currentQontoRoleIndex}`);
+        
+        // Update index
+        if (direction === 'next' && currentQontoRoleIndex < qontoRoles.length - 1) {
+            currentQontoRoleIndex++;
+        } else if (direction === 'prev' && currentQontoRoleIndex > 0) {
+            currentQontoRoleIndex--;
+        } else {
+            return;
+        }
+        
+        const role = qontoRoles[currentQontoRoleIndex];
+        
+        // Fade out only the text content
+        if (jobTitle) jobTitle.style.opacity = '0';
+        if (contentWrapper) contentWrapper.style.opacity = '0';
+        
+        setTimeout(() => {
+            // Update content
+            if (jobTitle) jobTitle.textContent = role.title;
+            if (description) description.textContent = role.description;
+            if (yearStart) yearStart.textContent = role.period.start;
+            if (yearEnd) yearEnd.textContent = role.period.end;
+            if (roleIndicator) roleIndicator.textContent = `${currentQontoRoleIndex + 1}/${qontoRoles.length}`;
+            
+            // Update arrows
+            updateRoleArrowsLocal();
+            
+            // Fade back in
+            if (jobTitle) jobTitle.style.opacity = '1';
+            if (contentWrapper) contentWrapper.style.opacity = '1';
+        }, 200);
+    }
+    
+    // Replace the cycleQontoRole function reference
+    const cycleQontoRole = cycleQontoRoleLocal;
+    
     // Initialize arrow states
-    updateRoleArrows();
+    updateRoleArrowsLocal();
+    
+    console.log('Qonto roles initialized successfully');
 }
 
 // ===================================
@@ -1278,18 +1368,31 @@ document.addEventListener('click', function(e) {
 
 // Initialize experience and role navigation after DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, initializing experience and roles');
-    initializeExperience();
-    initializeQontoRoles();
+    console.log('DOM loaded, waiting for content');
+    // Don't initialize here - wait for content to load
 });
 
 // Reinitialize when content is loaded (from content-loader.js)
 window.addEventListener('contentLoaded', () => {
-    console.log('Content loaded, reinitializing experience and roles');
+    console.log('Content loaded event received, initializing experience and roles');
     setTimeout(() => {
+        console.log('Running initialization now');
         initializeExperience();
         initializeQontoRoles();
-    }, 200);
+    }, 300);
+});
+
+// Also try after page load as fallback
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        console.log('Page load complete, checking if initialization needed');
+        const experienceItems = document.querySelectorAll('.experience-item');
+        if (experienceItems.length > 0 && !experienceInitialized) {
+            console.log('Initializing from load event');
+            initializeExperience();
+            initializeQontoRoles();
+        }
+    }, 500);
 });
 
 // ===================================
