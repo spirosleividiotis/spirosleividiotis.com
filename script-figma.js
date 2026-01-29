@@ -220,6 +220,7 @@ if (!isMobile) {
             previousExperienceIndex = currentIndex;
         });
     });
+    }
 }
 
 // ===================================
