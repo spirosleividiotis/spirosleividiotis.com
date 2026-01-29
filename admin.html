@@ -668,14 +668,16 @@
                 {
                     cloudName: CLOUDINARY_CLOUD_NAME,
                     uploadPreset: CLOUDINARY_UPLOAD_PRESET,
-                    sources: ['local', 'url', 'camera'],
+                    sources: ['local', 'url', 'camera', 'media_library'],
                     multiple: false,
                     resourceType: resourceType,
                     maxFileSize: 100000000, // 100MB
                     clientAllowedFormats: resourceType === 'video' ? ['mp4', 'webm', 'mov'] : 
                                          resourceType === 'raw' ? ['pdf'] : 
                                          ['jpg', 'png', 'gif', 'webp', 'mp3', 'wav', 'mp4'],
-                    folder: 'portfolio'
+                    folder: 'portfolio',
+                    showAdvancedOptions: true,
+                    showSkipCropButton: false
                 },
                 (error, result) => {
                     if (!error && result && result.event === 'success') {
@@ -1024,12 +1026,13 @@
                 {
                     cloudName: CLOUDINARY_CLOUD_NAME,
                     uploadPreset: CLOUDINARY_UPLOAD_PRESET,
-                    sources: ['local', 'url'],
+                    sources: ['local', 'url', 'media_library'],
                     multiple: false,
                     resourceType: 'auto',
                     maxFileSize: 100000000,
                     clientAllowedFormats: ['jpg', 'png', 'gif', 'webp', 'mp4', 'webm'],
-                    folder: 'portfolio/projects'
+                    folder: 'portfolio/projects',
+                    showAdvancedOptions: true
                 },
                 (error, result) => {
                     if (!error && result && result.event === 'success') {
@@ -1053,12 +1056,13 @@
                 {
                     cloudName: CLOUDINARY_CLOUD_NAME,
                     uploadPreset: CLOUDINARY_UPLOAD_PRESET,
-                    sources: ['local', 'url'],
+                    sources: ['local', 'url', 'media_library'],
                     multiple: true,
                     resourceType: 'auto',
                     maxFileSize: 100000000,
                     clientAllowedFormats: ['jpg', 'png', 'gif', 'webp', 'mp4', 'webm'],
-                    folder: 'portfolio/projects'
+                    folder: 'portfolio/projects',
+                    showAdvancedOptions: true
                 },
                 (error, result) => {
                     if (!error && result && result.event === 'success') {
