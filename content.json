@@ -12,11 +12,11 @@
         "After Effects"
       ],
       "skills": [
-        "UX motion",
-        "Motion systems",
-        "Interaction design",
-        "Lottie pipelines",
-        "Web & product experiences"
+        "Product Motion",
+        "Motion Systems",
+        "Interaction Design",
+        "Lottie Pipelines",
+        "Web & Product Experiences"
       ]
     }
   },
@@ -62,11 +62,11 @@
       "name": "Qonto Motion System",
       "company": "Qonto",
       "color": "#141414",
-      "passwordProtected": false,
-      "customUrl": "motion-system-content.html",
+      "passwordProtected": true,
+      "customUrl": "motion-system.html",
       "bodyText": "",
       "media": {
-        "hero": "motion-system/motion/Motion/Comp_5.gif",
+        "hero": "",
         "grid": []
       },
       "password": "spiros2026"
