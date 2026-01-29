@@ -1072,6 +1072,10 @@
         
         function updateProject(id) {
             const project = contentData.projects.find(p => p.id === id);
+            
+            // CRITICAL: Preserve customUrl field (for custom HTML projects like Motion System)
+            const existingCustomUrl = project.customUrl;
+            
             project.name = document.getElementById(`project-name-${id}`).value;
             project.company = document.getElementById(`project-company-${id}`).value;
             
@@ -1097,6 +1101,11 @@
             project.media.hero = document.getElementById(`project-hero-${id}`).value.trim();
             const gridValue = document.getElementById(`project-grid-${id}`).value.trim();
             project.media.grid = gridValue ? gridValue.split(',').map(s => s.trim()).filter(s => s) : [];
+            
+            // CRITICAL: Restore customUrl if it existed (don't let CMS overwrite it)
+            if (existingCustomUrl) {
+                project.customUrl = existingCustomUrl;
+            }
             
             renderProjects();
             showSuccess();
