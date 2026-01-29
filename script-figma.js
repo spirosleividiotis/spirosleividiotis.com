@@ -312,58 +312,6 @@ function initializeQontoRoles() {
         }
     }
     
-    function cycleQontoRole(direction) {
-        // Update index
-        if (direction === 'next' && currentQontoRoleIndex < qontoRoles.length - 1) {
-            currentQontoRoleIndex++;
-        } else if (direction === 'prev' && currentQontoRoleIndex > 0) {
-            currentQontoRoleIndex--;
-        } else {
-            return; // Don't do anything if we're at the limit
-        }
-        
-        const role = qontoRoles[currentQontoRoleIndex];
-        
-        // Fade out only the text content
-        jobTitle.style.opacity = '0';
-        contentWrapper.style.opacity = '0';
-        
-        setTimeout(() => {
-            // Update content
-            jobTitle.textContent = role.title;
-            description.textContent = role.description;
-            yearStart.textContent = role.period.start;
-            yearEnd.textContent = role.period.end;
-            roleIndicator.textContent = `${currentQontoRoleIndex + 1}/${qontoRoles.length}`;
-            
-            // Update arrows
-            updateRoleArrows();
-            
-            // Fade back in
-            jobTitle.style.opacity = '1';
-            contentWrapper.style.opacity = '1';
-        }, 200);
-    }
-    
-    // Clone arrows to remove old listeners
-    const newLeftArrow = leftArrow.cloneNode(true);
-    const newRightArrow = rightArrow.cloneNode(true);
-    leftArrow.parentNode.replaceChild(newLeftArrow, leftArrow);
-    rightArrow.parentNode.replaceChild(newRightArrow, rightArrow);
-    
-    // Add click handlers to new arrows
-    newLeftArrow.addEventListener('click', (e) => {
-        console.log('Left arrow clicked');
-        e.stopPropagation();
-        cycleQontoRole('prev');
-    });
-    
-    newRightArrow.addEventListener('click', (e) => {
-        console.log('Right arrow clicked');
-        e.stopPropagation();
-        cycleQontoRole('next');
-    });
-    
     // Update references for updateRoleArrows
     const updateRoleArrowsLocal = () => {
         const freshLeftArrow = qontoDetail.querySelector('.role-arrow-left');
@@ -382,8 +330,8 @@ function initializeQontoRoles() {
         }
     };
     
-    // Update cycleQontoRole to use local updateRoleArrows
-    function cycleQontoRoleLocal(direction) {
+    // Cycle through Qonto roles
+    function cycleQontoRole(direction) {
         console.log(`Cycling role: ${direction}, current index: ${currentQontoRoleIndex}`);
         
         // Update index
@@ -418,8 +366,24 @@ function initializeQontoRoles() {
         }, 200);
     }
     
-    // Replace the cycleQontoRole function reference
-    const cycleQontoRole = cycleQontoRoleLocal;
+    // Clone arrows to remove old listeners
+    const newLeftArrow = leftArrow.cloneNode(true);
+    const newRightArrow = rightArrow.cloneNode(true);
+    leftArrow.parentNode.replaceChild(newLeftArrow, leftArrow);
+    rightArrow.parentNode.replaceChild(newRightArrow, rightArrow);
+    
+    // Add click handlers to new arrows
+    newLeftArrow.addEventListener('click', (e) => {
+        console.log('Left arrow clicked');
+        e.stopPropagation();
+        cycleQontoRole('prev');
+    });
+    
+    newRightArrow.addEventListener('click', (e) => {
+        console.log('Right arrow clicked');
+        e.stopPropagation();
+        cycleQontoRole('next');
+    });
     
     // Initialize arrow states
     updateRoleArrowsLocal();
