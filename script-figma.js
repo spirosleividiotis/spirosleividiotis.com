@@ -1059,12 +1059,20 @@ function openProjectModal(card) {
     if (modalTitle) modalTitle.textContent = projectName || 'Project';
     if (modalSubtitle) modalSubtitle.textContent = projectCompany || '';
     
-    // Clear previous content
+    // Clear previous content (including custom HTML from Motion System)
+    const modalBodyText = document.getElementById('projectBodyText');
     if (modalHero) {
         modalHero.innerHTML = '';
         modalHero.style.display = 'none';
     }
-    if (modalGrid) modalGrid.innerHTML = '';
+    if (modalGrid) {
+        modalGrid.innerHTML = '';
+        modalGrid.style.display = 'none';
+    }
+    if (modalBodyText) {
+        modalBodyText.innerHTML = '';
+        modalBodyText.style.display = 'none';
+    }
     if (passwordError) passwordError.classList.remove('show');
     if (passwordInput) passwordInput.value = '';
     
@@ -1178,6 +1186,7 @@ function loadProjectContent(projectData, projectName) {
         
         // Grid items
         if (projectData.media.grid && projectData.media.grid.length > 0 && modalGrid) {
+            modalGrid.style.display = 'grid';
             modalGrid.innerHTML = projectData.media.grid.map(file => {
                 const ext = file.split('.').pop().toLowerCase();
                 const isVideo = ext === 'mp4' || ext === 'webm';
