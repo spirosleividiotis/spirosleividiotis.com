@@ -1,4 +1,40 @@
 {
+  "hero": {
+    "name": "Spiros<br>Leividiotis",
+    "subtitle": "Staff-level motion designer focused on UX motion and motion systems. I help teams ship motion that's consistent, scalable, and implementation-ready—turning principles into patterns, guidelines, and Lottie-ready handoff with design systems and engineering.",
+    "photo": "photo.png",
+    "tags": {
+      "tools": ["Rive", "Cursor", "Figma", "LottieFiles", "After Effects"],
+      "skills": ["UX motion", "Motion systems", "Interaction design", "Lottie pipelines", "Web & product experiences"]
+    }
+  },
+  "header": {
+    "navigation": [
+      { "text": "experience", "href": "#experience" },
+      { "text": "projects", "href": "#work" },
+      { "text": "contact", "href": "#contact" }
+    ],
+    "location": {
+      "text": "amsterdam",
+      "link": "https://open.spotify.com/track/2KvbLliAjjZNOipthec7Fh?si=885ff3e35661451e"
+    },
+    "cvFile": "cv.pdf"
+  },
+  "aboutMe": {
+    "photo": "photo.png",
+    "bio": [
+      "I'm Spiros, a Staff Motion Designer based in Amsterdam, Netherlands, working at the intersection of product design, animation, and design systems. I use motion as a functional tool—to clarify interactions, reinforce hierarchy, and improve usability at scale.",
+      "Currently working remotely at Qonto, I collaborate closely with product designers and engineers on product experiences and design systems. I focus on building reusable, well-documented motion patterns that teams can confidently use across complex products.",
+      "Outside of work, I spend a lot of time cycling and hanging out with Finn, my Westie—who has strong opinions about walk schedules and absolutely none about motion design. I care deeply about craft, consistency, and pragmatism, and I believe great motion should feel invisible: intentional, purposeful, and grounded in real user needs."
+    ]
+  },
+  "music": {
+    "title": "Lost in Amsterdam — Parov Stelar",
+    "file": "music.mp3"
+  },
+  "reel": {
+    "file": "reel.mp4"
+  },
   "projects": [
     {
       "id": 1,
@@ -6,11 +42,13 @@
       "company": "Qonto",
       "color": "#141414",
       "passwordProtected": true,
+      "password": "310890",
       "images": [
         { "type": "default", "background": "#141414" },
         { "type": "gradient", "background": "#FFFFFF", "gradient": "radial-gradient(circle at 50% 50%, #E0E0E0 0%, #FFFFFF 70%)" },
         { "type": "default", "background": "#141414" }
-      ]
+      ],
+      "media": []
     },
     {
       "id": 2,
@@ -22,7 +60,8 @@
         { "type": "default", "background": "#141414" },
         { "type": "default", "background": "#141414" },
         { "type": "default", "background": "#141414" }
-      ]
+      ],
+      "media": []
     },
     {
       "id": 3,
@@ -34,7 +73,8 @@
         { "type": "default", "background": "#141414" },
         { "type": "default", "background": "#141414" },
         { "type": "default", "background": "#141414" }
-      ]
+      ],
+      "media": []
     },
     {
       "id": 4,
@@ -46,7 +86,8 @@
         { "type": "default", "background": "#141414" },
         { "type": "default", "background": "#141414" },
         { "type": "default", "background": "#141414" }
-      ]
+      ],
+      "media": []
     },
     {
       "id": 5,
@@ -58,7 +99,8 @@
         { "type": "default", "background": "#141414" },
         { "type": "default", "background": "#141414" },
         { "type": "default", "background": "#141414" }
-      ]
+      ],
+      "media": []
     },
     {
       "id": 6,
@@ -70,55 +112,97 @@
         { "type": "default", "background": "#141414" },
         { "type": "default", "background": "#141414" },
         { "type": "default", "background": "#141414" }
-      ]
+      ],
+      "media": []
     }
   ],
   "experience": [
     {
-      "id": 1,
+      "id": "qonto",
       "company": "Qonto",
+      "image": "qonto.png",
       "roles": [
         {
           "title": "Staff Motion Designer - Design System",
-          "period": "2025-now",
+          "period": { "start": "2025", "end": "Now" },
           "description": "Own motion system principles, patterns, and docs. Partner with DS + engineering on implementation and QA. Drive adoption with reusable assets and handoff standards."
         },
         {
           "title": "Staff Motion and Website Designer",
-          "period": "2024 - 2025",
+          "period": { "start": "2024", "end": "2025" },
           "description": "Led website motion direction and consistency. Built scalable templates/patterns for faster delivery. Shipped implementation-ready motion with performance in mind."
         },
         {
           "title": "Senior Motion and Website Designer",
-          "period": "2022 - 2024",
+          "period": { "start": "2022", "end": "2024" },
           "description": "Delivered web motion end-to-end (concept → assets). Set early guidelines and delivery workflow. Prototyped interactions and micro-motions for key pages."
         }
-      ],
-      "image": "qonto.png"
+      ]
     },
     {
-      "id": 2,
+      "id": "flink",
       "company": "Flink",
-      "period": "2021 - 2022",
-      "role": "Senior Motion Designer",
-      "description": "Led motion for product + marketing. Defined Flink's motion language from scratch. Collaborated with product/brand to deliver motion for app launches and campaigns.",
-      "image": "flink.png"
+      "image": "flink.png",
+      "roles": [
+        {
+          "title": "Senior Motion Designer",
+          "period": { "start": "2021", "end": "2022" },
+          "description": "Set motion direction across product and brand. Built repeatable workflow for production and handoff. Delivered motion for key launches and campaigns."
+        }
+      ]
     },
     {
-      "id": 3,
+      "id": "delivery-hero",
       "company": "Delivery Hero",
-      "period": "2020 - 2021",
-      "role": "Motion Designer",
-      "description": "Executed motion for product features and internal comms. Supported brand campaigns with explainer videos and motion templates. Worked across multiple brands in the Delivery Hero portfolio.",
-      "image": "delivery-hero.png"
+      "image": "delivery-hero.png",
+      "roles": [
+        {
+          "title": "Motion Designer",
+          "period": { "start": "2020", "end": "2021" },
+          "description": "Created motion and visual assets for digital products and comms. Worked with design and marketing to ship high-volume work fast. Maintained quality and consistency across channels."
+        }
+      ]
     },
     {
-      "id": 4,
+      "id": "folket",
       "company": "Folket",
-      "period": "2018 - 2020",
-      "role": "Motion Designer",
-      "description": "Split time between an embedded client team (Skandia) and agency projects. Partnered with clients to storyboard, iterate, and deliver animated videos. Adapted styleframes and concepts into finished motion across multiple formats.",
-      "image": "folket.png"
+      "image": "folket.png",
+      "roles": [
+        {
+          "title": "Motion Designer",
+          "period": { "start": "2018", "end": "2020" },
+          "description": "Split time between an embedded client team (Skandia) and agency projects. Partnered with clients to storyboard, iterate, and deliver animated videos. Adapted styleframes and concepts into finished motion across multiple formats."
+        }
+      ]
     }
-  ]
+  ],
+  "gridImages": [
+    { "size": "large", "file": "", "type": "image" },
+    { "size": "medium", "file": "", "type": "image" },
+    { "size": "small", "file": "", "type": "gif" },
+    { "size": "medium", "file": "", "type": "image" },
+    { "size": "large", "file": "", "type": "image" },
+    { "size": "small", "file": "", "type": "gif" },
+    { "size": "small", "file": "", "type": "image" },
+    { "size": "medium", "file": "", "type": "image" },
+    { "size": "small", "file": "", "type": "image" },
+    { "size": "large", "file": "", "type": "image" },
+    { "size": "medium", "file": "", "type": "gif" },
+    { "size": "small", "file": "", "type": "image" },
+    { "size": "medium", "file": "", "type": "image" },
+    { "size": "small", "file": "", "type": "image" },
+    { "size": "large", "file": "", "type": "image" },
+    { "size": "medium", "file": "", "type": "gif" },
+    { "size": "small", "file": "", "type": "image" },
+    { "size": "medium", "file": "", "type": "image" }
+  ],
+  "footer": {
+    "email": "spirosleividiotis@gmail.com",
+    "social": [
+      { "name": "dribbble", "url": "https://dribbble.com/spirosleividiotis" },
+      { "name": "linkedin", "url": "https://www.linkedin.com/in/sleividiotis/" }
+    ],
+    "logo": "logo.svg",
+    "year": "2026"
+  }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Admin</title>
+    <title>Portfolio CMS - Admin</title>
     <style>
         * {
             margin: 0;
@@ -15,25 +15,20 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: #000;
             color: #fff;
-            padding: 40px 20px;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 20px;
         }
         
-        h1 {
-            font-size: 32px;
-            margin-bottom: 40px;
-            font-weight: 400;
-        }
-        
+        /* Login */
         .login-screen {
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 80vh;
+            min-height: 100vh;
         }
         
         .login-box {
@@ -49,84 +44,133 @@
             font-weight: 400;
         }
         
-        input {
+        /* Header */
+        .admin-header {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .admin-header h1 {
+            font-size: 24px;
+            font-weight: 400;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background: #1a1a1a;
+            border: none;
+            border-radius: 6px;
+            color: #999;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        
+        .tab:hover {
+            background: #222;
+            color: #fff;
+        }
+        
+        .tab.active {
+            background: #fff;
+            color: #000;
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Forms */
+        .section {
+            background: #1a1a1a;
+            padding: 32px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .section h2 {
+            font-size: 20px;
+            margin-bottom: 24px;
+            font-weight: 400;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="url"],
+        input[type="file"],
+        input[type="password"],
+        textarea {
             width: 100%;
             padding: 12px 16px;
             background: #000;
             border: 1px solid #333;
             border-radius: 4px;
             color: #fff;
-            font-size: 16px;
-            margin-bottom: 16px;
+            font-size: 14px;
+            font-family: inherit;
         }
         
-        input:focus {
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        input:focus,
+        textarea:focus {
             outline: none;
             border-color: #666;
         }
         
         button {
-            width: 100%;
-            padding: 12px 16px;
+            padding: 12px 24px;
             background: #fff;
             border: none;
             border-radius: 4px;
             color: #000;
-            font-size: 16px;
+            font-size: 14px;
             cursor: pointer;
             font-weight: 500;
+            transition: background 0.2s;
         }
         
         button:hover {
             background: #e5e5e5;
-        }
-        
-        .section {
-            background: #1a1a1a;
-            padding: 32px;
-            border-radius: 8px;
-            margin-bottom: 32px;
-        }
-        
-        .section h2 {
-            font-size: 24px;
-            margin-bottom: 24px;
-            font-weight: 400;
-        }
-        
-        .project-item {
-            background: #000;
-            padding: 20px;
-            border-radius: 4px;
-            margin-bottom: 16px;
-        }
-        
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-        
-        .project-name {
-            font-size: 18px;
-            font-weight: 500;
-        }
-        
-        .project-company {
-            color: #999;
-            font-size: 14px;
-        }
-        
-        .project-actions {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .btn-small {
-            padding: 6px 12px;
-            font-size: 14px;
-            width: auto;
         }
         
         .btn-secondary {
@@ -138,9 +182,75 @@
             background: #444;
         }
         
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+        
+        .btn-danger {
+            background: #dc2626;
+            color: #fff;
+        }
+        
+        .btn-danger:hover {
+            background: #b91c1c;
+        }
+        
+        /* Success Message */
+        .success-message {
+            background: #166534;
+            color: #fff;
+            padding: 16px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .success-message.show {
+            display: flex;
+        }
+        
+        /* Items List */
+        .items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .item {
+            background: #000;
+            padding: 20px;
+            border-radius: 6px;
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .item-title {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .item-subtitle {
+            color: #999;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        
+        .item-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
         .edit-form {
             display: none;
-            padding-top: 16px;
+            padding-top: 20px;
             border-top: 1px solid #333;
             margin-top: 16px;
         }
@@ -149,52 +259,54 @@
             display: block;
         }
         
-        .form-group {
-            margin-bottom: 16px;
+        /* Tags */
+        .tags-input {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
         }
         
-        label {
-            display: block;
-            margin-bottom: 8px;
+        .tag-item {
+            background: #333;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tag-remove {
+            cursor: pointer;
             color: #999;
-            font-size: 14px;
         }
         
-        textarea {
-            width: 100%;
-            padding: 12px 16px;
+        .tag-remove:hover {
+            color: #fff;
+        }
+        
+        /* Grid */
+        .grid-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        .grid-item-preview {
+            aspect-ratio: 1;
             background: #000;
             border: 1px solid #333;
             border-radius: 4px;
-            color: #fff;
-            font-size: 14px;
-            font-family: monospace;
-            min-height: 120px;
-            resize: vertical;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #666;
         }
         
-        .success-message {
-            background: #166534;
-            color: #fff;
-            padding: 12px 16px;
-            border-radius: 4px;
-            margin-bottom: 24px;
-            display: none;
-        }
-        
-        .success-message.show {
-            display: block;
-        }
-        
-        .logout-btn {
-            background: #333;
-            color: #fff;
-            width: auto;
-            padding: 8px 16px;
-            font-size: 14px;
-            margin-bottom: 24px;
-        }
-        
+        /* Note */
         .note {
             background: #1a1a1a;
             padding: 16px;
@@ -202,10 +314,32 @@
             font-size: 14px;
             color: #999;
             line-height: 1.6;
+            margin-bottom: 20px;
         }
         
         .note strong {
             color: #fff;
+        }
+        
+        .note code {
+            background: #000;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
         }
     </style>
 </head>
@@ -213,7 +347,7 @@
     <!-- Login Screen -->
     <div id="loginScreen" class="login-screen">
         <div class="login-box">
-            <h2>Admin Login</h2>
+            <h2>CMS Login</h2>
             <input type="password" id="passwordInput" placeholder="Enter password">
             <button onclick="login()">Login</button>
         </div>
@@ -222,35 +356,189 @@
     <!-- Admin Panel -->
     <div id="adminPanel" style="display: none;">
         <div class="container">
-            <button class="logout-btn" onclick="logout()">Logout</button>
-            
-            <h1>Portfolio Admin</h1>
+            <div class="admin-header">
+                <h1>Portfolio CMS</h1>
+                <button class="btn-secondary btn-small" onclick="logout()">Logout</button>
+            </div>
             
             <div class="success-message" id="successMessage">
-                ✓ Changes saved! Commit and push to update your live site.
+                <span>✓ Changes saved! Download content.json and push to GitHub to update your live site.</span>
+                <button class="btn-small btn-secondary" onclick="hideSuccess()">Dismiss</button>
             </div>
             
             <div class="note">
-                <strong>How it works:</strong><br>
-                1. Edit your projects below<br>
-                2. Click "Save Changes"<br>
-                3. Download the updated content.json file<br>
-                4. Push to GitHub to update your live site
+                <strong>How to update your site:</strong><br>
+                1. Edit content below<br>
+                2. Click "Save Changes" at the bottom<br>
+                3. Download the updated <code>content.json</code> file<br>
+                4. Replace the file in your project folder<br>
+                5. Run: <code>git add content.json && git commit -m "Update content" && git push</code>
             </div>
             
-            <div class="section">
-                <h2>Projects</h2>
-                <div id="projectsList"></div>
-                <button onclick="saveChanges()">Save Changes</button>
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('hero')">Hero</button>
+                <button class="tab" onclick="switchTab('about')">About Me</button>
+                <button class="tab" onclick="switchTab('media')">Music & Reel</button>
+                <button class="tab" onclick="switchTab('projects')">Projects</button>
+                <button class="tab" onclick="switchTab('experience')">Experience</button>
+                <button class="tab" onclick="switchTab('grid')">Grid Images</button>
+                <button class="tab" onclick="switchTab('footer')">Footer</button>
+            </div>
+            
+            <!-- Hero Tab -->
+            <div id="heroTab" class="tab-content active">
+                <div class="section">
+                    <h2>Hero Section</h2>
+                    <div class="form-group">
+                        <label>Name (use &lt;br&gt; for line break)</label>
+                        <input type="text" id="heroName" placeholder="Spiros<br>Leividiotis">
+                    </div>
+                    <div class="form-group">
+                        <label>Subtitle / Bio</label>
+                        <textarea id="heroSubtitle" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Photo</label>
+                        <input type="text" id="heroPhoto" placeholder="photo.png">
+                    </div>
+                    <div class="form-group">
+                        <label>Tools (comma-separated)</label>
+                        <input type="text" id="heroTools" placeholder="Rive, Cursor, Figma, LottieFiles, After Effects">
+                    </div>
+                    <div class="form-group">
+                        <label>Skills (comma-separated)</label>
+                        <input type="text" id="heroSkills" placeholder="UX motion, Motion systems, Interaction design">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- About Tab -->
+            <div id="aboutTab" class="tab-content">
+                <div class="section">
+                    <h2>About Me Modal</h2>
+                    <div class="form-group">
+                        <label>Photo</label>
+                        <input type="text" id="aboutPhoto" placeholder="photo.png">
+                    </div>
+                    <div class="form-group">
+                        <label>Paragraph 1</label>
+                        <textarea id="aboutBio1" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Paragraph 2</label>
+                        <textarea id="aboutBio2" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Paragraph 3</label>
+                        <textarea id="aboutBio3" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Media Tab -->
+            <div id="mediaTab" class="tab-content">
+                <div class="section">
+                    <h2>Music Player</h2>
+                    <div class="form-group">
+                        <label>Song Title</label>
+                        <input type="text" id="musicTitle" placeholder="Lost in Amsterdam — Parov Stelar">
+                    </div>
+                    <div class="form-group">
+                        <label>Audio File</label>
+                        <input type="text" id="musicFile" placeholder="music.mp3">
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>Reel Video</h2>
+                    <div class="form-group">
+                        <label>Video File</label>
+                        <input type="text" id="reelFile" placeholder="reel.mp4">
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>Header Settings</h2>
+                    <div class="form-group">
+                        <label>Location Text</label>
+                        <input type="text" id="locationText" placeholder="amsterdam">
+                    </div>
+                    <div class="form-group">
+                        <label>Location Spotify Link</label>
+                        <input type="url" id="locationLink" placeholder="https://open.spotify.com/...">
+                    </div>
+                    <div class="form-group">
+                        <label>CV File</label>
+                        <input type="text" id="cvFile" placeholder="cv.pdf">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Projects Tab -->
+            <div id="projectsTab" class="tab-content">
+                <div class="section">
+                    <h2>Projects</h2>
+                    <div class="items-list" id="projectsList"></div>
+                </div>
+            </div>
+            
+            <!-- Experience Tab -->
+            <div id="experienceTab" class="tab-content">
+                <div class="section">
+                    <h2>Experience</h2>
+                    <div class="items-list" id="experienceList"></div>
+                </div>
+            </div>
+            
+            <!-- Grid Tab -->
+            <div id="gridTab" class="tab-content">
+                <div class="section">
+                    <h2>Grid Modal Images</h2>
+                    <p style="color: #999; margin-bottom: 20px;">Add filenames for your grid images (GIFs, PNGs, JPGs, videos)</p>
+                    <div id="gridImagesList"></div>
+                </div>
+            </div>
+            
+            <!-- Footer Tab -->
+            <div id="footerTab" class="tab-content">
+                <div class="section">
+                    <h2>Footer</h2>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="footerEmail" placeholder="spirosleividiotis@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Dribbble URL</label>
+                        <input type="url" id="footerDribbble" placeholder="https://dribbble.com/spirosleividiotis">
+                    </div>
+                    <div class="form-group">
+                        <label>LinkedIn URL</label>
+                        <input type="url" id="footerLinkedin" placeholder="https://www.linkedin.com/in/sleividiotis/">
+                    </div>
+                    <div class="form-group">
+                        <label>Logo File</label>
+                        <input type="text" id="footerLogo" placeholder="logo.svg">
+                    </div>
+                    <div class="form-group">
+                        <label>Year</label>
+                        <input type="text" id="footerYear" placeholder="2026">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Save Button -->
+            <div style="position: sticky; bottom: 20px; background: #000; padding: 20px 0;">
+                <button onclick="saveChanges()" style="width: 100%; padding: 16px; font-size: 16px;">Save Changes & Download</button>
             </div>
         </div>
     </div>
     
     <script>
-        const ADMIN_PASSWORD = '310890'; // Same as your project password
+        const ADMIN_PASSWORD = '310890';
         let contentData = null;
         
-        // Login
+        // Login/Logout
         function login() {
             const password = document.getElementById('passwordInput').value;
             if (password === ADMIN_PASSWORD) {
@@ -268,80 +556,258 @@
             document.getElementById('passwordInput').value = '';
         }
         
-        // Load content from JSON
+        document.getElementById('passwordInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') login();
+        });
+        
+        // Tab Switching
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // Load Content
         async function loadContent() {
             try {
                 const response = await fetch('content.json');
                 contentData = await response.json();
-                renderProjects();
+                populateFields();
             } catch (error) {
                 console.error('Error loading content:', error);
-                alert('Error loading content');
+                alert('Error loading content. Make sure content.json exists.');
             }
         }
         
-        // Render projects
+        // Populate Fields
+        function populateFields() {
+            // Hero
+            document.getElementById('heroName').value = contentData.hero.name;
+            document.getElementById('heroSubtitle').value = contentData.hero.subtitle;
+            document.getElementById('heroPhoto').value = contentData.hero.photo;
+            document.getElementById('heroTools').value = contentData.hero.tags.tools.join(', ');
+            document.getElementById('heroSkills').value = contentData.hero.tags.skills.join(', ');
+            
+            // About
+            document.getElementById('aboutPhoto').value = contentData.aboutMe.photo;
+            document.getElementById('aboutBio1').value = contentData.aboutMe.bio[0] || '';
+            document.getElementById('aboutBio2').value = contentData.aboutMe.bio[1] || '';
+            document.getElementById('aboutBio3').value = contentData.aboutMe.bio[2] || '';
+            
+            // Media
+            document.getElementById('musicTitle').value = contentData.music.title;
+            document.getElementById('musicFile').value = contentData.music.file;
+            document.getElementById('reelFile').value = contentData.reel.file;
+            document.getElementById('locationText').value = contentData.header.location.text;
+            document.getElementById('locationLink').value = contentData.header.location.link;
+            document.getElementById('cvFile').value = contentData.header.cvFile;
+            
+            // Footer
+            document.getElementById('footerEmail').value = contentData.footer.email;
+            document.getElementById('footerDribbble').value = contentData.footer.social.find(s => s.name === 'dribbble')?.url || '';
+            document.getElementById('footerLinkedin').value = contentData.footer.social.find(s => s.name === 'linkedin')?.url || '';
+            document.getElementById('footerLogo').value = contentData.footer.logo;
+            document.getElementById('footerYear').value = contentData.footer.year;
+            
+            // Projects
+            renderProjects();
+            
+            // Experience
+            renderExperience();
+            
+            // Grid
+            renderGridImages();
+        }
+        
+        // Render Projects
         function renderProjects() {
-            const projectsList = document.getElementById('projectsList');
-            projectsList.innerHTML = contentData.projects.map(project => `
-                <div class="project-item">
-                    <div class="project-header">
+            const list = document.getElementById('projectsList');
+            list.innerHTML = contentData.projects.map(project => `
+                <div class="item">
+                    <div class="item-header">
                         <div>
-                            <div class="project-name">${project.name}</div>
-                            <div class="project-company">${project.company}</div>
+                            <div class="item-title">${project.name}</div>
+                            <div class="item-subtitle">${project.company} ${project.passwordProtected ? '🔒' : ''}</div>
                         </div>
-                        <div class="project-actions">
-                            <button class="btn-small" onclick="toggleEdit(${project.id})">Edit</button>
+                        <div class="item-actions">
+                            <button class="btn-small btn-secondary" onclick="toggleProjectEdit(${project.id})">Edit</button>
                         </div>
                     </div>
-                    <div class="edit-form" id="edit-${project.id}">
+                    <div class="edit-form" id="project-edit-${project.id}">
                         <div class="form-group">
                             <label>Project Name</label>
-                            <input type="text" id="name-${project.id}" value="${project.name}">
+                            <input type="text" id="project-name-${project.id}" value="${project.name}">
                         </div>
                         <div class="form-group">
                             <label>Company</label>
-                            <input type="text" id="company-${project.id}" value="${project.company}">
+                            <input type="text" id="project-company-${project.id}" value="${project.company}">
                         </div>
                         <div class="form-group">
                             <label>Background Color</label>
-                            <input type="text" id="color-${project.id}" value="${project.color}">
+                            <input type="text" id="project-color-${project.id}" value="${project.color}">
                         </div>
                         <div class="form-group">
                             <label>
-                                <input type="checkbox" id="password-${project.id}" ${project.passwordProtected ? 'checked' : ''}>
+                                <input type="checkbox" id="project-password-${project.id}" ${project.passwordProtected ? 'checked' : ''}>
                                 Password Protected
                             </label>
                         </div>
-                        <button class="btn-small btn-secondary" onclick="updateProject(${project.id})">Update</button>
+                        ${project.passwordProtected ? `
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="text" id="project-pwd-${project.id}" value="${project.password || ''}">
+                        </div>
+                        ` : ''}
+                        <button class="btn-small" onclick="updateProject(${project.id})">Update Project</button>
                     </div>
                 </div>
             `).join('');
         }
         
-        // Toggle edit form
-        function toggleEdit(projectId) {
-            const editForm = document.getElementById(`edit-${projectId}`);
-            editForm.classList.toggle('active');
+        function toggleProjectEdit(id) {
+            const form = document.getElementById(`project-edit-${id}`);
+            form.classList.toggle('active');
         }
         
-        // Update project
-        function updateProject(projectId) {
-            const project = contentData.projects.find(p => p.id === projectId);
-            project.name = document.getElementById(`name-${projectId}`).value;
-            project.company = document.getElementById(`company-${projectId}`).value;
-            project.color = document.getElementById(`color-${projectId}`).value;
-            project.passwordProtected = document.getElementById(`password-${projectId}`).checked;
-            
+        function updateProject(id) {
+            const project = contentData.projects.find(p => p.id === id);
+            project.name = document.getElementById(`project-name-${id}`).value;
+            project.company = document.getElementById(`project-company-${id}`).value;
+            project.color = document.getElementById(`project-color-${id}`).value;
+            project.passwordProtected = document.getElementById(`project-password-${id}`).checked;
+            if (project.passwordProtected && document.getElementById(`project-pwd-${id}`)) {
+                project.password = document.getElementById(`project-pwd-${id}`).value;
+            }
             renderProjects();
-            document.getElementById('successMessage').classList.add('show');
-            setTimeout(() => {
-                document.getElementById('successMessage').classList.remove('show');
-            }, 3000);
+            showSuccess();
         }
         
-        // Save changes (download JSON)
+        // Render Experience
+        function renderExperience() {
+            const list = document.getElementById('experienceList');
+            list.innerHTML = contentData.experience.map(exp => `
+                <div class="item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">${exp.company}</div>
+                            <div class="item-subtitle">${exp.roles.length} role(s)</div>
+                        </div>
+                        <div class="item-actions">
+                            <button class="btn-small btn-secondary" onclick="toggleExpEdit('${exp.id}')">Edit</button>
+                        </div>
+                    </div>
+                    <div class="edit-form" id="exp-edit-${exp.id}">
+                        <div class="form-group">
+                            <label>Company Name</label>
+                            <input type="text" id="exp-company-${exp.id}" value="${exp.company}">
+                        </div>
+                        <div class="form-group">
+                            <label>Company Image</label>
+                            <input type="text" id="exp-image-${exp.id}" value="${exp.image}">
+                        </div>
+                        ${exp.roles.map((role, i) => `
+                            <div style="background: #1a1a1a; padding: 16px; border-radius: 4px; margin-top: 16px;">
+                                <h4 style="margin-bottom: 12px; font-weight: 400;">Role ${i + 1}</h4>
+                                <div class="form-group">
+                                    <label>Job Title</label>
+                                    <input type="text" id="exp-${exp.id}-role-${i}-title" value="${role.title}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Period (Start)</label>
+                                    <input type="text" id="exp-${exp.id}-role-${i}-start" value="${role.period.start}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Period (End)</label>
+                                    <input type="text" id="exp-${exp.id}-role-${i}-end" value="${role.period.end}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea id="exp-${exp.id}-role-${i}-desc" rows="3">${role.description}</textarea>
+                                </div>
+                            </div>
+                        `).join('')}
+                        <button class="btn-small" onclick="updateExperience('${exp.id}')" style="margin-top: 16px;">Update Experience</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function toggleExpEdit(id) {
+            const form = document.getElementById(`exp-edit-${id}`);
+            form.classList.toggle('active');
+        }
+        
+        function updateExperience(id) {
+            const exp = contentData.experience.find(e => e.id === id);
+            exp.company = document.getElementById(`exp-company-${id}`).value;
+            exp.image = document.getElementById(`exp-image-${id}`).value;
+            
+            exp.roles.forEach((role, i) => {
+                role.title = document.getElementById(`exp-${id}-role-${i}-title`).value;
+                role.period.start = document.getElementById(`exp-${id}-role-${i}-start`).value;
+                role.period.end = document.getElementById(`exp-${id}-role-${i}-end`).value;
+                role.description = document.getElementById(`exp-${id}-role-${i}-desc`).value;
+            });
+            
+            renderExperience();
+            showSuccess();
+        }
+        
+        // Render Grid Images
+        function renderGridImages() {
+            const list = document.getElementById('gridImagesList');
+            list.innerHTML = contentData.gridImages.map((img, i) => `
+                <div class="form-group">
+                    <label>Image ${i + 1} (${img.size}, ${img.type})</label>
+                    <input type="text" id="grid-${i}" value="${img.file}" placeholder="filename.jpg or filename.gif">
+                </div>
+            `).join('');
+        }
+        
+        // Save Changes
         function saveChanges() {
+            // Update Hero
+            contentData.hero.name = document.getElementById('heroName').value;
+            contentData.hero.subtitle = document.getElementById('heroSubtitle').value;
+            contentData.hero.photo = document.getElementById('heroPhoto').value;
+            contentData.hero.tags.tools = document.getElementById('heroTools').value.split(',').map(s => s.trim());
+            contentData.hero.tags.skills = document.getElementById('heroSkills').value.split(',').map(s => s.trim());
+            
+            // Update About
+            contentData.aboutMe.photo = document.getElementById('aboutPhoto').value;
+            contentData.aboutMe.bio = [
+                document.getElementById('aboutBio1').value,
+                document.getElementById('aboutBio2').value,
+                document.getElementById('aboutBio3').value
+            ];
+            
+            // Update Media
+            contentData.music.title = document.getElementById('musicTitle').value;
+            contentData.music.file = document.getElementById('musicFile').value;
+            contentData.reel.file = document.getElementById('reelFile').value;
+            contentData.header.location.text = document.getElementById('locationText').value;
+            contentData.header.location.link = document.getElementById('locationLink').value;
+            contentData.header.cvFile = document.getElementById('cvFile').value;
+            
+            // Update Footer
+            contentData.footer.email = document.getElementById('footerEmail').value;
+            contentData.footer.social = [
+                { name: 'dribbble', url: document.getElementById('footerDribbble').value },
+                { name: 'linkedin', url: document.getElementById('footerLinkedin').value }
+            ];
+            contentData.footer.logo = document.getElementById('footerLogo').value;
+            contentData.footer.year = document.getElementById('footerYear').value;
+            
+            // Update Grid Images
+            contentData.gridImages.forEach((img, i) => {
+                img.file = document.getElementById(`grid-${i}`).value;
+            });
+            
+            // Download JSON
             const dataStr = JSON.stringify(contentData, null, 2);
             const dataBlob = new Blob([dataStr], { type: 'application/json' });
             const url = URL.createObjectURL(dataBlob);
@@ -350,13 +816,16 @@
             link.download = 'content.json';
             link.click();
             
-            alert('content.json downloaded! Replace the file in your portfolio-deploy folder and push to GitHub.');
+            showSuccess();
         }
         
-        // Enter key to login
-        document.getElementById('passwordInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') login();
-        });
+        function showSuccess() {
+            document.getElementById('successMessage').classList.add('show');
+        }
+        
+        function hideSuccess() {
+            document.getElementById('successMessage').classList.remove('show');
+        }
     </script>
 </body>
 </html>
