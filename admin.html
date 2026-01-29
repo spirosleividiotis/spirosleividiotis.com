@@ -939,7 +939,12 @@
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('adminPanel').style.display = 'block';
                 loadContent();
-                loadMotionSystemContent(); // Load Motion System content
+                // Load Motion System content in background (non-blocking)
+                setTimeout(() => {
+                    loadMotionSystemContent().catch(err => {
+                        console.warn('Motion System content not loaded:', err);
+                    });
+                }, 500);
             } else {
                 alert('Incorrect password');
             }
@@ -1613,6 +1618,10 @@
         async function loadMotionSystemContent() {
             try {
                 const response = await fetch('motion-system-content.html');
+                if (!response.ok) {
+                    console.warn('Motion System content file not found');
+                    return;
+                }
                 const html = await response.text();
                 
                 // Parse HTML to extract content (basic parsing)
@@ -2244,7 +2253,7 @@ ${contentToParagraphs(motionSystemData.impact.content)}
     </div>
 </div>
 
-<script>
+<scr` + `ipt>
 function toggleMotionExpand(idx = 0) {
     const container = document.getElementById('motionIframeContainer' + idx);
     const btns = document.querySelectorAll('.expand-btn');
@@ -2260,7 +2269,7 @@ function toggleMotionExpand(idx = 0) {
         }
     }
 }
-</script>`;
+<\/script>`;
         }
     </script>
 </body>
