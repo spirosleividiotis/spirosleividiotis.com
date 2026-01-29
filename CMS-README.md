@@ -59,7 +59,21 @@ The CMS has 7 tabs for editing different sections:
 - Logo and year
 
 ### Step 3: Save & Publish
-1. Click **"Save Changes & Download"** at the bottom
+
+**TWO OPTIONS:**
+
+#### Option A: 🚀 Auto-Publish (Recommended)
+1. Click **"🚀 Save & Publish Live"** at the bottom
+2. Wait ~10 seconds for the upload
+3. You'll see: ✅ "Published successfully!"
+4. Your site updates automatically in ~60 seconds! 🎉
+
+**⚠️ First time?** You need to set up auto-publish once:
+- See **`AUTO-PUBLISH-SETUP.md`** for 5-minute setup instructions
+- Once set up, it's one-click publishing forever!
+
+#### Option B: 💾 Manual (Fallback)
+1. Click **"💾 Save & Download JSON"** at the bottom
 2. A `content.json` file will download
 3. Replace the file in your project folder:
    ```
@@ -73,7 +87,7 @@ The CMS has 7 tabs for editing different sections:
    git push
    ```
 5. Vercel will automatically rebuild (takes ~1 minute)
-6. Your site is live with the new content! 🎉
+6. Your site is live! 🎉
 
 ## 📤 Uploading Files (After Cloudinary Setup)
 

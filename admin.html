@@ -653,9 +653,17 @@
                 </div>
             </div>
             
-            <!-- Save Button -->
+            <!-- Save Buttons -->
             <div style="position: sticky; bottom: 20px; background: #000; padding: 20px 0;">
-                <button onclick="saveChanges()" style="width: 100%; padding: 16px; font-size: 16px;">Save Changes & Download</button>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <button onclick="saveChanges()" style="padding: 16px; font-size: 16px; background: #333; border: 1px solid #555;">
+                        💾 Save & Download JSON
+                    </button>
+                    <button onclick="publishLive()" id="publishBtn" style="padding: 16px; font-size: 16px; background: #22c55e; border: 1px solid #16a34a;">
+                        🚀 Save & Publish Live
+                    </button>
+                </div>
+                <div id="publishStatus" style="margin-top: 12px; padding: 12px; border-radius: 6px; display: none;"></div>
             </div>
         </div>
     </div>
@@ -1191,8 +1199,8 @@
             showSuccess();
         }
         
-        // Save Changes
-        function saveChanges() {
+        // Update content data from form fields
+        function updateContentData() {
             // Update Hero
             contentData.hero.name = document.getElementById('heroName').value;
             contentData.hero.subtitle = document.getElementById('heroSubtitle').value;
@@ -1223,6 +1231,11 @@
             ];
             contentData.footer.logo = document.getElementById('footerLogo').value;
             contentData.footer.year = document.getElementById('footerYear').value;
+        }
+        
+        // Save Changes (Download JSON)
+        function saveChanges() {
+            updateContentData();
             
             // Download JSON
             const dataStr = JSON.stringify(contentData, null, 2);
@@ -1234,6 +1247,65 @@
             link.click();
             
             showSuccess();
+        }
+        
+        // Publish Live (Auto-commit to GitHub)
+        async function publishLive() {
+            const publishBtn = document.getElementById('publishBtn');
+            const statusDiv = document.getElementById('publishStatus');
+            
+            try {
+                // Update content data
+                updateContentData();
+                
+                // Show loading state
+                publishBtn.disabled = true;
+                publishBtn.innerHTML = '⏳ Publishing...';
+                statusDiv.style.display = 'block';
+                statusDiv.style.background = '#1a3a52';
+                statusDiv.style.border = '1px solid #3b82f6';
+                statusDiv.style.color = '#93c5fd';
+                statusDiv.innerHTML = '🔄 Uploading changes to GitHub...';
+                
+                // Call serverless function
+                const response = await fetch('/api/publish', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ content: contentData })
+                });
+                
+                const result = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(result.error || 'Failed to publish');
+                }
+                
+                // Success!
+                statusDiv.style.background = '#1a3a29';
+                statusDiv.style.border = '1px solid #22c55e';
+                statusDiv.style.color = '#86efac';
+                statusDiv.innerHTML = `✅ <strong>Published successfully!</strong><br>
+                    <small>Your site will update in ~60 seconds.<br>
+                    Commit: <a href="${result.commit}" target="_blank" style="color: #86efac; text-decoration: underline;">View on GitHub</a></small>`;
+                
+                setTimeout(() => {
+                    statusDiv.style.display = 'none';
+                }, 10000);
+                
+            } catch (error) {
+                console.error('Publish error:', error);
+                statusDiv.style.background = '#3a1a1a';
+                statusDiv.style.border = '1px solid #ef4444';
+                statusDiv.style.color = '#fca5a5';
+                statusDiv.innerHTML = `❌ <strong>Failed to publish</strong><br>
+                    <small>${error.message}</small><br>
+                    <small style="margin-top: 8px; display: block;">Use "Save & Download JSON" and push manually via Git.</small>`;
+            } finally {
+                publishBtn.disabled = false;
+                publishBtn.innerHTML = '🚀 Save & Publish Live';
+            }
         }
         
         function showSuccess() {
