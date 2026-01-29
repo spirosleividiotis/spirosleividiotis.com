@@ -586,212 +586,112 @@ function initializeCursorHoverEffects() {
     const navLinks = document.querySelectorAll('.nav-link');
     
     if (!cursorDot) return;
-        // Password protection state
-        let passwordUnlocked = false;
-        let passwordInputActive = false;
-        const CORRECT_PASSWORD = '310890';
-        
-        // Password protection functions
-        function showPasswordInput() {
-            const passwordInput = document.querySelector('.cursor-password-input');
-            const passwordField = document.getElementById('cursorPasswordField');
+    
+    // Arrow cursor only (no text) for footer links
+    footerLinks.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            cursorDot.classList.add('cursor-arrow-only');
+            cursorDot.classList.remove('cursor-hover', 'cursor-project');
+            // Explicitly hide text
             const cursorText = cursorDot.querySelector('.cursor-text');
-            const cursorArrow = cursorDot.querySelector('.cursor-arrow');
-            
-            if (passwordInput && passwordField) {
-                cursorDot.classList.add('cursor-password');
-                passwordInput.style.display = 'flex';
-                if (cursorText) cursorText.style.display = 'none';
-                if (cursorArrow) cursorArrow.style.display = 'none';
-                passwordInputActive = true;
-                
-                // Focus the password field
-                setTimeout(() => {
-                    passwordField.focus();
-                }, 100);
-            }
-        }
-        
-        function hidePasswordInput() {
-            const passwordInput = document.querySelector('.cursor-password-input');
-            const passwordField = document.getElementById('cursorPasswordField');
-            
-            if (passwordInput && passwordField) {
-                cursorDot.classList.remove('cursor-password');
-                passwordInput.style.display = 'none';
-                passwordField.value = '';
-                passwordInputActive = false;
-                resetCursorToDefault();
-            }
-        }
-        
-        function checkPassword() {
-            const passwordField = document.getElementById('cursorPasswordField');
-            if (passwordField && passwordField.value.trim() === CORRECT_PASSWORD) {
-                passwordUnlocked = true;
-                hidePasswordInput();
-                // Reset image index for unlocked project
-                const protectedCard = document.querySelector('[data-password-protected="true"]');
-                if (protectedCard) {
-                    const projectName = protectedCard.querySelector('.project-name').textContent;
-                    projectImageIndices[projectName] = 0;
-                }
-                return true;
-            }
-            return false;
-        }
-        
-        // Setup password field
-        function setupPasswordField() {
-            const passwordField = document.getElementById('cursorPasswordField');
-            if (passwordField) {
-                passwordField.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        if (checkPassword()) {
-                            // Password correct, unlock
-                            hidePasswordInput();
-                        } else {
-                            // Password incorrect, shake or show error
-                            passwordField.value = '';
-                            passwordField.placeholder = 'try again';
-                            setTimeout(() => {
-                                passwordField.placeholder = 'password';
-                            }, 2000);
-                        }
-                    }
-                });
-                
-                passwordField.addEventListener('mousedown', function(e) {
-                    e.stopPropagation();
-                });
-                
-                passwordField.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                });
-            }
-        }
-        
-        // Initialize password field
-        setupPasswordField();
-        
-        // Close password input when clicking outside
-        document.addEventListener('click', function(e) {
-            if (passwordInputActive) {
-                const passwordInput = document.querySelector('.cursor-password-input');
-                const passwordField = document.getElementById('cursorPasswordField');
-                if (passwordInput && passwordField && !passwordInput.contains(e.target)) {
-                    hidePasswordInput();
-                }
+            if (cursorText) {
+                cursorText.style.display = 'none';
             }
         });
         
-        // Arrow cursor only (no text) for footer links
-        footerLinks.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                cursorDot.classList.add('cursor-arrow-only');
-                cursorDot.classList.remove('cursor-hover', 'cursor-project');
-                // Explicitly hide text
-                const cursorText = cursorDot.querySelector('.cursor-text');
-                if (cursorText) {
-                    cursorText.style.display = 'none';
-                }
-            });
-            
-            link.addEventListener('mouseleave', () => {
-                cursorDot.classList.remove('cursor-arrow-only');
-                resetCursorToDefault();
-            });
+        link.addEventListener('mouseleave', () => {
+            cursorDot.classList.remove('cursor-arrow-only');
+            resetCursorToDefault();
+        });
+    });
+    
+    // Arrow cursor for Amsterdam link
+    if (locationLink) {
+        locationLink.addEventListener('mouseenter', () => {
+            cursorDot.classList.add('cursor-arrow-only');
+            cursorDot.classList.remove('cursor-hover', 'cursor-project');
+            // Explicitly hide text
+            const cursorText = cursorDot.querySelector('.cursor-text');
+            if (cursorText) {
+                cursorText.style.display = 'none';
+            }
         });
         
-        // Arrow cursor for Amsterdam link
-        if (locationLink) {
-            locationLink.addEventListener('mouseenter', () => {
-                cursorDot.classList.add('cursor-arrow-only');
-                cursorDot.classList.remove('cursor-hover', 'cursor-project');
-                // Explicitly hide text
-                const cursorText = cursorDot.querySelector('.cursor-text');
-                if (cursorText) {
-                    cursorText.style.display = 'none';
-                }
-            });
-            
-            locationLink.addEventListener('mouseleave', () => {
-                cursorDot.classList.remove('cursor-arrow-only');
-                resetCursorToDefault();
-            });
-        }
-        
-        // Arrow cursor for hero links and nav links
-        heroLinks.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                cursorDot.classList.add('cursor-arrow-only');
-                cursorDot.classList.remove('cursor-hover', 'cursor-project');
-                // Explicitly hide text
-                const cursorText = cursorDot.querySelector('.cursor-text');
-                if (cursorText) {
-                    cursorText.style.display = 'none';
-                }
-            });
-            
-            link.addEventListener('mouseleave', () => {
-                cursorDot.classList.remove('cursor-arrow-only');
-                resetCursorToDefault();
-            });
+        locationLink.addEventListener('mouseleave', () => {
+            cursorDot.classList.remove('cursor-arrow-only');
+            resetCursorToDefault();
+        });
+    }
+    
+    // Arrow cursor for hero links and nav links
+    heroLinks.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            cursorDot.classList.add('cursor-arrow-only');
+            cursorDot.classList.remove('cursor-hover', 'cursor-project');
+            // Explicitly hide text
+            const cursorText = cursorDot.querySelector('.cursor-text');
+            if (cursorText) {
+                cursorText.style.display = 'none';
+            }
         });
         
-        navLinks.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                cursorDot.classList.add('cursor-arrow-only');
-                cursorDot.classList.remove('cursor-hover', 'cursor-project');
-                // Explicitly hide text
-                const cursorText = cursorDot.querySelector('.cursor-text');
-                if (cursorText) {
-                    cursorText.style.display = 'none';
-                }
-            });
-            
-            link.addEventListener('mouseleave', () => {
-                cursorDot.classList.remove('cursor-arrow-only');
-                resetCursorToDefault();
-            });
+        link.addEventListener('mouseleave', () => {
+            cursorDot.classList.remove('cursor-arrow-only');
+            resetCursorToDefault();
+        });
+    });
+    
+    navLinks.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            cursorDot.classList.add('cursor-arrow-only');
+            cursorDot.classList.remove('cursor-hover', 'cursor-project');
+            // Explicitly hide text
+            const cursorText = cursorDot.querySelector('.cursor-text');
+            if (cursorText) {
+                cursorText.style.display = 'none';
+            }
         });
         
-        // Arrow cursor for grid link
-        const gridLinkElement = document.getElementById('gridLink');
-        if (gridLinkElement) {
-            gridLinkElement.addEventListener('mouseenter', () => {
-                cursorDot.classList.add('cursor-arrow-only');
-                cursorDot.classList.remove('cursor-hover', 'cursor-project');
-                const cursorText = cursorDot.querySelector('.cursor-text');
-                if (cursorText) {
-                    cursorText.style.display = 'none';
-                }
-            });
-            
-            gridLinkElement.addEventListener('mouseleave', () => {
-                cursorDot.classList.remove('cursor-arrow-only');
-                resetCursorToDefault();
-            });
-        }
+        link.addEventListener('mouseleave', () => {
+            cursorDot.classList.remove('cursor-arrow-only');
+            resetCursorToDefault();
+        });
+    });
+    
+    // Arrow cursor for grid link
+    const gridLinkElement = document.getElementById('gridLink');
+    if (gridLinkElement) {
+        gridLinkElement.addEventListener('mouseenter', () => {
+            cursorDot.classList.add('cursor-arrow-only');
+            cursorDot.classList.remove('cursor-hover', 'cursor-project');
+            const cursorText = cursorDot.querySelector('.cursor-text');
+            if (cursorText) {
+                cursorText.style.display = 'none';
+            }
+        });
         
-        // Arrow cursor for reel link
-        const reelLinkForCursor = document.querySelector('.reel-link');
-        if (reelLinkForCursor) {
-            reelLinkForCursor.addEventListener('mouseenter', function() {
-                cursorDot.classList.add('cursor-arrow-only');
-                cursorDot.classList.remove('cursor-hover', 'cursor-project');
-                const cursorText = cursorDot.querySelector('.cursor-text');
-                if (cursorText) {
-                    cursorText.style.display = 'none';
-                }
-            });
-            
-            reelLinkForCursor.addEventListener('mouseleave', function() {
-                cursorDot.classList.remove('cursor-arrow-only');
-                resetCursorToDefault();
-            });
-        }
+        gridLinkElement.addEventListener('mouseleave', () => {
+            cursorDot.classList.remove('cursor-arrow-only');
+            resetCursorToDefault();
+        });
+    }
+    
+    // Arrow cursor for reel link
+    const reelLinkForCursor = document.querySelector('.reel-link');
+    if (reelLinkForCursor) {
+        reelLinkForCursor.addEventListener('mouseenter', function() {
+            cursorDot.classList.add('cursor-arrow-only');
+            cursorDot.classList.remove('cursor-hover', 'cursor-project');
+            const cursorText = cursorDot.querySelector('.cursor-text');
+            if (cursorText) {
+                cursorText.style.display = 'none';
+            }
+        });
+        
+        reelLinkForCursor.addEventListener('mouseleave', function() {
+            cursorDot.classList.remove('cursor-arrow-only');
+            resetCursorToDefault();
+        });
     }
 }
 
@@ -973,7 +873,8 @@ function initializeModalsAndPlayers() {
     const videoClose = document.getElementById('videoClose');
     const videoPlayerElement = document.getElementById('videoPlayerElement');
 
-            reelLinkForVideo.addEventListener('click', function(e) {
+    if (reelLinkForVideo) {
+        reelLinkForVideo.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             if (videoPlayer) {
