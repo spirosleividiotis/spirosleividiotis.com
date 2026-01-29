@@ -59,7 +59,7 @@
   "projects": [
     {
       "id": 1,
-      "name": "Build a Motion System",
+      "name": "Building a Motion System",
       "company": "Qonto",
       "color": "#141414",
       "passwordProtected": true,
@@ -68,67 +68,79 @@
       "media": {
         "hero": "",
         "grid": []
-      }
+      },
+      "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769721538/portfolio/amsterdam-netherlands-seamless-banner-amsterdam-s-skyline-hand-drawn-digitally-colored-ink-illustration-75505367_qgojqf.webp",
+      "password": ""
     },
     {
       "id": 2,
       "name": "Checkout Experience",
       "company": "Flink",
       "color": "#141414",
-      "passwordProtected": false,
+      "passwordProtected": true,
       "bodyText": "",
       "media": {
         "hero": "",
         "grid": []
-      }
+      },
+      "cardPreview": "",
+      "password": "spiros2026"
     },
     {
       "id": 3,
       "name": "Brand Guidelines",
       "company": "Delivery Hero",
       "color": "#141414",
-      "passwordProtected": false,
+      "passwordProtected": true,
       "bodyText": "",
       "media": {
         "hero": "",
         "grid": []
-      }
+      },
+      "cardPreview": "",
+      "password": "spiros2026"
     },
     {
       "id": 4,
       "name": "Interactive Stories",
       "company": "Folket",
       "color": "#141414",
-      "passwordProtected": false,
+      "passwordProtected": true,
       "bodyText": "",
       "media": {
         "hero": "",
         "grid": []
-      }
+      },
+      "cardPreview": "",
+      "password": "spiros2026"
     },
     {
       "id": 5,
       "name": "Design Tokens",
       "company": "Freelance",
       "color": "#141414",
-      "passwordProtected": false,
+      "passwordProtected": true,
       "bodyText": "",
       "media": {
         "hero": "",
         "grid": []
-      }
+      },
+      "cardPreview": "",
+      "password": "spiros2026"
     },
     {
       "id": 6,
       "name": "Animations Showcase",
       "company": "Personal",
       "color": "#141414",
-      "passwordProtected": false,
+      "passwordProtected": true,
       "bodyText": "",
       "media": {
         "hero": "",
         "grid": []
-      }
+      },
+      "cardPreview": "",
+      "password": "spiros2026"
     }
   ],
   "experience": [
