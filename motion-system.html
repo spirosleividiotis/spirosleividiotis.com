@@ -189,6 +189,78 @@
             font-size: 14px;
         }
 
+        /* Principle examples */
+        .principle-examples {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .principle-examples img {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid #1a1a1a;
+        }
+
+        /* Token grid */
+        .token-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .token-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid #1a1a1a;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .token-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .token-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .token-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .token-name {
+            font-size: 14px;
+            color: #CCCCCC;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .subsection-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #FFFFFF;
+            margin-top: 40px;
+            margin-bottom: 0;
+        }
+
         /* Links */
         .link-grid {
             display: grid;
@@ -302,6 +374,30 @@
                 padding-left: 0;
             }
 
+            .principle-examples {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .token-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .token-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .token-name {
+                font-size: 12px;
+            }
+
+            .subsection-title {
+                font-size: 14px;
+                margin-top: 32px;
+            }
+
             .link-grid {
                 grid-template-columns: 1fr;
                 gap: 16px;
@@ -355,79 +451,169 @@
             <h2 class="section-title">Building the System</h2>
             
             <div class="process">
-                <!-- Step 1: Principles -->
-                <div class="step">
-                    <div class="step-header">
-                        <span class="step-number">01</span>
-                        <h3 class="step-title">Motion Principles</h3>
-                    </div>
-                    <div class="step-content">
-                        <p>
-                            We started by defining <strong>motion principles</strong>—the foundation for every 
-                            animation decision. These principles guide what good motion feels like at Qonto: 
-                            purposeful, coherent, subtle, snappy, and smooth.
-                        </p>
-                        <p>
-                            Each principle came with visual examples showing do's and don'ts, helping teams 
-                            understand not just the rules, but the reasoning behind them.
-                        </p>
-                        <div class="media-placeholder">
-                            [Principle GIFs will go here]
-                        </div>
-                    </div>
-                </div>
+                       <!-- Step 1: Principles -->
+                       <div class="step">
+                           <div class="step-header">
+                               <span class="step-number">01</span>
+                               <h3 class="step-title">Motion Principles</h3>
+                           </div>
+                           <div class="step-content">
+                               <p>
+                                   We started by defining <strong>motion principles</strong>—the foundation for every 
+                                   animation decision. These principles guide what good motion feels like at Qonto: 
+                                   purposeful, coherent, subtle, snappy, and smooth.
+                               </p>
+                               <p>
+                                   Each principle came with visual examples showing do's and don'ts, helping teams 
+                                   understand not just the rules, but the reasoning behind them.
+                               </p>
+                               <div class="principle-examples">
+                                   <img src="motion-system/motion/Motion/1.gif" alt="Motion principle example 1">
+                                   <img src="motion-system/motion/Motion/3_2.gif" alt="Motion principle example 2">
+                                   <img src="motion-system/motion/Motion/5_1.gif" alt="Motion principle example 3">
+                                   <img src="motion-system/motion/Motion/6_2.gif" alt="Motion principle example 4">
+                               </div>
+                           </div>
+                       </div>
 
-                <!-- Step 2: Primitives -->
-                <div class="step">
-                    <div class="step-header">
-                        <span class="step-number">02</span>
-                        <h3 class="step-title">Primitives: Speaking the Same Language</h3>
-                    </div>
-                    <div class="step-content">
-                        <p>
-                            Next, we worked with engineers to define <strong>primitive tokens</strong>—the 
-                            building blocks of motion. We asked them what they needed: duration values, easing 
-                            curves, scale factors, blur intensities.
-                        </p>
-                        <p>
-                            We talked to designers about how they spec'd motion in mockups. The result: a shared 
-                            vocabulary. <strong>motion.duration.quick</strong> means 200ms everywhere—Figma, 
-                            iOS, Android, Web. No interpretation. No ambiguity.
-                        </p>
-                        <p>
-                            Primitives include: <strong>Duration</strong>, <strong>Easing</strong>, 
-                            <strong>Scale</strong>, <strong>Alpha</strong>, <strong>Blur</strong>, 
-                            <strong>Rotation</strong>, <strong>Translate</strong>, and <strong>Delay</strong>.
-                        </p>
-                    </div>
-                </div>
+                       <!-- Step 2: Primitives -->
+                       <div class="step">
+                           <div class="step-header">
+                               <span class="step-number">02</span>
+                               <h3 class="step-title">Primitives: Speaking the Same Language</h3>
+                           </div>
+                           <div class="step-content">
+                               <p>
+                                   Next, we worked with engineers to define <strong>primitive tokens</strong>—the 
+                                   building blocks of motion. We asked them what they needed: duration values, easing 
+                                   curves, scale factors, blur intensities.
+                               </p>
+                               <p>
+                                   We talked to designers about how they spec'd motion in mockups. The result: a shared 
+                                   vocabulary. <strong>motion.duration.quick</strong> means 200ms everywhere—Figma, 
+                                   iOS, Android, Web. No interpretation. No ambiguity.
+                               </p>
+                               <p>
+                                   Primitives include: <strong>Duration</strong>, <strong>Easing</strong>, 
+                                   <strong>Scale</strong>, <strong>Alpha</strong>, <strong>Blur</strong>, 
+                                   <strong>Rotation</strong>, <strong>Translate</strong>, and <strong>Delay</strong>.
+                               </p>
+                               <div class="token-grid">
+                                   <a href="https://qonto-motion-duration.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/duration.gif" alt="Duration"></div>
+                                       <div class="token-name">Duration</div>
+                                   </a>
+                                   <a href="https://qonto-motion-easing.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/easing.gif" alt="Easing"></div>
+                                       <div class="token-name">Easing</div>
+                                   </a>
+                                   <a href="https://qonto-motion-scale.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/scale.gif" alt="Scale"></div>
+                                       <div class="token-name">Scale</div>
+                                   </a>
+                                   <a href="https://qonto-motion-alpha.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/alpha.gif" alt="Alpha"></div>
+                                       <div class="token-name">Alpha</div>
+                                   </a>
+                                   <a href="https://qonto-motion-blur.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/blur.gif" alt="Blur"></div>
+                                       <div class="token-name">Blur</div>
+                                   </a>
+                                   <a href="https://qonto-motion-translate.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/rotation.gif" alt="Translate"></div>
+                                       <div class="token-name">Translate</div>
+                                   </a>
+                                   <a href="https://qonto-motion-delay.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/delay.gif" alt="Delay"></div>
+                                       <div class="token-name">Delay</div>
+                                   </a>
+                                   <a href="https://qonto-motion-spring.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/spring.gif" alt="Spring"></div>
+                                       <div class="token-name">Spring</div>
+                                   </a>
+                               </div>
+                           </div>
+                       </div>
 
-                <!-- Step 3: Semantics -->
-                <div class="step">
-                    <div class="step-header">
-                        <span class="step-number">03</span>
-                        <h3 class="step-title">Semantics: Scalable Behaviors</h3>
-                    </div>
-                    <div class="step-content">
-                        <p>
-                            Primitives alone weren't enough. Designers don't think in milliseconds and cubic-beziers—they 
-                            think in behaviors. "This button should feel responsive." "This modal should slide in smoothly."
-                        </p>
-                        <p>
-                            So we created <strong>semantic tokens</strong>—predefined combinations of primitives 
-                            for common patterns. Behaviors like <strong>Fade</strong>, <strong>Slide</strong>, 
-                            <strong>Press/Tap</strong>, <strong>Hover/Lift</strong>, and <strong>Expand/Collapse</strong>.
-                        </p>
-                        <p>
-                            These semantics are organized into <strong>Base</strong> (entry, exit, reveal, transition) 
-                            and <strong>Common</strong> (interactions, micro-animations). They're documented with 
-                            specs, code snippets, and live previews.
-                        </p>
-                        <div class="media-placeholder">
-                            [Motion tokens library preview / Netlify link will go here]
-                        </div>
-                    </div>
-                </div>
+                       <!-- Step 3: Semantics -->
+                       <div class="step">
+                           <div class="step-header">
+                               <span class="step-number">03</span>
+                               <h3 class="step-title">Semantics: Scalable Behaviors</h3>
+                           </div>
+                           <div class="step-content">
+                               <p>
+                                   Primitives alone weren't enough. Designers don't think in milliseconds and cubic-beziers—they 
+                                   think in behaviors. "This button should feel responsive." "This modal should slide in smoothly."
+                               </p>
+                               <p>
+                                   So we created <strong>semantic tokens</strong>—predefined combinations of primitives 
+                                   for common patterns. Behaviors like <strong>Fade</strong>, <strong>Slide</strong>, 
+                                   <strong>Press/Tap</strong>, <strong>Hover/Lift</strong>, and <strong>Expand/Collapse</strong>.
+                               </p>
+                               <p>
+                                   These semantics are organized into <strong>Base</strong> (entry, exit, reveal, transition) 
+                                   and <strong>Common</strong> (interactions, micro-animations). They're documented with 
+                                   specs, code snippets, and live previews.
+                               </p>
+                               
+                               <h4 class="subsection-title">Base Patterns</h4>
+                               <div class="token-grid">
+                                   <a href="https://qonto-motion-entry.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/entry.gif" alt="Entry"></div>
+                                       <div class="token-name">Entry</div>
+                                   </a>
+                                   <a href="https://motion-qonto-exit.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/exit.gif" alt="Exit"></div>
+                                       <div class="token-name">Exit</div>
+                                   </a>
+                                   <a href="https://qonto-motion-reveal.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/reveal.gif" alt="Reveal"></div>
+                                       <div class="token-name">Reveal</div>
+                                   </a>
+                                   <a href="https://qonto-motion-transition.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/transition.gif" alt="Transition"></div>
+                                       <div class="token-name">Transition</div>
+                                   </a>
+                               </div>
+
+                               <h4 class="subsection-title">Common Interactions</h4>
+                               <div class="token-grid">
+                                   <a href="https://qonto-motion-presstap.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/tap.gif" alt="Press/Tap"></div>
+                                       <div class="token-name">Press/Tap</div>
+                                   </a>
+                                   <a href="https://qonto-motion-hoverlift.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/hover.gif" alt="Hover/Lift"></div>
+                                       <div class="token-name">Hover/Lift</div>
+                                   </a>
+                                   <a href="https://qonto-motion-expandcollapse.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/expand.gif" alt="Expand/Collapse"></div>
+                                       <div class="token-name">Expand/Collapse</div>
+                                   </a>
+                                   <a href="https://qonto-motion-slide.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/slide_fade.gif" alt="Slide"></div>
+                                       <div class="token-name">Slide</div>
+                                   </a>
+                                   <a href="https://qonto-motion-scalefade.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/scalefade.gif" alt="Scale Fade"></div>
+                                       <div class="token-name">Scale Fade</div>
+                                   </a>
+                                   <a href="https://qonto-motion-shimmerloading.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/loading.gif" alt="Shimmer Loading"></div>
+                                       <div class="token-name">Shimmer Loading</div>
+                                   </a>
+                                   <a href="https://qonto-motion-stagger.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/staggered.gif" alt="Stagger"></div>
+                                       <div class="token-name">Stagger</div>
+                                   </a>
+                                   <a href="https://qonto-motion-pagetransition.netlify.app/" target="_blank" class="token-card">
+                                       <div class="token-icon"><img src="motion-system/tokens/Motion tokens/transition-patterns.gif" alt="Page Transition"></div>
+                                       <div class="token-name">Page Transition</div>
+                                   </a>
+                               </div>
+                           </div>
+                       </div>
             </div>
         </div>
     </div>
