@@ -1204,6 +1204,23 @@ function closeProjectModal() {
     }
 }
 
+// Toggle Motion System interactive examples (globally accessible)
+function toggleMotionExpand(idx = 0) {
+    const container = document.getElementById('motionIframeContainer' + (idx || ''));
+    const btns = document.querySelectorAll('.expand-btn');
+    const btn = btns[idx] || document.querySelector('.expand-btn');
+    
+    if (container && btn) {
+        if (container.style.display === 'none') {
+            container.style.display = 'block';
+            btn.textContent = 'Click to collapse ↑';
+        } else {
+            container.style.display = 'none';
+            btn.textContent = 'Click to expand →';
+        }
+    }
+}
+
 // Project modal close button
 const projectModalClose = document.getElementById('projectModalClose');
 if (projectModalClose) {

@@ -1307,7 +1307,7 @@ section {
 }
 
 .project-modal-close {
-    position: absolute;
+    position: fixed;
     top: 30px;
     right: 30px;
     background: transparent;

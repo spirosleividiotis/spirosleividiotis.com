@@ -2253,23 +2253,7 @@ ${contentToParagraphs(motionSystemData.impact.content)}
     </div>
 </div>
 
-<scr` + `ipt>
-function toggleMotionExpand(idx = 0) {
-    const container = document.getElementById('motionIframeContainer' + idx);
-    const btns = document.querySelectorAll('.expand-btn');
-    const btn = btns[idx];
-    
-    if (container && btn) {
-        if (container.style.display === 'none') {
-            container.style.display = 'block';
-            btn.textContent = 'Click to collapse ↑';
-        } else {
-            container.style.display = 'none';
-            btn.textContent = 'Click to expand →';
-        }
-    }
-}
-<\/script>`;
+<!-- Note: toggleMotionExpand() function is defined globally in script-figma.js -->`;
         }
     </script>
 </body>

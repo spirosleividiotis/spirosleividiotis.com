@@ -496,19 +496,4 @@
     </div>
 </div>
 
-<script>
-function toggleMotionExpand() {
-    const container = document.getElementById('motionIframeContainer');
-    const btn = document.querySelector('.expand-btn');
-    
-    if (container && btn) {
-        if (container.style.display === 'none') {
-            container.style.display = 'block';
-            btn.textContent = 'Click to collapse ↑';
-        } else {
-            container.style.display = 'none';
-            btn.textContent = 'Click to expand →';
-        }
-    }
-}
-</script>
+<!-- Note: toggleMotionExpand() function is now defined in script-figma.js -->
