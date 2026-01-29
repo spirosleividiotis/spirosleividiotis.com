@@ -115,43 +115,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // EXPERIENCE SWITCHING (Hover-based with vertical slide)
 // ===================================
 
-const experienceItems = document.querySelectorAll('.experience-item');
-const experienceDetails = document.querySelectorAll('.experience-detail');
-const visualPlaceholders = document.querySelectorAll('.visual-placeholder');
-
 // Check if mobile - use function to check dynamically
 function checkIfMobile() {
     return window.innerWidth <= 768;
 }
-const isMobile = checkIfMobile();
 
-// Qonto role data
-const qontoRoles = [
-    {
-        title: "Staff Motion Designer - Design System",
-        description: "Own motion system principles, patterns, and docs. Partner with DS + engineering on implementation and QA. Drive adoption with reusable assets and handoff standards.",
-        yearStart: "2025",
-        yearEnd: "Now"
-    },
-    {
-        title: "Staff Motion and Website Designer",
-        description: "Led website motion direction and consistency. Built scalable templates/patterns for faster delivery. Shipped implementation-ready motion with performance in mind.",
-        yearStart: "2024",
-        yearEnd: "2025"
-    },
-    {
-        title: "Senior Motion and Website Designer",
-        description: "Delivered web motion end-to-end (concept → assets). Set early guidelines and delivery workflow. Prototyped interactions and micro-motions for key pages.",
-        yearStart: "2022",
-        yearEnd: "2024"
-    }
-];
-
-let currentQontoRoleIndex = 0;
-
-// Keep track of the previous active index
-let previousExperienceIndex = 0;
-let isAnimating = false;
+function initializeExperience() {
+    const experienceItems = document.querySelectorAll('.experience-item');
+    const experienceDetails = document.querySelectorAll('.experience-detail');
+    const visualPlaceholders = document.querySelectorAll('.visual-placeholder');
+    const isMobile = checkIfMobile();
+    
+    // Keep track of the previous active index
+    let previousExperienceIndex = 0;
+    let isAnimating = false;
 
 // Only enable hover switching on desktop
 if (!isMobile) {
@@ -249,9 +226,11 @@ if (!isMobile) {
 // QONTO ROLE CYCLING (Click arrows to cycle through roles)
 // ===================================
 
-const qontoDetail = document.getElementById('qonto');
-
-if (qontoDetail) {
+function initializeQontoRoles() {
+    const qontoDetail = document.getElementById('qonto');
+    
+    if (!qontoDetail) return;
+    
     const jobTitle = qontoDetail.querySelector('.job-title');
     const contentWrapper = qontoDetail.querySelector('.experience-content-wrapper');
     const description = qontoDetail.querySelector('.experience-description');
@@ -260,6 +239,29 @@ if (qontoDetail) {
     const roleIndicator = qontoDetail.querySelector('.role-indicator');
     const leftArrow = qontoDetail.querySelector('.role-arrow-left');
     const rightArrow = qontoDetail.querySelector('.role-arrow-right');
+    
+    if (!leftArrow || !rightArrow) return;
+    
+    // Qonto role data (from experience data if available)
+    const qontoRoles = window.experienceData?.find(e => e.id === 'qonto')?.roles || [
+        {
+            title: "Staff Motion Designer - Design System",
+            description: "Own motion system principles, patterns, and docs. Partner with DS + engineering on implementation and QA. Drive adoption with reusable assets and handoff standards.",
+            period: { start: "2025", end: "Now" }
+        },
+        {
+            title: "Staff Motion and Website Designer",
+            description: "Led website motion direction and consistency. Built scalable templates/patterns for faster delivery. Shipped implementation-ready motion with performance in mind.",
+            period: { start: "2024", end: "2025" }
+        },
+        {
+            title: "Senior Motion and Website Designer",
+            description: "Delivered web motion end-to-end (concept → assets). Set early guidelines and delivery workflow. Prototyped interactions and micro-motions for key pages.",
+            period: { start: "2022", end: "2024" }
+        }
+    ];
+    
+    let currentQontoRoleIndex = 0;
     
     function updateRoleArrows() {
         // Update arrow states
@@ -296,9 +298,9 @@ if (qontoDetail) {
             // Update content
             jobTitle.textContent = role.title;
             description.textContent = role.description;
-            yearStart.textContent = role.yearStart;
-            yearEnd.textContent = role.yearEnd;
-            roleIndicator.textContent = `${currentQontoRoleIndex + 1}/3`;
+            yearStart.textContent = role.period.start;
+            yearEnd.textContent = role.period.end;
+            roleIndicator.textContent = `${currentQontoRoleIndex + 1}/${qontoRoles.length}`;
             
             // Update arrows
             updateRoleArrows();
@@ -562,60 +564,76 @@ if (!isMobileDevice) {
             }
         });
         
-        // Special cursor for project cards
-        projectCards.forEach(card => {
-            const isPasswordProtected = card.getAttribute('data-password-protected') === 'true';
+        // Function to initialize project card cursors
+        function initializeProjectCursors() {
+            const projectCards = document.querySelectorAll('.work-card');
             
-            card.addEventListener('mouseenter', () => {
-                // Always show "come on, click" on hover, unless password input is active
-                if (!passwordInputActive) {
-                    cursorDot.classList.add('cursor-project');
-                    const cursorText = cursorDot.querySelector('.cursor-text');
-                    if (cursorText) {
-                        cursorText.textContent = 'come on, click';
-                        cursorText.style.display = 'block';
-                        cursorText.style.opacity = '1';
+            projectCards.forEach(card => {
+                const isPasswordProtected = card.getAttribute('data-password-protected') === 'true';
+                
+                card.addEventListener('mouseenter', () => {
+                    // Always show "come on, click" on hover, unless password input is active
+                    if (!passwordInputActive) {
+                        cursorDot.classList.add('cursor-project');
+                        const cursorText = cursorDot.querySelector('.cursor-text');
+                        if (cursorText) {
+                            cursorText.textContent = 'come on, click';
+                            cursorText.style.display = 'block';
+                            cursorText.style.opacity = '1';
+                        }
+                        const cursorArrow = cursorDot.querySelector('.cursor-arrow');
+                        if (cursorArrow) {
+                            cursorArrow.style.display = '';
+                            cursorArrow.style.opacity = '';
+                        }
+                        cursorDot.classList.remove('cursor-hover', 'cursor-arrow-only', 'cursor-password');
                     }
-                    const cursorArrow = cursorDot.querySelector('.cursor-arrow');
-                    if (cursorArrow) {
-                        cursorArrow.style.display = '';
-                        cursorArrow.style.opacity = '';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    // Reset to default cursor (no text, just dot) unless password input is active
+                    if (!passwordInputActive) {
+                        resetCursorToDefault();
                     }
-                    cursorDot.classList.remove('cursor-hover', 'cursor-arrow-only', 'cursor-password');
-                }
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                // Reset to default cursor (no text, just dot) unless password input is active
-                if (!passwordInputActive) {
-                    resetCursorToDefault();
-                }
+                    
+                    // Reset project info and image
+                    const projectInfo = card.querySelector('.project-info');
+                    if (projectInfo) {
+                        projectInfo.classList.remove('hidden');
+                    }
+                    const projectName = card.querySelector('.project-name')?.textContent;
+                    if (projectName && projectImageIndices[projectName] !== undefined) {
+                        projectImageIndices[projectName] = 0;
+                    }
+                });
                 
-                // Reset project info and image
-                const projectInfo = card.querySelector('.project-info');
-                projectInfo.classList.remove('hidden');
-                const projectName = card.querySelector('.project-name').textContent;
-                projectImageIndices[projectName] = 0;
+                // Add click handler
+                card.addEventListener('click', (e) => {
+                    cursorDot.classList.add('clicked');
+                    setTimeout(() => {
+                        cursorDot.classList.remove('clicked');
+                    }, 300);
+                    
+                    // Handle password protection
+                    if (isPasswordProtected && !passwordUnlocked) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        showPasswordInput();
+                        return;
+                    }
+                    
+                    // Open project modal
+                    openProjectModal(card);
+                });
             });
-            
-            // Add click handler
-            card.addEventListener('click', (e) => {
-                cursorDot.classList.add('clicked');
-                setTimeout(() => {
-                    cursorDot.classList.remove('clicked');
-                }, 300);
-                
-                // Handle password protection
-                if (isPasswordProtected && !passwordUnlocked) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    showPasswordInput();
-                    return;
-                }
-                
-                // Open project modal
-                openProjectModal(card);
-            });
+        }
+        
+        // Initialize project cursors on load
+        initializeProjectCursors();
+        
+        // Reinitialize when content is loaded
+        window.addEventListener('contentLoaded', () => {
+            initializeProjectCursors();
         });
         
         // Arrow cursor only (no text) for footer links
@@ -1168,6 +1186,7 @@ function openProjectModal(card) {
     // Show modal
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('project-modal-open');
 }
 
 function closeProjectModal() {
@@ -1175,6 +1194,7 @@ function closeProjectModal() {
     if (modal) {
         modal.classList.remove('active');
         document.body.style.overflow = '';
+        document.body.classList.remove('project-modal-open');
     }
 }
 
@@ -1190,6 +1210,32 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
         closeProjectModal();
     }
+});
+
+// Close project modal when clicking outside (on the modal background)
+document.addEventListener('click', function(e) {
+    const modal = document.getElementById('projectModal');
+    if (modal && modal.classList.contains('active')) {
+        // Check if click is directly on the modal (background) and not on its content
+        if (e.target === modal) {
+            closeProjectModal();
+        }
+    }
+});
+
+// ===================================
+// INITIALIZE ON LOAD
+// ===================================
+
+// Initialize experience and role navigation on page load
+initializeExperience();
+initializeQontoRoles();
+
+// Reinitialize when content is loaded
+window.addEventListener('contentLoaded', () => {
+    console.log('Content loaded, reinitializing experience and roles');
+    initializeExperience();
+    initializeQontoRoles();
 });
 
 // ===================================

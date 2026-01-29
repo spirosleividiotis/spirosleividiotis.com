@@ -176,7 +176,7 @@ section {
 }
 
 .hero {
-    padding: 0 0 100px 0;
+    padding: 0;
     min-height: 600px;
     display: flex;
     align-items: flex-start;
@@ -448,7 +448,7 @@ section {
     color: var(--color-text-dark);
     position: relative;
     z-index: 10;
-    margin-top: 600px;
+    margin-top: 650px;
 }
 
 .experience .container {
@@ -1365,6 +1365,11 @@ section {
     transition: opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1);
     overflow-y: auto;
     overflow-x: hidden;
+    cursor: default;
+}
+
+.project-modal * {
+    cursor: default;
 }
 
 .project-modal.active {
