@@ -1043,12 +1043,6 @@ function openProjectModal(card) {
     // Get project data from window.projectsData (loaded by content-loader.js)
     const projectData = window.projectsData?.find(p => p.id == projectId);
     
-    // Check if project has a custom URL - redirect instead of opening modal
-    if (projectData?.customUrl) {
-        window.location.href = projectData.customUrl;
-        return;
-    }
-    
     const modal = document.getElementById('projectModal');
     const modalTitle = document.getElementById('projectModalTitle');
     const modalSubtitle = document.getElementById('projectModalSubtitle');
@@ -1126,7 +1120,32 @@ function loadProjectContent(projectData, projectName) {
     const modalBodyText = document.getElementById('projectBodyText');
     const modalGrid = document.getElementById('projectGrid');
     
-    // Load project media if available
+    // Check if this is a custom HTML project (like motion system)
+    if (projectData && projectData.customUrl) {
+        // Load custom HTML content
+        fetch(projectData.customUrl)
+            .then(response => response.text())
+            .then(html => {
+                // Hide standard elements
+                if (modalHero) modalHero.style.display = 'none';
+                if (modalGrid) modalGrid.style.display = 'none';
+                
+                // Load custom HTML into body text area
+                if (modalBodyText) {
+                    modalBodyText.style.display = 'block';
+                    modalBodyText.innerHTML = html;
+                }
+            })
+            .catch(error => {
+                console.error('Error loading custom content:', error);
+                if (modalBodyText) {
+                    modalBodyText.innerHTML = '<p>Error loading project content.</p>';
+                }
+            });
+        return;
+    }
+    
+    // Load project media if available (standard projects)
     if (projectData && projectData.media) {
         // Hero image
         if (projectData.media.hero && projectData.media.hero.trim()) {

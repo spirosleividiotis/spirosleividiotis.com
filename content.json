@@ -62,11 +62,11 @@
       "name": "Qonto Motion System",
       "company": "Qonto",
       "color": "#141414",
-      "passwordProtected": true,
-      "customUrl": "motion-system.html",
+      "passwordProtected": false,
+      "customUrl": "motion-system-content.html",
       "bodyText": "",
       "media": {
-        "hero": "",
+        "hero": "motion-system/motion/Motion/Comp_5.gif",
         "grid": []
       },
       "password": "spiros2026"
