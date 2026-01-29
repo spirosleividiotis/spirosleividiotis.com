@@ -1,0 +1,722 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Motion</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="11831ee4-c696-802d-9096-fa098a9b9fe0" class="page sans"><header><div class="page-header-icon undefined"><img class="icon notion-static-icon" src="https://www.notion.so/icons/playback-fast-forward_gray.svg"/></div><h1 class="page-title" dir="auto">Motion</h1><p class="page-description" dir="auto"></p><table class="properties"><tbody><tr class="property-row property-row-status"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/burst_gray.svg" style="width:14px;height:14px;display:block"/></span>Health</th><td><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td></tr><tr class="property-row property-row-last_edited_time"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/clock_gray.svg" style="width:14px;height:14px;display:block"/></span>Last edited time</th><td><time>@December 1, 2025 9:49 AM</time></td></tr><tr class="property-row property-row-person"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/friends_gray.svg" style="width:14px;height:14px;display:block"/></span>Owner</th><td><span class="user"><img src="Motion/Spiros.jpg" class="icon user-icon"/>Spiros Leividiotis</span></td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>Topic</th><td><span class="selected-value select-value-color-yellow">Expressions</span></td></tr></tbody></table></header><div class="page-body"><div style="display:contents" dir="auto"><div id="2a131ee4-c696-8088-9052-dffb09a991c1" class="column-list"><div style="display:contents" dir="auto"><div id="2a131ee4-c696-80f8-ae30-e9a33571f3ba" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80d7-8858-deb77f535909"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/playback-fast-forward_gray.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8074-8864-ff81ee585c6d" class="">Foundations</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="2a131ee4-c696-80d3-bb69-c84b39481ac3" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-802d-986b-f9c21e74377e"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/playback-play-button_gray.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80b2-b3a3-ed764d98dc3b" class=""><a href="https://www.notion.so/Motion-tokens-2b031ee4c6968053b483e97ca3076264?pvs=21">Motion tokens</a></p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-808a-a4b7-f327e1ad9ca6" class="image"><a href="Motion/image.png"><img style="width:710px" src="Motion/image.png"/></a></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-801d-a17f-ea4d01031566"/></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-80dd-89c8-ce76c54b8e9a" class="column-list"><div style="display:contents" dir="auto"><div id="25e31ee4-c696-8099-adf8-ceb60212bbd8" style="width:25.816023738872406%" class="column"><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8007-bd23-cec7812fcf0b" class=""><a href="Motion%2011831ee4c696802d9096fa098a9b9fe0.html">Principles</a></p></div></div></div><div style="display:contents" dir="auto"><div id="26031ee4-c696-809f-a829-e421ddd121b8" style="width:50.44510385756678%" class="column"><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80b6-a552-ff130f8fed37" class=""><a href="Motion%2011831ee4c696802d9096fa098a9b9fe0.html">When to use animation</a></p></div></div></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-8080-8bb5-f35a153a49ea" style="width:23.738872403560833%" class="column"><div style="display:contents" dir="auto"><p id="25e31ee4-c696-808d-8d29-de95fd0074c2" class=""><a href="Motion%2011831ee4c696802d9096fa098a9b9fe0.html">Use cases</a></p></div></div></div></div></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-8019-9abc-fac51003922d"/></div><div style="display:contents" dir="auto"><h1 id="25e31ee4-c696-8098-b75c-f72565dbeb33" class=""><strong>Principles</strong></h1></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-802a-a689-ee4fdbfc4909"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80d0-b9c8-ea00fa41bd99" class="">Animations enhance user experience by adding<strong> interactivity</strong> and <strong>visual delight </strong>to our brand. They guide users, provide feedback, and make interactions feel more natural and engaging.<br/></p></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-802a-9462-f3199db41ac8" class="">We divide our Motion Principles in 4<strong> pillars:</strong></p></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-8048-a431-dc1d1954060b" class="column-list"><div style="display:contents" dir="auto"><div id="25e31ee4-c696-8052-8460-f0d1f56e999e" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-80be-b6d8-e224d88b57e3"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="25e31ee4-c696-8025-9e2d-c3d608ebb973" class="">Delightful</h2></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-80a3-b5f7-c8a4caa72a6f"/></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8088-a6da-dadc8f7b63aa" class="image"><a href="Motion/5_1.gif"><img style="width:667.984375px" src="Motion/5_1.gif"/></a></figure></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8045-952c-f50278235b97" class="">Animations add joy and surprise to interactions. Delight is used purposefully, keeping focus on what matters.</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-80e3-b6f2-d6aab2746b12" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-801c-9b13-e00bb276f244"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="25e31ee4-c696-8000-a7dc-f5e45f7ac0bb" class=""><strong>Subtle</strong></h2></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-808d-8170-d8491d22ef46"/></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-801f-92ca-e35d11568438" class="image"><a href="Motion/1.gif"><img style="width:667.984375px" src="Motion/1.gif"/></a></figure></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-800e-93ef-c9797f8dabc9" class="">Motion is gentle and unobtrusive. Animations enhance focus, never distracting from important content.<br/></p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-8077-8874-d6761e3e2584" class="column-list"><div style="display:contents" dir="auto"><div id="25e31ee4-c696-807c-8950-c214ba1b763c" style="width:49.99999999999999%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-8030-be58-c114c2d545e5"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="25e31ee4-c696-8056-8ce2-cee8f6b8d41b" class=""><strong>Fluid</strong></h2></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-8045-b809-d966219404e0"/></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8040-a0aa-f6110a9247c0" class="image"><a href="Motion/6_2.gif"><img style="width:667.984375px" src="Motion/6_2.gif"/></a></figure></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80eb-a21b-f851e79cba60" class="">Animations flow seamlessly continuous, quick, and natural. <br/>Motion feels smooth and responsive, never abrupt or hesitant.</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-8072-8e40-f4b7828779d0" style="width:49.99999999999999%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-8075-80d8-d21115ace66c"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="25e31ee4-c696-801b-94ab-f3ed0701d1e8" class="">Purposeful</h2></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-802a-b8d2-c38659a73a72"/></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8012-ae10-d87be335e935" class="image"><a href="Motion/3_2.gif"><img style="width:667.984375px" src="Motion/3_2.gif"/></a></figure></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8036-9bea-db20f051f878" class="">Every animation has a clear function, guiding users, supporting tasks, and directing attention.<br/></p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><p id="26031ee4-c696-80f5-9e78-c326f8921635" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="25e31ee4-c696-8073-af7f-c50c89a7d39e" class="">When to use animation</h1></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-8063-b3d7-e2736ee028ef"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8077-adf8-fc337cd4b334" class="">Animation at Qonto is <strong>purposeful</strong>, it <strong>breathes life</strong> into our products, <strong>communicates meaning</strong>, and supports <strong>storytelling</strong>.<br/>We use animation only when it adds genuine <strong>value</strong>, never for decoration or visual noise.</p></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8007-bf8e-ffe88a445fee" class=""><strong><br/>We animate to:</strong></p></div><div style="display:contents" dir="auto"><ul id="25e31ee4-c696-80dd-9f0e-c6ac39e1e147" class="bulleted-list"><li style="list-style-type:disc">Guide <strong>users’ attention</strong> to what matters</li></ul></div><div style="display:contents" dir="auto"><ul id="25e31ee4-c696-8044-88cd-ce20bf21b6db" class="bulleted-list"><li style="list-style-type:disc">Clarify<strong> interactions</strong> and improve <strong>usability</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="25e31ee4-c696-80dd-a77b-e91259dd696e" class="bulleted-list"><li style="list-style-type:disc">Express our <strong>brand’s personality</strong> through meaningful delight</li></ul></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-802e-bf1d-e0615f0c4a67" class="column-list"><div style="display:contents" dir="auto"><div id="25e31ee4-c696-80d3-a6ab-fb9301450411" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-805e-a5fe-ccc06630dd0d"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="25e31ee4-c696-8071-9af1-f79a30265175" class="">✓ Use animation</h2></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-8083-b78e-fd932e3974db"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-801d-b5ce-e45a10427ea4" class=""><strong>Important feedback<br/></strong>Guides, clarifies</p></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80bb-844b-e386d0c6dea0" class=""><strong>Navigation/transition<br/></strong>Directs attention</p></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80b6-b76f-decc4723b9a8" class=""><strong>Promo/hero/storytelling<br/></strong>Brand/impact</p></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8069-a587-eff8063879e5" class="">
+</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-800d-97a3-ff1ea6ebaa89" style="width:50.00000000000002%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-80e1-96e6-c3ea86071951"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="25e31ee4-c696-8019-95e9-cb93ecccb445" class="">Ｘ Don’t use animation</h2></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-8080-8c96-ce962c14895a"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80b7-a350-db189da6edef" class=""><strong>Decorative only<br/></strong>Distracts, adds nothing</p></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80dd-996a-fd0c8c9eecc3" class=""><strong>Overused/repetitive<br/></strong>Becomes noise</p></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-802d-9199-c03305b93b3a" class=""><strong>Slows UI or user flow<br/></strong>Hurts experience</p></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-807d-a941-d16be78e7ef0" class="">
+</p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80ce-adbd-f552485b6e61" class="">
+</p></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-8033-8125-e79e96099d91"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/report_gray.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8017-aa25-f7807213f4d8" class="">If motion does not contribute to <strong>understanding</strong>, <strong>clarity</strong>, or the overall <strong>user experience</strong>, we do not use it. Authentic brand impact is achieved through <strong>thoughtful</strong> and <strong>purposeful animation</strong>.</p></div></div></figure></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-8019-927d-d8bf17c12d7d" class="column-list"></div></div><div style="display:contents" dir="auto"><p id="26031ee4-c696-80a7-a2e3-e7d98877db83" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="25e31ee4-c696-80a3-973d-c1b517c10395" class="">Use cases</h1></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-80e6-a1f6-cbaab051a734"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-802f-af5c-e547e278abe6" class="">Animation usage at Qonto is organized by platform, distinguishing between <strong>Product</strong> and <strong>Website</strong> experiences.</p></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-800b-9fa1-e2b1cbf1c206" class=""><br/>Guidelines specify when motion is appropriate, what form it should take so that motion is applied <strong>purposefully</strong> and <strong>consistently</strong>, contributing to a unified and engaging user experience across all touch points.</p></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-805e-bf73-c442096edeb2" class="column-list"><div style="display:contents" dir="auto"><div id="25e31ee4-c696-808c-9c96-ce9186225312" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-801a-93fa-e7dd08e4d1dd"><div style="width:100%"><div style="display:contents" dir="auto"><p id="25e31ee4-c696-804c-8134-db4df30ef392" class=""><strong>Product [coming up]</strong></p></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-807b-9578-e21e754f8129"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80b8-b9d2-fdf057538cd9" class="">Motion in the core app experience, focused on usability, feedback, and interaction patterns.</p></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-80d4-aec3-de28a3123408" class="image"><a href="Motion/mobile.gif"><img style="width:290px" src="Motion/mobile.gif"/></a></figure></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-80ca-81ec-e299932fb9f7" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-8035-a1a0-d495b0a893b4"><div style="width:100%"><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-80a4-9609-e73c4003426e" class="link-to-page"><a href="Motion/Website%2025e31ee4c69680a49609e73c4003426e.html"><img class="icon notion-static-icon" src="https://www.notion.so/icons/globe_gray.svg"/>Website</a></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-805c-ae6a-eef02168cc76"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80f8-939c-fd1cf328bc4e" class="">Motion for marketing, storytelling, and brand expression, tailored to web-specific scenarios.</p></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8095-a27c-f4a044cf4d1c" class="image"><a href="Motion/Comp_5.gif"><img style="width:290px" src="Motion/Comp_5.gif"/></a></figure></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80ea-b929-eb4f05461eb2" class="">
+</p></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-806e-b85a-ea7f26cd4015" class="">
+</p></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8079-a477-c4d8d170a48c" class="">
+</p></div><div style="display:contents" dir="auto"><div style="display:contents" dir="auto"><div><div style="display:contents" dir="ltr"><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="1c331ee4-c696-80ad-9c58-dc026c606fb8"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/help-alternate_gray.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><h3 id="1c331ee4-c696-8008-bb33-f1911b39b81a" class="">Is something missing?</h3></div><div style="display:contents" dir="auto"><hr id="1c331ee4-c696-80fa-b699-c109b318d044"/></div><div style="display:contents" dir="auto"><p id="1c331ee4-c696-8084-ac35-f5c543f90853" class="">If you have any questions or feedback, we&#x27;d love to hear from you!</p></div></div></figure></div></div></div></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8060-ae45-c2c55fd2df6a" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,718 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Naming</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="23f31ee4-c696-817d-8888-d7511c92d71b" class="page sans"><header><div class="page-header-icon undefined"><img class="icon notion-static-icon" src="https://www.notion.so/icons/font_gray.svg"/></div><h1 class="page-title" dir="auto">Naming</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><div id="24031ee4-c696-8083-b9b1-fdeed0b3b152" class="column-list"><div style="display:contents" dir="auto"><div id="24031ee4-c696-80c5-97dc-d88ce16e4aab" style="width:33.333333333333336%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="24031ee4-c696-8099-b6e1-faa4a364e52c"><div style="width:100%"><div style="display:contents" dir="auto"><p id="24031ee4-c696-807d-a23e-fd6cb0d3eff4" class="">Naming</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="24031ee4-c696-80c1-ab25-c0164676e46d" style="width:33.333333333333336%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="24031ee4-c696-807b-a105-e16deb2b8315"><div style="width:100%"><div style="display:contents" dir="auto"><p id="24031ee4-c696-8089-8b04-d799910deaa8" class=""><a href="Values%2023f31ee4c69681c6a57cf6ff5d813eb6.html">Values</a></p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="24031ee4-c696-80ee-abc2-d77f3b67cee4" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="24031ee4-c696-80f6-8c28-fe1535bede22"><div style="width:100%"><div style="display:contents" dir="auto"><p id="24031ee4-c696-8058-ad61-d268e6342bdb" class=""><a href="Where%20How%2023f31ee4c696811e83a7e3042f31e368.html">Where/How</a></p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><h1 id="23f31ee4-c696-8133-96df-e7ed9be4d8a0" class="">Context</h1></div><div style="display:contents" dir="auto"><hr id="23f31ee4-c696-8187-b174-fc3ae59d260f"/></div><div style="display:contents" dir="auto"><p id="23f31ee4-c696-8106-9eb2-e6ce0b62f12e" class="">Naming motion tokens consistently is key to building a scalable and intuitive design system. Good names make tokens easy to use, easy to maintain, and future-proof as the system grows. There are multiple valid approaches from semantic and size-based to numeric scales. At Qonto, we explored three naming conventions to determine the best balance between clarity, scalability, and alignment with our existing token strategies (e.g. colors, spacing). </p></div><div style="display:contents" dir="auto"><h1 id="23f31ee4-c696-81ca-8755-eb8a54ceb392" class="">Naming convention</h1></div><div style="display:contents" dir="auto"><hr id="23f31ee4-c696-8188-b6fe-f62c8bc029ac"/></div><div style="display:contents" dir="auto"><p id="23f31ee4-c696-8165-ade2-ffd6fef8d7bb" class="">At Qonto, we evaluated three naming conventions to determine the best balance between:</p></div><div style="display:contents" dir="auto"><p id="23f31ee4-c696-81fe-8b83-dc724e255910" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="23f31ee4-c696-8158-b00e-d73beb06e316" class=""><strong>1. Size-based</strong>→ <code>motion-duration-m</code></h3></div><div style="display:contents" dir="auto"><p id="23f31ee4-c696-8121-a8f7-ed75dd74f7dc" class="">This approach uses abstract size labels (like s, m, l, or xs, xl) to communicate the relative duration of a motion. It is human-friendly and quickly conveys the idea of small vs large or short vs long animations. This strategy works well when there are only a few motion values and when semantic use cases are clear.</p></div><div style="display:contents" dir="auto"><div id="23f31ee4-c696-81cb-af2a-e5f20e1ba5dd" class="column-list"><div style="display:contents" dir="auto"><div id="23f31ee4-c696-81e0-ab86-c442be227ca6" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="23f31ee4-c696-816b-a889-c6fd0e6a526e"><div style="width:100%"><div style="display:contents" dir="auto"><p id="23f31ee4-c696-8155-b4a9-ddc4216ff1b7" class=""><strong>Pros</strong>:</p></div><div style="display:contents" dir="auto"><ul id="23f31ee4-c696-8164-96fe-f31a6b812341" class="bulleted-list"><li style="list-style-type:disc">Easy to understand for designers</li></ul></div><div style="display:contents" dir="auto"><ul id="23f31ee4-c696-81f9-9beb-fb601d8d7b9a" class="bulleted-list"><li style="list-style-type:disc">Feels natural for relative comparison (e.g. small &gt; medium &gt; large)</li></ul></div><div style="display:contents" dir="auto"><ul id="23f31ee4-c696-81ff-9e9a-d83ca908f0be" class="bulleted-list"><li style="list-style-type:disc">Works well for simple systems with limited durations</li></ul></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="23f31ee4-c696-8192-bd5e-dad58620131b" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="23f31ee4-c696-81ba-b8ab-ffe0bd83cc25"><div style="width:100%"><div style="display:contents" dir="auto"><p id="23f31ee4-c696-8138-be8a-db10426fe4e2" class=""><strong>Cons</strong>:</p></div><div style="display:contents" dir="auto"><ul id="23f31ee4-c696-81db-9ca0-efff0fc8552f" class="bulleted-list"><li style="list-style-type:disc">Lacks precision as system grows (what’s between m and l?)</li></ul></div><div style="display:contents" dir="auto"><ul id="23f31ee4-c696-8184-8a82-f4762e4c6e82" class="bulleted-list"><li style="list-style-type:disc">Harder to scale consistently across tokens (e.g. spacing uses numeric)</li></ul></div><div style="display:contents" dir="auto"><ul id="23f31ee4-c696-815d-8a0f-d71c7875f9b3" class="bulleted-list"><li style="list-style-type:disc">Ambiguous when tied to values (is m 150ms or 250ms?)</li></ul></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><h3 id="23f31ee4-c696-81ab-8758-d1a3cc8682f0" class=""><strong>2. Numeric scale</strong> → <code>motion-duration-1</code></h3></div><div style="display:contents" dir="auto"><p id="23f31ee4-c696-817a-b5c9-f63ac0253f41" class="">This option assigns a simple incremental number to each motion duration token. It creates a clear order and is scalable as more tokens are added. However, it hides the actual value (e.g. milliseconds) and offers no intrinsic meaning to users.</p></div><div style="display:contents" dir="auto"><div id="23f31ee4-c696-811b-b4e1-d97bad11bb63" class="column-list"><div style="display:contents" dir="auto"><div id="23f31ee4-c696-8144-b20b-f4337cb7d676" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="23f31ee4-c696-81e1-b1f2-ed393a98809f"><div style="width:100%"><div style="display:contents" dir="auto"><p id="23f31ee4-c696-816a-b9cb-f479892b6911" class=""><strong>Pros</strong>:</p></div><div style="display:contents" dir="auto"><ul id="23f31ee4-c696-8112-9971-d5f4df7f0eb2" class="bulleted-list"><li style="list-style-type:disc">Easy to scale (add new levels: 4, 5, etc.)</li></ul></div><div style="display:contents" dir="auto"><ul id="23f31ee4-c696-81b3-b314-c84ed57abeb8" class="bulleted-list"><li style="list-style-type:disc">Straightforward hierarchy</li></ul></div><div style="display:contents" dir="auto"><ul id="23f31ee4-c696-8175-a314-d3d6dcd58577" class="bulleted-list"><li style="list-style-type:disc">Simple and clean</li></ul></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="23f31ee4-c696-817e-abc9-df29901a7e2b" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="23f31ee4-c696-8199-93d8-e9b83ee0b733"><div style="width:100%"><div style="display:contents" dir="auto"><p id="23f31ee4-c696-814d-aa55-da6eba1d0a62" class=""><strong>Cons</strong>:</p></div><div style="display:contents" dir="auto"><ul id="23f31ee4-c696-81e5-846b-cb9be8c6b9c4" class="bulleted-list"><li style="list-style-type:disc">Doesn’t reflect actual values or milliseconds</li></ul></div><div style="display:contents" dir="auto"><ul id="23f31ee4-c696-8178-8c04-f9e1b0a044bc" class="bulleted-list"><li style="list-style-type:disc">Less transparent for developers and designers alike</li></ul></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><p id="23f31ee4-c696-8135-8dd7-dc0259b0780c" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="23f31ee4-c696-8104-9467-ccf8440f4eab" class=""><strong>3. Numeric scale</strong> → <code>motion-duration-100</code></h3></div><div style="display:contents" dir="auto"><p id="23f31ee4-c696-81d9-99c5-f08081dd7627" class="">This approach uses numbers that correspond to approximate millisecond values, like 100 for 100ms, 250 for 250ms, etc. It’s highly transparent and aligns perfectly with how Qonto names color tokens (e.g. gray-100, gray-500). The naming communicates both hierarchy and intent while offering flexibility for semantic aliases if needed later.</p></div><div style="display:contents" dir="auto"><div id="23f31ee4-c696-81c0-9c55-c650ca46631a" class="column-list"><div style="display:contents" dir="auto"><div id="23f31ee4-c696-8172-8739-fbdef58a68db" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="23f31ee4-c696-815b-beb1-e6cc2a9b553a"><div style="width:100%"><div style="display:contents" dir="auto"><p id="23f31ee4-c696-81cd-a9ca-cdf7aa78125d" class=""><strong>Pros</strong>:</p></div><div style="display:contents" dir="auto"><ul id="23f31ee4-c696-811b-a844-c1a6634ba8a0" class="bulleted-list"><li style="list-style-type:disc">Transparent: the name hints at the value</li></ul></div><div style="display:contents" dir="auto"><ul id="23f31ee4-c696-818c-9daf-f8db4c64702b" class="bulleted-list"><li style="list-style-type:disc">Scalable: fits easily into existing design token structure</li></ul></div><div style="display:contents" dir="auto"><ul id="23f31ee4-c696-81bd-9bed-e10bcd9ae0a1" class="bulleted-list"><li style="list-style-type:disc">Consistent with other token systems at Qonto (like color and spacing)</li></ul></div><div style="display:contents" dir="auto"><ul id="23f31ee4-c696-8199-b3c7-f89a5faef7e4" class="bulleted-list"><li style="list-style-type:disc">Friendly for both design and code environments</li></ul></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="23f31ee4-c696-81d1-9744-fe9033869c7e" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="23f31ee4-c696-8115-87a9-ec68218bc84d"><div style="width:100%"><div style="display:contents" dir="auto"><p id="23f31ee4-c696-81e3-af3e-df580246762d" class=""><strong>Cons</strong>:</p></div><div style="display:contents" dir="auto"><ul id="23f31ee4-c696-81bc-ad7e-f6a05c17de30" class="bulleted-list"><li style="list-style-type:disc">Slightly less human-readable than size labels (e.g. s, m)</li></ul></div><div style="display:contents" dir="auto"><ul id="23f31ee4-c696-81df-a203-f5bac53f64e3" class="bulleted-list"><li style="list-style-type:disc">Might suggest a fixed value when used semantically (though aliases solve this)</li></ul></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><h3 id="23f31ee4-c696-8138-86f8-d63b3e3924ef" class="">Examples</h3></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="23f31ee4-c696-81e6-9ac8-e65f543d576e"><div style="width:100%"><div style="display:contents" dir="auto"><div id="23f31ee4-c696-8180-af4a-d182ced86f62" class="column-list"><div style="display:contents" dir="auto"><div id="23f31ee4-c696-815e-877f-f132fb5127bf" style="width:33.333333333333336%" class="column"><div style="display:contents" dir="ltr"><table id="23f31ee4-c696-81e1-bd56-d57a536f963b" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-815b-9f9e-dc59f1b0a4eb"><th id="LIIh" class="simple-table-header-color simple-table-header" style="width:193px">Token</th><th id="T:MH" class="simple-table-header-color simple-table-header" style="width:107px">Value</th><th id="FpA]" class="simple-table-header-color simple-table-header" style="width:345px">Use case</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-81ee-a5ce-d0229ca0976c"><td id="LIIh" class="" style="width:193px">motion-duration-xxxs</td><td id="T:MH" class="" style="width:107px">100ms</td><td id="FpA]" class="" style="width:345px">taps, icon toggles</td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-8109-88e7-ff06877ec406"><td id="LIIh" class="" style="width:193px">motion-duration-xxs</td><td id="T:MH" class="" style="width:107px">150ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-8152-8c88-df5701a47e57"><td id="LIIh" class="" style="width:193px">motion-duration-xs</td><td id="T:MH" class="" style="width:107px">200ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-8176-a7ca-c83686042ba8"><td id="LIIh" class="" style="width:193px">motion-duration-s</td><td id="T:MH" class="" style="width:107px">250ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-81b4-a6ce-d537387091b8"><td id="LIIh" class="" style="width:193px">motion-duration-m</td><td id="T:MH" class="" style="width:107px">300ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-81da-ade0-dc508e4f9fd1"><td id="LIIh" class="" style="width:193px">motion-duration-l</td><td id="T:MH" class="" style="width:107px">350ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-819c-8195-dc51043cdcb6"><td id="LIIh" class="" style="width:193px">motion-duration-xl</td><td id="T:MH" class="" style="width:107px">400ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-81b0-b05d-e757a176d744"><td id="LIIh" class="" style="width:193px">motion-duration-xxl</td><td id="T:MH" class="" style="width:107px">450ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-812d-8de3-ec129fbf1810"><td id="LIIh" class="" style="width:193px">motion-duration-xxxl</td><td id="T:MH" class="" style="width:107px">500ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div></tbody></table></div></div></div><div style="display:contents" dir="auto"><div id="23f31ee4-c696-8122-821f-fb99bf2fc2aa" style="width:33.333333333333336%" class="column"><div style="display:contents" dir="ltr"><table id="23f31ee4-c696-8123-b09f-c3b869bf911a" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-81cf-a4c4-de815e060d0a"><th id="LIIh" class="simple-table-header-color simple-table-header" style="width:193px">Token</th><th id="T:MH" class="simple-table-header-color simple-table-header" style="width:107px">Value</th><th id="FpA]" class="simple-table-header-color simple-table-header" style="width:345px">Use case</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-81b6-835c-dfed6f4dd95a"><td id="LIIh" class="" style="width:193px">motion-delay-1</td><td id="T:MH" class="" style="width:107px">100ms</td><td id="FpA]" class="" style="width:345px">taps, icon toggles</td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-8194-8d2c-f0589908d55a"><td id="LIIh" class="" style="width:193px">motion-delay-2</td><td id="T:MH" class="" style="width:107px">150ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-81f0-9234-ed99a6245911"><td id="LIIh" class="" style="width:193px">motion-delay-3</td><td id="T:MH" class="" style="width:107px">200ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-8172-b3fa-de5db63575b1"><td id="LIIh" class="" style="width:193px">motion-delay-4</td><td id="T:MH" class="" style="width:107px">250ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-813a-9fd8-c20f1613ccfd"><td id="LIIh" class="" style="width:193px">motion-delay-5</td><td id="T:MH" class="" style="width:107px">300ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-8150-9e63-f7f5d857961a"><td id="LIIh" class="" style="width:193px">motion-delay-6</td><td id="T:MH" class="" style="width:107px">350ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-8131-b5f6-dc35a2411c0e"><td id="LIIh" class="" style="width:193px">motion-delay-7</td><td id="T:MH" class="" style="width:107px">400ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-8139-abd9-d2c9a9d8d7c9"><td id="LIIh" class="" style="width:193px">motion-delay-8</td><td id="T:MH" class="" style="width:107px">450ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-817e-bcd3-eb036021f78e"><td id="LIIh" class="" style="width:193px">motion-delay-9</td><td id="T:MH" class="" style="width:107px">500ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div></tbody></table></div></div></div><div style="display:contents" dir="auto"><div id="23f31ee4-c696-8162-bf15-e6285fe939a1" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="ltr"><table id="23f31ee4-c696-8105-a3c4-d3ecc17f9340" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-817a-96bc-f30dc55c4959"><th id="LIIh" class="simple-table-header-color simple-table-header" style="width:193px">Token</th><th id="T:MH" class="simple-table-header-color simple-table-header" style="width:107px">Value</th><th id="FpA]" class="simple-table-header-color simple-table-header" style="width:345px">Use case</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-81ea-8964-ce03eeb12da6"><td id="LIIh" class="" style="width:193px">motion-duration-100</td><td id="T:MH" class="" style="width:107px">100ms</td><td id="FpA]" class="" style="width:345px">taps, icon toggles</td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-81c4-8395-d2694ffa6af9"><td id="LIIh" class="" style="width:193px">motion-duration-150</td><td id="T:MH" class="" style="width:107px">150ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-8172-91d1-d2c29463928a"><td id="LIIh" class="" style="width:193px">motion-duration-200</td><td id="T:MH" class="" style="width:107px">200ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-81e6-a321-e7c23661fe71"><td id="LIIh" class="" style="width:193px">motion-duration-250</td><td id="T:MH" class="" style="width:107px">250ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-8103-89b2-c94bf2908281"><td id="LIIh" class="" style="width:193px">motion-duration-300</td><td id="T:MH" class="" style="width:107px">300ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-8156-8fc6-d69bed3d4485"><td id="LIIh" class="" style="width:193px">motion-duration-350</td><td id="T:MH" class="" style="width:107px">350ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-81f6-8a52-ca7edcd812fd"><td id="LIIh" class="" style="width:193px">motion-duration-400</td><td id="T:MH" class="" style="width:107px">400ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-8100-9e08-e3f0fa65615b"><td id="LIIh" class="" style="width:193px">motion-duration-450</td><td id="T:MH" class="" style="width:107px">450ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-8111-b4f3-e5b4353ef0d3"><td id="LIIh" class="" style="width:193px">motion-duration-500</td><td id="T:MH" class="" style="width:107px">500ms</td><td id="FpA]" class="" style="width:345px"></td></tr></div></tbody></table></div></div></div></div></div></div></figure></div><div style="display:contents" dir="auto"><p id="23f31ee4-c696-81c7-a63f-cdf444b37cc1" class="">
+</p></div><div style="display:contents" dir="auto"><p id="23f31ee4-c696-81b0-abe8-de73c3deb508" class="">To stay consistent with the rest of the Qonto system, we use a <strong>value-based numeric naming convention</strong> for motion tokens.</p></div><div style="display:contents" dir="ltr"><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="23f31ee4-c696-81fd-8735-ca96bc54a7a3"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/verified_gray.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><h3 id="23f31ee4-c696-812f-b197-d8a7f345c28a" class=""><strong>motion-duration-100</strong></h3></div></div></figure></div><div style="display:contents" dir="auto"><p id="23f31ee4-c696-81e0-a524-f5e456694e0a" class="">
+</p></div><div style="display:contents" dir="auto"><ul id="23f31ee4-c696-815e-8157-c8c5e849e6f2" class="toggle"><li><details open=""><summary>Foundational vs Semantic [future release]</summary><div style="display:contents" dir="auto"><h3 id="23f31ee4-c696-81e8-bbd2-fcf9e8a42912" class=""><strong>Foundational Tokens</strong></h3></div><div style="display:contents" dir="auto"><p id="23f31ee4-c696-81b8-b08b-e6d6e73c241a" class="">These are <strong>raw, reusable values</strong> that describe animation properties without prescribing usage.<br/>Foundational tokens are the <strong>building blocks</strong> of motion. They are used directly in components or aliased into more semantic values.</p></div><div style="display:contents" dir="auto"><h3 id="23f31ee4-c696-81ee-9f1b-c27ea4464cf4" class="">Examples</h3></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="23f31ee4-c696-817e-8ace-f8e18a7c6a84"><div style="width:100%"><div style="display:contents" dir="ltr"><table id="23f31ee4-c696-8194-a3b7-d5c68d8a95b9" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-811a-8ee5-f2198ac6ee6c"><th id="LIIh" class="simple-table-header-color simple-table-header" style="width:308px">Token</th><th id="T:MH" class="simple-table-header-color simple-table-header" style="width:354px">Value</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-8113-9a60-eeba61209602"><td id="LIIh" class="" style="width:308px">motion-duration-100</td><td id="T:MH" class="" style="width:354px">100ms</td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-81b9-b643-cd141c7838cf"><td id="LIIh" class="" style="width:308px">motion-duration-250</td><td id="T:MH" class="" style="width:354px">250ms</td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-8165-8b32-ef366ace56cf"><td id="LIIh" class="" style="width:308px">motion-easing-standard</td><td id="T:MH" class="" style="width:354px">cubic-bezier(...)</td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-810f-bdad-e7b39475867c"><td id="LIIh" class="" style="width:308px">motion-delay-150</td><td id="T:MH" class="" style="width:354px">150ms</td></tr></div></tbody></table></div></div></figure></div><div style="display:contents" dir="auto"><h3 id="23f31ee4-c696-815c-92e8-c219aa7568e8" class=""><strong>Semantic Tokens [TBC]</strong></h3></div><div style="display:contents" dir="auto"><p id="23f31ee4-c696-81b1-9952-f058aee462bc" class="">Semantic tokens make it easier to enforce brand personality and unify behaviors across platforms. They allow the <strong>underlying value</strong> to change over time without affecting usage.</p></div><div style="display:contents" dir="auto"><h3 id="23f31ee4-c696-81a9-a1c2-da09b40714eb" class="">Examples</h3></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="23f31ee4-c696-8104-85bb-e6a7b0dcfc78"><div style="width:100%"><div style="display:contents" dir="ltr"><table id="23f31ee4-c696-81c8-99cb-c6ab9868501b" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-8113-930d-ee545b3f8510"><th id="LIIh" class="simple-table-header-color simple-table-header" style="width:228px">Token</th><th id="T:MH" class="simple-table-header-color simple-table-header" style="width:217px">Value</th><th id="N{jB" class="simple-table-header-color simple-table-header" style="width:213.640625px">Use case</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-81fe-aa54-c094e89e515d"><td id="LIIh" class="" style="width:228px">motion-duration-enter</td><td id="T:MH" class="" style="width:217px">motion-duration-300</td><td id="N{jB" class="" style="width:213.640625px">Entering animations</td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-812c-9768-f50aab20404a"><td id="LIIh" class="" style="width:228px">motion-duration-exit</td><td id="T:MH" class="" style="width:217px">motion-duration-200</td><td id="N{jB" class="" style="width:213.640625px">Exit animations</td></tr></div><div style="display:contents" dir="ltr"><tr id="23f31ee4-c696-81f9-9b9a-cd9515de6670"><td id="LIIh" class="" style="width:228px">motion-duration-hover</td><td id="T:MH" class="" style="width:217px">motion-duration-100</td><td id="N{jB" class="" style="width:213.640625px">Hover states</td></tr></div></tbody></table></div></div></figure></div><div style="display:contents" dir="auto"><p id="24131ee4-c696-8086-a89a-e632ed61bd80" class="">
+</p></div></details></li></ul></div><div style="display:contents" dir="auto"><p id="24131ee4-c696-809c-907c-d86f9255befd" class=""><br/></p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

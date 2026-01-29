@@ -1,0 +1,719 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Motion Patterns &amp; Rationale</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="26831ee4-c696-8055-b6c3-f059c66ae4ae" class="page sans"><header><div class="page-header-icon undefined"><img class="icon notion-static-icon" src="https://www.notion.so/icons/arrow-northeast_gray.svg"/></div><h1 class="page-title" dir="auto"><strong>Motion Patterns &amp; Rationale</strong></h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><p id="26931ee4-c696-802b-9a80-f753aba893f4" class=""><a href="https://www.notion.so/Flows-14b31ee4c69680009b26e7d5feb5dfa3?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/aquarius_gray.svg"/>Flows</a> </p></div><div style="display:contents" dir="auto"><h2 id="26931ee4-c696-8036-91ac-c80745e4b6df" class=""><strong>Overview</strong></h2></div><div style="display:contents" dir="auto"><hr id="26931ee4-c696-80c7-a8fc-eb8146566e95"/></div><div style="display:contents" dir="auto"><p id="26931ee4-c696-80c4-845f-e78145726324" class="">Motion in flows guides users through multi-step processes, helps them understand progress, and clarifies context changes. Transitions should be clear, intuitive, and platform-aware, reinforcing the mental model of progress, return, and completion.</p></div><div style="display:contents" dir="auto"><p id="26931ee4-c696-8058-937a-cc43e7fbe190" class="">
+</p></div><div style="display:contents" dir="ltr"><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="26931ee4-c696-804a-a351-cdf2b0a7699c"><div style="width:100%"><div style="display:contents" dir="auto"><h1 id="26931ee4-c696-8005-a1c6-e4393df2bfcf" class="">Web</h1></div></div></figure></div><div style="display:contents" dir="auto"><div id="26931ee4-c696-8006-93c7-c3b635199e37" class="column-list"><div style="display:contents" dir="auto"><div id="26931ee4-c696-8051-9571-c8cc8ae8fef5" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26931ee4-c696-8020-bee4-fff92d76b2d7"><div style="width:100%"><div style="display:contents" dir="auto"><h1 id="26931ee4-c696-8052-b22f-ddf69ea1d1c1" class="">Linear flow</h1></div><div style="display:contents" dir="auto"><p id="26931ee4-c696-806d-89e4-c570baee74ba" class="">
+</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-802e-ba2f-e7415286c28d"><div style="width:100%"><div style="display:contents" dir="auto"><h1 id="26a31ee4-c696-802c-86db-e5793e817ace" class=""><strong>Flow with alternative paths</strong></h1></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="26931ee4-c696-80b0-a6d3-e5911ec2f73b" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26931ee4-c696-806f-a8b2-e877377fe73f"><div style="width:100%"><div style="display:contents" dir="auto"><h1 id="26931ee4-c696-802d-b3a6-d151970bf10a" class=""><strong>Flow following another flow</strong></h1></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8019-8e88-cb6f2c530386"><div style="width:100%"><div style="display:contents" dir="auto"><h1 id="26a31ee4-c696-8041-ae40-c377bf340729" class=""><strong>Flow with an upsell<br/></strong></h1></div></div></figure></div></div></div></div></div><div style="display:contents" dir="ltr"><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="26931ee4-c696-8048-a228-eae1bc82359e"><div style="width:100%"><div style="display:contents" dir="auto"><h1 id="26931ee4-c696-80b1-bf3e-e1bebac17788" class="">Mobile</h1></div></div></figure></div><div style="display:contents" dir="auto"><div id="26931ee4-c696-809d-ae70-f2b3362bc7f5" class="column-list"><div style="display:contents" dir="auto"><div id="26931ee4-c696-80f8-bbab-e347c91948b3" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26931ee4-c696-80aa-a4bd-c6be0b641bcb"><div style="width:100%"><div style="display:contents" dir="auto"><h1 id="26931ee4-c696-802d-8664-fa9b8bda768a" class="">Linear flow</h1></div><div style="display:contents" dir="auto"><p id="26931ee4-c696-80a8-b4af-e18ab58eb1e3" class="">
+</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8061-882f-c90f82a16cb5"><div style="width:100%"><div style="display:contents" dir="auto"><h1 id="26a31ee4-c696-8071-94b3-d90a1b075b39" class=""><strong>Flow with an upsell</strong></h1></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="26931ee4-c696-801c-bac3-c4a6f4111d14" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26931ee4-c696-8026-82b8-ce6e3242d309"><div style="width:100%"><div style="display:contents" dir="auto"><h1 id="26931ee4-c696-8007-ae1a-d76d25204e51" class=""><strong>Flow with alternative paths</strong></h1></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="26931ee4-c696-8089-b566-d2f90e9312f4" class=""><strong>Transition Patterns</strong></h2></div><div style="display:contents" dir="auto"><hr id="26931ee4-c696-8096-b4de-dca43829e328"/></div><div style="display:contents" dir="ltr"><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="26931ee4-c696-80d6-be9a-dc99e2e59208"><div style="width:100%"><div style="display:contents" dir="auto"><h1 id="26931ee4-c696-8023-aef1-e22da1ba77b6" class="">Web</h1></div></div></figure></div><div style="display:contents" dir="auto"><h1 id="26931ee4-c696-808e-8abc-ffe50a27f7a7" class="">Linear flow</h1></div><div style="display:contents" dir="auto"><hr id="26931ee4-c696-80ed-ad57-e553b97255b8"/></div><div style="display:contents" dir="auto"><div id="26931ee4-c696-80eb-8f48-d2366998d62e" class="column-list"><div style="display:contents" dir="auto"><div id="26931ee4-c696-80b4-acea-cbab0bec6573" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26931ee4-c696-8090-a446-d7c4bd5fdf49"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26931ee4-c696-80cc-a840-ef2f24f14205" class=""><strong>Start flow</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26931ee4-c696-80e5-a347-e01a230f31f7"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26931ee4-c696-80f2-beaf-dd7c12fae2c8" class=""><strong>Transition:</strong> Slide in from bottom</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26931ee4-c696-80d3-a07a-d1ca81f9db59" class=""><strong>Rationale:</strong> Entering a dedicated process should feel like elevating into a focused state. Bottom-to-top motion signals a new context and aligns with modal/sheet behavior.</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26931ee4-c696-8024-963a-fd7f08f66393"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26931ee4-c696-808f-bd8d-c991423c177b" class=""><strong>Previous step</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26931ee4-c696-8024-8568-e2d8769fdda4"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26931ee4-c696-8056-aa7b-ffad21ad6ff4" class=""><strong>Transition:</strong> Slide in from left</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26931ee4-c696-8029-9cea-e315c2a8ee9c" class=""><strong>Rationale:</strong> Returning maps to leftward movement, matching user expectations for “back” or “undo.” <br/><br/><br/></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-80bf-ad99-c33ed2d53ac6"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26a31ee4-c696-8053-be5b-fb3a9757f140" class=""><strong>Success page</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8058-b332-e04839a57c32"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26a31ee4-c696-802c-b39f-c790c3cc2795" class=""><strong>Transition:</strong> Fade in/out</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-80b9-9cc8-ed893ae279cd" class=""><strong>Rationale:</strong> Success isn’t a spatial move fading reinforces a sense of completion and closure.</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="26931ee4-c696-80c5-9134-d7e20e33f5e5" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26931ee4-c696-803f-a74d-fb36efab8598"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26931ee4-c696-8049-9d24-e21d7b320791" class="">Next step</h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26931ee4-c696-806b-bdf8-ef145bc612f6"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26931ee4-c696-80be-bc10-e098e29be2cc" class=""><strong>Transition:</strong> Slide in from right</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26931ee4-c696-80e3-8019-df1f4051e2d5" class=""><strong>Rationale:</strong> Moving forward in a process feels like progressing to the right, reinforcing spatial and mental models of “next.”<br/></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26931ee4-c696-8046-8836-f3d13c04190f"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26931ee4-c696-80ca-8f92-cd0329f39ae6" class=""><strong>End/Dismiss flow:</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26931ee4-c696-806f-a43d-c1bf063be15f"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26931ee4-c696-808e-87aa-f92e107e9018" class=""><strong>Transition:</strong> Slide out to bottom or fade</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26931ee4-c696-80c6-80d7-fbb08cdfd2c3" class=""><strong>Rationale:</strong> Completing or dismissing the process uses a downward motion to return to origin. Fading is used for success/confirmation to soften the transition.</p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><h1 id="26a31ee4-c696-8075-bde0-e7f36fbc34d4" class=""><strong>Flow following another flow</strong></h1></div><div style="display:contents" dir="auto"><hr id="26a31ee4-c696-8049-889f-ec68d4d69612"/></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-80c8-a10a-d4e68d226525"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26a31ee4-c696-80a5-a6f1-df351b39549e" class=""><strong>Start flow</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-804b-a563-c5077bbe2630"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26a31ee4-c696-80e3-9926-d7f8371417b8" class=""><strong>Transition:</strong> Fade out old flow, fade in new flow (or slide if context is related)</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-80dd-b481-c94132423b7d" class=""><strong>Rationale:</strong> Entering a dedicated process should feel like elevating into a focused state. Bottom-to-top motion signals a new context and aligns with modal/sheet behavior.</p></div></div></figure></div><div style="display:contents" dir="auto"><h1 id="26a31ee4-c696-8037-ad62-c8e81f49ee36" class=""><strong>Flow with alternative paths</strong></h1></div><div style="display:contents" dir="auto"><hr id="26a31ee4-c696-8022-9649-d4904217cc27"/></div><div style="display:contents" dir="auto"><div id="26a31ee4-c696-8089-bc60-f726bebc482f" class="column-list"><div style="display:contents" dir="auto"><div id="26a31ee4-c696-80df-94f6-c9e70d8c704f" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-807c-9148-ee615d5a9cee"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26a31ee4-c696-804f-bc2d-fcd797bc0d6e" class=""><strong>Enter sub-flow</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8008-b70a-d6400dab8527"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26a31ee4-c696-80da-a6b9-d6bc893c99e1" class=""><strong>Transition:</strong> Slide in from right</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-8064-80e5-dfc71ac05a8d" class=""><strong>Rationale:</strong> Entering a sub-task or sub-goal deepens the journey, feeling like a “step forward.</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8077-86e9-fb34c0ba1b5b"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26a31ee4-c696-8051-b6b5-cee9350b5caf" class=""><strong>No success toast/page inside sub-flow</strong></h2></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-806e-a685-fb2318583100" class=""><strong>Rationale:</strong> Feedback is centralized on the recap/validation screen, avoiding interruption.</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="26a31ee4-c696-8038-8949-dcf45529bc24" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8014-94d5-f566760e6376"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26a31ee4-c696-80bc-a7e4-d566ba492363" class=""><strong>Exit sub-flow</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8014-946a-fd249196fdc1"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26a31ee4-c696-802c-a658-d8f297dea4c9" class=""><strong>Transition:</strong> Slide out to left</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-8072-8d3b-f71a3e4dd6bd" class=""><strong>Rationale:</strong> Returning to the main flow follows “back” logic, moving left.<br/></p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><h1 id="26a31ee4-c696-804b-bef2-c3e73f38e227" class=""><strong>Flow with an upsell</strong></h1></div><div style="display:contents" dir="auto"><hr id="26a31ee4-c696-8093-ab65-c74841c33443"/></div><div style="display:contents" dir="auto"><div id="26a31ee4-c696-8062-a482-eaf2a5010ee7" class="column-list"><div style="display:contents" dir="auto"><div id="26a31ee4-c696-8053-9f8a-e2db4ad25354" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-80db-86b7-f5c09f22a35e"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26a31ee4-c696-8056-8e0e-ecb551c7623b" class=""><strong>Enter upsell</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-80d0-b3fc-cb15cf8f0fea"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26a31ee4-c696-8019-8a20-c9f8cbb8e628" class=""><strong>Transition:</strong> Slide in from right or modal up</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-8066-bd69-f3cad62df962" class=""><strong>Rationale:</strong> Feels like a new, focused option or feature, spatially separated from the main flow.</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8076-a190-ce34f1d998a0"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26a31ee4-c696-8093-91f0-fedb084a8fab" class=""><strong>Unlock feedback</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8083-abf9-f1ecd9e22261"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26a31ee4-c696-8085-b028-ceb040dba393" class=""><strong>Transition:</strong> Fade in toast</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-8005-b60d-fae35e113e8b" class=""><strong>Rationale:</strong> Instant, non-blocking feedback for the user.</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="26a31ee4-c696-80a2-8e39-e3c045bbde56" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8075-8c83-e702d7211314"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26a31ee4-c696-80f8-a37f-cfe99c7a1803" class=""><strong>Complete upsell</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-803a-8486-ec38d5e8ac01"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26a31ee4-c696-803d-8f8d-e455df93c03b" class=""><strong>Transition:</strong> Slide out, then return to main flow</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-803d-98f9-e15b40d4128f" class=""><strong>Rationale:</strong> Reinforces return to the original context after a successful unlock.</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-80f1-81ad-e1b044390b02" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-80ae-876f-cce83fec73e0" class="">
+</p></div><div style="display:contents" dir="ltr"><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-80f2-a8f6-f0c20dd4b5c4"><div style="width:100%"><div style="display:contents" dir="auto"><h1 id="26a31ee4-c696-8032-be51-f541df615a71" class="">Mobile</h1></div></div></figure></div><div style="display:contents" dir="auto"><h1 id="26a31ee4-c696-80fa-8e73-cb3421c9ae33" class="">Linear flow</h1></div><div style="display:contents" dir="auto"><hr id="26a31ee4-c696-8011-902e-d071664d1b33"/></div><div style="display:contents" dir="auto"><div id="26a31ee4-c696-8054-9c46-e7778e2b4477" class="column-list"><div style="display:contents" dir="auto"><div id="26a31ee4-c696-8012-b2dc-cc6ad6466d9b" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-80b5-ae32-c7b24b45f1d5"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26a31ee4-c696-80da-b047-dc169b918d31" class=""><strong>Start flow</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-80f0-b46b-f06fc9c1a1f9"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26a31ee4-c696-8099-9941-e33a4cb6a26f" class=""><strong>Transition:</strong> Slide in from bottom</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-8039-b4c2-d71e67117694" class=""><strong>Rationale:</strong> Entering a dedicated process should feel like elevating into a focused state. Bottom-to-top motion signals a new context and aligns with modal/sheet behavior.</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-809a-a75e-edfa090c1deb"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26a31ee4-c696-8018-8971-dab936cecf1f" class=""><strong>Previous step</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8086-8174-c485f6aa6831"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26a31ee4-c696-80c3-bf26-d4688f740c90" class=""><strong>Transition:</strong> Slide in from left</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-80b1-bc65-ca9b41c66f7d" class=""><strong>Rationale:</strong> Returning maps to leftward movement, matching user expectations for “back” or “undo.” <br/><br/><br/></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8080-b136-f3d0c6388ea7"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26a31ee4-c696-80e1-a586-c4e74561c7e2" class=""><strong>Success page</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-80d1-b38a-f4099716e62e"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26a31ee4-c696-806b-87f4-e88cf3b331b5" class=""><strong>Transition:</strong> Fade in/out</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-8077-904e-ec3ed8145165" class=""><strong>Rationale:</strong> Success isn’t a spatial move fading reinforces a sense of completion and closure.</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="26a31ee4-c696-80a2-b083-d7d44e42338b" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8093-b43c-ef644241df9b"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26a31ee4-c696-8088-a971-f1786e821714" class="">Next step</h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-80cc-a7b7-ef1636ba3c46"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26a31ee4-c696-805b-85b7-ec0cbdc897ff" class=""><strong>Transition:</strong> Slide in from right</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-8005-bcab-c752bedcfd3e" class=""><strong>Rationale:</strong> Moving forward in a process feels like progressing to the right, reinforcing spatial and mental models of “next.”<br/></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8074-9f2b-d7a3d6dc63e0"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26a31ee4-c696-80e6-96c2-dd6c16fe23a6" class=""><strong>End/Dismiss flow</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-80c2-b3cc-ce7f7612bbfa"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26a31ee4-c696-800a-ad82-ef4578fc45b8" class=""><strong>Transition:</strong> Slide out to bottom or fade</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-8079-8fe2-ee60dde2fb17" class=""><strong>Rationale:</strong> Completing or dismissing the process uses a downward motion to return to origin. Fading is used for success/confirmation to soften the transition.</p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><p id="26931ee4-c696-8058-8e3b-e36a53a751b6" class=""><em>Same patterns as Web, but transitions may be OS-managed (e.g., UINavigationController push/pop for next/previous steps).</em></p></div><div style="display:contents" dir="auto"><h1 id="26a31ee4-c696-80fe-a334-e5c30390bc60" class=""><strong>Flow with alternative paths</strong></h1></div><div style="display:contents" dir="auto"><hr id="26a31ee4-c696-80a2-9585-e4a910b449e6"/></div><div style="display:contents" dir="auto"><div id="26a31ee4-c696-803b-970b-c3215521fa2d" class="column-list"><div style="display:contents" dir="auto"><div id="26a31ee4-c696-80ca-a48f-dbdbf3bf6b4e" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-805f-9f86-f37969833631"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26a31ee4-c696-8086-aab4-d987bf343529" class=""><strong>Enter sub-flow</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8001-9cb6-dfb9cfe3b8e3"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26a31ee4-c696-80f6-9455-ceca9ca1fce1" class=""><strong>Transition:</strong> Slide in from right</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-8082-bd17-d6d71ca8f5d0" class=""><strong>Rationale:</strong> Deepens the user’s journey.</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="26a31ee4-c696-80b7-bc9e-dd51c7e5c2cf" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8089-b3c9-ce4eda9fd759"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26a31ee4-c696-80d1-943e-fb588f31194e" class=""><strong>Exit sub-flow</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8038-bc7f-c01241fe8ee2"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26a31ee4-c696-8028-8b34-f7deb085ca55" class=""><strong>Transition:</strong> Slide out to left</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-80d0-b690-d77f8a5696b0" class=""><strong>Rationale:</strong> Back to main flow.</p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><h1 id="26a31ee4-c696-80a0-ae3d-dc9039115528" class=""><strong>Flow with an upsell</strong></h1></div><div style="display:contents" dir="auto"><hr id="26a31ee4-c696-80aa-bdc1-d3a4b1739b55"/></div><div style="display:contents" dir="auto"><div id="26a31ee4-c696-8068-9c58-cf8f1a500880" class="column-list"><div style="display:contents" dir="auto"><div id="26a31ee4-c696-8071-81f0-de12c4bb8b63" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-802b-80d9-edaabd02ea79"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26a31ee4-c696-8056-b59c-f485e47e2c8c" class=""><strong>Enter upsell</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8086-b1d2-d5edf6d453a6"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26a31ee4-c696-80e9-b119-dfa2b110f70f" class=""><strong>Transition:</strong> Slide in from right or modal up</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-8028-aebd-e84676cc36a2" class=""><strong>Rationale:</strong> Feels like a new, focused option or feature, spatially separated from the main flow.</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-804e-a35e-f6915352733e"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26a31ee4-c696-807a-b1f6-c881886cd536" class=""><strong>Unlock feedback</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8013-ae95-e4dc6f1b333d"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26a31ee4-c696-80fe-8eeb-d3fc69a69b3c" class=""><strong>Transition:</strong> Fade in toast</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-80d5-a6f0-e80b3e294ca9" class=""><strong>Rationale:</strong> Instant, non-blocking feedback for the user.</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="26a31ee4-c696-8013-852b-cb38cc1d7688" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-8054-a5ad-e2d378cf7f8f"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="26a31ee4-c696-80db-a11e-cd714cd8aab8" class=""><strong>Complete upsell</strong></h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26a31ee4-c696-802f-9820-d6e76ec94c57"><div style="width:100%"><div style="display:contents" dir="auto"><p id="26a31ee4-c696-807b-98bc-fb001b6ac9cf" class=""><strong>Transition:</strong> Slide out, then return to main flow</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-8041-ac90-e7462f632582" class=""><strong>Rationale:</strong> Reinforces return to the original context after a successful unlock.</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="26a31ee4-c696-80cb-978b-cf7d25893619" class="">
+</p></div></div></div></div></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,718 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Content guidelines</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="25d31ee4-c696-813f-927f-eac33184187f" class="page sans"><header><div class="page-header-icon undefined"><img class="icon notion-static-icon" src="https://www.notion.so/icons/translate_gray.svg"/></div><h1 class="page-title" dir="auto">Content guidelines</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-819d-912b-d15055a9e970" class="">
+</p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8132-85f3-ce15769333fe" class="">
+</p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-817e-a6a1-d5263b611e26" class=""><em><mark class="highlight-blue">Add use case labels and relevant links to those sections</mark></em></p></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8185-ac8c-db3b159aaaa7" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8118-8ff3-feeea5713ab7" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="25d31ee4-c696-8198-867e-ddc60b416ec3"><div style="width:100%"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81b1-aefb-fc9f568af2ad" class="">Use case 1</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8181-8aa3-d27c079b8563" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="25d31ee4-c696-81cb-bcf9-e63688dda4ea"><div style="width:100%"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-817b-98f0-d7cefd830785" class="">Use case 2</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8152-af8a-d9ad25bb1cdb" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="25d31ee4-c696-8141-a6f1-f807053eb4a5"><div style="width:100%"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81c2-807d-f1f24ff95078" class="">Use case 3</p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><h1 id="25d31ee4-c696-819e-ae82-f6d1dbaa65b3" class="">Use case 1</h1></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-815f-9741-f2250f47a651" class=""><em><mark class="highlight-blue">Add links in the nav bar to the section.</mark></em></p></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-819d-830f-d5a633e2f214"/></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8129-b06b-e960840f11eb" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-817b-b5e8-d0041cf0598a" style="width:25%" class="column"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8144-bc10-c042a45dd13c" class=""><strong>Content coherence</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-819b-9d5e-ec7ea6b719e8" style="width:25%" class="column"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81a9-94f3-c9fac7dcd5e3" class=""><strong>Type of sentence</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81f3-b3ff-c79fb93a425c" style="width:25%" class="column"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8115-a88d-effcff1772c5" class=""><strong>Tense of sentence</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-814b-a5c0-d8bd88141756" style="width:25%" class="column"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8194-9cb1-e60c32418f75" class=""><strong>Tone of voice</strong></p></div></div></div></div></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-8115-95fd-ceeb326eebac"/></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-817a-a9eb-dac618c60f0b" class=""><em><mark class="highlight-blue">Add recommendations based on the category. If there’s no recommendation for a category, remove it from the page. </mark></em></p></div><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-8109-bded-d26c97a0edf2" class="">Content coherence</h2></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8106-9581-f7a0c7c09bd5" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8130-8bbe-e9b4344a4e7b" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-81fb-ad43-feab76debbc8" class="image"><a href="Content%20guidelines/image.png"><img style="width:2504px" src="Content%20guidelines/image.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81b3-b5d4-dcdb69050853" class="">✅ We do…<br/>💡<strong>Why?</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-819b-9793-ed16419da708" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-8150-b5d8-dce5c0b6924c" class="image"><a href="Content%20guidelines/image%201.png"><img style="width:2504px" src="Content%20guidelines/image%201.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8108-9135-c2584ab4b7ef" class="">❌ We don’t..</p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81d9-a5d8-ea501bc05259" class="">💡<strong>Why?</strong></p></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-8105-a0b1-f64ba3dad556" class="">Type of sentence</h2></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8182-bb7f-fed3326859b2" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-818e-ada2-f75ae560dd84" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-81e7-9bd8-df746f8069bc" class="image"><a href="Content%20guidelines/image.png"><img style="width:2504px" src="Content%20guidelines/image.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8165-a7d4-cb7193e849fe" class="">✅ We do…<br/>💡<strong>Why?</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-817b-a761-f9711a9c842c" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-8108-b019-e461d4599e4b" class="image"><a href="Content%20guidelines/image%201.png"><img style="width:2504px" src="Content%20guidelines/image%201.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8157-8dc1-d08ccc4ace4f" class="">❌ We don’t..</p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8129-80fe-da21513c4534" class="">💡<strong>Why?</strong></p></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-8150-a9f4-ef4bb95e67e2" class="">Tense of sentence</h2></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81d2-b116-fdcedc25c6e4" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81db-9cc3-cb91c4d7fb58" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-8100-b84c-f81086d82370" class="image"><a href="Content%20guidelines/image.png"><img style="width:2504px" src="Content%20guidelines/image.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-817b-9f53-e9e528d3eda3" class="">✅ We do…<br/>💡<strong>Why?</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81cc-8a8e-ef1ea4a957a3" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-81b7-9938-e44ab76d49cc" class="image"><a href="Content%20guidelines/image%201.png"><img style="width:2504px" src="Content%20guidelines/image%201.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8147-bb3d-dc3433b573f2" class="">❌ We don’t..</p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-811f-9b0e-c176c39d5818" class="">💡<strong>Why?</strong></p></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-819d-a179-ebfeab6a8502" class="">Tone of voice</h2></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8141-b0c7-d6d316766d19" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8145-930e-c08a3dbac39b" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-814a-a1e9-d442a3b08af5" class="image"><a href="Content%20guidelines/image.png"><img style="width:2504px" src="Content%20guidelines/image.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81c5-9dd1-cbcaccc522c8" class="">✅ We do…<br/>💡<strong>Why?</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81cb-9e37-c01209cc0aec" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-810f-b71e-de9d726039f7" class="image"><a href="Content%20guidelines/image%201.png"><img style="width:2504px" src="Content%20guidelines/image%201.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-819d-8df2-e167d96444db" class="">❌ We don’t..</p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8190-b6fb-ce61804037b6" class="">💡<strong>Why?</strong></p></div></div></div></div></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-81f2-b979-c764617ce9bd"/></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-813a-9004-fb4845a6d2d1" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="25d31ee4-c696-8112-8f24-c4b9bbaa1a2e" class="">Use case 2</h1></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8115-8bd2-e1c1ce96229d" class=""><em><mark class="highlight-blue">Add links in the nav bar to the section.</mark></em></p></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-81b0-a541-d927a752ec56"/></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81d2-bced-df312a35c1de" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81ba-95c1-d69819bc4226" style="width:25%" class="column"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-815d-9111-d8dfc2c3bb1b" class=""><strong>Content coherence</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8125-9d1c-e87c3b2c17ba" style="width:25%" class="column"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81ff-905e-dfcca8f59d85" class=""><strong>Type of sentence</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-810e-929b-cab3036bd6f8" style="width:25%" class="column"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8168-ae68-e800b9b912d3" class=""><strong>Tense of sentence</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-811f-a2b2-da50ab39b7c1" style="width:25%" class="column"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-810e-a9d9-d6383485010c" class=""><strong>Tone of voice</strong></p></div></div></div></div></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-81d7-8a1b-e5fb20ca946a"/></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81a9-94d6-c2813c565729" class=""><em><mark class="highlight-blue">Add recommendations based on the category. If there’s no recommendation for a category, remove it from the page. </mark></em></p></div><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-8197-a252-d27a1b56e697" class="">Content coherence</h2></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81a4-a1a2-f47c1adef1a1" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8150-899d-ea37b3e55c3f" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-81fa-879c-f95784dd1438" class="image"><a href="Content%20guidelines/image.png"><img style="width:2504px" src="Content%20guidelines/image.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8116-825a-fdc638916d93" class="">✅ We do…<br/>💡<strong>Why?</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8117-9172-cddb2f281bbb" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-8155-9ceb-c5b2a4b4a65f" class="image"><a href="Content%20guidelines/image%201.png"><img style="width:2504px" src="Content%20guidelines/image%201.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-819c-844c-d414b2d32661" class="">❌ We don’t..</p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81d7-9393-ebf0a16151a6" class="">💡<strong>Why?</strong></p></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-8127-b0aa-c89946c3fd57" class="">Type of sentence</h2></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-818b-8dfd-c38f7f8fa809" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-814a-95d3-ce6e1d95dc65" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-8141-811e-c0bb4e505ed3" class="image"><a href="Content%20guidelines/image.png"><img style="width:2504px" src="Content%20guidelines/image.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8134-a4c3-cfc0fa3e795f" class="">✅ We do…<br/>💡<strong>Why?</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81f0-a264-db0968bf1c9a" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-81fb-ba04-f0ac9ca7b9e7" class="image"><a href="Content%20guidelines/image%201.png"><img style="width:2504px" src="Content%20guidelines/image%201.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8188-8ec6-dae7e399a762" class="">❌ We don’t..</p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8140-8419-e60fcf76d99a" class="">💡<strong>Why?</strong></p></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-81f5-9b3a-f1782596e0d7" class="">Tense of sentence</h2></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81a6-9a32-eca62cc2fc52" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8164-9919-fffa42c4cf58" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-815e-9e40-e11fce910c50" class="image"><a href="Content%20guidelines/image.png"><img style="width:2504px" src="Content%20guidelines/image.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8151-9053-ca84eff3a804" class="">✅ We do…<br/>💡<strong>Why?</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-811c-a170-f2c4781b6925" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-81e0-98c3-f8cc541e29be" class="image"><a href="Content%20guidelines/image%201.png"><img style="width:2504px" src="Content%20guidelines/image%201.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8189-9d09-fe0625b2b074" class="">❌ We don’t..</p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8167-9f80-efd1afb7879e" class="">💡<strong>Why?</strong></p></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-81be-bbc5-d2fecef643c1" class="">Tone of voice</h2></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8194-82fd-e2166f9bc13b" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8134-af2d-c1641e26be90" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-81be-a69d-cc55eeff30d1" class="image"><a href="Content%20guidelines/image.png"><img style="width:2504px" src="Content%20guidelines/image.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8139-ba04-c066fd05639c" class="">✅ We do…<br/>💡<strong>Why?</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-818b-82d5-c310b6f2dea5" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-8170-b24a-da582b0a0461" class="image"><a href="Content%20guidelines/image%201.png"><img style="width:2504px" src="Content%20guidelines/image%201.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8105-8d6d-f2da5bb983a2" class="">❌ We don’t..</p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8102-8b23-dd5d5424345e" class="">💡<strong>Why?</strong></p></div></div></div></div></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-8173-8a15-f4a8d01c22dc"/></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81ca-8e97-f53aacef7561" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="25d31ee4-c696-81bd-adf9-c1a152b44692" class="">Use case 3</h1></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81a8-9662-c2bd80de52b2" class=""><em><mark class="highlight-blue">Add links in the nav bar to the section.</mark></em></p></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-81db-a1cd-c0769682518e"/></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8125-a5ef-ea4c7f988062" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8135-9584-c2576e38293b" style="width:25%" class="column"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81d7-8a1b-f706348d3569" class=""><strong>Content coherence</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81b5-a8eb-ef40a6f3c119" style="width:25%" class="column"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81ec-8297-dc32a737cf19" class=""><strong>Type of sentence</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8114-b14f-d30d61be8662" style="width:25%" class="column"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81bf-9508-e93801028c87" class=""><strong>Tense of sentence</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8125-a2bf-f7ae66eb4478" style="width:25%" class="column"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81b7-b753-f3aa216d7cd8" class=""><strong>Tone of voice</strong></p></div></div></div></div></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-81b6-81fc-c36e19c560f0"/></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81ae-b7fa-c5c8c26e351e" class=""><em><mark class="highlight-blue">Add recommendations based on the category. If there’s no recommendation for a category, remove it from the page. </mark></em></p></div><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-812b-b5c6-da1827dbae46" class="">Content coherence</h2></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8178-a793-e3be31bb8a91" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81e8-80e2-ef2296c74c9f" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-818b-a6c3-f3ae4c6e95d5" class="image"><a href="Content%20guidelines/image.png"><img style="width:2504px" src="Content%20guidelines/image.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8114-bb87-ff1bda1e2e7e" class="">✅ We do…<br/>💡<strong>Why?</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81c9-a1ef-d4d1cab42c9e" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-81e5-a781-ecc6da44c300" class="image"><a href="Content%20guidelines/image%201.png"><img style="width:2504px" src="Content%20guidelines/image%201.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8165-9e3a-f9b1684deebf" class="">❌ We don’t..</p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8151-b214-e7e9330a8541" class="">💡<strong>Why?</strong></p></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-8170-a703-d3ae4a9e9a56" class="">Type of sentence</h2></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8179-9a26-ee11b455077c" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81f7-84db-febf5c7bd71b" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-817c-9e46-f280d1d39080" class="image"><a href="Content%20guidelines/image.png"><img style="width:2504px" src="Content%20guidelines/image.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-810d-8504-d40bf216848a" class="">✅ We do…<br/>💡<strong>Why?</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8191-bb89-fc29a98df169" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-81ac-a0b1-e74c76b66146" class="image"><a href="Content%20guidelines/image%201.png"><img style="width:2504px" src="Content%20guidelines/image%201.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8108-820d-fc986266cd1f" class="">❌ We don’t..</p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81ad-998b-c85eea30062b" class="">💡<strong>Why?</strong></p></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-81fe-8b5c-ecfee4e24961" class="">Tense of sentence</h2></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-819f-b3f1-f6733d90524e" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8135-abaa-c30231f1bd71" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-810a-9b19-cfcaaff8d412" class="image"><a href="Content%20guidelines/image.png"><img style="width:2504px" src="Content%20guidelines/image.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81a5-9806-cf593268d793" class="">✅ We do…<br/>💡<strong>Why?</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8113-ac55-fce1a0ba1346" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-8154-8457-cf5653a0fe34" class="image"><a href="Content%20guidelines/image%201.png"><img style="width:2504px" src="Content%20guidelines/image%201.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-810e-a0fc-eae687e745cf" class="">❌ We don’t..</p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8116-8ad9-ff39efe1cefa" class="">💡<strong>Why?</strong></p></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-8148-9ae9-d52729da4b95" class="">Tone of voice</h2></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81d2-8d1d-f8d8dbbc3b00" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-815f-80de-e00406a07b0e" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-8162-9694-fc3b2bcf979e" class="image"><a href="Content%20guidelines/image.png"><img style="width:2504px" src="Content%20guidelines/image.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81a0-b63f-deef9d8623e9" class="">✅ We do…<br/>💡<strong>Why?</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81f8-8b9c-ca445227bf9f" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-813d-b164-f33017bd8180" class="image"><a href="Content%20guidelines/image%201.png"><img style="width:2504px" src="Content%20guidelines/image%201.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81a6-86ad-e82d2de4188c" class="">❌ We don’t..</p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8180-b002-f61d801f5404" class="">💡<strong>Why?</strong></p></div></div></div></div></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-81fe-bfbf-fa0497080f03"/></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8134-b0b3-e19c0d0d9ea3" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,718 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Website</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="25e31ee4-c696-80a4-9609-e73c4003426e" class="page sans"><header><div class="page-header-icon undefined"><img class="icon notion-static-icon" src="https://www.notion.so/icons/globe_gray.svg"/></div><h1 class="page-title" dir="auto">Website</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-80a0-8952-cd1180832f80" class="image"><a href="image.png"><img style="width:710px" src="image.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-802d-8cf9-d5e720648be6" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-8027-b526-c724c08aba6b"/></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-80f7-bc15-fb9bc50be8b6" class="column-list"><div style="display:contents" dir="auto"><div id="25e31ee4-c696-8000-ba1a-f2b214d8e139" style="width:126.3157894736842%" class="column"><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80eb-a597-d23195c443f5" class=""><a href="Website%2025e31ee4c69680a49609e73c4003426e.html">Types</a></p></div></div></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-80cb-bc12-ff4c35de001d" style="width:126.3157894736842%" class="column"><div style="display:contents" dir="auto"><p id="25e31ee4-c696-807e-8baf-f8a969cee50b" class=""><a href="Website%2025e31ee4c69680a49609e73c4003426e.html">Styles</a></p></div></div></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-803d-8a92-fcc4979c5aad" style="width:100%" class="column"><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80c3-ba83-da0001debeee" class=""><a href="Website%2025e31ee4c69680a49609e73c4003426e.html">Elements</a></p></div></div></div></div></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-801a-ba28-fe5fd32f5c33"/></div><div style="display:contents" dir="auto"><h2 id="25e31ee4-c696-802b-a488-d226fbd97ef4" class=""><strong>Types</strong></h2></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-8022-9159-f49effbc02a6"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80f6-9e9f-f3c9dfce9c7a" class="">Types of Motion in our design system include <strong>Animations</strong> and <strong>Interactions</strong>. These types work together to create a dynamic, engaging, and intuitive user experience by providing visual feedback, enhancing usability, and guiding user interactions.</p></div><div style="display:contents" dir="auto"><h3 id="25e31ee4-c696-8041-a39b-e4388e6b548c" class="">Animations</h3></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-8041-a798-de2b7b1752b9"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80bb-a29b-eba2f5f2c916" class="">On our website, animations are visual effects triggered by events like<strong> loading</strong> a page or <strong>scrolling</strong>. They make elements like text, images, or buttons move or change smoothly, such as sliding menus or fading text.</p></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-80b7-aa57-e36706e05ad8" class="column-list"><div style="display:contents" dir="auto"><div id="25e31ee4-c696-809a-9628-f3960470610f" style="width:33.333333333333336%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-8058-985c-d3a5ba139046"><div style="width:100%"><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8039-9913-fd1f2e5fbe59" class="image"><a href="Website/wiVTHCmOS0d4j07INmEzcw.gif"><img style="width:292.9921875px" src="Website/wiVTHCmOS0d4j07INmEzcw.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-8055-bacc-dae4465e1eda"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8042-85c2-fbc48afe5b19" class=""><strong>Micro-animations<br/><br/></strong>Small, subtle visual effect used to <strong>enhance user experience</strong>.</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-804e-af68-e7e3a6e943da" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-8036-a2fd-cdfc316426ef"><div style="width:100%"><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8060-b616-f46e97b0c24f" class="image"><a href="Website/utyoKVxHf0oOOSGZN2_WdA.gif"><img style="width:167.328125px" src="Website/utyoKVxHf0oOOSGZN2_WdA.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-80e4-a982-f79478df7289"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-807b-b127-ebaa7020cffd" class=""><strong>Loading animations<br/><br/></strong>Indicate progress during loading times, <strong>keeping users engaged</strong>.</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-80ff-bde4-c777a83cb50c" style="width:33.333333333333336%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-80f6-8022-d65909786e0d"><div style="width:100%"><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-80ad-8f11-de0ee1d54a5a" class="image"><a href="Website/9oQFFOJgvQUQoGuYO3aB4Q.gif"><img style="width:167.328125px" src="Website/9oQFFOJgvQUQoGuYO3aB4Q.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-80c1-8e68-df418f31bb90"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8088-a54f-ce75ffbb9115" class=""><strong>Transitions<br/><br/></strong>Animations that <strong>guide users</strong> between different sections or pages.</p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><h3 id="25e31ee4-c696-8048-9174-fe3229b362b8" class="">Interactions</h3></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-80cc-9abd-f033900c4b52"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80c0-ad4b-c786581045d3" class="">Interactions occur when you perform actions like <strong>clicking </strong>a button or <strong>hovering</strong> over an item. `These actions prompt our website to <strong>respond</strong>, <strong>providing feedback</strong> or <strong>changing elements</strong> based on what you do.</p></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-80ae-aded-c0c94a321751" class="column-list"><div style="display:contents" dir="auto"><div id="25e31ee4-c696-8070-84a9-f9dcf7c5f2bf" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-80df-9bc9-c99113100992"><div style="width:100%"><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-80d8-a8a2-c03e6ed1813f" class="image"><a href="Website/qn4EykVjhlpi_aVMsyv8NQ.gif"><img style="width:167.328125px" src="Website/qn4EykVjhlpi_aVMsyv8NQ.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-8084-a681-c2d67aef5030"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8097-80a1-fa67d5aa1279" class=""><strong>Micro-interactions<br/><br/></strong>Brief, contained animations to improve <strong>user interaction</strong> and <strong>understanding</strong>.</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-806e-bcc1-cf469712dce1" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-8068-b5d9-e8e1aceac926"><div style="width:100%"><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-80e1-94d0-c18299bd873d" class="image"><a href="Website/VTgZYI6uroiQgwSfwzEdMQ.gif"><img style="width:331.5859375px" src="Website/VTgZYI6uroiQgwSfwzEdMQ.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-80a2-8fed-eee072fada86"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8046-8a83-efbcd1c68188" class=""><strong>Hover<br/><br/></strong>Provide <strong>immediate feedback</strong> when users hover over elements.<br/><br/></p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-8079-b089-d0cf0a466608" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-8072-b977-ee7930388506"><div style="width:100%"><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8046-9601-ecc7a6dcf40d" class="image"><a href="Website/KrlpcvgFDrrIPR2pUX5f0A.gif"><img style="width:292.9921875px" src="Website/KrlpcvgFDrrIPR2pUX5f0A.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-807f-bbf3-f60c1097ebf6"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80b0-afe4-c37ca32bbc84" class=""><strong>Contextual <br/><br/></strong>Animations that respond to specific <strong>user actions within the context</strong>.<br/></p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80f7-ab87-d40f00f1180f" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="25e31ee4-c696-8035-bf35-db2627aa2809" class=""><strong>Styles</strong></h2></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-802b-b958-cf1e391c6b5f"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80a2-9e8b-f537a2e07a52" class="">Our styles feature smooth transitions, consistent timing, and fluid motion. These enhance the user experience by combining <strong>elegance </strong>with <strong>functionality</strong>, ensuring a <strong>cohesive </strong>and <strong>engaging interface</strong> with visual harmony across animations and interactions.</p></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-80e0-9d9b-ed32e7d7c098"><div style="width:100%"><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Scroll</summary><div class="indented"><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-806e-880b-e663c5125aaf"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8080-9952-f7bc1bcf918e" class="">Animations triggered as users scroll through content, creating a<strong> dynamic flow</strong>.</p></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-80f4-8445-d243bd48d872" class="image"><a href="Website/image.png"><img style="width:292.984375px" src="Website/image.png"/></a><figcaption>Vertical Scrolling on Topic Highlight Advanced module</figcaption></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-80e7-b5ff-d1d458d7339e"/></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-80bd-9fa1-d3c9d6c7eebe" class="image"><a href="Website/9uhFLXIiHG6GoGEvPCtdWw.gif"><img style="width:708px" src="Website/9uhFLXIiHG6GoGEvPCtdWw.gif"/></a><figcaption>Horizontal Scrolling in multiple modules</figcaption></figure></div></div></details></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-8090-9968-c258a1b51684"><div style="width:100%"><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Fade</summary><div class="indented"><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-80f4-9b65-e74017ec00e1"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8004-a69b-cbd008a33480" class="">Elements smoothly fade in and out to <strong>guide user attention</strong>.</p></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8058-817a-cda3bff58f12" class="image"><a href="Website/Rvd4ZhAjx_AQyviKACuIMg.gif"><img style="width:642px" src="Website/Rvd4ZhAjx_AQyviKACuIMg.gif"/></a><figcaption>Fade in asset and, headline and subtext</figcaption></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-80d1-8636-f661802de5a9"/></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8035-a21e-eac2d7122f32" class="image"><a href="Website/jcZrPYl_ogMuCwyYs0cZ_g.gif"><img style="width:641.984375px" src="Website/jcZrPYl_ogMuCwyYs0cZ_g.gif"/></a><figcaption>Fade in headline</figcaption></figure></div></div></details></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-8098-8145-dc9565de755c"><div style="width:100%"><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Position</summary><div class="indented"><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-802a-8252-cf29d8d01882"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-804c-9fb2-d44dd4524310" class="">Items slide or move to new positions, enhancing <strong>visual storytelling</strong>.</p></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8018-8dac-da0a1dcd3968" class="image"><a href="Website/mev1ymU_cWJI6gAH5Th3WA.gif"><img style="width:642px" src="Website/mev1ymU_cWJI6gAH5Th3WA.gif"/></a><figcaption>Position effect on photos</figcaption></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-80ce-87fe-c2e6768c1ce7"/></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-80fc-a1bc-d694c2b01db6" class="image"><a href="Website/FOLDCv8Dz6FrGznclVDO4g.gif"><img style="width:642px" src="Website/FOLDCv8Dz6FrGznclVDO4g.gif"/></a><figcaption>Product tour parallax effect</figcaption></figure></div></div></details></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-80e6-9914-ffdbdd945cd7"><div style="width:100%"><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Morphing</summary><div class="indented"><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-8048-be7a-e71954e5f2bc"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80fc-9db2-efddfd78a535" class="">Shapes transform <strong>seamlessly</strong>, adding <strong>fluidity</strong> to transitions.</p></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8046-a333-ee29b3b3fcf8" class="image"><a href="Website/CNTOElQmWgENwRTqjDH3yw.gif"><img style="width:642px" src="Website/CNTOElQmWgENwRTqjDH3yw.gif"/></a><figcaption>Radius morphing</figcaption></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-80f1-804e-c289759e101f"/></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-80d9-8a8a-d52de423e58b" class="image"><a href="Website/jEWvmJj28JdHH2qTTt2p7w.gif"><img style="width:641.984375px" src="Website/jEWvmJj28JdHH2qTTt2p7w.gif"/></a><figcaption>Radius morphing on Tiles module</figcaption></figure></div></div></details></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-8033-b2f4-efb0501a89c7"><div style="width:100%"><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Colour</summary><div class="indented"><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-8037-8eb8-ec02266763cf"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-803c-b13a-d9098690349d" class="">Colour changes highlight <strong>interactions</strong> and <strong>state changes</strong>.</p></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-80a1-b10f-cd7de41ceea0" class="image"><a href="Website/image.png"><img style="width:641.984375px" src="Website/image.png"/></a><figcaption>Colour state change on hover</figcaption></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-80fc-a4ce-e16e46638fd2"/></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8081-b6a6-cfd047ce09fe" class="image"><a href="Website/ejINpczxHJzM0a9WCen6UQ.gif"><img style="width:381.984375px" src="Website/ejINpczxHJzM0a9WCen6UQ.gif"/></a><figcaption>Colour background change following card&#x27;s colour</figcaption></figure></div></div></details></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-80fc-a4d6-d2d8e2c24ba9"><div style="width:100%"><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Scale</summary><div class="indented"><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-801f-b075-ea5511b6631a"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-804a-b837-f161523f6189" class="">Elements grow or shrink to indicate<strong> importance</strong> and <strong>focus</strong>.</p></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8068-96d4-c4b5145e36d3" class="image"><a href="Website/HmifXwRfgiqqU11bw7ktTg.gif"><img style="width:642px" src="Website/HmifXwRfgiqqU11bw7ktTg.gif"/></a><figcaption>Scale down on Blog</figcaption></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-80cf-b646-ee3e7bcc22a2"/></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8039-9e32-d3d460f25840" class="image"><a href="Website/7P5vrizz4pwTgLnmc0m47w.gif"><img style="width:642px" src="Website/7P5vrizz4pwTgLnmc0m47w.gif"/></a><figcaption>Scale up on Stepper module</figcaption></figure></div></div></details></div></div></figure></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80bc-9919-d0b8eb1a91a8" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="25e31ee4-c696-809c-953e-d6c38a52b659" class="">Elements</h2></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-80a9-a8b7-fb869727978d"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8000-91b8-c91bc52feacb" class="">Elements integrate <strong>seamlessly </strong>to enhance the user experience, providing visual feedback and guiding interactions. Together, they ensure a cohesive, dynamic, and intuitive interface that maintains <strong>consistency</strong> and <strong>engagement</strong> throughout the website.</p></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-80bd-8bdf-d2825f94fd81"><div style="width:100%"><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Components</summary><div class="indented"><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-8076-800b-e47a907104cf"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8015-a154-ed8f1b83e75c" class="">Animations triggered as users scroll through content, creating a<strong> dynamic flow</strong>.</p></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-8043-87b2-e143d169ba5e" class="column-list"><div style="display:contents" dir="auto"><div id="25e31ee4-c696-8018-8a14-e2ba43c9b207" style="width:33.333333333333336%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-80f8-ac7f-f5208977c896"><div style="width:100%"><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8061-841b-fe8353bc3dea" class="image"><a href="Website/MXZ0BITTNiGQtzW9BiWrkQ.gif"><img style="width:145.328125px" src="Website/MXZ0BITTNiGQtzW9BiWrkQ.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-8073-b715-ffa9276e54cf"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8061-b38d-d32469ddbd35" class=""><strong>Buttons<br/><br/></strong>Buttons and links with subtle animations to encourage <strong>interaction</strong>.<br/></p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-80be-919d-c932724200b2" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-80c3-aac9-cd1a7f462713"><div style="width:100%"><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8039-8d4f-cfa9b0240e6c" class="image"><a href="Website/jZCDRovjbzbSaIHUe7KiYg.gif"><img style="width:145.328125px" src="Website/jZCDRovjbzbSaIHUe7KiYg.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-80d0-945e-ee5adda7f05c"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80cb-82c3-d3c6006cd5d7" class=""><strong>Navigation<br/><br/></strong>Animated arrows for <strong>guiding users</strong> through carousels or sliders.<br/></p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-80bf-935d-f0c36b8ba696" style="width:33.333333333333336%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-8076-b031-f0ec08bca591"><div style="width:100%"><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-80f9-8406-ff48568d5f6e" class="image"><a href="Website/7PJu6HasG5tSQGikcX7JSA.gif"><img style="width:145.328125px" src="Website/7PJu6HasG5tSQGikcX7JSA.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-806d-8612-e63987b1ec48"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8023-bc59-c373829d6ab0" class=""><strong>Toggles<br/><br/></strong>Smooth animations for switching between on and off states, providing <strong>clear visual feedback</strong>.</p></div></div></figure></div></div></div></div></div></div></details></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-802f-9bdb-e6dfddd487a7"><div style="width:100%"><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Assets</summary><div class="indented"><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-804c-a2a5-f84580bc4b44"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80f3-8f04-d04ca21a4592" class=""><strong>Assets </strong>are the media elements used to create animations on the website. They are divided into the following subcategories:<br/></p></div><div style="display:contents" dir="auto"><ul id="25e31ee4-c696-80ea-91bf-f85095170ec7" class="bulleted-list"><li style="list-style-type:disc"><strong>Lotties</strong></li></ul></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80fc-b1be-d3d526aa8cb9" class="">Lottie animations used for <strong>interactive elements</strong>, <strong>tutorials</strong>, or <strong>visual storytelling</strong>.</p></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-80b6-94ee-d4889015892b" class="column-list"><div style="display:contents" dir="auto"><div id="25e31ee4-c696-80d7-b3c4-f82ca7b45bff" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-802f-98bd-d1d2122128d8"><div style="width:100%"><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-80cc-b8fd-e3fe27f455b6" class="image"><a href="Website/34KrpUiuQivt1CVR_WnxWQ.gif"><img style="width:260px" src="Website/34KrpUiuQivt1CVR_WnxWQ.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-80d1-849e-f6ffa3e61e41"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80c8-94f0-d0545a4ac487" class=""><strong>Isometric Lotties<br/><br/></strong>Dynamic isometric animations that add <strong>depth</strong> and <strong>engagement</strong> to visual content.</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-80fb-8863-fc8d4e4d7530" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-8094-88cd-fe9f52de41ff"><div style="width:100%"><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-805d-b73c-e5c23e51325e" class="image"><a href="Website/dOU2wTGNZ2Q_kVewjYG7GA.gif"><img style="width:260px" src="Website/dOU2wTGNZ2Q_kVewjYG7GA.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-8044-b7da-e3dba81a0334"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-805e-be2b-de118e41777b" class=""><strong>UI Lotties<br/><br/></strong>Subtle animated UI elements that enhance <strong>user interactions</strong> and <strong>feedback</strong>.</p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-803f-94b4-ee38736d1fa9"/></div><div style="display:contents" dir="auto"><ul id="25e31ee4-c696-8053-9498-f1871ca2898d" class="bulleted-list"><li style="list-style-type:disc"><strong>Video</strong></li></ul></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8019-8ea2-c50f19aa7ffe" class="">Video used for<strong> background animations</strong>, <strong>tutorials</strong>, or <strong>dynamic conten</strong></p></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8065-b063-e654f8c4c527" class="image"><a href="Website/r-prz83kV_MKLz_RkLVyMg.gif"><img style="width:624px" src="Website/r-prz83kV_MKLz_RkLVyMg.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-808f-89e2-fec796f20a82"/></div><div style="display:contents" dir="auto"><ul id="25e31ee4-c696-8082-8859-c05c7a557c12" class="bulleted-list"><li style="list-style-type:disc"><strong>Live Photos</strong></li></ul></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8020-ae3a-f9cf6a9a33af" class="">High-quality, <strong>animated images</strong> that capture motion and bring elements to <strong>life</strong>.</p></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-80fb-81ce-e179cd37cfb5" class="image"><a href="Website/ScreenRecording2024-11-20at17.31.42-ezgif.com-video-to-gif-converter.gif"><img style="width:603.9921875px" src="Website/ScreenRecording2024-11-20at17.31.42-ezgif.com-video-to-gif-converter.gif"/></a></figure></div></div></details></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-80f4-9d4e-c134b6bc7855"><div style="width:100%"><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Modules</summary><div class="indented"><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-80b9-8f8e-c880ed9d15f7"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80d9-806f-fbb466a288e4" class=""><strong>Modules</strong> are predefined <strong>animated components</strong> that make up different sections of the website. Each module incorporates specific animations to enhance <strong>user interaction and engagement</strong>. </p></div><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-804d-b0a3-df8404514908" class="image"><a href="Website/7tZE4vZafNkrewzjWStBYg.gif"><img style="width:641.9921875px" src="Website/7tZE4vZafNkrewzjWStBYg.gif"/></a></figure></div></div></details></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-80e5-a0c3-e67c72997d01"><div style="width:100%"><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Text</summary><div class="indented"><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-800c-b831-dab9c155fcbc"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80d5-b98f-dfde9259d439" class=""><strong>Text animations</strong> are used to enhance <strong>readability</strong> and draw <strong>attention</strong> to important content. </p></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-809d-aa99-eda5f7e8c4cc" class="column-list"><div style="display:contents" dir="auto"><div id="25e31ee4-c696-8090-9c58-f643b13d20f6" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-800f-86f5-d4d150d10cd0"><div style="width:100%"><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8067-9e29-ec036805f67f" class="image"><a href="Website/-sdzQal62cMsQBlSA6O8ug.gif"><img style="width:260px" src="Website/-sdzQal62cMsQBlSA6O8ug.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-803c-b272-fcd68dcc3d9d"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80c6-9382-d218e34422f7" class=""><strong>Fade<br/><br/></strong>Text <strong>gradually appears</strong> or disappears to guide the user’s focus.</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="25e31ee4-c696-80ff-8f10-cbfd97cfc69d" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-8091-85de-da71730f8da4"><div style="width:100%"><div style="display:contents" dir="ltr"><figure id="25e31ee4-c696-8069-adc0-cd478f9c19a1" class="image"><a href="Website/T3XLZSAF-xB10-RbIMM-ZQ.gif"><img style="width:260px" src="Website/T3XLZSAF-xB10-RbIMM-ZQ.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="25e31ee4-c696-80cc-a3f2-d3f6ffcd39e0"/></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-807b-a32c-eb6691d794d3" class=""><strong>Position<br/><br/></strong>Anywhere on the screen, according to design needs and <strong>user experience considerations</strong>.</p></div></div></figure></div></div></div></div></div></div></details></div></div></figure></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80db-9f2f-df918ad60475" class="">
+</p></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-804f-bdda-d8e9438fee62"><div style="width:100%"><div style="display:contents" dir="auto"><p id="25e31ee4-c696-80af-99a3-dc1879d660f5" class="">Please refer to this standard for guidelines </p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="25e31ee4-c696-80af-b3d1-e155db1dbe39"><div style="width:100%"><div style="display:contents" dir="auto"><p id="25e31ee4-c696-805f-9af8-c1b3a4113db6" class=""><a href="https://www.notion.so/Standard-Page-Animation-9db6ce900d654e10a1eeb9a903969a06?pvs=21"><img class="icon" src="Website/S_-_mustard_-_website.png"/>Standard - Page Animation</a> </p></div></div></figure></div></div></figure></div><div style="display:contents" dir="auto"><p id="25e31ee4-c696-8094-860f-d361c10a2e65" class="">
+</p></div><div style="display:contents" dir="auto"><div style="display:contents" dir="auto"><div><div style="display:contents" dir="ltr"><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="1c331ee4-c696-80ad-9c58-dc026c606fb8"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/help-alternate_gray.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><h3 id="1c331ee4-c696-8008-bb33-f1911b39b81a" class="">Is something missing?</h3></div><div style="display:contents" dir="auto"><hr id="1c331ee4-c696-80fa-b699-c109b318d044"/></div><div style="display:contents" dir="auto"><p id="1c331ee4-c696-8084-ac35-f5c543f90853" class="">If you have any questions or feedback, we&#x27;d love to hear from you!</p></div></div></figure></div></div></div></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

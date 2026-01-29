@@ -1,0 +1,745 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Web new</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2a931ee4-c696-8066-a554-c793aa945625" class="page sans"><header><div class="page-header-icon undefined"><img class="icon notion-static-icon" src="https://www.notion.so/icons/computer_gray.svg"/></div><h1 class="page-title" dir="auto">Web new</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2a931ee4-c696-80c2-8d2a-ca73c27fdbb6"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8045-8c91-d2e6967dab70" class="">Figma link</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8012-8ca5-c67f9bb75dda" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-8082-a239-d9d9831247c6"/></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-8008-aa93-c0336232c8e6" class="column-list"><div style="display:contents" dir="auto"><div id="2a931ee4-c696-802b-9921-c452478ee9cd" style="width:30.000000000000004%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-806c-b72f-d7971caedd0b" class=""><a href="https://www.notion.so/Web-13d31ee4c69681c58332f45e5033dc8e?pvs=21">Skeleton loader</a></p></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80ea-ae89-fa75502c0e9d" style="width:25%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-800b-9490-edf38a985f63" class=""><a href="https://www.notion.so/Web-13d31ee4c69681c58332f45e5033dc8e?pvs=21">Indeterminate spinner</a></p></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80a3-b3a1-c54eb0e4b1c5" style="width:2.5%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8025-8e4f-fdcbd78e9ed4" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80ad-9e52-f9e383a7337f" style="width:20%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-800f-9c64-d3fbcf3a656a" class=""><a href="https://www.notion.so/Web-13d31ee4c69681c58332f45e5033dc8e?pvs=21">Lottie animation loader</a></p></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80c1-bc28-e3b182a63d6d" style="width:22.50000000000002%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80a0-973b-d7b56df7bcc8" class=""><a href="https://www.notion.so/Web-13d31ee4c69681c58332f45e5033dc8e?pvs=21">Determinate progress bar</a></p></div></div></div></div></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-806a-9904-c5222b20764e"/></div><div style="display:contents" dir="auto"><h1 id="2a931ee4-c696-809a-b5fc-c68c7244ba84" class=""><strong>Skeleton loader</strong> </h1></div><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-8079-9a0b-def88c78f399" class="">Best practices</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-808a-982f-d9dff07d7ee4"/></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80a6-8ad0-c19e6c52f5d7" class="">A Skeleton loader should give real-time information of what is being loaded in the different blocks of the app that have a constant layout. It’s the closest to showing real content and should be preferred whenever possible</p></div><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-80af-9ffa-df9eab2d1aff" class="">Anatomy</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-80c1-b90d-e227fbd771ce"/></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-80ff-b31c-d9ca43463804" class=""><strong>Structure</strong></h3></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8031-9f20-dc1bcfd23701" class="">Use these elements to create the layout of your skeleton. You can adapt the size of the elements to fit your use case.</p></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-8001-a181-ce81e65d22fc" class="column-list"><div style="display:contents" dir="auto"><div id="2a931ee4-c696-8009-906f-edb6236fc749" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="2a931ee4-c696-8015-ba4d-dca25de4d33e" class="image"><a href="Web%20new/skeleton.png"><img style="width:708px" src="Web%20new/skeleton.png"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80cb-b341-c279296296ea" style="width:100%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80dd-87cf-e759a517d45d" class=""><strong>Skeleton elements</strong></p></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-8007-b06e-e519f7cabe3b" class="numbered-list" start="1"><li>Text</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-80de-8709-c87d55a00d20" class="numbered-list" start="2"><li>Avatar</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-807a-9118-ca4b06d8239e" class="numbered-list" start="3"><li>Tag</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-808f-913f-c34ca95f4216" class="numbered-list" start="4"><li>Button</li></ol></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80ca-8ee6-fd05c5f501f9" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="ltr"><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="2aa31ee4-c696-8078-a7af-e86b214d888f"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-8009-935b-dbc2475acc68" class="">Animation</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-8059-b94f-c66ffe1ef60b"/></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8015-9efe-d87770e960b0" class="">Skeletons should feel <strong>calm, subtle, and consistent.</strong></p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8064-ba65-e767a7b1574c" class="">They indicate:</p></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8033-b1c1-d97355a78c3e" class="bulleted-list"><li style="list-style-type:disc">Known layout</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80d4-b1b0-e068243fb060" class="bulleted-list"><li style="list-style-type:disc">Content incoming</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8022-b392-d87244141be2" class=""><strong>Timing tokens</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-803a-b0ba-efb03585221a" class="bulleted-list"><li style="list-style-type:disc">Show only if load &gt; <code>200–300 ms</code> </li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80f9-a8aa-c2e441217834" class="bulleted-list"><li style="list-style-type:disc">Once shown, keep visible <code>400–700 ms</code> </li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80fc-bd26-c616a2e0d05e" class="bulleted-list"><li style="list-style-type:disc">Entrance: <code>fade in 200–300 ms</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-800b-bd8d-e64a6f2cfe7a" class="bulleted-list"><li style="list-style-type:disc">Exit: crossfade to content <code>200–300 ms</code></li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-80c3-a6c3-caff89a94cb9" class=""><strong>Shimmer</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80df-a9b4-fa0b57e6d477" class="bulleted-list"><li style="list-style-type:disc">Cycle: <code>1500 ms</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8029-ad84-fbb0a2116dfb" class="bulleted-list"><li style="list-style-type:disc">Direction: left → right (current right → left)</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-801a-856f-d79c954c7df3" class="bulleted-list"><li style="list-style-type:disc">Loop continuously while loading.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8076-b7ab-d9c5efa3d402" class=""><strong>Easing</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-808e-9ac2-fdde7cac09c0" class="bulleted-list"><li style="list-style-type:disc">Shimmer: linear.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-808c-8e8c-e31060f2fdd5" class="bulleted-list"><li style="list-style-type:disc">Fades/reveal: standard easing (e.g., cubic-bezier(0.2, 0, 0, 1)).</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8091-afce-c33fb3d1a6e1" class=""><strong>When to use</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8046-a483-ee87163906cd" class="bulleted-list"><li style="list-style-type:disc">Use skeletons for known layouts (lists, cards, tables, details).</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80d2-8c1d-e6bdaa0e67e7" class="bulleted-list"><li style="list-style-type:disc">Use spinners for small inline actions or unknown layout.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80ad-ab2c-ec0c072d2726" class="bulleted-list"><li style="list-style-type:disc">Don’t mix skeleton and spinner in the same region.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8042-ae8e-d4b9fc73a6dc" class=""><strong>Do / Don’t</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80d8-8cae-da2b379d5acf" class="bulleted-list"><li style="list-style-type:disc">Do keep shimmer slow and subtle; don’t exceed ~2s per cycle.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8035-878e-d2ca0bc4b8b3" class="bulleted-list"><li style="list-style-type:disc">Do debounce show and enforce a minimum display; don’t flash on/off.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80e6-96dc-effe00a1d54b" class="bulleted-list"><li style="list-style-type:disc">Do crossfade into content; don’t hard-swap.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8035-9bdd-e7aab34841de" class="bulleted-list"><li style="list-style-type:disc">Do mirror final layout; don’t use generic blocks that mislead spacing.</li></ul></div></div></figure></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8094-a4ba-e0d1985406c8" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80aa-8c75-d6ad39573589" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8079-951a-fbe1c5b5ac4b" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80d7-99e1-fb1e446552dc" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8081-ae32-d30165b7610f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8085-9d30-d386842096cd" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80b3-a830-f867f01b65c5" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-809b-af6e-c069d96c55e6" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-807a-ad7d-c7fd17c14163" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8027-b179-c3a269397a04" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-801a-bbb9-cb3b58fdd80c" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2a931ee4-c696-809d-9d3a-fe800a797161" class=""><strong>Indeterminate spinner</strong></h1></div><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-803b-bc58-ff30a2ec2903" class="">Best practices</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-8004-8d55-da3315c29034"/></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8075-8747-d885a646dfd1" class="">Indeterminate spinners help visualizing variable short loading times (in context) that will be understood by users as the direct result of their action.</p></div><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-80e7-80d2-faabe163fbeb" class="">Anatomy</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-8081-9454-de9867bebf37"/></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-8004-85bf-f2f036899bfc" class=""><strong>Structure</strong></h3></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-803b-aa96-e5d06a5ab4c8" class="">Spinners come in various sizes for different situations.</p></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-8036-bb14-ce7ed2786b15" class="column-list"><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80ad-8b0e-c3d524086ae1" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="2a931ee4-c696-80df-8b3b-dbddf2f77238" class="image"><a href="Web%20new/Frame_5.png"><img style="width:708px" src="Web%20new/Frame_5.png"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80a3-9aa3-fca55f6ab438" style="width:100%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-807f-ba1c-f0e8f766b79b" class=""><strong>Spinner anatomy</strong></p></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-8015-b0d8-c7409426b420" class="numbered-list" start="1"><li>Large spinner : fullscreen loader</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-807b-bb27-e470690875e4" class="numbered-list" start="2"><li>Medium (mobile only) : button loader</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-80f7-95a6-cdbcf0e365e2" class="numbered-list" start="3"><li>Small : Large button loader</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-806c-9a01-cb5fc209c490" class="numbered-list" start="4"><li>Extra-small : Medium / small button loader</li></ol></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8023-b9ae-df11e94be65d" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="ltr"><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="2aa31ee4-c696-8027-b47c-ef35ac189170"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="2aa31ee4-c696-80fd-8831-e8808ab6fda9" class="">Animation</h2></div><div style="display:contents" dir="auto"><hr id="2aa31ee4-c696-804b-a631-c9afef094375"/></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-805a-9e6e-eab24ca25fe3" class="">Spinners communicate “work in progress” when duration is unknown. Keep them subtle, steady, and scoped to the action.</p></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-804f-a29a-f33a535a4628" class=""><strong>Timing</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-805c-a7f9-c59864b17de5" class="bulleted-list"><li style="list-style-type:disc">Show only if load &gt; 200–300 ms (debounce).</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80df-a583-f68d800a7469" class="bulleted-list"><li style="list-style-type:disc">Once shown, keep visible ≥ 400–700 ms to avoid flicker.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80af-9ad5-e40a6356ff4f" class="bulleted-list"><li style="list-style-type:disc">Entrance: fade in 150–200 ms.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8051-bf01-f9222ed8d9f0" class="bulleted-list"><li style="list-style-type:disc">Exit: fade out 150–200 ms.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-80d0-a8cb-f124ab1e1c42" class=""><strong>Rotation</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8094-a8ee-c2f3cd66c4ff" class="bulleted-list"><li style="list-style-type:disc">Full rotation: 1200–1600 ms per loop.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-806b-a0bb-d15d5fe00f56" class="bulleted-list"><li style="list-style-type:disc">Easing: linear (constant speed).</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80bc-8f11-f0de4876b31c" class="bulleted-list"><li style="list-style-type:disc">Loop: continuous while loading.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8090-8838-c535fb2b1e22" class=""><strong>Placement and scope</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-807b-9dbe-f9ffd38ff97c" class="bulleted-list"><li style="list-style-type:disc">Inline/contextual: inside the triggering control or nearby region.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8022-824a-ef178e8f9498" class="bulleted-list"><li style="list-style-type:disc">Don’t block more UI than necessary; prefer inline over overlays.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8026-9e19-c0bfb58a5b64" class="bulleted-list"><li style="list-style-type:disc">Use fullscreen/section overlay only for route changes or critical blocking tasks.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-80f4-a164-fc4e668c93af" class=""><strong>Size mapping</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80dd-9e75-d77c5a3760e1" class="bulleted-list"><li style="list-style-type:disc">Large: fullscreen/section loaders.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8083-88e4-d224716c9042" class="bulleted-list"><li style="list-style-type:disc">Medium: mobile button loader.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8075-ae30-f8ed8993d447" class="bulleted-list"><li style="list-style-type:disc">Small: large button loader.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80e7-852b-e8cfd68d24bd" class="bulleted-list"><li style="list-style-type:disc">Extra-small: medium/small button loader.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-800e-b76e-f0c55f712c6a" class=""><strong>Do / Don’t</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8064-a6ec-dd0d758c1bae" class="bulleted-list"><li style="list-style-type:disc">Do debounce and enforce a minimum display; don’t flash on/off.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80d4-822a-d0f59f050f5d" class="bulleted-list"><li style="list-style-type:disc">Do keep rotation steady; don’t accelerate/decelerate each loop.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-809a-bbda-e194178b3f1b" class="bulleted-list"><li style="list-style-type:disc">Do fade in/out; don’t hard-swap.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8047-b9a0-dfe32f8cd4f3" class="bulleted-list"><li style="list-style-type:disc">Do use one spinner per action; don’t stack spinner + skeleton in the same region.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-80a9-919b-d7a8ee57f4f8" class=""><strong>Token mapping (if applicable)</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-800d-bf2f-cd8492303bc5" class="bulleted-list"><li style="list-style-type:disc">Rotation: duration.slow (1200–1600 ms), easing.linear.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-803f-914a-f411471a1f7e" class="bulleted-list"><li style="list-style-type:disc">Entrance/Exit: duration.quick (150–200 ms), easing.standard.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-80cd-af0b-d42cebeb9adb" class=""><strong>Hand-off notes</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-801a-8909-c7220f3fc551" class="bulleted-list"><li style="list-style-type:disc">Use a single animation keyframe reused across instances.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80f6-ba19-f32a3ab31b12" class="bulleted-list"><li style="list-style-type:disc">Keep stroke width and contrast consistent with theme.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80de-8a07-fb54eab3e339" class="bulleted-list"><li style="list-style-type:disc">Center within its container; reserve fixed space in buttons to avoid label shift.</li></ul></div></div></figure></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8024-be35-f8d4af59b87e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8046-a6ea-d8c28e4de19c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8076-86d7-fe27bef804bb" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80d7-9d5f-e0db3776e5d6" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80cd-9b95-cad248808b30" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-806b-9abb-f6bc7c339a09" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2a931ee4-c696-803a-9aa4-dc4727a92611" class=""><strong>Lottie animation loader</strong></h1></div><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-809c-9775-de9f1d6b8b74" class="">Best practices</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-8064-955c-e3e7f89e4e9c"/></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8083-9a69-e39769cc6fc7" class="">If you know in advance that a sensitive action will result in a longer than average loading time (around 10s+), dedicate a proper page with enough context to help the user understand what’s going on.</p></div><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-805b-a73f-ff383f171dd3" class="">Anatomy</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-809d-9971-eb964d5f5df3"/></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-809e-8504-e4feb8a878dc" class=""><strong>Structure</strong></h3></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80fd-90de-c351c3fdcd59" class="column-list"><div style="display:contents" dir="auto"><div id="2a931ee4-c696-804b-ba4b-fef2e96db743" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="2a931ee4-c696-80b8-9a1a-e4563c8a79f8" class="image"><a href="Web%20new/Frame_6.png"><img style="width:708px" src="Web%20new/Frame_6.png"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-8060-98b8-c3bd8f82ddf2" style="width:100%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80c8-880b-df91ecd0386d" class=""><strong>Lottie animation loader anatomy</strong></p></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-80fc-b82d-df373d6cf725" class="numbered-list" start="1"><li>Large spinner : fullscreen loader</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-804e-aea7-e343b9ddff4b" class="numbered-list" start="2"><li>Medium (mobile only) : button loader</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-80a7-8354-f8e791ebde29" class="numbered-list" start="3"><li>Small : Large button loader</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-80cb-8361-e2887eb36eb8" class="numbered-list" start="4"><li>Extra-small : Medium / small button loader</li></ol></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-801f-81ba-e9cf84894e28" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-8001-917a-dd93fbde8f2e" class="">Behavior</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-8074-a237-ef56b768430d"/></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-805d-9ffb-e476633108a7" class="column-list"><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80ea-8161-dd24de57a5ed" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="2a931ee4-c696-8051-a0f9-c41f8fea9a09" class="image"><a href="Web%20new/aqKu8ewkXyjNi-LGu-5L-g.gif"><img style="width:330.9921875px" src="Web%20new/aqKu8ewkXyjNi-LGu-5L-g.gif"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80e4-8cd9-ee70066d9f3c" style="width:50%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80f5-8db3-dc07c74556f5" class=""><strong>Sense of loading</strong></p></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8090-9337-fb308a0f7481" class="">Convey the sense of loading with the lottie animation</p></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8012-906d-f77461be1f52" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8061-9c64-c1aacae5b308" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8082-afb1-c3606ee05a24" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8071-b21a-d5d79ba06311" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8060-98c7-fc3b49d8efe1" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80c1-bfaf-d8e988b698f3" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8018-99d6-c97acea031ff" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80f0-99d5-d666642eb39b" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2a931ee4-c696-806b-8b8c-f3c45b09aec8" class=""><strong>Determinate progress bar</strong></h1></div><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-80fe-9aa3-c2d3246ed113" class="">Best practices</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-80cf-8246-eec2811e60f5"/></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-803a-a8b5-c031cd22e9d1" class="">As opposed to an indeterminate spinner, a determinate progress bar or a determinate spinner give exact feedback of the progression. The size and context is well defined therefore users will understand what the percentage means without explicitly saying that “the file is currently uploading”.</p></div><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-80d5-830f-efdeaa049449" class="">Anatomy</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-809c-88f1-fb5b707bb572"/></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-804a-9fb2-ed70af7fc487" class=""><strong>Structure</strong></h3></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-803b-9929-dfc637668ef1" class="column-list"><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80e6-af74-d41c34250ae6" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="2a931ee4-c696-80e2-8aaa-cdddd5037f17" class="image"><a href="Web%20new/Frame_7.png"><img style="width:708px" src="Web%20new/Frame_7.png"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80bb-8fb7-e75c34db0bb0" style="width:100%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-805d-a5d8-c0579a418930" class=""><strong>Progress bar</strong></p></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-80cc-a63b-e3a657442778" class="numbered-list" start="1"><li>Progression bar</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-80ce-a2ab-ce5a00bed956" class="numbered-list" start="2"><li>Background bar</li></ol></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80ca-81fc-f03b2fb4e73b" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-8017-968d-f6afdfae2638" class="">Behavior</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-8076-a53c-d9022665981c"/></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-805d-838e-e6714093f74e" class="column-list"><div style="display:contents" dir="auto"><div id="2a931ee4-c696-806e-a0aa-f5a7b2100464" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="2a931ee4-c696-8099-b5ab-c5dd01cf4481" class="image"><a href="Web%20new/jTjCYys3NCsiXLMilam1FA.gif"><img style="width:330.9921875px" src="Web%20new/jTjCYys3NCsiXLMilam1FA.gif"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-8061-bed9-c2792e029361" style="width:50%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-808c-84d1-c94b73b82715" class=""><strong>Defined length</strong></p></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8016-bae7-cd4fa5d79d84" class="">A progress bar loader should have a clearly defined beginning and end to give context while it fills progressively. In the case of loading states, the color should remain a primary stroke color as it only informs about back end processing.</p></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-804f-a989-daf76dbcb68a" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="ltr"><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="2aa31ee4-c696-807a-95f0-dd660009b28b"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="2aa31ee4-c696-809a-82d5-f2eca306a5ba" class="">Animation</h2></div><div style="display:contents" dir="auto"><hr id="2aa31ee4-c696-80ce-85ca-d718f3680f43"/></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-803c-be57-f81919064ff9" class="">Determinate bars show known progress. Movement should be smooth, honest, and calm.</p></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8003-b19a-e3feade5fe70" class=""><strong>Timing</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80fe-ac5c-cfd2d419fa8b" class="bulleted-list"><li style="list-style-type:disc">Entrance: fade in 150–200 ms.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80d5-ad92-dbe3e0172ef0" class="bulleted-list"><li style="list-style-type:disc">Exit on completion: fill to 100% then fade out or transition to success in 200–300 ms.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80d1-85ea-e6664baf4eec" class="bulleted-list"><li style="list-style-type:disc">Completion hold: pause at 100% for ~400–600 ms to confirm success before changing state.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8006-b55c-e0589bbdd780" class=""><strong>Progress updates</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8092-a998-fb16edcaaff6" class="bulleted-list"><li style="list-style-type:disc">Animate between reported values over ~200–300 ms.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80f5-b42c-ff0afa7b53ab" class="bulleted-list"><li style="list-style-type:disc">Easing: standard (e.g., cubic-bezier(0.2, 0, 0, 1)).</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-800c-a733-dd4a8884254e" class="bulleted-list"><li style="list-style-type:disc">Never animate backwards; clamp to the latest known value.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-80ed-abd3-d913c7699974" class=""><strong>Frequency</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8020-8f97-e07718004876" class="bulleted-list"><li style="list-style-type:disc">Throttle value updates to ~4–10 per second to avoid jitter.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-806c-afa9-cb351df8200b" class="bulleted-list"><li style="list-style-type:disc">For sparse updates, interpolate smoothly to each new value.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-80b3-a275-d67c5ec527cf" class=""><strong>Visual behavior</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80f5-9c10-e891ebc772d7" class="bulleted-list"><li style="list-style-type:disc">Keep the background bar static.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8039-8d96-c240023dbc46" class="bulleted-list"><li style="list-style-type:disc">Foreground bar fills left → right.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8004-8670-e8c28f93826e" class="bulleted-list"><li style="list-style-type:disc">Optional subtle pulse at completion (≤300 ms), then settle.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8047-b734-f3aaf53ec044" class=""><strong>Color and messaging</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80e0-a268-dbaba71a55d5" class="bulleted-list"><li style="list-style-type:disc">Use primary stroke color for neutral loading.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8048-b469-e53713c58448" class="bulleted-list"><li style="list-style-type:disc">Don’t change color unless indicating error or success state.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-806e-9d67-ea4a7fccebe4" class="bulleted-list"><li style="list-style-type:disc">Percentage label is optional; prefer concise task label if needed.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8093-8d53-fcb0133b8dbe" class=""><strong>When to use</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80a7-abde-d26568869469" class="bulleted-list"><li style="list-style-type:disc">Use for uploads, downloads, imports, or tasks with measurable progress.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80ec-a622-db7e5cc25ae0" class="bulleted-list"><li style="list-style-type:disc">Prefer over indeterminate when backend can report progress.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-800a-9679-da2e4b38f366" class="bulleted-list"><li style="list-style-type:disc">Don’t combine with skeleton/spinner in the same region.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8000-87af-e4ec0ebedd96" class=""><strong>Do / Don’t</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-805f-8e7a-f619cd090b9d" class="bulleted-list"><li style="list-style-type:disc">Do animate smoothly between values; don’t snap or stutter.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8012-8bd4-fee18a838daa" class="bulleted-list"><li style="list-style-type:disc">Do hold briefly at 100%; don’t disappear instantly.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80dc-953a-d6f779284082" class="bulleted-list"><li style="list-style-type:disc">Do keep layout stable; don’t resize the bar during progress.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8032-983a-f42bf6d65223" class="bulleted-list"><li style="list-style-type:disc">Do reflect real progress; don’t fake fast starts/slow ends beyond easing.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8063-9a13-caa8099d9918" class=""><strong>Token mapping (if applicable)</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-809c-80ac-d728ef94062e" class="bulleted-list"><li style="list-style-type:disc">Value transitions: duration.standard (200–300 ms), easing.standard.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8032-9169-de479cd873b7" class="bulleted-list"><li style="list-style-type:disc">Entrance/Exit/Completion: duration.quick–standard (150–300 ms), easing.standard.</li></ul></div></div></figure></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

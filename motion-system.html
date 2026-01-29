@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qonto Motion System | Spiros Leividiotis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --font-primary: 'Space Grotesk', -apple-system, system-ui, sans-serif;
+            --color-bg: #000000;
+            --color-text: #FFFFFF;
+            --color-muted: #757575;
+            --color-border: #1a1a1a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 60px 100px;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 60px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--color-muted);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 32px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--color-text);
+        }
+
+        .header-title {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+            color: #FFFFFF;
+        }
+
+        .header-intro {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #CCCCCC;
+            max-width: 800px;
+            margin-bottom: 16px;
+        }
+
+        .header-meta {
+            font-size: 16px;
+            font-weight: 400;
+            color: #999999;
+            letter-spacing: -0.01em;
+        }
+
+        /* Section */
+        .section {
+            margin-top: 60px;
+            padding-top: 60px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .section:first-of-type {
+            margin-top: 0;
+        }
+
+        .section-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #999999;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            color: #FFFFFF;
+        }
+
+        .section-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #CCCCCC;
+            max-width: 800px;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content strong {
+            color: #FFFFFF;
+            font-weight: 500;
+        }
+
+        /* Process Steps */
+        .process {
+            margin-top: 40px;
+        }
+
+        .step {
+            margin-bottom: 60px;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: baseline;
+            gap: 20px;
+            margin-bottom: 16px;
+        }
+
+        .step-number {
+            font-size: 14px;
+            color: #999999;
+            font-weight: 400;
+        }
+
+        .step-title {
+            font-size: 20px;
+            font-weight: 500;
+            color: #FFFFFF;
+            letter-spacing: -0.01em;
+        }
+
+        .step-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #CCCCCC;
+            max-width: 800px;
+            padding-left: 40px;
+        }
+
+        .step-content p {
+            margin-bottom: 16px;
+        }
+
+        .step-content strong {
+            color: #FFFFFF;
+            font-weight: 500;
+        }
+
+        /* Media placeholder */
+        .media-placeholder {
+            margin-top: 24px;
+            padding: 40px 24px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed #1a1a1a;
+            border-radius: 4px;
+            text-align: center;
+            color: #999999;
+            font-size: 14px;
+        }
+
+        /* Links */
+        .link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 32px;
+        }
+
+        .link-card {
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid #1a1a1a;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #FFFFFF;
+            transition: all 0.2s;
+        }
+
+        .link-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .link-card-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #999999;
+            margin-bottom: 8px;
+        }
+
+        .link-card-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #FFFFFF;
+        }
+
+        .link-card-description {
+            font-size: 14px;
+            color: #CCCCCC;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 80px;
+            padding-top: 60px;
+            border-top: 1px solid #1a1a1a;
+            text-align: center;
+        }
+
+        .footer-link {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            transition: opacity 0.2s;
+        }
+
+        .footer-link:hover {
+            opacity: 0.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 60px 20px 80px;
+            }
+
+            .header {
+                margin-bottom: 40px;
+            }
+
+            .header-title {
+                font-size: 20px;
+            }
+
+            .header-intro {
+                font-size: 16px;
+            }
+
+            .section {
+                margin-top: 40px;
+                padding-top: 40px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+
+            .section-content {
+                font-size: 16px;
+            }
+
+            .step {
+                margin-bottom: 40px;
+            }
+
+            .step-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .step-title {
+                font-size: 18px;
+            }
+
+            .step-content {
+                font-size: 16px;
+                padding-left: 0;
+            }
+
+            .link-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .footer {
+                margin-top: 60px;
+                padding-top: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="container">
+            <a href="/" class="back-link">← Back to portfolio</a>
+            <h1 class="header-title">Qonto Motion System</h1>
+            <p class="header-intro">
+                Qonto has a strong design system, and we wanted animation to be part of it. 
+                This is the story of how we built a scalable motion language that bridges design 
+                and engineering—from principles to implementation.
+            </p>
+            <div class="header-meta">2022–2024 · Qonto · Motion Design Lead</div>
+        </div>
+    </div>
+
+    <!-- Problem -->
+    <div class="section">
+        <div class="container">
+            <div class="section-label">Context</div>
+            <h2 class="section-title">The Problem</h2>
+            <div class="section-content">
+                <p>
+                    Qonto's design system provided clarity for color, typography, spacing, and components. 
+                    But motion? It was inconsistent. Designers mocked up animations with arbitrary values. 
+                    Engineers implemented them differently across platforms. There was no shared vocabulary.
+                </p>
+                <p>
+                    We needed a motion system that would scale—one that designers could reference in specs, 
+                    engineers could implement without ambiguity, and teams could extend without breaking consistency.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Solution -->
+    <div class="section">
+        <div class="container">
+            <div class="section-label">Approach</div>
+            <h2 class="section-title">Building the System</h2>
+            
+            <div class="process">
+                <!-- Step 1: Principles -->
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-number">01</span>
+                        <h3 class="step-title">Motion Principles</h3>
+                    </div>
+                    <div class="step-content">
+                        <p>
+                            We started by defining <strong>motion principles</strong>—the foundation for every 
+                            animation decision. These principles guide what good motion feels like at Qonto: 
+                            purposeful, coherent, subtle, snappy, and smooth.
+                        </p>
+                        <p>
+                            Each principle came with visual examples showing do's and don'ts, helping teams 
+                            understand not just the rules, but the reasoning behind them.
+                        </p>
+                        <div class="media-placeholder">
+                            [Principle GIFs will go here]
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Primitives -->
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-number">02</span>
+                        <h3 class="step-title">Primitives: Speaking the Same Language</h3>
+                    </div>
+                    <div class="step-content">
+                        <p>
+                            Next, we worked with engineers to define <strong>primitive tokens</strong>—the 
+                            building blocks of motion. We asked them what they needed: duration values, easing 
+                            curves, scale factors, blur intensities.
+                        </p>
+                        <p>
+                            We talked to designers about how they spec'd motion in mockups. The result: a shared 
+                            vocabulary. <strong>motion.duration.quick</strong> means 200ms everywhere—Figma, 
+                            iOS, Android, Web. No interpretation. No ambiguity.
+                        </p>
+                        <p>
+                            Primitives include: <strong>Duration</strong>, <strong>Easing</strong>, 
+                            <strong>Scale</strong>, <strong>Alpha</strong>, <strong>Blur</strong>, 
+                            <strong>Rotation</strong>, <strong>Translate</strong>, and <strong>Delay</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 3: Semantics -->
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-number">03</span>
+                        <h3 class="step-title">Semantics: Scalable Behaviors</h3>
+                    </div>
+                    <div class="step-content">
+                        <p>
+                            Primitives alone weren't enough. Designers don't think in milliseconds and cubic-beziers—they 
+                            think in behaviors. "This button should feel responsive." "This modal should slide in smoothly."
+                        </p>
+                        <p>
+                            So we created <strong>semantic tokens</strong>—predefined combinations of primitives 
+                            for common patterns. Behaviors like <strong>Fade</strong>, <strong>Slide</strong>, 
+                            <strong>Press/Tap</strong>, <strong>Hover/Lift</strong>, and <strong>Expand/Collapse</strong>.
+                        </p>
+                        <p>
+                            These semantics are organized into <strong>Base</strong> (entry, exit, reveal, transition) 
+                            and <strong>Common</strong> (interactions, micro-animations). They're documented with 
+                            specs, code snippets, and live previews.
+                        </p>
+                        <div class="media-placeholder">
+                            [Motion tokens library preview / Netlify link will go here]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Impact -->
+    <div class="section">
+        <div class="container">
+            <div class="section-label">Impact</div>
+            <h2 class="section-title">The Result</h2>
+            <div class="section-content">
+                <p>
+                    Implementation with the motion system is <strong>faster</strong>. Designers know what behaviors 
+                    to use from the library. Engineers reference tokens in code—no guesswork, no back-and-forth.
+                </p>
+                <p>
+                    We <strong>scale</strong>. New features ship with consistent motion because the patterns are 
+                    already defined. We're <strong>consistent</strong> across web and mobile because we share the 
+                    same source of truth.
+                </p>
+                <p>
+                    Most importantly, we have a <strong>common motion language</strong>. Designers, engineers, and 
+                    product teams can discuss animation with precision, using the same vocabulary.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Documentation Links -->
+    <div class="section">
+        <div class="container">
+            <div class="section-label">Explore</div>
+            <h2 class="section-title">Documentation</h2>
+            <div class="section-content">
+                <p>
+                    The motion system lives in detailed documentation—tokens, patterns, rationale, and implementation 
+                    guides for every platform.
+                </p>
+            </div>
+
+            <div class="link-grid">
+                <a href="motion-system/system/[A3][Motion] Qonto's Motion System 23831ee4c69680eda304d798420a6c4d.html" class="link-card">
+                    <div class="link-card-label">Overview</div>
+                    <div class="link-card-title">Motion System</div>
+                    <div class="link-card-description">
+                        Principles, rationale, and system architecture
+                    </div>
+                </a>
+
+                <a href="motion-system/tokens-library/Motion tokens library 25d31ee4c6968053a3f2fa7c9b45976e.html" class="link-card">
+                    <div class="link-card-label">Reference</div>
+                    <div class="link-card-title">Motion Tokens Library</div>
+                    <div class="link-card-description">
+                        Complete token reference: primitives, base, and common patterns
+                    </div>
+                </a>
+
+                <a href="motion-system/tokens/Motion tokens 2b031ee4c6968053b483e97ca3076264.html" class="link-card">
+                    <div class="link-card-label">Implementation</div>
+                    <div class="link-card-title">Motion Tokens</div>
+                    <div class="link-card-description">
+                        Token values and usage guidelines
+                    </div>
+                </a>
+
+                <a href="motion-system/motion/Motion 11831ee4c696802d9096fa098a9b9fe0.html" class="link-card">
+                    <div class="link-card-label">Specs</div>
+                    <div class="link-card-title">Motion</div>
+                    <div class="link-card-description">
+                        Product motion specs and examples
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <a href="/" class="footer-link">← Back to portfolio</a>
+        </div>
+    </div>
+</body>
+</html>

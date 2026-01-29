@@ -1,0 +1,26 @@
+﻿Name,Category,Created,Created by,Health,Type
+" Duration",Timing,"August 28, 2025 6:00 PM (GMT+2)",Spiros Leividiotis,Up-to-date,Primitive tokens
+Easing,Timing,"August 28, 2025 6:00 PM (GMT+2)",Spiros Leividiotis,Up-to-date,Primitive tokens
+Delay,Timing,"August 28, 2025 6:00 PM (GMT+2)",Spiros Leividiotis,Up-to-date,Primitive tokens
+Translate X,Values,"August 28, 2025 6:00 PM (GMT+2)",Spiros Leividiotis,Deprecated,Primitive tokens
+Translate Y,Values,"August 28, 2025 6:00 PM (GMT+2)",Spiros Leividiotis,Deprecated,Primitive tokens
+Scale,Values,"August 28, 2025 6:00 PM (GMT+2)",Spiros Leividiotis,Up-to-date,Primitive tokens
+Alpha,Values,"August 28, 2025 6:00 PM (GMT+2)",Spiros Leividiotis,Up-to-date,Primitive tokens
+Rotation,Values,"August 28, 2025 6:00 PM (GMT+2)",Spiros Leividiotis,Up-to-date,Primitive tokens
+Blur,Values,"October 31, 2025",Spiros Leividiotis,Up-to-date,Primitive tokens
+Spring,Values,"October 31, 2025",Spiros Leividiotis,Up-to-date,Primitive tokens
+Translate,Values,"October 31, 2025",Spiros Leividiotis,Up-to-date,Primitive tokens
+Entry,Base,"October 31, 2025",Spiros Leividiotis,Up-to-date,Semantic tokens
+Exit,Base,"October 31, 2025",Spiros Leividiotis,Up-to-date,Semantic tokens
+Interactive,Base,"October 31, 2025",Spiros Leividiotis,Archive,Semantic tokens
+Transition,Base,"October 31, 2025",Spiros Leividiotis,Up-to-date,Semantic tokens
+Reveal,Base,"October 31, 2025",Spiros Leividiotis,Up-to-date,Semantic tokens
+"Slide ",Common,"November 3, 2025",Spiros Leividiotis,Up-to-date,Semantic tokens
+Fade,Common,"November 3, 2025",Spiros Leividiotis,Up-to-date,Semantic tokens
+Scale fade,Common,"November 3, 2025",Spiros Leividiotis,Up-to-date,Semantic tokens
+Expand/ collapse,Common,"November 3, 2025",Spiros Leividiotis,Up-to-date,Semantic tokens
+Press/ tap,Common,"November 3, 2025",Spiros Leividiotis,Up-to-date,Semantic tokens
+"Hover/ lift ",Common,"November 3, 2025",Spiros Leividiotis,Up-to-date,Semantic tokens
+"Shimmer/ loading ",Common,"November 3, 2025",Spiros Leividiotis,Up-to-date,Semantic tokens
+"Stagger ",Common,"November 3, 2025",Spiros Leividiotis,Up-to-date,Semantic tokens
+Page transition,Common,"November 3, 2025",Spiros Leividiotis,Up-to-date,Semantic tokens

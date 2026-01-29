@@ -1,0 +1,721 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Mobile</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="25d31ee4-c696-812b-abd4-db691c2f77a8" class="page sans"><header><div class="page-header-icon undefined"><img class="icon notion-static-icon" src="https://www.notion.so/icons/phone_gray.svg"/></div><h1 class="page-title" dir="auto">Mobile</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-817a-aa9c-d96f83594dfd" class="">Use cases</h2></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-817c-86a3-d9a69b7458b2"/></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81ee-a0af-fa39f27d23ab" class=""><em><mark class="highlight-blue">If more than one use case uses the same pattern type, document this pattern type once and navigate to it from each use case.</mark></em></p></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81a6-a5e6-dbb668e812fa" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-811d-88f7-d3c7824cb5c6" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="25d31ee4-c696-8128-a019-c73bea9b37f3"><div style="width:100%"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8157-9f38-f70308930ae8" class="">Use case 1</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81d3-b99b-d50678790c70" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="25d31ee4-c696-8120-9838-eee2b385ed1c"><div style="width:100%"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-812b-8e32-df7a719ebc98" class="">Use case 2</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8145-8941-da9d6bfdf5e0" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81bb-b744-e99d2e66da42" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="25d31ee4-c696-8156-a352-d72964c7a152"><div style="width:100%"><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8119-9e9f-c3057c166ac7" class="">Use case 3</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-814d-9003-d1f0d5f9e44e" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><h1 id="25d31ee4-c696-81b2-9b7e-f9718a7b4e80" class="">Use case 1</h1></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-81f4-a659-dffed3ec356b"/></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8191-94e3-e77b7b072689" class=""><em><mark class="highlight-blue">Provide a brief explanation of the use case and an example. E.g. User needs to verify their identity via a KYC provider to get full access to their account.</mark></em></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81d2-bc2b-ed07dbd22fb5" class="">
+</p></div><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-816c-b4b9-e990794b1930" class="image"><a href="Web/image-pattern.png"><img style="width:707.9921875px" src="Web/image-pattern.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81a6-b73c-c1532736d447" class=""><em><mark class="highlight-blue">If the use case features multiple pattern types, introduce it visually with an illustration of the possibilities.</mark></em></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81d7-aacf-f82fca5d6a8d" class="">💡<strong>Why this pattern for this use case?</strong></p></div><div style="display:contents" dir="auto"><ul id="25d31ee4-c696-81e6-b8f4-c58cca87da13" class="bulleted-list"><li style="list-style-type:disc">xxx</li></ul></div><div style="display:contents" dir="auto"><ul id="25d31ee4-c696-8174-85a1-d271f1e2af04" class="bulleted-list"><li style="list-style-type:disc">xxx</li></ul></div><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-81cd-9a64-deef353d3247" class="">Behavior</h2></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-816a-a6f8-fddd4233288e" class=""><em><mark class="highlight-blue">Share recommendations on how the pattern behaves for the specific use case, e.g. display conditions or logic. Remember to cross-link to relevant component documentation.</mark></em></p></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8159-902b-f007b2998a66" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8141-92ba-ff2c5e4501f8" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-8154-830a-d20da2b684d7" class="image"><a href="Web/1024x768px-mustard.png"><img style="width:2048px" src="Web/1024x768px-mustard.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81c9-9457-c452e63ea22c" class=""><strong>Guideline</strong></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-818c-8005-db6fbf3a4b8a" class="">💡Why?</p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81c3-947b-cc7b5fe1c3e6" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-81ae-a8d3-c5a95dd8c2e3" class="image"><a href="Web/1024x768px-mint.png"><img style="width:331px" src="Web/1024x768px-mint.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-815b-a68b-d44309300ec5" class=""><strong>Guideline</strong></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81f5-b5ad-d8f5b2411435" class="">💡Why?</p></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-818d-ae39-c0cd66337a55" class="">Content</h2></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8144-9c50-c0195d06eec0" class=""><em><mark class="highlight-blue">Include any content guidelines that we’d take into account when using this pattern. See </mark></em><em><mark class="highlight-blue"><a href="https://www.notion.so/13d31ee4c696806380f7d4f74a98b848?pvs=21">full list of content parameters</a></mark></em><em><mark class="highlight-blue"> to consider.</mark></em></p></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-81cc-912f-fdfeab4d0b76"/></div><div style="display:contents" dir="auto"><h3 id="25d31ee4-c696-817b-b327-d1fcdea730b1" class="">E.g. Content coherence</h3></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81e1-a856-d028d081a9e0" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81b4-bb0a-f91d54495ecf" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-81dc-8e13-cc87a63e13ce" class="image"><a href="Web/1024x768px-mustard.png"><img style="width:2048px" src="Web/1024x768px-mustard.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8144-b5e4-c18190971a3e" class=""><strong>Guideline</strong></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-817f-9f32-fd87374a7b69" class="">💡Why?</p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81cd-88ee-ce9737326b43" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-81d8-8b14-d5c2270436b5" class="image"><a href="Web/1024x768px-mint.png"><img style="width:331px" src="Web/1024x768px-mint.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81c1-91b7-e7d3a719aa3b" class=""><strong>Guideline</strong></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81ff-afac-c4fa3f0f3915" class="">💡Why?</p></div></div></div></div></div><div style="display:contents" dir="auto"><h3 id="25d31ee4-c696-8153-b41f-ca94804c58ac" class="">E.g. Tone of voice</h3></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81ac-8917-d2e69911ccf1" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-818b-af11-d80bb2f14dc9" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-8178-85ef-d48af7ff8464" class="image"><a href="Web/1024x768px-mustard.png"><img style="width:2048px" src="Web/1024x768px-mustard.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8112-b87a-f49bd3ab282b" class=""><strong>Guideline</strong></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-811f-a36f-e870f6204751" class="">💡Why?</p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81e4-9166-c3be9710619f" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-81f1-88ba-c0bfe9edcf27" class="image"><a href="Web/1024x768px-mint.png"><img style="width:331px" src="Web/1024x768px-mint.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8184-9bad-e2b255f6eca9" class=""><strong>Guideline</strong></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81a1-be65-d5febb2e284d" class="">💡Why?</p></div></div></div></div></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8197-98e0-e1c814f94442" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-81b6-80c0-d0daf922454e"/></div><div style="display:contents" dir="auto"><h1 id="25d31ee4-c696-8117-9757-e0816a6bd067" class="">Use case 2</h1></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-8105-932e-f117c0cc0c29"/></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-810a-b966-cc943bcde9d9" class=""><em><mark class="highlight-blue">Provide a brief explanation of the use case and an example. E.g. User needs to verify their identity via a KYC provider to get full access to their account.</mark></em></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81ea-b1e8-eaf118adb2ba" class="">
+</p></div><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-8152-8887-d227d3e76a64" class="image"><a href="Web/image-pattern.png"><img style="width:707.9921875px" src="Web/image-pattern.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8187-a1d0-d6eba380d5d5" class=""><em><mark class="highlight-blue">If the use case features multiple pattern variations, introduce it visually with an illustration of the possibilities.</mark></em></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-816c-b47b-e490ca6c2bbd" class="">💡<strong>Why this pattern for this use case?</strong></p></div><div style="display:contents" dir="auto"><ul id="25d31ee4-c696-8106-9c4f-de2e86ffea20" class="bulleted-list"><li style="list-style-type:disc">xxx</li></ul></div><div style="display:contents" dir="auto"><ul id="25d31ee4-c696-81de-b374-e9fbc783333f" class="bulleted-list"><li style="list-style-type:disc">xxx</li></ul></div><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-81e3-8ca1-ce12975aca80" class="">Behavior</h2></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81e0-921f-d47c07df0580" class=""><em><mark class="highlight-blue">Share recommendations on how the pattern behaves for the use case, e.g. display conditions or logic behind the pattern. Remember to cross-link to component documentation.</mark></em></p></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81a8-a3c0-f47a1cffe483" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81e2-983f-c3e8a7e36375" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-8171-a88a-ed7aa606fda9" class="image"><a href="Web/1024x768px-mustard.png"><img style="width:2048px" src="Web/1024x768px-mustard.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81f1-81c3-c2c6f6f2cedc" class=""><strong>Guideline</strong></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81bf-ab73-ef21e33e25f0" class="">💡Why?</p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81ba-b17a-c9f6f4562a9d" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-8195-a32a-fff431f7e955" class="image"><a href="Web/1024x768px-mint.png"><img style="width:331px" src="Web/1024x768px-mint.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-813e-b5c5-ccf5a7707f58" class=""><strong>Guideline</strong></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8159-90a6-e3c27e866233" class="">💡Why?</p></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-8131-880a-c8acf7c3442c" class="">Content</h2></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8137-8583-c4fd012548b6" class=""><em><mark class="highlight-blue">Include any content guidelines that we’d take into account when using this pattern. See </mark></em><em><mark class="highlight-blue"><a href="https://www.notion.so/13d31ee4c696806380f7d4f74a98b848?pvs=21">full list of content parameters</a></mark></em><em><mark class="highlight-blue"> to consider.</mark></em></p></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-812a-9a50-e7e1ac10073c"/></div><div style="display:contents" dir="auto"><h3 id="25d31ee4-c696-8111-9419-c60898dbb583" class="">E.g. Content coherence</h3></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81aa-bd80-e21c39736774" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8140-a310-de19b770f3ca" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-814d-ba9c-c92f2b11f5f4" class="image"><a href="Web/1024x768px-mustard.png"><img style="width:2048px" src="Web/1024x768px-mustard.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81e5-99ab-dcd507645a1d" class=""><strong>Guideline</strong></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8155-80da-c27d4e9c9971" class="">💡Why?</p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81ae-befb-c1527acff171" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-8172-9b1e-d0aff82c24fb" class="image"><a href="Web/1024x768px-mint.png"><img style="width:331px" src="Web/1024x768px-mint.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8181-905e-ce95f4494899" class=""><strong>Guideline</strong></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81c2-bcbf-f71e94161e4b" class="">💡Why?</p></div></div></div></div></div><div style="display:contents" dir="auto"><h3 id="25d31ee4-c696-810c-a0d1-e99e40e9063e" class="">E.g. Tone of voice</h3></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81de-9b96-de3df27950f6" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-812f-85bf-f47e8c92c17f" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-8176-8a35-fa30bd97c85d" class="image"><a href="Web/1024x768px-mustard.png"><img style="width:2048px" src="Web/1024x768px-mustard.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81de-adbf-c04ffb6b0113" class=""><strong>Guideline</strong></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81a9-84bc-e2544ce7fe9f" class="">💡Why?</p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-817d-8775-d7344eb30928" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-8112-836b-fa2ee7bcbfe5" class="image"><a href="Web/1024x768px-mint.png"><img style="width:331px" src="Web/1024x768px-mint.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8171-9243-ce87c4feb357" class=""><strong>Guideline</strong></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8154-8b4d-ceb252486a9d" class="">💡Why?</p></div></div></div></div></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81ab-9fe7-eaa70380a819" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-8161-9802-ce4e4506e641"/></div><div style="display:contents" dir="auto"><h1 id="25d31ee4-c696-81cc-b1aa-f3afb259bd15" class="">Use case 3</h1></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-8126-a264-cbad11f8a5fc"/></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-816f-a655-c072678bfaf8" class=""><em><mark class="highlight-blue">Provide a brief explanation of the use case and an example. E.g. User needs to verify their identity via a KYC provider to get full access to their account.</mark></em></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8108-868f-f2982a0d4f94" class="">
+</p></div><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-815a-9dd0-f1124267c237" class="image"><a href="Web/image-pattern.png"><img style="width:707.9921875px" src="Web/image-pattern.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81c6-a6bb-f348cada59b9" class=""><em><mark class="highlight-blue">If the use case features multiple pattern variations, introduce it visually with an illustration of the possibilities.</mark></em></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81fc-9c34-de5eb7310cae" class="">💡<strong>Why this pattern for this use case?</strong></p></div><div style="display:contents" dir="auto"><ul id="25d31ee4-c696-81cd-81b2-fac16d587072" class="bulleted-list"><li style="list-style-type:disc">xxx</li></ul></div><div style="display:contents" dir="auto"><ul id="25d31ee4-c696-814b-acab-c0cef5859970" class="bulleted-list"><li style="list-style-type:disc">xxx</li></ul></div><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-8126-b309-d15b2fca6ff0" class="">Behavior</h2></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81fb-9692-f6b7f6252d7d" class=""><em><mark class="highlight-blue">Share recommendations on how the pattern behaves for the use case, e.g. display conditions or logic behind the pattern. Remember to cross-link to component documentation.</mark></em></p></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81c9-b580-db2cb5bd51a4" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-812f-b481-cbd7ddf71e25" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-8144-a693-f3ede2136313" class="image"><a href="Web/1024x768px-mustard.png"><img style="width:2048px" src="Web/1024x768px-mustard.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81ec-9ea9-fc58ad7423b5" class=""><strong>Guideline</strong></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8187-9dad-d34104850224" class="">💡Why?</p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8131-a629-e14581aeea3f" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-811c-96d5-d945a6cd0694" class="image"><a href="Web/1024x768px-mint.png"><img style="width:331px" src="Web/1024x768px-mint.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81c4-aadb-d38f29b69437" class=""><strong>Guideline</strong></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-814c-86a7-fae4dc37c1ea" class="">💡Why?</p></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="25d31ee4-c696-8198-bd63-f2d6a4931527" class="">Content</h2></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81e7-a8d1-cbecb3103991" class=""><em><mark class="highlight-blue">Include any content guidelines that we’d take into account when using this pattern. See </mark></em><em><mark class="highlight-blue"><a href="https://www.notion.so/13d31ee4c696806380f7d4f74a98b848?pvs=21">full list of content parameters</a></mark></em><em><mark class="highlight-blue"> to consider.</mark></em></p></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-8166-9ee0-dc022f88f9c0"/></div><div style="display:contents" dir="auto"><h3 id="25d31ee4-c696-81b5-864c-e14c2cb7f3fd" class="">E.g. Content coherence</h3></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81f7-a98e-dc1c748c4bbd" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8186-ab99-fb8f02e6dac7" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-81f1-b791-e31a923032c2" class="image"><a href="Web/1024x768px-mustard.png"><img style="width:2048px" src="Web/1024x768px-mustard.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81d3-8b1e-fe5cea3f190e" class=""><strong>Guideline</strong></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-811c-b441-edac7d9927f9" class="">💡Why?</p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8157-a263-eba6c9f49f39" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-81da-972d-e227b4c63c38" class="image"><a href="Web/1024x768px-mint.png"><img style="width:331px" src="Web/1024x768px-mint.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81c7-8f79-f9e3a565d893" class=""><strong>Guideline</strong></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81ec-b0a0-d3ae3373b5d1" class="">💡Why?</p></div></div></div></div></div><div style="display:contents" dir="auto"><h3 id="25d31ee4-c696-8151-aba4-c08083f0199c" class="">E.g. Tone of voice</h3></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-8198-80d4-cabcb1493177" class="column-list"><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81ef-a007-db3129b562b3" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-819c-9d1e-ed63c853d4fb" class="image"><a href="Web/1024x768px-mustard.png"><img style="width:2048px" src="Web/1024x768px-mustard.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-81fa-86ff-c156af6c5d62" class=""><strong>Guideline</strong></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8145-94b7-cb7b1c1c2219" class="">💡Why?</p></div></div></div><div style="display:contents" dir="auto"><div id="25d31ee4-c696-81f0-a496-decfac28e2cf" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure id="25d31ee4-c696-810b-b232-fb8b3ae85a43" class="image"><a href="Web/1024x768px-mint.png"><img style="width:331px" src="Web/1024x768px-mint.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8191-ab74-c88b0ced8dcf" class=""><strong>Guideline</strong></p></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-819f-8f27-ff74e7e51439" class="">💡Why?</p></div></div></div></div></div><div style="display:contents" dir="auto"><p id="25d31ee4-c696-8111-b317-e559657cfcc9" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="25d31ee4-c696-81fb-9768-dc215831dbba"/></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

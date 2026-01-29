@@ -1,0 +1,713 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>New</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2a931ee4-c696-806d-a963-ea79fff546fa" class="page sans"><header><div class="page-header-icon undefined"><img class="icon notion-static-icon" src="https://www.notion.so/icons/new-badge_gray.svg"/></div><h1 class="page-title" dir="auto">New</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><div id="2a931ee4-c696-8035-a6d7-ff95c7b86df4" class="column-list"><div style="display:contents" dir="auto"><div id="2a931ee4-c696-8063-8a97-ea04c6295a22" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="2a931ee4-c696-8093-aca7-ded4a6f1e4ef"><div style="width:100%"><div style="display:contents" dir="ltr"><figure id="2a931ee4-c696-8066-a554-c793aa945625" class="link-to-page"><a href="New/Web%20new%202a931ee4c6968066a554c793aa945625.html"><img class="icon notion-static-icon" src="https://www.notion.so/icons/computer_gray.svg"/>Web new</a></figure></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-8037-9b04-f4c1b95921d8" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="2a931ee4-c696-80d0-a4b2-d85a05a7ebb2"><div style="width:100%"><div style="display:contents" dir="ltr"><figure id="2a931ee4-c696-8031-856a-fb0655f70581" class="link-to-page"><a href="New/Mobile%20new%202a931ee4c6968031856afb0655f70581.html"><img class="icon notion-static-icon" src="https://www.notion.so/icons/phone_gray.svg"/>Mobile new</a></figure></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-80e2-accf-e2a9a3c45ce8" class=""><strong>Loader Types</strong></h3></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80ef-aae6-ea069de07c9f" class="">Split your documentation into <strong>4 main loader types</strong>:</p></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-80e6-a017-cd603e6af7c5" class=""><strong>A. Skeleton Loader</strong></h3></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-808b-821f-e396400d729c" class="bulleted-list"><li style="list-style-type:disc">✅ <strong>Anatomy</strong> - Structure, sizes, variants</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-8039-8a0b-d4bd23bcad14" class="bulleted-list"><li style="list-style-type:disc">✅ <strong>Behavior</strong> - Animation specs (dynamic, fluid)</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-8015-b0e7-cb0db38924de" class="bulleted-list"><li style="list-style-type:disc">⚠️ <strong>Motion specs</strong> - ADD THIS:<div style="display:contents" dir="auto"><ul id="2a931ee4-c696-80ea-8610-def0b4676a49" class="bulleted-list"><li style="list-style-type:circle">Duration values (reference Motion Tokens)</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-80b8-b05f-cdf8a8abf568" class="bulleted-list"><li style="list-style-type:circle">Easing curves</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-80d1-a0a4-e9f7cd9d8d3c" class="bulleted-list"><li style="list-style-type:circle">Animation direction</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-802f-b62a-db2aee2ffc8c" class="bulleted-list"><li style="list-style-type:disc">⚠️ <strong>Usage guidelines</strong> - ADD:<div style="display:contents" dir="auto"><ul id="2a931ee4-c696-8015-ae49-dba02db621c6" class="bulleted-list"><li style="list-style-type:circle">Do&#x27;s and Don&#x27;ts with examples</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-8029-9030-ec62666e6b3c" class="bulleted-list"><li style="list-style-type:circle">When to use vs other loaders</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-8043-bc01-cc6484498df8" class="bulleted-list"><li style="list-style-type:disc">⚠️ <strong>Accessibility</strong> - ADD:<div style="display:contents" dir="auto"><ul id="2a931ee4-c696-8014-aef9-f765e58aaf2e" class="bulleted-list"><li style="list-style-type:circle">Screen reader behavior</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-80c3-b48f-df9e16272406" class="bulleted-list"><li style="list-style-type:circle">Reduced motion preferences</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-8062-b710-d67f1ea1b1e1" class="bulleted-list"><li style="list-style-type:circle">ARIA labels</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-80c2-836f-f21c72aafb26" class=""><strong>B. Indeterminate Spinner</strong></h3></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80c3-a770-f203e9d2d68b" class="">Same structure as above</p></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-8043-9e30-e0af47c1ae23" class=""><strong>C. Lottie Animation Loader</strong></h3></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-803c-b029-dd527bbc36f2" class="">Same structure + add:</p></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-8081-9d8f-d27302f35485" class="bulleted-list"><li style="list-style-type:disc"><strong>Technical specs</strong> (file size, FPS, dimensions)</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-80e9-86d5-cb2d5dec67da" class="bulleted-list"><li style="list-style-type:disc"><strong>Animation principles</strong> (from Motion guidelines)</li></ul></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-80d9-9ba5-eaee97b9cee0" class=""><strong>D. Determinate Progress Bar</strong></h3></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-802d-bb71-cd5c74293b3d" class="">Same structure + add:</p></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-80bd-bb49-eda03ace58ad" class="bulleted-list"><li style="list-style-type:disc"><strong>Percentage display guidelines</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-8014-a0fc-f5e0133c6ffa" class="bulleted-list"><li style="list-style-type:disc"><strong>State transitions</strong></li></ul></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-8034-a126-f3ef4f907e64" class=""><strong>3. Motion Guidelines Section (NEW - Critical!)</strong></h3></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8045-9103-ed419868f577" class="">This connects loaders to your Motion work:</p></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-800f-b4b1-e15537264577" class=""><strong>General Motion Principles</strong></h3></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-8024-a859-c19ea30f819b" class="bulleted-list"><li style="list-style-type:disc">Reference the 4 pillars: Smooth, Purposeful, Subtle, Delightful</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-80b9-9b93-eec05f9c43e9" class="bulleted-list"><li style="list-style-type:disc">How they apply specifically to loading states</li></ul></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-807e-a439-c0140aec90eb" class=""><strong>Motion Tokens for Loaders</strong></h3></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80df-8353-fcc34e0f65fa" class="">Create a dedicated section showing:</p></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-806c-90e9-d69797072d3a" class="bulleted-list"><li style="list-style-type:disc"><strong>Duration tokens</strong> - Which tokens for which loader type<div style="display:contents" dir="auto"><ul id="2a931ee4-c696-808d-afb6-d32bd50a411d" class="bulleted-list"><li style="list-style-type:circle"><code>motion.duration.short</code> → Skeleton shimmer</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-805b-b1d8-d3ce099c2102" class="bulleted-list"><li style="list-style-type:circle"><code>motion.duration.medium</code> → Spinner rotation</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-808c-9d3b-ede10d1fe03f" class="bulleted-list"><li style="list-style-type:circle"><code>motion.duration.long</code> → Lottie animations</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-80b2-8a97-c9f854ab7dd9" class="bulleted-list"><li style="list-style-type:disc"><strong>Easing tokens</strong> - Which easing curves to use<div style="display:contents" dir="auto"><ul id="2a931ee4-c696-805a-a7cd-eb1b1c84d062" class="bulleted-list"><li style="list-style-type:circle"><code>motion.easing.standard</code> → Most loaders</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-802a-a76e-d0a048849e49" class="bulleted-list"><li style="list-style-type:circle"><code>motion.easing.emphasized</code> → Lottie entrance</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-80ee-be36-cf605372de65" class="bulleted-list"><li style="list-style-type:disc"><strong>Timing examples</strong> with visual mockups</li></ul></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-80a6-beff-fee2ae04f98f" class=""><strong>Behavior Specifications</strong></h3></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-808b-941a-c2740a8c5fbf" class="bulleted-list"><li style="list-style-type:disc">Frame rates (30 or 60 FPS)</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-80b2-b7c5-f302fcf17c4e" class="bulleted-list"><li style="list-style-type:disc">Loop behavior</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-8023-ad6d-cfb1944e6ef0" class="bulleted-list"><li style="list-style-type:disc">Transition timing (enter/exit)</li></ul></div><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-80b8-885c-d98beb68b9a5" class=""><strong>🎨 What to Mockup</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-8092-9311-ecd76f1cb444" class=""><strong>Priority 1 - Motion Specs Mockups:</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-80af-acee-f5266422e2c7" class="numbered-list" start="1"><li><strong>Side-by-side comparisons</strong> showing:<div style="display:contents" dir="auto"><ul id="2a931ee4-c696-80e5-b1e0-e48c36915026" class="bulleted-list"><li style="list-style-type:disc">Different duration values on same loader</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-80e5-807c-e8f306988ca7" class="bulleted-list"><li style="list-style-type:disc">Different easing curves visualized</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-804c-b07f-f5a8e8d48f1d" class="bulleted-list"><li style="list-style-type:disc">Correct vs incorrect motion (Do/Don&#x27;t)</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-8016-acd2-c695624d50e9" class="numbered-list" start="2"><li><strong>State transitions</strong> for each loader:<div style="display:contents" dir="auto"><ul id="2a931ee4-c696-8042-9bf0-ef2e73f0715f" class="bulleted-list"><li style="list-style-type:disc">Idle → Loading → Success</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-8060-a9a7-f1842898b94e" class="bulleted-list"><li style="list-style-type:disc">Loading → Error</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-801e-97fa-f41671bf8382" class="bulleted-list"><li style="list-style-type:disc">With timing annotations</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-80b8-9d06-d236a739857f" class="numbered-list" start="3"><li><strong>Motion token application examples:</strong><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-80a2-a6ca-d467f207153d" class="bulleted-list"><li style="list-style-type:disc">Annotated Figma frames showing which tokens are used where</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-8081-9ab2-e10e202fe1f4" class="bulleted-list"><li style="list-style-type:disc">Code snippets if possible</li></ul></div></li></ol></div><div style="display:contents" dir="ltr"><figure id="2a931ee4-c696-80a0-9faa-eb5d7885e56c" class="image"><a href="New/Loaders.png"><img style="width:711.9921875px" src="New/Loaders.png"/></a></figure></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-8024-a231-fff1886aabbe" class=""><strong>Priority 2 - Usage Examples:</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-80f7-be73-e1c7c732368d" class="numbered-list" start="1"><li><strong>Context mockups</strong> showing loaders in real UI:<div style="display:contents" dir="auto"><ul id="2a931ee4-c696-8093-9545-e2435a7ef35d" class="bulleted-list"><li style="list-style-type:disc">Button loading states</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-809b-8223-caafd66cc6de" class="bulleted-list"><li style="list-style-type:disc">Page loading states</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-803b-aff7-dbc683e580aa" class="bulleted-list"><li style="list-style-type:disc">Card/widget loading states</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-80ad-8321-d9884c6bc214" class="bulleted-list"><li style="list-style-type:disc">Full-screen loading states</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-80a8-9020-eb19190323e1" class="numbered-list" start="2"><li><strong>Do&#x27;s and Don&#x27;ts gallery:</strong><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-8040-b8c1-caf32cc3e142" class="bulleted-list"><li style="list-style-type:disc">✅ Correct duration for context</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-80a9-9d2f-efa3ec5ae5be" class="bulleted-list"><li style="list-style-type:disc">❌ Too fast/too slow</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-80c8-bacd-eb85a899aa62" class="bulleted-list"><li style="list-style-type:disc">✅ Appropriate loader type</li></ul></div><div style="display:contents" dir="auto"><ul id="2a931ee4-c696-80e9-85f2-f16a86b5930e" class="bulleted-list"><li style="list-style-type:disc">❌ Wrong loader for use case</li></ul></div></li></ol></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

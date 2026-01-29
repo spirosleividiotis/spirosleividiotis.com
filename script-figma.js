@@ -1043,6 +1043,12 @@ function openProjectModal(card) {
     // Get project data from window.projectsData (loaded by content-loader.js)
     const projectData = window.projectsData?.find(p => p.id == projectId);
     
+    // Check if project has a custom URL - redirect instead of opening modal
+    if (projectData?.customUrl) {
+        window.location.href = projectData.customUrl;
+        return;
+    }
+    
     const modal = document.getElementById('projectModal');
     const modalTitle = document.getElementById('projectModalTitle');
     const modalSubtitle = document.getElementById('projectModalSubtitle');

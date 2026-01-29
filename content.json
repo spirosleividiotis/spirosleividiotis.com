@@ -62,15 +62,12 @@
       "name": "Qonto Motion System",
       "company": "Qonto",
       "color": "#141414",
-      "passwordProtected": true,
-      "password": "spiros2026",
-      "bodyText": "Own motion system principles, patterns, and documentation. Partner with design systems team and engineering on implementation and QA. Drive adoption with reusable assets and production-ready handoff.",
+      "passwordProtected": false,
+      "customUrl": "motion-system.html",
+      "bodyText": "",
       "media": {
-        "hero": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769703982/portfolio/projects/Screenshot_2026-01-29_at_17.20.23_y2h0aq.png",
-        "grid": [
-          "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769703987/portfolio/projects/Screenshot_2026-01-29_at_17.20.44_g5fa3z.png",
-          "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769703988/portfolio/projects/Screenshot_2026-01-29_at_17.20.40_phoqhg.png"
-        ]
+        "hero": "",
+        "grid": []
       }
     },
     {
@@ -78,7 +75,7 @@
       "name": "Checkout Experience",
       "company": "Flink",
       "color": "#141414",
-      "passwordProtected": true,
+      "passwordProtected": false,
       "bodyText": "",
       "media": {
         "hero": "",
@@ -91,7 +88,7 @@
       "name": "Brand Guidelines",
       "company": "Delivery Hero",
       "color": "#141414",
-      "passwordProtected": true,
+      "passwordProtected": false,
       "bodyText": "",
       "media": {
         "hero": "",
@@ -104,7 +101,7 @@
       "name": "Interactive Stories",
       "company": "Folket",
       "color": "#141414",
-      "passwordProtected": true,
+      "passwordProtected": false,
       "bodyText": "",
       "media": {
         "hero": "",
@@ -117,7 +114,7 @@
       "name": "Design Tokens",
       "company": "Freelance",
       "color": "#141414",
-      "passwordProtected": true,
+      "passwordProtected": false,
       "bodyText": "",
       "media": {
         "hero": "",
@@ -130,7 +127,7 @@
       "name": "Animations Showcase",
       "company": "Personal",
       "color": "#141414",
-      "passwordProtected": true,
+      "passwordProtected": false,
       "bodyText": "",
       "media": {
         "hero": "",

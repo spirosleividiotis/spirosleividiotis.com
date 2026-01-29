@@ -1,0 +1,753 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Mobile new</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2a931ee4-c696-8031-856a-fb0655f70581" class="page sans"><header><div class="page-header-icon undefined"><img class="icon notion-static-icon" src="https://www.notion.so/icons/phone_gray.svg"/></div><h1 class="page-title" dir="auto">Mobile new</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2a931ee4-c696-8048-9a35-d19da975d265"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8038-bafe-d003f6f802e9" class="">Figma link</p></div></div></figure></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-8007-94aa-ca757f25f82a"/></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80de-803a-d1de8998bc0a" class="column-list"><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80c1-82a8-d32083ae3416" style="width:27.083333333333332%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-801c-b2c0-e11ac9b37824" class=""><a href="https://www.notion.so/Mobile-13d31ee4c69681eba189f26b0d02dc0a?pvs=21">Skeleton loader</a></p></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-8082-91f6-d11dba56d0fb" style="width:18.750000000000007%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80a1-b207-ce871e4420ef" class=""><a href="https://www.notion.so/Mobile-13d31ee4c69681eba189f26b0d02dc0a?pvs=21">Indeterminate spinner</a></p></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-801c-bee1-c3f0b75d0452" style="width:2.0833333333333335%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-801c-93bf-de6e657f56ae" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-8070-bf53-c0fd0ca0e4f2" style="width:16.666666666666668%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8056-a412-f396cea9102a" class=""><a href="https://www.notion.so/Mobile-13d31ee4c69681eba189f26b0d02dc0a?pvs=21">Lottie animation loader</a></p></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-808d-8b09-dd7a06b2b67d" style="width:18.750000000000018%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-805a-88ba-efe0d9af22e6" class=""><a href="https://www.notion.so/Mobile-13d31ee4c69681eba189f26b0d02dc0a?pvs=21">Determinate progress bar</a></p></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80e1-8e90-cef006013158" style="width:16.666666666666664%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8062-b728-fb71b66c41bf" class=""><a href="https://www.notion.so/Mobile-13d31ee4c69681eba189f26b0d02dc0a?pvs=21">indeterminate progress bar</a></p></div></div></div></div></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-8003-af19-cc50409d97ae"/></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8041-9142-c94ad0a41483" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2a931ee4-c696-8076-8c5d-de1a0c6930ca" class=""><strong>Skeleton loader</strong> </h1></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80ba-a78a-df7b43c69294" class="">A Skeleton loader should give real-time information of what is being loaded in the different blocks of the app that have a constant layout. It’s the closest to showing real content and should be preferred whenever possible</p></div><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-800f-8479-dff10411b2d7" class="">Anatomy</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-8042-b40c-f143429a558b"/></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-800a-a971-d76fcd529de1" class=""><strong>Structure</strong></h3></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80b6-957a-fc08003b11ec" class="">Use these elements available inside to create the layout of your skeleton as much as possible. You can also reuse parts of certain existing skeleton if the screen you work on uses the same layout. You can also create custom elements to fit specific use cases.</p></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-809b-b09a-ed67b14dc66f" class="column-list"><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80a7-8f47-d5409564f345" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="2a931ee4-c696-80ec-8105-cd1c9706059a" class="image"><a href="Mobile%20new/Skeleton_mobile.png"><img style="width:331px" src="Mobile%20new/Skeleton_mobile.png"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-8008-8e77-c67b90dfc4eb" style="width:100%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8077-b8ac-dfb2ad466b56" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="ltr"><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="2aa31ee4-c696-8030-9e3f-fe14599d3097"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="2aa31ee4-c696-80f3-8468-fcdf994d8df1" class="">Animation</h2></div><div style="display:contents" dir="auto"><hr id="2aa31ee4-c696-8006-8913-ce34f8aa1b28"/></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-809b-b54b-e7b91e617afe" class=""><strong>Timing</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80e1-b1a2-e547c7daf061" class="bulleted-list"><li style="list-style-type:disc">Show only if load &gt; 200–300 ms (debounce).</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8073-b8f3-d9315554474b" class="bulleted-list"><li style="list-style-type:disc">Once shown, keep visible ≥ 400–700 ms to avoid flicker.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-809f-b6c7-f4889ea36385" class="bulleted-list"><li style="list-style-type:disc">Entrance: fade in 200–300 ms.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80f3-af36-ff1143a32e63" class="bulleted-list"><li style="list-style-type:disc">Exit: crossfade to real content 200–300 ms.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8017-abb5-d9552235a01f" class="bulleted-list"><li style="list-style-type:disc">Optional: very small upward content reveal (8–12 px, 200–250 ms).</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-802c-8f64-d278c2780220" class=""><strong>Shimmer</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-802f-be2d-e36493e10dd3" class="bulleted-list"><li style="list-style-type:disc">Cycle: 1400–1800 ms per pass.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8080-9453-edd3c7d23df7" class="bulleted-list"><li style="list-style-type:disc">Direction: left → right (or top → bottom for vertical stacks).</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8060-8edc-fccc6893e13a" class="bulleted-list"><li style="list-style-type:disc">Contrast: subtle luminance shift; avoid strong color change.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80b1-a5e5-e0cf0f7c331a" class="bulleted-list"><li style="list-style-type:disc">Loop continuously while loading.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8050-8d33-ee2579ae0a5f" class="bulleted-list"><li style="list-style-type:disc">Use a single shared cycle timing across the page to avoid noisy desync.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8002-92d5-c4c823a6432c" class=""><strong>Layout</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80f7-af87-e3624d486df8" class="bulleted-list"><li style="list-style-type:disc">Mirror the final layout: same sizes and spacing as the real content.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-802c-bbe5-fee6c27a1342" class="bulleted-list"><li style="list-style-type:disc">Vary text line widths (about 70–95%) for realism.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80c3-83ac-f09d8d4316cf" class="bulleted-list"><li style="list-style-type:disc">Crossfade to prevent layout jumps; don’t reflow on completion.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8011-b418-f5d8eb3ee209" class=""><strong>When to use</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80b3-b426-f19e44e2c6eb" class="bulleted-list"><li style="list-style-type:disc">Use for known, content-heavy layouts (lists, cards, tables, details).</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-807e-85d0-e779ece4f783" class="bulleted-list"><li style="list-style-type:disc">Prefer over spinners when the structure is known.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8093-879c-ffdeb77f2905" class="bulleted-list"><li style="list-style-type:disc">Don’t mix skeleton and spinner in the same region.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8084-a4c3-cfd9a1d3c8b9" class=""><strong>Do / Don’t</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8002-903e-f6589c5e8c7f" class="bulleted-list"><li style="list-style-type:disc">Do keep shimmer slow and subtle; don’t exceed ~2s per cycle.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-807d-a45a-ee6713650a9d" class="bulleted-list"><li style="list-style-type:disc">Do debounce and enforce a minimum display; don’t flash on/off.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8087-8c83-f492bd5e844d" class="bulleted-list"><li style="list-style-type:disc">Do crossfade into content; don’t hard-swap.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80d2-8136-ef77eb4ddae1" class="bulleted-list"><li style="list-style-type:disc">Do mirror the final layout; don’t use generic blocks that mislead spacing.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-80e1-8c4d-fb52d2abb55b" class=""><strong>Token mapping (if applicable)</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80f9-9756-f9a72f5fc849" class="bulleted-list"><li style="list-style-type:disc">Shimmer: duration.slow (1400–1800 ms), easing.linear.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80d8-8972-e8d2fbde07b0" class="bulleted-list"><li style="list-style-type:disc">Entrance/Exit: duration.standard (200–300 ms), easing.standard.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8023-bb7f-e2f435ba8c3a" class="bulleted-list"><li style="list-style-type:disc">Content reveal (optional): duration.standard (200–250 ms), easing.standard.</li></ul></div></div></figure></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-802c-94c4-df128920dd26" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8053-9656-e0b391ede41d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80e6-9e2b-df29e91ef479" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-801b-bce4-d0b7dd121bb2" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-805b-b127-d573b61a7501" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80ee-be3a-f513526776eb" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80bc-a94a-ec184445458c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8080-85a7-c529249f12b0" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80ef-8e88-d0e0379b7046" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2a931ee4-c696-80b9-b7d2-fe7a702d1ea5" class=""><strong>Indeterminate spinner</strong></h1></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8012-850a-fda57d0586da" class="">Indeterminate spinners help visualizing variable short loading times (in context) that will be understood by users as the direct result of their action.</p></div><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-80ab-8d35-ef1e51c2830f" class="">Anatomy</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-8066-90ee-e61ea432c6f5"/></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-80df-b351-ea407f3940cc" class=""><strong>Structure</strong></h3></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80f0-b1ab-da0d17646ac5" class="column-list"><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80cf-a374-c0c40fd8973b" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="2a931ee4-c696-8075-ab06-e630238d8355" class="image"><a href="Mobile%20new/Spinner_mobile.png"><img style="width:331px" src="Mobile%20new/Spinner_mobile.png"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80e4-8c5b-f93641a1568d" style="width:100%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8088-a16e-f0d07d35323a" class=""><strong>Spinner anatomy</strong></p></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-808b-87e5-c3e793270af4" class="">Small : 12*12px : Small interactions (ex: reveal pin)</p></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8011-81c8-d92df20bd714" class="">Medium : 16*16px : Medium CTAs</p></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-800f-852b-ec30fcf1d2e8" class="">Large : 24*24px : full page spinners, pull-to-refresh, and large CTAs</p></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80a7-ab59-ca19eeaccfe2" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="ltr"><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="2aa31ee4-c696-8044-81b7-cc87682d2464"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-8047-a5e1-dbf3bc87c5fa" class="">Animation</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-80c9-b26d-d29ac657a914"/></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8053-b976-cbbb047f0bbc" class=""><strong>Timing</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8077-a7b7-e860fac7b6ca" class="bulleted-list"><li style="list-style-type:disc">Show only if load &gt; 200–300 ms (debounce).</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80ab-982c-fde7be9264e4" class="bulleted-list"><li style="list-style-type:disc">Once shown, keep visible ≥ 400–700 ms to avoid flicker.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-800e-b02c-ea5133a66818" class="bulleted-list"><li style="list-style-type:disc">Entrance: fade in 150–200 ms.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-804d-a7ed-e2aa17481f59" class="bulleted-list"><li style="list-style-type:disc">Exit: fade out 150–200 ms.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-80d5-9366-ffc997231be7" class=""><strong>Rotation</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-806d-975e-fa847361f394" class="bulleted-list"><li style="list-style-type:disc">Full rotation: 1200–1400 ms per loop.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8031-814e-f1c11aa62ce8" class="bulleted-list"><li style="list-style-type:disc">Easing: linear (constant speed).</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8098-89a6-c02f1f8b2215" class="bulleted-list"><li style="list-style-type:disc">Loop: continuous while loading.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-80d4-9892-e7736e86c653" class=""><strong>Placement and scope</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8015-9959-dde7df0b42e1" class="bulleted-list"><li style="list-style-type:disc">Replace the button label; keep button width fixed to avoid reflow.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80fb-9980-e2910ff89151" class="bulleted-list"><li style="list-style-type:disc">For pull-to-refresh or full-page loads, center within the loading area.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8001-9d97-e53987942a49" class="bulleted-list"><li style="list-style-type:disc">Use overlays only for blocking flows or route changes.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8060-a818-d973d047643b" class=""><strong>Size mapping (iOS/Android)</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80c8-be54-ec10e1eb0c00" class="bulleted-list"><li style="list-style-type:disc">Small 12×12 px: tiny inline actions (e.g., reveal PIN).</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80ad-8bbf-db3d90ad6289" class="bulleted-list"><li style="list-style-type:disc">Medium 16×16 px: medium CTAs.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80a4-b0ca-e28932619ba5" class="bulleted-list"><li style="list-style-type:disc">Large 24×24 px: full-page spinner, pull-to-refresh, large CTAs.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-801d-a206-ecd1c678ba11" class=""><strong>Do / Don’t</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8087-aaf9-d1404478297f" class="bulleted-list"><li style="list-style-type:disc">Do debounce and enforce a minimum display; don’t flash.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80f8-bfbe-e527b1c87c80" class="bulleted-list"><li style="list-style-type:disc">Do fade in/out; don’t hard-swap.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8064-a855-dbb848acc73d" class="bulleted-list"><li style="list-style-type:disc">Do keep rotation steady; don’t speed up/slow down per loop.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8011-9266-c9d1ee8eb7b2" class="bulleted-list"><li style="list-style-type:disc">Do use one spinner per action; don’t combine spinner and skeleton in the same region.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8067-b9de-fae34b92fa21" class=""><strong>Token mapping (if applicable)</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80fb-8f20-d2a1d4ccd2b4" class="bulleted-list"><li style="list-style-type:disc">Rotation: duration.slow (1200–1400 ms), easing.linear.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8056-9ef7-fb3b0ce0ba02" class="bulleted-list"><li style="list-style-type:disc">Entrance/Exit: duration.quick (150–200 ms), easing.standard.</li></ul></div></div></figure></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80a8-b8c0-f5172a2ff572" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80fc-a3b0-d4e519f4a584" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80a4-9e14-d31254f7e69c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80b4-b968-c07ea06af1b4" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8000-b080-c3c8e129894c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-801c-a21a-f48f3363a501" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2a931ee4-c696-808d-a341-e9a9cbed351c" class=""><strong>Lottie animation loader</strong></h1></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8060-a072-de0838331b0b" class="">If you know in advance that a sensitive action will result in a longer than average loading time (around 10s+), dedicate a proper page with enough context to help the user understand what’s going on.</p></div><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-8019-8275-cd87e54d239d" class="">Anatomy</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-8088-aee8-e725e88238ab"/></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-808b-9ca7-eab5885bf15d" class=""><strong>Structure</strong></h3></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-8069-953a-ca9562acd422" class="column-list"><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80f9-8142-ed334a2f5639" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="2a931ee4-c696-8056-b3d3-e7b38d64e6d4" class="image"><a href="Mobile%20new/loading_animation.png"><img style="width:331px" src="Mobile%20new/loading_animation.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80d5-ad2f-c748ec674c3d" class=""><strong>Lottie animation loader</strong> <strong>anatomy</strong></p></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-8037-8d3b-c58befd2ef12" style="width:100%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80ac-8876-e8cf6cef1bcf" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-8005-880d-ee63bf9aa074" class="">Behavior</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-80f0-b56a-ce040de39f04"/></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80d1-bf51-ff4e5dd91a5e" class="column-list"><div style="display:contents" dir="auto"><div id="2a931ee4-c696-805c-9acd-fbd485990689" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="2a931ee4-c696-8052-9092-ef26ad480547" class="image"><a href="Mobile%20new/UDA-LBp2qCEl0xE6ekOh7g.gif"><img style="width:330.9921875px" src="Mobile%20new/UDA-LBp2qCEl0xE6ekOh7g.gif"/></a></figure></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-8037-9f55-cc49edd2435d" class="">Design a dedicated lottie related to the back-end processing that’s going on. Describe the action with a short caption to bring reassurance, especially if it’s related to a sensitive action.</p></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-809f-bb63-d1154c3f5a0f" style="width:100%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80d4-a9db-e68d3e0fddfb" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-809c-b12f-de84c3192a1b" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-809d-b20a-ffbf4989eaf9" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80e7-afe7-ee60c155800e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8021-b959-db075e13bf60" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-802d-841a-fafa6bad157c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80de-9462-dfe5af88fba0" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8012-8aa1-e71c57dd8ec7" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2a931ee4-c696-80f2-8a4c-fd497d879667" class=""><strong>Determinate progress bar</strong></h1></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80c3-acba-f2ee189d15d6" class="">As opposed to an indeterminate spinner, a determinate progress bar or a determinate spinner give exact feedback of the progression. The size and context is well defined therefore users will understand what the percentage means without explicitly saying that “the file is currently uploading”.</p></div><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-80be-af7b-e8880c91966f" class="">Anatomy</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-8019-aebf-f59cc332a5e5"/></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-80ea-8ab8-f484bc0a8eb7" class=""><strong>Structure</strong></h3></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-808e-9414-f5ccd62c7aea" class="column-list"><div style="display:contents" dir="auto"><div id="2a931ee4-c696-803e-9d55-e099750cf4e9" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="2a931ee4-c696-80ab-97f0-d6715e4558fb" class="image"><a href="Mobile%20new/Frame_10.png"><img style="width:331px" src="Mobile%20new/Frame_10.png"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-808d-bdc7-c94ec24e91a7" style="width:100%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-801a-b6bf-ca4227a3084d" class=""><strong>Progress bar</strong></p></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-8078-a103-d586e38b5fc0" class="numbered-list" start="1"><li>Progression bar</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-804c-8e5c-ddb94b44d7ce" class="numbered-list" start="2"><li>Background bar</li></ol></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80d5-9a66-e8762c445e96" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="ltr"><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="2aa31ee4-c696-80e4-a789-e5b8eb69df48"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-805c-806c-c72937cf499c" class="">Animation</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-80d9-8a0a-cd651dedc3d6"/></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-80c8-bb48-c729637e48bc" class=""><strong>Timing</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80e1-821b-d38474fa8f87" class="bulleted-list"><li style="list-style-type:disc">Entrance: fade in 150–200 ms.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8023-8e79-f9c670a28232" class="bulleted-list"><li style="list-style-type:disc">Completion: animate to 100%, hold 400–600 ms, then fade out or switch to success in 200–300 ms.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-80ae-9f0b-c23bd49d4fe6" class=""><strong>Progress updates</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80d9-9abe-d2ab529d37d1" class="bulleted-list"><li style="list-style-type:disc">Animate between reported values over ~200–300 ms.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8002-969c-f38347a46352" class="bulleted-list"><li style="list-style-type:disc">Easing: standard (e.g., cubic-bezier(0.2, 0, 0, 1)).</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80ba-b46b-e84a0f68f1d3" class="bulleted-list"><li style="list-style-type:disc">Never move backwards; clamp to the latest known value.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8052-98b7-d253773b25c6" class=""><strong>Update frequency</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80a5-8db0-d69d31079982" class="bulleted-list"><li style="list-style-type:disc">Throttle updates to ~4–10 per second to avoid jitter.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80f2-860a-e73f7a057db3" class="bulleted-list"><li style="list-style-type:disc">If updates are sparse, interpolate smoothly to each new value.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-805b-8947-cd62a745c80a" class=""><strong>Visual behavior</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8080-b664-d147d3513805" class="bulleted-list"><li style="list-style-type:disc">Background bar stays static.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80af-b0b1-d8e1375915a3" class="bulleted-list"><li style="list-style-type:disc">Foreground fills left → right.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80c3-80e1-fd3dcd134731" class="bulleted-list"><li style="list-style-type:disc">Optional: a very subtle pulse at 100% (≤300 ms), then settle.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-80a2-9917-dfa75d735b14" class=""><strong>Color and context</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8063-b61d-f348e67902bd" class="bulleted-list"><li style="list-style-type:disc">Use primary stroke color for neutral loading.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8052-bf1e-d9f8b346ce0a" class="bulleted-list"><li style="list-style-type:disc">Only change color for error/success states if defined by the system.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80ae-a51f-ccdf9733d9f6" class="bulleted-list"><li style="list-style-type:disc">Percentage label is optional; short task label preferred on mobile.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-80ae-914c-ec6efa8b88d4" class=""><strong>Do / Don’t</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80a6-b318-f1cf657e88f4" class="bulleted-list"><li style="list-style-type:disc">Do animate smoothly between values; don’t snap or stutter.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-807f-bd99-c9a1637f4031" class="bulleted-list"><li style="list-style-type:disc">Do hold briefly at 100%; don’t disappear instantly.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8099-86a8-f2dd441fd6d3" class="bulleted-list"><li style="list-style-type:disc">Do keep layout fixed; don’t resize the bar as it fills.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-80c0-ad20-f099b1791178" class=""><strong>Token mapping (if applicable)</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-809c-817c-f66796cc7080" class="bulleted-list"><li style="list-style-type:disc">Value transitions: duration.standard (200–300 ms), easing.standard.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8052-a244-f3bd27aecbbc" class="bulleted-list"><li style="list-style-type:disc">Entrance/Exit/Completion: duration.quick–standard (150–300 ms), easing.standard.</li></ul></div></div></figure></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8058-9b30-ee80a861fcc8" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80e9-85f9-d3fa9430aa57" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8070-8bfe-e104cbb93770" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80b4-b5c9-fade17e575a3" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-807e-8aae-d66cc5cb49cd" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8059-b692-faac1b27c4cd" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-8035-9eac-ef772969a83f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80c5-99fc-e1928374281e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-80d4-986c-d27f690fc420" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2a931ee4-c696-80bd-8c40-fb6942ac605d" class=""><strong>Indeterminate progress bar</strong></h1></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-804e-a657-d6f12358b5b7" class="">Indeterminate progress bars should be used when the processing of a task normally displayed with a determinate progress bar can&#x27;t be shown in real time.</p></div><div style="display:contents" dir="auto"><h2 id="2a931ee4-c696-80d7-9993-e079ddbf0f04" class="">Anatomy</h2></div><div style="display:contents" dir="auto"><hr id="2a931ee4-c696-80cd-b75e-f3f1553bcf86"/></div><div style="display:contents" dir="auto"><h3 id="2a931ee4-c696-8010-a412-c78ff1ba790f" class=""><strong>Structure</strong></h3></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-8019-b4a4-eaa50213f655" class="column-list"><div style="display:contents" dir="auto"><div id="2a931ee4-c696-800d-bc6d-d118b9e9b90d" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="2a931ee4-c696-80fc-8cb7-c5d2228bd7b3" class="image"><a href="Mobile%20new/Frame_9.png"><img style="width:331px" src="Mobile%20new/Frame_9.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="2aa31ee4-c696-807d-bd15-c402d08ced20" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="2a931ee4-c696-80ec-993f-f424249fc79c" style="width:100%" class="column"><div style="display:contents" dir="auto"><p id="2a931ee4-c696-80db-8bf1-c79a31827e6d" class=""><strong>Progress bar</strong></p></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-8038-a087-d727f6a5a1d0" class="numbered-list" start="1"><li>Progression bar</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2a931ee4-c696-8051-b6e3-fa5e86be8a50" class="numbered-list" start="2"><li>Background bar</li></ol></div><div style="display:contents" dir="auto"><p id="2a931ee4-c696-807b-81db-c0f8ae897b94" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="ltr"><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="2aa31ee4-c696-80d4-9d01-ce6164a08301"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="2aa31ee4-c696-80d4-a3a4-c065ac18eb74" class="">Animation</h2></div><div style="display:contents" dir="auto"><hr id="2aa31ee4-c696-80d7-bb53-ebeec9a4ff58"/></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8070-95d1-f68ef11f59a8" class=""><strong>Timing</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8052-8235-f6c4a8003f85" class="bulleted-list"><li style="list-style-type:disc">Entrance: fade in 150–200 ms.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-807d-b389-fe89e84f9dff" class="bulleted-list"><li style="list-style-type:disc">Exit: fade out 150–200 ms.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-800c-af1b-db49647cba4b" class="bulleted-list"><li style="list-style-type:disc">Minimum display once shown: ≥ 400–700 ms to avoid flicker.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-804f-8c69-d2ca10263bea" class=""><strong>Movement</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-802a-beb6-e4a4e576fa30" class="bulleted-list"><li style="list-style-type:disc">Cycle duration: 1400–1800 ms per pass.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80a6-9887-e4d741f6317f" class="bulleted-list"><li style="list-style-type:disc">Pattern: a moving segment travels left → right, then repeats.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8006-bc65-f3dd2d69451d" class="bulleted-list"><li style="list-style-type:disc">Segment width: about 20–35% of the track length (keep consistent across contexts).</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8025-86fc-c770e1810903" class="bulleted-list"><li style="list-style-type:disc">Easing: standard easing for the segment’s travel; steady pace, no bounce.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8058-9956-e1bbdc2c4a20" class="bulleted-list"><li style="list-style-type:disc">Loop: continuous while loading.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-80e8-b753-ee1f76c8d51e" class=""><strong>Visual behavior</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8084-9920-f76ffca116b8" class="bulleted-list"><li style="list-style-type:disc">Track (background bar) stays static.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8059-90ea-e3666bbddb2f" class="bulleted-list"><li style="list-style-type:disc">One moving highlight segment suggests activity; avoid multiple segments unless defined as a variant.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80a8-aa85-df9dab907ca2" class="bulleted-list"><li style="list-style-type:disc">Keep contrast subtle and theme-consistent.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-8006-b9b4-f7d424b36605" class=""><strong>Placement and scope</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8093-9642-d5a6f4470348" class="bulleted-list"><li style="list-style-type:disc">Use in places where a determinate bar would appear if progress were known (uploads, syncing), but data isn’t available.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8068-b7ac-eaf791e26631" class="bulleted-list"><li style="list-style-type:disc">Prefer inline or section-level usage; use fullscreen only for route changes or blocking tasks.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2aa31ee4-c696-80b4-bf67-c1f2570f9ac3" class=""><strong>Do / Don’t</strong></h3></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80d3-a997-dc9a46db41ca" class="bulleted-list"><li style="list-style-type:disc">Do keep a consistent cycle time; don’t vary speed per loop.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-80a7-856e-d0d010a6cd26" class="bulleted-list"><li style="list-style-type:disc">Do use a single moving segment; don’t stack multiple flashy elements.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-802d-b703-e1bef12851c0" class="bulleted-list"><li style="list-style-type:disc">Do fade in/out; don’t hard-swap.</li></ul></div><div style="display:contents" dir="auto"><ul id="2aa31ee4-c696-8043-aa7f-c3fb5b03ad2b" class="bulleted-list"><li style="list-style-type:disc">Do replace with a determinate bar as soon as progress becomes available.</li></ul></div></div></figure></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

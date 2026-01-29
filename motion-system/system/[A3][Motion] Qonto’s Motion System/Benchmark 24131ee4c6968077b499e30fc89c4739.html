@@ -1,0 +1,756 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Benchmark</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="24131ee4-c696-8077-b499-e30fc89c4739" class="page sans"><header><div class="page-header-icon undefined"><img class="icon notion-static-icon" src="https://www.notion.so/icons/arrow-southeast_gray.svg"/></div><h1 class="page-title" dir="auto">Benchmark</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="ltr"><figure id="24131ee4-c696-80e9-818a-c00f5f190874"><a href="https://polaris-react.shopify.com/tokens/motion" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Motion — Shopify Polaris React</div><div class="bookmark-description">Tokens →</div></div><div class="bookmark-href"><img src="https://polaris-react.shopify.com/images/favicon.png" class="icon bookmark-icon"/>https://polaris-react.shopify.com/tokens/motion</div></div><img src="https://polaris-react.shopify.com/og-images/tokens/motion.png" class="bookmark-image"/></a></figure></div><div style="display:contents" dir="ltr"><figure id="24131ee4-c696-8052-87ac-e2efd07e2e1b"><a href="https://m3.material.io/styles/motion/overview/how-it-works" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Motion – Material Design 3</div><div class="bookmark-description">Use motion to make a UI expressive and easy to use.</div></div><div class="bookmark-href"><img src="https://m3.material.io/static/assets/m3-favicon.ico" class="icon bookmark-icon"/>https://m3.material.io/styles/motion/overview/how-it-works</div></div><img src="https://lh3.googleusercontent.com/XCyLWAz5oSWfoKiKiQCrAG6duOngJc5yQHLv3AcEDxXN3RdsIrWVSas8JsavPRtAUkkwbiitO3PngF-VjISS1iYdWY2j75bZ_mxcVzgZNx4GwHr6p78" class="bookmark-image"/></a></figure></div><div style="display:contents" dir="ltr"><figure id="24231ee4-c696-804c-8259-e430d5d0fa7e"><a href="https://www.designsystemscollective.com/not-just-colors-and-fonts-why-motion-tokens-belong-in-every-modern-design-system-8a2dcdc00659" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Not Just Colors and Fonts: Why Motion Tokens Belong in Every Modern Design System</div><div class="bookmark-description">We’ve standardized colors, fonts, and spacing. Now it’s time we do the same for animation.</div></div><div class="bookmark-href"><img src="https://miro.medium.com/v2/resize:fill:304:304/10fd5c419ac61637245384e7099e131627900034828f4f386bdaa47a74eae156" class="icon bookmark-icon"/>https://www.designsystemscollective.com/not-just-colors-and-fonts-why-motion-tokens-belong-in-every-modern-design-system-8a2dcdc00659</div></div><img src="https://miro.medium.com/v2/resize:fit:1200/1*BjLXOoV0tIiJT-G6II3lQg.png" class="bookmark-image"/></a></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="24131ee4-c696-8095-9afd-e6bd854efc93"><div style="width:100%"><div style="display:contents" dir="auto"><p id="24131ee4-c696-80a5-9903-e347931e8d50" class=""> </p></div></div></figure></div><div style="display:contents" dir="auto"><h1 id="24231ee4-c696-8040-b8ef-cfc1c2f1a7a8" class=""><strong>🧭 Motion System Benchmark</strong></h1></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-801d-ac02-d56d0da730c9" class="">A structured overview of how industry-leading design systems approach motion. This benchmark supports your A3 by helping you identify patterns, gaps, and opportunities.</p></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-8066-ac84-dc1814eea9d4"/></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-8055-8fb8-ddddb402e69d" class=""><strong>🏷️ Referenced Brands</strong></h2></div><div style="display:contents" dir="ltr"><table id="24231ee4-c696-8003-a0e7-f8f6c381cc32" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-801d-9768-ff1e6dad79de"><th id="}Z:R" class="simple-table-header-color simple-table-header"><strong>Brand/System</strong></th><th id="Mots" class="simple-table-header-color simple-table-header"><strong>Focus Area</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-80db-a251-c6d2d10f6909"><td id="}Z:R" class=""><strong>Google Material 3</strong></td><td id="Mots" class="">Easing curves, durations, naming conventions</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-8095-823d-dd561977ee55"><td id="}Z:R" class=""><strong>Shopify Polaris</strong></td><td id="Mots" class="">Motion tokens, production implementation</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-8046-86c5-f02ff8993236"><td id="}Z:R" class=""><strong>IBM Carbon</strong></td><td id="Mots" class="">Component-level specs, token structure</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-80bf-96cb-c22a85c30e1b"><td id="}Z:R" class=""><strong>Atlassian</strong></td><td id="Mots" class="">Expressive tokens, motion architecture</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-80a6-82a2-f323fb536672"><td id="}Z:R" class=""><strong>Salesforce Lightning</strong></td><td id="Mots" class="">Utility motion for performance &amp; clarity</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-8000-9265-e6b5f648ae53"><td id="}Z:R" class=""><strong>Spotify Encore</strong></td><td id="Mots" class="">Emotional, identity-based motion</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-803c-ae1b-dff68b6ffa56"><td id="}Z:R" class=""><strong>Apple HIG</strong></td><td id="Mots" class="">Platform-specific interaction behavior</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-8067-94b0-e2b5df4154a8"><td id="}Z:R" class=""><strong>Meta (Facebook)</strong></td><td id="Mots" class="">Purposeful choreography, immersive transitions</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-809a-93b8-ce9eddf597e7"><td id="}Z:R" class=""><strong>Linear</strong></td><td id="Mots" class="">Minimal, fast, interaction-led timing</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-80b6-8794-c783a89e959a"><td id="}Z:R" class=""><strong>Pinterest</strong></td><td id="Mots" class="">Scenario-driven microinteractions</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-80ff-a450-f9fc5ae4d868"><td id="}Z:R" class=""><strong>Microsoft Fluent</strong></td><td id="Mots" class="">Accessibility-first timing &amp; easing</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-8003-8c80-e5b3a88006b3"><td id="}Z:R" class=""><strong>Dropbox</strong></td><td id="Mots" class="">Typography animation &amp; tone</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-8044-8248-f7664ad60668"><td id="}Z:R" class=""><strong>Airbnb</strong></td><td id="Mots" class="">Production export via Lottie</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-8025-b682-f12900e598e1"><td id="}Z:R" class=""><strong>Uber</strong></td><td id="Mots" class="">Brand tier system, expressive vs utility motion</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-80ce-a4d6-c47bc87d1fc5"><td id="}Z:R" class=""><strong>Adobe Spectrum</strong></td><td id="Mots" class="">Input feedback &amp; responsiveness</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-80dc-be7e-ecad9d0fb507"><td id="}Z:R" class=""><strong>LottieFiles</strong></td><td id="Mots" class="">Implementation-ready format integration</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-80ce-acab-c88bdf212439"/></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-8007-b747-e2c53906c622" class=""><strong>📚 Benchmarked Topics</strong></h2></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-80e5-af99-c110c0a70e55" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">&lt;details&gt;&lt;summary&gt;&lt;strong&gt;1. Principles&lt;/strong&gt;&lt;/summary&gt;
+</code></pre></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-804b-b519-cd3ff10f9c86" class="bulleted-list"><li style="list-style-type:disc">Most systems use 3–5 principles</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80b9-b373-cde52b2c1278" class="bulleted-list"><li style="list-style-type:disc">Common themes:<div style="display:contents" dir="auto"><ul id="24231ee4-c696-80e4-8e88-dd1fec4f523b" class="bulleted-list"><li style="list-style-type:circle">Clarity over flair</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80da-b206-da80deec5e55" class="bulleted-list"><li style="list-style-type:circle">Guide attention through hierarchy</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-803e-b8f5-e0e37eefa7ad" class="bulleted-list"><li style="list-style-type:circle">Use continuity to reduce cognitive load</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8015-905a-fd2a5bf826f7" class="bulleted-list"><li style="list-style-type:circle">Delight, but don’t distract</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8088-8ec2-f697086d98c4" class="bulleted-list"><li style="list-style-type:circle">Respect user control</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-80ce-b56c-e7dd850f9cad" class="">🟡 <em>Spotify</em> and <em>Meta</em> add emotional tone — storytelling and feel over raw function.</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-8017-9892-ebfd3981030a" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">&lt;/details&gt;
+</code></pre></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-8031-bb67-d5585922dbcd" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">&lt;details&gt;&lt;summary&gt;&lt;strong&gt;2. Motion Tokens&lt;/strong&gt;&lt;/summary&gt;
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-80e0-85af-feb1071ac76d" class=""><strong>2.1 Foundations</strong></h3></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80e3-9100-d0b459db7802" class="bulleted-list"><li style="list-style-type:disc">Tokens are named and structured clearly (motion.duration.short, motion.easing.entrance)</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80d0-8390-c4089c5c50fd" class="bulleted-list"><li style="list-style-type:disc">Grouped by purpose, not just value</li></ul></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-8061-8525-df222d6d85fd" class=""><strong>2.2 Properties</strong></h3></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-808b-a8a1-caa970a3fb71" class="bulleted-list"><li style="list-style-type:disc"><strong>Duration</strong>: 100ms (micro) → 700ms (narrative)</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80ab-9533-ea22e0f9833e" class="bulleted-list"><li style="list-style-type:disc"><strong>Easing</strong>: Custom bezier curves, not CSS defaults</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80ad-866c-dd8de7ce9548" class="bulleted-list"><li style="list-style-type:disc"><strong>Delay</strong>: Used to orchestrate multi-step interactions (e.g. tooltips, success messages)</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80b0-88eb-c518dde9a613" class="bulleted-list"><li style="list-style-type:disc"><strong>Scale/Rotation</strong>: Used sparingly, typically in badge animations, transitions, etc.</li></ul></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-80d8-8880-d0b461cd6ac0" class="">🔵 <em>Shopify</em>, <em>IBM</em>, and <em>Atlassian</em> excel at providing dev-friendly token structures with both purpose and value mapped.</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-8035-b12c-d16f69f5d173" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">&lt;/details&gt;
+</code></pre></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-806c-8ddf-c3ee8bd01a5a" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">&lt;details&gt;&lt;summary&gt;&lt;strong&gt;3. Component-Level Production Guidelines&lt;/strong&gt;&lt;/summary&gt;
+</code></pre></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-809e-88e7-dc0384092cee" class="bulleted-list"><li style="list-style-type:disc">Motion behaviors tied to component types (e.g., Modal = fade + scale, Button = quick tap feedback)</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-808e-8b6c-e52eb898a5dc" class="bulleted-list"><li style="list-style-type:disc">Visual aids like:<div style="display:contents" dir="auto"><ul id="24231ee4-c696-801b-929e-f4ed948408b1" class="bulleted-list"><li style="list-style-type:circle">Timing curves</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80c5-9747-e7f2c580ba69" class="bulleted-list"><li style="list-style-type:circle">GIF demos</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8061-a30b-efe0aee5f24c" class="bulleted-list"><li style="list-style-type:circle">Figma timeline samples</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-8095-9dff-e99301989f21" class="">🟣 <em>IBM</em>, <em>Dropbox</em>, and <em>Google</em> use easing graphs and side-by-side comparisons for clarity.</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-8082-a515-d13187978afc" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">&lt;/details&gt;
+</code></pre></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-80c7-81f0-d8339e8fce85" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">&lt;details&gt;&lt;summary&gt;&lt;strong&gt;4. Choreography&lt;/strong&gt;&lt;/summary&gt;
+</code></pre></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-800b-832f-df5779341dfa" class="bulleted-list"><li style="list-style-type:disc">Systems choreograph sequences (e.g. cards animating in with staggered delay)</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8012-9d45-d089327c8a62" class="bulleted-list"><li style="list-style-type:disc">Focus on:<div style="display:contents" dir="auto"><ul id="24231ee4-c696-8018-b7ec-ee644bcfdc75" class="bulleted-list"><li style="list-style-type:circle">Entrance/exit</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80ea-8d72-d055eef2f3c8" class="bulleted-list"><li style="list-style-type:circle">Cascading motion</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80eb-963c-fbcd766efbcd" class="bulleted-list"><li style="list-style-type:circle">No overlapping or clashing interactions</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-8021-8f3c-e30c41d0be26" class="">🟢 <em>Meta</em> and <em>Google</em> lead in this area. <em>Apple HIG</em> also excels in platform-native interaction logic.</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-800a-a25b-ebf04a1e64e7" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">&lt;/details&gt;
+</code></pre></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-80f9-8c72-cae4a4c654b1" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">&lt;details&gt;&lt;summary&gt;&lt;strong&gt;5. Use Cases &amp; Scenarios&lt;/strong&gt;&lt;/summary&gt;
+</code></pre></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8011-9cd3-dddfbb3d781c" class="bulleted-list"><li style="list-style-type:disc">Many systems split by:<div style="display:contents" dir="auto"><ul id="24231ee4-c696-8082-a25c-ccc9f03346c4" class="bulleted-list"><li style="list-style-type:circle"><strong>Page transitions</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8046-a8b0-ff37f9672f6a" class="bulleted-list"><li style="list-style-type:circle"><strong>Feedback/Validation</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8024-a993-fbd85d7a6561" class="bulleted-list"><li style="list-style-type:circle"><strong>Component state changes</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80b4-a3b8-d99bbffa3253" class="bulleted-list"><li style="list-style-type:circle"><strong>Onboarding/Narrative</strong></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-80e6-a2ed-f7b3cda96d2a" class="">Examples:</p></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8048-a680-c2588b132b34" class="bulleted-list"><li style="list-style-type:disc">Airbnb animates walkthroughs</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-808b-b4f5-ead40698bb84" class="bulleted-list"><li style="list-style-type:disc">Dropbox animates text layout</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-809d-ade4-d93cbe74dc33" class="bulleted-list"><li style="list-style-type:disc">Pinterest shows empty state transitions</li></ul></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-8067-9395-f410fa1377c5" class="">📘 This reinforces tying motion to user journeys, not isolated components.</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-805f-8e04-c22cb34d4549" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">&lt;/details&gt;
+</code></pre></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-80f1-b37a-c86358200622" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">&lt;details&gt;&lt;summary&gt;&lt;strong&gt;6. Implementation &amp; Export&lt;/strong&gt;&lt;/summary&gt;
+</code></pre></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8077-9013-cb4f06bb9bb9" class="bulleted-list"><li style="list-style-type:disc">Emphasis on tooling:<div style="display:contents" dir="auto"><ul id="24231ee4-c696-8011-a996-f6ab51a09edb" class="bulleted-list"><li style="list-style-type:circle">AE to Lottie to Code (Airbnb, LottieFiles)</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8052-ba5b-e2612e2d1d93" class="bulleted-list"><li style="list-style-type:circle">Figma motion specs (Adobe, Shopify)</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80e4-921c-e72ba51cc312" class="bulleted-list"><li style="list-style-type:circle">Platform parity (iOS, Android, Web)</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-80e6-aaf8-df608c4a8379" class="">🏁 <em>Linear</em> ensures token parity across design and dev, leading to a cohesive experience.</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-80e6-b543-c547832ddd19" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">&lt;/details&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-80e3-a11a-e0e7006808c4"/></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-80ee-bdda-c5a21e83a7e1" class=""><strong>🔍 Key Insights</strong></h2></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8068-beeb-fd08b280a484" class="bulleted-list"><li style="list-style-type:disc">✅ <strong>Motion tokens should be purposeful</strong>, not just mapped to raw values</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80d7-8794-c05cb0e8367e" class="bulleted-list"><li style="list-style-type:disc">✅ <strong>Easing matters</strong>: custom curves give your brand motion a signature feel</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8021-995a-c24c37ac1ce4" class="bulleted-list"><li style="list-style-type:disc">✅ Use <strong>visuals</strong> (GIFs, timelines, bubbles) to communicate behavior</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-805f-9c1d-c45c93c2fa24" class="bulleted-list"><li style="list-style-type:disc">✅ Define motion by <strong>interaction context</strong>, not just property</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8025-b960-ed10ef5d2c6c" class="bulleted-list"><li style="list-style-type:disc">✅ Consider a <strong>choreography system</strong> for entrance/exit hierarchy</li></ul></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-8037-be18-cde6a9e735fa"/></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-8023-933c-f0ee7ced79e2" class=""><strong>📎 What to Bring into Your System</strong></h2></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80dd-b9e5-f0e77670ab63" class="bulleted-list"><li style="list-style-type:disc">Motion Tokens:<div style="display:contents" dir="auto"><ul id="24231ee4-c696-802c-9c8d-e6dea1c5187f" class="bulleted-list"><li style="list-style-type:circle">Name based on intent: duration.entrance.short, easing.exit.natural</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8002-98a4-f30d323fb09d" class="bulleted-list"><li style="list-style-type:circle">Document duration ranges, easing curves, delays as building blocks</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-808b-b2ce-fd6a9012a9c6" class="bulleted-list"><li style="list-style-type:disc">Component Spec Examples:<div style="display:contents" dir="auto"><ul id="24231ee4-c696-8078-9228-c571c5f36516" class="bulleted-list"><li style="list-style-type:circle">Show how different components use these tokens in context</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-802b-aa02-ff1ff732c901" class="bulleted-list"><li style="list-style-type:circle">Use visual timelines, curves, and motion previews</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-809d-ab18-ee36639e3ba1" class="bulleted-list"><li style="list-style-type:disc">Choreography:<div style="display:contents" dir="auto"><ul id="24231ee4-c696-8039-bc01-cf31b474f068" class="bulleted-list"><li style="list-style-type:circle">Define rules for sequencing, staggering, and consistent motion paths</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80b4-921b-cfb7e5b012b1" class="bulleted-list"><li style="list-style-type:disc">Export Strategy:<div style="display:contents" dir="auto"><ul id="24231ee4-c696-8094-96b6-d5c305ba5a88" class="bulleted-list"><li style="list-style-type:circle">Recommend best practices for AE to code (or Lottie), depending on product needs</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><h1 id="24231ee4-c696-803e-b839-c4783b0d6e18" class=""><strong>🎯 Motion Tokens Benchmark</strong></h1></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-80e5-bd3f-c8f478759d07" class="">This page highlights how leading design systems structure motion tokens—what they include, how they’re named, and the strategic intent they support.</p></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-80cd-90f0-e9530698b648"/></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-806e-98e6-d990546c1ef5" class=""><strong>🏷️ Token Systems Compared</strong></h2></div><div style="display:contents" dir="ltr"><table id="24231ee4-c696-805d-b517-c90a3cbc6107" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-80f0-abe8-c41321bb5a61"><th id="&lt;QFn" class="simple-table-header-color simple-table-header"><strong>Design System</strong></th><th id="l^ZD" class="simple-table-header-color simple-table-header"><strong>Token Naming Style</strong></th><th id="zLfY" class="simple-table-header-color simple-table-header"><strong>Token Types</strong></th><th id="PKWv" class="simple-table-header-color simple-table-header"><strong>Highlight Features</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-8009-be9b-e37815ebd3c2"><td id="&lt;QFn" class=""><strong>Shopify Polaris</strong></td><td id="l^ZD" class="">--p-motion-duration-300, --p-motion-ease-in-out, --p-motion-linear</td><td id="zLfY" class="">Duration + Easing tokens (50–500ms), Linear, In-/Out-/In-Out</td><td id="PKWv" class="">Automated migration tools, clear token prefix enforcement</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-80dc-88eb-fdc7777bf41f"><td id="&lt;QFn" class=""><strong>Material Design 3</strong></td><td id="l^ZD" class="">motion.duration.short2, motion.easing.standard</td><td id="zLfY" class="">Fast, Default, Slow durations + custom easing curves</td><td id="PKWv" class="">Expressive design, platform-scaled defaults</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-80b2-954b-f7c6abeeff4c"><td id="&lt;QFn" class=""><strong>Atlassian Atlaskit</strong></td><td id="l^ZD" class="">motion.enter, motion.exit specs mapped to easing</td><td id="zLfY" class="">Component-level motion utilities, including resizing+entering</td><td id="PKWv" class="">Built-in behavior mappings and performance notes</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-80a4-9a66-ef9434a518d3"><td id="&lt;QFn" class=""><strong>Sprout Social / Seeds</strong></td><td id="l^ZD" class="">motion properties + tokens</td><td id="zLfY" class="">Duration, easing, choreography guidelines</td><td id="PKWv" class="">Emphasizes cohesive timing aligned to branding</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-8062-9b55-f4340d95e3d1"/></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-800f-9046-d3e5d5c33282" class=""><strong>➡️ Token Design Insights</strong></h2></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-8047-96cf-c83d0ab15b1e" class=""><strong>🔧 Duration</strong></h3></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80e2-af51-c50d8dda3487" class="bulleted-list"><li style="list-style-type:disc"><strong>Shopify Polaris</strong> uses a discrete scale: 50ms–500ms in consistent 50ms increments</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-809c-bfcf-d50c63f0a504" class="bulleted-list"><li style="list-style-type:disc"><strong>Material Design 3</strong> groups tokens into semantic categories like fast, standard, slow; each with defined ms values</li></ul></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-8069-925d-cdfe555413e2" class=""><strong>Takeaway:</strong> Use a balanced scale of durations that supports both micro-interactions and narrative-level motion.</p></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-8033-8fe2-d5d5484c62e2"/></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-80d5-989a-d055727a8ddc" class=""><strong>↔️ Easing</strong></h3></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8003-900b-c3e2b11b73ca" class="bulleted-list"><li style="list-style-type:disc"><strong>Polaris</strong> includes: ease-in, ease-out, ease-in-out, linear, plus an ease custom default designed for response-style interactions</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80b2-96ff-cf2e5a42d0fa" class="bulleted-list"><li style="list-style-type:disc"><strong>Material Design</strong> favors expressive cubic-bezier curves with emphasis on smooth stop/start and longer duration for polish</li></ul></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-805e-9af7-f75f13488bf6" class=""><strong>Takeaway:</strong> Use custom easing curves tied to system tokens, favoring Bézier values over CSS keywords.</p></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-80ac-a4a9-f7fed13c619e"/></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-80a4-84cf-e3f198935160" class=""><strong>⏳ Delay</strong></h3></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-800c-9dcb-d850e6a80abe" class="bulleted-list"><li style="list-style-type:disc"><strong>Shopify</strong> and others use delay tokens sparingly—primarily to enable sequencing or stagger of multi-element motion</li></ul></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-80cb-b54d-f2ac02de0300" class=""><strong>Takeaway:</strong> Define delay tokens (e.g., 50ms, 100ms) and reinforce their use in choreographed flows like tooltips and onboarding panels.</p></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-80a1-b620-ca46bc8c0d25"/></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-8071-b9fe-dd20711a5bc7" class=""><strong>↕️ Scale &amp; Rotation</strong></h3></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-804b-9507-ffc3ea72fe13" class="bulleted-list"><li style="list-style-type:disc">While Polaris doesn’t expose scale/rotation tokens by default, other systems embed these into keyframe token utilities</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-809d-a825-c75e61de0422" class="bulleted-list"><li style="list-style-type:disc">Atlassian provides predefined motion modules (e.g. resizing, toggles, entering elements) where scale and rotation play a role</li></ul></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-80de-8a68-d1d9750cbe44" class=""><strong>Takeaway:</strong> Include scale and rotation tokens even if simpler—they provide clarity for icon toggles, feedback interactions, and spinner behavior.</p></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-8068-863f-da83c99e678f"/></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-8098-89c8-ecaabc78a261" class=""><strong>✅ System Design Recommendations</strong></h2></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-800e-94e4-f7cd6372a95a" class="bulleted-list"><li style="list-style-type:disc"><strong>Follow Polaris-style naming conventions</strong>: motion-duration-100, motion-easing-standard, motion-delay-50</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8029-895a-e380e64d4481" class="bulleted-list"><li style="list-style-type:disc"><strong>Descriptive purpose over arbitrary numbers</strong>: use tokens like -standard, -emphasized, -decelerate to clarify intent</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8058-a5a8-eb68bbc79b1e" class="bulleted-list"><li style="list-style-type:disc"><strong>Ensure consistency across platforms</strong> and include auto conversion tools (as done in Polaris migration scripts)</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80f6-9a32-dcdfdb892e9d" class="bulleted-list"><li style="list-style-type:disc"><strong>Support accessibility</strong> by planning for a duration-scalar or reduced motion override, per Norton example</li></ul></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-8015-9551-e1dd61b6286e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-80a1-ad53-ebebf878e115" class="">Here’s a <strong>detailed breakdown of how each brand treats the structure, naming, values, and tokens</strong> of their motion system. The focus is on:</p></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80d5-8600-f607c4e87ee8" class="bulleted-list"><li style="list-style-type:disc"><strong>System structure</strong>: how motion is organized conceptually</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80cc-b653-ccc513ea333d" class="bulleted-list"><li style="list-style-type:disc"><strong>Token naming</strong>: conventions and semantic styles</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8029-a136-c8b5cdb9428e" class="bulleted-list"><li style="list-style-type:disc"><strong>Token values</strong>: actual durations, easing, delays</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80fd-a6a1-dd895665cff3" class="bulleted-list"><li style="list-style-type:disc"><strong>Token coverage</strong>: what kinds of motion are tokenized (duration, easing, etc.)</li></ul></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-8094-a3fd-d4a1089995d0"/></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-80ec-8d48-f34f1dfed6be" class=""><strong>🟣</strong></h2></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-80c1-8b58-c4dba2c1b2d6" class=""><strong>Shopify Polaris</strong></h2></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-803a-8b88-ee5822be6378" class=""><strong>🧱 System Structure</strong></h3></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-8026-a4de-d7c66db63956" class="">Polaris’ motion system is fully tokenized and integrated into their design tokens framework. It separates <strong>duration</strong> and <strong>easing</strong> into global tokens, decoupled from components. These are used across <strong>transitions</strong>, <strong>overlays</strong>, <strong>feedback</strong>, and <strong>motion choreography</strong>.</p></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-808c-90e6-d7352d261528" class="bulleted-list"><li style="list-style-type:disc">Supports semantic use (e.g. “emphasized”, “standard”)</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80c8-bb83-c1e686720de9" class="bulleted-list"><li style="list-style-type:disc">Tokens used in Figma, React, and CSS (via --p-motion-*)</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80f0-a1ef-c48e3960f46a" class="bulleted-list"><li style="list-style-type:disc">Enforced through linters and token rules</li></ul></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-808f-9b19-fbe212b97dfa" class=""><strong>🏷️ Naming</strong></h3></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-8066-b9c2-d5ecf912e7bc" class="">All tokens start with --p-motion-*. Naming is:</p></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80bf-944f-f5b40eba7f6d" class="bulleted-list"><li style="list-style-type:disc">Duration: --p-motion-duration-100 → ms value</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-808d-bc04-f3764093f117" class="bulleted-list"><li style="list-style-type:disc">Easing: --p-motion-ease-in, --p-motion-ease-out</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8056-bbe5-ea98cd40b2a6" class="bulleted-list"><li style="list-style-type:disc">Delay: Not exposed as tokens directly but used in choreography</li></ul></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-8049-a6b5-cecc354f952d" class=""><strong>🧮 Values</strong></h3></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80e7-809c-d06bca1ffb60" class="bulleted-list"><li style="list-style-type:disc"><strong>Durations</strong>:</li></ul></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-809a-9061-ef5e9b46af39" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">--p-motion-duration-50   → 50ms
+--p-motion-duration-100  → 100ms
+--p-motion-duration-150  → 150ms
+...
+--p-motion-duration-500  → 500ms</code></pre></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80af-82b0-fd9fb8dd5831" class="bulleted-list"><li style="list-style-type:disc"></li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80ba-b6dd-ea1de037ba17" class="bulleted-list"><li style="list-style-type:disc"><strong>Easing</strong>:</li></ul></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-8055-b592-cf37de6290cc" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">--p-motion-ease           → cubic-bezier(0.4, 0, 0.2, 1)
+--p-motion-linear         → cubic-bezier(0, 0, 1, 1)
+--p-motion-ease-in        → cubic-bezier(0.4, 0, 1, 1)
+--p-motion-ease-out       → cubic-bezier(0, 0, 0.2, 1)
+--p-motion-ease-in-out    → cubic-bezier(0.4, 0, 0.2, 1)</code></pre></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-8019-9be0-d2f68d7e5bf6" class=""><strong>🎯 Token Coverage</strong></h3></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8036-a3ff-c8fe73bd90ed" class="bulleted-list"><li style="list-style-type:disc">✅ Duration</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8006-92c5-f80dc8d7d10d" class="bulleted-list"><li style="list-style-type:disc">✅ Easing</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-800a-889a-dacf4fac2d18" class="bulleted-list"><li style="list-style-type:disc">❌ No rotation/scale tokens</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80cb-8286-fd3da7bcfd5d" class="bulleted-list"><li style="list-style-type:disc">⚠️ Delay used but not tokenized</li></ul></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-80e1-904b-f5444e15e77f"/></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-80db-b032-fea8ccb06583" class=""><strong>🟡</strong></h2></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-803b-897c-fcc642e20c49" class=""><strong>Material Design 3</strong></h2></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-808d-ab1a-d56a013bdeae" class=""><strong>🧱 System Structure</strong></h3></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-808e-b75d-d17e84f958c3" class="">Material defines motion in a <strong>semantic scale</strong> linked to platform feedback expectations. Motion tokens are part of the <strong>MD3 design tokens</strong> structure (e.g., motion.duration.short3).</p></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-803d-8578-df1389ff4dc1" class="bulleted-list"><li style="list-style-type:disc">Motion supports system expressions: enter/exit, transform, fade, etc.</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80aa-a58a-e5f52348024d" class="bulleted-list"><li style="list-style-type:disc">Organized by duration <strong>speed</strong> and <strong>use case</strong></li></ul></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-800a-84d7-f737265b4a8a" class=""><strong>🏷️ Naming</strong></h3></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-80e7-a154-c3d90f63ddd7" class="">Token style: motion.duration.*, motion.easing.*</p></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-80bb-bbef-d7cd1bc9e812" class="">It is <strong>purpose-based</strong>, not purely numeric. Example:</p></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8084-ba18-c26dab0b2aba" class="bulleted-list"><li style="list-style-type:disc">motion.duration.short1</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8090-88fb-d3eeac2e5eab" class="bulleted-list"><li style="list-style-type:disc">motion.easing.standard</li></ul></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-8032-b559-fc6d1f991211" class=""><strong>🧮 Values</strong></h3></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8006-8dbf-d62912d3f330" class="bulleted-list"><li style="list-style-type:disc"><strong>Durations</strong>:</li></ul></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-80f9-ab80-eba2d1c56648" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">short1 → 50ms
+short2 → 100ms
+short3 → 150ms
+medium1 → 200ms
+medium2 → 250ms
+long1 → 300ms
+long2 → 500ms</code></pre></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80a8-90b3-f1559f899424" class="bulleted-list"><li style="list-style-type:disc"></li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8059-bbea-cfe019890b35" class="bulleted-list"><li style="list-style-type:disc"><strong>Easing</strong>:</li></ul></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-8089-a23f-d69ee929b863" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">standard → cubic-bezier(0.2, 0, 0, 1)
+emphasized → cubic-bezier(0.3, 0, 0.8, 0.15)
+decelerate → cubic-bezier(0.0, 0, 0.2, 1)
+accelerate → cubic-bezier(0.4, 0, 1, 1)</code></pre></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-8039-bc1d-f55ed9b74b49" class=""><strong>🎯 Token Coverage</strong></h3></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80d9-9c58-dd3887bd6056" class="bulleted-list"><li style="list-style-type:disc">✅ Duration</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80c0-9afd-c444d3a6bfb5" class="bulleted-list"><li style="list-style-type:disc">✅ Easing</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80c0-9c52-d47644e8d167" class="bulleted-list"><li style="list-style-type:disc">✅ Platform-specific tokens</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80f7-9ca5-ccd579b39440" class="bulleted-list"><li style="list-style-type:disc">✅ Timing guidance in system docs</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80ed-a4ed-f3c30580eb55" class="bulleted-list"><li style="list-style-type:disc">❌ No scale/rotation token exposure</li></ul></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-80e1-b60f-eb00081c9c2c"/></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-80b6-a2d5-f4fc3256a096" class=""><strong>🔵</strong></h2></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-80d8-b973-ed4659a3beba" class=""><strong>Atlassian Design System</strong></h2></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-8047-a7b9-d4c0d58b63b8" class=""><strong>🧱 System Structure</strong></h3></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-8098-a27b-d247dc45f812" class="">Atlassian organizes motion around <strong>motion patterns</strong> like:</p></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8009-8603-f8f10641f44c" class="bulleted-list"><li style="list-style-type:disc">Entering/Exiting</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-806c-b028-f07a7125fa78" class="bulleted-list"><li style="list-style-type:disc">Moving/Resizing</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-800b-803d-ced564daeac6" class="bulleted-list"><li style="list-style-type:disc">Feedback animations</li></ul></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-80cf-9fca-e23d138d4e19" class="">It uses <strong>predefined motion behaviors</strong> with duration and easing built-in rather than exposed as isolated tokens. Component-level motion spec is favored.</p></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-8051-8647-d7b1a7cee20a" class=""><strong>🏷️ Naming</strong></h3></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-807c-b3f1-d759ffd9176c" class="bulleted-list"><li style="list-style-type:disc">Names refer to actions, not raw tokens<div style="display:contents" dir="auto"><p id="24231ee4-c696-8004-9cc5-c837ec278d76" class="">e.g. motion.enter.scale.fade or motion.resizing.width</p></div></li></ul></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-8061-9d09-e4ea78c0a2f9" class="">They document values, but don’t use them as standalone design tokens in public documentation.</p></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-80c7-9032-e5b7e88c57ba" class=""><strong>🧮 Values</strong></h3></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8054-9ca1-f3c5d1343324" class="bulleted-list"><li style="list-style-type:disc"><strong>Durations</strong> (typical):</li></ul></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-8049-aa8d-e1fb1fba6c23" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Small interactions → 150ms
+Entering components → 300ms
+Modals → 500ms</code></pre></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-804c-98a1-e9563f063b15" class="bulleted-list"><li style="list-style-type:disc"></li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8049-bedd-c90e6eb67372" class="bulleted-list"><li style="list-style-type:disc"><strong>Easing</strong>:</li></ul></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-8078-9e73-c4b26aeece15" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Enter:    cubic-bezier(0.2, 0, 0, 1)
+Exit:     cubic-bezier(0.4, 0, 1, 1)
+Resize:   cubic-bezier(0.2, 0, 0, 1)</code></pre></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-8077-aa88-c7f81616563c" class=""><strong>🎯 Token Coverage</strong></h3></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80df-b95f-f3d6bb1f218c" class="bulleted-list"><li style="list-style-type:disc">✅ Duration</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8060-a7ef-e75fc1800af8" class="bulleted-list"><li style="list-style-type:disc">✅ Easing</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8014-acbf-cec8b79e3854" class="bulleted-list"><li style="list-style-type:disc">✅ Integrated into behaviors</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80d3-83ef-e56b97dcde7a" class="bulleted-list"><li style="list-style-type:disc">❌ No tokenized scale/rotation</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80a0-9344-ec36df3cedc6" class="bulleted-list"><li style="list-style-type:disc">❌ No standalone motion token library (non-token-based system)</li></ul></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-8077-983f-f3ae4a69f200"/></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-8056-b9e4-fccd963d6ba2" class=""><strong>🟢</strong></h2></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-8084-9d47-f573aa8190ba" class=""><strong>Sprout Social / Seeds</strong></h2></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-800f-974a-ea64c12ea444" class=""><strong>🧱 System Structure</strong></h3></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-8048-a329-d71cd718e4cd" class="">Seeds focuses on motion as part of <strong>brand voice</strong>, balancing expressiveness with restraint. It defines timing curves and durations but <strong>doesn’t expose token code in public</strong>.</p></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80b8-a142-c992c3fd248a" class="bulleted-list"><li style="list-style-type:disc">Motion guidance embedded in docs</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80a3-bd74-fa5c5017bc60" class="bulleted-list"><li style="list-style-type:disc">Expressiveness balanced with usability and performance</li></ul></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-800b-8eef-eb738a078ce5" class=""><strong>🏷️ Naming</strong></h3></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8018-a610-d0950b5c560f" class="bulleted-list"><li style="list-style-type:disc">Not exposed in code/token format—only guidelines:<div style="display:contents" dir="auto"><ul id="24231ee4-c696-807d-9fa2-ead2051e20a2" class="bulleted-list"><li style="list-style-type:circle">“Fast”, “Moderate”, “Deliberate”</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-800d-8d71-f955a93e9a22" class="bulleted-list"><li style="list-style-type:circle">No token prefixes or variable examples provided publicly</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-8082-8391-e4616d3af6ac" class=""><strong>🧮 Values</strong></h3></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80ce-a75b-ff53f3c825a8" class="bulleted-list"><li style="list-style-type:disc"><strong>Durations</strong> (examples in documentation):</li></ul></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-80cb-853e-c7a339ae78bb" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Micro-interactions → 100–150ms
+Navigation or overlays → 300–500ms</code></pre></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-804a-bb83-fa58c93bcb14" class="bulleted-list"><li style="list-style-type:disc"></li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8060-aab0-d20a9bccbfcd" class="bulleted-list"><li style="list-style-type:disc"><strong>Easing</strong> (curves used):</li></ul></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-8022-9e98-c8a17ba599be" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Ease-in
+Ease-out
+Ease-in-out</code></pre></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80af-b062-ee0120ecfddf" class="bulleted-list"><li style="list-style-type:disc"></li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80fb-9d34-cea4a718c465" class="bulleted-list"><li style="list-style-type:disc">Emphasizes not overusing motion or delaying user tasks</li></ul></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-8048-b936-c9a578c8adf6" class=""><strong>🎯 Token Coverage</strong></h3></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-800a-876f-fc9e8c275898" class="bulleted-list"><li style="list-style-type:disc">✅ Duration &amp; easing values in docs</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8007-979e-e39e5da08287" class="bulleted-list"><li style="list-style-type:disc">❌ No token code references</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8083-a349-f0fe226ae5a4" class="bulleted-list"><li style="list-style-type:disc">❌ No rotation/scale/delay token detail</li></ul></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-800a-8db1-e92103ff7871"/></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-801a-ad81-f7a63a5875e9" class=""><strong>🔚 Summary Table</strong></h2></div><div style="display:contents" dir="ltr"><table id="24231ee4-c696-8002-ba6b-e41335846793" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-8023-8829-ea46b21902f3"><th id="gf&gt;I" class="simple-table-header-color simple-table-header" style="width:85px"><strong>Brand</strong></th><th id="Ug~j" class="simple-table-header-color simple-table-header" style="width:98px"><strong>Tokenized?</strong></th><th id="pBMi" class="simple-table-header-color simple-table-header"><strong>Duration Tokens</strong></th><th id="&lt;tvj" class="simple-table-header-color simple-table-header" style="width:117.4296875px"><strong>Easing Tokens</strong></th><th id="uQRd" class="simple-table-header-color simple-table-header" style="width:77.234375px"><strong>Rotation/Scale</strong></th><th id="bItX" class="simple-table-header-color simple-table-header"><strong>Naming Style</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-806f-b217-c5939ab232b8"><td id="gf&gt;I" class="" style="width:85px"><strong>Shopify</strong></td><td id="Ug~j" class="" style="width:98px">✅ Yes</td><td id="pBMi" class="">✅ 50–500ms</td><td id="&lt;tvj" class="" style="width:117.4296875px">✅ Named + custom Bézier</td><td id="uQRd" class="" style="width:77.234375px">❌ Not exposed</td><td id="bItX" class="">--p-motion-*</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-80c9-9d38-d0ad89e7884b"><td id="gf&gt;I" class="" style="width:85px"><strong>Material</strong></td><td id="Ug~j" class="" style="width:98px">✅ Yes</td><td id="pBMi" class="">✅ Short–Long</td><td id="&lt;tvj" class="" style="width:117.4296875px">✅ Semantic Bézier</td><td id="uQRd" class="" style="width:77.234375px">❌ Not exposed</td><td id="bItX" class="">motion.duration.*</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-8089-8925-cd9951cac486"><td id="gf&gt;I" class="" style="width:85px"><strong>Atlassian</strong></td><td id="Ug~j" class="" style="width:98px">⚠️ Partial</td><td id="pBMi" class="">✅ Behavior-based</td><td id="&lt;tvj" class="" style="width:117.4296875px">✅ Per motion pattern</td><td id="uQRd" class="" style="width:77.234375px">❌ Not tokenized</td><td id="bItX" class="">motion.enter.fade.scale</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-809a-955d-cbb26061160f"><td id="gf&gt;I" class="" style="width:85px"><strong>Sprout</strong></td><td id="Ug~j" class="" style="width:98px">⚠️ Partial</td><td id="pBMi" class="">✅ Docs only</td><td id="&lt;tvj" class="" style="width:117.4296875px">✅ Docs only</td><td id="uQRd" class="" style="width:77.234375px">❌ Not tokenized</td><td id="bItX" class="">“Fast”, “Deliberate” (semantic)</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-8020-9879-c428217e6401" class=""><strong>🔍</strong></h2></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-8087-8f30-f6e2c2d6689a" class=""><strong>General Learnings from the Page</strong></h2></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-805c-a993-e3b98df3889d" class=""><strong>1.</strong></h3></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-8003-bf82-df43239f38d3" class=""><strong>Structure Matters</strong></h3></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-802a-a0e6-eabbbe62f4ef" class="">The database separates motion into digestible layers, showcasing how teams approach:</p></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80b4-95fa-d66a5d3cb7bf" class="bulleted-list"><li style="list-style-type:disc"><strong>Principles</strong>: Why motion is used, and its philosophical role in the brand.</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8069-b33a-f66f1a3fc01b" class="bulleted-list"><li style="list-style-type:disc"><strong>Tokens &amp; Specs</strong>: Concrete values (like timing, easing) with naming conventions.</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-803e-8830-e4b1ae1ce34d" class="bulleted-list"><li style="list-style-type:disc"><strong>Usage</strong>: Real examples of how motion is applied in components or transitions.</li></ul></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-80c9-9eb9-f9bbee7f2045" class="">You can replicate this structure in your A3:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-8099-9360-d2e295227fb2" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">1. Principles
+2. Motion Tokens
+   - 2.1 Naming
+   - 2.2 Values (Duration, Easing, etc.)
+   - 2.3 Application (&quot;Where/How&quot;)
+3. Component Behaviors / Interaction Specs</code></pre></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-8041-a07e-d8575450e960"/></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-80b4-a387-d83e285de0e0" class=""><strong>2.</strong></h3></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-8069-b0c1-e1c04ac301e0" class=""><strong>Naming &amp; Token Strategy Examples</strong></h3></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-80e4-9e1f-c16049672672" class="">From the brands listed (like Wise, Klarna, Vevo), many:</p></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8039-a7c5-fe1f5cd34626" class="bulleted-list"><li style="list-style-type:disc">Use <strong>semantic naming</strong> like motion-enter-fast, motion-exit-smooth, or ease-in-emphasized — not hardcoded like ease-300ms.</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8062-9069-d716dde8977f" class="bulleted-list"><li style="list-style-type:disc">Organize values around <strong>behavior or intent</strong>, e.g. “enter”, “exit”, “emphasis”, “background”, etc.</li></ul></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-80d9-a15f-e9ff8bb72b4e" class="">✅ This reinforces your approach with tokens like:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24231ee4-c696-80b5-b9b9-fe16c53ab84c" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">--motion-duration-enter-fast: 150ms;
+--motion-easing-emphasized: cubic-bezier(…);</code></pre></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-80b1-abfe-f547d010540f"/></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-8041-8ae4-cc6eee12085f" class=""><strong>3.</strong></h3></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-8008-acb3-e23bcd55e0f4" class=""><strong>Motion Tokens are often grouped like this:</strong></h3></div><div style="display:contents" dir="ltr"><table id="24231ee4-c696-8032-bc82-f9b43b1e601b" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-80a5-8d81-cc3f80b1b917"><th id="t?bY" class="simple-table-header-color simple-table-header"><strong>Group</strong></th><th id="ORuJ" class="simple-table-header-color simple-table-header"><strong>Description</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-80b5-b2c3-d7f0d8436c3a"><td id="t?bY" class=""><strong>Duration</strong></td><td id="ORuJ" class="">e.g. short, medium, long, instant, delayed</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-8043-8291-fc6cda5ec6ca"><td id="t?bY" class=""><strong>Easing</strong></td><td id="ORuJ" class="">e.g. standard, accelerated, decelerated, emphasized</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-8055-9add-d65504e2e6c0"><td id="t?bY" class=""><strong>Delays</strong></td><td id="ORuJ" class="">used in sequences, often in carousel/image/content transitions</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-8007-ae8f-c37be2828d33"><td id="t?bY" class=""><strong>Transforms</strong></td><td id="ORuJ" class="">such as scale, rotate, translate—used to define entry/exit animation tokens</td></tr></div><div style="display:contents" dir="ltr"><tr id="24231ee4-c696-8026-82d0-c3844b92cf83"><td id="t?bY" class=""><strong>Component States</strong></td><td id="ORuJ" class="">interaction patterns like “pressed”, “hover”, “active”, “loading”</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-80eb-941f-ef9007e7b782"/></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-80a4-ba8a-ce0ba3daa5eb" class=""><strong>4.</strong></h3></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-805f-a552-c68935c250cc" class=""><strong>Conclusions from Victoria’s Benchmark</strong></h3></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-802c-b9fa-c6afde0c7919" class=""><strong>📌</strong></h3></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-8073-a751-d787eec0875c" class=""><strong>Brands like Wise, Klarna, Revolut, and Meta show:</strong></h3></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-801e-a89a-dbdcabdfc2d8" class="bulleted-list"><li style="list-style-type:disc">Emphasis on <strong>reusable tokens</strong> and <strong>consistent semantic structure</strong>.</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-801a-ae3a-e12a99fcb858" class="bulleted-list"><li style="list-style-type:disc">Preference for <strong>ease of developer implementation</strong>, e.g. using standardized variables and ramping values.</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-809e-86a4-f885ea830713" class="bulleted-list"><li style="list-style-type:disc">Motion is <strong>branded</strong> (subtle but distinct curves, durations, and delays that reflect personality).</li></ul></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-80d7-8e06-c812a1f5dac9"/></div><div style="display:contents" dir="auto"><h2 id="24231ee4-c696-8000-982b-cd1f9e191ca3" class=""><strong>✅ What You Can Do With This Benchmark</strong></h2></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-80ee-aa0d-e0aa819b67d6" class=""><strong>🔧 Use it to validate your system:</strong></h3></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80f6-8a0b-fde8cedef880" class="bulleted-list"><li style="list-style-type:disc">Are your <strong>token names</strong> aligned with industry patterns?</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8088-b74a-f962e4b13a3c" class="bulleted-list"><li style="list-style-type:disc">Are you using <strong>abstracted, semantic values</strong> instead of hard-coded ones?</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8032-b44f-fbcb00f2a785" class="bulleted-list"><li style="list-style-type:disc">Does your structure allow <strong>reusability across platforms</strong>?</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-8021-9600-fe4546d05bc4" class="bulleted-list"><li style="list-style-type:disc">Do your <strong>delays and easings</strong> serve actual interaction cases?</li></ul></div><div style="display:contents" dir="auto"><h3 id="24231ee4-c696-8032-8150-e53f61e1bded" class=""><strong>🧠 Take inspiration for your Notion formatting:</strong></h3></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-8001-999a-cf08e63f086a" class="">Use brand logos, short summaries, example tokens, and GIFs like she does. For each brand, you could document:</p></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80e1-a4e8-e0390e73f0af" class="bulleted-list"><li style="list-style-type:disc"><strong>System name</strong> (e.g., Wise Motion Spec)</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-80b6-9ba8-cdf1b8a3f271" class="bulleted-list"><li style="list-style-type:disc"><strong>Structure</strong> (Principles, Tokens, Use Cases)</li></ul></div><div style="display:contents" dir="auto"><ul id="24231ee4-c696-804f-832c-d78bb8653d9c" class="bulleted-list"><li style="list-style-type:disc"><strong>Unique behaviors</strong> (e.g., Klarna’s playful bounce, Meta’s precise easing)</li></ul></div><div style="display:contents" dir="auto"><hr id="24231ee4-c696-8067-bcfb-d9237066cb1d"/></div><div style="display:contents" dir="auto"><p id="24231ee4-c696-8089-a095-eeac6f6dd938" class="">Would you like a ready-to-copy Notion structure/template to document this for your Motion System page — or to compare these brands like Victoria does? I can generate that next.</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

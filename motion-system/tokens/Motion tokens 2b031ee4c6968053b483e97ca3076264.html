@@ -1,0 +1,725 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Motion tokens</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2b031ee4-c696-8053-b483-e97ca3076264" class="page sans"><header><div class="page-header-icon undefined"><img class="icon notion-static-icon" src="https://www.notion.so/icons/playback-play-button_gray.svg"/></div><h1 class="page-title" dir="auto">Motion tokens</h1><p class="page-description" dir="auto"></p><table class="properties"><tbody><tr class="property-row property-row-created_by"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/user-circle_gray.svg" style="width:14px;height:14px;display:block"/></span>Created by</th><td><span class="user"><img src="Motion%20tokens/Spiros.jpg" class="icon user-icon"/>Spiros Leividiotis</span></td></tr><tr class="property-row property-row-last_edited_time"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/clock_gray.svg" style="width:14px;height:14px;display:block"/></span>Created</th><td><time>@December 18, 2025 3:51 PM</time></td></tr><tr class="property-row property-row-status"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/burst_gray.svg" style="width:14px;height:14px;display:block"/></span>Health</th><td><span class="status-value select-value-color-blue"><div class="status-dot status-dot-color-blue"></div>In progress</span></td></tr></tbody></table></header><div class="page-body"><div style="display:contents" dir="auto"><div id="2b031ee4-c696-804f-b456-d756166ac185" class="column-list"><div style="display:contents" dir="auto"><div id="2b031ee4-c696-8066-890d-e7529e9cd3b8" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80fb-903c-c4dd6ca3afe5"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/playback-fast-forward_gray.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80e1-b488-d62eeac92f02" class=""><a href="https://www.notion.so/Motion-11831ee4c696802d9096fa098a9b9fe0?pvs=21">Foundations</a></p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-80ff-8b61-dc40b088c8ad" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80e6-bed2-d0358bed9295"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/playback-play-button_gray.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8078-b957-c040cdd4fbf4" class="">Motion tokens</p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-802a-8d7c-df333d71706a" class="image"><a href="Motion%20tokens/play.png"><img style="width:710px" src="Motion%20tokens/play.png"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-801f-818f-f541654ca6b0"/></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-809d-adc8-cea815fc24c6" class="column-list"><div style="display:contents" dir="auto"><div id="2b031ee4-c696-807f-a087-fb51cc51758b" style="width:63.636363636363626%" class="column"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80f5-a117-f4f50e1e7ded" class=""><a href="https://www.notion.so/Motion-tokens-2b031ee4c6968053b483e97ca3076264?pvs=21">What are Motion tokens</a></p></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-801f-8a81-c02467a2ff21" class=""><a href="https://www.notion.so/Motion-tokens-2b031ee4c6968053b483e97ca3076264?pvs=21">Motion decision guide</a></p></div></div></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-8083-926a-ca5b76af4461" style="width:50%" class="column"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-801d-9cae-e2a0544b5dcc" class=""><a href="https://www.notion.so/Motion-tokens-2b031ee4c6968053b483e97ca3076264?pvs=21">Primitive tokens</a></p></div></div></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-80df-9523-f08378289d30" style="width:45.454545454545475%" class="column"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-807a-8ffa-d22c6adfe5c7" class=""><a href="https://www.notion.so/Motion-tokens-2b031ee4c6968053b483e97ca3076264?pvs=21">Semantic tokens</a></p></div></div></div></div></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-8049-afa7-d66b6c23e88c"/></div><div style="display:contents" dir="auto"><h1 id="2b031ee4-c696-80d4-bf43-ff0d54ebdcfe" class="">What are Motion tokens?</h1></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-80dd-b9e2-d7f1bb33514d"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80e8-88ac-f91c8800791d" class=""><strong>Motion tokens</strong> are the foundation of a scalable <strong>Motion System</strong> at <strong>Qonto</strong>.<br/>They are divided into two main groups:</p></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-806b-9d55-cc1984018d75" class="column-list"><div style="display:contents" dir="auto"><div id="2b031ee4-c696-8085-bcca-e5c4ebdb57b2" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80bb-a0be-cbfd3062978f"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="2b031ee4-c696-80f8-8455-d2f9c22e6e72" class="">Primitives</h2></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-8029-831d-c27452670c11"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8055-8618-d9414899e7dc" class="">The building blocks of the motion system. Individual values for timing (duration, easing, delay) and visual changes (translate, scale, alpha, rotation, blur, spring).<br/></p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-8091-83b4-f149a9dd4946" style="width:50%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8098-8719-c7da7472dab4"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="2b031ee4-c696-80c1-b61f-f2e6c369fec3" class=""><strong>Semantics</strong></h2></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-80cb-99f4-f11130eebb6f"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8069-b752-f7a8c903c8d4" class="">Purpose-driven combinations of primitives. Foundations define timing based on intent (entry, exit, interactive, reveal, transition), while patterns create complete animations (slide, fade, press, hover, etc.).</p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8086-b228-f9d91e0de37c" class="">Tokens help bridge design and development by using shared language and structure, enabling smoother handoff and easier maintenance.</p></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8033-8ea5-df639c13835f" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2b031ee4-c696-80a7-a84c-c9f5d18b514e" class="">Primitive tokens</h1></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-8079-8226-c0c38563d26d"/></div><div style="display:contents" dir="auto"><h2 id="2b031ee4-c696-8081-af78-fc6f9e5d3ae0" class="">Timing</h2></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80f9-a0a9-cd4a78f5e68b" class="">Core time controls for any animation.</p></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-8054-b0e5-d961979658b7" class="column-list"><div style="display:contents" dir="auto"><div id="2b031ee4-c696-8095-ab8e-daa0f3fab2ce" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-801b-be8a-c2e7d733b74d"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-807a-a931-da16fe8bbe32" class=""><a href="https://www.notion.so/Duration-25d31ee4c696804a9bccf082dd8167d0?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/clock-alternate_gray.svg"/> Duration</a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-80e2-ab9e-cccdc9c8d250" class="image" style="text-align:center"><a href="Motion%20tokens/duration.gif"><img style="width:163.9921875px" src="Motion%20tokens/duration.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-8077-9942-f45d12fcc9b8"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8066-bcdd-d0865c23d3c7" class="">Defines the duration of the animation.<br/></p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-804e-9604-dd99accf0c55" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-802b-9f93-c358c7b6dad8"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8025-81a4-f36e0b50c259" class=""><a href="https://www.notion.so/Easing-25d31ee4c696805fa830f64a36905451?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/timeline_gray.svg"/>Easing</a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-80db-88d0-c1945b587624" class="image" style="text-align:center"><a href="Motion%20tokens/easing.gif"><img style="width:163.9921875px" src="Motion%20tokens/easing.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-8004-a5c3-c26e510f81c8"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8085-a8d4-d3f6a7d2f3a2" class="">Defines the speed change of the animation.</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-8062-9fe8-e8a60e549775" style="width:33.33333333333334%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80c4-8e38-cd2dfbf2717a"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80a1-9860-f28278e0d6ae" class=""><a href="https://www.notion.so/Delay-25d31ee4c6968030bbd1fefc9b0bd4da?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/hourglass_gray.svg"/>Delay</a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-80c7-9584-f54dac7f69b0" class="image" style="text-align:center"><a href="Motion%20tokens/delay.gif"><img style="width:163.9921875px" src="Motion%20tokens/delay.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-8030-84b8-d1b06dc3c91b"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80dc-b190-ee81b77cbcb0" class="">Defines the delay before the animation begins.</p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8076-9e48-cc66f3a382f9" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2b031ee4-c696-8047-b852-f023a1282033" class="">Values</h2></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80a5-a832-ebd7188de3ab" class="">Visual change primitives applied to elements.</p></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-8095-8baa-f53802034849" class="column-list"><div style="display:contents" dir="auto"><div id="2b031ee4-c696-80a0-9b5b-f6e1ae8636fe" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8025-923a-f1e344d09a97"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8008-95bd-f40c4bbd1f37" class=""><a href="https://www.notion.so/Translate-29d31ee4c69680d496dce512c3b1fa8d?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/arrows-horizontal_gray.svg"/>Translate</a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-8087-abfc-d485f0fe22ec" class="image" style="text-align:center"><a href="Motion%20tokens/X.gif"><img style="width:163.9921875px" src="Motion%20tokens/X.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-800c-b711-c8131be08f79"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80f9-9aff-f91295ebde55" class="">Defines the distance an element moves along the X or Y axis. Used for sliding, shifting, and positional animations.</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8005-a0f0-d2f151c26d0f"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80d2-b6fc-ca65bd7fcd58" class=""><a href="https://www.notion.so/Rotation-25d31ee4c69680dc9246f3b49e9978ba?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/sync_gray.svg"/>Rotation</a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-8060-bfbf-eecf02f2aaa0" class="image" style="text-align:center"><a href="Motion%20tokens/rotation.gif"><img style="width:163.9921875px" src="Motion%20tokens/rotation.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-80e3-8f0e-cf36f9c47034"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-804a-9930-d8f345f65fdd" class="">Specifies the rotation angle of an element in degrees. Used for spins, tilts, and orientation changes.</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-802c-b4c3-eb06e39f615b" style="width:33.33333333333336%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8019-ac1d-ccb05e50919b"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8041-afaa-d280eb1223c9" class=""><a href="https://www.notion.so/Alpha-25d31ee4c69680d39cfafe3806c9673a?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/contrast_gray.svg"/>Alpha</a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-80f4-8e1a-f667b6dc3b7b" class="image" style="text-align:center"><a href="Motion%20tokens/alpha.gif"><img style="width:163.9921875px" src="Motion%20tokens/alpha.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-8083-8256-cc1f82a1eb36"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80b4-a743-fa5ae2eb1205" class="">Specifies the opacity level of an element. Controls visibility <br/>from transparent to fully opaque.</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8027-98d6-f0bc1bdcde2a"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8057-8275-d747fb582d51" class=""><a href="https://www.notion.so/Blur-29d31ee4c69680e3bb0ada558eee3139?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/circle-alternate_gray.svg"/>Blur</a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-807f-926a-c806ef51e077" class="image" style="text-align:center"><a href="Motion%20tokens/blur.gif"><img style="width:163.9921875px" src="Motion%20tokens/blur.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-80ba-b859-e1dfc0999b51"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8029-82a6-e8faad68d098" class="">Defines the blur radius applied to an element. Used for focus effects, depth, and loading states.</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-8008-a905-c07059047b40" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-805e-bdec-c86407bdf799"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8079-b7ca-ecc332debac3" class=""><a href="https://www.notion.so/Scale-25d31ee4c69680c686ded095790a924c?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/expand_gray.svg"/>Scale</a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-80d5-9eb9-d9529aa15170" class="image" style="text-align:center"><a href="Motion%20tokens/scale.gif"><img style="width:163.9921875px" src="Motion%20tokens/scale.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-8004-a98d-dae0febecd45"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80f1-95c4-f06f595eb850" class="">Specifies the size multiplier of an element. Used for zoom effects, emphasis, and size transitions.</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8093-8f7f-d1cb53be1775"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80c6-b37b-ce0f4a065cda" class=""><a href="https://www.notion.so/Spring-29d31ee4c69680e0ab01d7d1024cc592?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/science_gray.svg"/>Spring</a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-8070-8604-cf0937740559" class="image" style="text-align:center"><a href="Motion%20tokens/spring.gif"><img style="width:163.9921875px" src="Motion%20tokens/spring.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-8042-895e-e9138adf6d56"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8095-9721-e4900473558f" class="">Defines physics-based animation behavior using damping, stiffness, and mass. </p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80d7-ac96-fee408701f7a" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2b031ee4-c696-80c3-a2d8-f57d1cb59f60" class="">Semantic tokens</h1></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-80ba-afc4-d6d7b1650a81"/></div><div style="display:contents" dir="auto"><h2 id="2b031ee4-c696-808e-ae14-c30fe1edb5a0" class="">Base</h2></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-803e-902a-e8af314b9d1c" class="">Purpose-driven combinations of timing primitives with no visual change. <br/>Designers pick by intent - engineers apply effects as needed or use Common patterns.</p></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-8068-be8e-cbc54645e05f" class="column-list"><div style="display:contents" dir="auto"><div id="2b031ee4-c696-805d-b143-fea2629c5230" style="width:33.33333333333336%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80cb-b4f6-d94ba63bc82e"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80b8-92e0-d13016da2a34" class=""><a href="https://www.notion.so/Entry-29d31ee4c69680dca527d6f1532177c8?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/log-in_gray.svg"/>Entry</a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-80e6-89fb-f342e4a41768" class="image" style="text-align:center"><a href="Motion%20tokens/entry.gif"><img style="width:163.9921875px" src="Motion%20tokens/entry.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-804d-8318-d5e377930e9a"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8018-b66e-e571de2afb23" class="">Defines timing for elements appearing into view. </p></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80da-8182-db570c8bf477" class="">Used when content becomes visible for the first time.</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80ef-8207-f25550d69bc0"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8016-b607-c0e16a0d4f95" class=""><a href="https://www.notion.so/Transition-29d31ee4c6968063bafde42c6228136d?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/arrows-swap-horizontally_gray.svg"/>Transition</a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-802c-8c8f-daa55b6641ef" class="image" style="text-align:center"><a href="Motion%20tokens/transition.gif"><img style="width:163.9921875px" src="Motion%20tokens/transition.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-80e8-ae24-ee3e151debdc"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80c9-9499-cc84b18ed22d" class="">Defines timing for state changes. Used when properties smoothly shift between different values.<br/></p></div></div></figure></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80b5-bf19-c18fb00ae4db" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-80ad-9c0e-db5e2fa0e909" style="width:33.33333333333334%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80fc-968d-cf9146154a9d"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80ce-9fee-d643305d4391" class=""><a href="https://www.notion.so/Exit-29d31ee4c696807eaac1c269fcda1007?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/log-out_gray.svg"/>Exit</a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-80a1-b5b8-e9b80bac6b52" class="image" style="text-align:center"><a href="Motion%20tokens/exit.gif"><img style="width:163.9921875px" src="Motion%20tokens/exit.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-803f-8a3f-ecd9c3360947"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8052-b1f7-fc3c6bb8eb55" class="">Defines timing for elements leaving view. </p></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-804a-a34b-d43633afec03" class="">Used when content is being removed or hidden from the interface.</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-806c-af17-deff632052f7" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80b0-b5c3-d79661f7b454"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8000-983d-eb796d630ce3" class=""><a href="https://www.notion.so/Reveal-29d31ee4c69680a68d72f141235c4543?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/view_gray.svg"/>Reveal</a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-8055-9038-f1a15bb6d1b7" class="image" style="text-align:center"><a href="Motion%20tokens/reveal.gif"><img style="width:163.9921875px" src="Motion%20tokens/reveal.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-807f-ae5b-f50b19d16edd"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-802b-a2cf-ea0b19812d1a" class="">Defines timing for progressive disclosure. Used when content gradually becomes visible with subtle emphasis.<br/></p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="2b031ee4-c696-800a-9b5d-c75182118ebc" class="">Common</h2></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8081-bb31-df0768975105" class="">Ready-made patterns combining Base timing with effect(s).</p></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-807b-9c16-d0023fc1b921" class="column-list"><div style="display:contents" dir="auto"><div id="2b031ee4-c696-80ec-825c-eb889314c608" style="width:33.333333333333336%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8066-92e8-fb23020fecf2"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80b6-8a74-c9a7b0ecd34a" class=""><a href="https://www.notion.so/Expand-collapse-2a031ee4c696808fa02dea7bb9517ea7?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/arrow-circle-down_gray.svg"/>Expand/ collapse</a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-807e-95e4-eeb57e02aa4e" class="image" style="text-align:center"><a href="Motion%20tokens/expand.gif"><img style="width:163.9921875px" src="Motion%20tokens/expand.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-8008-9de1-edf436ca834b"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80be-ba8f-e3242aae3bb4" class="">Animates height changes for revealing or hiding content sections. Used for accordions, dropdowns, and collapsible panels.</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-808a-aa33-ca6a48782bda"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80f1-8d88-ffc71a95423c" class=""><a href="https://www.notion.so/Page-transition-2a031ee4c69680ce9590c1eb86c6be9d?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/camera-roll-portrait_gray.svg"/>Page transition</a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-804f-8ce6-c5da4e3bb10c" class="image" style="text-align:center"><a href="Motion%20tokens/transition-patterns.gif"><img style="width:163.9921875px" src="Motion%20tokens/transition-patterns.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-807b-9650-e3f032beb693"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8091-9c5a-f52e0fc953ab" class="">Manages transitions between different views or pages. Provides context and continuity during navigation by smoothly replacing content.</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8051-8057-dd1b9f84dbb5"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8042-a5c8-e1db9f4f190f" class=""><a href="https://www.notion.so/Shimmer-loading-2a031ee4c69680c8b4c6c74da851b19c?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/circle-five-eighths_gray.svg"/>Shimmer/ loading </a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-8007-aadc-c897764642f1" class="image" style="text-align:center"><a href="Motion%20tokens/loading.gif"><img style="width:163.9921875px" src="Motion%20tokens/loading.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-80ba-a53a-f8606dcd4a02"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8023-8283-ca9c0697d4be" class="">Indicates loading states and ongoing processes. Uses infinite loops to communicate activity and maintain user engagement during wait times.</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-80b1-ba1f-fed6aabcf928" style="width:33.333333333333336%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80c0-b31f-fbdee9d18838"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-800d-b619-d21ade55f455" class=""><a href="https://www.notion.so/Fade-2a031ee4c69680debaeedeb88ce3cfaa?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/lights_gray.svg"/>Fade</a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-80a0-a1a7-ce8fe8da8045" class="image" style="text-align:center"><a href="Motion%20tokens/fade.gif"><img style="width:163.9921875px" src="Motion%20tokens/fade.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-8065-9107-d59f7fee1c6a"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8033-b8a1-dd9a67d64717" class="">Controls opacity transitions for appearing or disappearing content. Used for overlays, tooltips, and gentle state changes.</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8038-b491-deb6e454a808"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-808b-8a6b-de92f329ccd4" class=""><a href="https://www.notion.so/Press-tap-2a031ee4c69680ac99c5c60453a79cd3?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/location_gray.svg"/>Press/ tap</a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-806b-beb6-ed1b8eaefa00" class="image" style="text-align:center"><a href="Motion%20tokens/tap.gif"><img style="width:163.9921875px" src="Motion%20tokens/tap.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-806f-8b51-cd8955f78ecc"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80a1-bc3e-e1c279bfaf83" class="">Provides tactile feedback for interactive elements. Scales down on press and returns on release to simulate physical button behavior.<br/></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80c4-941a-c47f5041ad88"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80a7-b9bb-e4e89043879b" class=""><a href="https://www.notion.so/Slide-2a031ee4c69680fb85cad1280c097093?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/reorder_gray.svg"/>Slide </a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-8087-b323-f0463ab623a7" class="image" style="text-align:center"><a href="Motion%20tokens/slide_fade.gif"><img style="width:163.9921875px" src="Motion%20tokens/slide_fade.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-8050-a353-df34b3b27818"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80de-b6d1-fa6a47e20cb5" class="">Animates directional movement with opacity changes. Used for panels, drawers, and content that enters or exits from specific directions.<br/></p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-80ef-9120-f7b9a9758327" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80eb-b2ba-d3c43658d6ab"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80f9-a53b-dc39700b41ed" class=""><a href="https://www.notion.so/Hover-lift-2a031ee4c69680feba8cc632ece8b0df?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/cursor-button_gray.svg"/>Hover/ lift </a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-80da-909b-c68381fb05f2" class="image" style="text-align:center"><a href="Motion%20tokens/hover.gif"><img style="width:163.9921875px" src="Motion%20tokens/hover.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-805d-b3c3-f08b3f320079"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8074-a46f-fa4d89f934c6" class="">Provides visual feedback for interactive elements on hover. Used for cards, buttons, and clickable items to indicate interactivity.</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8077-8a87-f394cda8de31"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80c5-ad38-d94b8595078e" class=""><a href="https://www.notion.so/Scale-fade-2a031ee4c6968066921cfadd5549113d?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/square-one-fourth_gray.svg"/>Scale fade</a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-8097-b81c-e297661da040" class="image" style="text-align:center"><a href="Motion%20tokens/scalefade.gif"><img style="width:163.9921875px" src="Motion%20tokens/scalefade.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-8036-9b78-ebc77b77a4ec"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80d2-9234-c94c707496f6" class="">Combines scale and opacity changes for emphasis. Used for modals, alerts, and elements that need dramatic entrance or exit.<br/><br/></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-800d-9c4b-ef5ed0f6bab0"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8003-a72d-ee18c612a5e4" class=""><a href="https://www.notion.so/Stagger-2a031ee4c696801c9420f1274ca30fe9?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/layers_gray.svg"/>Stagger </a> </p></div><div style="display:contents" dir="ltr"><figure id="2b031ee4-c696-8066-8ed0-cada495b7c93" class="image" style="text-align:center"><a href="Motion%20tokens/staggered.gif"><img style="width:163.9921875px" src="Motion%20tokens/staggered.gif"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-809d-81ca-fd940039c463"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80b9-964d-f674605bdbdb" class="">Orchestrates sequential entrance of multiple elements. Creates visual hierarchy and draws attention by animating items with incremental delays.<br/></p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8006-8af3-d3939eba8584" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2b031ee4-c696-802f-b2a1-f22fe86610a8" class=""><strong>Motion Decision Guide</strong></h1></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-8044-bfe4-df3e6c30564d"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80d2-a5cc-d57d7c6f8990" class=""><strong>Quick start:</strong> Pick <strong>Common</strong> tokens first - they cover most use cases. If you need something custom, combine a <strong>Base</strong> token with <strong>Values</strong>.<br/></p></div><div style="display:contents" dir="auto"><h2 id="2b031ee4-c696-808e-a5c7-fc1ee3d96973" class=""><strong>How to choose:</strong></h2></div><div style="display:contents" dir="auto"><ul id="2b031ee4-c696-805e-9fb8-c07c9ba3e959" class="bulleted-list"><li style="list-style-type:disc"><strong>Start with Common tokens</strong> → Use the sections below to find your match.</li></ul></div><div style="display:contents" dir="auto"><ul id="2b031ee4-c696-807f-ae80-f44683ce5616" class="bulleted-list"><li style="list-style-type:disc"><strong>Review the token details</strong> → Each token has Purpose, Use/Don&#x27;t, Properties, Preview, and Code alias.</li></ul></div><div style="display:contents" dir="auto"><ul id="2b031ee4-c696-8017-a903-cf2127f9f827" class="bulleted-list"><li style="list-style-type:disc"><strong>Customize if needed</strong> → Pair a <strong>Base</strong> token (<code>entry</code>, <code>exit</code>, <code>reveal</code>, <code>transition</code>) <br/>with <strong>Value</strong> primitives.</li></ul></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80dd-900d-d139b9b1d64e" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2b031ee4-c696-804f-b2ef-d19ea66c727f" class="">Choose by intent</h2></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-8013-9312-c852059a4dbc"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8072-9dcb-c006a43bb838" class="">What is the purpose of your animation?<br/></p></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-801e-a356-fa6ffc524264" class="column-list"><div style="display:contents" dir="auto"><div id="2b031ee4-c696-8030-9769-f67dc3a1cb42" style="width:31.25%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80be-b585-c27f17d459c2"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-806e-949a-debb9091ddfb" class=""><strong>Reveal inline content</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-806b-9d2d-dbf54ad41989"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-804b-b2c4-d3dbe405ab5f" class=""><strong>Enter a surface</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80d4-8b35-c8d17cc8e5eb"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8042-9a77-eaa2d22800cc" class=""><strong>Exit a surface</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8006-8ed6-e00a6e284197"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80af-a3c7-fb4648c05d1a" class=""><strong>Change page/route</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8051-8040-cb077396661a"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80ea-92e4-c9a2b0e4c746" class=""><strong>Swap views</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80f2-90e8-d22807a63292"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8064-84af-d54c70b06db1" class=""><strong>Directional movement </strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80d7-8801-ee00ef7e28ba"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8049-a9bf-ed2a764fd4e9" class=""><strong>Hover feedback (web) </strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8042-91a7-c0555b9178fc"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80e8-8610-f7a70c202eeb" class=""><strong>Press / tap feedback</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8055-9fb0-fb746d696bae"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8037-94b9-c77c5545b9f2" class=""><strong>Loading placeholders</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8037-b45b-ffcdc001355a"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8048-ae22-c871e125c874" class=""><strong>Sequence multiple items </strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80d6-aef5-c41e37c2f4cb"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-809d-8206-c73d89bd11e2" class=""><strong>Expand / collapse content </strong></p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-80be-91b9-ee9b5f249678" style="width:68.75%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-804f-ac1d-d5d52bcb6bb6"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8047-95a3-ce7d743b2919" class="">→ Reveal</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8052-b205-dcdaf01cde7a"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8069-8e9c-ec977f4f3244" class="">→ Entry</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8032-a6c0-cd05b49c1de5"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80b9-b68a-f3eb037f7893" class="">→ Exit</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8044-a404-c5b67db81fce"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8031-929a-e4e1c499c31b" class="">→ Page transition</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-800a-a6d2-eae0750f544d"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8077-9c65-d6665a99fd5d" class="">→ Transition</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80ea-ad3e-c23309b0f7c3"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8080-9d29-c7b8ce6a1f30" class="">→ Slide<br/></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8049-b10c-e0c6531dbd08"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-800d-ae99-d6a25a607235" class="">→ Hover / lift<br/></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-803b-8af9-d00d2843386d"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-807b-8868-dd68092980fd" class="">→ Press / tap</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8087-af4c-c703dd2254c7"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80b0-9848-e954ec27e307" class="">→ Shimmer / loading<br/></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80ed-9d5c-d65afdb22e0a"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-806d-a73f-dacd9c8f0b7a" class="">→ Stagger<br/></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80e6-a4f9-fefe3e465764"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8042-9ce6-cba0e556c347" class="">→ Expand / collapse<br/></p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-801e-8913-f7edf0dd701a" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2b031ee4-c696-80a8-a249-cbb2321f01c7" class="">Choose by component</h2></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-80f9-ae1a-cacaf4c168f6"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80b3-a7c2-f93d3ed86c4b" class="">Working with an existing component? Check which <strong>Common</strong> token it uses:<br/></p></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-8034-b5a5-d7e880e4590d" class="column-list"><div style="display:contents" dir="auto"><div id="2b031ee4-c696-8028-8a38-e048866a7eb3" style="width:31.25%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8019-a75c-d96c195b16ac"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8096-971d-ff83ab3e238d" class=""><strong>Accordion</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80cb-8de4-d115e8c34c2b"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80dc-9f22-d687d6378d5f" class=""><strong>Buttons</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80fe-be02-da57c22660ae"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-804b-8345-d6a55f9de92e" class=""><strong>Cards (Animated)</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-800c-bdac-dacbca0d8f95"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-804f-a9e8-feae4af27e27" class=""><strong>Choice Chips</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8066-bc90-e6ba3c6d97de"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8060-ae89-f23e12130980" class=""><strong>Collapse Options</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80ad-ac48-f444e3e6008d"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-804c-b370-c399c54c189a" class=""><strong>Data Tables</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80bb-9c6e-d82631a41ddf"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80d8-bc02-c9e5d46418a8" class=""><strong>Drawer (Side)</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-807b-acaa-d7bbf78faf94"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80b3-b803-db621d2483b4" class=""><strong>Dropdown</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8002-974d-ed33a6aea771"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8051-9417-de309aef303b" class=""><strong>Empty States</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80d9-9c87-d49ff4d8c9c9"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80d4-8d56-c8f657512ebf" class=""><strong>Fullscreen Modal</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8060-9d88-fbbc1e68a7d8"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8078-9c7b-d1edec0d8636" class=""><strong>Loaders</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8084-a0ec-dd2950575324"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8085-b6fe-fe15bdff22da" class=""><strong>Modals</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-800f-972a-fb3016481840"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8019-8fb0-f58e5025c90e" class=""><strong>Side Panel</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8023-a577-f5616f65c45c"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8087-9450-ed913da74fdd" class=""><strong>Tables</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-803c-8770-eeb7ae600742"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80df-be18-f53a3b3a7077" class=""><strong>Toast</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8001-bf7a-d07e3d30b341"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-803b-8f28-e1e84186dc19" class=""><strong>Toggle Button</strong></p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80f9-8d72-f596484f3051"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8096-b09e-ddcffb91a6e1" class=""><strong>User Actions Stack</strong></p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="2b031ee4-c696-80b3-b1c2-fd98447a33ea" style="width:68.75%" class="column"><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-802a-88a8-d4e31dbd145d"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8004-bf1d-c846310d4581" class="">motion-expand, motion-collapse</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80aa-9e45-e7f2460d3fb0"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-808e-aa0f-ed1901951d43" class="">motion-press-tap</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-804e-ae8b-c04d98a0f613"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8046-afcd-c69e84687b8d" class="">motion-scale-fade-in</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-808c-a2f6-e56b22ebbaf1"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8065-b51e-fa2a697b6ccc" class="">motion-fade-in, motion-fade-out + motion-slide-in</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-809c-aa17-cbff5096419f"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8036-979d-ced63af7cd58" class="">motion-fade-in, motion-fade-out + motion-slide-in</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-800d-be10-f5536e1cd0aa"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-801f-bdc9-f48a615d6597" class="">motion-stagger-light + motion-fade-in + motion-slide-in</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8020-bd60-dc2ca1d32989"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-805b-b0de-c25502287021" class="">motion-slide-in (right) + motion-fade-in (overlay)</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80ee-9f85-d34c274fd3cb"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8079-855c-f0638e4e7514" class="">motion-fade-in, motion-slide-in</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8068-965a-ea2dd3c93f39"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8019-a581-eba44a5701df" class="">motion-fade-in</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80f9-9ec7-e9ca0e4ca6b2"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8009-a25d-ffd70be3823e" class="">motion-slide-in (up)</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-800a-9bfc-c9b5e7424377"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8005-b684-d5b0ef2c1dcc" class="">motion-shimmer, motion-pulse</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8083-9702-cf464665af1b"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8095-9d12-d6bce79b9575" class="">motion-fade-in, motion-fade-out + motion-slide-in</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80e1-9194-e944d5a1cdb2"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80f7-9adf-fabe6926a583" class="">motion-slide-in (right)</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-802b-955c-deaf1f3daf11"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-802f-b448-f7e43c913a7c" class="">motion-stagger-light + motion-fade-in + motion-slide-in</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-80c9-818d-cdddb618bddb"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-804b-8ccf-c44684d06b25" class="">motion-slide-in (left) + motion-fade-in</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8060-adc4-c9b666684138"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-801b-80ac-f94aafce911a" class="">motion-slide-in (horizontal)</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8074-9680-f1bd2cfd1131"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80e8-9dae-e90dbdc4835d" class="">motion-expand, motion-collapse + motion-scale-fade-in</p></div></div></figure></div></div></div></div></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8056-8143-c7934af730c5" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2b031ee4-c696-80d6-a314-dc80f31ce7ee" class=""><strong>Customize if needed</strong></h2></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-8070-b488-d48881845c64"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80a0-82b5-f59b9887a975" class="">If no <strong>Common</strong> token fits your needs:</p></div><div style="display:contents" dir="auto"><ol type="1" id="2b031ee4-c696-80ca-bd70-c82a9b60b05c" class="numbered-list" start="1"><li>Pick a <strong>Base</strong> token (<mark class="highlight-teal"><code>motion-entry</code></mark>, <mark class="highlight-teal"><code>motion-exit</code></mark>, <mark class="highlight-teal"><code>motion-reveal</code></mark>, <mark class="highlight-teal"><code>motion-transition</code></mark>)</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2b031ee4-c696-8054-9cbc-ea1946db2507" class="numbered-list" start="2"><li>Combine it with <strong>Value</strong> primitives (<mark class="highlight-teal"><code>motion-translate</code></mark>, <mark class="highlight-teal"><code>motion-scale</code></mark>, <mark class="highlight-teal"><code>motion-alpha</code></mark>, etc.)</li></ol></div><div style="display:contents" dir="ltr"><figure class="block-color-default_background callout" style="white-space:pre-wrap;display:flex" id="2b031ee4-c696-8060-8499-cb19ed4dd7bc"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8023-aed2-d012e5834fce" class=""><strong>Example:</strong> Need a custom slide? Use <mark class="highlight-teal"><code>motion-entry-default</code></mark> + <mark class="highlight-teal"><code>motion-translate-X-100</code></mark></p></div></div></figure></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80f8-a2bc-db30003f0aaa" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2b031ee4-c696-809e-abc1-d8cc2872af3c" class=""><strong>Token Structure</strong></h1></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-804e-b200-f765dd10c702"/></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80e6-835e-d319198f84b3" class="">Motion tokens follow a 3-tier hierarchy:</p></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8082-906e-dc6885b7d720" class=""><strong>1. Primitives</strong> → <mark class="highlight-teal"><code>motion-duration-200</code></mark>, <mark class="highlight-teal"><code>motion-scale-95</code></mark>, <mark class="highlight-teal"><code>motion-alpha-0</code></mark></p></div><div style="display:contents" dir="auto"><ul id="2b031ee4-c696-80f4-a57c-ee23fb239afd" class="bulleted-list"><li style="list-style-type:disc">Building blocks for timing and visual changes</li></ul></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-8084-83b6-fce4673757a1" class=""><strong>2. Base</strong> → <mark class="highlight-teal"><code>motion-entry-default</code></mark> (<mark class="highlight-teal"><code>duration</code></mark> + <mark class="highlight-teal"><code>easing</code></mark> + <mark class="highlight-teal"><code>delay</code></mark>)</p></div><div style="display:contents" dir="auto"><ul id="2b031ee4-c696-8097-92f1-d5019a555e42" class="bulleted-list"><li style="list-style-type:disc">Purpose-driven timing combinations (no visual change)</li></ul></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80ce-a0dc-d9983a55ad58" class=""><strong>3. Common</strong> → <mark class="highlight-teal"><code>motion-slide-up</code></mark> (<strong>Base</strong> + <strong>Values</strong>)</p></div><div style="display:contents" dir="auto"><ul id="2b031ee4-c696-8057-bdf3-c189a7736289" class="bulleted-list"><li style="list-style-type:disc">Ready-made patterns combining timing with effects</li></ul></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80a2-95d9-c0c5b318c17b" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2b031ee4-c696-805e-a8df-cf5b5c43b03c" class="">Motion tokens library</h2></div><div style="display:contents" dir="auto"><hr id="2b031ee4-c696-80e6-840c-facf46582b94"/></div><div style="display:contents" dir="ltr"><div id="25d31ee4-c696-8053-a3f2-fa7c9b45976e" class="collection-content"><h4 class="collection-title">Motion tokens library</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><img src="https://www.notion.so/icons/font_gray.svg" style="width:14px;height:14px;display:block"/></span>Name</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/burst_gray.svg" style="width:14px;height:14px;display:block"/></span>Health</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>Type</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>Category</th></tr></thead><tbody><tr id="25d31ee4-c696-80d3-9cfa-fe3806c9673a"><td class="cell-title"><a href="https://www.notion.so/Alpha-25d31ee4c69680d39cfafe3806c9673a?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/contrast_gray.svg"/>Alpha</a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-default">Primitive tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-default">Values</span></td></tr><tr id="29d31ee4-c696-80e3-bb0a-da558eee3139"><td class="cell-title"><a href="https://www.notion.so/Blur-29d31ee4c69680e3bb0ada558eee3139?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/circle-alternate_gray.svg"/>Blur</a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-default">Primitive tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-default">Values</span></td></tr><tr id="25d31ee4-c696-8030-bbd1-fefc9b0bd4da"><td class="cell-title"><a href="https://www.notion.so/Delay-25d31ee4c6968030bbd1fefc9b0bd4da?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/hourglass_gray.svg"/>Delay</a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-default">Primitive tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-default">Timing</span></td></tr><tr id="25d31ee4-c696-804a-9bcc-f082dd8167d0"><td class="cell-title"><a href="https://www.notion.so/Duration-25d31ee4c696804a9bccf082dd8167d0?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/clock-alternate_gray.svg"/> Duration</a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-default">Primitive tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-default">Timing</span></td></tr><tr id="25d31ee4-c696-805f-a830-f64a36905451"><td class="cell-title"><a href="https://www.notion.so/Easing-25d31ee4c696805fa830f64a36905451?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/timeline_gray.svg"/>Easing</a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-default">Primitive tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-default">Timing</span></td></tr><tr id="29d31ee4-c696-80dc-a527-d6f1532177c8"><td class="cell-title"><a href="https://www.notion.so/Entry-29d31ee4c69680dca527d6f1532177c8?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/log-in_gray.svg"/>Entry</a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-gray">Semantic tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-gray">Base</span></td></tr><tr id="29d31ee4-c696-807e-aac1-c269fcda1007"><td class="cell-title"><a href="https://www.notion.so/Exit-29d31ee4c696807eaac1c269fcda1007?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/log-out_gray.svg"/>Exit</a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-gray">Semantic tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-gray">Base</span></td></tr><tr id="2a031ee4-c696-808f-a02d-ea7bb9517ea7"><td class="cell-title"><a href="https://www.notion.so/Expand-collapse-2a031ee4c696808fa02dea7bb9517ea7?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/arrow-circle-down_gray.svg"/>Expand/ collapse</a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-gray">Semantic tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-brown">Common</span></td></tr><tr id="2a031ee4-c696-80de-baee-deb88ce3cfaa"><td class="cell-title"><a href="https://www.notion.so/Fade-2a031ee4c69680debaeedeb88ce3cfaa?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/lights_gray.svg"/>Fade</a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-gray">Semantic tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-brown">Common</span></td></tr><tr id="2a031ee4-c696-80fe-ba8c-c632ece8b0df"><td class="cell-title"><a href="https://www.notion.so/Hover-lift-2a031ee4c69680feba8cc632ece8b0df?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/cursor-button_gray.svg"/>Hover/ lift </a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-gray">Semantic tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-brown">Common</span></td></tr><tr id="2a031ee4-c696-80ce-9590-c1eb86c6be9d"><td class="cell-title"><a href="https://www.notion.so/Page-transition-2a031ee4c69680ce9590c1eb86c6be9d?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/camera-roll-portrait_gray.svg"/>Page transition</a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-gray">Semantic tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-brown">Common</span></td></tr><tr id="2a031ee4-c696-80ac-99c5-c60453a79cd3"><td class="cell-title"><a href="https://www.notion.so/Press-tap-2a031ee4c69680ac99c5c60453a79cd3?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/location_gray.svg"/>Press/ tap</a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-gray">Semantic tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-brown">Common</span></td></tr><tr id="29d31ee4-c696-80a6-8d72-f141235c4543"><td class="cell-title"><a href="https://www.notion.so/Reveal-29d31ee4c69680a68d72f141235c4543?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/view_gray.svg"/>Reveal</a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-gray">Semantic tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-gray">Base</span></td></tr><tr id="25d31ee4-c696-80dc-9246-f3b49e9978ba"><td class="cell-title"><a href="https://www.notion.so/Rotation-25d31ee4c69680dc9246f3b49e9978ba?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/sync_gray.svg"/>Rotation</a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-default">Primitive tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-default">Values</span></td></tr><tr id="25d31ee4-c696-80c6-86de-d095790a924c"><td class="cell-title"><a href="https://www.notion.so/Scale-25d31ee4c69680c686ded095790a924c?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/expand_gray.svg"/>Scale</a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-default">Primitive tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-default">Values</span></td></tr><tr id="2a031ee4-c696-8066-921c-fadd5549113d"><td class="cell-title"><a href="https://www.notion.so/Scale-fade-2a031ee4c6968066921cfadd5549113d?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/square-one-fourth_gray.svg"/>Scale fade</a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-gray">Semantic tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-brown">Common</span></td></tr><tr id="2a031ee4-c696-80c8-b4c6-c74da851b19c"><td class="cell-title"><a href="https://www.notion.so/Shimmer-loading-2a031ee4c69680c8b4c6c74da851b19c?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/circle-five-eighths_gray.svg"/>Shimmer/ loading </a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-gray">Semantic tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-brown">Common</span></td></tr><tr id="2a031ee4-c696-80fb-85ca-d1280c097093"><td class="cell-title"><a href="https://www.notion.so/Slide-2a031ee4c69680fb85cad1280c097093?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/reorder_gray.svg"/>Slide </a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-gray">Semantic tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-brown">Common</span></td></tr><tr id="29d31ee4-c696-80e0-ab01-d7d1024cc592"><td class="cell-title"><a href="https://www.notion.so/Spring-29d31ee4c69680e0ab01d7d1024cc592?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/science_gray.svg"/>Spring</a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-default">Primitive tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-default">Values</span></td></tr><tr id="2a031ee4-c696-801c-9420-f1274ca30fe9"><td class="cell-title"><a href="https://www.notion.so/Stagger-2a031ee4c696801c9420f1274ca30fe9?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/layers_gray.svg"/>Stagger </a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-gray">Semantic tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-brown">Common</span></td></tr><tr id="29d31ee4-c696-8063-bafd-e42c6228136d"><td class="cell-title"><a href="https://www.notion.so/Transition-29d31ee4c6968063bafde42c6228136d?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/arrows-swap-horizontally_gray.svg"/>Transition</a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-gray">Semantic tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-gray">Base</span></td></tr><tr id="29d31ee4-c696-80d4-96dc-e512c3b1fa8d"><td class="cell-title"><a href="https://www.notion.so/Translate-29d31ee4c69680d496dce512c3b1fa8d?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/arrows-horizontal_gray.svg"/>Translate</a></td><td class="cell-ZaeE"><span class="status-value select-value-color-green"><div class="status-dot status-dot-color-green"></div>Up-to-date</span></td><td class="cell-[Juf"><span class="selected-value select-value-color-default">Primitive tokens</span></td><td class="cell-VlH&gt;"><span class="selected-value select-value-color-default">Values</span></td></tr></tbody></table><br/><br/></div></div><div style="display:contents" dir="auto"><div style="display:contents" dir="auto"><div><div style="display:contents" dir="ltr"><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="1c331ee4-c696-80ad-9c58-dc026c606fb8"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/help-alternate_gray.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><h3 id="1c331ee4-c696-8008-bb33-f1911b39b81a" class="">Is something missing?</h3></div><div style="display:contents" dir="auto"><hr id="1c331ee4-c696-80fa-b699-c109b318d044"/></div><div style="display:contents" dir="auto"><p id="1c331ee4-c696-8084-ac35-f5c543f90853" class="">If you have any questions or feedback, we&#x27;d love to hear from you!</p></div></div></figure></div></div></div></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-80e7-8426-e602a401556f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2b031ee4-c696-805f-8ecc-f303db113c7c" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
