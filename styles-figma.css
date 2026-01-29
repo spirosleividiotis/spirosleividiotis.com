@@ -1435,6 +1435,7 @@ section {
     max-width: 800px;
     margin: 60px auto;
     padding: 0 40px;
+    text-align: left;
 }
 
 .project-body-text p {
@@ -1442,6 +1443,7 @@ section {
     line-height: 1.8;
     color: #CCCCCC;
     margin: 0;
+    text-align: left;
 }
 
 /* 2-column Grid */
