@@ -219,14 +219,6 @@
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid #1a1a1a;
             border-radius: 4px;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .token-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
         }
 
         .token-icon {
@@ -259,6 +251,59 @@
             color: #FFFFFF;
             margin-top: 40px;
             margin-bottom: 0;
+        }
+
+        /* Interactive Example */
+        .interactive-example {
+            margin-top: 48px;
+            padding: 32px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid #1a1a1a;
+            border-radius: 4px;
+        }
+
+        .example-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .example-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #FFFFFF;
+        }
+
+        .expand-btn {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #1a1a1a;
+            border-radius: 4px;
+            color: #CCCCCC;
+            font-family: var(--font-primary);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .expand-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .iframe-container {
+            width: 100%;
+            height: 600px;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid #1a1a1a;
+        }
+
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         /* Links */
@@ -398,6 +443,28 @@
                 margin-top: 32px;
             }
 
+            .interactive-example {
+                padding: 20px;
+            }
+
+            .example-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .example-title {
+                font-size: 14px;
+            }
+
+            .expand-btn {
+                width: 100%;
+            }
+
+            .iframe-container {
+                height: 400px;
+            }
+
             .link-grid {
                 grid-template-columns: 1fr;
                 gap: 16px;
@@ -421,7 +488,7 @@
                 This is the story of how we built a scalable motion language that bridges design 
                 and engineering—from principles to implementation.
             </p>
-            <div class="header-meta">2022–2024 · Qonto · Motion Design Lead</div>
+            <div class="header-meta">2025 Qonto Staff Motion Designer, Design System</div>
         </div>
     </div>
 
@@ -499,38 +566,49 @@
                                    <strong>Rotation</strong>, <strong>Translate</strong>, and <strong>Delay</strong>.
                                </p>
                                <div class="token-grid">
-                                   <a href="https://qonto-motion-duration.netlify.app/" target="_blank" class="token-card">
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/duration.gif" alt="Duration"></div>
                                        <div class="token-name">Duration</div>
-                                   </a>
-                                   <a href="https://qonto-motion-easing.netlify.app/" target="_blank" class="token-card">
+                                   </div>
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/easing.gif" alt="Easing"></div>
                                        <div class="token-name">Easing</div>
-                                   </a>
-                                   <a href="https://qonto-motion-scale.netlify.app/" target="_blank" class="token-card">
+                                   </div>
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/scale.gif" alt="Scale"></div>
                                        <div class="token-name">Scale</div>
-                                   </a>
-                                   <a href="https://qonto-motion-alpha.netlify.app/" target="_blank" class="token-card">
+                                   </div>
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/alpha.gif" alt="Alpha"></div>
                                        <div class="token-name">Alpha</div>
-                                   </a>
-                                   <a href="https://qonto-motion-blur.netlify.app/" target="_blank" class="token-card">
+                                   </div>
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/blur.gif" alt="Blur"></div>
                                        <div class="token-name">Blur</div>
-                                   </a>
-                                   <a href="https://qonto-motion-translate.netlify.app/" target="_blank" class="token-card">
+                                   </div>
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/rotation.gif" alt="Translate"></div>
                                        <div class="token-name">Translate</div>
-                                   </a>
-                                   <a href="https://qonto-motion-delay.netlify.app/" target="_blank" class="token-card">
+                                   </div>
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/delay.gif" alt="Delay"></div>
                                        <div class="token-name">Delay</div>
-                                   </a>
-                                   <a href="https://qonto-motion-spring.netlify.app/" target="_blank" class="token-card">
+                                   </div>
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/spring.gif" alt="Spring"></div>
                                        <div class="token-name">Spring</div>
-                                   </a>
+                                   </div>
+                               </div>
+                               
+                               <!-- Interactive Example -->
+                               <div class="interactive-example">
+                                   <div class="example-header">
+                                       <h4 class="example-title">Interactive Token Example: Duration</h4>
+                                       <button class="expand-btn" onclick="toggleExpand()">Click to expand →</button>
+                                   </div>
+                                   <div class="iframe-container" id="iframeContainer" style="display: none;">
+                                       <iframe src="https://qonto-motion-duration.netlify.app/" frameborder="0" allowfullscreen></iframe>
+                                   </div>
                                </div>
                            </div>
                        </div>
@@ -559,58 +637,58 @@
                                
                                <h4 class="subsection-title">Base Patterns</h4>
                                <div class="token-grid">
-                                   <a href="https://qonto-motion-entry.netlify.app/" target="_blank" class="token-card">
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/entry.gif" alt="Entry"></div>
                                        <div class="token-name">Entry</div>
-                                   </a>
-                                   <a href="https://motion-qonto-exit.netlify.app/" target="_blank" class="token-card">
+                                   </div>
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/exit.gif" alt="Exit"></div>
                                        <div class="token-name">Exit</div>
-                                   </a>
-                                   <a href="https://qonto-motion-reveal.netlify.app/" target="_blank" class="token-card">
+                                   </div>
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/reveal.gif" alt="Reveal"></div>
                                        <div class="token-name">Reveal</div>
-                                   </a>
-                                   <a href="https://qonto-motion-transition.netlify.app/" target="_blank" class="token-card">
+                                   </div>
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/transition.gif" alt="Transition"></div>
                                        <div class="token-name">Transition</div>
-                                   </a>
+                                   </div>
                                </div>
 
                                <h4 class="subsection-title">Common Interactions</h4>
                                <div class="token-grid">
-                                   <a href="https://qonto-motion-presstap.netlify.app/" target="_blank" class="token-card">
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/tap.gif" alt="Press/Tap"></div>
                                        <div class="token-name">Press/Tap</div>
-                                   </a>
-                                   <a href="https://qonto-motion-hoverlift.netlify.app/" target="_blank" class="token-card">
+                                   </div>
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/hover.gif" alt="Hover/Lift"></div>
                                        <div class="token-name">Hover/Lift</div>
-                                   </a>
-                                   <a href="https://qonto-motion-expandcollapse.netlify.app/" target="_blank" class="token-card">
+                                   </div>
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/expand.gif" alt="Expand/Collapse"></div>
                                        <div class="token-name">Expand/Collapse</div>
-                                   </a>
-                                   <a href="https://qonto-motion-slide.netlify.app/" target="_blank" class="token-card">
+                                   </div>
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/slide_fade.gif" alt="Slide"></div>
                                        <div class="token-name">Slide</div>
-                                   </a>
-                                   <a href="https://qonto-motion-scalefade.netlify.app/" target="_blank" class="token-card">
+                                   </div>
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/scalefade.gif" alt="Scale Fade"></div>
                                        <div class="token-name">Scale Fade</div>
-                                   </a>
-                                   <a href="https://qonto-motion-shimmerloading.netlify.app/" target="_blank" class="token-card">
+                                   </div>
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/loading.gif" alt="Shimmer Loading"></div>
                                        <div class="token-name">Shimmer Loading</div>
-                                   </a>
-                                   <a href="https://qonto-motion-stagger.netlify.app/" target="_blank" class="token-card">
+                                   </div>
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/staggered.gif" alt="Stagger"></div>
                                        <div class="token-name">Stagger</div>
-                                   </a>
-                                   <a href="https://qonto-motion-pagetransition.netlify.app/" target="_blank" class="token-card">
+                                   </div>
+                                   <div class="token-card">
                                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/transition-patterns.gif" alt="Page Transition"></div>
                                        <div class="token-name">Page Transition</div>
-                                   </a>
+                                   </div>
                                </div>
                            </div>
                        </div>
@@ -644,12 +722,13 @@
     <!-- Documentation Links -->
     <div class="section">
         <div class="container">
-            <div class="section-label">Explore</div>
-            <h2 class="section-title">Documentation</h2>
+            <div class="section-label">Deep Dive</div>
+            <h2 class="section-title">Full System Documentation</h2>
             <div class="section-content">
                 <p>
-                    The motion system lives in detailed documentation—tokens, patterns, rationale, and implementation 
-                    guides for every platform.
+                    This page shows the overview and narrative. For teams needing complete specs, I've documented 
+                    every detail: token values across platforms (iOS/Android/Web), implementation code, design 
+                    rationale, and usage guidelines. Below are the full exports from our internal documentation.
                 </p>
             </div>
 
@@ -695,5 +774,20 @@
             <a href="/" class="footer-link">← Back to portfolio</a>
         </div>
     </div>
+
+    <script>
+        function toggleExpand() {
+            const container = document.getElementById('iframeContainer');
+            const btn = document.querySelector('.expand-btn');
+            
+            if (container.style.display === 'none') {
+                container.style.display = 'block';
+                btn.textContent = 'Click to collapse ↑';
+            } else {
+                container.style.display = 'none';
+                btn.textContent = 'Click to expand →';
+            }
+        }
+    </script>
 </body>
 </html>
