@@ -1310,7 +1310,7 @@ section {
 .project-modal-close {
     position: fixed;
     top: 30px;
-    right: 30px;
+    right: 50px;
     background: transparent;
     border: none;
     color: #FFFFFF;
@@ -2590,7 +2590,7 @@ section {
     
     .project-modal-close {
         top: 20px;
-        right: 20px;
+        right: 30px;
     }
     
     .project-modal-content {
