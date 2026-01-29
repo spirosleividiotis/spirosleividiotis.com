@@ -176,7 +176,7 @@ section {
 }
 
 .hero {
-    padding: 0;
+    padding: 0 0 100px 0;
     min-height: 600px;
     display: flex;
     align-items: flex-start;
