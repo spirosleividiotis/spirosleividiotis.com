@@ -2,7 +2,7 @@
   "hero": {
     "name": "Spiros<br>Leividiotis",
     "subtitle": "Staff-level motion designer focused on UX motion and motion systems. I help teams ship motion that's consistent, scalable, and implementation-ready—turning principles into patterns, guidelines, and Lottie-ready handoff with design systems and engineering.",
-    "photo": "photo.png",
+    "photo": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694889/photo_vf6t7t.jpg",
     "tags": {
       "tools": ["Rive", "Cursor", "Figma", "LottieFiles", "After Effects"],
       "skills": ["UX motion", "Motion systems", "Interaction design", "Lottie pipelines", "Web & product experiences"]
@@ -21,7 +21,7 @@
     "cvFile": "cv.pdf"
   },
   "aboutMe": {
-    "photo": "photo.png",
+    "photo": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694889/photo_vf6t7t.jpg",
     "bio": [
       "I'm Spiros, a Staff Motion Designer based in Amsterdam, Netherlands, working at the intersection of product design, animation, and design systems. I use motion as a functional tool—to clarify interactions, reinforce hierarchy, and improve usability at scale.",
       "Currently working remotely at Qonto, I collaborate closely with product designers and engineers on product experiences and design systems. I focus on building reusable, well-documented motion patterns that teams can confidently use across complex products.",
@@ -30,10 +30,10 @@
   },
   "music": {
     "title": "Lost in Amsterdam — Parov Stelar",
-    "file": "music.mp3"
+    "file": "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769694887/Parov_Stelar_-_Lost_In_Amsterdam_Official_Audio_z6lurq.mp3"
   },
   "reel": {
-    "file": "reel.mp4"
+    "file": "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769694877/Motion_reel_copy_sfrcru.mp4"
   },
   "projects": [
     {
@@ -114,7 +114,7 @@
     {
       "id": "qonto",
       "company": "Qonto",
-      "image": "qonto.png",
+      "image": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694888/qonto_cevi3i.jpg",
       "roles": [
         {
           "title": "Staff Motion Designer - Design System",
@@ -136,7 +136,7 @@
     {
       "id": "flink",
       "company": "Flink",
-      "image": "flink.png",
+      "image": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694888/flink_zak6m6.jpg",
       "roles": [
         {
           "title": "Senior Motion Designer",
@@ -148,7 +148,7 @@
     {
       "id": "delivery-hero",
       "company": "Delivery Hero",
-      "image": "delivery-hero.png",
+      "image": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694888/delivery-hero_axtkey.jpg",
       "roles": [
         {
           "title": "Motion Designer",
@@ -160,7 +160,7 @@
     {
       "id": "folket",
       "company": "Folket",
-      "image": "folket.png",
+      "image": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694888/folket_jxr23m.jpg",
       "roles": [
         {
           "title": "Motion Designer",
@@ -176,7 +176,7 @@
       { "name": "dribbble", "url": "https://dribbble.com/spirosleividiotis" },
       { "name": "linkedin", "url": "https://www.linkedin.com/in/sleividiotis/" }
     ],
-    "logo": "logo.svg",
+    "logo": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694889/logo_ufrm6c.svg",
     "year": "2026"
   }
 }
