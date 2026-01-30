@@ -3,36 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motion System Cover</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #000; overflow: hidden; }
+        body { background: #141414; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
         .cover-container {
             position: relative;
-            width: 100vw;
-            height: 100vh;
-        }
-        .cover-image {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
         }
         .cover-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .cover-container:hover .cover-overlay { background: rgba(0, 0, 0, 0.15); }
+        .grid-wrapper {
+            transform: rotate(-6deg);
+            width: 115%;
+            margin-left: -7.5%;
+        }
+        .cover-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .cover-card {
+            aspect-ratio: 1;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .cover-card video {
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.15);
-            pointer-events: none;
+            object-fit: contain;
+            opacity: 0.7;
+            transition: opacity 0.4s ease;
+        }
+        .cover-container:hover .cover-card video { opacity: 1; }
+        @media (max-width: 768px) {
+            .cover-container { padding: 25px; }
+            .grid-wrapper { transform: rotate(-4deg); width: 125%; margin-left: -12.5%; }
+            .cover-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
         }
     </style>
 </head>
 <body>
     <div class="cover-container">
-        <img src="motion-system-cover.gif" alt="Motion System Cover" class="cover-image">
+        <div class="grid-wrapper">
+            <div class="cover-grid">
+                <div class="cover-card"><video src="lottie-1.webm" autoplay loop muted playsinline></video></div>
+                <div class="cover-card"><video src="lottie-2.webm" autoplay loop muted playsinline></video></div>
+                <div class="cover-card"><video src="lottie-3.webm" autoplay loop muted playsinline></video></div>
+                <div class="cover-card"><video src="lottie-4.webm" autoplay loop muted playsinline></video></div>
+                <div class="cover-card"><video src="lottie-5.webm" autoplay loop muted playsinline></video></div>
+                <div class="cover-card"><video src="lottie-6.webm" autoplay loop muted playsinline></video></div>
+                <div class="cover-card"><video src="lottie-7.webm" autoplay loop muted playsinline></video></div>
+                <div class="cover-card"><video src="lottie-8.webm" autoplay loop muted playsinline></video></div>
+                <div class="cover-card"><video src="lottie-9.webm" autoplay loop muted playsinline></video></div>
+            </div>
+        </div>
         <div class="cover-overlay"></div>
     </div>
 </body>
