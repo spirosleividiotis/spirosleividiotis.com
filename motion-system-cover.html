@@ -29,6 +29,27 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .cover-static {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .cover-animated {
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .cover-container:hover .cover-static {
+            opacity: 0;
+        }
+
+        .cover-container:hover .cover-animated {
+            opacity: 1;
         }
 
         /* Black overlay */
@@ -51,7 +72,8 @@
 </head>
 <body>
     <div class="cover-container">
-        <img src="motion-system-cover.gif?v=2" alt="Motion System Cover" class="cover-image">
+        <img src="motion-system-cover-static.png" alt="Motion System Cover" class="cover-image cover-static">
+        <img src="motion-system-cover.gif" alt="Motion System Cover Animated" class="cover-image cover-animated">
         <div class="cover-overlay"></div>
     </div>
 </body>
