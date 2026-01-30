@@ -461,6 +461,62 @@
             </div>
         </div>
 
+        <!-- Case 4: Personalized Account Setup -->
+        <div class="case-wrapper">
+            <div class="case-header">
+                <div class="case-number">Case 04</div>
+                <h3 class="case-title">Animated Text Swipe Reveal</h3>
+                <p class="case-description">
+                    Continuous text reveal behind a mask for personalized account setup. Each text sequence displays for 2.5s minimum. Creates loading progression while maintaining readability.
+                </p>
+            </div>
+
+            <div class="case-preview">
+                <div class="preview-label">Interactive Preview</div>
+                <iframe src="https://rive.app/s/-fFrKbEosUWHv0C3Qvwmqw/embed?mode=preview" frameborder="0" allowfullscreen style="height: 400px;"></iframe>
+            </div>
+
+            <div class="insight">
+                <div class="insight-label">UX Challenge</div>
+                <div class="insight-text">
+                    <strong>Why mask the text?</strong> A simple cross-fade would be faster, but masking creates the sense of content "loading" from below—reinforcing the system is working. The 300ms position + 150ms fade-in (delayed 150ms) creates smooth sequential reveals.
+                </div>
+            </div>
+
+            <div class="specs-section">
+                <h4 style="color: #FFFFFF; font-size: 16px; margin-bottom: 16px;">Technical Specs</h4>
+                
+                <table class="specs-table">
+                    <thead>
+                        <tr>
+                            <th>Animation</th>
+                            <th>Specification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Text Position</td>
+                            <td>
+                                <strong>Duration:</strong> <span class="token">motion-duration-300</span> <span class="value">300ms</span><br/>
+                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
+                                <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.6, 1</span><br/>
+                                <strong>Translate Y:</strong> <span class="value">187px → 117px</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Text Fade In</td>
+                            <td>
+                                <strong>Duration:</strong> <span class="token">motion-duration-150</span> <span class="value">150ms</span><br/>
+                                <strong>Delay:</strong> <span class="token">motion-delay-150</span> <span class="value">150ms</span><br/>
+                                <strong>Easing:</strong> <span class="token">motion-easing-linear</span><br/>
+                                <strong>Alpha:</strong> <span class="value">0 → 100</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 
     <!-- Impact -->
