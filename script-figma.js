@@ -1215,12 +1215,13 @@ function closeProjectModal() {
 
 // Toggle Motion System interactive examples (globally accessible)
 function toggleMotionExpand(idx = 0) {
-    const container = document.getElementById('motionIframeContainer' + (idx || ''));
+    const containerId = 'motionIframeContainer' + idx;
+    const container = document.getElementById(containerId);
     const btns = document.querySelectorAll('.expand-btn');
     const btn = btns[idx] || document.querySelector('.expand-btn');
     
     if (container && btn) {
-        if (container.style.display === 'none') {
+        if (container.style.display === 'none' || container.style.display === '') {
             container.style.display = 'block';
             btn.textContent = 'Click to collapse ↑';
         } else {
