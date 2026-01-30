@@ -44,6 +44,19 @@
             height: 100%;
         }
 
+        /* Black overlay */
+        .cover-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            transition: background 0.3s ease;
+            pointer-events: none;
+            z-index: 10;
+        }
+
         .cover-container:hover .cover-static {
             display: none;
         }
@@ -51,12 +64,17 @@
         .cover-container:hover .cover-animated {
             display: block;
         }
+
+        .cover-container:hover .cover-overlay {
+            background: rgba(0, 0, 0, 0.85);
+        }
     </style>
 </head>
 <body>
     <div class="cover-container">
         <img src="motion-system-cover-static.png" alt="Motion System Cover" class="cover-image cover-static">
         <img src="motion-system-cover.gif" alt="Motion System Cover Animated" class="cover-image cover-animated">
+        <div class="cover-overlay"></div>
     </div>
 </body>
 </html>
