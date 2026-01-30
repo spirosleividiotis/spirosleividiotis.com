@@ -4,7 +4,7 @@
 
 async function loadContent() {
     try {
-        const response = await fetch('content.json');
+        const response = await fetch('content.json?v=' + Date.now());
         const content = await response.json();
         
         // Update Hero
