@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motion System Primitive Tokens</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+        }
+
+        .tokens-container {
+            width: 100%;
+            max-width: 1400px;
+            padding: 40px;
+            transform: rotate(-6deg);
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .tokens-container:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .tokens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            perspective: 1000px;
+        }
+
+        .token-card {
+            position: relative;
+            aspect-ratio: 1;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .token-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        .token-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.9) contrast(1.1);
+            transition: filter 0.4s ease;
+        }
+
+        .token-card:hover img {
+            filter: brightness(1) contrast(1.2);
+        }
+
+        .token-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .token-card:hover .token-label {
+            opacity: 1;
+        }
+
+        /* Staggered animation on load */
+        .token-card {
+            animation: fadeInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+        }
+
+        .token-card:nth-child(1) { animation-delay: 0.05s; }
+        .token-card:nth-child(2) { animation-delay: 0.1s; }
+        .token-card:nth-child(3) { animation-delay: 0.15s; }
+        .token-card:nth-child(4) { animation-delay: 0.2s; }
+        .token-card:nth-child(5) { animation-delay: 0.25s; }
+        .token-card:nth-child(6) { animation-delay: 0.3s; }
+        .token-card:nth-child(7) { animation-delay: 0.35s; }
+        .token-card:nth-child(8) { animation-delay: 0.4s; }
+        .token-card:nth-child(9) { animation-delay: 0.45s; }
+        .token-card:nth-child(10) { animation-delay: 0.5s; }
+        .token-card:nth-child(11) { animation-delay: 0.55s; }
+        .token-card:nth-child(12) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .tokens-container {
+                padding: 20px;
+                transform: rotate(-3deg);
+            }
+
+            .tokens-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 12px;
+            }
+
+            .token-card:hover {
+                transform: translateY(-4px) scale(1.03);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tokens-container">
+        <div class="tokens-grid">
+            <div class="token-card">
+                <img src="motion-system/tokens/Motion tokens/duration.gif" alt="Duration">
+                <div class="token-label">Duration</div>
+            </div>
+            <div class="token-card">
+                <img src="motion-system/tokens/Motion tokens/easing.gif" alt="Easing">
+                <div class="token-label">Easing</div>
+            </div>
+            <div class="token-card">
+                <img src="motion-system/tokens/Motion tokens/delay.gif" alt="Delay">
+                <div class="token-label">Delay</div>
+            </div>
+            <div class="token-card">
+                <img src="motion-system/tokens/Motion tokens/scale.gif" alt="Scale">
+                <div class="token-label">Scale</div>
+            </div>
+            <div class="token-card">
+                <img src="motion-system/tokens/Motion tokens/fade.gif" alt="Fade">
+                <div class="token-label">Fade</div>
+            </div>
+            <div class="token-card">
+                <img src="motion-system/tokens/Motion tokens/rotation.gif" alt="Rotation">
+                <div class="token-label">Rotation</div>
+            </div>
+            <div class="token-card">
+                <img src="motion-system/tokens/Motion tokens/spring.gif" alt="Spring">
+                <div class="token-label">Spring</div>
+            </div>
+            <div class="token-card">
+                <img src="motion-system/tokens/Motion tokens/entry.gif" alt="Entry">
+                <div class="token-label">Entry</div>
+            </div>
+            <div class="token-card">
+                <img src="motion-system/tokens/Motion tokens/exit.gif" alt="Exit">
+                <div class="token-label">Exit</div>
+            </div>
+            <div class="token-card">
+                <img src="motion-system/tokens/Motion tokens/staggered.gif" alt="Stagger">
+                <div class="token-label">Stagger</div>
+            </div>
+            <div class="token-card">
+                <img src="motion-system/tokens/Motion tokens/hover.gif" alt="Hover">
+                <div class="token-label">Hover</div>
+            </div>
+            <div class="token-card">
+                <img src="motion-system/tokens/Motion tokens/transition.gif" alt="Transition">
+                <div class="token-label">Transition</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
