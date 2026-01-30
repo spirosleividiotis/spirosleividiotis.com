@@ -118,7 +118,7 @@ function updateProjects(projects) {
         <article class="work-card" ${project.passwordProtected ? 'data-password-protected="true"' : ''} data-project-id="${project.id}">
             <div class="work-visual work-color-${index + 1}" style="background: ${hasPreview ? 'transparent' : project.color};">
                 ${hasPreview ? (isHtml ?
-                    `<iframe src="${project.cardPreview}" style="width: 100%; height: 100%; border: none; position: absolute; top: 0; left: 0; pointer-events: auto;"></iframe>` :
+                    `<iframe src="${project.cardPreview}" style="width: 100%; height: 100%; border: none; position: absolute; top: 0; left: 0; pointer-events: none;"></iframe>` :
                     isVideo ? 
                     `<video src="${project.cardPreview}" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;"></video>` :
                     `<img src="${project.cardPreview}" alt="${project.name}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">`) : ''}
