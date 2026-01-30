@@ -81,7 +81,7 @@
       "customUrl": "project-2-tokens-tool.html",
       "bodyText": "",
       "media": {
-        "hero": "",
+        "hero": "tool-cover.html",
         "grid": []
       }
     },
@@ -95,7 +95,7 @@
       "customUrl": "project-3-animation-library.html",
       "bodyText": "",
       "media": {
-        "hero": "",
+        "hero": "lottie-library-cover.html",
         "grid": []
       }
     },
@@ -109,7 +109,7 @@
       "customUrl": "project-4-handoff-process.html",
       "bodyText": "",
       "media": {
-        "hero": "",
+        "hero": "handoff-cover.html",
         "grid": []
       }
     },

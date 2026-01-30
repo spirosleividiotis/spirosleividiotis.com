@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Library Cover</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #141414;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .cover-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .lottie-wrapper {
+            transform: rotate(-6deg);
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .cover-container:hover .lottie-wrapper {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .lottie-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            max-width: 700px;
+        }
+
+        .lottie-card {
+            aspect-ratio: 1;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .cover-container:hover .lottie-card {
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .lottie-card iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: brightness(0.85);
+            transition: filter 0.3s ease;
+        }
+
+        .cover-container:hover .lottie-card iframe {
+            filter: brightness(1);
+        }
+
+        @media (max-width: 768px) {
+            .cover-container {
+                padding: 30px;
+            }
+            
+            .lottie-wrapper {
+                transform: rotate(-4deg);
+            }
+
+            .lottie-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cover-container">
+        <div class="lottie-wrapper">
+            <div class="lottie-grid">
+                <div class="lottie-card">
+                    <iframe src="https://lottie.host/embed/ed51c2a2-e644-4919-8f69-542febb90add/hwrQHwUmZr.json"></iframe>
+                </div>
+                <div class="lottie-card">
+                    <iframe src="https://lottie.host/embed/48b7beb3-de04-4de1-9461-d224c09e2d96/Zbn7Ql9wXk.json"></iframe>
+                </div>
+                <div class="lottie-card">
+                    <iframe src="https://lottie.host/embed/636b9ecc-1fc4-4fb4-a295-a4b2020433e2/7Rt2oGVGYG.json"></iframe>
+                </div>
+                <div class="lottie-card">
+                    <iframe src="https://lottie.host/embed/7bfc49fa-fead-4481-b1cd-014469fe60d7/U4BdkvO8Pg.json"></iframe>
+                </div>
+                <div class="lottie-card">
+                    <iframe src="https://lottie.host/embed/b75c0251-8421-43c7-ab12-fe8a5414a070/EqgjRNKMVg.json"></iframe>
+                </div>
+                <div class="lottie-card">
+                    <iframe src="https://lottie.host/embed/9e16038f-a28e-4181-8d9e-4ee72f2840f8/WxVpCO0tXF.json"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
