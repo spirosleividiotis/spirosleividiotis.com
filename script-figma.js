@@ -1215,8 +1215,16 @@ function closeProjectModal() {
 
 // Toggle Motion System interactive examples (globally accessible)
 function toggleMotionExpand(idx = 0) {
-    const containerId = 'motionIframeContainer' + idx;
-    const container = document.getElementById(containerId);
+    // Try with and without index suffix
+    let containerId = 'motionIframeContainer' + idx;
+    let container = document.getElementById(containerId);
+    
+    // If not found with index, try without
+    if (!container) {
+        containerId = 'motionIframeContainer';
+        container = document.getElementById(containerId);
+    }
+    
     const btns = document.querySelectorAll('.expand-btn');
     const btn = btns[idx] || document.querySelector('.expand-btn');
     
