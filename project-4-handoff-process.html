@@ -232,6 +232,7 @@
     <!-- Tags -->
     <div style="display: flex; gap: 12px; margin-bottom: 32px; flex-wrap: wrap;">
         <span style="padding: 6px 14px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; font-size: 13px; color: #999;">Motion Design</span>
+        <span style="padding: 6px 14px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; font-size: 13px; color: #999;">Rive</span>
         <span style="padding: 6px 14px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; font-size: 13px; color: #999;">Product Thinking</span>
         <span style="padding: 6px 14px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; font-size: 13px; color: #999;">Implementation</span>
         <span style="padding: 6px 14px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; font-size: 13px; color: #999;">QA</span>
@@ -400,6 +401,65 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <!-- Case 3: Real-time Usage Limits -->
+        <div class="case-wrapper">
+            <div class="case-header">
+                <div class="case-number">Case 03</div>
+                <h3 class="case-title">Real-time Usage Limits Upsell</h3>
+                <p class="case-description">
+                    Upsell card that appears after 4 seconds on transactions screen. Card slides up with fade-in while transactions table pushes down—creating spatial awareness that content is being inserted, not overlaid.
+                </p>
+            </div>
+
+            <div class="case-preview">
+                <div class="preview-label">Animation Preview</div>
+                <img src="limits-upsell.gif" alt="Usage limits upsell animation" style="width: 100%; border-radius: 4px;">
+            </div>
+
+            <div class="insight">
+                <div class="insight-label">UX Challenge</div>
+                <div class="insight-text">
+                    <strong>Why push the table down?</strong> Z-index alone would overlay the card, but users would miss the spatial relationship. By translating the table down simultaneously, we show that the card is <em>part of the content</em>, not floating above it.
+                </div>
+            </div>
+
+            <div class="specs-section">
+                <h4 style="color: #FFFFFF; font-size: 16px; margin-bottom: 16px;">Technical Specs</h4>
+                
+                <table class="specs-table">
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Specification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Upsell Card<br/>Display</td>
+                            <td>
+                                <strong>Duration:</strong> <span class="token">motion-duration-800</span> <span class="value">800ms</span><br/>
+                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
+                                <strong>Easing:</strong> <span class="token">motion-easing-default</span> <span class="value">0.4, 0, 0.2, 1</span><br/>
+                                <strong>Translate Y:</strong> <span class="value">-50px → 0px</span><br/>
+                                <strong>Opacity:</strong> <span class="value">0 → 100</span> (350ms, delay 100ms, linear)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Transactions<br/>Table Push</td>
+                            <td>
+                                <strong>Duration:</strong> <span class="token">motion-duration-800</span> <span class="value">800ms</span><br/>
+                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
+                                <strong>Easing:</strong> <span class="token">motion-easing-default</span> <span class="value">0.4, 0, 0.2, 1</span><br/>
+                                <strong>Translate Y:</strong> <span class="value">0px → 164px</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
     </div>
 
