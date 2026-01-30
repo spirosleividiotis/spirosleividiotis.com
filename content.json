@@ -63,14 +63,13 @@
       "company": "Qonto",
       "color": "#141414",
       "passwordProtected": true,
+      "password": "spiros2026",
       "customUrl": "motion-system-content.html",
       "bodyText": "",
       "media": {
         "hero": "motion-system/motion/Motion/Comp_5.gif",
         "grid": []
-      },
-      "cardPreview": "",
-      "password": "spiros2026"
+      }
     },
     {
       "id": 2,
@@ -98,8 +97,7 @@
       "media": {
         "hero": "",
         "grid": []
-      },
-      "cardPreview": ""
+      }
     },
     {
       "id": 4,
@@ -113,8 +111,7 @@
       "media": {
         "hero": "",
         "grid": []
-      },
-      "cardPreview": ""
+      }
     },
     {
       "id": 5,
@@ -128,8 +125,7 @@
       "media": {
         "hero": "",
         "grid": []
-      },
-      "cardPreview": ""
+      }
     },
     {
       "id": 6,
@@ -143,8 +139,7 @@
       "media": {
         "hero": "",
         "grid": []
-      },
-      "cardPreview": ""
+      }
     }
   ],
   "experience": [
