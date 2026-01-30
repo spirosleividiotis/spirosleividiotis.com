@@ -1,4 +1,5 @@
 <!-- Project 3: Animation Library at Scale (loads inside project modal) -->
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <style>
     /* Reuse Motion System styles */
     #projectModalBody .motion-system-content {
@@ -61,38 +62,44 @@
 
     #projectModalBody .lottie-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 16px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
         margin: 32px 0;
     }
 
     #projectModalBody .lottie-card {
         background: rgba(255, 255, 255, 0.02);
         border: 1px solid #1a1a1a;
-        border-radius: 4px;
-        padding: 20px;
+        border-radius: 8px;
+        padding: 24px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        transition: background 0.2s ease;
+        transition: all 0.3s ease;
+        cursor: pointer;
     }
 
     #projectModalBody .lottie-card:hover {
-        background: rgba(255, 255, 255, 0.04);
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: scale(1.02);
     }
 
-    #projectModalBody .lottie-placeholder {
+    #projectModalBody .lottie-container {
         width: 100%;
         aspect-ratio: 1;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px dashed rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.01);
         border-radius: 4px;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #666;
-        font-size: 12px;
         margin-bottom: 12px;
+        overflow: hidden;
+    }
+
+    #projectModalBody .lottie-container lottie-player {
+        width: 100%;
+        height: 100%;
     }
 
     #projectModalBody .lottie-name {
@@ -149,39 +156,47 @@
 <div class="motion-system-content">
     <!-- Intro -->
     <p class="motion-intro">
-        Over four years at Qonto, I built an extensive library of production-ready Lottie animations—from micro-interactions to complex product flows. This wasn't just animation for aesthetics; it was motion at scale, designed to be maintainable, reusable, and technically sound across web and mobile platforms.
+        Lotties are everywhere at Qonto—product, website, marketing. Over four years, I built a production pipeline that scaled from individual animations to a library of 1,000+ files, migrated formats for better performance, and led technical standards across design and engineering.
     </p>
-    <div class="motion-meta">2021–2025 Qonto Animation Production</div>
+    <div class="motion-meta">2021–2025 Qonto Animation Production & Pipeline</div>
+
+    <!-- TLDR -->
+    <div class="motion-section" style="background: rgba(255, 255, 255, 0.02); border: 1px solid #1a1a1a; border-radius: 4px; padding: 32px; margin-bottom: 48px;">
+        <div class="motion-section-label">TLDR</div>
+        <h2 class="motion-section-title" style="margin-bottom: 20px;">1,000+ Lotties. JSON to .lottie migration. Technical leadership.</h2>
+        <div class="motion-section-content" style="margin-bottom: 0;">
+            <p style="margin-bottom: 0;">
+                Built and maintained Qonto's animation library—1,000+ production-ready Lotties used across web, iOS, and Android. Led the migration from .json to .lottie format, reducing file sizes and improving Android performance. Established technical standards and troubleshot pipeline issues for the entire team.
+            </p>
+        </div>
+    </div>
 
     <!-- Stats -->
     <div class="stats-grid">
         <div class="stat-card">
-            <div class="stat-number">150+</div>
-            <div class="stat-label">Lottie Animations</div>
+            <div class="stat-number">1,000+</div>
+            <div class="stat-label">Lottie Files</div>
         </div>
         <div class="stat-card">
             <div class="stat-number">3</div>
             <div class="stat-label">Platforms</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number">4</div>
-            <div class="stat-label">Years</div>
+            <div class="stat-number">JSON → .lottie</div>
+            <div class="stat-label">Format Migration</div>
         </div>
     </div>
 
-    <!-- Approach -->
+    <!-- Scale & Pipeline -->
     <div class="motion-section">
-        <div class="motion-section-label">Approach</div>
-        <h2 class="motion-section-title">Production at Scale</h2>
+        <div class="motion-section-label">Scale</div>
+        <h2 class="motion-section-title">Production Pipeline</h2>
         <div class="motion-section-content">
             <p>
-                Every animation followed a consistent process: <strong>design with constraints, optimize for performance, test across platforms, document for engineers</strong>. I wasn't just animating—I was building a production pipeline.
+                Lotties are used everywhere at Qonto: <strong>in-product micro-interactions, website illustrations, onboarding flows, empty states, success feedback</strong>. The library grew to 1,000+ files stored in LottieFiles, covering every use case from button states to full-screen celebrations.
             </p>
             <p>
-                Lottie files were structured for reusability. Colors and values were tokenized where possible. File sizes were optimized (most under 50KB). Animations were tested on real devices, not just design tools.
-            </p>
-            <p>
-                The library covered everything from button states and loaders to onboarding flows and success celebrations. Each animation was purposeful, polished, and ready to ship.
+                In the past 6 months, I led the migration from <strong>.json to .lottie format</strong>—a smaller, more efficient file type that reduced bundle sizes on Android. I also established technical guidelines around format limitations, compression, and cross-platform compatibility, becoming the go-to for pipeline issues and technical questions.
             </p>
         </div>
     </div>
@@ -189,61 +204,43 @@
     <!-- Library -->
     <div class="motion-section">
         <div class="motion-section-label">Library</div>
-        <h2 class="motion-section-title">Selected Animations</h2>
+        <h2 class="motion-section-title">Selected Work</h2>
         <div class="motion-section-content">
             <p>
-                Below is a selection of animations from the library, spanning micro-interactions, feedback states, onboarding sequences, and feature illustrations.
+                A selection from the library. <strong>Hover on any animation</strong> to focus on it—the others will pause.
             </p>
         </div>
         
         <div class="lottie-grid">
-            <div class="lottie-card">
-                <div class="lottie-placeholder">[Lottie 1]</div>
-                <div class="lottie-name">Loading State</div>
+            <div class="lottie-card" onmouseenter="focusLottie(0)" onmouseleave="unfocusLottie()">
+                <div class="lottie-container">
+                    <lottie-player id="lottie-0" src="https://lottie.host/ed51c2a2-e644-4919-8f69-542febb90add/hwrQHwUmZr.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                </div>
             </div>
-            <div class="lottie-card">
-                <div class="lottie-placeholder">[Lottie 2]</div>
-                <div class="lottie-name">Success Feedback</div>
+            <div class="lottie-card" onmouseenter="focusLottie(1)" onmouseleave="unfocusLottie()">
+                <div class="lottie-container">
+                    <lottie-player id="lottie-1" src="https://lottie.host/48b7beb3-de04-4de1-9461-d224c09e2d96/Zbn7Ql9wXk.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                </div>
             </div>
-            <div class="lottie-card">
-                <div class="lottie-placeholder">[Lottie 3]</div>
-                <div class="lottie-name">Error State</div>
+            <div class="lottie-card" onmouseenter="focusLottie(2)" onmouseleave="unfocusLottie()">
+                <div class="lottie-container">
+                    <lottie-player id="lottie-2" src="https://lottie.host/636b9ecc-1fc4-4fb4-a295-a4b2020433e2/7Rt2oGVGYG.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                </div>
             </div>
-            <div class="lottie-card">
-                <div class="lottie-placeholder">[Lottie 4]</div>
-                <div class="lottie-name">Onboarding Step</div>
+            <div class="lottie-card" onmouseenter="focusLottie(3)" onmouseleave="unfocusLottie()">
+                <div class="lottie-container">
+                    <lottie-player id="lottie-3" src="https://lottie.host/7bfc49fa-fead-4481-b1cd-014469fe60d7/U4BdkvO8Pg.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                </div>
             </div>
-            <div class="lottie-card">
-                <div class="lottie-placeholder">[Lottie 5]</div>
-                <div class="lottie-name">Card Animation</div>
+            <div class="lottie-card" onmouseenter="focusLottie(4)" onmouseleave="unfocusLottie()">
+                <div class="lottie-container">
+                    <lottie-player id="lottie-4" src="https://lottie.host/b75c0251-8421-43c7-ab12-fe8a5414a070/EqgjRNKMVg.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                </div>
             </div>
-            <div class="lottie-card">
-                <div class="lottie-placeholder">[Lottie 6]</div>
-                <div class="lottie-name">Transition</div>
-            </div>
-            <div class="lottie-card">
-                <div class="lottie-placeholder">[Lottie 7]</div>
-                <div class="lottie-name">Feature Intro</div>
-            </div>
-            <div class="lottie-card">
-                <div class="lottie-placeholder">[Lottie 8]</div>
-                <div class="lottie-name">Empty State</div>
-            </div>
-            <div class="lottie-card">
-                <div class="lottie-placeholder">[Lottie 9]</div>
-                <div class="lottie-name">Pull to Refresh</div>
-            </div>
-            <div class="lottie-card">
-                <div class="lottie-placeholder">[Lottie 10]</div>
-                <div class="lottie-name">Celebration</div>
-            </div>
-            <div class="lottie-card">
-                <div class="lottie-placeholder">[Lottie 11]</div>
-                <div class="lottie-name">Menu Transition</div>
-            </div>
-            <div class="lottie-card">
-                <div class="lottie-placeholder">[Lottie 12]</div>
-                <div class="lottie-name">Notification</div>
+            <div class="lottie-card" onmouseenter="focusLottie(5)" onmouseleave="unfocusLottie()">
+                <div class="lottie-container">
+                    <lottie-player id="lottie-5" src="https://lottie.host/9e16038f-a28e-4181-8d9e-4ee72f2840f8/WxVpCO0tXF.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                </div>
             </div>
         </div>
     </div>
@@ -254,13 +251,29 @@
         <h2 class="motion-section-title">Beyond Individual Files</h2>
         <div class="motion-section-content">
             <p>
-                This library wasn't just a collection of animations—it was a <strong>production asset</strong>. Engineers could integrate Lotties knowing they'd perform well. Designers could reference existing work before creating new animations. Product teams could ship features with polished motion without custom requests.
-            </p>
-            <p>
-                The consistency across the library reinforced Qonto's brand. Every animation felt like part of the same system—purposeful, refined, and ready for production.
+                The library became a <strong>production asset</strong>. Engineers integrated Lotties confidently. Designers referenced existing work before creating new animations. Product teams shipped features with polished motion without custom requests. The .lottie migration improved Android performance and reduced bundle sizes across the entire product.
             </p>
         </div>
     </div>
 </div>
 
-<!-- Note: toggleMotionExpand() function is defined globally in script-figma.js -->
+<script>
+// Lottie hover interaction
+function focusLottie(index) {
+    // Pause all others
+    for (let i = 0; i < 6; i++) {
+        if (i !== index) {
+            const player = document.getElementById('lottie-' + i);
+            if (player) player.pause();
+        }
+    }
+}
+
+function unfocusLottie() {
+    // Resume all
+    for (let i = 0; i < 6; i++) {
+        const player = document.getElementById('lottie-' + i);
+        if (player) player.play();
+    }
+}
+</script>
