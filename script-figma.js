@@ -1040,10 +1040,6 @@ function openProjectModal(card) {
     const projectId = card.getAttribute('data-project-id');
     const isPasswordProtected = card.getAttribute('data-password-protected') === 'true';
     
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/75a39076-4f26-46f4-aa78-a1720ba436f3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'script-figma.js:1037',message:'openProjectModal called',data:{projectName,projectId,isPasswordProtected},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H2'})}).catch(()=>{});
-    // #endregion
-    
     // Get project data from window.projectsData (loaded by content-loader.js)
     const projectData = window.projectsData?.find(p => p.id == projectId);
     
@@ -1128,10 +1124,6 @@ function openProjectModal(card) {
 }
 
 function loadProjectContent(projectData, projectName) {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/75a39076-4f26-46f4-aa78-a1720ba436f3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'script-figma.js:1126',message:'loadProjectContent called',data:{projectName,hasCustomUrl:!!projectData?.customUrl,customUrl:projectData?.customUrl},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H2'})}).catch(()=>{});
-    // #endregion
-    
     const modalHero = document.getElementById('projectHero');
     const modalBodyText = document.getElementById('projectBodyText');
     const modalGrid = document.getElementById('projectGrid');
@@ -1140,17 +1132,8 @@ function loadProjectContent(projectData, projectName) {
     if (projectData && projectData.customUrl) {
         // Load custom HTML content
         fetch(projectData.customUrl)
-            .then(response => {
-                // #region agent log
-                fetch('http://127.0.0.1:7242/ingest/75a39076-4f26-46f4-aa78-a1720ba436f3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'script-figma.js:1137',message:'Custom HTML fetch response',data:{url:projectData.customUrl,status:response.status,ok:response.ok},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H2'})}).catch(()=>{});
-                // #endregion
-                return response.text();
-            })
+            .then(response => response.text())
             .then(html => {
-                // #region agent log
-                fetch('http://127.0.0.1:7242/ingest/75a39076-4f26-46f4-aa78-a1720ba436f3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'script-figma.js:1143',message:'Custom HTML loaded',data:{htmlLength:html.length,hasLottieIframe:html.includes('lottiefiles')},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H2'})}).catch(()=>{});
-                // #endregion
-                
                 // Hide standard elements
                 if (modalHero) modalHero.style.display = 'none';
                 if (modalGrid) modalGrid.style.display = 'none';
@@ -1162,9 +1145,6 @@ function loadProjectContent(projectData, projectName) {
                 }
             })
             .catch(error => {
-                // #region agent log
-                fetch('http://127.0.0.1:7242/ingest/75a39076-4f26-46f4-aa78-a1720ba436f3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'script-figma.js:1159',message:'Custom HTML fetch ERROR',data:{error:error.message,url:projectData?.customUrl},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H2'})}).catch(()=>{});
-                // #endregion
                 console.error('Error loading custom content:', error);
                 if (modalBodyText) {
                     modalBodyText.innerHTML = '<p>Error loading project content.</p>';

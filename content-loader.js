@@ -105,10 +105,6 @@ function updateHeader(header) {
 
 // Update Projects
 function updateProjects(projects) {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/75a39076-4f26-46f4-aa78-a1720ba436f3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'content-loader.js:107',message:'updateProjects called',data:{projectCount:projects.length,motionSystemPreview:projects[0]?.cardPreview},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H8'})}).catch(()=>{});
-    // #endregion
-    
     const workGrid = document.querySelector('.work-grid');
     if (!workGrid) return;
     
@@ -117,12 +113,6 @@ function updateProjects(projects) {
         const fileExt = hasPreview ? project.cardPreview.split('.').pop().toLowerCase() : '';
         const isVideo = fileExt === 'mp4' || fileExt === 'webm' || fileExt === 'mov';
         const isHtml = fileExt === 'html';
-        
-        // #region agent log
-        if (project.name === 'Qonto Motion System') {
-            fetch('http://127.0.0.1:7242/ingest/75a39076-4f26-46f4-aa78-a1720ba436f3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'content-loader.js:118',message:'Motion System card preview',data:{hasPreview,fileExt,isHtml,cardPreview:project.cardPreview},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H6,H8'})}).catch(()=>{});
-        }
-        // #endregion
         
         return `
         <article class="work-card" ${project.passwordProtected ? 'data-password-protected="true"' : ''} data-project-id="${project.id}">
@@ -144,10 +134,6 @@ function updateProjects(projects) {
         </article>
         `;
     }).join('');
-    
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/75a39076-4f26-46f4-aa78-a1720ba436f3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'content-loader.js:145',message:'Projects HTML rendered',data:{cardCount:workGrid.querySelectorAll('.work-card').length},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H6'})}).catch(()=>{});
-    // #endregion
     
     // Store project data globally for password check
     window.projectsData = projects;
