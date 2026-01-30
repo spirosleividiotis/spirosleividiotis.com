@@ -30,10 +30,14 @@
         }
 
         .cover-image {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
+            z-index: 1;
         }
 
         /* Black overlay */
@@ -46,7 +50,7 @@
             background: rgba(0, 0, 0, 0.2);
             transition: background 0.3s ease;
             pointer-events: none;
-            z-index: 10;
+            z-index: 2;
         }
 
         .cover-container:hover .cover-overlay {
