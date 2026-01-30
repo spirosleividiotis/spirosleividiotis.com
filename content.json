@@ -60,7 +60,7 @@
   "projects": [
     {
       "id": 1,
-      "name": "Building a Motion System",
+      "name": "Qonto Motion System",
       "company": "Qonto",
       "color": "#141414",
       "passwordProtected": true,
@@ -75,7 +75,7 @@
     },
     {
       "id": 2,
-      "name": "Vibe coding a System Motion tool",
+      "name": "Motion Tokens Inspector",
       "company": "Qonto",
       "color": "#141414",
       "passwordProtected": true,
@@ -89,8 +89,8 @@
     },
     {
       "id": 3,
-      "name": "Brand Guidelines",
-      "company": "Delivery Hero",
+      "name": "Animation Library at Scale",
+      "company": "Qonto",
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
@@ -98,12 +98,13 @@
       "media": {
         "hero": "",
         "grid": []
-      }
+      },
+      "cardPreview": ""
     },
     {
       "id": 4,
-      "name": "Interactive Stories",
-      "company": "Folket",
+      "name": "Motion Handoff & Specs",
+      "company": "Qonto",
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
@@ -111,12 +112,13 @@
       "media": {
         "hero": "",
         "grid": []
-      }
+      },
+      "cardPreview": ""
     },
     {
       "id": 5,
-      "name": "Design Tokens",
-      "company": "Freelance",
+      "name": "Brand Motion Guidelines",
+      "company": "Flink",
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
@@ -124,12 +126,13 @@
       "media": {
         "hero": "",
         "grid": []
-      }
+      },
+      "cardPreview": ""
     },
     {
       "id": 6,
-      "name": "Animations Showcase",
-      "company": "Personal",
+      "name": "Selected Work ",
+      "company": "2020 - 2025",
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
@@ -137,7 +140,8 @@
       "media": {
         "hero": "",
         "grid": []
-      }
+      },
+      "cardPreview": ""
     }
   ],
   "experience": [
