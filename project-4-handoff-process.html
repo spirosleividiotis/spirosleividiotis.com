@@ -333,96 +333,25 @@
             </div>
         </div>
 
-        <!-- Case 2: Check Mark Success Feedback -->
+        <!-- Case 2: Tertiary Button Arrow -->
         <div class="case-wrapper">
             <div class="case-header">
                 <div class="case-number">Case 02</div>
-                <h3 class="case-title">Check Mark Success Feedback</h3>
+                <h3 class="case-title">Tertiary Button Arrow Interaction</h3>
                 <p class="case-description">
-                    A success confirmation. The challenge: make it feel rewarding, not mechanical. The circle "pops" in—scaling to 120% before settling at 100%—while the check mark draws like a hand-written stroke. Two separate animations, choreographed to feel like one celebratory moment.
+                    A text link with an animated arrow. The challenge: make the interaction feel fluid and intentional—on hover, the arrow slides out and back in within a mask; on click, it scales down and up for tactile feedback. This micro-interaction reinforces that it's clickable while maintaining consistency with button behaviors across the site.
                 </p>
             </div>
 
             <div class="case-preview">
                 <div class="preview-label">Interactive Preview</div>
-                <iframe src="https://rive.app/s/TO6xVZ1mg0yrAvC7jW5AOQ/embed?mode=preview&artboard=Desktop" frameborder="0" allowfullscreen style="height: 400px;"></iframe>
+                <iframe src="https://rive.app/s/5qg5O04RL0Cj12XRMP7QXw/embed?mode=preview" frameborder="0" allowfullscreen style="height: 400px;"></iframe>
             </div>
 
             <div class="insight">
                 <div class="insight-label">UX Challenge</div>
                 <div class="insight-text">
-                    <strong>Why overshoot the scale?</strong> The circle scales to 120% before settling at 100%—this "pop" creates a moment of emphasis. Users subconsciously register it as "important" and "positive." The check mark's stroke draw feels hand-crafted, human. Together, they create a micro-celebration that reinforces success without being obnoxious.
-                </div>
-            </div>
-
-            <div class="specs-section">
-                <h4 style="color: #FFFFFF; font-size: 16px; margin-bottom: 16px;">Technical Specs</h4>
-                
-                <table class="specs-table">
-                    <thead>
-                        <tr>
-                            <th>Element</th>
-                            <th>Specification</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Circle</td>
-                            <td>
-                                <strong>Duration:</strong> <span class="token">motion-duration-500</span> <span class="value">500ms</span><br/><br/>
-                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/><br/>
-                                <strong>Easing (keyframed):</strong><br/>
-                                At start [0ms]: <span class="value">.3, .9, .4, 1</span><br/>
-                                At mid [250ms]: <span class="value">.36, .13, .36, 1</span><br/>
-                                At end [500ms]: <span class="value">.93, 0, 0, 1</span><br/><br/>
-                                <strong>Scale:</strong><br/>
-                                At start [0ms]: <span class="value">0%</span><br/>
-                                At mid [250ms]: <span class="value">120%</span> (overshoot)<br/>
-                                At end [500ms]: <span class="value">100%</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Check Mark</td>
-                            <td>
-                                <strong>Duration:</strong> <span class="token">motion-duration-500</span> <span class="value">500ms</span><br/><br/>
-                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/><br/>
-                                <strong>Easing (keyframed):</strong><br/>
-                                At start [0ms]: <span class="value">.54, 0, .2, 1</span><br/>
-                                At mid [250ms]: <span class="value">.23, -.09, .2, 1</span><br/>
-                                At end [500ms]: <span class="value">.54, 0, .2, 1</span><br/><br/>
-                                <strong>Stroke draw:</strong><br/>
-                                At start [0ms]: <span class="value">0%</span><br/>
-                                At mid [250ms]: <span class="value">50%</span><br/>
-                                At end [500ms]: <span class="value">100%</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Case 3: FAQ Hover Interaction -->
-        <div class="case-wrapper">
-            <div class="case-header">
-                <div class="case-number">Case 03</div>
-                <h3 class="case-title">FAQ Advanced Hover & Reveal</h3>
-                <p class="case-description">
-                    An FAQ module with hover feedback. The challenge: make hover states feel responsive without being distracting, and answer reveals feel natural—not like a dropdown.  The divider animates from left to right on hover (darkening), and answers fade/slide in with staggered timing. Every micro-interaction reinforces the hierarchy and guides attention.
-                </p>
-            </div>
-
-            <div class="case-preview">
-                <div class="preview-label">Video Preview</div>
-                <video autoplay loop muted playsinline style="height: auto;">
-                    <source src="faq-animation.mov" type="video/quicktime">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-
-            <div class="insight">
-                <div class="insight-label">UX Challenge</div>
-                <div class="insight-text">
-                    <strong>Why animate the divider?</strong> The divider animation (scale-X from left) provides instant visual feedback—users know they're hovering on something clickable. The animation direction (left-to-right) subtly guides reading flow. The answer text reveals with smooth easing—not instant (feels jarring) and not slow (feels sluggish). Timing is everything.
+                    <strong>Why dual arrows?</strong> The arrow appears to move, but it's actually two arrows in sequence—one exits while another enters. This creates the illusion of continuous motion within a rectangular mask. The 150ms stagger prevents them from overlapping visually. On click, the scale down/up (100% → 90% → 100%) provides haptic-like feedback—confirming the action without requiring a physical press.
                 </div>
             </div>
 
@@ -438,41 +367,108 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Hover In<br/>(divider)</td>
-                            <td>
-                                <strong>Duration:</strong> <span class="token">motion-duration-250</span> <span class="value">250ms</span><br/>
-                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
-                                <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.2, 1</span><br/>
-                                <strong>Effect:</strong> Scale-X from <span class="value">0 → 1</span> (origin: left)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Hover Out<br/>(divider)</td>
-                            <td>
-                                <strong>Duration:</strong> <span class="token">motion-duration-200</span> <span class="value">200ms</span><br/>
-                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
-                                <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.2, 1</span><br/>
-                                <strong>Effect:</strong> Scale-X from <span class="value">1 → 0</span> (origin: right)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Answer Reveal</td>
+                            <td>Click Scale</td>
                             <td>
                                 <strong>Duration:</strong> <span class="token">motion-duration-300</span> <span class="value">300ms</span><br/>
-                                <strong>Easing:</strong> <span class="token">motion-easing-smooth</span><br/>
-                                <strong>Delay:</strong> <span class="token">motion-delay-0</span>
+                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
+                                <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.6, 1</span><br/>
+                                <strong>Scale:</strong> <span class="value">100%</span> → <span class="value">90%</span> (15 frames) → <span class="value">100%</span> (30 frames)
                             </td>
                         </tr>
                         <tr>
-                            <td>Answer Hide</td>
+                            <td>Hover In<br/>(First Arrow)</td>
                             <td>
-                                <strong>Duration:</strong> <span class="token">motion-duration-150</span> <span class="value">150ms</span><br/>
-                                <strong>Easing:</strong> <span class="token">motion-easing-accelerate</span><br/>
-                                <strong>Delay:</strong> <span class="token">motion-delay-0</span>
+                                <strong>Duration:</strong> <span class="token">motion-duration-300</span> <span class="value">300ms</span><br/>
+                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
+                                <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.6, 1</span><br/>
+                                <strong>Translate X:</strong> <span class="value">0px → 18px</span><br/>
+                                <strong>Translate Y:</strong> <span class="value">0px → -18px</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Hover In<br/>(Second Arrow)</td>
+                            <td>
+                                <strong>Duration:</strong> <span class="token">motion-duration-300</span> <span class="value">300ms</span><br/>
+                                <strong>Delay:</strong> <span class="token">motion-delay-150</span> <span class="value">150ms</span><br/>
+                                <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.6, 1</span><br/>
+                                <strong>Translate X:</strong> <span class="value">18px → 0px</span><br/>
+                                <strong>Translate Y:</strong> <span class="value">-18px → 0px</span>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+
+                <div class="insight">
+                    <div class="insight-label">Implementation Note</div>
+                    <div class="insight-text">
+                        The hover and click effects trigger when hovering either the text or the arrow. On mobile, only the click effect applies (no hover state).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case 3: Card Hover Lift -->
+        <div class="case-wrapper">
+            <div class="case-header">
+                <div class="case-number">Case 03</div>
+                <h3 class="case-title">Card Hover Lift Interaction</h3>
+                <p class="case-description">
+                    A hover effect for interactive cards across the website. The challenge: make cards feel responsive and tangible without being heavy. On hover, the card lifts 10px upward—subtle enough to feel light, but pronounced enough to signal interactivity. The effect only applies to clickable cards, preserving the visual hierarchy and preventing meaningless motion.
+                </p>
+            </div>
+
+            <div class="case-preview">
+                <div class="preview-label">Interactive Previews (3 Variations)</div>
+                <iframe src="https://rive.app/s/xrDinUacjEC_zQgO_mFA-Q/embed?mode=preview" frameborder="0" allowfullscreen style="height: 300px; margin-bottom: 12px;"></iframe>
+                <iframe src="https://rive.app/s/Hrs-aXlpQ06GtkxKLBWH6g/embed?mode=preview" frameborder="0" allowfullscreen style="height: 300px; margin-bottom: 12px;"></iframe>
+                <iframe src="https://rive.app/s/QmCbwIOrdUOFNRd6zn2fpQ/embed?mode=preview" frameborder="0" allowfullscreen style="height: 300px;"></iframe>
+            </div>
+
+            <div class="insight">
+                <div class="insight-label">UX Challenge</div>
+                <div class="insight-text">
+                    <strong>Why 10px lift?</strong> The 10px translateY creates a subtle elevation change—enough to feel like the card is "rising" toward you, but not so much that it feels jumpy or aggressive. The same timing in/out (250ms) maintains symmetry—hover on feels as smooth as hover off. Critically, this only applies to clickable cards. Non-interactive cards don't lift, preventing false affordances.
+                </div>
+            </div>
+
+            <div class="specs-section">
+                <h4 style="color: #FFFFFF; font-size: 16px; margin-bottom: 16px;">Technical Specs</h4>
+                
+                <table class="specs-table">
+                    <thead>
+                        <tr>
+                            <th>Interaction</th>
+                            <th>Specification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Hover On</td>
+                            <td>
+                                <strong>Duration:</strong> <span class="token">motion-duration-250</span> <span class="value">250ms</span><br/>
+                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
+                                <strong>Easing:</strong> <span class="token">motion-easing-default</span> <span class="value">0.4, 0, 0.2, 1</span><br/>
+                                <strong>Translate Y:</strong> <span class="value">0px → -10px</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Hover Off</td>
+                            <td>
+                                <strong>Duration:</strong> <span class="token">motion-duration-250</span> <span class="value">250ms</span><br/>
+                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
+                                <strong>Easing:</strong> <span class="token">motion-easing-default</span> <span class="value">0.4, 0, 0.2, 1</span><br/>
+                                <strong>Translate Y:</strong> <span class="value">-10px → 0px</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="insight">
+                    <div class="insight-label">Implementation Note</div>
+                    <div class="insight-text">
+                        This hover applies to all clickable cards: Bento, Cards (all variations), Cards within Hero. Slider cards do <strong>not</strong> use these specs. Arrow animation specs are handled separately.
+                    </div>
+                </div>
             </div>
         </div>
 
