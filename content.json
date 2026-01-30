@@ -74,7 +74,7 @@
     },
     {
       "id": 2,
-      "name": "Vibe coding a Motion tool",
+      "name": "Motion Tokens Inspector",
       "company": "Qonto",
       "color": "#141414",
       "passwordProtected": true,
@@ -119,20 +119,6 @@
     },
     {
       "id": 5,
-      "name": "Carriage Delivery Experience",
-      "company": "Delivery Hero",
-      "color": "#141414",
-      "passwordProtected": true,
-      "password": "spiros2026",
-      "customUrl": "project-5-carriage-delivery.html",
-      "bodyText": "",
-      "media": {
-        "hero": "",
-        "grid": []
-      }
-    },
-    {
-      "id": 6,
       "name": "Brand Guidelines",
       "company": "Flink",
       "color": "#141414",
@@ -144,6 +130,21 @@
         "hero": "",
         "grid": []
       }
+    },
+    {
+      "id": 6,
+      "name": "Selection of Designs",
+      "company": "Multiple Brands",
+      "color": "#141414",
+      "passwordProtected": true,
+      "password": "spiros2026",
+      "customUrl": "project-6-selection.html",
+      "bodyText": "",
+      "media": {
+        "hero": "",
+        "grid": []
+      },
+      "cardPreview": ""
     }
   ],
   "experience": [
