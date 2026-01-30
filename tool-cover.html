@@ -31,47 +31,39 @@
 
         .screenshot-wrapper {
             transform: rotate(-6deg);
-            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-            max-width: 900px;
-            width: 100%;
-        }
-
-        .cover-container:hover .screenshot-wrapper {
-            transform: rotate(0deg) scale(1.02);
+            width: 110%;
+            margin-left: -5%;
         }
 
         .screenshot-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        .cover-container:hover .screenshot-card {
-            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
         }
 
         .screenshot-card img {
             width: 100%;
             height: auto;
             display: block;
-            filter: brightness(0.9);
-            transition: filter 0.3s ease;
+            filter: grayscale(0.3) brightness(0.8);
+            transition: filter 0.4s ease;
         }
 
         .cover-container:hover .screenshot-card img {
-            filter: brightness(1);
+            filter: grayscale(0) brightness(1);
         }
 
         @media (max-width: 768px) {
             .cover-container {
-                padding: 40px;
+                padding: 30px;
             }
             
             .screenshot-wrapper {
                 transform: rotate(-4deg);
+                width: 115%;
+                margin-left: -7.5%;
             }
         }
     </style>
