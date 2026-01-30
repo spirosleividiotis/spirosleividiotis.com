@@ -12,12 +12,11 @@
         "After Effects"
       ],
       "skills": [
-        "Product Motion",
-        "Motion Systems",
-        "Interaction Design",
-        "Vibecoding",
-        "Lottie Pipelines",
-        "Web & Product Experiences"
+        "UX motion",
+        "Motion systems",
+        "Interaction design",
+        "Lottie pipelines",
+        "Web & product experiences"
       ]
     }
   },
@@ -63,15 +62,13 @@
       "name": "Qonto Motion System",
       "company": "Qonto",
       "color": "#141414",
-      "passwordProtected": true,
+      "passwordProtected": false,
       "customUrl": "motion-system-content.html",
       "bodyText": "",
       "media": {
         "hero": "motion-system/motion/Motion/Comp_5.gif",
         "grid": []
-      },
-      "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769721871/portfolio/3_2_bbvdcl.gif",
-      "password": "spiros2026"
+      }
     },
     {
       "id": 2,
@@ -80,12 +77,12 @@
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
+      "customUrl": "project-2-tokens-tool.html",
       "bodyText": "",
       "media": {
         "hero": "",
         "grid": []
-      },
-      "cardPreview": ""
+      }
     },
     {
       "id": 3,
@@ -94,6 +91,7 @@
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
+      "customUrl": "project-3-animation-library.html",
       "bodyText": "",
       "media": {
         "hero": "",
@@ -103,11 +101,12 @@
     },
     {
       "id": 4,
-      "name": "Motion Handoff & Specs",
+      "name": "Motion Handoff & Implementation",
       "company": "Qonto",
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
+      "customUrl": "project-4-handoff-process.html",
       "bodyText": "",
       "media": {
         "hero": "",
@@ -117,11 +116,12 @@
     },
     {
       "id": 5,
-      "name": "Brand Motion Guidelines",
-      "company": "Flink",
+      "name": "Carriage Delivery Experience",
+      "company": "Delivery Hero",
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
+      "customUrl": "project-5-carriage-delivery.html",
       "bodyText": "",
       "media": {
         "hero": "",
@@ -131,11 +131,12 @@
     },
     {
       "id": 6,
-      "name": "Selected Work ",
-      "company": "2020 - 2025",
+      "name": "Brand Guidelines",
+      "company": "Flink",
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
+      "customUrl": "project-6-flink-brand.html",
       "bodyText": "",
       "media": {
         "hero": "",
