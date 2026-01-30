@@ -64,22 +64,39 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.85) contrast(1.1);
-            transition: filter 0.3s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .cover-container:hover .token-card img {
-            filter: brightness(1) contrast(1.15);
+        .token-static {
+            opacity: 1;
+            filter: grayscale(0.8) brightness(0.6);
         }
 
-        /* Subtle individual hover */
+        .token-animated {
+            opacity: 0;
+            filter: brightness(1) contrast(1.1);
+        }
+
+        /* On cover hover, swap to animated */
+        .cover-container:hover .token-static {
+            opacity: 0;
+        }
+
+        .cover-container:hover .token-animated {
+            opacity: 1;
+        }
+
+        /* Individual card hover */
         .token-card:hover {
             transform: scale(1.05);
             border-color: rgba(255, 255, 255, 0.3);
             z-index: 10;
         }
 
-        .token-card:hover img {
+        .token-card:hover .token-animated {
             filter: brightness(1.1) contrast(1.2);
         }
 
@@ -101,40 +118,52 @@
         <div class="tokens-wrapper">
             <div class="tokens-grid">
                 <div class="token-card">
-                    <img src="motion-system/tokens/Motion tokens/duration.gif" alt="Duration">
+                    <img class="token-static" src="motion-system/tokens/Motion tokens/duration.gif" alt="Duration">
+                    <img class="token-animated" src="motion-system/tokens/Motion tokens/duration.gif" alt="Duration">
                 </div>
                 <div class="token-card">
-                    <img src="motion-system/tokens/Motion tokens/easing.gif" alt="Easing">
+                    <img class="token-static" src="motion-system/tokens/Motion tokens/easing.gif" alt="Easing">
+                    <img class="token-animated" src="motion-system/tokens/Motion tokens/easing.gif" alt="Easing">
                 </div>
                 <div class="token-card">
-                    <img src="motion-system/tokens/Motion tokens/delay.gif" alt="Delay">
+                    <img class="token-static" src="motion-system/tokens/Motion tokens/delay.gif" alt="Delay">
+                    <img class="token-animated" src="motion-system/tokens/Motion tokens/delay.gif" alt="Delay">
                 </div>
                 <div class="token-card">
-                    <img src="motion-system/tokens/Motion tokens/scale.gif" alt="Scale">
+                    <img class="token-static" src="motion-system/tokens/Motion tokens/scale.gif" alt="Scale">
+                    <img class="token-animated" src="motion-system/tokens/Motion tokens/scale.gif" alt="Scale">
                 </div>
                 <div class="token-card">
-                    <img src="motion-system/tokens/Motion tokens/fade.gif" alt="Fade">
+                    <img class="token-static" src="motion-system/tokens/Motion tokens/fade.gif" alt="Fade">
+                    <img class="token-animated" src="motion-system/tokens/Motion tokens/fade.gif" alt="Fade">
                 </div>
                 <div class="token-card">
-                    <img src="motion-system/tokens/Motion tokens/rotation.gif" alt="Rotation">
+                    <img class="token-static" src="motion-system/tokens/Motion tokens/rotation.gif" alt="Rotation">
+                    <img class="token-animated" src="motion-system/tokens/Motion tokens/rotation.gif" alt="Rotation">
                 </div>
                 <div class="token-card">
-                    <img src="motion-system/tokens/Motion tokens/spring.gif" alt="Spring">
+                    <img class="token-static" src="motion-system/tokens/Motion tokens/spring.gif" alt="Spring">
+                    <img class="token-animated" src="motion-system/tokens/Motion tokens/spring.gif" alt="Spring">
                 </div>
                 <div class="token-card">
-                    <img src="motion-system/tokens/Motion tokens/entry.gif" alt="Entry">
+                    <img class="token-static" src="motion-system/tokens/Motion tokens/entry.gif" alt="Entry">
+                    <img class="token-animated" src="motion-system/tokens/Motion tokens/entry.gif" alt="Entry">
                 </div>
                 <div class="token-card">
-                    <img src="motion-system/tokens/Motion tokens/exit.gif" alt="Exit">
+                    <img class="token-static" src="motion-system/tokens/Motion tokens/exit.gif" alt="Exit">
+                    <img class="token-animated" src="motion-system/tokens/Motion tokens/exit.gif" alt="Exit">
                 </div>
                 <div class="token-card">
-                    <img src="motion-system/tokens/Motion tokens/staggered.gif" alt="Stagger">
+                    <img class="token-static" src="motion-system/tokens/Motion tokens/staggered.gif" alt="Stagger">
+                    <img class="token-animated" src="motion-system/tokens/Motion tokens/staggered.gif" alt="Stagger">
                 </div>
                 <div class="token-card">
-                    <img src="motion-system/tokens/Motion tokens/hover.gif" alt="Hover">
+                    <img class="token-static" src="motion-system/tokens/Motion tokens/hover.gif" alt="Hover">
+                    <img class="token-animated" src="motion-system/tokens/Motion tokens/hover.gif" alt="Hover">
                 </div>
                 <div class="token-card">
-                    <img src="motion-system/tokens/Motion tokens/transition.gif" alt="Transition">
+                    <img class="token-static" src="motion-system/tokens/Motion tokens/transition.gif" alt="Transition">
+                    <img class="token-animated" src="motion-system/tokens/Motion tokens/transition.gif" alt="Transition">
                 </div>
             </div>
         </div>
