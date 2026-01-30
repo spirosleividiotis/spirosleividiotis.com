@@ -119,12 +119,12 @@
     },
     {
       "id": 5,
-      "name": "Brand Guidelines",
-      "company": "Flink",
+      "name": "Carriage Delivery Experience",
+      "company": "Delivery Hero",
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
-      "customUrl": "project-6-flink-brand.html",
+      "customUrl": "project-5-carriage-delivery.html",
       "bodyText": "",
       "media": {
         "hero": "",
@@ -133,12 +133,12 @@
     },
     {
       "id": 6,
-      "name": "Selection of designs",
-      "company": "multiple brands",
+      "name": "Brand Guidelines",
+      "company": "Flink",
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
-      "customUrl": "project-6-selection.html",
+      "customUrl": "project-6-flink-brand.html",
       "bodyText": "",
       "media": {
         "hero": "",
