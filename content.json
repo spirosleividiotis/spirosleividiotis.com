@@ -66,7 +66,7 @@
       "password": "spiros2026",
       "customUrl": "motion-system-content.html",
       "bodyText": "",
-      "cardPreview": "motion-system-cover.html",
+      "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769811654/portfolio/cover-system_mxfbe8.gif",
       "media": {
         "hero": "motion-system-cover.html",
         "grid": []
