@@ -59,80 +59,171 @@
         font-weight: 500;
     }
 
-    #projectModalBody .motion-step {
-        margin-bottom: 60px;
-    }
-
-    #projectModalBody .motion-step-header {
-        display: flex;
-        align-items: baseline;
-        gap: 20px;
-        margin-bottom: 16px;
-    }
-
-    #projectModalBody .motion-step-number {
-        font-size: 14px;
-        color: #999999;
-        font-weight: 400;
-    }
-
-    #projectModalBody .motion-step-title {
-        font-size: 20px;
-        font-weight: 500;
-        color: #FFFFFF;
-        letter-spacing: -0.01em;
-    }
-
-    #projectModalBody .motion-step-content {
-        font-size: 16px;
-        line-height: 1.8;
-        color: #CCCCCC;
-        padding-left: 40px;
-    }
-
-    #projectModalBody .motion-step-content p {
-        margin-bottom: 16px;
-    }
-
-    #projectModalBody .motion-step-content strong {
-        color: #FFFFFF;
-        font-weight: 500;
-    }
-
-    #projectModalBody .process-showcase {
-        background: rgba(255, 255, 255, 0.02);
+    #projectModalBody .case-wrapper {
+        margin-bottom: 80px;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.01);
         border: 1px solid #1a1a1a;
+        border-radius: 8px;
+    }
+
+    #projectModalBody .case-header {
+        margin-bottom: 32px;
+    }
+
+    #projectModalBody .case-number {
+        font-size: 14px;
+        color: #999;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 12px;
+    }
+
+    #projectModalBody .case-title {
+        font-size: 28px;
+        font-weight: 500;
+        color: #FFFFFF;
+        margin-bottom: 16px;
+        line-height: 1.2;
+    }
+
+    #projectModalBody .case-description {
+        font-size: 16px;
+        line-height: 1.7;
+        color: #CCCCCC;
+        margin-bottom: 32px;
+    }
+
+    #projectModalBody .case-preview {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid #2a2a2a;
         border-radius: 4px;
         padding: 32px;
-        margin: 24px 0;
+        margin-bottom: 32px;
     }
 
-    #projectModalBody .process-placeholder {
+    #projectModalBody .preview-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #757575;
+        margin-bottom: 16px;
+    }
+
+    #projectModalBody .case-preview iframe,
+    #projectModalBody .case-preview video {
         width: 100%;
-        height: 300px;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px dashed rgba(255, 255, 255, 0.1);
         border-radius: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #666;
+        margin-top: 8px;
+    }
+
+    #projectModalBody .specs-section {
+        margin-top: 40px;
+    }
+
+    #projectModalBody .specs-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 24px 0;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    #projectModalBody .specs-table thead {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    #projectModalBody .specs-table th {
+        padding: 16px;
+        text-align: left;
+        font-size: 13px;
+        font-weight: 500;
+        color: #FFFFFF;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    #projectModalBody .specs-table td {
+        padding: 20px 16px;
         font-size: 14px;
-        margin-top: 16px;
+        line-height: 1.8;
+        color: #CCCCCC;
+        border-bottom: 1px solid #1a1a1a;
+        vertical-align: top;
+    }
+
+    #projectModalBody .specs-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    #projectModalBody .specs-table td:first-child {
+        color: #999;
+        font-weight: 500;
+        width: 140px;
+    }
+
+    #projectModalBody .token {
+        background: rgba(0, 150, 136, 0.15);
+        color: #4DB6AC;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-family: 'Monaco', 'Menlo', monospace;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    #projectModalBody .value {
+        background: rgba(255, 255, 255, 0.05);
+        color: #E0E0E0;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-family: 'Monaco', 'Menlo', monospace;
+        font-size: 13px;
+    }
+
+    #projectModalBody .insight {
+        background: rgba(255, 193, 7, 0.08);
+        border-left: 3px solid rgba(255, 193, 7, 0.4);
+        padding: 20px;
+        margin: 24px 0;
+        border-radius: 4px;
+    }
+
+    #projectModalBody .insight-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #FFC107;
+        margin-bottom: 8px;
+        font-weight: 500;
+    }
+
+    #projectModalBody .insight-text {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #E0E0E0;
     }
 
     /* Mobile responsive */
     @media (max-width: 768px) {
-        #projectModalBody .motion-step-content {
-            padding-left: 0;
+        #projectModalBody .case-wrapper {
+            padding: 24px;
         }
 
-        #projectModalBody .process-showcase {
-            padding: 20px;
+        #projectModalBody .case-title {
+            font-size: 22px;
         }
 
-        #projectModalBody .process-placeholder {
-            height: 200px;
+        #projectModalBody .specs-table {
+            display: block;
+            overflow-x: auto;
+        }
+
+        #projectModalBody .specs-table td:first-child {
+            width: auto;
+            min-width: 120px;
         }
     }
 </style>
@@ -140,117 +231,319 @@
 <div class="motion-system-content">
     <!-- Intro -->
     <p class="motion-intro">
-        Motion design is only valuable if it ships correctly. At Qonto, I developed a handoff process that bridged design intent and engineering implementation—from initial mockups to final QA. The goal: engineers get specs they can implement, designers get results that match their vision, and users get polished motion.
+        Motion specs aren't just technical handoff—they're where design intent meets user experience. I challenge product designers to think deeply about timing, choreography, and feel. These specs bridge vision and implementation, ensuring motion ships exactly as designed.
     </p>
-    <div class="motion-meta">2021–2025 Qonto Motion Design Process</div>
+    <div class="motion-meta">2021–2025 Qonto Motion Design & Implementation</div>
 
-    <!-- Problem -->
-    <div class="motion-section">
-        <div class="motion-section-label">Context</div>
-        <h2 class="motion-section-title">The Challenge</h2>
-        <div class="motion-section-content">
-            <p>
-                Static designs don't communicate motion. A Figma frame showing a modal "open" state doesn't tell an engineer <strong>how</strong> it opens—duration, easing, layering, stagger.
-            </p>
-            <p>
-                Early on, handoffs were verbal: "Make it slide in smoothly." Engineers would interpret this differently across platforms. iOS felt snappy, Android felt sluggish, web felt inconsistent. There was no shared language, no single source of truth.
-            </p>
-            <p>
-                We needed a process that was <strong>precise, visual, and implementation-ready</strong>.
+    <!-- TLDR -->
+    <div class="motion-section" style="background: rgba(255, 255, 255, 0.02); border: 1px solid #1a1a1a; border-radius: 4px; padding: 32px; margin-bottom: 48px;">
+        <div class="motion-section-label">TLDR</div>
+        <h2 class="motion-section-title" style="margin-bottom: 20px;">From Rive prototypes to production. Challenging UX. Implementation-ready specs.</h2>
+        <div class="motion-section-content" style="margin-bottom: 0;">
+            <p style="margin-bottom: 0;">
+                I prototype motion in Rive/After Effects, apply system tokens, create detailed specs with custom timing curves, and QA on real devices. Each spec challenges product designers to consider user experience deeply—not just "make it move," but <strong>why this timing? why this easing? what's the user feeling?</strong> These aren't decorative animations—they're intentional, implementation-ready, and production-tested.
             </p>
         </div>
     </div>
 
-    <!-- Solution -->
+    <!-- Case Studies -->
     <div class="motion-section">
-        <div class="motion-section-label">Process</div>
-        <h2 class="motion-section-title">From Mockup to Production</h2>
-        
-        <!-- Step 1: Prototyping -->
-        <div class="motion-step">
-            <div class="motion-step-header">
-                <span class="motion-step-number">01</span>
-                <h3 class="motion-step-title">Motion Prototyping</h3>
+        <div class="motion-section-label">Selected Cases</div>
+        <h2 class="motion-section-title">Complex Motion Specs</h2>
+        <div class="motion-section-content">
+            <p>
+                Real specs from Qonto projects—each one shows the depth of thinking, precision, and craft required to ship motion that feels right.
+            </p>
+        </div>
+
+        <!-- Case 1: Multi-Step Progressive Bar -->
+        <div class="case-wrapper">
+            <div class="case-header">
+                <div class="case-number">Case 01</div>
+                <h3 class="case-title">Multi-Step Progressive Bar</h3>
+                <p class="case-description">
+                    A progress indicator for multi-step flows. The challenge: each step needs to feel connected, not discrete. The bar grows continuously, with steps overlapping by 250ms—creating a seamless, uninterrupted progression. Custom cubic-beziers at three keyframes give it personality: quick start, smooth mid-transition, confident finish.
+                </p>
             </div>
-            <div class="motion-step-content">
-                <p>
-                    I start by taking static product designs and bringing them to life in <strong>Rive</strong> (or After Effects for complex sequences). Rive became my primary tool—it's lightweight, interactive, and exports directly to code.
-                </p>
-                <p>
-                    At this stage, I'm exploring: <strong>What's the right timing? What easing feels best? Should this fade, slide, or scale?</strong> I iterate quickly, often showing multiple options to product designers or PMs.
-                </p>
-                <p>
-                    The output is a working prototype that demonstrates the exact motion behavior—no guessing, no interpretation.
-                </p>
-                <div class="process-showcase">
-                    <h4 style="color: #FFFFFF; font-size: 14px; margin-bottom: 8px;">Rive Prototype Example</h4>
-                    <div class="process-placeholder">
-                        [Rive Interactive Prototype]
+
+            <div class="case-preview">
+                <div class="preview-label">Interactive Preview</div>
+                <iframe src="https://rive.app/s/TO6xVZ1mg0yrAvC7jW5AOQ/embed?mode=preview&artboard=Desktop" frameborder="0" allowfullscreen style="height: 400px;"></iframe>
+            </div>
+
+            <div class="insight">
+                <div class="insight-label">UX Challenge</div>
+                <div class="insight-text">
+                    <strong>Why overlap steps?</strong> Users perceive discrete jumps as "loading breaks." By starting step 2 before step 1 finishes (250ms overlap), the progression feels continuous—like the system is always working, never waiting. The custom easing at mid-point (600ms) adds a subtle "breath" that makes the motion feel alive, not robotic.
+                </div>
+            </div>
+
+            <div class="specs-section">
+                <h4 style="color: #FFFFFF; font-size: 16px; margin-bottom: 16px;">Technical Specs</h4>
+                
+                <table class="specs-table">
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Specification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Duration</td>
+                            <td>
+                                <span class="token">motion-duration-1500</span> <span class="value">1500ms</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Delay</td>
+                            <td>
+                                <span class="token">motion-delay-0</span> for Step 1<br/>
+                                Step 2: <span class="value">1250ms</span> (starts 250ms before Step 1 ends)<br/>
+                                Step 3: <span class="value">2500ms</span> (same overlap pattern)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Easing</td>
+                            <td>
+                                <strong>Custom cubic-bezier keyframes:</strong><br/>
+                                At start [0ms]: <span class="value">0.67, -0.02, 0.8, 0.15</span><br/>
+                                At mid [600ms]: <span class="value">0.03, 0.07, 0, 1</span><br/>
+                                At end [1500ms]: <span class="value">0, 0.8, 0.2, 1</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Scale</td>
+                            <td>
+                                <strong>Custom scale keyframes:</strong><br/>
+                                At start [0ms]: <span class="value">0%</span><br/>
+                                At mid [600ms]: <span class="value">75%</span><br/>
+                                At end [1500ms]: <span class="value">100%</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="insight">
+                    <div class="insight-label">Multi-Step Rule</div>
+                    <div class="insight-text">
+                        Each subsequent step keeps the same duration but starts <strong>250ms before the previous step ends</strong> by reducing its delay accordingly. Example: Step 1 ends at 1500ms → Step 2 delay = 1250ms. This creates continuous overlapping progression instead of discrete jumps.
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Step 2: Token Application -->
-        <div class="motion-step">
-            <div class="motion-step-header">
-                <span class="motion-step-number">02</span>
-                <h3 class="motion-step-title">Applying System Tokens</h3>
-            </div>
-            <div class="motion-step-content">
-                <p>
-                    Once the motion direction is approved, I map the animation to <strong>motion system tokens</strong>. If the prototype uses a 300ms fade, I replace it with <strong>motion.duration.standard</strong>. If it uses a custom curve, I check if an existing easing token works.
-                </p>
-                <p>
-                    For custom animations that don't fit system patterns, I document the exact values and justify why they're one-off. This keeps the system clean while allowing exceptions when needed.
-                </p>
-                <p>
-                    The goal: <strong>engineers can reference token names instead of copying arbitrary values</strong>.
+        <!-- Case 2: Check Mark Success Feedback -->
+        <div class="case-wrapper">
+            <div class="case-header">
+                <div class="case-number">Case 02</div>
+                <h3 class="case-title">Check Mark Success Feedback</h3>
+                <p class="case-description">
+                    A success confirmation. The challenge: make it feel rewarding, not mechanical. The circle "pops" in—scaling to 120% before settling at 100%—while the check mark draws like a hand-written stroke. Two separate animations, choreographed to feel like one celebratory moment.
                 </p>
             </div>
-        </div>
 
-        <!-- Step 3: VE/VA -->
-        <div class="motion-step">
-            <div class="motion-step-header">
-                <span class="motion-step-number">03</span>
-                <h3 class="motion-step-title">Visual Engineering (VE) & Visual Acceptance (VA)</h3>
+            <div class="case-preview">
+                <div class="preview-label">Interactive Preview</div>
+                <iframe src="https://rive.app/s/TO6xVZ1mg0yrAvC7jW5AOQ/embed?mode=preview&artboard=Desktop" frameborder="0" allowfullscreen style="height: 400px;"></iframe>
             </div>
-            <div class="motion-step-content">
-                <p>
-                    During <strong>VE sessions</strong>, I meet with engineers before implementation. We review the Rive prototype together, discuss technical constraints (performance, platform limitations), and align on the approach.
-                </p>
-                <p>
-                    After implementation, we have <strong>VA sessions</strong>—visual acceptance reviews. I compare the shipped code against the original prototype. Are timings correct? Easings accurate? Layering as intended?
-                </p>
-                <p>
-                    This isn't about nitpicking—it's about <strong>maintaining quality</strong>. Small motion discrepancies add up. A 50ms timing difference might seem minor, but it changes the feel.
-                </p>
-            </div>
-        </div>
 
-        <!-- Step 4: Specs & QA -->
-        <div class="motion-step">
-            <div class="motion-step-header">
-                <span class="motion-step-number">04</span>
-                <h3 class="motion-step-title">Final Specs & QA</h3>
-            </div>
-            <div class="motion-step-content">
-                <p>
-                    I provide engineers with clear, annotated specs: token references, timing diagrams, interaction states, edge cases. For Rive files, I export runtime files that engineers can integrate directly.
-                </p>
-                <p>
-                    During QA, I test on real devices—not just simulators. Motion that looks smooth at 60fps on a MacBook might stutter on a mid-range Android phone. I check for jank, test edge cases (slow networks, interrupted animations), and ensure consistency across platforms.
-                </p>
-                <p>
-                    The handoff isn't done until it ships correctly.
-                </p>
-                <div class="process-showcase">
-                    <h4 style="color: #FFFFFF; font-size: 14px; margin-bottom: 8px;">Spec Documentation Example</h4>
-                    <div class="process-placeholder">
-                        [Annotated Motion Spec]
-                    </div>
+            <div class="insight">
+                <div class="insight-label">UX Challenge</div>
+                <div class="insight-text">
+                    <strong>Why overshoot the scale?</strong> The circle scales to 120% before settling at 100%—this "pop" creates a moment of emphasis. Users subconsciously register it as "important" and "positive." The check mark's stroke draw feels hand-crafted, human. Together, they create a micro-celebration that reinforces success without being obnoxious.
                 </div>
+            </div>
+
+            <div class="specs-section">
+                <h4 style="color: #FFFFFF; font-size: 16px; margin-bottom: 16px;">Technical Specs</h4>
+                
+                <table class="specs-table">
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Specification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Circle</td>
+                            <td>
+                                <strong>Duration:</strong> <span class="token">motion-duration-500</span> <span class="value">500ms</span><br/><br/>
+                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/><br/>
+                                <strong>Easing (keyframed):</strong><br/>
+                                At start [0ms]: <span class="value">.3, .9, .4, 1</span><br/>
+                                At mid [250ms]: <span class="value">.36, .13, .36, 1</span><br/>
+                                At end [500ms]: <span class="value">.93, 0, 0, 1</span><br/><br/>
+                                <strong>Scale:</strong><br/>
+                                At start [0ms]: <span class="value">0%</span><br/>
+                                At mid [250ms]: <span class="value">120%</span> (overshoot)<br/>
+                                At end [500ms]: <span class="value">100%</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Check Mark</td>
+                            <td>
+                                <strong>Duration:</strong> <span class="token">motion-duration-500</span> <span class="value">500ms</span><br/><br/>
+                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/><br/>
+                                <strong>Easing (keyframed):</strong><br/>
+                                At start [0ms]: <span class="value">.54, 0, .2, 1</span><br/>
+                                At mid [250ms]: <span class="value">.23, -.09, .2, 1</span><br/>
+                                At end [500ms]: <span class="value">.54, 0, .2, 1</span><br/><br/>
+                                <strong>Stroke draw:</strong><br/>
+                                At start [0ms]: <span class="value">0%</span><br/>
+                                At mid [250ms]: <span class="value">50%</span><br/>
+                                At end [500ms]: <span class="value">100%</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Case 3: FAQ Hover Interaction -->
+        <div class="case-wrapper">
+            <div class="case-header">
+                <div class="case-number">Case 03</div>
+                <h3 class="case-title">FAQ Advanced Hover & Reveal</h3>
+                <p class="case-description">
+                    An FAQ module with hover feedback. The challenge: make hover states feel responsive without being distracting, and answer reveals feel natural—not like a dropdown.  The divider animates from left to right on hover (darkening), and answers fade/slide in with staggered timing. Every micro-interaction reinforces the hierarchy and guides attention.
+                </p>
+            </div>
+
+            <div class="case-preview">
+                <div class="preview-label">Video Preview</div>
+                <video autoplay loop muted playsinline style="height: auto;">
+                    <source src="faq-animation.mov" type="video/quicktime">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="insight">
+                <div class="insight-label">UX Challenge</div>
+                <div class="insight-text">
+                    <strong>Why animate the divider?</strong> The divider animation (scale-X from left) provides instant visual feedback—users know they're hovering on something clickable. The animation direction (left-to-right) subtly guides reading flow. The answer text reveals with smooth easing—not instant (feels jarring) and not slow (feels sluggish). Timing is everything.
+                </div>
+            </div>
+
+            <div class="specs-section">
+                <h4 style="color: #FFFFFF; font-size: 16px; margin-bottom: 16px;">Technical Specs</h4>
+                
+                <table class="specs-table">
+                    <thead>
+                        <tr>
+                            <th>Interaction</th>
+                            <th>Specification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Hover In<br/>(divider)</td>
+                            <td>
+                                <strong>Duration:</strong> <span class="token">motion-duration-250</span> <span class="value">250ms</span><br/>
+                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
+                                <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.2, 1</span><br/>
+                                <strong>Effect:</strong> Scale-X from <span class="value">0 → 1</span> (origin: left)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Hover Out<br/>(divider)</td>
+                            <td>
+                                <strong>Duration:</strong> <span class="token">motion-duration-200</span> <span class="value">200ms</span><br/>
+                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
+                                <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.2, 1</span><br/>
+                                <strong>Effect:</strong> Scale-X from <span class="value">1 → 0</span> (origin: right)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Answer Reveal</td>
+                            <td>
+                                <strong>Duration:</strong> <span class="token">motion-duration-300</span> <span class="value">300ms</span><br/>
+                                <strong>Easing:</strong> <span class="token">motion-easing-smooth</span><br/>
+                                <strong>Delay:</strong> <span class="token">motion-delay-0</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Answer Hide</td>
+                            <td>
+                                <strong>Duration:</strong> <span class="token">motion-duration-150</span> <span class="value">150ms</span><br/>
+                                <strong>Easing:</strong> <span class="token">motion-easing-accelerate</span><br/>
+                                <strong>Delay:</strong> <span class="token">motion-delay-0</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Case 4: Card Flip Product Animation -->
+        <div class="case-wrapper">
+            <div class="case-header">
+                <div class="case-number">Case 04</div>
+                <h3 class="case-title">Card Flip Interaction</h3>
+                <p class="case-description">
+                    A physical card customization flow. The challenge: make the flip feel tangible—like you're flipping a real card, not swapping JPEGs. 3D rotation with proper perspective, staggered layer reveals on the back side, and attention to the "weight" of the animation. It's not just eye candy—it helps users understand they're looking at a different side of the same object.
+                </p>
+            </div>
+
+            <div class="case-preview">
+                <div class="preview-label">Animation Preview</div>
+                <img src="card-flip.gif" alt="Card flip animation" style="width: 100%; border-radius: 4px;">
+            </div>
+
+            <div class="insight">
+                <div class="insight-label">UX Challenge</div>
+                <div class="insight-text">
+                    <strong>Why 3D rotation?</strong> A 2D cross-fade would be faster to implement, but it wouldn't convey the spatial relationship between front and back. The 3D flip creates a mental model: "I'm looking at the back of the same card." This helps users understand the customization context—they're not navigating to a new screen, they're exploring the object. The animation reinforces the product hierarchy.
+                </div>
+            </div>
+
+            <div class="specs-section">
+                <h4 style="color: #FFFFFF; font-size: 16px; margin-bottom: 16px;">Technical Specs</h4>
+                
+                <table class="specs-table">
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Specification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Component</td>
+                            <td>
+                                <span class="value">Modifier.graphicsLayer</span> (Android)<br/>
+                                <span class="value">rotationY / transform3D</span> (iOS/Web)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Transition</td>
+                            <td>
+                                <strong>Type:</strong> Rotation (Y-axis)<br/>
+                                <strong>Use case:</strong> Change content (front ↔ back)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Duration</td>
+                            <td>
+                                <span class="token">motion-duration-600</span> <span class="value">600ms</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Easing</td>
+                            <td>
+                                <span class="token">motion-easing-emphasized</span><br/>
+                                Custom curve for mid-rotation deceleration
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Perspective</td>
+                            <td>
+                                <span class="value">1000px</span> (creates depth perception)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -258,19 +551,14 @@
     <!-- Impact -->
     <div class="motion-section">
         <div class="motion-section-label">Impact</div>
-        <h2 class="motion-section-title">Consistent, Scalable, Shippable</h2>
+        <h2 class="motion-section-title">Challenging UX, Shipping Quality</h2>
         <div class="motion-section-content">
             <p>
-                This process became the standard for motion at Qonto. Engineers knew what to expect. Product designers trusted the handoff. Features shipped with polished, intentional motion—not placeholder animations.
+                These specs aren't documentation—they're tools for <strong>challenging product thinking</strong>. Every timing decision, every easing curve, every overlap pattern is a conversation: "Does this serve the user? Does it reinforce the hierarchy? Does it feel right?"
             </p>
             <p>
-                More importantly, it <strong>scaled beyond me</strong>. The process was documented, repeatable, and teachable. Other designers could follow the same workflow. Engineers could self-serve for simple cases using the specs library.
-            </p>
-            <p>
-                Motion became a production-ready, predictable part of the product development cycle.
+                The process scales: engineers get implementation-ready specs, product designers get motion that matches their vision, and users get experiences that feel polished, intentional, and human.
             </p>
         </div>
     </div>
 </div>
-
-<!-- Note: toggleMotionExpand() function is defined globally in script-figma.js -->
