@@ -59,7 +59,7 @@
   "projects": [
     {
       "id": 1,
-      "name": "Qonto Motion System",
+      "name": "Qonto's Motion System",
       "company": "Qonto",
       "color": "#141414",
       "passwordProtected": true,
