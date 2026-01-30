@@ -150,7 +150,7 @@
     {
       "id": "qonto",
       "company": "Qonto",
-      "image": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694888/qonto_cevi3i.jpg",
+      "image": "experience-qonto.png",
       "roles": [
         {
           "title": "Staff Motion Designer - Design System",
@@ -181,7 +181,7 @@
     {
       "id": "flink",
       "company": "Flink",
-      "image": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694888/flink_zak6m6.jpg",
+      "image": "experience-flink.png",
       "roles": [
         {
           "title": "Senior Motion Designer",
@@ -196,7 +196,7 @@
     {
       "id": "delivery-hero",
       "company": "Delivery Hero",
-      "image": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694888/delivery-hero_axtkey.jpg",
+      "image": "experience-delivery-hero.png",
       "roles": [
         {
           "title": "Motion Designer",
@@ -211,7 +211,7 @@
     {
       "id": "folket",
       "company": "Folket",
-      "image": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694888/folket_jxr23m.jpg",
+      "image": "experience-folket.png",
       "roles": [
         {
           "title": "Motion Designer",
