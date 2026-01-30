@@ -121,6 +121,57 @@
         margin-top: 20px;
     }
 
+    #projectModalBody .interactive-example {
+        margin-top: 48px;
+        padding: 32px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid #1a1a1a;
+        border-radius: 4px;
+    }
+
+    #projectModalBody .example-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+    }
+
+    #projectModalBody .example-title {
+        font-size: 16px;
+        font-weight: 500;
+        color: #FFFFFF;
+    }
+
+    #projectModalBody .expand-btn {
+        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid #1a1a1a;
+        border-radius: 4px;
+        color: #CCCCCC;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    #projectModalBody .expand-btn:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    #projectModalBody .iframe-container {
+        width: 100%;
+        border-radius: 4px;
+        overflow: hidden;
+        border: 1px solid #1a1a1a;
+    }
+
+    #projectModalBody .iframe-container iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
     /* Mobile responsive */
     @media (max-width: 768px) {
         #projectModalBody .motion-step-content {
@@ -133,6 +184,29 @@
 
         #projectModalBody .tool-placeholder {
             height: 300px;
+        }
+
+        #projectModalBody .interactive-example {
+            padding: 20px;
+            display: none;
+        }
+
+        #projectModalBody .example-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        #projectModalBody .example-title {
+            font-size: 14px;
+        }
+
+        #projectModalBody .expand-btn {
+            width: 100%;
+        }
+
+        #projectModalBody .iframe-container {
+            height: 600px;
         }
     }
 </style>
@@ -181,9 +255,8 @@
                 </p>
                 <div class="tool-showcase">
                     <h4 style="color: #FFFFFF; font-size: 14px; margin-bottom: 8px;">Token Inspector Interface</h4>
-                    <div class="tool-placeholder">
-                        [Tool Interface Screenshot - Token Library View]
-                    </div>
+                    <p style="font-size: 13px; color: #999; margin-bottom: 16px;">Build motion, get code for iOS, Android, CSS, and visual specs</p>
+                    <img src="tool-visualspecs.png" alt="Visual specs and code export" style="width: 100%; border-radius: 4px; margin-top: 8px;">
                 </div>
             </div>
         </div>
@@ -206,9 +279,8 @@
                 </p>
                 <div class="tool-showcase">
                     <h4 style="color: #FFFFFF; font-size: 14px; margin-bottom: 8px;">Product Context Preview</h4>
-                    <div class="tool-placeholder">
-                        [Product Design + Motion Token Preview]
-                    </div>
+                    <p style="font-size: 13px; color: #999; margin-bottom: 16px;">Upload an asset and compare different motion tokens side-by-side</p>
+                    <img src="tool-sidebyside.png" alt="Side by side token comparison" style="width: 100%; border-radius: 4px; margin-top: 8px;">
                 </div>
             </div>
         </div>
@@ -231,10 +303,30 @@
                 </p>
                 <div class="tool-showcase">
                     <h4 style="color: #FFFFFF; font-size: 14px; margin-bottom: 8px;">Advanced Timeline Editor</h4>
-                    <div class="tool-placeholder">
-                        [Advanced Timeline Interface with Stagger Controls]
-                    </div>
+                    <p style="font-size: 13px; color: #999; margin-bottom: 16px;">Build staggered animations with full timeline control</p>
+                    <img src="tool-stacked.png" alt="Timeline and stagger editor" style="width: 100%; border-radius: 4px; margin-top: 8px;">
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Demo -->
+    <div class="motion-section">
+        <div class="motion-section-label">Try It</div>
+        <h2 class="motion-section-title">Interactive Demo</h2>
+        <div class="motion-section-content">
+            <p>
+                The tool is fully functional and interactive. Explore the motion tokens, upload your designs, and see how Qonto's motion system works in practice.
+            </p>
+        </div>
+        
+        <div class="interactive-example">
+            <div class="example-header">
+                <h4 class="example-title">Motion Tokens Inspector</h4>
+                <button class="expand-btn" onclick="toggleMotionExpand(0)">Click to open tool →</button>
+            </div>
+            <div class="iframe-container" id="motionIframeContainer0" style="display: none; height: 800px;">
+                <iframe src="motion-tokens-tool/index.html" frameborder="0" allowfullscreen style="width: 100%; height: 100%; border: none;"></iframe>
             </div>
         </div>
     </div>

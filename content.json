@@ -96,8 +96,7 @@
       "media": {
         "hero": "",
         "grid": []
-      },
-      "cardPreview": ""
+      }
     },
     {
       "id": 4,
@@ -111,8 +110,7 @@
       "media": {
         "hero": "",
         "grid": []
-      },
-      "cardPreview": ""
+      }
     },
     {
       "id": 5,
@@ -126,8 +124,7 @@
       "media": {
         "hero": "",
         "grid": []
-      },
-      "cardPreview": ""
+      }
     },
     {
       "id": 6,
@@ -141,8 +138,7 @@
       "media": {
         "hero": "",
         "grid": []
-      },
-      "cardPreview": ""
+      }
     }
   ],
   "experience": [
