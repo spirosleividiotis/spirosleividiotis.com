@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Motion System Cover</title>
     <style>
         * {
             margin: 0;
@@ -12,97 +11,52 @@
         }
 
         body {
-            background: #141414;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+            background: #000000;
             overflow: hidden;
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
         }
 
         .cover-container {
-            width: 100%;
-            height: 100%;
+            position: relative;
+            width: 100vw;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px;
         }
 
-        .tokens-wrapper {
-            transform: rotate(-6deg);
-            width: 120%;
-            margin-left: -10%;
-        }
-
-        .tokens-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            width: 100%;
-        }
-
-        .token-card {
-            aspect-ratio: 1;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .token-card img {
+        .cover-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(0.8) brightness(0.6);
-            transition: filter 0.4s ease;
+            display: block;
         }
 
-        /* On hover, animate the GIFs */
-        .cover-container:hover .token-card img {
-            filter: grayscale(0) brightness(1);
+        .cover-static {
+            display: block;
         }
 
-        @media (max-width: 768px) {
-            .tokens-wrapper {
-                transform: rotate(-4deg);
-                width: 130%;
-                margin-left: -15%;
-            }
-            
-            .tokens-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
+        .cover-animated {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .cover-container:hover .cover-static {
+            display: none;
+        }
+
+        .cover-container:hover .cover-animated {
+            display: block;
         }
     </style>
 </head>
 <body>
     <div class="cover-container">
-        <div class="tokens-wrapper">
-            <div class="tokens-grid">
-                <div class="token-card">
-                    <img src="motion-system/tokens/Motion tokens/duration.gif" alt="Duration">
-                </div>
-                <div class="token-card">
-                    <img src="motion-system/tokens/Motion tokens/easing.gif" alt="Easing">
-                </div>
-                <div class="token-card">
-                    <img src="motion-system/tokens/Motion tokens/spring.gif" alt="Spring">
-                </div>
-                <div class="token-card">
-                    <img src="motion-system/tokens/Motion tokens/scale.gif" alt="Scale">
-                </div>
-                <div class="token-card">
-                    <img src="motion-system/tokens/Motion tokens/fade.gif" alt="Fade">
-                </div>
-                <div class="token-card">
-                    <img src="motion-system/tokens/Motion tokens/staggered.gif" alt="Stagger">
-                </div>
-            </div>
-        </div>
+        <img src="motion-system-cover-static.png" alt="Motion System Cover" class="cover-image cover-static">
+        <img src="motion-system-cover.gif" alt="Motion System Cover Animated" class="cover-image cover-animated">
     </div>
 </body>
 </html>
