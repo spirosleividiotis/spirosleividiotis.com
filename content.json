@@ -66,6 +66,7 @@
       "password": "spiros2026",
       "customUrl": "motion-system-content.html",
       "bodyText": "",
+      "cardPreview": "motion-system-cover.html",
       "media": {
         "hero": "motion-system-cover.html",
         "grid": []
@@ -80,6 +81,7 @@
       "password": "spiros2026",
       "customUrl": "project-2-tokens-tool.html",
       "bodyText": "",
+      "cardPreview": "tool-cover.html",
       "media": {
         "hero": "tool-cover.html",
         "grid": []
@@ -94,6 +96,7 @@
       "password": "spiros2026",
       "customUrl": "project-3-animation-library.html",
       "bodyText": "",
+      "cardPreview": "lottie-library-cover.html",
       "media": {
         "hero": "lottie-library-cover.html",
         "grid": []
@@ -108,6 +111,7 @@
       "password": "spiros2026",
       "customUrl": "project-4-handoff-process.html",
       "bodyText": "",
+      "cardPreview": "handoff-cover.html",
       "media": {
         "hero": "handoff-cover.html",
         "grid": []

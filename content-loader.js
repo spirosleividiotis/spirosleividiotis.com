@@ -112,11 +112,14 @@ function updateProjects(projects) {
         const hasPreview = project.cardPreview && project.cardPreview.trim();
         const fileExt = hasPreview ? project.cardPreview.split('.').pop().toLowerCase() : '';
         const isVideo = fileExt === 'mp4' || fileExt === 'webm' || fileExt === 'mov';
+        const isHtml = fileExt === 'html';
         
         return `
         <article class="work-card" ${project.passwordProtected ? 'data-password-protected="true"' : ''} data-project-id="${project.id}">
             <div class="work-visual work-color-${index + 1}" style="background: ${hasPreview ? 'transparent' : project.color};">
-                ${hasPreview ? (isVideo ? 
+                ${hasPreview ? (isHtml ?
+                    `<iframe src="${project.cardPreview}" style="width: 100%; height: 100%; border: none; position: absolute; top: 0; left: 0; pointer-events: none;"></iframe>` :
+                    isVideo ? 
                     `<video src="${project.cardPreview}" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;"></video>` :
                     `<img src="${project.cardPreview}" alt="${project.name}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">`) : ''}
                 <div class="project-info" style="position: relative; z-index: 1;">
