@@ -1040,6 +1040,10 @@ function openProjectModal(card) {
     const projectId = card.getAttribute('data-project-id');
     const isPasswordProtected = card.getAttribute('data-password-protected') === 'true';
     
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/75a39076-4f26-46f4-aa78-a1720ba436f3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'script-figma.js:1037',message:'openProjectModal called',data:{projectName,projectId,isPasswordProtected},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H2'})}).catch(()=>{});
+    // #endregion
+    
     // Get project data from window.projectsData (loaded by content-loader.js)
     const projectData = window.projectsData?.find(p => p.id == projectId);
     
