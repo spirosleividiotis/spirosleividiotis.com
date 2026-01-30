@@ -193,10 +193,10 @@
         <h2 class="motion-section-title">Creating at Scale</h2>
         <div class="motion-section-content">
             <p>
-                I <strong>designed and produced 1,000+ Lottie animations</strong> used across Qonto: in-product micro-interactions, website illustrations, onboarding flows, empty states, success feedback. Every animation was optimized for performance, tested across platforms, and ready to ship.
+                I <strong>designed and produced 1,000+ Lottie animations</strong> across Qonto: in-product micro-interactions, website illustrations, onboarding flows, success feedback. Optimized for performance, tested across platforms.
             </p>
             <p>
-                Beyond production, I built the pipeline: established the LottieFiles library structure, defined export standards, and over the past 6 months led the <strong>.json to .lottie migration</strong>—reducing file sizes and improving Android performance. I became the technical owner: format guidelines, compression, cross-platform compatibility, troubleshooting for the team.
+                Built the pipeline: LottieFiles library structure, export standards, and led <strong>JSON → .lottie migration</strong> over 6 months—reducing file sizes, improving Android performance. Technical owner for format guidelines and cross-platform troubleshooting.
             </p>
         </div>
     </div>
@@ -205,41 +205,37 @@
     <div class="motion-section">
         <div class="motion-section-label">Library</div>
         <h2 class="motion-section-title">Selected Work</h2>
-        <div class="motion-section-content">
-            <p>
-                A selection from the library. <strong>Hover on any animation</strong> to focus on it—the others will pause.
-            </p>
-        </div>
         
         <div class="lottie-grid">
             <div class="lottie-card" onmouseenter="focusLottie(0)" onmouseleave="unfocusLottie()">
                 <div class="lottie-container">
-                    <iframe id="lottie-0" src="https://lottie.host/embed/ed51c2a2-e644-4919-8f69-542febb90add/hwrQHwUmZr.json" style="width: 100%; height: 100%; border: none;"></iframe>
+                    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+                    <dotlottie-player src="https://lottie.host/ed51c2a2-e644-4919-8f69-542febb90add/hwrQHwUmZr.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></dotlottie-player>
                 </div>
             </div>
             <div class="lottie-card" onmouseenter="focusLottie(1)" onmouseleave="unfocusLottie()">
                 <div class="lottie-container">
-                    <iframe id="lottie-1" src="https://lottie.host/embed/48b7beb3-de04-4de1-9461-d224c09e2d96/Zbn7Ql9wXk.json" style="width: 100%; height: 100%; border: none;"></iframe>
+                    <dotlottie-player src="https://lottie.host/48b7beb3-de04-4de1-9461-d224c09e2d96/Zbn7Ql9wXk.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></dotlottie-player>
                 </div>
             </div>
             <div class="lottie-card" onmouseenter="focusLottie(2)" onmouseleave="unfocusLottie()">
                 <div class="lottie-container">
-                    <iframe id="lottie-2" src="https://lottie.host/embed/636b9ecc-1fc4-4fb4-a295-a4b2020433e2/7Rt2oGVGYG.json" style="width: 100%; height: 100%; border: none;"></iframe>
+                    <dotlottie-player src="https://lottie.host/636b9ecc-1fc4-4fb4-a295-a4b2020433e2/7Rt2oGVGYG.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></dotlottie-player>
                 </div>
             </div>
             <div class="lottie-card" onmouseenter="focusLottie(3)" onmouseleave="unfocusLottie()">
                 <div class="lottie-container">
-                    <iframe id="lottie-3" src="https://lottie.host/embed/7bfc49fa-fead-4481-b1cd-014469fe60d7/U4BdkvO8Pg.json" style="width: 100%; height: 100%; border: none;"></iframe>
+                    <dotlottie-player src="https://lottie.host/7bfc49fa-fead-4481-b1cd-014469fe60d7/U4BdkvO8Pg.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></dotlottie-player>
                 </div>
             </div>
             <div class="lottie-card" onmouseenter="focusLottie(4)" onmouseleave="unfocusLottie()">
                 <div class="lottie-container">
-                    <iframe id="lottie-4" src="https://lottie.host/embed/b75c0251-8421-43c7-ab12-fe8a5414a070/EqgjRNKMVg.json" style="width: 100%; height: 100%; border: none;"></iframe>
+                    <dotlottie-player src="https://lottie.host/b75c0251-8421-43c7-ab12-fe8a5414a070/EqgjRNKMVg.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></dotlottie-player>
                 </div>
             </div>
             <div class="lottie-card" onmouseenter="focusLottie(5)" onmouseleave="unfocusLottie()">
                 <div class="lottie-container">
-                    <iframe id="lottie-5" src="https://lottie.host/embed/9e16038f-a28e-4181-8d9e-4ee72f2840f8/WxVpCO0tXF.json" style="width: 100%; height: 100%; border: none;"></iframe>
+                    <dotlottie-player src="https://lottie.host/9e16038f-a28e-4181-8d9e-4ee72f2840f8/WxVpCO0tXF.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></dotlottie-player>
                 </div>
             </div>
         </div>
@@ -251,7 +247,7 @@
         <h2 class="motion-section-title">Beyond Individual Files</h2>
         <div class="motion-section-content">
             <p>
-                The library became a <strong>production asset</strong>. Engineers integrated Lotties confidently. Designers referenced existing work before creating new animations. Product teams shipped features with polished motion without custom requests. The .lottie migration improved Android performance and reduced bundle sizes across the entire product.
+                The library became a production asset. Engineers integrated confidently. Designers referenced existing work. .lottie migration improved Android performance across the product.
             </p>
         </div>
     </div>
