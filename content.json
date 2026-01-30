@@ -66,7 +66,7 @@
       "password": "spiros2026",
       "customUrl": "motion-system-content.html",
       "bodyText": "",
-      "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769811654/portfolio/cover-system_mxfbe8.gif",
+      "cardPreview": "motion-system-cover.html",
       "media": {
         "hero": "motion-system-cover.html",
         "grid": []
@@ -96,7 +96,7 @@
       "password": "spiros2026",
       "customUrl": "project-3-animation-library.html",
       "bodyText": "",
-      "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769811735/portfolio/cover-lotties_jdaabq.gif",
+      "cardPreview": "lottie-library-cover.html",
       "media": {
         "hero": "lottie-library-cover.html",
         "grid": []
@@ -111,7 +111,7 @@
       "password": "spiros2026",
       "customUrl": "project-4-handoff-process.html",
       "bodyText": "",
-      "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769811748/portfolio/cover-handoff_o2zqsw.gif",
+      "cardPreview": "handoff-cover.html",
       "media": {
         "hero": "handoff-cover.html",
         "grid": []

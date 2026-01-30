@@ -617,6 +617,7 @@
             <div id="projectsTab" class="tab-content">
                 <div class="section">
                     <h2>Projects</h2>
+                    <p style="color: #666; font-size: 13px; margin-bottom: 12px;">Source of truth: <code>content.json</code>. <button type="button" class="btn-small btn-secondary" onclick="loadContent()" style="margin-left: 8px;">Reload from server</button> to align with deployed content.</p>
                     <div class="items-list" id="projectsList"></div>
                 </div>
             </div>
@@ -979,7 +980,7 @@
         // Load Content
         async function loadContent() {
             try {
-                const response = await fetch('content.json');
+                const response = await fetch('content.json?v=' + Date.now());
                 contentData = await response.json();
                 populateFields();
             } catch (error) {
