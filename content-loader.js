@@ -121,21 +121,6 @@ function updateHeader(header) {
     if (cvLink) cvLink.href = header.cvFile;
 }
 
-// Optimize Cloudinary image URLs for project covers: smaller size + auto format/quality (faster load)
-function optimizeCloudinaryImageUrl(url) {
-    if (!url || typeof url !== 'string') return url;
-    // Match res.cloudinary.com/.../image/upload/ (with optional existing transforms) /v123/...
-    const match = url.match(/^(https:\/\/res\.cloudinary\.com\/[^/]+\/image\/upload\/)(.+)$/);
-    if (!match) return url;
-    const prefix = match[1];
-    const rest = match[2];
-    // If transforms already present (e.g. w_800,c_scale), leave as-is
-    if (/^[whcqfo]_/.test(rest) || /^[0-9]+,[a-z_]+/.test(rest)) return url;
-    // Insert resize + auto format/quality for card size (width 600 is enough for cards)
-    const transforms = 'w_600,c_limit,f_auto,q_auto';
-    return prefix + transforms + '/' + rest;
-}
-
 // Update Projects
 function updateProjects(projects) {
     const workGrid = document.querySelector('.work-grid');
@@ -148,8 +133,7 @@ function updateProjects(projects) {
         const fileExt = pathOnly ? pathOnly.split('.').pop().toLowerCase() : '';
         const isVideo = fileExt === 'mp4' || fileExt === 'webm' || fileExt === 'mov';
         const isHtml = fileExt === 'html';
-        // Use optimized URL for Cloudinary images (GIFs etc.) to reduce weight
-        const previewUrl = hasPreview && !isHtml && !isVideo ? optimizeCloudinaryImageUrl(project.cardPreview) : (project.cardPreview || '');
+        const previewUrl = project.cardPreview || '';
         const lazyLoad = index >= 2 ? ' loading="lazy"' : '';
         return `
         <article class="work-card" ${project.passwordProtected ? 'data-password-protected="true"' : ''} data-project-id="${project.id}">
