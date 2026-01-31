@@ -1171,7 +1171,7 @@ function loadProjectContent(projectData, projectName) {
                 const heroPath = heroFile.split('?')[0].split('#')[0];
                 const heroExt = heroPath.split('.').pop().toLowerCase();
                 
-                if (heroExt === 'mp4' || heroExt === 'webm') {
+                if (heroExt === 'mp4' || heroExt === 'webm' || heroExt === 'mov') {
                     modalHero.innerHTML = `<video src="${heroFile}" autoplay loop muted playsinline></video>`;
                 } else {
                     modalHero.innerHTML = `<img src="${heroFile}" alt="${projectName}">`;
@@ -1185,18 +1185,20 @@ function loadProjectContent(projectData, projectName) {
             modalBodyText.innerHTML = `<p>${projectData.bodyText.replace(/\n/g, '<br>')}</p>`;
         }
         
-        // Grid items
+        // Grid items (masonry: images, GIFs, videos)
         if (projectData.media.grid && projectData.media.grid.length > 0 && modalGrid) {
-            modalGrid.style.display = 'grid';
+            modalGrid.style.display = 'block';
             modalGrid.innerHTML = projectData.media.grid.map(file => {
-                const ext = file.split('.').pop().toLowerCase();
-                const isVideo = ext === 'mp4' || ext === 'webm';
-                
+                const url = (file || '').trim();
+                const pathOnly = url.split('?')[0].split('#')[0];
+                const ext = pathOnly ? pathOnly.split('.').pop().toLowerCase() : '';
+                const isVideo = ext === 'mp4' || ext === 'webm' || ext === 'mov';
+                const escaped = url.replace(/"/g, '&quot;');
                 return `
                     <div class="project-grid-item">
-                        ${isVideo ? 
-                            `<video src="${file}" loop muted playsinline onmouseenter="this.play()" onmouseleave="this.pause(); this.currentTime=0;"></video>` :
-                            `<img src="${file}" alt="${projectName}">`
+                        ${isVideo
+                            ? `<video src="${escaped}" autoplay loop muted playsinline onmouseenter="this.play()" onmouseleave="this.pause(); this.currentTime=0;"></video>`
+                            : `<img src="${escaped}" alt="${(projectName || '').replace(/"/g, '&quot;')}">`
                         }
                     </div>
                 `;

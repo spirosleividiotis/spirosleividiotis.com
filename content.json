@@ -137,12 +137,37 @@
       "company": "",
       "color": "#141414",
       "passwordProtected": false,
-      "customUrl": "project-6-selection.html",
       "bodyText": "",
-      "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769857643/portfolio/projects/cover-designs_gizgqr.gif",
+      "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/w_800,c_scale/v1769857643/portfolio/projects/cover-designs_gizgqr.gif",
       "media": {
-        "hero": "",
-        "grid": []
+        "hero": "https://res.cloudinary.com/dnbmyyc9x/image/upload/w_800,c_scale/v1769857643/portfolio/projects/cover-designs_gizgqr.gif",
+        "grid": [
+          "selection-01.gif",
+          "selection-02.mp4",
+          "selection-03.mp4",
+          "selection-04.gif",
+          "selection-05.webp",
+          "selection-06.gif",
+          "selection-08.gif",
+          "selection-09.mp4",
+          "selection-10.gif",
+          "selection-11.mp4",
+          "selection-12.mp4",
+          "selection-13.mp4",
+          "selection-14.gif",
+          "selection-15.gif",
+          "selection-16.gif",
+          "selection-17.webp",
+          "selection-18.gif",
+          "selection-19.mp4",
+          "selection-20.gif",
+          "selection-21.mp4",
+          "selection-22.gif",
+          "selection-23.webp",
+          "selection-24.gif",
+          "selection-25.gif",
+          "selection-27.gif"
+        ]
       }
     }
   ],

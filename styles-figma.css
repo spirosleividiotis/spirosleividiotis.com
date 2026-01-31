@@ -1281,7 +1281,7 @@ section {
     width: 95%;
     height: 95%;
     background: #000000;
-    border: 0.5px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 0;
     overflow-y: auto;
     overflow-x: hidden;
@@ -1466,36 +1466,49 @@ section {
     text-align: left;
 }
 
-/* Project grid: items follow each asset's dimensions */
+/* Project grid: responsive masonry (column-count), different sizes like puzzle */
 .project-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    align-items: flex-start;
+    column-count: 5;
+    column-gap: 0;
+    max-width: 1200px;
+    margin: 24px auto 0;
+    width: 100%;
 }
 
 .project-grid-item {
-    flex: 0 0 auto;
-    background: #1a1a1a;
-    border-radius: 8px;
+    break-inside: avoid;
+    margin: 0;
+    padding: 0;
+    background: transparent;
     overflow: hidden;
-    position: relative;
     line-height: 0;
+    display: inline-block;
+    width: 100%;
 }
 
 .project-grid-item img,
 .project-grid-item video {
     display: block;
-    width: auto;
+    width: 100%;
     height: auto;
-    max-width: 400px;
-    max-height: 400px;
     object-fit: contain;
     vertical-align: bottom;
 }
 
 .project-grid-item video {
     cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .project-grid {
+        column-count: 4;
+    }
+}
+
+@media (max-width: 600px) {
+    .project-grid {
+        column-count: 2;
+    }
 }
 
 /* Placeholder for empty items */
@@ -1542,6 +1555,7 @@ section {
     overflow: visible;
     display: flex;
     align-items: center;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .about-inner {
@@ -2600,9 +2614,6 @@ section {
         font-size: 14px;
     }
     
-    .project-grid {
-        gap: 20px;
-    }
     .project-grid-item img,
     .project-grid-item video {
         max-width: 100%;

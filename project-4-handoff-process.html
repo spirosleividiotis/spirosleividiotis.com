@@ -121,6 +121,64 @@
         margin-top: 40px;
     }
 
+    /* Toggle: Technical Specs hidden by default, click arrow to expand */
+    #projectModalBody .specs-toggle {
+        border: 1px solid #2a2a2a;
+        border-radius: 6px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.02);
+    }
+    #projectModalBody .specs-toggle:not([open]) .specs-toggle-content {
+        display: none;
+    }
+    #projectModalBody .specs-toggle-summary {
+        list-style: none;
+        cursor: pointer;
+        padding: 14px 20px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #FFFFFF;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        user-select: none;
+        transition: background 0.2s ease;
+    }
+    #projectModalBody .specs-toggle-summary::-webkit-details-marker,
+    #projectModalBody .specs-toggle-summary::marker {
+        display: none;
+    }
+    #projectModalBody .specs-toggle-summary:hover {
+        background: rgba(255, 255, 255, 0.06);
+    }
+    #projectModalBody .specs-toggle-summary .specs-toggle-hint {
+        font-size: 12px;
+        font-weight: 400;
+        color: #757575;
+    }
+    #projectModalBody .specs-toggle-summary .specs-toggle-icon {
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        stroke: #999;
+        transition: transform 0.2s ease;
+    }
+    #projectModalBody .specs-toggle[open] .specs-toggle-icon {
+        transform: rotate(180deg);
+    }
+    #projectModalBody .specs-toggle-content {
+        padding: 0 20px 20px;
+        border-top: 1px solid #1a1a1a;
+    }
+    #projectModalBody .specs-toggle-content .specs-table {
+        margin-top: 20px;
+        margin-bottom: 0;
+    }
+    #projectModalBody .specs-toggle-content .insight {
+        margin-top: 24px;
+    }
+
     #projectModalBody .specs-table {
         width: 100%;
         border-collapse: collapse;
@@ -283,57 +341,62 @@
             </div>
 
             <div class="specs-section">
-                <h4 style="color: #FFFFFF; font-size: 16px; margin-bottom: 16px;">Technical Specs</h4>
-                
-                <table class="specs-table">
-                    <thead>
-                        <tr>
-                            <th>Property</th>
-                            <th>Specification</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Duration</td>
-                            <td>
-                                <span class="token">motion-duration-1500</span> <span class="value">1500ms</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Delay</td>
-                            <td>
-                                <span class="token">motion-delay-0</span> for Step 1<br/>
-                                Step 2: <span class="value">1250ms</span> (starts 250ms before Step 1 ends)<br/>
-                                Step 3: <span class="value">2500ms</span> (same overlap pattern)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Easing</td>
-                            <td>
-                                <strong>Custom cubic-bezier keyframes:</strong><br/>
-                                At start [0ms]: <span class="value">0.67, -0.02, 0.8, 0.15</span><br/>
-                                At mid [600ms]: <span class="value">0.03, 0.07, 0, 1</span><br/>
-                                At end [1500ms]: <span class="value">0, 0.8, 0.2, 1</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Scale</td>
-                            <td>
-                                <strong>Custom scale keyframes:</strong><br/>
-                                At start [0ms]: <span class="value">0%</span><br/>
-                                At mid [600ms]: <span class="value">75%</span><br/>
-                                At end [1500ms]: <span class="value">100%</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="insight">
-                    <div class="insight-label">Multi-Step Rule</div>
-                    <div class="insight-text">
-                        Each step starts <strong>250ms before the previous ends</strong>. Step 1 ends at 1500ms → Step 2 delay = 1250ms.
+                <details class="specs-toggle">
+                    <summary class="specs-toggle-summary">
+                        <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
+                        <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </summary>
+                    <div class="specs-toggle-content">
+                        <table class="specs-table">
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Specification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Duration</td>
+                                    <td>
+                                        <span class="token">motion-duration-1500</span> <span class="value">1500ms</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Delay</td>
+                                    <td>
+                                        <span class="token">motion-delay-0</span> for Step 1<br/>
+                                        Step 2: <span class="value">1250ms</span> (starts 250ms before Step 1 ends)<br/>
+                                        Step 3: <span class="value">2500ms</span> (same overlap pattern)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Easing</td>
+                                    <td>
+                                        <strong>Custom cubic-bezier keyframes:</strong><br/>
+                                        At start [0ms]: <span class="value">0.67, -0.02, 0.8, 0.15</span><br/>
+                                        At mid [600ms]: <span class="value">0.03, 0.07, 0, 1</span><br/>
+                                        At end [1500ms]: <span class="value">0, 0.8, 0.2, 1</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Scale</td>
+                                    <td>
+                                        <strong>Custom scale keyframes:</strong><br/>
+                                        At start [0ms]: <span class="value">0%</span><br/>
+                                        At mid [600ms]: <span class="value">75%</span><br/>
+                                        At end [1500ms]: <span class="value">100%</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="insight">
+                            <div class="insight-label">Multi-Step Rule</div>
+                            <div class="insight-text">
+                                Each step starts <strong>250ms before the previous ends</strong>. Step 1 ends at 1500ms → Step 2 delay = 1250ms.
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </details>
             </div>
         </div>
 
@@ -360,47 +423,53 @@
             </div>
 
             <div class="specs-section">
-                <h4 style="color: #FFFFFF; font-size: 16px; margin-bottom: 16px;">Technical Specs</h4>
-                
-                <table class="specs-table">
-                    <thead>
-                        <tr>
-                            <th>Interaction</th>
-                            <th>Specification</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Click Scale</td>
-                            <td>
-                                <strong>Duration:</strong> <span class="token">motion-duration-300</span> <span class="value">300ms</span><br/>
-                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
-                                <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.6, 1</span><br/>
-                                <strong>Scale:</strong> <span class="value">100%</span> → <span class="value">90%</span> (15 frames) → <span class="value">100%</span> (30 frames)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Hover In<br/>(First Arrow)</td>
-                            <td>
-                                <strong>Duration:</strong> <span class="token">motion-duration-300</span> <span class="value">300ms</span><br/>
-                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
-                                <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.6, 1</span><br/>
-                                <strong>Translate X:</strong> <span class="value">0px → 18px</span><br/>
-                                <strong>Translate Y:</strong> <span class="value">0px → -18px</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Hover In<br/>(Second Arrow)</td>
-                            <td>
-                                <strong>Duration:</strong> <span class="token">motion-duration-300</span> <span class="value">300ms</span><br/>
-                                <strong>Delay:</strong> <span class="token">motion-delay-150</span> <span class="value">150ms</span><br/>
-                                <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.6, 1</span><br/>
-                                <strong>Translate X:</strong> <span class="value">18px → 0px</span><br/>
-                                <strong>Translate Y:</strong> <span class="value">-18px → 0px</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <details class="specs-toggle">
+                    <summary class="specs-toggle-summary">
+                        <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
+                        <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </summary>
+                    <div class="specs-toggle-content">
+                        <table class="specs-table">
+                            <thead>
+                                <tr>
+                                    <th>Interaction</th>
+                                    <th>Specification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Click Scale</td>
+                                    <td>
+                                        <strong>Duration:</strong> <span class="token">motion-duration-300</span> <span class="value">300ms</span><br/>
+                                        <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
+                                        <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.6, 1</span><br/>
+                                        <strong>Scale:</strong> <span class="value">100%</span> → <span class="value">90%</span> (15 frames) → <span class="value">100%</span> (30 frames)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Hover In<br/>(First Arrow)</td>
+                                    <td>
+                                        <strong>Duration:</strong> <span class="token">motion-duration-300</span> <span class="value">300ms</span><br/>
+                                        <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
+                                        <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.6, 1</span><br/>
+                                        <strong>Translate X:</strong> <span class="value">0px → 18px</span><br/>
+                                        <strong>Translate Y:</strong> <span class="value">0px → -18px</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Hover In<br/>(Second Arrow)</td>
+                                    <td>
+                                        <strong>Duration:</strong> <span class="token">motion-duration-300</span> <span class="value">300ms</span><br/>
+                                        <strong>Delay:</strong> <span class="token">motion-delay-150</span> <span class="value">150ms</span><br/>
+                                        <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.6, 1</span><br/>
+                                        <strong>Translate X:</strong> <span class="value">18px → 0px</span><br/>
+                                        <strong>Translate Y:</strong> <span class="value">-18px → 0px</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
             </div>
         </div>
 
@@ -427,37 +496,43 @@
             </div>
 
             <div class="specs-section">
-                <h4 style="color: #FFFFFF; font-size: 16px; margin-bottom: 16px;">Technical Specs</h4>
-                
-                <table class="specs-table">
-                    <thead>
-                        <tr>
-                            <th>Element</th>
-                            <th>Specification</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Upsell Card<br/>Display</td>
-                            <td>
-                                <strong>Duration:</strong> <span class="token">motion-duration-800</span> <span class="value">800ms</span><br/>
-                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
-                                <strong>Easing:</strong> <span class="token">motion-easing-default</span> <span class="value">0.4, 0, 0.2, 1</span><br/>
-                                <strong>Translate Y:</strong> <span class="value">-50px → 0px</span><br/>
-                                <strong>Opacity:</strong> <span class="value">0 → 100</span> (350ms, delay 100ms, linear)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Transactions<br/>Table Push</td>
-                            <td>
-                                <strong>Duration:</strong> <span class="token">motion-duration-800</span> <span class="value">800ms</span><br/>
-                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
-                                <strong>Easing:</strong> <span class="token">motion-easing-default</span> <span class="value">0.4, 0, 0.2, 1</span><br/>
-                                <strong>Translate Y:</strong> <span class="value">0px → 164px</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <details class="specs-toggle">
+                    <summary class="specs-toggle-summary">
+                        <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
+                        <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </summary>
+                    <div class="specs-toggle-content">
+                        <table class="specs-table">
+                            <thead>
+                                <tr>
+                                    <th>Element</th>
+                                    <th>Specification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Upsell Card<br/>Display</td>
+                                    <td>
+                                        <strong>Duration:</strong> <span class="token">motion-duration-800</span> <span class="value">800ms</span><br/>
+                                        <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
+                                        <strong>Easing:</strong> <span class="token">motion-easing-default</span> <span class="value">0.4, 0, 0.2, 1</span><br/>
+                                        <strong>Translate Y:</strong> <span class="value">-50px → 0px</span><br/>
+                                        <strong>Opacity:</strong> <span class="value">0 → 100</span> (350ms, delay 100ms, linear)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Transactions<br/>Table Push</td>
+                                    <td>
+                                        <strong>Duration:</strong> <span class="token">motion-duration-800</span> <span class="value">800ms</span><br/>
+                                        <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
+                                        <strong>Easing:</strong> <span class="token">motion-easing-default</span> <span class="value">0.4, 0, 0.2, 1</span><br/>
+                                        <strong>Translate Y:</strong> <span class="value">0px → 164px</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
             </div>
         </div>
 
@@ -484,36 +559,42 @@
             </div>
 
             <div class="specs-section">
-                <h4 style="color: #FFFFFF; font-size: 16px; margin-bottom: 16px;">Technical Specs</h4>
-                
-                <table class="specs-table">
-                    <thead>
-                        <tr>
-                            <th>Animation</th>
-                            <th>Specification</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Text Position</td>
-                            <td>
-                                <strong>Duration:</strong> <span class="token">motion-duration-300</span> <span class="value">300ms</span><br/>
-                                <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
-                                <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.6, 1</span><br/>
-                                <strong>Translate Y:</strong> <span class="value">187px → 117px</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Text Fade In</td>
-                            <td>
-                                <strong>Duration:</strong> <span class="token">motion-duration-150</span> <span class="value">150ms</span><br/>
-                                <strong>Delay:</strong> <span class="token">motion-delay-150</span> <span class="value">150ms</span><br/>
-                                <strong>Easing:</strong> <span class="token">motion-easing-linear</span><br/>
-                                <strong>Alpha:</strong> <span class="value">0 → 100</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <details class="specs-toggle">
+                    <summary class="specs-toggle-summary">
+                        <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
+                        <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </summary>
+                    <div class="specs-toggle-content">
+                        <table class="specs-table">
+                            <thead>
+                                <tr>
+                                    <th>Animation</th>
+                                    <th>Specification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Text Position</td>
+                                    <td>
+                                        <strong>Duration:</strong> <span class="token">motion-duration-300</span> <span class="value">300ms</span><br/>
+                                        <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
+                                        <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.6, 1</span><br/>
+                                        <strong>Translate Y:</strong> <span class="value">187px → 117px</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Text Fade In</td>
+                                    <td>
+                                        <strong>Duration:</strong> <span class="token">motion-duration-150</span> <span class="value">150ms</span><br/>
+                                        <strong>Delay:</strong> <span class="token">motion-delay-150</span> <span class="value">150ms</span><br/>
+                                        <strong>Easing:</strong> <span class="token">motion-easing-linear</span><br/>
+                                        <strong>Alpha:</strong> <span class="value">0 → 100</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
             </div>
         </div>
 

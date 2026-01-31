@@ -67,6 +67,7 @@
         /* Tabs */
         .tabs {
             display: flex;
+            flex-wrap: wrap;
             gap: 8px;
             margin-bottom: 20px;
             overflow-x: auto;
@@ -459,6 +460,7 @@
                 <button class="tab" onclick="switchTab('about')">About Me</button>
                 <button class="tab" onclick="switchTab('media')">Music & Reel</button>
                 <button class="tab" onclick="switchTab('projects')">Projects</button>
+                <button class="tab" onclick="switchTab('selectionDesigns')">Selection of Designs</button>
                 <button class="tab" onclick="switchTab('motionSystem')">Motion System</button>
                 <button class="tab" onclick="switchTab('experience')">Experience</button>
                 <button class="tab" onclick="switchTab('footer')">Footer</button>
@@ -617,6 +619,24 @@
                     <h2>Projects</h2>
                     <p style="color: #666; font-size: 13px; margin-bottom: 12px;">Source of truth: <code>content.json</code>. <button type="button" class="btn-small btn-secondary" onclick="loadContent()" style="margin-left: 8px;">Reload from server</button> to align with deployed content.</p>
                     <div class="items-list" id="projectsList"></div>
+                </div>
+            </div>
+            
+            <!-- Selection of Designs Tab -->
+            <div id="selectionDesignsTab" class="tab-content">
+                <div style="background: #1a1a1a; padding: 16px; border-radius: 6px; margin-bottom: 20px; border-left: 3px solid #22c55e;">
+                    <strong>🚀 Selection of Designs Editor</strong>
+                    <p style="margin: 8px 0 0 0; color: #999; font-size: 14px;">
+                        Add, remove, or replace each asset in the Selection of Projects grid. Order = display order. Use <strong>Save to Selection Project</strong> then <strong>Save &amp; Publish Live</strong> (or Download JSON) to update the site.
+                    </p>
+                </div>
+                <div class="section">
+                    <h2>Grid assets (images, GIFs, videos)</h2>
+                    <div id="selectionGridList" class="items-list"></div>
+                    <div style="margin-top: 16px;">
+                        <button class="btn-secondary" onclick="addSelectionAsset()">+ Add asset</button>
+                        <button class="btn-primary" onclick="saveSelectionGrid()" style="margin-left: 12px;">Save to Selection Project</button>
+                    </div>
                 </div>
             </div>
             
@@ -873,6 +893,12 @@
                             const index = parseInt(fieldId.replace('common-token-', ''));
                             motionSystemData.step3.commonTokens[index].gif = url;
                             renderCommonTokens();
+                        } else if (fieldId.startsWith('selection-asset-')) {
+                            const index = parseInt(fieldId.replace('selection-asset-', ''), 10);
+                            if (typeof selectionGridAssets !== 'undefined' && selectionGridAssets.length > index) {
+                                selectionGridAssets[index] = url;
+                                renderSelectionGrid();
+                            }
                         } else {
                             // Standard field upload
                             const field = document.getElementById(fieldId);
@@ -893,9 +919,10 @@
             const previewDiv = document.getElementById(`${fieldId}-preview`);
             if (!previewDiv) return;
             
-            // Auto-detect resource type from URL if 'auto'
+            // Auto-detect resource type from URL if 'auto' (strip query/hash for Cloudinary URLs)
             if (resourceType === 'auto' || !resourceType) {
-                const ext = url.split('.').pop().toLowerCase();
+                const pathOnly = (url || '').split('?')[0].split('#')[0];
+                const ext = pathOnly ? pathOnly.split('.').pop().toLowerCase() : '';
                 if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext)) {
                     resourceType = 'image';
                 } else if (['mp4', 'webm', 'mov'].includes(ext)) {
@@ -972,6 +999,12 @@
             // Populate Motion System fields when that tab is opened
             if (tabName === 'motionSystem') {
                 populateMotionSystemFields();
+            }
+            // Load Selection of Designs grid when that tab is opened
+            if (tabName === 'selectionDesigns') {
+                const proj = getSelectionProject();
+                selectionGridAssets = proj && proj.media && Array.isArray(proj.media.grid) ? proj.media.grid.slice() : [];
+                renderSelectionGrid();
             }
         }
         
@@ -1157,7 +1190,7 @@
                             <label>Card Preview Type</label>
                             <select id="project-preview-type-${project.id}" onchange="toggleProjectPreviewType(${project.id})" style="width: 100%; padding: 8px; background: #1a1a1a; border: 1px solid #333; color: #fff; border-radius: 4px;">
                                 <option value="color" ${!project.cardPreview ? 'selected' : ''}>Solid Color</option>
-                                <option value="media" ${project.cardPreview ? 'selected' : ''}>Image/GIF/Video</option>
+                                <option value="media" ${project.cardPreview ? 'selected' : ''}>Image / GIF / WebM / MP4</option>
                             </select>
                         </div>
                         <div class="form-group" id="project-color-group-${project.id}" style="display: ${!project.cardPreview ? 'block' : 'none'};">
@@ -1165,10 +1198,11 @@
                             <input type="text" id="project-color-${project.id}" value="${project.color}" placeholder="#141414">
                         </div>
                         <div class="form-group" id="project-preview-group-${project.id}" style="display: ${project.cardPreview ? 'block' : 'none'};">
-                            <label>Card Preview (Image/GIF/Video)</label>
-                            <div class="file-upload-container">
+<label>Card Preview (Image / GIF / WebM / MP4)</label>
+                                <small style="color: #666; margin-bottom: 8px; display: block;">Use WebM or MP4 for smaller file size than GIF. Paste any Cloudinary URL or upload.</small>
+                                <div class="file-upload-container">
                                 <div class="file-upload-row">
-                                    <input type="text" id="project-preview-${project.id}" value="${project.cardPreview || ''}" placeholder="Paste Cloudinary URL or click Upload" style="flex: 1;">
+                                    <input type="text" id="project-preview-${project.id}" value="${project.cardPreview || ''}" placeholder="Paste Cloudinary URL (image, GIF, WebM, MP4) or click Upload" style="flex: 1;">
                                     <button type="button" class="btn-upload" onclick="uploadFile('project-preview-${project.id}', 'auto')">Upload</button>
                                     <button type="button" class="btn-small" onclick="window.open('https://console.cloudinary.com/console/c-3932f658ea9d31b91b5eafc4127ae1/media_library/folders/home', '_blank')" style="background: #22c55e;">Browse</button>
                                     <button type="button" class="btn-small btn-secondary" onclick="removeFile('project-preview-${project.id}')">Remove</button>
@@ -1197,10 +1231,10 @@
                             </div>
                             
                             <div class="form-group">
-                                <label>Hero Image (optional, wide banner)</label>
+                                <label>Hero (optional, wide banner — Image / GIF / WebM / MP4)</label>
                                 <div class="file-upload-container">
                                     <div class="file-upload-row">
-                                        <input type="text" id="project-hero-${project.id}" value="${project.media.hero || ''}" placeholder="Paste Cloudinary URL or click Upload" style="flex: 1;">
+                                        <input type="text" id="project-hero-${project.id}" value="${project.media.hero || ''}" placeholder="Paste Cloudinary URL (image, GIF, WebM, MP4) or click Upload" style="flex: 1;">
                                         <button type="button" class="btn-upload" onclick="uploadProjectFile(${project.id}, 'hero')">Upload</button>
                                         <button type="button" class="btn-small" onclick="window.open('https://console.cloudinary.com/console/c-3932f658ea9d31b91b5eafc4127ae1/media_library/folders/home', '_blank')" style="background: #22c55e;">Browse</button>
                                         <button type="button" class="btn-small btn-secondary" onclick="clearProjectField(${project.id}, 'hero')">Remove</button>
@@ -1210,13 +1244,14 @@
                             </div>
                             
                             <div class="form-group">
-                                <label>Grid Assets (2-column layout)</label>
+                                <label>Grid assets (images, GIFs, videos)</label>
+                                <small style="color: #666; margin-bottom: 8px; display: block;">Add as many as you want. One URL per line or comma-separated. Responsive masonry grid on the site.</small>
                                 <div class="file-upload-container">
                                     <div class="file-upload-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                                        <button type="button" class="btn-upload" onclick="uploadProjectGridFiles(${project.id})">Upload Multiple Files</button>
+                                        <button type="button" class="btn-upload" onclick="uploadProjectGridFiles(${project.id})">Upload to Cloudinary</button>
                                         <button type="button" class="btn-small" onclick="window.open('https://console.cloudinary.com/console/c-3932f658ea9d31b91b5eafc4127ae1/media_library/folders/home', '_blank')" style="background: #22c55e;">Browse Library</button>
                                     </div>
-                                    <textarea id="project-grid-${project.id}" rows="4" placeholder="Paste URLs (comma-separated) or use Upload..." style="margin-top: 8px;">${(project.media.grid || []).join(', ')}</textarea>
+                                    <textarea id="project-grid-${project.id}" rows="8" placeholder="Paste Cloudinary URLs, one per line or comma-separated..." style="margin-top: 8px;">${(project.media.grid || []).join('\n')}</textarea>
                                     <button type="button" class="btn-small btn-secondary" onclick="clearProjectField(${project.id}, 'grid')" style="margin-top: 8px;">Clear All Grid Assets</button>
                                     <div id="project-grid-${project.id}-preview" class="file-preview"></div>
                                 </div>
@@ -1286,7 +1321,7 @@
             // Update media
             project.media.hero = document.getElementById(`project-hero-${id}`).value.trim();
             const gridValue = document.getElementById(`project-grid-${id}`).value.trim();
-            project.media.grid = gridValue ? gridValue.split(',').map(s => s.trim()).filter(s => s) : [];
+            project.media.grid = gridValue ? gridValue.split(/[\n,]+/).map(s => s.trim()).filter(Boolean) : [];
             
             // CRITICAL: Restore customUrl if it existed (don't let CMS overwrite it)
             if (existingCustomUrl) {
@@ -1596,6 +1631,76 @@
         
         function hideSuccess() {
             document.getElementById('successMessage').classList.remove('show');
+        }
+        
+        // ===================================
+        // SELECTION OF DESIGNS EDITOR (project id 6)
+        // ===================================
+        
+        let selectionGridAssets = [];
+        
+        function getSelectionProject() {
+            return contentData && contentData.projects ? contentData.projects.find(p => p.id === 6) : null;
+        }
+        
+        function escapeAttr(s) {
+            if (!s) return '';
+            return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+        
+        function isVideoUrl(url) {
+            if (!url) return false;
+            const path = url.split('?')[0].split('#')[0];
+            const ext = path ? path.split('.').pop().toLowerCase() : '';
+            return ext === 'mp4' || ext === 'webm' || ext === 'mov';
+        }
+        
+        function renderSelectionGrid() {
+            const list = document.getElementById('selectionGridList');
+            if (!list) return;
+            list.innerHTML = selectionGridAssets.map((url, index) => {
+                const safe = escapeAttr(url);
+                const preview = url ? (isVideoUrl(url)
+                    ? `<video src="${safe}" style="max-width: 80px; max-height: 80px; object-fit: cover;" muted playsinline></video>`
+                    : `<img src="${safe}" style="max-width: 80px; max-height: 80px; object-fit: cover;" alt="">`) : '<span style="color: #666; font-size: 12px;">No asset</span>';
+                return `
+                    <div class="item" style="margin-bottom: 16px; padding: 12px; background: #111; border-radius: 6px; border: 1px solid #2a2a2a;">
+                        <div style="display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap;">
+                            <div style="flex-shrink: 0; width: 80px; height: 80px; background: #1a1a1a; border-radius: 4px; overflow: hidden; display: flex; align-items: center; justify-content: center;">${preview}</div>
+                            <div style="flex: 1; min-width: 200px;">
+                                <input type="text" value="${safe}" onchange="selectionGridAssets[${index}] = this.value; renderSelectionGrid();" placeholder="Paste Cloudinary URL or upload" style="width: 100%; margin-bottom: 8px;">
+                                <div style="display: flex; gap: 8px;">
+                                    <button type="button" class="btn-upload" onclick="uploadFile('selection-asset-${index}', 'auto')">📤 Upload / Replace</button>
+                                    <button type="button" class="btn-danger" onclick="removeSelectionAsset(${index})">🗑️ Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function addSelectionAsset() {
+            selectionGridAssets.push('');
+            renderSelectionGrid();
+        }
+        
+        function removeSelectionAsset(index) {
+            selectionGridAssets.splice(index, 1);
+            renderSelectionGrid();
+        }
+        
+        function saveSelectionGrid() {
+            const proj = getSelectionProject();
+            if (!proj) {
+                alert('Selection of Projects (id 6) not found in content.json.');
+                return;
+            }
+            if (!proj.media) proj.media = { hero: '', grid: [] };
+            proj.media.grid = selectionGridAssets.filter(u => u && u.trim()).map(u => u.trim());
+            const ta = document.getElementById('project-grid-6');
+            if (ta) ta.value = proj.media.grid.join('\n');
+            showSuccess();
         }
         
         // ===================================
