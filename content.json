@@ -57,7 +57,7 @@
     "file": "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769694877/Motion_reel_copy_sfrcru.mp4"
   },
   "analytics": {
-    "script": ""
+    "script": "<!-- Google tag (gtag.js) -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=G-BBHPPJKL50\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n  gtag('config', 'G-BBHPPJKL50');\n</script>"
   },
   "projects": [
     {
