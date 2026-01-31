@@ -746,8 +746,8 @@ section {
     background-image: url('folket.png');
 }
 
-.visual-placeholder[data-visual="qonto"] {
-    background-image: url('qonto.png');
+.visual-placeholder[data-visual="portfolio"] {
+    background-image: url('portfolio.png');
 }
 
 .visual-placeholder[data-visual="delivery-hero"] {

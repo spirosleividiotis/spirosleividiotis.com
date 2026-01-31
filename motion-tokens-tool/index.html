@@ -5,7 +5,7 @@ Tell Cursor agent:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qonto Motion Animation Tool</title>
+    <title>Portfolio Motion Animation Tool</title>
     <style>
         @font-face {
             font-family: 'Polysans Qonto';
@@ -2063,11 +2063,11 @@ Tell Cursor agent:
         
         /* Blue highlight when folder is expanded */
         .folder-icon.open {
-            color: #2081E2; /* Qonto blue */
+            color: #2081E2; /* Portfolio blue */
         }
         
         .folder-icon.open svg path {
-            stroke: #2081E2; /* Qonto blue */
+            stroke: #2081E2; /* Portfolio blue */
         }
         
         .folder-icon:hover {
@@ -2754,7 +2754,7 @@ Tell Cursor agent:
                     <span class="ai-suggestion-text">Recommended animation: </span>
                     <span class="ai-suggestion-pattern"></span>
                 </button>
-                <a href="https://www.notion.so/qonto/Motion-11831ee4c696802d9096fa098a9b9fe0" class="docs-link" target="_blank" rel="noopener noreferrer">Visit Motion System Documentation</a>
+                <a href="https://www.notion.so/portfolio/Motion-11831ee4c696802d9096fa098a9b9fe0" class="docs-link" target="_blank" rel="noopener noreferrer">Visit Motion System Documentation</a>
                 <button class="get-code-btn" onclick="openCodeModal()">Get the code</button>
             </div>
         </div>
@@ -2847,7 +2847,7 @@ Tell Cursor agent:
                 <div class="canvas-container stacked" id="canvasContainer">
                     <div class="empty-state">
                         <div class="empty-state-greeting">
-                            <span>Hello Qontoer</span>
+                            <span>Hello</span>
                             <span class="empty-state-emoji">👋🏼</span>
         </div>
                         <div class="empty-state-dropzone" id="emptyStateDropzone" onclick="document.getElementById('fileInput').click();">
@@ -7011,7 +7011,7 @@ Tell Cursor agent:
             // Check if canvas is empty and show empty state
             if (layers.length === 0) {
                 const container = document.getElementById('canvasContainer');
-                container.innerHTML = '<div class="empty-state"><div class="empty-state-greeting"><span>Hello Qontoer</span><span class="empty-state-emoji">👋🏼</span></div><div class="empty-state-dropzone" id="emptyStateDropzone" onclick="document.getElementById(\'fileInput\').click();"><div class="dropzone-text">Add your images or svg</div><div class="dropzone-subtext">Drag and drop here, or click to browse</div></div></div>';
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-greeting"><span>Hello</span><span class="empty-state-emoji">👋🏼</span></div><div class="empty-state-dropzone" id="emptyStateDropzone" onclick="document.getElementById(\'fileInput\').click();"><div class="dropzone-text">Add your images or svg</div><div class="dropzone-subtext">Drag and drop here, or click to browse</div></div></div>';
                 setupDropzoneHandlers();
             }
         }
@@ -7591,7 +7591,7 @@ Tell Cursor agent:
             // Handle empty state or reselection
             if (layers.length === 0) {
                 const container = document.getElementById('canvasContainer');
-                container.innerHTML = '<div class="empty-state"><div class="empty-state-greeting"><span>Hello Qontoer</span><span class="empty-state-emoji">👋🏼</span></div><div class="empty-state-dropzone" id="emptyStateDropzone" onclick="document.getElementById(\'fileInput\').click();"><div class="dropzone-text">Add your images or svg</div><div class="dropzone-subtext">Drag and drop here, or click to browse</div></div></div>';
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-greeting"><span>Hello</span><span class="empty-state-emoji">👋🏼</span></div><div class="empty-state-dropzone" id="emptyStateDropzone" onclick="document.getElementById(\'fileInput\').click();"><div class="dropzone-text">Add your images or svg</div><div class="dropzone-subtext">Drag and drop here, or click to browse</div></div></div>';
                 setupDropzoneHandlers();
                 document.getElementById('propertiesContent').innerHTML = '';
                 selectedLayerId = null;
@@ -10305,7 +10305,7 @@ Tell Cursor agent:
             if (confirm('This will remove all layers and start fresh. Continue?')) {
                 // Clear all canvas elements
                 const container = document.getElementById('canvasContainer');
-                container.innerHTML = '<div class="empty-state"><div class="empty-state-greeting"><span>Hello Qontoer</span><span class="empty-state-emoji">👋🏼</span></div><div class="empty-state-dropzone" id="emptyStateDropzone" onclick="document.getElementById(\'fileInput\').click();"><div class="dropzone-text">Add your images or svg</div><div class="dropzone-subtext">Drag and drop here, or click to browse</div></div></div>';
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-greeting"><span>Hello</span><span class="empty-state-emoji">👋🏼</span></div><div class="empty-state-dropzone" id="emptyStateDropzone" onclick="document.getElementById(\'fileInput\').click();"><div class="dropzone-text">Add your images or svg</div><div class="dropzone-subtext">Drag and drop here, or click to browse</div></div></div>';
                 setupDropzoneHandlers();
                 
                 // Clear all data
@@ -10844,7 +10844,7 @@ Tell Cursor agent:
                 rulerContainer.appendChild(mark);
             }
             
-            // Color palette from Qonto design tokens (blue shades)
+            // Color palette from Portfolio design tokens (blue shades)
             const timelineColors = [
                 '#C6E6FB', // blue-100
                 '#A8D9F8', // blue-200

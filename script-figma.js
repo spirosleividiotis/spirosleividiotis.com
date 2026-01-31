@@ -245,29 +245,29 @@ function initializeExperience() {
 }
 
 // ===================================
-// QONTO ROLE CYCLING (Click arrows to cycle through roles)
+// PORTFOLIO ROLE CYCLING (Click arrows to cycle through roles)
 // ===================================
 
-function initializeQontoRoles() {
-    console.log('initializeQontoRoles called');
+function initializePortfolioRoles() {
+    console.log('initializePortfolioRoles called');
     
-    const qontoDetail = document.getElementById('qonto');
+    const portfolioDetail = document.getElementById('portfolio');
     
-    if (!qontoDetail) {
-        console.log('Qonto detail not found, will retry on contentLoaded');
+    if (!portfolioDetail) {
+        console.log('Portfolio detail not found, will retry on contentLoaded');
         return;
     }
     
-    console.log('Qonto detail found');
+    console.log('Portfolio detail found');
     
-    const jobTitle = qontoDetail.querySelector('.job-title');
-    const contentWrapper = qontoDetail.querySelector('.experience-content-wrapper');
-    const description = qontoDetail.querySelector('.experience-description');
-    const yearStart = qontoDetail.querySelector('.timeline-year');
-    const yearEnd = qontoDetail.querySelector('.timeline-end');
-    const roleIndicator = qontoDetail.querySelector('.role-indicator');
-    const leftArrow = qontoDetail.querySelector('.role-arrow-left');
-    const rightArrow = qontoDetail.querySelector('.role-arrow-right');
+    const jobTitle = portfolioDetail.querySelector('.job-title');
+    const contentWrapper = portfolioDetail.querySelector('.experience-content-wrapper');
+    const description = portfolioDetail.querySelector('.experience-description');
+    const yearStart = portfolioDetail.querySelector('.timeline-year');
+    const yearEnd = portfolioDetail.querySelector('.timeline-end');
+    const roleIndicator = portfolioDetail.querySelector('.role-indicator');
+    const leftArrow = portfolioDetail.querySelector('.role-arrow-left');
+    const rightArrow = portfolioDetail.querySelector('.role-arrow-right');
     
     if (!leftArrow || !rightArrow) {
         console.log('Arrows not found');
@@ -276,8 +276,8 @@ function initializeQontoRoles() {
     
     console.log('Arrows found, attaching listeners');
     
-    // Qonto role data (from experience data if available)
-    const qontoRoles = window.experienceData?.find(e => e.id === 'qonto')?.roles || [
+    // Portfolio role data (from experience data if available)
+    const portfolioRoles = window.experienceData?.find(e => e.id === 'portfolio')?.roles || [
         {
             title: "Staff Motion Designer - Design System",
             description: "Own motion system principles, patterns, and docs. Partner with DS + engineering on implementation and QA. Drive adoption with reusable assets and handoff standards.",
@@ -295,17 +295,17 @@ function initializeQontoRoles() {
         }
     ];
     
-    let currentQontoRoleIndex = 0;
+    let currentPortfolioRoleIndex = 0;
     
     function updateRoleArrows() {
         // Update arrow states
-        if (currentQontoRoleIndex === 0) {
+        if (currentPortfolioRoleIndex === 0) {
             leftArrow.classList.add('inactive');
         } else {
             leftArrow.classList.remove('inactive');
         }
         
-        if (currentQontoRoleIndex === qontoRoles.length - 1) {
+        if (currentPortfolioRoleIndex === portfolioRoles.length - 1) {
             rightArrow.classList.add('inactive');
         } else {
             rightArrow.classList.remove('inactive');
@@ -314,36 +314,36 @@ function initializeQontoRoles() {
     
     // Update references for updateRoleArrows
     const updateRoleArrowsLocal = () => {
-        const freshLeftArrow = qontoDetail.querySelector('.role-arrow-left');
-        const freshRightArrow = qontoDetail.querySelector('.role-arrow-right');
+        const freshLeftArrow = portfolioDetail.querySelector('.role-arrow-left');
+        const freshRightArrow = portfolioDetail.querySelector('.role-arrow-right');
         
-        if (currentQontoRoleIndex === 0) {
+        if (currentPortfolioRoleIndex === 0) {
             freshLeftArrow?.classList.add('inactive');
         } else {
             freshLeftArrow?.classList.remove('inactive');
         }
         
-        if (currentQontoRoleIndex === qontoRoles.length - 1) {
+        if (currentPortfolioRoleIndex === portfolioRoles.length - 1) {
             freshRightArrow?.classList.add('inactive');
         } else {
             freshRightArrow?.classList.remove('inactive');
         }
     };
     
-    // Cycle through Qonto roles
-    function cycleQontoRole(direction) {
-        console.log(`Cycling role: ${direction}, current index: ${currentQontoRoleIndex}`);
+    // Cycle through Portfolio roles
+    function cyclePortfolioRole(direction) {
+        console.log(`Cycling role: ${direction}, current index: ${currentPortfolioRoleIndex}`);
         
         // Update index
-        if (direction === 'next' && currentQontoRoleIndex < qontoRoles.length - 1) {
-            currentQontoRoleIndex++;
-        } else if (direction === 'prev' && currentQontoRoleIndex > 0) {
-            currentQontoRoleIndex--;
+        if (direction === 'next' && currentPortfolioRoleIndex < portfolioRoles.length - 1) {
+            currentPortfolioRoleIndex++;
+        } else if (direction === 'prev' && currentPortfolioRoleIndex > 0) {
+            currentPortfolioRoleIndex--;
         } else {
             return;
         }
         
-        const role = qontoRoles[currentQontoRoleIndex];
+        const role = portfolioRoles[currentPortfolioRoleIndex];
         
         // Fade out only the text content
         if (jobTitle) jobTitle.style.opacity = '0';
@@ -355,7 +355,7 @@ function initializeQontoRoles() {
             if (description) description.textContent = role.description;
             if (yearStart) yearStart.textContent = role.period.start;
             if (yearEnd) yearEnd.textContent = role.period.end;
-            if (roleIndicator) roleIndicator.textContent = `${currentQontoRoleIndex + 1}/${qontoRoles.length}`;
+            if (roleIndicator) roleIndicator.textContent = `${currentPortfolioRoleIndex + 1}/${portfolioRoles.length}`;
             
             // Update arrows
             updateRoleArrowsLocal();
@@ -376,19 +376,19 @@ function initializeQontoRoles() {
     newLeftArrow.addEventListener('click', (e) => {
         console.log('Left arrow clicked');
         e.stopPropagation();
-        cycleQontoRole('prev');
+        cyclePortfolioRole('prev');
     });
     
     newRightArrow.addEventListener('click', (e) => {
         console.log('Right arrow clicked');
         e.stopPropagation();
-        cycleQontoRole('next');
+        cyclePortfolioRole('next');
     });
     
     // Initialize arrow states
     updateRoleArrowsLocal();
     
-    console.log('Qonto roles initialized successfully');
+    console.log('Portfolio roles initialized successfully');
 }
 
 // ===================================
@@ -482,8 +482,8 @@ function cycleProjectImage(card) {
     projectInfo.classList.add('hidden');
     projectImageIndices[projectName] = (projectImageIndices[projectName] + 1) % 3;
     
-    // Special handling for Qonto Motion System (first project)
-    if (projectName === 'Qonto Motion System') {
+    // Special handling for Portfolio Motion System (first project)
+    if (projectName === 'Portfolio Motion System') {
         if (projectImageIndices[projectName] === 1) {
             // Second image: gray shape in white
             workVisual.style.background = '#FFFFFF';
@@ -1280,7 +1280,7 @@ function initializeAll() {
     initializeCursorHoverEffects();
     initializeModalsAndPlayers();
     initializeExperience();
-    initializeQontoRoles();
+    initializePortfolioRoles();
     initializeProjectCursors();
 }
 
@@ -1296,7 +1296,7 @@ window.addEventListener('contentLoaded', () => {
     setTimeout(() => {
         console.log('Running reinitialization now');
         initializeExperience();
-        initializeQontoRoles();
+        initializePortfolioRoles();
         initializeProjectCursors();
     }, 300);
 });

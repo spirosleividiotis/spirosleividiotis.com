@@ -45,7 +45,7 @@
     "photo": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694889/photo_vf6t7t.jpg",
     "bio": [
       "I'm Spiros, a Staff Motion Designer based in Amsterdam, Netherlands, working at the intersection of product design, animation, and design systems. I use motion as a functional tool—to clarify interactions, reinforce hierarchy, and improve usability at scale.",
-      "Currently working remotely at Qonto, I collaborate closely with product designers and engineers on product experiences and design systems. I focus on building reusable, well-documented motion patterns that teams can confidently use across complex products.",
+      "Currently working remotely at Portfolio, I collaborate closely with product designers and engineers on product experiences and design systems. I focus on building reusable, well-documented motion patterns that teams can confidently use across complex products.",
       "Outside of work, I spend a lot of time cycling and hanging out with Finn, my Westie—who has strong opinions about walk schedules and absolutely none about motion design. I care deeply about craft, consistency, and pragmatism, and I believe great motion should feel invisible: intentional, purposeful, and grounded in real user needs."
     ]
   },
@@ -59,8 +59,8 @@
   "projects": [
     {
       "id": 1,
-      "name": "Qonto Motion System",
-      "company": "Qonto",
+      "name": "Portfolio Motion System",
+      "company": "Portfolio",
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
@@ -68,14 +68,14 @@
       "bodyText": "",
       "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769884563/portfolio/cover-system_bja2ln.gif",
       "media": {
-        "hero": "qonto-ios-cover.html",
+        "hero": "portfolio-ios-cover.html",
         "grid": []
       }
     },
     {
       "id": 2,
       "name": "Motion Tokens Inspector",
-      "company": "Qonto",
+      "company": "Portfolio",
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
@@ -90,7 +90,7 @@
     {
       "id": 3,
       "name": "Animation Library at Scale",
-      "company": "Qonto",
+      "company": "Portfolio",
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
@@ -105,7 +105,7 @@
     {
       "id": 4,
       "name": "Motion Handoff & Implementation",
-      "company": "Qonto",
+      "company": "Portfolio",
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
@@ -173,9 +173,9 @@
   ],
   "experience": [
     {
-      "id": "qonto",
-      "company": "Qonto",
-      "image": "experience-qonto.png",
+      "id": "portfolio",
+      "company": "Portfolio",
+      "image": "experience-portfolio.png",
       "roles": [
         {
           "title": "Staff Motion Designer - Design System",

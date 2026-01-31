@@ -130,7 +130,7 @@ The CMS has 7 tabs for editing different sections:
 - **Documents:** PDF
 
 ### Tips:
-- Use descriptive filenames: `qonto-project-1.jpg` instead of `image1.jpg`
+- Use descriptive filenames: `portfolio-project-1.jpg` instead of `image1.jpg`
 - Keep file sizes reasonable for web (compress images/videos)
 - Supported formats:
   - Images: JPG, PNG, GIF, WebP
