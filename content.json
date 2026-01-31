@@ -133,8 +133,8 @@
         "hero": "",
         "grid": [],
         "videos": [
-          "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769888713/portfolio/1920x1080_Logo_Animation_8_sicpwe.mp4",
-          "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769888705/portfolio/1920x1080_Logo_Appscreen_igsozd.mp4",
+          "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769888741/portfolio/1920x1080_Logo_Animation_8_fo3knv.mp4",
+          "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769888749/portfolio/1920x1080_Logo_Appscreen_rjxqkk.mp4",
           "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769888578/portfolio/Flink_Splashscreen_1080x1350_u5spdt.mp4"
         ]
       },
@@ -150,33 +150,7 @@
       "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/w_800,c_scale/v1769857643/portfolio/projects/cover-designs_gizgqr.gif",
       "media": {
         "hero": "",
-        "grid": [
-          "selection-01.gif",
-          "selection-02.mp4",
-          "selection-03.mp4",
-          "selection-04.gif",
-          "selection-05.webp",
-          "selection-06.gif",
-          "selection-08.gif",
-          "selection-09.mp4",
-          "selection-10.gif",
-          "selection-11.mp4",
-          "selection-12.mp4",
-          "selection-13.mp4",
-          "selection-14.gif",
-          "selection-15.gif",
-          "selection-16.gif",
-          "selection-17.webp",
-          "selection-18.gif",
-          "selection-19.mp4",
-          "selection-20.gif",
-          "selection-21.mp4",
-          "selection-22.gif",
-          "selection-23.webp",
-          "selection-24.gif",
-          "selection-25.gif",
-          "selection-27.gif"
-        ]
+        "grid": []
       }
     }
   ],
