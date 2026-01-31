@@ -1165,9 +1165,19 @@ function loadProjectContent(projectData, projectName) {
                 if (modalBodyText) {
                     modalBodyText.style.display = 'block';
                     modalBodyText.innerHTML = html;
-                    // Fill Brand Guidelines (project 5) video placeholders from CMS
-                    if (projectData.id === 5 && projectData.media && Array.isArray(projectData.media.videos)) {
-                        fillBrandVideos(modalBodyText, projectData.media.videos);
+                    // Brand Guidelines (project 5): always fetch content.json so live site shows latest videos (avoids stale projectsData / CDN cache)
+                    if (projectData.id === 5) {
+                        fetch('content.json?v=' + Date.now())
+                            .then(r => r.json())
+                            .then(content => {
+                                const proj = content.projects && content.projects.find(p => p.id === 5);
+                                const videos = proj && proj.media && Array.isArray(proj.media.videos) ? proj.media.videos : [];
+                                fillBrandVideos(modalBodyText, videos);
+                            })
+                            .catch(() => {
+                                const fallback = projectData.media && Array.isArray(projectData.media.videos) ? projectData.media.videos : [];
+                                fillBrandVideos(modalBodyText, fallback);
+                            });
                     }
                 }
             })
