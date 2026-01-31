@@ -3,16 +3,18 @@ description: Always deploy (commit and push) after making code or content change
 alwaysApply: true
 ---
 
-# Deploy After Changes
+# Always Push Changes
 
-After making any code or content changes to this portfolio project:
+**You must always push after making changes.** The user has requested that changes are always pushed. Do not finish a task that modified files without deploying.
+
+After any code or content changes:
 
 1. **Stage** the changed files: `git add <files>` (or `git add -A` for everything).
 2. **Commit** with a clear message: `git commit -m "Brief description of changes"`.
-3. **Push** to deploy: `git push origin main`.
+3. **Push**: `git push origin main`.
 
-Do this automatically at the end of the task. Do not wait for the user to ask to deploy.
+Do this as part of the same task, right after your edits. Do not wait for the user to ask.
 
-If the push is rejected (remote has new commits), pull with rebase first: `git pull --rebase origin main`, resolve any conflicts, then push again.
+If push is rejected (remote has new commits): run `git pull --rebase origin main`, resolve any conflicts if needed, then `git push origin main` again.
 
-Do not skip deployment unless the user explicitly says not to deploy or only to make local changes.
+Only skip if the user explicitly says "do not push" or "local changes only."
