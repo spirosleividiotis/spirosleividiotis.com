@@ -66,7 +66,7 @@
       "password": "spiros2026",
       "customUrl": "motion-system-content.html",
       "bodyText": "",
-      "cardPreview": "qonto-ios-cover.html",
+      "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769884563/portfolio/cover-system_bja2ln.gif",
       "media": {
         "hero": "qonto-ios-cover.html",
         "grid": []
@@ -143,8 +143,7 @@
       "media": {
         "hero": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769857643/portfolio/projects/cover-designs_gizgqr.gif",
         "grid": []
-      },
-      "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769857643/portfolio/projects/cover-designs_gizgqr.gif"
+      }
     }
   ],
   "experience": [
