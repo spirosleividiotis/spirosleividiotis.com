@@ -1123,6 +1123,29 @@ function openProjectModal(card) {
     document.body.classList.add('project-modal-open');
 }
 
+function fillBrandVideos(container, videos) {
+    if (!container || !Array.isArray(videos)) return;
+    [0, 1, 2].forEach(index => {
+        const el = container.querySelector('#brand-video-' + index);
+        if (!el) return;
+        const url = (videos[index] || '').trim();
+        if (!url) {
+            const label = el.querySelector('.brand-placeholder-label') ? el.querySelector('.brand-placeholder-label').textContent : 'Add video in CMS';
+            el.innerHTML = '<span class="brand-placeholder-label">' + (['Logo Animation', 'Endscreen Animation', 'Splashscreen Animation'][index]) + '</span>';
+            return;
+        }
+        const pathOnly = url.split('?')[0].split('#')[0];
+        const ext = pathOnly ? pathOnly.split('.').pop().toLowerCase() : '';
+        const isVideo = ext === 'mp4' || ext === 'webm' || ext === 'mov';
+        const escaped = url.replace(/"/g, '&quot;');
+        if (isVideo) {
+            el.innerHTML = '<video src="' + escaped + '" controls loop muted playsinline style="width:100%;height:100%;object-fit:contain;"></video>';
+        } else {
+            el.innerHTML = '<img src="' + escaped + '" alt="" style="width:100%;height:100%;object-fit:contain;">';
+        }
+    });
+}
+
 function loadProjectContent(projectData, projectName) {
     const modalHero = document.getElementById('projectHero');
     const modalBodyText = document.getElementById('projectBodyText');
@@ -1142,6 +1165,10 @@ function loadProjectContent(projectData, projectName) {
                 if (modalBodyText) {
                     modalBodyText.style.display = 'block';
                     modalBodyText.innerHTML = html;
+                    // Fill Brand Guidelines (project 5) video placeholders from CMS
+                    if (projectData.id === 5 && projectData.media && Array.isArray(projectData.media.videos)) {
+                        fillBrandVideos(modalBodyText, projectData.media.videos);
+                    }
                 }
             })
             .catch(error => {

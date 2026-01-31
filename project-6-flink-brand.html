@@ -79,6 +79,23 @@
         color: #666;
         font-size: 14px;
         margin-top: 16px;
+        overflow: hidden;
+    }
+    #projectModalBody .brand-placeholder:has(video),
+    #projectModalBody .brand-placeholder:has(img) {
+        border-style: solid;
+        border-color: rgba(255, 255, 255, 0.1);
+        padding: 0;
+    }
+    #projectModalBody .brand-placeholder video,
+    #projectModalBody .brand-placeholder img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+    }
+    #projectModalBody .brand-placeholder-label {
+        color: #666;
     }
 
     #projectModalBody .deliverable-title {
@@ -132,8 +149,8 @@
             <p style="font-size: 14px; color: #999; margin-bottom: 16px;">
                 A quick, energetic reveal for brand moments—ads, presentations, app launches. The animation reinforces Flink's speed and energy without overstaying its welcome.
             </p>
-            <div class="brand-placeholder">
-                [Flink Logo Animation]
+            <div class="brand-placeholder brand-video" id="brand-video-0" data-index="0">
+                <span class="brand-placeholder-label">Logo Animation</span>
             </div>
         </div>
 
@@ -143,8 +160,8 @@
             <p style="font-size: 14px; color: #999; margin-bottom: 16px;">
                 A satisfying, conclusive animation shown after order placement. Communicates success, builds anticipation, and reassures the user that their order is on its way.
             </p>
-            <div class="brand-placeholder">
-                [Endscreen Animation]
+            <div class="brand-placeholder brand-video" id="brand-video-1" data-index="1">
+                <span class="brand-placeholder-label">Endscreen Animation</span>
             </div>
         </div>
 
@@ -154,8 +171,8 @@
             <p style="font-size: 14px; color: #999; margin-bottom: 16px;">
                 An optimized launch animation that loads instantly and feels fast—even during network delays. Reinforces brand identity without creating perceived slowness.
             </p>
-            <div class="brand-placeholder">
-                [Splashscreen Animation]
+            <div class="brand-placeholder brand-video" id="brand-video-2" data-index="2">
+                <span class="brand-placeholder-label">Splashscreen Animation</span>
             </div>
         </div>
     </div>

@@ -461,6 +461,7 @@
                 <button class="tab" onclick="switchTab('media')">Music & Reel</button>
                 <button class="tab" onclick="switchTab('projects')">Projects</button>
                 <button class="tab" onclick="switchTab('selectionDesigns')">Selection of Designs</button>
+                <button class="tab" onclick="switchTab('brandGuidelines')">Brand Guidelines</button>
                 <button class="tab" onclick="switchTab('motionSystem')">Motion System</button>
                 <button class="tab" onclick="switchTab('experience')">Experience</button>
                 <button class="tab" onclick="switchTab('footer')">Footer</button>
@@ -650,6 +651,23 @@
                     <div style="margin-top: 16px;">
                         <button class="btn-secondary" onclick="addSelectionAsset()">+ Add asset</button>
                         <button class="btn-primary" onclick="saveSelectionGrid()" style="margin-left: 12px;">Save to Selection Project</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Brand Guidelines Tab (Project 5 - Flink) -->
+            <div id="brandGuidelinesTab" class="tab-content">
+                <div style="background: #1a1a1a; padding: 16px; border-radius: 6px; margin-bottom: 20px; border-left: 3px solid #f59e0b;">
+                    <strong>🚀 Brand Guidelines Editor</strong>
+                    <p style="margin: 8px 0 0 0; color: #999; font-size: 14px;">
+                        Add video URLs for the three placeholders in the Brand Guidelines (Flink) project: Logo Animation, Endscreen, Splashscreen. Use <strong>Save to Brand Project</strong> then <strong>Save &amp; Publish Live</strong> (or Download JSON) to update the site.
+                    </p>
+                </div>
+                <div class="section">
+                    <h2>Deliverable videos (Logo, Endscreen, Splashscreen)</h2>
+                    <div id="brandVideosList" class="items-list"></div>
+                    <div style="margin-top: 16px;">
+                        <button class="btn-primary" onclick="saveBrandVideos()">Save to Brand Project</button>
                     </div>
                 </div>
             </div>
@@ -913,6 +931,12 @@
                                 selectionGridAssets[index] = url;
                                 renderSelectionGrid();
                             }
+                        } else if (fieldId.startsWith('brand-video-')) {
+                            const index = parseInt(fieldId.replace('brand-video-', ''), 10);
+                            if (typeof brandVideos !== 'undefined' && brandVideos.length > index) {
+                                brandVideos[index] = url;
+                                renderBrandVideos();
+                            }
                         } else {
                             // Standard field upload
                             const field = document.getElementById(fieldId);
@@ -1019,6 +1043,12 @@
                 const proj = getSelectionProject();
                 selectionGridAssets = proj && proj.media && Array.isArray(proj.media.grid) ? proj.media.grid.slice() : [];
                 renderSelectionGrid();
+            }
+            if (tabName === 'brandGuidelines') {
+                const proj = getBrandProject();
+                const v = proj && proj.media && Array.isArray(proj.media.videos) ? proj.media.videos.slice() : ['', '', ''];
+                brandVideos = [v[0] || '', v[1] || '', v[2] || ''];
+                renderBrandVideos();
             }
         }
         
@@ -1718,6 +1748,51 @@
             proj.media.grid = selectionGridAssets.filter(u => u && u.trim()).map(u => u.trim());
             const ta = document.getElementById('project-grid-6');
             if (ta) ta.value = proj.media.grid.join('\n');
+            showSuccess();
+        }
+        
+        // ===================================
+        // BRAND GUIDELINES EDITOR (project id 5 - Flink)
+        // ===================================
+        
+        let brandVideos = ['', '', ''];
+        const BRAND_VIDEO_LABELS = ['Logo Animation', 'Order Confirmation Endscreen', 'App Splashscreen'];
+        
+        function getBrandProject() {
+            return contentData && contentData.projects ? contentData.projects.find(p => p.id === 5) : null;
+        }
+        
+        function renderBrandVideos() {
+            const list = document.getElementById('brandVideosList');
+            if (!list) return;
+            list.innerHTML = brandVideos.map((url, index) => {
+                const safe = escapeAttr(url);
+                const preview = url ? (isVideoUrl(url)
+                    ? `<video src="${safe}" style="max-width: 80px; max-height: 80px; object-fit: cover;" muted playsinline></video>`
+                    : `<img src="${safe}" style="max-width: 80px; max-height: 80px; object-fit: cover;" alt="">`) : '<span style="color: #666; font-size: 12px;">No video</span>';
+                return `
+                    <div class="item" style="margin-bottom: 16px; padding: 12px; background: #111; border-radius: 6px; border: 1px solid #2a2a2a;">
+                        <div style="display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap;">
+                            <div style="flex-shrink: 0; width: 80px; height: 80px; background: #1a1a1a; border-radius: 4px; overflow: hidden; display: flex; align-items: center; justify-content: center;">${preview}</div>
+                            <div style="flex: 1; min-width: 200px;">
+                                <div style="font-weight: 500; margin-bottom: 8px; color: #fff;">${BRAND_VIDEO_LABELS[index]}</div>
+                                <input type="text" value="${safe}" onchange="brandVideos[${index}] = this.value; renderBrandVideos();" placeholder="Paste Cloudinary URL or upload" style="width: 100%; margin-bottom: 8px;">
+                                <button type="button" class="btn-upload" onclick="uploadFile('brand-video-${index}', 'auto')">📤 Upload / Replace</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function saveBrandVideos() {
+            const proj = getBrandProject();
+            if (!proj) {
+                alert('Brand Guidelines (project 5) not found in content.json.');
+                return;
+            }
+            if (!proj.media) proj.media = { hero: '', grid: [], videos: [] };
+            proj.media.videos = brandVideos.map(u => (u || '').trim());
             showSuccess();
         }
         

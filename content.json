@@ -131,7 +131,8 @@
       "bodyText": "",
       "media": {
         "hero": "",
-        "grid": []
+        "grid": [],
+        "videos": ["", "", ""]
       }
     },
     {
