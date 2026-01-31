@@ -933,6 +933,7 @@
                             if (typeof brandVideos !== 'undefined' && brandVideos.length > index) {
                                 brandVideos[index] = url;
                                 renderBrandVideos();
+                                if (typeof syncBrandVideosToContentData === 'function') syncBrandVideosToContentData();
                             }
                         } else {
                             // Standard field upload
@@ -1594,14 +1595,23 @@
             contentData.footer.logo = document.getElementById('footerLogo').value;
             contentData.footer.year = document.getElementById('footerYear').value;
             
-            // Brand Guidelines (project 5): read from DOM so no separate "Save to Brand Project" needed
+            // Brand Guidelines (project 5): read from DOM and in-memory so assets are never lost
             const brandProj = contentData.projects && contentData.projects.find(p => p.id === 5);
             if (brandProj) {
                 const brandList = document.getElementById('brandVideosList');
                 const brandInputs = brandList ? brandList.querySelectorAll('input[type="text"]') : [];
-                const brandVals = Array.from(brandInputs).map(inp => (inp.value || '').trim());
+                const fromDom = Array.from(brandInputs).map(inp => (inp.value || '').trim());
+                // Prefer DOM (typed/pasted), fallback to brandVideos (e.g. just uploaded, or tab not visible)
+                const videos = [
+                    (fromDom[0] || '').trim() || (brandVideos[0] || '').trim(),
+                    (fromDom[1] || '').trim() || (brandVideos[1] || '').trim(),
+                    (fromDom[2] || '').trim() || (brandVideos[2] || '').trim()
+                ];
+                brandVideos[0] = videos[0];
+                brandVideos[1] = videos[1];
+                brandVideos[2] = videos[2];
                 if (!brandProj.media) brandProj.media = { hero: '', grid: [], videos: [] };
-                brandProj.media.videos = [brandVals[0] || '', brandVals[1] || '', brandVals[2] || ''];
+                brandProj.media.videos = [videos[0], videos[1], videos[2]];
             }
             
             // Selection of Designs (project 6): read from DOM so no separate "Save to Selection Project" needed
@@ -1776,6 +1786,13 @@
             return contentData && contentData.projects ? contentData.projects.find(p => p.id === 5) : null;
         }
         
+        function syncBrandVideosToContentData() {
+            const proj = getBrandProject();
+            if (!proj || typeof brandVideos === 'undefined') return;
+            if (!proj.media) proj.media = { hero: '', grid: [], videos: [] };
+            proj.media.videos = brandVideos.slice();
+        }
+        
         function renderBrandVideos() {
             const list = document.getElementById('brandVideosList');
             if (!list) return;
@@ -1790,7 +1807,7 @@
                             <div style="flex-shrink: 0; width: 80px; height: 80px; background: #1a1a1a; border-radius: 4px; overflow: hidden; display: flex; align-items: center; justify-content: center;">${preview}</div>
                             <div style="flex: 1; min-width: 200px;">
                                 <div style="font-weight: 500; margin-bottom: 8px; color: #fff;">${BRAND_VIDEO_LABELS[index]}</div>
-                                <input type="text" value="${safe}" onchange="brandVideos[${index}] = this.value; renderBrandVideos();" placeholder="Paste Cloudinary URL or upload" style="width: 100%; margin-bottom: 8px;">
+                                <input type="text" value="${safe}" onchange="brandVideos[${index}] = this.value; renderBrandVideos(); syncBrandVideosToContentData();" placeholder="Paste Cloudinary URL or upload" style="width: 100%; margin-bottom: 8px;">
                                 <button type="button" class="btn-upload" onclick="uploadFile('brand-video-${index}', 'auto')">📤 Upload / Replace</button>
                             </div>
                         </div>
