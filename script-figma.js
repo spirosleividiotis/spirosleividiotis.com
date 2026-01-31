@@ -1139,7 +1139,7 @@ function fillBrandVideos(container, videos) {
         const isVideo = ext === 'mp4' || ext === 'webm' || ext === 'mov';
         const escaped = url.replace(/"/g, '&quot;');
         if (isVideo) {
-            el.innerHTML = '<video src="' + escaped + '" controls loop muted playsinline style="width:100%;height:100%;object-fit:contain;"></video>';
+            el.innerHTML = '<video src="' + escaped + '" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:contain;"></video>';
         } else {
             el.innerHTML = '<img src="' + escaped + '" alt="" style="width:100%;height:100%;object-fit:contain;">';
         }
