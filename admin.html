@@ -1041,6 +1041,7 @@
                 const proj = getSelectionProject();
                 selectionGridAssets = proj && proj.media && Array.isArray(proj.media.grid) ? proj.media.grid.slice() : [];
                 renderSelectionGrid();
+                window._selectionTabLoaded = true; // so Publish only overwrites grid when user has opened this tab
             }
             if (tabName === 'brandGuidelines') {
                 const proj = getBrandProject();
@@ -1614,9 +1615,9 @@
                 brandProj.media.videos = [videos[0], videos[1], videos[2]];
             }
             
-            // Selection of Designs (project 6): read from DOM so no separate "Save to Selection Project" needed
+            // Selection of Designs (project 6): only overwrite grid if user opened that tab this session (avoid wiping grid when they didn't)
             const selProj = contentData.projects && contentData.projects.find(p => p.id === 6);
-            if (selProj && typeof selectionGridAssets !== 'undefined') {
+            if (selProj && window._selectionTabLoaded && typeof selectionGridAssets !== 'undefined') {
                 if (!selProj.media) selProj.media = { hero: '', grid: [] };
                 selProj.media.grid = selectionGridAssets.slice();
             }
