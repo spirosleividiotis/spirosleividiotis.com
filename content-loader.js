@@ -110,7 +110,9 @@ function updateProjects(projects) {
     
     workGrid.innerHTML = projects.map((project, index) => {
         const hasPreview = project.cardPreview && project.cardPreview.trim();
-        const fileExt = hasPreview ? project.cardPreview.split('.').pop().toLowerCase() : '';
+        // Strip query/hash for extension (e.g. Cloudinary URLs) so .gif?x=y is treated as image
+        const pathOnly = hasPreview ? project.cardPreview.split('?')[0].split('#')[0] : '';
+        const fileExt = pathOnly ? pathOnly.split('.').pop().toLowerCase() : '';
         const isVideo = fileExt === 'mp4' || fileExt === 'webm' || fileExt === 'mov';
         const isHtml = fileExt === 'html';
         

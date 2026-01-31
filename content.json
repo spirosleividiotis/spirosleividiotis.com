@@ -66,15 +66,15 @@
       "password": "spiros2026",
       "customUrl": "motion-system-content.html",
       "bodyText": "",
-      "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769812332/portfolio/cover-system_ngy8cd.gif",
+      "cardPreview": "qonto-ios-cover.html",
       "media": {
-        "hero": "motion-system-cover.html",
+        "hero": "qonto-ios-cover.html",
         "grid": []
       }
     },
     {
       "id": 2,
-      "name": "Vibe coding a Motion Tool",
+      "name": "Motion Tokens Inspector",
       "company": "Qonto",
       "color": "#141414",
       "passwordProtected": true,
@@ -96,7 +96,7 @@
       "password": "spiros2026",
       "customUrl": "project-3-animation-library.html",
       "bodyText": "",
-      "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769812346/portfolio/cover-lotties_vjes5p.gif",
+      "cardPreview": "lottie-library-cover.html",
       "media": {
         "hero": "lottie-library-cover.html",
         "grid": []
@@ -111,7 +111,7 @@
       "password": "spiros2026",
       "customUrl": "project-4-handoff-process.html",
       "bodyText": "",
-      "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769812358/portfolio/cover-handoff_tti7cj.gif",
+      "cardPreview": "handoff-cover.html",
       "media": {
         "hero": "handoff-cover.html",
         "grid": []
@@ -139,8 +139,9 @@
       "passwordProtected": false,
       "customUrl": "project-6-selection.html",
       "bodyText": "",
+      "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769857643/portfolio/projects/cover-designs_gizgqr.gif",
       "media": {
-        "hero": "",
+        "hero": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769857643/portfolio/projects/cover-designs_gizgqr.gif",
         "grid": []
       },
       "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769857643/portfolio/projects/cover-designs_gizgqr.gif"

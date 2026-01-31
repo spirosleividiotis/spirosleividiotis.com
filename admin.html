@@ -442,17 +442,15 @@
             </div>
             
             <div class="success-message" id="successMessage">
-                <span>✓ Changes saved! Download content.json and push to GitHub to update your live site.</span>
+                <span>✓ Changes saved! Use <strong>Save & Publish Live</strong> below to push to the live site, or download content.json and push via Git.</span>
                 <button class="btn-small btn-secondary" onclick="hideSuccess()">Dismiss</button>
             </div>
             
             <div class="note">
-                <strong>How to update your site:</strong><br>
-                1. Edit content below<br>
-                2. Click "Save Changes" at the bottom<br>
-                3. Download the updated <code>content.json</code> file<br>
-                4. Replace the file in your project folder<br>
-                5. Run: <code>git add content.json && git commit -m "Update content" && git push</code>
+                <strong>Why don’t I see my changes on the site?</strong> The live site uses the <em>deployed</em> content.json. Editing here only updates a copy until you publish.<br><br>
+                <strong>To update the live site:</strong><br>
+                • <strong>Save & Publish Live</strong> (green button below) — pushes content to GitHub; site updates in ~1 min.<br>
+                • Or <strong>Save & Download JSON</strong> → replace <code>content.json</code> in your repo → <code>git add content.json && git commit -m "Update content" && git push</code>
             </div>
             
             <!-- Tabs -->

@@ -1168,7 +1168,8 @@ function loadProjectContent(projectData, projectName) {
             if (modalHero) {
                 modalHero.style.display = 'block';
                 const heroFile = projectData.media.hero.trim();
-                const heroExt = heroFile.split('.').pop().toLowerCase();
+                const heroPath = heroFile.split('?')[0].split('#')[0];
+                const heroExt = heroPath.split('.').pop().toLowerCase();
                 
                 if (heroExt === 'mp4' || heroExt === 'webm') {
                     modalHero.innerHTML = `<video src="${heroFile}" autoplay loop muted playsinline></video>`;
