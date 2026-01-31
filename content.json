@@ -140,10 +140,10 @@
       "customUrl": "project-6-selection.html",
       "bodyText": "",
       "media": {
-        "hero": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769857643/portfolio/projects/cover-designs_gizgqr.gif",
+        "hero": "",
         "grid": []
       },
-      "cardPreview": ""
+      "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769857643/portfolio/projects/cover-designs_gizgqr.gif"
     }
   ],
   "experience": [
