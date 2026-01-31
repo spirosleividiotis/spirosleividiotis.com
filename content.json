@@ -59,7 +59,7 @@
   "projects": [
     {
       "id": 1,
-      "name": "Qonto's Motion System",
+      "name": "Qonto Motion System",
       "company": "Qonto",
       "color": "#141414",
       "passwordProtected": true,
@@ -133,18 +133,16 @@
     },
     {
       "id": 6,
-      "name": "Selection of Designs",
-      "company": "Multiple Brands",
+      "name": "Selection of designs",
+      "company": "multiple brands",
       "color": "#141414",
-      "passwordProtected": true,
-      "password": "spiros2026",
+      "passwordProtected": false,
       "customUrl": "project-6-selection.html",
       "bodyText": "",
       "media": {
         "hero": "",
         "grid": []
-      },
-      "cardPreview": ""
+      }
     }
   ],
   "experience": [
