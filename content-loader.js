@@ -31,6 +31,11 @@ async function loadContent() {
         // Update Footer
         updateFooter(content.footer);
         
+        // Inject analytics script if provided (GA, Plausible, etc.)
+        if (content.analytics && content.analytics.script && content.analytics.script.trim()) {
+            injectAnalyticsScript(content.analytics.script.trim());
+        }
+        
         console.log('✓ Content loaded successfully');
         
         // Dispatch event to notify other scripts that content is loaded
@@ -82,6 +87,19 @@ function updateMusic(music) {
     if (audioPlayer) audioPlayer.src = music.file;
 }
 
+// Inject analytics script (views & location visible in your GA/Plausible dashboard)
+function injectAnalyticsScript(scriptHtml) {
+    const wrap = document.createElement('div');
+    wrap.innerHTML = scriptHtml;
+    wrap.querySelectorAll('script').forEach(oldScript => {
+        const newScript = document.createElement('script');
+        Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+        if (oldScript.src) newScript.src = oldScript.src;
+        else newScript.textContent = oldScript.textContent;
+        (document.head || document.documentElement).appendChild(newScript);
+    });
+}
+
 // Update Reel
 function updateReel(reel) {
     const videoPlayer = document.querySelector('#videoPlayerElement source');
@@ -103,6 +121,21 @@ function updateHeader(header) {
     if (cvLink) cvLink.href = header.cvFile;
 }
 
+// Optimize Cloudinary image URLs for project covers: smaller size + auto format/quality (faster load)
+function optimizeCloudinaryImageUrl(url) {
+    if (!url || typeof url !== 'string') return url;
+    // Match res.cloudinary.com/.../image/upload/ (with optional existing transforms) /v123/...
+    const match = url.match(/^(https:\/\/res\.cloudinary\.com\/[^/]+\/image\/upload\/)(.+)$/);
+    if (!match) return url;
+    const prefix = match[1];
+    const rest = match[2];
+    // If transforms already present (e.g. w_800,c_scale), leave as-is
+    if (/^[whcqfo]_/.test(rest) || /^[0-9]+,[a-z_]+/.test(rest)) return url;
+    // Insert resize + auto format/quality for card size (width 600 is enough for cards)
+    const transforms = 'w_600,c_limit,f_auto,q_auto';
+    return prefix + transforms + '/' + rest;
+}
+
 // Update Projects
 function updateProjects(projects) {
     const workGrid = document.querySelector('.work-grid');
@@ -115,15 +148,17 @@ function updateProjects(projects) {
         const fileExt = pathOnly ? pathOnly.split('.').pop().toLowerCase() : '';
         const isVideo = fileExt === 'mp4' || fileExt === 'webm' || fileExt === 'mov';
         const isHtml = fileExt === 'html';
-        
+        // Use optimized URL for Cloudinary images (GIFs etc.) to reduce weight
+        const previewUrl = hasPreview && !isHtml && !isVideo ? optimizeCloudinaryImageUrl(project.cardPreview) : (project.cardPreview || '');
+        const lazyLoad = index >= 2 ? ' loading="lazy"' : '';
         return `
         <article class="work-card" ${project.passwordProtected ? 'data-password-protected="true"' : ''} data-project-id="${project.id}">
             <div class="work-visual work-color-${index + 1}" style="background: ${hasPreview ? 'transparent' : project.color};">
                 ${hasPreview ? (isHtml ?
-                    `<iframe src="${project.cardPreview}" style="width: 100%; height: 100%; border: none; position: absolute; top: 0; left: 0; pointer-events: none;"></iframe>` :
+                    `<iframe src="${project.cardPreview}"${lazyLoad} style="width: 100%; height: 100%; border: none; position: absolute; top: 0; left: 0; pointer-events: none;"></iframe>` :
                     isVideo ? 
-                    `<video src="${project.cardPreview}" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;"></video>` :
-                    `<img src="${project.cardPreview}" alt="${project.name}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">`) : ''}
+                    `<video src="${project.cardPreview}" autoplay loop muted playsinline${lazyLoad ? ' loading="lazy"' : ''} style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;"></video>` :
+                    `<img src="${previewUrl}" alt="${project.name}"${lazyLoad} decoding="async" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">`) : ''}
                 <div class="project-info" style="position: relative; z-index: 1;">
                     <div class="project-text-mask">
                         <h3 class="project-name">${project.name}</h3>

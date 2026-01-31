@@ -56,6 +56,9 @@
   "reel": {
     "file": "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769694877/Motion_reel_copy_sfrcru.mp4"
   },
+  "analytics": {
+    "script": ""
+  },
   "projects": [
     {
       "id": 1,

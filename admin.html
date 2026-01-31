@@ -589,6 +589,20 @@
                 </div>
                 
                 <div class="section">
+                    <h2>Analytics (views &amp; location)</h2>
+                    <p style="color: #999; font-size: 14px; margin-bottom: 12px;">Paste your <strong>Google Analytics</strong> or <strong>Plausible</strong> script here. After you publish, view <strong>page views</strong> and <strong>visitor location</strong> in your analytics dashboard.</p>
+                    <div class="form-group">
+                        <label>Analytics script (optional)</label>
+                        <textarea id="analyticsScript" rows="6" placeholder="Paste the full &lt;script&gt;...&lt;/script&gt; from Google Analytics (GA4) or Plausible. Leave empty to disable." style="font-family: monospace; font-size: 12px;"></textarea>
+                    </div>
+                    <p style="color: #666; font-size: 13px; margin-top: 8px;">
+                        <strong>Where to see views &amp; location:</strong><br>
+                        • <a href="https://analytics.google.com/" target="_blank" rel="noopener" style="color: #22c55e;">Google Analytics</a> → Reports → Engagement (pages) &amp; User attributes (location)<br>
+                        • <a href="https://plausible.io/" target="_blank" rel="noopener" style="color: #22c55e;">Plausible</a> → Dashboard shows visitors, page views, and countries
+                    </p>
+                </div>
+                
+                <div class="section">
                     <h2>Header Settings</h2>
                     <div class="form-group">
                         <label>Location Text</label>
@@ -1052,6 +1066,8 @@
             if (contentData.reel.file) {
                 showFilePreview('reelFile', contentData.reel.file, 'video');
             }
+            
+            document.getElementById('analyticsScript').value = (contentData.analytics && contentData.analytics.script) ? contentData.analytics.script : '';
             
             document.getElementById('locationText').value = contentData.header.location.text;
             document.getElementById('locationLink').value = contentData.header.location.link;
@@ -1536,6 +1552,8 @@
             contentData.music.title = document.getElementById('musicTitle').value;
             contentData.music.file = document.getElementById('musicFile').value;
             contentData.reel.file = document.getElementById('reelFile').value;
+            if (!contentData.analytics) contentData.analytics = { script: '' };
+            contentData.analytics.script = document.getElementById('analyticsScript').value;
             contentData.header.location.text = document.getElementById('locationText').value;
             contentData.header.location.link = document.getElementById('locationLink').value;
             contentData.header.cvFile = document.getElementById('cvFile').value;
