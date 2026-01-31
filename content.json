@@ -133,16 +133,17 @@
     },
     {
       "id": 6,
-      "name": "Selection of designs",
-      "company": "multiple brands",
+      "name": "Selection of Projects",
+      "company": "",
       "color": "#141414",
       "passwordProtected": false,
       "customUrl": "project-6-selection.html",
       "bodyText": "",
       "media": {
-        "hero": "",
+        "hero": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769856564/portfolio/projects/cover-designs_nox4tf.gif",
         "grid": []
-      }
+      },
+      "cardPreview": ""
     }
   ],
   "experience": [
