@@ -660,15 +660,12 @@
                 <div style="background: #1a1a1a; padding: 16px; border-radius: 6px; margin-bottom: 20px; border-left: 3px solid #f59e0b;">
                     <strong>🚀 Brand Guidelines Editor</strong>
                     <p style="margin: 8px 0 0 0; color: #999; font-size: 14px;">
-                        Add video URLs for the three placeholders in the Brand Guidelines (Flink) project: Logo Animation, Endscreen, Splashscreen. Use <strong>Save to Brand Project</strong> then <strong>Save &amp; Publish Live</strong> (or Download JSON) to update the site.
+                        Add video URLs for the three placeholders in the Brand Guidelines (Flink) project: Logo Animation, Endscreen, Splashscreen. Then use <strong>Save &amp; Publish Live</strong> (or Download JSON) below to update the site — no extra button needed.
                     </p>
                 </div>
                 <div class="section">
                     <h2>Deliverable videos (Logo, Endscreen, Splashscreen)</h2>
                     <div id="brandVideosList" class="items-list"></div>
-                    <div style="margin-top: 16px;">
-                        <button class="btn-primary" onclick="saveBrandVideos()">Save to Brand Project</button>
-                    </div>
                 </div>
             </div>
             
@@ -1596,6 +1593,23 @@
             ];
             contentData.footer.logo = document.getElementById('footerLogo').value;
             contentData.footer.year = document.getElementById('footerYear').value;
+            
+            // Brand Guidelines (project 5): read from DOM so no separate "Save to Brand Project" needed
+            const brandProj = contentData.projects && contentData.projects.find(p => p.id === 5);
+            if (brandProj) {
+                const brandList = document.getElementById('brandVideosList');
+                const brandInputs = brandList ? brandList.querySelectorAll('input[type="text"]') : [];
+                const brandVals = Array.from(brandInputs).map(inp => (inp.value || '').trim());
+                if (!brandProj.media) brandProj.media = { hero: '', grid: [], videos: [] };
+                brandProj.media.videos = [brandVals[0] || '', brandVals[1] || '', brandVals[2] || ''];
+            }
+            
+            // Selection of Designs (project 6): read from DOM so no separate "Save to Selection Project" needed
+            const selProj = contentData.projects && contentData.projects.find(p => p.id === 6);
+            if (selProj && typeof selectionGridAssets !== 'undefined') {
+                if (!selProj.media) selProj.media = { hero: '', grid: [] };
+                selProj.media.grid = selectionGridAssets.slice();
+            }
         }
         
         // Save Changes (Download JSON)
@@ -1791,8 +1805,14 @@
                 alert('Brand Guidelines (project 5) not found in content.json.');
                 return;
             }
+            // Read current values from DOM so we don't miss the last-edited field (onchange only fires on blur)
+            const list = document.getElementById('brandVideosList');
+            const inputs = list ? list.querySelectorAll('input[type="text"]') : [];
+            const values = Array.from(inputs).map(inp => (inp.value || '').trim());
+            const videos = [values[0] || '', values[1] || '', values[2] || ''];
+            brandVideos = videos;
             if (!proj.media) proj.media = { hero: '', grid: [], videos: [] };
-            proj.media.videos = brandVideos.map(u => (u || '').trim());
+            proj.media.videos = videos;
             showSuccess();
         }
         
