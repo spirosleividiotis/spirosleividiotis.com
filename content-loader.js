@@ -145,7 +145,7 @@ function updateHeader(header) {
         { text: 'experience', href: '#experience' },
         { text: 'projects', href: '#work' }
     ];
-    // Figma order: About me, Experience, Reel, Projects (4 links)
+    // Figma: two columns. Col1: About me, Experience. Col2: Reel, Projects. Gap 50px.
     const labels = ['about me', 'experience', 'reel', 'projects'];
     const defaultHrefs = ['#', '#experience', '#reel', '#work'];
     const linkByLabel = {};
@@ -155,11 +155,15 @@ function updateHeader(header) {
     });
     const entriesEl = document.getElementById('heroNavLeft');
     if (entriesEl) {
-        entriesEl.innerHTML = labels.map((label, i) => {
+        const link = (label, i) => {
             const href = linkByLabel[label] || defaultHrefs[i];
             const isAbout = (href.replace(/^#/, '') === '' || href === '#') && i === 0;
             return `<a href="${escapeAttr(href)}" class="nav-link" ${isAbout ? 'id="aboutMeLink"' : ''}>${escapeHtml(label)}</a>`;
-        }).join('');
+        };
+        entriesEl.innerHTML = `
+            <div class="header-col">${link('about me', 0)}${link('experience', 1)}</div>
+            <div class="header-col">${link('reel', 2)}${link('projects', 3)}</div>
+        `;
     }
 }
 
