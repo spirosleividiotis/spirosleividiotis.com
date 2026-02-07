@@ -1070,13 +1070,13 @@ section {
    =================================== */
 
 .footer {
-    padding: 10px 0 80px;
+    padding: 0 0 48px;
+    margin-top: 80px;
     background: #FFFFFF;
     will-change: transform;
     color: #000000;
     position: relative;
     z-index: 5;
-    margin-top: 0;
 }
 
 /* Footer: left = download cv | center = hit me up | right = find me (LinkedIn, Dribbble) */
@@ -1091,7 +1091,6 @@ section {
 
 .footer-three-cols .footer-left {
     justify-content: flex-start;
-    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .footer-three-cols .footer-center {
@@ -1099,37 +1098,10 @@ section {
     align-items: center;
     gap: 20px;
     justify-content: center;
-    transition: opacity 0.6s ease, transform 0.6s ease;
-    transition-delay: 0.08s;
 }
 
 .footer-three-cols .footer-right {
     justify-content: flex-end;
-    transition: opacity 0.6s ease, transform 0.6s ease;
-    transition-delay: 0.16s;
-}
-
-/* Staggered reveal when footer enters view (JS adds .footer-animate then .footer-visible) */
-.footer.footer-animate .footer-three-cols .footer-left {
-    opacity: 0;
-    transform: translateY(16px);
-}
-
-.footer.footer-animate .footer-three-cols .footer-center {
-    opacity: 0;
-    transform: translateY(16px);
-}
-
-.footer.footer-animate .footer-three-cols .footer-right {
-    opacity: 0;
-    transform: translateY(16px);
-}
-
-.footer.footer-visible .footer-three-cols .footer-left,
-.footer.footer-visible .footer-three-cols .footer-center,
-.footer.footer-visible .footer-three-cols .footer-right {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .footer-three-cols .footer-right .footer-link {
@@ -1194,18 +1166,6 @@ section {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    transition: opacity 0.6s ease, transform 0.6s ease;
-    transition-delay: 0.24s;
-}
-
-.footer.footer-animate .footer-credit {
-    opacity: 0;
-    transform: translateY(12px);
-}
-
-.footer.footer-visible .footer-credit {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .footer-logo {
@@ -2438,7 +2398,7 @@ section {
     .footer {
         padding: 48px 0 32px;
         position: relative !important;
-        margin-top: 0 !important;
+        margin-top: 48px !important;
         background: #000000;
     }
     
@@ -2730,10 +2690,14 @@ section {
     }
     
     .experience,
-    .selected-work,
-    .footer {
+    .selected-work {
         padding: 80px 0;
         margin-top: 0;
+    }
+    
+    .footer {
+        padding: 80px 0 48px;
+        margin-top: 80px;
     }
     
     .experience-grid {

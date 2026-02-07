@@ -45,17 +45,10 @@ function updateParallax() {
         tagsGrid.style.transform = `translateY(-${tagsOffset}px)`;
     }
     
-    // Footer: different parallax — moves up slower (gentle lag) so it feels distinct from hero
+    // Footer: whole-section parallax — section lags behind scroll (moves up slower)
     if (footer) {
-        const footerRect = footer.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        if (footerRect.top < viewportHeight * 1.2) {
-            const footerProgress = 1 - Math.max(0, footerRect.top) / (viewportHeight * 1.2);
-            const footerOffset = footerProgress * 40 * 0.4; // subtle upward drift
-            footer.style.transform = `translateY(-${footerOffset}px)`;
-        } else {
-            footer.style.transform = '';
-        }
+        const lag = scrolled * 0.12;
+        footer.style.transform = `translateY(${lag}px)`;
     }
     
     ticking = false;
@@ -72,29 +65,6 @@ function requestTick() {
 if (!checkIfMobile()) {
     window.addEventListener('scroll', requestTick);
 }
-
-// ===================================
-// FOOTER STAGGERED REVEAL (different animation when footer enters view)
-// ===================================
-function initFooterReveal() {
-    const footer = document.querySelector('.footer');
-    if (!footer) return;
-    const viewportHeight = window.innerHeight;
-    const footerTop = footer.getBoundingClientRect().top;
-    if (footerTop > viewportHeight * 0.8) {
-        footer.classList.add('footer-animate');
-    }
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('footer-visible');
-            }
-        });
-    }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
-    observer.observe(footer);
-}
-window.addEventListener('contentLoaded', initFooterReveal);
-window.addEventListener('DOMContentLoaded', initFooterReveal);
 
 // ===================================
 // LIVE TIME
