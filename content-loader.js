@@ -144,22 +144,23 @@ function updateHeader(header) {
     ];
     const leftEl = document.getElementById('heroNavLeft');
     const centerEl = document.getElementById('heroNavCenter');
+    const heroArrowSvg = '<span class="hero-arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h5M9 4l3 3-3 3"/></svg></span>';
     if (leftEl) {
         const leftItems = nav.length >= 2 ? nav.slice(0, 2) : nav;
         leftEl.innerHTML = leftItems.map((item, i) => {
             const label = item.label || item.text || '';
             const href = item.href || '#';
             const isAbout = (href.replace(/^#/, '') === '' || href === '#') && i === 0;
-            return `<a href="${escapeAttr(href)}" class="hero-link" ${isAbout ? 'id="aboutMeLink"' : ''}>${escapeHtml(label)}</a>`;
+            return `<a href="${escapeAttr(href)}" class="hero-link hero-capsule-link" ${isAbout ? 'id="aboutMeLink"' : ''}>${escapeHtml(label)} ${heroArrowSvg}</a>`;
         }).join('');
     }
     if (centerEl && nav.length >= 3) {
         const centerItem = nav[2];
         const label = centerItem.label || centerItem.text || '';
         const href = centerItem.href || '#work';
-        centerEl.innerHTML = `<a href="${escapeAttr(href)}" class="hero-link">${escapeHtml(label)}</a>`;
+        centerEl.innerHTML = `<a href="${escapeAttr(href)}" class="hero-link hero-capsule-link">${escapeHtml(label)} ${heroArrowSvg}</a>`;
     } else if (centerEl && nav.length === 2) {
-        centerEl.innerHTML = `<a href="#work" class="hero-link">projects</a>`;
+        centerEl.innerHTML = `<a href="#work" class="hero-link hero-capsule-link">projects ${heroArrowSvg}</a>`;
     } else if (centerEl) {
         centerEl.innerHTML = '';
     }
