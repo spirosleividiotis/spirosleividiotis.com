@@ -133,7 +133,8 @@ function updateReel(reel) {
 function updateHeader(header) {
     const location = document.querySelector('.location');
     if (location) {
-        location.textContent = header.location.text;
+        const locText = (header.location.text || '').trim();
+        location.textContent = locText ? locText.charAt(0).toUpperCase() + locText.slice(1).toLowerCase() : '';
         location.href = header.location.link;
     }
     
@@ -145,8 +146,9 @@ function updateHeader(header) {
         { text: 'experience', href: '#experience' },
         { text: 'projects', href: '#work' }
     ];
-    // Figma: two columns. Col1: About me, Experience. Col2: Reel, Projects. Gap 50px.
-    const labels = ['about me', 'experience', 'reel', 'projects'];
+    // Figma: two columns. Col1: About me, Experience. Col2: Reel, Projects. Display: proper case.
+    const labelsLower = ['about me', 'experience', 'reel', 'projects'];
+    const labelsDisplay = ['About me', 'Experience', 'Reel', 'Projects'];
     const defaultHrefs = ['#', '#experience', '#reel', '#work'];
     const linkByLabel = {};
     nav.forEach((item) => {
@@ -155,14 +157,14 @@ function updateHeader(header) {
     });
     const entriesEl = document.getElementById('heroNavLeft');
     if (entriesEl) {
-        const link = (label, i) => {
-            const href = linkByLabel[label] || defaultHrefs[i];
+        const link = (labelKey, displayText, i) => {
+            const href = linkByLabel[labelKey] || defaultHrefs[i];
             const isAbout = (href.replace(/^#/, '') === '' || href === '#') && i === 0;
-            return `<a href="${escapeAttr(href)}" class="nav-link" ${isAbout ? 'id="aboutMeLink"' : ''}>${escapeHtml(label)}</a>`;
+            return `<a href="${escapeAttr(href)}" class="nav-link" ${isAbout ? 'id="aboutMeLink"' : ''}>${escapeHtml(displayText)}</a>`;
         };
         entriesEl.innerHTML = `
-            <div class="header-col">${link('about me', 0)}${link('experience', 1)}</div>
-            <div class="header-col">${link('reel', 2)}${link('projects', 3)}</div>
+            <div class="header-col">${link('about me', 'About me', 0)}${link('experience', 'Experience', 1)}</div>
+            <div class="header-col">${link('reel', 'Reel', 2)}${link('projects', 'Projects', 3)}</div>
         `;
     }
 }

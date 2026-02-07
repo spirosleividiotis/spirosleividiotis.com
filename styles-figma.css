@@ -177,7 +177,6 @@ section {
     line-height: 19px;
     color: #000000;
     text-decoration: none;
-    text-transform: lowercase;
     transition: opacity 0.2s ease;
 }
 
