@@ -75,11 +75,11 @@ function updateHero(hero) {
     if (heroPhoto && hero.photo) heroPhoto.style.backgroundImage = `url('${escapeAttr(hero.photo)}')`;
     
     const tagsGrid = document.getElementById('tagsGrid');
-    if (tagsGrid && hero.tags) {
-        const tools = Array.isArray(hero.tags.tools) ? hero.tags.tools : [];
-        const skills = Array.isArray(hero.tags.skills) ? hero.tags.skills : [];
+    if (tagsGrid) {
+        const tools = (hero.tags && Array.isArray(hero.tags.tools)) ? hero.tags.tools : [];
+        const skillsHardcoded = ['Product Motion', 'Design Systems', 'Interaction Design'];
         const toolTags = tools.map(tool => `<div class="tag tag-black">${escapeHtml(tool)}</div>`).join('');
-        const skillTags = skills.map(skill => `<div class="tag">${escapeHtml(skill)}</div>`).join('');
+        const skillTags = skillsHardcoded.map(skill => `<div class="tag">${escapeHtml(skill)}</div>`).join('');
         tagsGrid.innerHTML = toolTags + '<div style="flex-basis: 100%; height: 0;"></div>' + skillTags;
     }
 }

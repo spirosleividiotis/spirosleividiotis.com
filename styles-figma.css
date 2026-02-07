@@ -374,11 +374,15 @@ section {
 
 
 /* ===================================
-   EXPERIENCE (Figma: black bg, list with dividers, dates right)
+   EXPERIENCE (Figma: 50px 48px 100px, gap 50px, title 16px, rows 264px gap, 106px company–details)
    =================================== */
 
 .experience {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     padding: 50px 48px 100px;
+    gap: 50px;
     background: #000000;
     color: #FFFFFF;
     position: relative;
@@ -388,7 +392,12 @@ section {
 .experience .container {
     max-width: 1600px;
     margin: 0 auto;
-    padding: 0 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 50px;
 }
 
 .experience-title-main {
@@ -397,13 +406,15 @@ section {
     font-size: 16px;
     line-height: 19px;
     color: #777777;
-    margin-bottom: 50px;
-    text-transform: lowercase;
+    margin: 0;
+    text-transform: capitalize;
 }
 
 .experience-rows {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
 }
 
 .experience-row {
@@ -412,8 +423,9 @@ section {
     justify-content: space-between;
     align-items: flex-start;
     padding: 25px 0 50px;
-    gap: 24px;
+    gap: 264px;
     border-bottom: 0.5px solid #FFFFFF;
+    width: 100%;
 }
 
 .experience-row:last-child {
@@ -422,8 +434,8 @@ section {
 }
 
 .experience-row:not(:first-child) {
-    padding-top: 25px;
-    padding-bottom: 25px;
+    align-items: center;
+    padding: 25px 0;
 }
 
 .experience-row:not(:first-child):last-child {
@@ -436,7 +448,7 @@ section {
     align-items: flex-start;
     gap: 106px;
     flex: 1;
-    max-width: 964px;
+    min-width: 0;
 }
 
 .experience-company {
@@ -451,7 +463,9 @@ section {
 .experience-job-block {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 15px;
+    min-width: 0;
 }
 
 .experience-job-title {
@@ -464,7 +478,7 @@ section {
 
 .experience-description {
     font-family: var(--font-primary);
-    font-weight: 400;
+    font-weight: 600;
     font-size: 16px;
     line-height: 19px;
     color: #777777;
@@ -498,6 +512,7 @@ section {
     width: 130px;
     height: 0;
     border-top: 1px solid #777777;
+    flex-shrink: 0;
 }
 
 /* Legacy experience layout (hidden when using .experience-rows) */
