@@ -1024,45 +1024,6 @@ function initializeModalsAndPlayers() {
     }
 }
 
-// Hero name photo reveal
-let photoTimeout;
-
-// Wait for DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-    const heroNameElement = document.getElementById('heroName');
-    const heroPhotoElement = document.getElementById('heroPhoto');
-    
-    console.log('DOM loaded - Hero name:', heroNameElement);
-    console.log('DOM loaded - Hero photo:', heroPhotoElement);
-    
-    if (heroNameElement && heroPhotoElement) {
-        console.log('Setting up click listener on hero name');
-        
-        heroNameElement.addEventListener('click', function(e) {
-            console.log('Hero name clicked!', e);
-            
-            // Clear any existing timeout
-            if (photoTimeout) {
-                clearTimeout(photoTimeout);
-            }
-            
-            // Show photo
-            heroPhotoElement.classList.add('show');
-            console.log('Photo class added, should be visible');
-            
-            // Hide after 3 seconds
-            photoTimeout = setTimeout(() => {
-                heroPhotoElement.classList.remove('show');
-                console.log('Photo hidden');
-            }, 3000);
-        });
-        
-        console.log('Click listener added successfully');
-    } else {
-        console.error('Could not find hero elements');
-    }
-});
-
 // ===================================
 // PROJECT MODAL (Full-screen)
 // ===================================
