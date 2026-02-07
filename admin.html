@@ -605,6 +605,31 @@
                 
                 <div class="section">
                     <h2>Header Settings</h2>
+                    <p style="color: #999; font-size: 13px; margin-bottom: 16px;">Hero nav: <strong>Left</strong> = 1 &amp; 2, <strong>Center</strong> = reel + 3, <strong>Right</strong> = amsterdam, time.</p>
+                    <div class="form-group">
+                        <label>Nav 1 (left) – Label</label>
+                        <input type="text" id="nav1Label" placeholder="about me">
+                    </div>
+                    <div class="form-group">
+                        <label>Nav 1 (left) – Link</label>
+                        <input type="text" id="nav1Href" placeholder="#">
+                    </div>
+                    <div class="form-group">
+                        <label>Nav 2 (left) – Label</label>
+                        <input type="text" id="nav2Label" placeholder="experience">
+                    </div>
+                    <div class="form-group">
+                        <label>Nav 2 (left) – Link</label>
+                        <input type="text" id="nav2Href" placeholder="#experience">
+                    </div>
+                    <div class="form-group">
+                        <label>Nav 3 (center, below reel) – Label</label>
+                        <input type="text" id="nav3Label" placeholder="projects">
+                    </div>
+                    <div class="form-group">
+                        <label>Nav 3 (center) – Link</label>
+                        <input type="text" id="nav3Href" placeholder="#work">
+                    </div>
                     <div class="form-group">
                         <label>Location Text</label>
                         <input type="text" id="locationText" placeholder="amsterdam">
@@ -1098,6 +1123,20 @@
             
             document.getElementById('analyticsScript').value = (contentData.analytics && contentData.analytics.script) ? contentData.analytics.script : '';
             
+            if (!contentData.header.navigation || !Array.isArray(contentData.header.navigation)) {
+                contentData.header.navigation = [
+                    { text: 'about me', href: '#' },
+                    { text: 'experience', href: '#experience' },
+                    { text: 'projects', href: '#work' }
+                ];
+            }
+            const nav = contentData.header.navigation;
+            document.getElementById('nav1Label').value = (nav[0] && (nav[0].label || nav[0].text)) || 'about me';
+            document.getElementById('nav1Href').value = (nav[0] && nav[0].href) || '#';
+            document.getElementById('nav2Label').value = (nav[1] && (nav[1].label || nav[1].text)) || 'experience';
+            document.getElementById('nav2Href').value = (nav[1] && nav[1].href) || '#experience';
+            document.getElementById('nav3Label').value = (nav[2] && (nav[2].label || nav[2].text)) || 'projects';
+            document.getElementById('nav3Href').value = (nav[2] && nav[2].href) || '#work';
             document.getElementById('locationText').value = contentData.header.location.text;
             document.getElementById('locationLink').value = contentData.header.location.link;
             document.getElementById('cvFile').value = contentData.header.cvFile;
@@ -1583,6 +1622,11 @@
             contentData.reel.file = document.getElementById('reelFile').value;
             if (!contentData.analytics) contentData.analytics = { script: '' };
             contentData.analytics.script = document.getElementById('analyticsScript').value;
+            contentData.header.navigation = [
+                { text: document.getElementById('nav1Label').value.trim() || 'about me', href: document.getElementById('nav1Href').value.trim() || '#' },
+                { text: document.getElementById('nav2Label').value.trim() || 'experience', href: document.getElementById('nav2Href').value.trim() || '#experience' },
+                { text: document.getElementById('nav3Label').value.trim() || 'projects', href: document.getElementById('nav3Href').value.trim() || '#work' }
+            ];
             contentData.header.location.text = document.getElementById('locationText').value;
             contentData.header.location.link = document.getElementById('locationLink').value;
             contentData.header.cvFile = document.getElementById('cvFile').value;
