@@ -141,6 +141,10 @@ section {
 }
 
 .hero-nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 32px;
     display: flex;
     flex-direction: column;
     gap: 4px;
