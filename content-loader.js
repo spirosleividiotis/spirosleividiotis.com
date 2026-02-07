@@ -129,7 +129,7 @@ function updateReel(reel) {
     }
 }
 
-// Update Header
+// Update Header (4 links: About me, Experience, Reel, Projects)
 function updateHeader(header) {
     const location = document.querySelector('.location');
     if (location) {
@@ -137,35 +137,29 @@ function updateHeader(header) {
         location.href = header.location.link;
     }
     
-    const cvLink = document.querySelector('a[href*="cv"]');
-    if (cvLink) cvLink.href = header.cvFile;
+    const footerCvLink = document.querySelector('.footer-left a[href*="cv"], .footer-left a[href*=".pdf"]');
+    if (footerCvLink && header.cvFile) footerCvLink.href = header.cvFile;
     
-    // Hero nav: left = first 2 items (about me, experience) | center = reel + last item (projects) | right = amsterdam, time
     const nav = header.navigation && header.navigation.length ? header.navigation : [
-        { label: 'about me', href: '#' },
-        { label: 'experience', href: '#experience' },
-        { label: 'projects', href: '#work' }
+        { text: 'about me', href: '#' },
+        { text: 'experience', href: '#experience' },
+        { text: 'projects', href: '#work' }
     ];
-    const leftEl = document.getElementById('heroNavLeft');
-    const centerEl = document.getElementById('heroNavCenter');
-    if (leftEl) {
-        const leftItems = nav.length >= 2 ? nav.slice(0, 2) : nav;
-        leftEl.innerHTML = leftItems.map((item, i) => {
-            const label = item.label || item.text || '';
-            const href = item.href || '#';
+    // Figma order: About me, Experience, Reel, Projects (4 links)
+    const labels = ['about me', 'experience', 'reel', 'projects'];
+    const defaultHrefs = ['#', '#experience', '#reel', '#work'];
+    const linkByLabel = {};
+    nav.forEach((item) => {
+        const t = (item.label || item.text || '').toLowerCase();
+        if (t) linkByLabel[t] = item.href || '#';
+    });
+    const entriesEl = document.getElementById('heroNavLeft');
+    if (entriesEl) {
+        entriesEl.innerHTML = labels.map((label, i) => {
+            const href = linkByLabel[label] || defaultHrefs[i];
             const isAbout = (href.replace(/^#/, '') === '' || href === '#') && i === 0;
-            return `<a href="${escapeAttr(href)}" class="hero-link" ${isAbout ? 'id="aboutMeLink"' : ''}>${escapeHtml(label)}</a>`;
+            return `<a href="${escapeAttr(href)}" class="nav-link" ${isAbout ? 'id="aboutMeLink"' : ''}>${escapeHtml(label)}</a>`;
         }).join('');
-    }
-    if (centerEl && nav.length >= 3) {
-        const centerItem = nav[2];
-        const label = centerItem.label || centerItem.text || '';
-        const href = centerItem.href || '#work';
-        centerEl.innerHTML = `<a href="${escapeAttr(href)}" class="hero-link">${escapeHtml(label)}</a>`;
-    } else if (centerEl && nav.length === 2) {
-        centerEl.innerHTML = `<a href="#work" class="hero-link">projects</a>`;
-    } else if (centerEl) {
-        centerEl.innerHTML = '';
     }
 }
 
@@ -208,113 +202,66 @@ function updateProjects(projects) {
     window.projectsData = projects;
 }
 
-// Update Experience
+// Update Experience (flat list: one row per role, description on first row only)
 function updateExperience(experience) {
-    // Update sidebar list (CMS only)
-    const experienceList = document.querySelector('.experience-list');
-    if (experienceList && experience.length) {
-        experienceList.innerHTML = experience.map((exp, i) => `
-            <div class="experience-item ${i === 0 ? 'active' : ''}" data-experience="${escapeAttr(exp.id || '')}">
-                <span class="item-name">${escapeHtml(exp.company || '')}</span>
-            </div>
-        `).join('');
-    }
+    const rowsEl = document.querySelector('.experience-rows');
+    if (!rowsEl || !experience.length) return;
     
-    // Update details content (escaped from CMS)
-    const experienceWrapper = document.querySelector('.experience-details-wrapper');
-    if (experienceWrapper && experience.length) {
-        experienceWrapper.innerHTML = experience.map((exp, expIndex) => {
-            const hasMultipleRoles = exp.roles && exp.roles.length > 1;
-            const firstRole = exp.roles && exp.roles[0] ? exp.roles[0] : { title: '', description: '', period: { start: '', end: '' } };
+    let rowIndex = 0;
+    const rows = [];
+    experience.forEach((exp) => {
+        const roles = exp.roles && exp.roles.length ? exp.roles : [{ title: '', description: '', period: { start: '', end: '' } }];
+        roles.forEach((role) => {
             const company = escapeHtml(exp.company || '');
-            const title = escapeHtml(firstRole.title || '');
-            const description = escapeHtml(firstRole.description || '');
-            const start = escapeHtml((firstRole.period && firstRole.period.start) || '');
-            const end = escapeHtml((firstRole.period && firstRole.period.end) || '');
-            const expId = escapeAttr(exp.id || '');
-            
-            return `
-                <div class="experience-detail ${expIndex === 0 ? 'active' : ''}" id="${expId}" data-role-index="0">
-                    <h2 class="company-name">${company}</h2>
-                    ${hasMultipleRoles ? `
-                    <div class="job-title-wrapper">
-                        <p class="job-title">${title}</p>
-                        <div class="role-navigation">
-                            <button class="role-arrow role-arrow-left inactive" data-direction="prev">
-                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8 2L4 6L8 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
-                            <span class="role-indicator">1/${exp.roles.length}</span>
-                            <button class="role-arrow role-arrow-right" data-direction="next">
-                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
+            const title = escapeHtml(role.title || '');
+            const description = escapeHtml(role.description || '');
+            const start = escapeHtml((role.period && role.period.start) || '');
+            const end = escapeHtml((role.period && role.period.end) || '');
+            const expanded = rowIndex === 0 ? ' expanded' : '';
+            rowIndex++;
+            rows.push(`
+                <div class="experience-row${expanded}">
+                    <div class="experience-row-left">
+                        <span class="experience-company">${company}</span>
+                        <div class="experience-job-block">
+                            <span class="experience-job-title">${title}</span>
+                            ${description ? `<p class="experience-description">${description.replace(/\n/g, '<br>')}</p>` : ''}
                         </div>
                     </div>
-                    ` : `
-                    <p class="job-title">${title}</p>
-                    `}
-                    <div class="experience-content-wrapper">
-                        <p class="experience-description">${description}</p>
-                        <div class="experience-timeline">
-                            <span class="timeline-year">${start}</span>
-                            <span class="timeline-line"></span>
-                            <span class="timeline-end">${end}</span>
-                        </div>
+                    <div class="experience-dates">
+                        <span class="experience-date-start">${start}</span>
+                        <span class="experience-date-line"></span>
+                        <span class="experience-date-end">${end}</span>
                     </div>
                 </div>
-            `;
-        }).join('');
-    }
-    
-    // Update visuals (CMS only)
-    const experienceVisual = document.querySelector('.experience-visual');
-    if (experienceVisual && experience.length) {
-        experienceVisual.innerHTML = experience.map((exp, i) => {
-            const hasImage = exp.image && exp.image.trim();
-            const fileExt = hasImage ? exp.image.split('.').pop().toLowerCase().split('?')[0] : '';
-            const isVideo = fileExt === 'mp4' || fileExt === 'webm' || fileExt === 'mov';
-            const imgUrl = hasImage ? escapeAttr(exp.image) : '';
-            const expId = escapeAttr(exp.id || '');
-            return `
-            <div class="visual-placeholder ${i === 0 ? 'active' : ''}" data-visual="${expId}" ${hasImage && !isVideo ? `style="background-image: url('${imgUrl}');"` : ''}>
-                ${hasImage && isVideo ? `<video src="${imgUrl}" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>` : ''}
-            </div>
-            `;
-        }).join('');
-    }
-    
-    // Store experience data globally for role switching
+            `);
+        });
+    });
+    rowsEl.innerHTML = rows.join('');
     window.experienceData = experience;
 }
 
-// Update Footer (left = cv, center = email, right = social)
+// Update Footer (left = logo + cv + email, right = social)
 function updateFooter(footer) {
-    const footerEmail = document.querySelector('.footer-center .footer-link, .footer-email');
+    const footerEmail = document.querySelector('.footer-email');
     if (footerEmail) {
         footerEmail.textContent = footer.email;
         footerEmail.href = `mailto:${footer.email}`;
     }
     
     const socialLinks = document.querySelectorAll('.footer-right .footer-link');
-    footer.social.forEach((social, i) => {
+    if (footer.social) footer.social.forEach((social, i) => {
         if (socialLinks[i]) {
             socialLinks[i].href = social.url;
             socialLinks[i].textContent = social.name;
         }
     });
     
-    const footerLogo = document.querySelector('.footer-logo');
-    if (footerLogo) footerLogo.src = footer.logo;
+    const footerLogo = document.querySelector('.footer-logo-circle');
+    if (footerLogo && footer.logo) footerLogo.src = footer.logo;
     
-    const footerCredit = document.querySelector('.footer-credit');
-    if (footerCredit) {
-        const logoUrl = footer.logo ? escapeAttr(footer.logo) : '';
-        const year = escapeHtml(String(footer.year != null ? footer.year : ''));
-        footerCredit.innerHTML = `<img src="${logoUrl}" alt="Spiros Leividiotis logo" class="footer-logo">${year} Spiros Leividiotis`;
-    }
+    const cvLink = document.querySelector('.footer-left a[href*="cv"], .footer-left a[href*=".pdf"]');
+    if (cvLink && footer.cvFile) cvLink.href = footer.cvFile;
 }
 
 // Load content on page load

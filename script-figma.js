@@ -4,53 +4,8 @@
 
 let ticking = false;
 
+// Hero is fixed; sections scroll on top of it. No element parallax needed.
 function updateParallax() {
-    const scrolled = window.pageYOffset;
-    
-    // Hero elements parallax - move UP as you scroll down
-    const heroHeaderRow = document.querySelector('.hero-header-row');
-    const nav = document.querySelector('.nav');
-    const headerMeta = document.querySelector('.header-meta');
-    const heroName = document.querySelector('.hero-name');
-    const heroSubtitle = document.querySelector('.hero-subtitle');
-    const tagsGrid = document.querySelector('.tags-grid');
-    const footer = document.querySelector('.footer');
-    
-    // Hero nav row (left, center, right) moves with scroll
-    if (heroHeaderRow) {
-        const linksOffset = scrolled * 0.25;
-        heroHeaderRow.style.transform = `translateY(-${linksOffset}px)`;
-    }
-    
-    // Navigation and time move up slowly
-    if (nav) {
-        const navOffset = scrolled * 0.25;
-        nav.style.transform = `translateY(-${navOffset}px)`;
-    }
-    
-    /* headerMeta is inside hero-header-row, so it moves with the row */
-    
-    if (heroName) {
-        const nameOffset = scrolled * 0.3;
-        heroName.style.transform = `translateY(-${nameOffset}px)`;
-    }
-    
-    if (heroSubtitle) {
-        const subtitleOffset = scrolled * 0.4;
-        heroSubtitle.style.transform = `translateY(-${subtitleOffset}px)`;
-    }
-    
-    if (tagsGrid) {
-        const tagsOffset = scrolled * 0.5;
-        tagsGrid.style.transform = `translateY(-${tagsOffset}px)`;
-    }
-    
-    // Footer: whole-section parallax — section lags behind scroll (moves up slower)
-    if (footer) {
-        const lag = scrolled * 0.12;
-        footer.style.transform = `translateY(${lag}px)`;
-    }
-    
     ticking = false;
 }
 
@@ -125,19 +80,36 @@ function checkIfMobile() {
     return window.innerWidth <= 768;
 }
 
-// Store initialization state to prevent duplicate listeners
+// Experience accordion: one row expanded at a time, switch on hover
+function initializeExperienceAccordion() {
+    const container = document.querySelector('.experience-rows');
+    const rows = document.querySelectorAll('.experience-row');
+    if (!container || rows.length === 0) return;
+    
+    rows.forEach((row) => {
+        row.addEventListener('mouseenter', () => {
+            rows.forEach((r) => r.classList.remove('expanded'));
+            row.classList.add('expanded');
+        });
+    });
+    
+    container.addEventListener('mouseleave', () => {
+        rows.forEach((r) => r.classList.remove('expanded'));
+        if (rows[0]) rows[0].classList.add('expanded');
+    });
+}
+
+// Legacy experience (sidebar + detail) - no longer used
 let experienceInitialized = false;
 
 function initializeExperience() {
-    console.log('initializeExperience called');
-    
+    initializeExperienceAccordion();
     const experienceItems = document.querySelectorAll('.experience-item');
     const experienceDetails = document.querySelectorAll('.experience-detail');
     const visualPlaceholders = document.querySelectorAll('.visual-placeholder');
     const isMobile = checkIfMobile();
     
     if (experienceItems.length === 0) {
-        console.log('Experience items not found, will retry on contentLoaded');
         return;
     }
     
@@ -434,7 +406,7 @@ function initializeCursor() {
     animateCursor();
 
     // Hover effect on interactive elements
-    const interactiveElements = document.querySelectorAll('a:not(.footer-link):not(.location-link):not(.hero-link):not(.nav-link):not(.reel-link), button, .experience-item');
+    const interactiveElements = document.querySelectorAll('a:not(.footer-link):not(.location-link):not(.nav-link):not(.reel-video-wrap), button, .experience-item');
     const reelLink = document.getElementById('reelLink');
     const projectCards = document.querySelectorAll('.work-card');
     const footerLinks = document.querySelectorAll('.footer-link');
@@ -626,20 +598,20 @@ function initializeCursorHoverEffects() {
         });
     }
     
-    // cursor-arrow-only for every hero nav link (event delegation so CMS-injected links work)
-    const heroHeaderRow = document.querySelector('.hero-header-row');
-    if (heroHeaderRow) {
-        heroHeaderRow.addEventListener('mouseover', (e) => {
-            const link = e.target.closest('.hero-link');
-            if (link && heroHeaderRow.contains(link)) {
+    // cursor-arrow-only for header nav links (event delegation for CMS-injected links)
+    const headerEntries = document.querySelector('.header-entries');
+    if (headerEntries) {
+        headerEntries.addEventListener('mouseover', (e) => {
+            const link = e.target.closest('.nav-link');
+            if (link && headerEntries.contains(link)) {
                 cursorDot.classList.add('cursor-arrow-only');
                 cursorDot.classList.remove('cursor-hover', 'cursor-project');
                 const cursorText = cursorDot.querySelector('.cursor-text');
                 if (cursorText) cursorText.style.display = 'none';
             }
         });
-        heroHeaderRow.addEventListener('mouseout', (e) => {
-            const stillOverLink = e.relatedTarget && e.relatedTarget.closest('.hero-link') && heroHeaderRow.contains(e.relatedTarget.closest('.hero-link'));
+        headerEntries.addEventListener('mouseout', (e) => {
+            const stillOverLink = e.relatedTarget && e.relatedTarget.closest('.nav-link') && headerEntries.contains(e.relatedTarget.closest('.nav-link'));
             if (!stillOverLink) {
                 cursorDot.classList.remove('cursor-arrow-only');
                 resetCursorToDefault();
@@ -682,19 +654,16 @@ function initializeCursorHoverEffects() {
         });
     }
     
-    // Arrow cursor for reel link
-    const reelLinkForCursor = document.querySelector('.reel-link');
-    if (reelLinkForCursor) {
-        reelLinkForCursor.addEventListener('mouseenter', function() {
+    // Arrow cursor for reel video wrap
+    const reelWrap = document.querySelector('.reel-video-wrap');
+    if (reelWrap) {
+        reelWrap.addEventListener('mouseenter', function() {
             cursorDot.classList.add('cursor-arrow-only');
             cursorDot.classList.remove('cursor-hover', 'cursor-project');
             const cursorText = cursorDot.querySelector('.cursor-text');
-            if (cursorText) {
-                cursorText.style.display = 'none';
-            }
+            if (cursorText) cursorText.style.display = 'none';
         });
-        
-        reelLinkForCursor.addEventListener('mouseleave', function() {
+        reelWrap.addEventListener('mouseleave', function() {
             cursorDot.classList.remove('cursor-arrow-only');
             resetCursorToDefault();
         });
