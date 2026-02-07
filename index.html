@@ -15,27 +15,18 @@
     <!-- Hero (with header merged) -->
     <section class="hero" data-scroll-section>
         <div class="container">
-            <!-- About Me & CV Links -->
-            <div class="hero-links">
-                <a href="#" class="hero-link" id="aboutMeLink">about me</a>
-                <a href="cv.pdf#view=Fit" target="_blank" class="hero-link">download cv</a>
-            </div>
-            
-            <!-- Header Navigation -->
-            <header class="header">
-                <div class="header-inner">
-                    <nav class="nav">
-                        <a href="#experience" class="nav-link">experience</a>
-                        <a href="#work" class="nav-link">projects</a>
-                        <a href="#contact" class="nav-link">contact</a>
-                    </nav>
-                    <div class="header-meta">
-                        <a href="https://open.spotify.com/track/2KvbLliAjjZNOipthec7Fh?si=885ff3e35661451e" target="_blank" class="location location-link">amsterdam</a>
-                        <span class="time" id="liveTime">00:00</span>
-                    </div>
+            <!-- Hero / Header: about me, experience, projects (no contact). Location + time. -->
+            <div class="hero-header-row">
+                <div class="hero-links">
+                    <a href="#" class="hero-link" id="aboutMeLink">about me</a>
+                    <a href="#experience" class="hero-link">experience</a>
+                    <a href="#work" class="hero-link">projects</a>
                 </div>
-            </header>
-            
+                <div class="header-meta">
+                    <a href="https://open.spotify.com/track/2KvbLliAjjZNOipthec7Fh?si=885ff3e35661451e" target="_blank" class="location location-link">amsterdam</a>
+                    <span class="time" id="liveTime">00:00</span>
+                </div>
+            </div>
             <!-- Hero Content -->
             <div class="hero-content">
                 <div class="hero-name-container">
@@ -423,19 +414,21 @@
         </div>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer: left = download cv | middle = hit me up | right = find me (LinkedIn, Dribbble) -->
     <footer class="footer" id="contact" data-scroll-section>
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-content footer-three-cols">
                 <div class="footer-left">
-                    <span class="footer-label">hit me up:</span>
-                    <a href="mailto:spirosleividiotis@gmail.com" class="footer-link">spirosleividiotis@gmail.com</a>
+                    <a href="cv.pdf#view=Fit" target="_blank" class="footer-link">download cv</a>
                 </div>
-                
+                <div class="footer-center">
+                    <span class="footer-label">hit me up:</span>
+                    <a href="mailto:spirosleividiotis@gmail.com" class="footer-link footer-email">spirosleividiotis@gmail.com</a>
+                </div>
                 <div class="footer-right">
                     <span class="footer-label">find me:</span>
-                    <a href="https://dribbble.com/spirosleividiotis" target="_blank" class="footer-link">dribbble</a>
                     <a href="https://www.linkedin.com/in/sleividiotis/" target="_blank" class="footer-link">linkedin</a>
+                    <a href="https://dribbble.com/spirosleividiotis" target="_blank" class="footer-link">dribbble</a>
                 </div>
             </div>
             

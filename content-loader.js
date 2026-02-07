@@ -235,9 +235,9 @@ function updateExperience(experience) {
     window.experienceData = experience;
 }
 
-// Update Footer
+// Update Footer (left = cv, center = email, right = social)
 function updateFooter(footer) {
-    const footerEmail = document.querySelector('.footer-left .footer-link');
+    const footerEmail = document.querySelector('.footer-center .footer-link, .footer-email');
     if (footerEmail) {
         footerEmail.textContent = footer.email;
         footerEmail.href = `mailto:${footer.email}`;

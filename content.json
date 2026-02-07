@@ -1,16 +1,10 @@
 {
   "hero": {
-    "name": "Spiros<br>Leividiotis",
+    "name": "Spiros Leividiotis",
     "subtitle": "Staff Product Motion Designer specializing in motion systems and design system implementation. I help teams ship motion that's consistent, scalable, and implementation ready, turning principles into patterns, guidelines, and Lottie ready handoff with design systems and engineering.\n",
     "photo": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694889/photo_vf6t7t.jpg",
     "tags": {
-      "tools": [
-        "Rive",
-        "Cursor",
-        "Figma",
-        "LottieFiles",
-        "After Effects"
-      ],
+      "tools": ["Rive", "Cursor", "Figma", "LottieFiles", "After Effects"],
       "skills": [
         "UX motion",
         "Motion systems",
@@ -22,18 +16,9 @@
   },
   "header": {
     "navigation": [
-      {
-        "text": "experience",
-        "href": "#experience"
-      },
-      {
-        "text": "projects",
-        "href": "#work"
-      },
-      {
-        "text": "contact",
-        "href": "#contact"
-      }
+      { "text": "experience", "href": "#experience" },
+      { "text": "projects", "href": "#work" },
+      { "text": "contact", "href": "#contact" }
     ],
     "location": {
       "text": "amsterdam",
@@ -57,7 +42,7 @@
     "file": "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769694877/Motion_reel_copy_sfrcru.mp4"
   },
   "analytics": {
-    "script": "<!-- Google tag (gtag.js) -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=G-BBHPPJKL50\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n  gtag('config', 'G-BBHPPJKL50');\n</script>"
+    "script": " \n \n \n window.dataLayer = window.dataLayer || [];\n function gtag(){dataLayer.push(arguments);}\n gtag('js', new Date());\n gtag('config', 'G-BBHPPJKL50');\n "
   },
   "projects": [
     {
@@ -70,10 +55,7 @@
       "customUrl": "motion-system-content.html",
       "bodyText": "",
       "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769884563/portfolio/cover-system_bja2ln.gif",
-      "media": {
-        "hero": "portfolio-ios-cover.html",
-        "grid": []
-      }
+      "media": { "hero": "portfolio-ios-cover.html", "grid": [] }
     },
     {
       "id": 2,
@@ -85,10 +67,7 @@
       "customUrl": "project-2-tokens-tool.html",
       "bodyText": "",
       "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1770458902/portfolio/cover-tool_wl4nuu.mp4",
-      "media": {
-        "hero": "tool-cover.html",
-        "grid": []
-      }
+      "media": { "hero": "tool-cover.html", "grid": [] }
     },
     {
       "id": 3,
@@ -100,10 +79,7 @@
       "customUrl": "project-3-animation-library.html",
       "bodyText": "",
       "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769886597/portfolio/cover-lotties_zunbzo.gif",
-      "media": {
-        "hero": "lottie-library-cover.html",
-        "grid": []
-      }
+      "media": { "hero": "lottie-library-cover.html", "grid": [] }
     },
     {
       "id": 4,
@@ -115,10 +91,7 @@
       "customUrl": "project-4-handoff-process.html",
       "bodyText": "",
       "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1770458891/portfolio/cover-handoff_abhtmt.mp4",
-      "media": {
-        "hero": "handoff-cover.html",
-        "grid": []
-      }
+      "media": { "hero": "handoff-cover.html", "grid": [] }
     },
     {
       "id": 5,
@@ -129,15 +102,7 @@
       "password": "spiros2026",
       "customUrl": "project-6-flink-brand.html",
       "bodyText": "",
-      "media": {
-        "hero": "",
-        "grid": [],
-        "videos": [
-          "",
-          "",
-          ""
-        ]
-      },
+      "media": { "hero": "", "grid": [], "videos": ["", "", ""] },
       "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769887959/portfolio/cover-flink_nlzzjj.mp4"
     },
     {
@@ -151,30 +116,12 @@
       "media": {
         "hero": "",
         "grid": [
-          "selection-01.gif",
-          "selection-02.mp4",
-          "selection-03.mp4",
-          "selection-04.gif",
-          "selection-05.webp",
-          "selection-06.gif",
-          "selection-08.gif",
-          "selection-09.mp4",
-          "selection-10.gif",
-          "selection-11.mp4",
-          "selection-12.mp4",
-          "selection-13.mp4",
-          "selection-14.gif",
-          "selection-15.gif",
-          "selection-16.gif",
-          "selection-17.webp",
-          "selection-18.gif",
-          "selection-19.mp4",
-          "selection-20.gif",
-          "selection-21.mp4",
-          "selection-22.gif",
-          "selection-23.webp",
-          "selection-24.gif",
-          "selection-25.gif",
+          "selection-01.gif", "selection-02.mp4", "selection-03.mp4", "selection-04.gif",
+          "selection-05.webp", "selection-06.gif", "selection-08.gif", "selection-09.mp4",
+          "selection-10.gif", "selection-11.mp4", "selection-12.mp4", "selection-13.mp4",
+          "selection-14.gif", "selection-15.gif", "selection-16.gif", "selection-17.webp",
+          "selection-18.gif", "selection-19.mp4", "selection-20.gif", "selection-21.mp4",
+          "selection-22.gif", "selection-23.webp", "selection-24.gif", "selection-25.gif",
           "selection-27.gif"
         ]
       }
@@ -188,26 +135,17 @@
       "roles": [
         {
           "title": "Staff Motion Designer, Design System",
-          "period": {
-            "start": "2025",
-            "end": "Now"
-          },
+          "period": { "start": "2025", "end": "Now" },
           "description": "- Built motion design system: interaction patterns, timing tokens, easing curves, semantic language\n- Established Lottie/Rive pipelines enabling autonomous adoption across 20+ designers and 50+ engineers\n- Partnered with design systems and engineering on implementation, QA, and performance optimization\n- Co-led vibe coding initiative; built internal tools with AI-assisted workflows for faster iteration"
         },
         {
           "title": "Staff Motion Designer, Product & Web",
-          "period": {
-            "start": "2024",
-            "end": "2025"
-          },
+          "period": { "start": "2024", "end": "2025" },
           "description": "- Led motion direction for website: scroll animations, hover states, navigation, progressive reveals\n- Prototyped complex interactions (CTAs, parallax, cards, multi-step flows) and built reusable templates\n- Established Lottie pipeline for web-optimized, performance-ready animations"
         },
         {
           "title": "Senior Motion Designer, Brand & Web",
-          "period": {
-            "start": "2022",
-            "end": "2024"
-          },
+          "period": { "start": "2022", "end": "2024" },
           "description": "- Delivered motion across product, website, and brand touchpoints\n- Established typography system, video guidelines, and motion workflows"
         }
       ]
@@ -219,10 +157,7 @@
       "roles": [
         {
           "title": "Senior Motion Designer",
-          "period": {
-            "start": "2021",
-            "end": "2022"
-          },
+          "period": { "start": "2021", "end": "2022" },
           "description": "- Set motion direction across product and brand\n- Built repeatable workflow reducing delivery time from weeks to days"
         }
       ]
@@ -234,10 +169,7 @@
       "roles": [
         {
           "title": "Motion Designer",
-          "period": {
-            "start": "2020",
-            "end": "2021"
-          },
+          "period": { "start": "2020", "end": "2021" },
           "description": "- Created motion concepts and adaptations for apps, social, TV, and DOOH\n- Maintained quality and consistency while shipping high-volume work\n"
         }
       ]
@@ -249,10 +181,7 @@
       "roles": [
         {
           "title": "Motion Designer",
-          "period": {
-            "start": "2018",
-            "end": "2020"
-          },
+          "period": { "start": "2018", "end": "2020" },
           "description": "- Split time between an embedded client team (Skandia) and agency projects\n- Partnered with clients to storyboard, iterate, and deliver animated videos\n- Adapted styleframes and concepts into finished motion across multiple formats"
         }
       ]
@@ -261,14 +190,8 @@
   "footer": {
     "email": "spirosleividiotis@gmail.com",
     "social": [
-      {
-        "name": "dribbble",
-        "url": "https://dribbble.com/spirosleividiotis"
-      },
-      {
-        "name": "linkedin",
-        "url": "https://www.linkedin.com/in/sleividiotis/"
-      }
+      { "name": "linkedin", "url": "https://www.linkedin.com/in/sleividiotis/" },
+      { "name": "dribbble", "url": "https://dribbble.com/spirosleividiotis" }
     ],
     "logo": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694889/logo_ufrm6c.svg",
     "year": "2026"
