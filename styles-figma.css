@@ -74,8 +74,8 @@ section {
         padding: 0 200px;
     }
     
-    .hero-links {
-        left: calc(130px * 1.6);
+    .hero-line-1-left {
+        /* position from container padding */
     }
     
     .nav {
@@ -131,10 +131,8 @@ section {
    HERO MODULE (includes header)
    =================================== */
 
-.hero-links {
-    position: absolute;
-    top: 32px;
-    left: 80px; /* Match container padding - aligns with project boxes and company names */
+/* Line 1 left: about me + reel. Line 2: experience + projects */
+.hero-line-1-left {
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -142,23 +140,22 @@ section {
     will-change: transform;
 }
 
-/* Large screens - scale hero links position to match container padding */
-@media (min-width: 1920px) {
-    .hero-links {
-        left: 120px; /* Match container padding */
-    }
+.hero-nav-row-1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
 }
 
-@media (min-width: 2560px) {
-    .hero-links {
-        left: 160px; /* Match container padding */
-    }
+.hero-nav-row-2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
 }
 
-@media (min-width: 3440px) {
-    .hero-links {
-        left: 200px; /* Match container padding */
-    }
+.hero-line-1-left .hero-link {
+    display: inline-block;
 }
 
 .hero-link {
@@ -175,7 +172,7 @@ section {
     opacity: 0.6;
 }
 
-/* Hero top row: left links | center projects | right meta */
+/* Hero top row: left = line1 (about me, reel) + line2 (experience, projects) | right = meta */
 .hero-header-row {
     position: absolute;
     top: 0;
@@ -184,26 +181,34 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding-top: 32px;
+    padding: 32px 0 0 80px;
+    padding-right: 80px;
     z-index: 10;
 }
 
-.hero-nav-center {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 32px;
+@media (min-width: 1920px) {
+    .hero-header-row {
+        padding-left: 120px;
+        padding-right: 120px;
+    }
 }
 
-.hero-nav-center .hero-link {
-    display: block;
+@media (min-width: 2560px) {
+    .hero-header-row {
+        padding-left: 160px;
+        padding-right: 160px;
+    }
 }
 
-/* Reel link in hero, below top row */
+@media (min-width: 3440px) {
+    .hero-header-row {
+        padding-left: 200px;
+        padding-right: 200px;
+    }
+}
+
+/* Reel link on line 1 (same row as about me) */
 .hero-reel-link {
-    position: absolute;
-    top: 80px;
-    left: 80px;
     z-index: 10;
     color: #000000;
     border-color: #000000;
@@ -211,24 +216,6 @@ section {
 
 .hero-reel-link:hover {
     border-color: rgba(0, 0, 0, 0.6);
-}
-
-@media (min-width: 1920px) {
-    .hero-reel-link {
-        left: 120px;
-    }
-}
-
-@media (min-width: 2560px) {
-    .hero-reel-link {
-        left: 160px;
-    }
-}
-
-@media (min-width: 3440px) {
-    .hero-reel-link {
-        left: 200px;
-    }
 }
 
 .hero {
@@ -1087,6 +1074,7 @@ section {
 .footer {
     padding: 10px 0 80px;
     background: #FFFFFF;
+    will-change: transform;
     color: #000000;
     position: relative;
     z-index: 5;
@@ -1105,6 +1093,7 @@ section {
 
 .footer-three-cols .footer-left {
     justify-content: flex-start;
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .footer-three-cols .footer-center {
@@ -1112,10 +1101,37 @@ section {
     align-items: center;
     gap: 20px;
     justify-content: center;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: 0.08s;
 }
 
 .footer-three-cols .footer-right {
     justify-content: flex-end;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: 0.16s;
+}
+
+/* Staggered reveal when footer enters view (JS adds .footer-animate then .footer-visible) */
+.footer.footer-animate .footer-three-cols .footer-left {
+    opacity: 0;
+    transform: translateY(16px);
+}
+
+.footer.footer-animate .footer-three-cols .footer-center {
+    opacity: 0;
+    transform: translateY(16px);
+}
+
+.footer.footer-animate .footer-three-cols .footer-right {
+    opacity: 0;
+    transform: translateY(16px);
+}
+
+.footer.footer-visible .footer-three-cols .footer-left,
+.footer.footer-visible .footer-three-cols .footer-center,
+.footer.footer-visible .footer-three-cols .footer-right {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .footer-three-cols .footer-right .footer-link {
@@ -1180,6 +1196,18 @@ section {
     align-items: center;
     justify-content: center;
     gap: 12px;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: 0.24s;
+}
+
+.footer.footer-animate .footer-credit {
+    opacity: 0;
+    transform: translateY(12px);
+}
+
+.footer.footer-visible .footer-credit {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .footer-logo {
@@ -2089,29 +2117,28 @@ section {
         padding-top: 0;
     }
     
-    .hero-nav-center {
+    .hero-nav-row-1,
+    .hero-nav-row-2 {
         position: relative !important;
-        left: auto !important;
         transform: none !important;
-        top: auto !important;
     }
     
     .hero-reel-link {
         position: relative !important;
-        top: auto !important;
-        left: auto !important;
-        margin-top: 16px;
-        margin-bottom: 24px;
+        margin-top: 0;
+        margin-bottom: 0;
     }
     
-    /* Hero links */
-    .hero-links {
+    .hero-line-1-left {
         position: relative !important;
-        top: auto !important;
-        left: auto !important;
         margin-bottom: 0;
         gap: 12px;
         transform: none !important;
+    }
+    
+    .hero-header-row {
+        padding-left: 20px;
+        padding-right: 20px;
     }
     
     .hero-link {

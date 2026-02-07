@@ -8,7 +8,7 @@ function updateParallax() {
     const scrolled = window.pageYOffset;
     
     // Hero elements parallax - move UP as you scroll down
-    const heroLinks = document.querySelector('.hero-links');
+    const heroLine1Left = document.querySelector('.hero-line-1-left');
     const nav = document.querySelector('.nav');
     const headerMeta = document.querySelector('.header-meta');
     const heroName = document.querySelector('.hero-name');
@@ -16,10 +16,10 @@ function updateParallax() {
     const tagsGrid = document.querySelector('.tags-grid');
     const footer = document.querySelector('.footer');
     
-    // Hero links move with navigation
-    if (heroLinks) {
+    // Hero nav (line 1: about me + reel, line 2: experience + projects) moves with scroll
+    if (heroLine1Left) {
         const linksOffset = scrolled * 0.25;
-        heroLinks.style.transform = `translateY(-${linksOffset}px)`;
+        heroLine1Left.style.transform = `translateY(-${linksOffset}px)`;
     }
     
     // Navigation and time move up slowly
@@ -48,6 +48,19 @@ function updateParallax() {
         tagsGrid.style.transform = `translateY(-${tagsOffset}px)`;
     }
     
+    // Footer: different parallax — moves up slower (gentle lag) so it feels distinct from hero
+    if (footer) {
+        const footerRect = footer.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        if (footerRect.top < viewportHeight * 1.2) {
+            const footerProgress = 1 - Math.max(0, footerRect.top) / (viewportHeight * 1.2);
+            const footerOffset = footerProgress * 40 * 0.4; // subtle upward drift
+            footer.style.transform = `translateY(-${footerOffset}px)`;
+        } else {
+            footer.style.transform = '';
+        }
+    }
+    
     ticking = false;
 }
 
@@ -62,6 +75,29 @@ function requestTick() {
 if (!checkIfMobile()) {
     window.addEventListener('scroll', requestTick);
 }
+
+// ===================================
+// FOOTER STAGGERED REVEAL (different animation when footer enters view)
+// ===================================
+function initFooterReveal() {
+    const footer = document.querySelector('.footer');
+    if (!footer) return;
+    const viewportHeight = window.innerHeight;
+    const footerTop = footer.getBoundingClientRect().top;
+    if (footerTop > viewportHeight * 0.8) {
+        footer.classList.add('footer-animate');
+    }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('footer-visible');
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+    observer.observe(footer);
+}
+window.addEventListener('contentLoaded', initFooterReveal);
+window.addEventListener('DOMContentLoaded', initFooterReveal);
 
 // ===================================
 // LIVE TIME

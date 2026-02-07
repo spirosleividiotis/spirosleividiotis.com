@@ -2,6 +2,22 @@
 // CONTENT LOADER - Load content from content.json
 // ===================================
 
+function escapeHtml(s) {
+    if (s == null) return '';
+    const div = document.createElement('div');
+    div.textContent = s;
+    return div.innerHTML;
+}
+function escapeAttr(s) {
+    if (s == null) return '';
+    return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
 async function loadContent() {
     try {
         const response = await fetch('content.json?v=' + Date.now());
@@ -119,6 +135,30 @@ function updateHeader(header) {
     
     const cvLink = document.querySelector('a[href*="cv"]');
     if (cvLink) cvLink.href = header.cvFile;
+    
+    // Hero nav: line 1 = first item + reel (static), line 2 = rest (e.g. experience, projects)
+    const nav = header.navigation && header.navigation.length ? header.navigation : [
+        { label: 'about me', href: '#' },
+        { label: 'experience', href: '#experience' },
+        { label: 'projects', href: '#work' }
+    ];
+    const row1El = document.getElementById('heroNavRow1');
+    const row2El = document.getElementById('heroNavRow2');
+    if (row1El && nav.length > 0) {
+        const item = nav[0];
+        const label = item.label || item.text || '';
+        const href = item.href || '#';
+        const isAbout = href.replace(/^#/, '') === '' || href === '#';
+        row1El.innerHTML = `<a href="${escapeAttr(href)}" class="hero-link" ${isAbout ? 'id="aboutMeLink"' : ''}>${escapeHtml(label)}</a>`;
+    }
+    if (row2El && nav.length > 1) {
+        const rest = nav.slice(1);
+        row2El.innerHTML = rest.map(item => {
+            const label = item.label || item.text || '';
+            const href = item.href || '#';
+            return `<a href="${escapeAttr(href)}" class="hero-link">${escapeHtml(label)}</a>`;
+        }).join('');
+    }
 }
 
 // Update Projects
