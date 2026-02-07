@@ -174,21 +174,29 @@ section {
     opacity: 0.6;
 }
 
-/* Capsule + arrow for all hero nav links (about me, experience, reel, projects) */
+/* Capsule + arrow only on hover (static = plain text link) */
 .hero-capsule-link {
-    padding: 12px 24px;
-    border: 1px solid rgba(0, 0, 0, 0.35);
+    padding: 0;
+    border: 1px solid transparent;
     border-radius: 9999px;
     margin-bottom: 4px;
-}
-
-.hero-capsule-link:hover {
-    border-color: rgba(0, 0, 0, 0.6);
+    transition: padding 0.2s ease, border-color 0.2s ease;
 }
 
 .hero-capsule-link .hero-arrow {
     display: inline-flex;
     color: inherit;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.hero-capsule-link:hover {
+    padding: 12px 24px;
+    border-color: rgba(0, 0, 0, 0.6);
+}
+
+.hero-capsule-link:hover .hero-arrow {
+    opacity: 1;
 }
 
 .hero-capsule-link .hero-arrow svg {
