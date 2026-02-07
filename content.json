@@ -63,7 +63,7 @@
     {
       "id": 1,
       "name": "Portfolio Motion System",
-      "company": "Portfolio",
+      "company": "Qonto",
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
@@ -77,14 +77,14 @@
     },
     {
       "id": 2,
-      "name": "Motion Tokens Inspector",
-      "company": "Portfolio",
+      "name": "Vibe coding a Motion Preview Tool",
+      "company": "Qonto",
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
       "customUrl": "project-2-tokens-tool.html",
       "bodyText": "",
-      "cardPreview": "tool-cover.html",
+      "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1770458902/portfolio/cover-tool_wl4nuu.mp4",
       "media": {
         "hero": "tool-cover.html",
         "grid": []
@@ -93,7 +93,7 @@
     {
       "id": 3,
       "name": "Animation Library at Scale",
-      "company": "Portfolio",
+      "company": "Qonto",
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
@@ -108,13 +108,13 @@
     {
       "id": 4,
       "name": "Motion Handoff & Implementation",
-      "company": "Portfolio",
+      "company": "Qonto",
       "color": "#141414",
       "passwordProtected": true,
       "password": "spiros2026",
       "customUrl": "project-4-handoff-process.html",
       "bodyText": "",
-      "cardPreview": "handoff-cover.html",
+      "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1770458891/portfolio/cover-handoff_abhtmt.mp4",
       "media": {
         "hero": "handoff-cover.html",
         "grid": []
@@ -133,9 +133,9 @@
         "hero": "",
         "grid": [],
         "videos": [
-          "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769888741/portfolio/1920x1080_Logo_Animation_8_fo3knv.mp4",
-          "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769888749/portfolio/1920x1080_Logo_Appscreen_rjxqkk.mp4",
-          "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769888578/portfolio/Flink_Splashscreen_1080x1350_u5spdt.mp4"
+          "",
+          "",
+          ""
         ]
       },
       "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769887959/portfolio/cover-flink_nlzzjj.mp4"
