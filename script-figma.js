@@ -877,62 +877,51 @@ function initializeModalsAndPlayers() {
         }
     });
 
-    // About Me Modal
-    const aboutModal = document.getElementById('aboutModal');
+    // About Me: in-page view (homepage hides, smooth reveal, X to return)
+    const aboutView = document.getElementById('aboutModal');
     const aboutMeLink = document.getElementById('aboutMeLink');
     const aboutClose = document.getElementById('aboutClose');
-    const aboutOverlay = document.getElementById('aboutOverlay');
 
-    console.log('About modal setup:', { aboutModal, aboutMeLink });
+    function openAboutView() {
+        if (aboutView) {
+            document.body.classList.add('about-view-active');
+            aboutView.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeAboutView() {
+        if (aboutView) {
+            document.body.classList.remove('about-view-active');
+            aboutView.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
 
     if (aboutMeLink) {
         aboutMeLink.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            console.log('About me link clicked!');
-            
-            if (aboutModal) {
-                aboutModal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                console.log('Modal should be visible now');
-            }
+            openAboutView();
+            return false;
         });
     }
 
     if (aboutClose) {
         aboutClose.addEventListener('click', function() {
-            if (aboutModal) {
-                aboutModal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
+            closeAboutView();
         });
     }
 
-    if (aboutOverlay) {
-        aboutOverlay.addEventListener('click', function() {
-            if (aboutModal) {
-                aboutModal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-    }
-
-    // Close on Escape
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && aboutModal && aboutModal.classList.contains('active')) {
-            if (aboutModal) aboutModal.classList.remove('active');
-            document.body.style.overflow = '';
+        if (e.key === 'Escape' && aboutView && aboutView.classList.contains('active')) {
+            closeAboutView();
         }
     });
-    
-    // Close about modal when clicking outside (on modal background)
-    if (aboutModal) {
-        aboutModal.addEventListener('click', function(e) {
-            // Close if clicking directly on the modal (not on the content inside)
-            if (e.target === aboutModal) {
-                aboutModal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
+
+    if (aboutView) {
+        aboutView.addEventListener('click', function(e) {
+            if (e.target === aboutView) closeAboutView();
         });
     }
     

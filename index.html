@@ -116,19 +116,18 @@
         </div>
     </div>
 
-    <!-- About Me Modal -->
-    <div class="about-modal" id="aboutModal">
-        <div class="modal-overlay" id="aboutOverlay"></div>
-        <div class="about-content">
-            <button class="modal-close" id="aboutClose">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
+    <!-- About Me: in-page view (things hide, smooth reveal, X to return) -->
+    <div class="about-view" id="aboutModal">
+        <button class="about-view-close" id="aboutClose" aria-label="Close and return to homepage">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="about-view-content">
             <div class="about-inner">
                 <div class="about-photo">
-                    <img id="aboutPhotoImg" src="" alt="">
+                    <img id="aboutPhotoImg" src="" alt="Spiros Leividiotis">
                 </div>
                 <div class="about-text" id="aboutText"></div>
             </div>
@@ -237,66 +236,7 @@
         </div>
     </footer>
 
-    <script src="content-loader.js?v=5"></script>
-    <script src="script-figma.js?v=5"></script>
-    <script>
-        // Emergency about me fix
-        console.log('Emergency script loaded');
-        window.addEventListener('load', function() {
-            console.log('Page fully loaded');
-            const link = document.getElementById('aboutMeLink');
-            const modal = document.getElementById('aboutModal');
-            const overlay = document.getElementById('aboutOverlay');
-            console.log('Link:', link);
-            console.log('Modal:', modal);
-            
-            function closeModal() {
-                if (modal) {
-                    modal.classList.remove('active');
-                    modal.style.opacity = '0';
-                    modal.style.pointerEvents = 'none';
-                    document.body.style.overflow = '';
-                }
-            }
-            
-            if (link) {
-                link.onclick = function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('LINK CLICKED!');
-                    if (modal) {
-                        modal.classList.add('active');
-                        modal.style.display = 'flex';
-                        modal.style.opacity = '1';
-                        modal.style.pointerEvents = 'all';
-                        document.body.style.overflow = 'hidden';
-                        console.log('Modal activated');
-                    }
-                    return false;
-                };
-            }
-            
-            const close = document.getElementById('aboutClose');
-            if (close) {
-                close.onclick = closeModal;
-            }
-            
-            // Click outside to close
-            if (modal) {
-                modal.onclick = function(e) {
-                    if (e.target === modal || e.target === overlay) {
-                        closeModal();
-                    }
-                };
-            }
-            
-            // Escape key to close
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
-                    closeModal();
-                }
-            });
-        });
-    </script>
+    <script src="content-loader.js?v=6"></script>
+    <script src="script-figma.js?v=6"></script>
 </body>
 </html>
