@@ -232,11 +232,11 @@ section {
     left: 0;
     right: 0;
     height: calc(100vh - 92px);
-    padding: 0 48px 100px;
+    padding: 100px 48px;
     background: #FFFFFF;
     z-index: 1;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
 }
 
 .hero .container {
@@ -249,27 +249,21 @@ section {
 .hero-content {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    justify-content: space-between;
+    align-items: flex-start;
     gap: 50px;
     max-width: 1205px;
-    margin-left: auto;
     width: 100%;
-    height: 100%;
-    padding: 0 0 0 0;
 }
 
-.hero-right {
-    order: 1;
-}
-
-.hero-name-container {
-    order: 2;
-    margin-top: auto;
+/* Name row: Figma justify-content center, align-items flex-end; name text right-aligned */
+.hero-name-wrapper {
     position: relative;
-    width: 100%;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    max-width: 1205px;
 }
 
 .hero-name {
@@ -307,10 +301,11 @@ section {
     opacity: 1;
 }
 
-.hero-right {
-    order: 1;
+/* Intro: 806px, align end, 24px / 28px, weight 600 */
+.hero-intro {
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     align-items: flex-end;
     gap: 10px;
     max-width: 806px;
@@ -318,7 +313,7 @@ section {
 
 .hero-subtitle {
     font-family: var(--font-primary);
-    font-weight: 500;
+    font-weight: 600;
     font-size: 24px;
     line-height: 28px;
     letter-spacing: -0.02em;
@@ -327,24 +322,21 @@ section {
     text-align: right;
 }
 
-.tags-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
+/* Tags: two rows – row gap 18px, column gap 20px (Figma) */
+.hero-tags {
     width: 100%;
-    max-width: 542px;
 }
 
-/* Tags: first row = black pills (tools), second row = outline pills (skills) */
 .tags-grid {
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: flex-start;
     gap: 18px 20px;
 }
 
-.tags-grid > .tag,
-.tags-grid > .tag-black {
+.tags-grid .tag,
+.tags-grid .tag-black {
     flex-shrink: 0;
 }
 
@@ -357,7 +349,7 @@ section {
     border: 1px solid #000000;
     border-radius: 50px;
     font-family: var(--font-primary);
-    font-weight: 400;
+    font-weight: 600;
     font-size: 18px;
     line-height: 118.44%;
     color: #000000;
@@ -373,11 +365,13 @@ section {
     background: #000000 !important;
     border-color: #000000 !important;
     color: #FFFFFF !important;
+    font-weight: 600;
 }
 
 .tag-black:hover {
     opacity: 0.85;
 }
+
 
 /* ===================================
    EXPERIENCE (Figma: black bg, list with dividers, dates right)
