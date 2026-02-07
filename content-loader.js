@@ -136,28 +136,32 @@ function updateHeader(header) {
     const cvLink = document.querySelector('a[href*="cv"]');
     if (cvLink) cvLink.href = header.cvFile;
     
-    // Hero nav: line 1 = first item + reel (static), line 2 = rest (e.g. experience, projects)
+    // Hero nav: left = first 2 items (about me, experience) | center = reel + last item (projects) | right = amsterdam, time
     const nav = header.navigation && header.navigation.length ? header.navigation : [
         { label: 'about me', href: '#' },
         { label: 'experience', href: '#experience' },
         { label: 'projects', href: '#work' }
     ];
-    const row1El = document.getElementById('heroNavRow1');
-    const row2El = document.getElementById('heroNavRow2');
-    if (row1El && nav.length > 0) {
-        const item = nav[0];
-        const label = item.label || item.text || '';
-        const href = item.href || '#';
-        const isAbout = href.replace(/^#/, '') === '' || href === '#';
-        row1El.innerHTML = `<a href="${escapeAttr(href)}" class="hero-link" ${isAbout ? 'id="aboutMeLink"' : ''}>${escapeHtml(label)}</a>`;
-    }
-    if (row2El && nav.length > 1) {
-        const rest = nav.slice(1);
-        row2El.innerHTML = rest.map(item => {
+    const leftEl = document.getElementById('heroNavLeft');
+    const centerEl = document.getElementById('heroNavCenter');
+    if (leftEl) {
+        const leftItems = nav.length >= 2 ? nav.slice(0, 2) : nav;
+        leftEl.innerHTML = leftItems.map((item, i) => {
             const label = item.label || item.text || '';
             const href = item.href || '#';
-            return `<a href="${escapeAttr(href)}" class="hero-link">${escapeHtml(label)}</a>`;
+            const isAbout = (href.replace(/^#/, '') === '' || href === '#') && i === 0;
+            return `<a href="${escapeAttr(href)}" class="hero-link" ${isAbout ? 'id="aboutMeLink"' : ''}>${escapeHtml(label)}</a>`;
         }).join('');
+    }
+    if (centerEl && nav.length >= 3) {
+        const centerItem = nav[2];
+        const label = centerItem.label || centerItem.text || '';
+        const href = centerItem.href || '#work';
+        centerEl.innerHTML = `<a href="${escapeAttr(href)}" class="hero-link">${escapeHtml(label)}</a>`;
+    } else if (centerEl && nav.length === 2) {
+        centerEl.innerHTML = `<a href="#work" class="hero-link">projects</a>`;
+    } else if (centerEl) {
+        centerEl.innerHTML = '';
     }
 }
 

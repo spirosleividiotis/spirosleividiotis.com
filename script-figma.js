@@ -8,7 +8,7 @@ function updateParallax() {
     const scrolled = window.pageYOffset;
     
     // Hero elements parallax - move UP as you scroll down
-    const heroLine1Left = document.querySelector('.hero-line-1-left');
+    const heroHeaderRow = document.querySelector('.hero-header-row');
     const nav = document.querySelector('.nav');
     const headerMeta = document.querySelector('.header-meta');
     const heroName = document.querySelector('.hero-name');
@@ -16,10 +16,10 @@ function updateParallax() {
     const tagsGrid = document.querySelector('.tags-grid');
     const footer = document.querySelector('.footer');
     
-    // Hero nav (line 1: about me + reel, line 2: experience + projects) moves with scroll
-    if (heroLine1Left) {
+    // Hero nav row (left, center, right) moves with scroll
+    if (heroHeaderRow) {
         const linksOffset = scrolled * 0.25;
-        heroLine1Left.style.transform = `translateY(-${linksOffset}px)`;
+        heroHeaderRow.style.transform = `translateY(-${linksOffset}px)`;
     }
     
     // Navigation and time move up slowly
@@ -28,10 +28,7 @@ function updateParallax() {
         nav.style.transform = `translateY(-${navOffset}px)`;
     }
     
-    if (headerMeta) {
-        const metaOffset = scrolled * 0.25;
-        headerMeta.style.transform = `translateY(-${metaOffset}px)`;
-    }
+    /* headerMeta is inside hero-header-row, so it moves with the row */
     
     if (heroName) {
         const nameOffset = scrolled * 0.3;

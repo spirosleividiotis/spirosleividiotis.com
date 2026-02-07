@@ -16,9 +16,9 @@
   },
   "header": {
     "navigation": [
+      { "text": "about me", "href": "#" },
       { "text": "experience", "href": "#experience" },
-      { "text": "projects", "href": "#work" },
-      { "text": "contact", "href": "#contact" }
+      { "text": "projects", "href": "#work" }
     ],
     "location": {
       "text": "amsterdam",

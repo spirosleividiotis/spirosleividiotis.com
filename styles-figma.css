@@ -74,7 +74,7 @@ section {
         padding: 0 200px;
     }
     
-    .hero-line-1-left {
+    .hero-nav-left {
         /* position from container padding */
     }
     
@@ -131,8 +131,8 @@ section {
    HERO MODULE (includes header)
    =================================== */
 
-/* Line 1 left: about me + reel. Line 2: experience + projects */
-.hero-line-1-left {
+/* Hero header: left = about me, experience | center = reel, projects | right = amsterdam, time */
+.hero-nav-left {
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -140,22 +140,18 @@ section {
     will-change: transform;
 }
 
-.hero-nav-row-1 {
+.hero-nav-center {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: 4px;
     align-items: center;
-    gap: 16px;
+    z-index: 10;
+    will-change: transform;
 }
 
-.hero-nav-row-2 {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 16px;
-}
-
-.hero-line-1-left .hero-link {
-    display: inline-block;
+.hero-nav-left .hero-link,
+.hero-nav-center .hero-link {
+    display: block;
 }
 
 .hero-link {
@@ -172,7 +168,7 @@ section {
     opacity: 0.6;
 }
 
-/* Hero top row: left = line1 (about me, reel) + line2 (experience, projects) | right = meta */
+/* Hero top row: left | center | right */
 .hero-header-row {
     position: absolute;
     top: 0;
@@ -181,8 +177,7 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 32px 0 0 80px;
-    padding-right: 80px;
+    padding: 32px 80px 0;
     z-index: 10;
 }
 
@@ -207,7 +202,7 @@ section {
     }
 }
 
-/* Reel link on line 1 (same row as about me) */
+/* Reel link in center column (above projects) */
 .hero-reel-link {
     z-index: 10;
     color: #000000;
@@ -2117,23 +2112,14 @@ section {
         padding-top: 0;
     }
     
-    .hero-nav-row-1,
-    .hero-nav-row-2 {
+    .hero-nav-left,
+    .hero-nav-center {
         position: relative !important;
         transform: none !important;
     }
     
     .hero-reel-link {
         position: relative !important;
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-    
-    .hero-line-1-left {
-        position: relative !important;
-        margin-bottom: 0;
-        gap: 12px;
-        transform: none !important;
     }
     
     .hero-header-row {
