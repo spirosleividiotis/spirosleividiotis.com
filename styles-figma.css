@@ -142,13 +142,13 @@ section {
 
 .hero-nav-center {
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    left: calc(50% + 60px);
+    transform: none;
     top: 32px;
     display: flex;
     flex-direction: column;
     gap: 4px;
-    align-items: center;
+    align-items: flex-start;
     z-index: 10;
     will-change: transform;
 }
@@ -389,7 +389,7 @@ section {
     grid-template-columns: 1fr 1fr;
     gap: 80px;
     align-items: flex-start;
-    padding-top: 100px;
+    padding-top: 140px;
     padding-bottom: 0;
 }
 
