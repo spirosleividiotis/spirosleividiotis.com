@@ -187,28 +187,28 @@
       "image": "experience-portfolio.png",
       "roles": [
         {
-          "title": "Staff Motion Designer - Design System",
+          "title": "Staff Motion Designer, Design System",
           "period": {
             "start": "2025",
             "end": "Now"
           },
-          "description": "Own motion system principles, patterns, and docs. Partner with DS + engineering on implementation and QA. Drive adoption with reusable assets and handoff standards."
+          "description": "- Built motion design system from scratch: interaction patterns, timing tokens, easing curves, semantic motion language (entry/exit, transitions, reveals)\n- Established Lottie/Rive production pipelines enabling designers and engineers to ship scalable, performant animations autonomously\n- Partnered with design systems and engineering on implementation specs, QA, and performance optimization\n- Co-led vibe coding initiative for product design team to ship PRs directly: built internal tools and leveraged AI workflows for faster iteration"
         },
         {
-          "title": "Staff Motion and Website Designer",
+          "title": "Staff Motion Designer, Product & Web",
           "period": {
             "start": "2024",
             "end": "2025"
           },
-          "description": "Led website motion direction and consistency. Built scalable templates/patterns for faster delivery. Shipped implementation-ready motion with performance in mind."
+          "description": "- Led motion direction for Qonto's website: scroll animations, hover states, navigation transitions, progressive reveals with implementation-ready specs\n- Prototyped complex interactions (sticky CTAs, parallax, card hovers, multi-step flows) and built reusable templates that cut production time significantly\n- Established Lottie production pipeline for web-optimized, performance-ready animations shipped directly to engineering"
         },
         {
-          "title": "Senior Motion and Website Designer",
+          "title": "Senior Motion Designer, Brand & Web",
           "period": {
             "start": "2022",
             "end": "2024"
           },
-          "description": "Delivered web motion end-to-end (concept → assets). Set early guidelines and delivery workflow. Prototyped interactions and micro-motions for key pages."
+          "description": "- Delivered motion across product, website, and brand from product launches to marketing campaigns and brand touchpoints\n- Established typography system, video guidelines, and early motion workflows that scaled across teams"
         }
       ]
     },
@@ -223,7 +223,7 @@
             "start": "2021",
             "end": "2022"
           },
-          "description": "Set motion direction across product and brand. Built repeatable workflow for production and handoff. Delivered motion for key launches and campaigns."
+          "description": "- Set motion direction across product and brand\n- Built repeatable workflow reducing delivery time from weeks to days"
         }
       ]
     },
@@ -238,7 +238,7 @@
             "start": "2020",
             "end": "2021"
           },
-          "description": "Created motion and visual assets for digital products and comms. Worked with design and marketing to ship high-volume work fast. Maintained quality and consistency across channels."
+          "description": "- Created motion concepts and adaptations for apps, social, TV, and DOOH\n- Maintained quality and consistency while shipping high-volume work\n"
         }
       ]
     },
