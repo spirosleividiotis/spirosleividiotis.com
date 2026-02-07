@@ -174,34 +174,7 @@ section {
     opacity: 0.6;
 }
 
-/* Capsule + arrow only on hover (static = plain text link) */
-.hero-capsule-link {
-    padding: 0;
-    border: 1px solid transparent;
-    border-radius: 9999px;
-    margin-bottom: 4px;
-    transition: padding 0.2s ease, border-color 0.2s ease;
-}
-
-.hero-capsule-link .hero-arrow {
-    display: inline-flex;
-    color: inherit;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-}
-
-.hero-capsule-link:hover {
-    padding: 12px 24px;
-    border-color: rgba(0, 0, 0, 0.6);
-}
-
-.hero-capsule-link:hover .hero-arrow {
-    opacity: 1;
-}
-
-.hero-capsule-link .hero-arrow svg {
-    display: block;
-}
+/* Hero nav links: plain text; cursor turns to capsule+arrow on hover (see .cursor-arrow-only) */
 
 /* Hero top row: left | center | right */
 .hero-header-row {
