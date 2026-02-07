@@ -656,23 +656,26 @@ function initializeCursorHoverEffects() {
         });
     }
     
-    // Arrow cursor for hero links and nav links
-    heroLinks.forEach(link => {
-        link.addEventListener('mouseenter', () => {
-            cursorDot.classList.add('cursor-arrow-only');
-            cursorDot.classList.remove('cursor-hover', 'cursor-project');
-            // Explicitly hide text
-            const cursorText = cursorDot.querySelector('.cursor-text');
-            if (cursorText) {
-                cursorText.style.display = 'none';
+    // cursor-arrow-only for every hero nav link (event delegation so CMS-injected links work)
+    const heroHeaderRow = document.querySelector('.hero-header-row');
+    if (heroHeaderRow) {
+        heroHeaderRow.addEventListener('mouseover', (e) => {
+            const link = e.target.closest('.hero-link');
+            if (link && heroHeaderRow.contains(link)) {
+                cursorDot.classList.add('cursor-arrow-only');
+                cursorDot.classList.remove('cursor-hover', 'cursor-project');
+                const cursorText = cursorDot.querySelector('.cursor-text');
+                if (cursorText) cursorText.style.display = 'none';
             }
         });
-        
-        link.addEventListener('mouseleave', () => {
-            cursorDot.classList.remove('cursor-arrow-only');
-            resetCursorToDefault();
+        heroHeaderRow.addEventListener('mouseout', (e) => {
+            const stillOverLink = e.relatedTarget && e.relatedTarget.closest('.hero-link') && heroHeaderRow.contains(e.relatedTarget.closest('.hero-link'));
+            if (!stillOverLink) {
+                cursorDot.classList.remove('cursor-arrow-only');
+                resetCursorToDefault();
+            }
         });
-    });
+    }
     
     navLinks.forEach(link => {
         link.addEventListener('mouseenter', () => {
@@ -886,19 +889,6 @@ function initializeModalsAndPlayers() {
             cursorDot.classList.remove('cursor-arrow-only');
         });
     }
-
-    // Arrow cursor for hero links (about me, cv)
-    const heroLinks = document.querySelectorAll('.hero-link');
-    heroLinks.forEach(link => {
-    link.addEventListener('mouseenter', () => {
-        cursorDot.classList.add('cursor-arrow-only');
-        cursorDot.classList.remove('cursor-hover', 'cursor-project');
-    });
-    
-        link.addEventListener('mouseleave', () => {
-            cursorDot.classList.remove('cursor-arrow-only');
-        });
-    });
 
     // Reel Video Player
     const reelLinkForVideo = document.getElementById('reelLink');
