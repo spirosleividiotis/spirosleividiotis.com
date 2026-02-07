@@ -63,34 +63,38 @@ async function loadContent() {
     }
 }
 
-// Update Hero Section
+// Update Hero Section (CMS only – no fallback to HTML)
 function updateHero(hero) {
     const heroName = document.getElementById('heroName');
-    if (heroName) heroName.innerHTML = hero.name;
+    if (heroName && hero.name) heroName.innerHTML = escapeHtml(hero.name);
     
-    const heroSubtitle = document.querySelector('.hero-subtitle');
-    if (heroSubtitle) heroSubtitle.textContent = hero.subtitle;
+    const heroSubtitle = document.getElementById('heroSubtitle');
+    if (heroSubtitle && hero.subtitle != null) heroSubtitle.textContent = hero.subtitle;
     
     const heroPhoto = document.getElementById('heroPhoto');
-    if (heroPhoto) heroPhoto.style.backgroundImage = `url('${hero.photo}')`;
+    if (heroPhoto && hero.photo) heroPhoto.style.backgroundImage = `url('${escapeAttr(hero.photo)}')`;
     
-    // Update tags
-    const tagsGrid = document.querySelector('.tags-grid');
-    if (tagsGrid) {
-        const toolTags = hero.tags.tools.map(tool => `<div class="tag tag-black">${tool}</div>`).join('');
-        const skillTags = hero.tags.skills.map(skill => `<div class="tag">${skill}</div>`).join('');
+    const tagsGrid = document.getElementById('tagsGrid');
+    if (tagsGrid && hero.tags) {
+        const tools = Array.isArray(hero.tags.tools) ? hero.tags.tools : [];
+        const skills = Array.isArray(hero.tags.skills) ? hero.tags.skills : [];
+        const toolTags = tools.map(tool => `<div class="tag tag-black">${escapeHtml(tool)}</div>`).join('');
+        const skillTags = skills.map(skill => `<div class="tag">${escapeHtml(skill)}</div>`).join('');
         tagsGrid.innerHTML = toolTags + '<div style="flex-basis: 100%; height: 0;"></div>' + skillTags;
     }
 }
 
-// Update About Me Modal
+// Update About Me Modal (CMS only)
 function updateAboutMe(aboutMe) {
-    const aboutPhoto = document.querySelector('.about-photo img');
-    if (aboutPhoto) aboutPhoto.src = aboutMe.photo;
+    const aboutPhoto = document.getElementById('aboutPhotoImg');
+    if (aboutPhoto && aboutMe.photo) {
+        aboutPhoto.src = aboutMe.photo;
+        aboutPhoto.alt = 'Spiros Leividiotis';
+    }
     
-    const aboutText = document.querySelector('.about-text');
-    if (aboutText) {
-        aboutText.innerHTML = aboutMe.bio.map(p => `<p>${p}</p>`).join('');
+    const aboutText = document.getElementById('aboutText');
+    if (aboutText && Array.isArray(aboutMe.bio)) {
+        aboutText.innerHTML = aboutMe.bio.map(p => `<p>${escapeHtml(p)}</p>`).join('');
     }
 }
 
@@ -207,29 +211,35 @@ function updateProjects(projects) {
 
 // Update Experience
 function updateExperience(experience) {
-    // Update sidebar list
+    // Update sidebar list (CMS only)
     const experienceList = document.querySelector('.experience-list');
-    if (experienceList) {
+    if (experienceList && experience.length) {
         experienceList.innerHTML = experience.map((exp, i) => `
-            <div class="experience-item ${i === 0 ? 'active' : ''}" data-experience="${exp.id}">
-                <span class="item-name">${exp.company}</span>
+            <div class="experience-item ${i === 0 ? 'active' : ''}" data-experience="${escapeAttr(exp.id || '')}">
+                <span class="item-name">${escapeHtml(exp.company || '')}</span>
             </div>
         `).join('');
     }
     
-    // Update details content
+    // Update details content (escaped from CMS)
     const experienceWrapper = document.querySelector('.experience-details-wrapper');
-    if (experienceWrapper) {
+    if (experienceWrapper && experience.length) {
         experienceWrapper.innerHTML = experience.map((exp, expIndex) => {
-            const hasMultipleRoles = exp.roles.length > 1;
-            const firstRole = exp.roles[0];
+            const hasMultipleRoles = exp.roles && exp.roles.length > 1;
+            const firstRole = exp.roles && exp.roles[0] ? exp.roles[0] : { title: '', description: '', period: { start: '', end: '' } };
+            const company = escapeHtml(exp.company || '');
+            const title = escapeHtml(firstRole.title || '');
+            const description = escapeHtml(firstRole.description || '');
+            const start = escapeHtml((firstRole.period && firstRole.period.start) || '');
+            const end = escapeHtml((firstRole.period && firstRole.period.end) || '');
+            const expId = escapeAttr(exp.id || '');
             
             return `
-                <div class="experience-detail ${expIndex === 0 ? 'active' : ''}" id="${exp.id}" data-role-index="0">
-                    <h2 class="company-name">${exp.company}</h2>
+                <div class="experience-detail ${expIndex === 0 ? 'active' : ''}" id="${expId}" data-role-index="0">
+                    <h2 class="company-name">${company}</h2>
                     ${hasMultipleRoles ? `
                     <div class="job-title-wrapper">
-                        <p class="job-title">${firstRole.title}</p>
+                        <p class="job-title">${title}</p>
                         <div class="role-navigation">
                             <button class="role-arrow role-arrow-left inactive" data-direction="prev">
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -245,14 +255,14 @@ function updateExperience(experience) {
                         </div>
                     </div>
                     ` : `
-                    <p class="job-title">${firstRole.title}</p>
+                    <p class="job-title">${title}</p>
                     `}
                     <div class="experience-content-wrapper">
-                        <p class="experience-description">${firstRole.description}</p>
+                        <p class="experience-description">${description}</p>
                         <div class="experience-timeline">
-                            <span class="timeline-year">${firstRole.period.start}</span>
+                            <span class="timeline-year">${start}</span>
                             <span class="timeline-line"></span>
-                            <span class="timeline-end">${firstRole.period.end}</span>
+                            <span class="timeline-end">${end}</span>
                         </div>
                     </div>
                 </div>
@@ -260,17 +270,18 @@ function updateExperience(experience) {
         }).join('');
     }
     
-    // Update visuals
+    // Update visuals (CMS only)
     const experienceVisual = document.querySelector('.experience-visual');
-    if (experienceVisual) {
+    if (experienceVisual && experience.length) {
         experienceVisual.innerHTML = experience.map((exp, i) => {
             const hasImage = exp.image && exp.image.trim();
-            const fileExt = hasImage ? exp.image.split('.').pop().toLowerCase() : '';
+            const fileExt = hasImage ? exp.image.split('.').pop().toLowerCase().split('?')[0] : '';
             const isVideo = fileExt === 'mp4' || fileExt === 'webm' || fileExt === 'mov';
-            
+            const imgUrl = hasImage ? escapeAttr(exp.image) : '';
+            const expId = escapeAttr(exp.id || '');
             return `
-            <div class="visual-placeholder ${i === 0 ? 'active' : ''}" data-visual="${exp.id}" ${hasImage && !isVideo ? `style="background-image: url('${exp.image}');"` : ''}>
-                ${hasImage && isVideo ? `<video src="${exp.image}" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>` : ''}
+            <div class="visual-placeholder ${i === 0 ? 'active' : ''}" data-visual="${expId}" ${hasImage && !isVideo ? `style="background-image: url('${imgUrl}');"` : ''}>
+                ${hasImage && isVideo ? `<video src="${imgUrl}" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>` : ''}
             </div>
             `;
         }).join('');
@@ -301,7 +312,9 @@ function updateFooter(footer) {
     
     const footerCredit = document.querySelector('.footer-credit');
     if (footerCredit) {
-        footerCredit.innerHTML = `<img src="${footer.logo}" alt="Spiros Leividiotis logo" class="footer-logo">${footer.year} Spiros Leividiotis`;
+        const logoUrl = footer.logo ? escapeAttr(footer.logo) : '';
+        const year = escapeHtml(String(footer.year != null ? footer.year : ''));
+        footerCredit.innerHTML = `<img src="${logoUrl}" alt="Spiros Leividiotis logo" class="footer-logo">${year} Spiros Leividiotis`;
     }
 }
 

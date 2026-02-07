@@ -30,31 +30,13 @@
             <!-- Hero Content -->
             <div class="hero-content">
                 <div class="hero-name-container">
-                    <h1 class="hero-name" id="heroName">Spiros<br>Leividiotis</h1>
+                    <h1 class="hero-name" id="heroName"></h1>
                     <div class="hero-photo" id="heroPhoto"></div>
                 </div>
                 
                 <div class="hero-right">
-                    <p class="hero-subtitle">
-                        Staff-level motion designer focused on UX motion and motion systems. 
-                        I help teams ship motion that's consistent, scalable, and implementation-ready—turning 
-                        principles into patterns, guidelines, and Lottie-ready handoff with design systems 
-                        and engineering.
-                    </p>
-                    
-                    <div class="tags-grid">
-                        <div class="tag tag-black">Rive</div>
-                        <div class="tag tag-black">Cursor</div>
-                        <div class="tag tag-black">Figma</div>
-                        <div class="tag tag-black">LottieFiles</div>
-                        <div class="tag tag-black">After Effects</div>
-                        <div style="flex-basis: 100%; height: 0;"></div>
-                        <div class="tag">UX motion</div>
-                        <div class="tag">Motion systems</div>
-                        <div class="tag">Interaction design</div>
-                        <div class="tag">Lottie pipelines</div>
-                        <div class="tag">Web & product experiences</div>
-                    </div>
+                    <p class="hero-subtitle" id="heroSubtitle"></p>
+                    <div class="tags-grid" id="tagsGrid"></div>
                 </div>
             </div>
         </div>
@@ -69,107 +51,16 @@
                 <div class="experience-sidebar">
                     <h3 class="sidebar-label">experience</h3>
                     
-                    <div class="experience-list">
-                        <div class="experience-item active" data-experience="portfolio">
-                            <span class="item-name">Portfolio</span>
-                        </div>
-                        <div class="experience-item" data-experience="flink">
-                            <span class="item-name">Flink</span>
-                        </div>
-                        <div class="experience-item" data-experience="delivery-hero">
-                            <span class="item-name">Delivery Hero</span>
-                        </div>
-                        <div class="experience-item" data-experience="folket">
-                            <span class="item-name">Folket</span>
-                        </div>
-                    </div>
+                    <div class="experience-list"><!-- filled from content.json --></div>
                 </div>
                 
                 <!-- Middle: Description Content -->
                 <div class="experience-content">
-                    <div class="experience-details-wrapper">
-                        <div class="experience-detail active" id="portfolio" data-role-index="0">
-                            <h2 class="company-name">Portfolio</h2>
-                            <div class="job-title-wrapper">
-                                <p class="job-title">Staff Motion Designer - Design System</p>
-                                <div class="role-navigation">
-                                    <button class="role-arrow role-arrow-left inactive" data-direction="prev">
-                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8 2L4 6L8 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </button>
-                                    <span class="role-indicator">1/3</span>
-                                    <button class="role-arrow role-arrow-right" data-direction="next">
-                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="experience-content-wrapper">
-                                <p class="experience-description">
-                                    Own motion system principles, patterns, and docs. Partner with DS + engineering on implementation and QA. Drive adoption with reusable assets and handoff standards.
-                                </p>
-                                
-                                <div class="experience-timeline">
-                                    <span class="timeline-year">2025</span>
-                                    <span class="timeline-line"></span>
-                                    <span class="timeline-end">Now</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="experience-detail" id="flink">
-                            <h2 class="company-name">Flink</h2>
-                            <p class="job-title">Senior Motion Designer</p>
-                            <p class="experience-description">
-                                Set motion direction across product and brand. Built repeatable workflow for production and handoff. Delivered motion for key launches and campaigns.
-                            </p>
-                            
-                            <div class="experience-timeline">
-                                <span class="timeline-year">2021</span>
-                                <span class="timeline-line"></span>
-                                <span class="timeline-end">2022</span>
-                            </div>
-                        </div>
-                        
-                        <div class="experience-detail" id="delivery-hero">
-                            <h2 class="company-name">Delivery Hero</h2>
-                            <p class="job-title">Motion Designer</p>
-                            <p class="experience-description">
-                                Created motion and visual assets for digital products and comms. Worked with design and marketing to ship high-volume work fast. Maintained quality and consistency across channels.
-                            </p>
-                            
-                            <div class="experience-timeline">
-                                <span class="timeline-year">2020</span>
-                                <span class="timeline-line"></span>
-                                <span class="timeline-end">2021</span>
-                            </div>
-                        </div>
-                        
-                        <div class="experience-detail" id="folket">
-                            <h2 class="company-name">Folket</h2>
-                            <p class="job-title">Motion Designer</p>
-                            <p class="experience-description">
-                                Split time between an embedded client team (Skandia) and agency projects. Partnered with clients to storyboard, iterate, and deliver animated videos. Adapted styleframes and concepts into finished motion across multiple formats.
-                            </p>
-                            
-                            <div class="experience-timeline">
-                                <span class="timeline-year">2018</span>
-                                <span class="timeline-line"></span>
-                                <span class="timeline-end">2020</span>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="experience-details-wrapper"><!-- filled from content.json --></div>
                 </div>
                 
                 <!-- Right: Visual/Image -->
-                <div class="experience-visual">
-                    <div class="visual-placeholder active" data-visual="portfolio"></div>
-                    <div class="visual-placeholder" data-visual="flink"></div>
-                    <div class="visual-placeholder" data-visual="delivery-hero"></div>
-                    <div class="visual-placeholder" data-visual="folket"></div>
-                </div>
+                <div class="experience-visual"><!-- filled from content.json --></div>
             </div>
         </div>
     </section>
@@ -179,85 +70,7 @@
         <div class="container">
             <a href="#" class="reel-link" id="reel" onclick="event.preventDefault(); const m=document.getElementById('videoPlayer'); const v=document.getElementById('videoPlayerElement'); if(m){m.classList.add('active'); document.body.style.overflow='hidden'; document.body.classList.add('video-player-active'); if(v){v.play();}} return false;"><span class="reel-arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h5M9 4l3 3-3 3"/></svg></span> reel</a>
             <h2 class="section-title">projects</h2>
-            <div class="work-grid">
-                <article class="work-card" data-password-protected="true">
-                    <div class="work-visual work-color-1">
-                        <div class="project-info">
-                            <div class="project-text-mask">
-                                <h3 class="project-name">Portfolio Motion System</h3>
-                            </div>
-                            <div class="project-text-mask">
-                                <p class="project-company">Portfolio</p>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="work-card">
-                    <div class="work-visual work-color-2">
-                        <div class="project-info">
-                            <div class="project-text-mask">
-                                <h3 class="project-name">Checkout Experience</h3>
-                            </div>
-                            <div class="project-text-mask">
-                                <p class="project-company">Flink</p>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="work-card">
-                    <div class="work-visual work-color-3">
-                        <div class="project-info">
-                            <div class="project-text-mask">
-                                <h3 class="project-name">Brand Guidelines</h3>
-                            </div>
-                            <div class="project-text-mask">
-                                <p class="project-company">Delivery Hero</p>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="work-card">
-                    <div class="work-visual work-color-4">
-                        <div class="project-info">
-                            <div class="project-text-mask">
-                                <h3 class="project-name">Interactive Stories</h3>
-                            </div>
-                            <div class="project-text-mask">
-                                <p class="project-company">Folket</p>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="work-card">
-                    <div class="work-visual work-color-5">
-                        <div class="project-info">
-                            <div class="project-text-mask">
-                                <h3 class="project-name">Design Tokens</h3>
-                            </div>
-                            <div class="project-text-mask">
-                                <p class="project-company">Freelance</p>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="work-card">
-                    <div class="work-visual work-color-6">
-                        <div class="project-info">
-                            <div class="project-text-mask">
-                                <h3 class="project-name">Portfolio Site</h3>
-                            </div>
-                            <div class="project-text-mask">
-                                <p class="project-company">Personal</p>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            </div>
+            <div class="work-grid"><!-- filled from content.json --></div>
         </div>
     </section>
 
@@ -320,15 +133,9 @@
             </button>
             <div class="about-inner">
                 <div class="about-photo">
-                    <img src="photo.png" alt="Spiros Leividiotis">
+                    <img id="aboutPhotoImg" src="" alt="">
                 </div>
-                <div class="about-text">
-                    <p>I'm Spiros, a Staff Motion Designer based in Amsterdam, Netherlands, working at the intersection of product design, animation, and design systems. I use motion as a functional tool—to clarify interactions, reinforce hierarchy, and improve usability at scale.</p>
-                    
-                    <p>Currently working remotely at Portfolio, I collaborate closely with product designers and engineers on product experiences and design systems. I focus on building reusable, well-documented motion patterns that teams can confidently use across complex products.</p>
-                    
-                    <p>Outside of work, I spend a lot of time cycling and hanging out with Finn, my Westie—who has strong opinions about walk schedules and absolutely none about motion design. I care deeply about craft, consistency, and pragmatism, and I believe great motion should feel invisible: intentional, purposeful, and grounded in real user needs.</p>
-                </div>
+                <div class="about-text" id="aboutText"></div>
             </div>
         </div>
     </div>
