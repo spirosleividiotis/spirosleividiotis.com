@@ -423,7 +423,6 @@ section {
     justify-content: space-between;
     align-items: flex-start;
     padding: 25px 0 50px;
-    gap: 264px;
     border-bottom: 0.5px solid #FFFFFF;
     width: 100%;
 }
@@ -446,7 +445,7 @@ section {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: 106px;
+    gap: 110px;
     flex: 1;
     min-width: 0;
 }
@@ -480,7 +479,7 @@ section {
     font-family: var(--font-primary);
     font-weight: 600;
     font-size: 16px;
-    line-height: 19px;
+    line-height: 118%;
     color: #777777;
     margin: 0;
     display: none;

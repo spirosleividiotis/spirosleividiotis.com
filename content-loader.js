@@ -222,7 +222,8 @@ function updateExperience(experience) {
             const title = escapeHtml(role.title || '');
             const description = escapeHtml(role.description || '');
             const start = escapeHtml((role.period && role.period.start) || '');
-            const end = escapeHtml((role.period && role.period.end) || '');
+            const endDisplay = rowIndex === 0 ? 'On going' : (role.period && role.period.end) || '';
+            const end = escapeHtml(endDisplay);
             const expanded = rowIndex === 0 ? ' expanded' : '';
             rowIndex++;
             rows.push(`
