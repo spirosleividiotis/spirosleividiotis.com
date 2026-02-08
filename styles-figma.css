@@ -409,6 +409,7 @@ section {
     padding: 25px 0 50px;
     border-bottom: 0.5px solid #FFFFFF;
     width: 100%;
+    transition: padding 0.35s var(--ease);
 }
 
 .experience-row:last-child {
@@ -448,12 +449,17 @@ section {
 }
 
 .experience-job-block {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto 0fr;
     align-items: flex-start;
     gap: 15px;
     min-width: 0;
     border-radius: 35px;
+    transition: grid-template-rows 0.4s var(--ease);
+}
+
+.experience-row.expanded .experience-job-block {
+    grid-template-rows: auto 1fr;
 }
 
 .experience-job-title {
@@ -471,11 +477,15 @@ section {
     line-height: 1.32;
     color: #777777;
     margin: 0;
-    display: none;
+    min-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.35s var(--ease) 0.05s;
 }
 
 .experience-row.expanded .experience-description {
-    display: block;
+    opacity: 1;
+    transition-delay: 0.1s;
 }
 
 .experience-dates {
