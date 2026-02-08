@@ -134,6 +134,8 @@ section {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
     padding: 0 0;
 }
 
@@ -375,7 +377,7 @@ section {
 }
 
 .experience .container {
-    max-width: 1600px;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 0;
     width: 100%;
@@ -407,10 +409,14 @@ section {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 25px 0 50px;
+    padding: 25px 0;
     border-bottom: 0.5px solid #FFFFFF;
     width: 100%;
     transition: padding 0.5s var(--ease);
+}
+
+.experience-row.expanded {
+    padding-bottom: 50px;
 }
 
 .experience-row:last-child {
@@ -456,7 +462,6 @@ section {
     gap: 15px;
     min-width: 0;
     border-radius: 35px;
-    transition: grid-template-rows 0.55s var(--ease);
 }
 
 .experience-row.expanded .experience-job-block {
@@ -481,12 +486,12 @@ section {
     min-height: 0;
     overflow: hidden;
     opacity: 0;
-    transition: opacity 0.5s var(--ease) 0.08s;
+    transition: opacity 0.4s var(--ease);
+    will-change: opacity;
 }
 
 .experience-row.expanded .experience-description {
     opacity: 1;
-    transition-delay: 0.15s;
 }
 
 .experience-dates {
@@ -527,6 +532,9 @@ section {
 
 .reel-section .container {
     padding: 0 0;
+    max-width: 1500px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .reel-section-title {
@@ -540,8 +548,8 @@ section {
 
 .reel-video-wrap {
     display: block;
-    width: 1500px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 1500px;
     height: 600px;
     margin: 0 auto;
     background: #141414;
@@ -615,6 +623,7 @@ section {
     height: 38px;
     background: #777777;
     clip-path: polygon(0 0, 0 100%, 100% 50%);
+    border-radius: 2px;
 }
 
 /* ===================================
@@ -656,6 +665,8 @@ section {
 .selected-work .container {
     padding: 0 0;
     width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -670,7 +681,7 @@ section {
 .work-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 50px 15px;
+    gap: 15px;
     width: 100%;
     max-width: 1500px;
 }
@@ -831,6 +842,8 @@ section {
 .footer .container {
     padding: 0 0;
     width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
 }
 
 .footer-content {

@@ -628,7 +628,7 @@
             if (!list) return;
             list.innerHTML = (contentData.footer.social || []).map((s, i) => `
                 <div class="row-item">
-                    <input type="text" placeholder="Label (e.g. linkedin)" value="${escapeAttr(s.name)}" onchange="contentData.footer.social[${i}].name=this.value">
+                    <input type="text" placeholder="Label (e.g. Linkedin)" value="${escapeAttr(s.name)}" onchange="contentData.footer.social[${i}].name=this.value">
                     <input type="text" placeholder="URL" value="${escapeAttr(s.url)}" onchange="contentData.footer.social[${i}].url=this.value">
                     <button type="button" class="btn-small btn-danger" onclick="removeFooterSocial(${i})">Remove</button>
                 </div>

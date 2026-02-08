@@ -858,7 +858,7 @@
                         <input type="url" id="footerDribbble" placeholder="https://dribbble.com/spirosleividiotis">
                     </div>
                     <div class="form-group">
-                        <label>LinkedIn URL</label>
+                        <label>Linkedin URL</label>
                         <input type="url" id="footerLinkedin" placeholder="https://www.linkedin.com/in/sleividiotis/">
                     </div>
                     <div class="form-group">
@@ -1146,8 +1146,8 @@
             
             // Footer
             document.getElementById('footerEmail').value = contentData.footer.email;
-            document.getElementById('footerDribbble').value = contentData.footer.social.find(s => s.name === 'dribbble')?.url || '';
-            document.getElementById('footerLinkedin').value = contentData.footer.social.find(s => s.name === 'linkedin')?.url || '';
+            document.getElementById('footerDribbble').value = contentData.footer.social.find(s => (s.name || '').toLowerCase() === 'dribbble')?.url || '';
+            document.getElementById('footerLinkedin').value = contentData.footer.social.find(s => (s.name || '').toLowerCase() === 'linkedin')?.url || '';
             document.getElementById('footerLogo').value = contentData.footer.logo;
             if (contentData.footer.logo) {
                 showFilePreview('footerLogo', contentData.footer.logo, 'image');
@@ -1634,8 +1634,8 @@
             // Update Footer
             contentData.footer.email = document.getElementById('footerEmail').value;
             contentData.footer.social = [
-                { name: 'dribbble', url: document.getElementById('footerDribbble').value },
-                { name: 'linkedin', url: document.getElementById('footerLinkedin').value }
+                { name: 'Dribbble', url: document.getElementById('footerDribbble').value },
+                { name: 'Linkedin', url: document.getElementById('footerLinkedin').value }
             ];
             contentData.footer.logo = document.getElementById('footerLogo').value;
             contentData.footer.year = document.getElementById('footerYear').value;

@@ -266,7 +266,8 @@ function updateFooter(footer) {
     if (footer.social) footer.social.forEach((social, i) => {
         if (socialLinks[i]) {
             socialLinks[i].href = social.url;
-            socialLinks[i].textContent = social.name;
+            const name = (social.name || '').toLowerCase();
+            socialLinks[i].textContent = name === 'linkedin' ? 'Linkedin' : name === 'dribbble' ? 'Dribbble' : (social.name || '');
         }
     });
     
