@@ -67,6 +67,8 @@ async function loadContent() {
 function updateHero(hero) {
     const heroName = document.getElementById('heroName');
     if (heroName && hero.name) heroName.innerHTML = escapeHtml(hero.name);
+    const footerName = document.getElementById('footerName');
+    if (footerName && hero.name) footerName.textContent = hero.name;
     
     const heroSubtitle = document.getElementById('heroSubtitle');
     if (heroSubtitle && hero.subtitle != null) heroSubtitle.textContent = hero.subtitle;
