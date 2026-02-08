@@ -2002,6 +2002,7 @@ section {
         padding-top: 0;
         padding-bottom: 0;
     }
+    /* Override base .hero-about padding (104px 0 48px) so mobile gets 35px top/bottom only */
     .hero.hero-about-open .hero-about {
         position: relative !important;
         top: auto;
@@ -2010,7 +2011,7 @@ section {
         bottom: auto;
         height: auto;
         overflow: visible;
-        padding: 35px 0 35px;
+        padding: 35px 0 35px !important;
         justify-content: flex-start;
         width: 100%;
     }
