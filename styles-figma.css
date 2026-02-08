@@ -1988,7 +1988,7 @@ section {
         bottom: auto;
         height: auto;
         overflow: visible;
-        padding: 16px 0 80px;
+        padding: 35px 0 80px;
         justify-content: flex-start;
         width: 100%;
     }
@@ -1996,7 +1996,7 @@ section {
         display: none !important;
     }
     .hero-about-inner {
-        padding: 48px 0 0;
+        padding: 0;
         width: 100%;
         max-width: 100%;
         overflow: visible;
@@ -2007,7 +2007,7 @@ section {
     .hero-about-row {
         flex-direction: column;
         align-items: center;
-        gap: 24px;
+        gap: 20px;
         width: 100%;
     }
     .hero-about-photo {
