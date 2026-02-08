@@ -1,6 +1,6 @@
 /* ===================================
-   FIGMA VERSION - 100% Match
-   Minimal · Fluid · Animated
+   LOCKED PRODUCTION VERSION
+   Figma match · Hero name left · About me mobile full · No redundant rules
    =================================== */
 
 * {
@@ -1806,14 +1806,6 @@ section {
         margin-left: 0;
     }
     
-    .hero-name-wrapper {
-        justify-content: flex-start;
-        align-items: flex-end;
-    }
-    .hero-name {
-        text-align: left;
-    }
-    
     .hero-links {
         left: 40px;
     }
@@ -1821,7 +1813,6 @@ section {
     .nav {
         margin-left: 150px;
     }
-    
 }
 
 @media (max-width: 768px) {
@@ -2079,16 +2070,16 @@ section {
         margin: 0 auto;
         overflow: hidden;
     }
-.hero-about-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    pointer-events: none;
-    user-select: none;
-    -webkit-user-drag: none;
-    user-drag: none;
-}
+    .hero-about-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        pointer-events: none;
+        user-select: none;
+        -webkit-user-drag: none;
+        user-drag: none;
+    }
     .hero-about-right {
         width: 100%;
         max-width: 100%;
@@ -2670,31 +2661,17 @@ section {
    RESPONSIVE
    =================================== */
 
-/* Tablet (769–1024): mobile-like – name left-aligned, experience click (JS). Smaller laptop (1025+): desktop. */
+/* Tablet (769–1024): smaller hero name; experience click (JS). */
 @media (min-width: 769px) and (max-width: 1024px) {
-    .hero-name-wrapper {
-        justify-content: flex-start;
-        align-items: flex-end;
-    }
     .hero-name {
-        text-align: left;
         font-size: 80px;
         line-height: 96px;
     }
 }
 
-/* 769–1200: name left-aligned so no right-align gap at 1025–1200 */
 @media (min-width: 769px) and (max-width: 1200px) {
     .container {
         padding: 0 60px;
-    }
-    
-    .hero-name-wrapper {
-        justify-content: flex-start;
-        align-items: flex-end;
-    }
-    .hero-name {
-        text-align: left;
     }
     
     .hero-content {

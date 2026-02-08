@@ -1,6 +1,8 @@
 // ===================================
-// SOFT POSITION-DOWN ON SCROLL (hero + about me, same animation)
+// LOCKED PRODUCTION VERSION – hero parallax, scroll spacer, about me, experience
 // ===================================
+
+// SOFT POSITION-DOWN ON SCROLL (hero + about me, same animation)
 
 let parallaxTicking = false;
 
@@ -139,10 +141,9 @@ function updateScrollSpacerHeight() {
     const spacerH = Math.max(minSpacer, contentSpacer, heroH, 1);
     spacer.style.height = spacerH + 'px';
     spacer.style.minHeight = '';
-    if (window.__scrollDebug) {
+    if (window.__scrollDebug && window.__scrollDebug.enabled) {
         window.__scrollDebug.spacerHeight = spacerH;
         window.__scrollDebug.spacerUpdated = Date.now();
-        window.dispatchEvent(new CustomEvent('scrollSpacerUpdated', { detail: { height: spacerH } }));
     }
 }
 
@@ -1222,10 +1223,10 @@ window.addEventListener('load', () => {
     });
 });
 
-// Chrome scroll debug: always on. In Console type: __scrollDebug (see lastWheel, wheelTarget, spacerHeight)
-window.__scrollDebug = { enabled: true, hint: 'Scroll the page or move mouse then type __scrollDebug in Console' };
+// Optional scroll debug: set window.__scrollDebug = { enabled: true } in Console to inspect spacer/wheel.
+window.__scrollDebug = undefined;
 document.addEventListener('wheel', function(e) {
-    if (!window.__scrollDebug) return;
+    if (!window.__scrollDebug || !window.__scrollDebug.enabled) return;
     window.__scrollDebug.lastWheel = Date.now();
     window.__scrollDebug.wheelTarget = (e.target && e.target.id) ? e.target.id : (e.target && e.target.className) ? String(e.target.className).slice(0, 80) : e.target.tagName;
     window.__scrollDebug.wheelTargetNode = e.target;
@@ -1248,10 +1249,6 @@ document.addEventListener('wheel', function(e) {
         e.preventDefault();
     }, { passive: false, capture: true });
 })();
-
-if (typeof console !== 'undefined' && console.log) {
-    console.log('[scroll debug] Type __scrollDebug in Console to inspect. Scroll or move mouse first to fill lastWheel / wheelTarget.');
-}
 
 // ===================================
 // PASSWORD INPUT IN CURSOR

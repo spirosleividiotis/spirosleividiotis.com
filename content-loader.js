@@ -1,5 +1,5 @@
 // ===================================
-// CONTENT LOADER - Load content from content.json
+// CONTENT LOADER (locked) – content.json, hero, about me, experience, projects, footer
 // ===================================
 
 function escapeHtml(s) {
