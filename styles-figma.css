@@ -25,7 +25,6 @@
 
 /* Single scroll: document only, no inner scroll on hero or sections */
 html {
-    scroll-behavior: smooth;
     overflow-x: hidden;
 }
 
@@ -490,16 +489,30 @@ section {
 /* ===================================
    DESKTOP: Hero 844px (644 content + 100+100 padding), About 1000px (50+25 padding).
    Hero + About = fixed layer (z-A); rest of site scrolls over (z-B); both get parallax.
+   Height animates 844 ↔ 1844 when About opens/closes (no snap).
    =================================== */
 @media (min-width: 769px) {
-    /* Hero default: 1600×644 design → content 644px, vertical padding 100px → total 844px */
-    .hero:not(.hero-about-open):not(.hero-about-step1):not(.hero-about-step2):not(.hero-about-closing) {
+    .hero {
+        transition: height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .hero .container {
+        transition: height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* Hero default + during step1/step2 + during closing: 844px so height can animate to 1844 when open */
+    .hero:not(.hero-about-open):not(.hero-about-step1):not(.hero-about-step2):not(.hero-about-closing),
+    .hero.hero-about-step1,
+    .hero.hero-about-step2,
+    .hero.hero-about-closing {
         height: 844px;
         min-height: 844px;
         padding: 100px 48px 100px;
         box-sizing: border-box;
     }
-    .hero:not(.hero-about-open):not(.hero-about-step1):not(.hero-about-step2):not(.hero-about-closing) .container {
+    .hero:not(.hero-about-open):not(.hero-about-step1):not(.hero-about-step2):not(.hero-about-closing) .container,
+    .hero.hero-about-step1 .container,
+    .hero.hero-about-step2 .container,
+    .hero.hero-about-closing .container {
         height: 644px;
         min-height: 644px;
         flex: 0 0 auto;
