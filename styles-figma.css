@@ -1806,6 +1806,14 @@ section {
         margin-left: 0;
     }
     
+    .hero-name-wrapper {
+        justify-content: flex-start;
+        align-items: flex-end;
+    }
+    .hero-name {
+        text-align: left;
+    }
+    
     .hero-links {
         left: 40px;
     }
@@ -1992,7 +2000,7 @@ section {
         display: none;
     }
     
-    /* About me mobile: in-flow (locked version), same top padding as hero (35px), no cut; tags unchanged */
+    /* About me mobile: in-flow, content-sized so it always adjusts to your text (change bio anytime, no spec changes) */
     .hero.hero-about-open {
         position: relative !important;
         top: auto;
@@ -2001,19 +2009,29 @@ section {
         overflow: visible;
         padding-top: 0;
         padding-bottom: 0;
+        height: auto;
+        min-height: 0;
     }
-    /* Override base .hero-about padding (104px 0 48px) so mobile: 35px top, extra bottom so last paragraph not cut */
+    .hero.hero-about-open .container {
+        overflow: visible;
+        max-height: none;
+        height: auto;
+    }
+    /* Override base .hero-about: no fixed height so full bio is visible and section grows with content */
     .hero.hero-about-open .hero-about {
         position: relative !important;
         top: auto;
         left: auto;
         right: auto;
         bottom: auto;
-        height: auto;
+        height: auto !important;
+        min-height: 0;
+        max-height: none !important;
         overflow: visible;
         padding: 35px 0 56px !important;
         justify-content: flex-start;
         width: 100%;
+        flex: 0 0 auto;
     }
     .hero.hero-about-open .hero-content {
         display: none !important;
@@ -2023,15 +2041,22 @@ section {
         width: 100%;
         max-width: 100%;
         overflow: visible;
+        max-height: none;
+        height: auto;
     }
     .hero-about-text {
         overflow: visible;
+        max-height: none;
+        height: auto;
+        min-height: 0;
     }
     .hero-about-row {
         flex-direction: column;
         align-items: center;
         gap: 20px;
         width: 100%;
+        height: auto;
+        max-height: none;
     }
     .hero-about-photo {
         width: 100%;
