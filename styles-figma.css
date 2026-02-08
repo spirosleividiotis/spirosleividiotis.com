@@ -643,7 +643,8 @@ section {
     transition: opacity 0.2s ease;
 }
 
-.experience-description {
+/* Legacy detail layout only – main .experience-description is in Experience section above */
+.experience-content-wrapper .experience-description {
     font-size: 20px;
     font-weight: 400;
     line-height: 1.6;
@@ -2230,8 +2231,8 @@ body.about-view-active .footer {
     
     .experience-description {
         font-size: 16px;
-        line-height: 1.6;
-        color: #CCCCCC;
+        line-height: 118%;
+        color: #777777;
         margin-bottom: 12px;
     }
     
