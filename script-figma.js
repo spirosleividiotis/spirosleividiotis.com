@@ -951,7 +951,7 @@ function initializeModalsAndPlayers() {
         setTimeout(function() {
             heroSection.classList.remove('hero-about-closing', 'hero-content-reveal');
             updateScrollSpacerHeight();
-        }, 950);
+        }, 1400);
     }
 
     // Use delegation so About me works when link is injected by content-loader after load

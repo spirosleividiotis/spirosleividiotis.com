@@ -278,7 +278,7 @@ section {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.55s, visibility 0s step-start 0.55s;
+    /* delay set above so about fades in after name has moved down */
 }
 
 .hero-about-row {
@@ -392,6 +392,7 @@ section {
     transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+/* Open: 1) intro+tags fade out  2) name moves down  3) then photo+text+X fade in */
 .hero.hero-about-open .hero-intro,
 .hero.hero-about-open .hero-tags {
     opacity: 0;
@@ -402,25 +403,29 @@ section {
     height: 1px;
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
-    transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
 }
 
 .hero.hero-about-open .hero-name {
     transform: translateY(72px);
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.25s;
+    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s;
 }
 
-/* Close animation */
+.hero.hero-about-open .hero-about {
+    transition: opacity 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.95s, visibility 0s step-start 0.95s;
+}
+
+/* Close (reverse): 1) photo+text+X fade out  2) name moves up  3) then intro+tags fade in */
 .hero.hero-about-closing .hero-about {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+    transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
 }
 
 .hero.hero-about-closing .hero-name {
     transform: translateY(0);
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.25s;
+    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.35s;
 }
 
 .hero.hero-about-closing .hero-intro,
@@ -432,7 +437,7 @@ section {
     height: auto;
     overflow: visible;
     clip: auto;
-    transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.55s;
+    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s;
 }
 
 /* When closing About: whole hero-content fades in as one (no stagger) */
@@ -450,7 +455,7 @@ section {
     height: auto !important;
     min-height: calc(100vh - 92px);
     overflow: visible;
-    padding-top: 48px;
+    padding-top: 16px;
 }
 
 .hero.hero-about-open .container {
