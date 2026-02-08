@@ -429,12 +429,15 @@ section {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: 110px;
+    gap: 105px;
     flex: 1;
     min-width: 0;
 }
 
 .experience-company {
+    width: 115px;
+    min-width: 115px;
+    max-width: 115px;
     font-family: var(--font-primary);
     font-weight: 700;
     font-size: 18px;
