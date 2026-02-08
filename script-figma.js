@@ -127,12 +127,11 @@ function updateScrollSpacerHeight() {
         }
         return;
     }
-    const heroH = heroSection.offsetHeight;
+    const heroH = heroSection.offsetHeight || 0;
     const gap = getHeroScrollGap();
-    const minSpacer = vh - headerH;
+    const minSpacer = Math.max(0, vh - headerH);
     const contentSpacer = vh - headerH - heroH + gap;
-    /* Spacer so content below scrolls over fixed hero (desktop and mobile); clamp so Chrome always has scrollable area */
-    const spacerH = Math.max(minSpacer, contentSpacer, heroH, minSpacer);
+    const spacerH = Math.max(minSpacer, contentSpacer, heroH, 1);
     spacer.style.height = spacerH + 'px';
 }
 
@@ -1202,6 +1201,14 @@ window.addEventListener('contentLoaded', () => {
 // Resize: recompute scroll-spacer so first screen stays correct
 window.addEventListener('resize', () => {
     requestAnimationFrame(updateScrollSpacerHeight);
+});
+
+// Chrome: run spacer after full load so layout is final and scroll works
+window.addEventListener('load', () => {
+    requestAnimationFrame(() => {
+        updateScrollSpacerHeight();
+        setTimeout(updateScrollSpacerHeight, 50);
+    });
 });
 
 // ===================================
