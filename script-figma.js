@@ -1218,26 +1218,6 @@ document.addEventListener('click', function(e) {
 });
 
 // ===================================
-// FOOTER REVEAL (parallax-style: name reveals as footer enters view)
-// ===================================
-
-function initializeFooterReveal() {
-    const footer = document.getElementById('contact');
-    if (!footer) return;
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    footer.classList.add('footer-revealed');
-                }
-            });
-        },
-        { rootMargin: '0px 0px -10% 0px', threshold: 0 }
-    );
-    observer.observe(footer);
-}
-
-// ===================================
 // INITIALIZE ON LOAD
 // ===================================
 
@@ -1251,7 +1231,6 @@ function initializeAll() {
     initializeExperience();
     initializePortfolioRoles();
     initializeProjectCursors();
-    initializeFooterReveal();
 }
 
 // Initialize on DOM ready
