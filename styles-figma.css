@@ -284,6 +284,15 @@ section {
     pointer-events: auto;
 }
 
+/* Same width as header/hero content (1500px max, centered) */
+.hero-about-inner {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .hero-about-row {
     display: flex;
     flex-direction: row;
@@ -320,9 +329,8 @@ section {
     align-items: flex-end;
 }
 
-/* X only visible when About open; outside overlay so not clipped */
+/* X in body; shown via JS when About open; always on top, black */
 .hero-about-close {
-    display: none;
     position: fixed;
     top: 36px;
     right: max(48px, calc((100vw - 1500px) / 2));
@@ -333,9 +341,10 @@ section {
     background: none;
     color: #000000;
     cursor: pointer;
+    display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 101;
+    z-index: 10002;
     transition: opacity 0.25s ease;
     box-sizing: border-box;
 }
@@ -345,10 +354,6 @@ section {
 }
 
 /* X fixed to viewport so it’s always visible (no scroll-away); same layout at all times */
-.hero.hero-about-open .hero-about-close {
-    display: flex !important;
-}
-
 .hero-about-close:hover {
     opacity: 0.6;
 }
@@ -1975,8 +1980,7 @@ section {
         align-items: flex-start;
     }
     
-    /* About overlay: same as desktop – X stays fixed to viewport (no absolute override) */
-    .hero.hero-about-open .hero-about-close {
+    .hero-about-close {
         min-width: 44px;
         min-height: 44px;
         width: 44px;

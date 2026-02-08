@@ -780,11 +780,14 @@ function initializeModalsAndPlayers() {
     const heroSection = document.getElementById('heroSection');
     const heroAbout = document.getElementById('heroAbout');
 
+    const heroAboutCloseBtn = document.getElementById('heroAboutClose');
+
     function openAboutView() {
         if (!heroSection || !heroAbout) return;
         heroAbout.setAttribute('aria-hidden', 'false');
         heroSection.classList.add('hero-about-open');
         document.body.style.overflow = 'hidden';
+        if (heroAboutCloseBtn) heroAboutCloseBtn.style.display = 'flex';
     }
 
     function closeAboutView() {
@@ -792,6 +795,7 @@ function initializeModalsAndPlayers() {
         heroSection.classList.remove('hero-about-open');
         heroAbout.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
+        if (heroAboutCloseBtn) heroAboutCloseBtn.style.display = 'none';
     }
 
     // Use delegation so About me works when link is injected by content-loader after load
@@ -805,9 +809,8 @@ function initializeModalsAndPlayers() {
         }
     });
 
-    const heroAboutClose = document.getElementById('heroAboutClose');
-    if (heroAboutClose) {
-        heroAboutClose.addEventListener('click', function() {
+    if (heroAboutCloseBtn) {
+        heroAboutCloseBtn.addEventListener('click', function() {
             closeAboutView();
         });
     }
