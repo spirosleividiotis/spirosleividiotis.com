@@ -102,6 +102,7 @@ section {
 .selected-work,
 .footer {
     position: relative;
+    z-index: 10;
 }
 
 /* ===================================
@@ -201,23 +202,27 @@ section {
    HERO (fixed; intro+tags top, name bottom – stays visible with footer)
    =================================== */
 
-/* Spacer only for layout; hero scrolls with page */
+/* Spacer reserves space so content below can scroll up over the fixed hero */
 .scroll-spacer {
-    height: 0;
+    height: calc(100vh - 92px);
     width: 100%;
     pointer-events: none;
 }
 
+/* Hero fixed so experience/reel/projects scroll above it */
 .hero {
-    position: relative;
+    position: fixed;
+    top: 92px;
+    left: 0;
+    right: 0;
+    height: calc(100vh - 92px);
     padding: 100px 48px 100px;
     background: #FFFFFF;
     display: flex;
     align-items: flex-start;
     box-sizing: border-box;
     overflow: visible;
-    min-height: auto;
-    height: auto;
+    z-index: 1;
 }
 
 /* Match header content width (1500px) so hero text aligns with nav */
