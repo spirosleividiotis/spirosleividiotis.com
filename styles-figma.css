@@ -26,8 +26,10 @@
 /* Single scroll: document only, no inner scroll on hero or sections */
 html {
     overflow-x: hidden;
+    overflow-y: auto;
     background: #FFFFFF;
     overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -208,10 +210,12 @@ section {
 .scroll-spacer {
     position: relative;
     z-index: 1;
-    height: calc(100vh - 104px); /* fallback; JS sets to (100vh - headerH - heroHeight) */
+    height: calc(100vh - 104px); /* fallback; JS sets explicitly */
+    min-height: calc(100vh - 104px); /* Chrome: ensure scrollable area even before/without JS */
     width: 100%;
     pointer-events: none;
     background: #FFFFFF;
+    flex-shrink: 0;
 }
 
 /* Hero fixed so experience/reel/projects scroll above it; above spacer so hero content is visible at top */

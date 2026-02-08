@@ -131,8 +131,8 @@ function updateScrollSpacerHeight() {
     const gap = getHeroScrollGap();
     const minSpacer = vh - headerH;
     const contentSpacer = vh - headerH - heroH + gap;
-    /* Spacer so content below scrolls over fixed hero (desktop and mobile) */
-    const spacerH = Math.max(minSpacer, contentSpacer, heroH, 0);
+    /* Spacer so content below scrolls over fixed hero (desktop and mobile); clamp so Chrome always has scrollable area */
+    const spacerH = Math.max(minSpacer, contentSpacer, heroH, minSpacer);
     spacer.style.height = spacerH + 'px';
 }
 
@@ -1180,6 +1180,7 @@ function initializeAll() {
     initializeProjectCursors();
     requestAnimationFrame(() => {
         updateScrollSpacerHeight();
+        requestAnimationFrame(updateScrollSpacerHeight);
     });
 }
 
