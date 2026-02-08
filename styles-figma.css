@@ -374,7 +374,8 @@ section {
 
 
 /* ===================================
-   EXPERIENCE (Figma: 50px 48px 100px, gap 50px, title 16px, rows 264px gap, 106px company–details)
+   EXPERIENCE (Figma: padding 25 0 50, border-bottom 0.5px, company–details gap 106/110px,
+   description gap 15px border-radius 35px, dates gap 10px line 130px; row gap auto for dates right-align)
    =================================== */
 
 .experience {
@@ -465,6 +466,7 @@ section {
     align-items: flex-start;
     gap: 15px;
     min-width: 0;
+    border-radius: 35px;
 }
 
 .experience-job-title {
