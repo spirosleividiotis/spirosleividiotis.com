@@ -35,12 +35,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ===================================
-// SMOOTH SCROLL (eased wheel) – desktop only
+// SMOOTH SCROLL (eased) – desktop wheel, mobile touch
 // ===================================
 (function() {
     var smoothTarget = 0;
     var smoothCurrent = 0;
     var smoothRaf = null;
+    var lastTouchY = 0;
 
     function smoothTick() {
         smoothRaf = null;
@@ -50,17 +51,33 @@ document.addEventListener('DOMContentLoaded', function() {
         if (smoothCurrent !== smoothTarget) smoothRaf = requestAnimationFrame(smoothTick);
     }
 
-    function onWheel(e) {
-        if (window.innerWidth <= 768) return;
+    function setTarget(deltaY) {
         var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
         smoothTarget = window.scrollY || window.pageYOffset;
-        smoothTarget += e.deltaY;
+        smoothTarget += deltaY;
         smoothTarget = Math.max(0, Math.min(smoothTarget, maxScroll));
-        e.preventDefault();
         if (!smoothRaf) {
             smoothCurrent = window.scrollY || window.pageYOffset;
             smoothRaf = requestAnimationFrame(smoothTick);
         }
+    }
+
+    function onWheel(e) {
+        if (window.innerWidth <= 768) return;
+        setTarget(e.deltaY);
+        e.preventDefault();
+    }
+
+    function onTouchStart(e) {
+        if (e.touches.length) lastTouchY = e.touches[0].clientY;
+    }
+    function onTouchMove(e) {
+        if (window.innerWidth > 768) return;
+        if (e.touches.length === 0) return;
+        var y = e.touches[0].clientY;
+        setTarget(lastTouchY - y);
+        lastTouchY = y;
+        e.preventDefault();
     }
 
     function syncTarget() {
@@ -72,6 +89,8 @@ document.addEventListener('DOMContentLoaded', function() {
         syncTarget();
         window.addEventListener('scroll', syncTarget, { passive: true });
         window.addEventListener('wheel', onWheel, { passive: false });
+        document.addEventListener('touchstart', onTouchStart, { passive: true });
+        document.addEventListener('touchmove', onTouchMove, { passive: false });
     });
 })();
 

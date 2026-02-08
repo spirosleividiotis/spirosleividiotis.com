@@ -149,7 +149,7 @@ section {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 4px;
+    gap: 2px;
 }
 
 .header-entries .nav-link {
@@ -170,7 +170,7 @@ section {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 4px;
+    gap: 2px;
 }
 
 .header-meta .location {
@@ -1150,7 +1150,7 @@ section {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 4px;
+    gap: 2px;
 }
 
 .footer-entries .footer-link {
@@ -1166,7 +1166,7 @@ section {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 4px;
+    gap: 2px;
     flex-shrink: 0;
 }
 
