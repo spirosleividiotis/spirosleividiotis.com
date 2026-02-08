@@ -2180,7 +2180,7 @@ body.about-view-active .footer {
         right: auto;
         height: auto;
         min-height: auto;
-        padding: 33px 0;
+        padding: 56px 0 33px;
     }
     
     .hero .container {
