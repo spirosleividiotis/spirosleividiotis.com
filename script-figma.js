@@ -35,6 +35,47 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ===================================
+// SMOOTH SCROLL (eased wheel) – desktop only
+// ===================================
+(function() {
+    var smoothTarget = 0;
+    var smoothCurrent = 0;
+    var smoothRaf = null;
+
+    function smoothTick() {
+        smoothRaf = null;
+        smoothCurrent += (smoothTarget - smoothCurrent) * 0.12;
+        if (Math.abs(smoothTarget - smoothCurrent) < 0.5) smoothCurrent = smoothTarget;
+        window.scrollTo(0, smoothCurrent);
+        if (smoothCurrent !== smoothTarget) smoothRaf = requestAnimationFrame(smoothTick);
+    }
+
+    function onWheel(e) {
+        if (window.innerWidth <= 768) return;
+        var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        smoothTarget = window.scrollY || window.pageYOffset;
+        smoothTarget += e.deltaY;
+        smoothTarget = Math.max(0, Math.min(smoothTarget, maxScroll));
+        e.preventDefault();
+        if (!smoothRaf) {
+            smoothCurrent = window.scrollY || window.pageYOffset;
+            smoothRaf = requestAnimationFrame(smoothTick);
+        }
+    }
+
+    function syncTarget() {
+        smoothTarget = window.scrollY || window.pageYOffset;
+        smoothCurrent = smoothTarget;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        syncTarget();
+        window.addEventListener('scroll', syncTarget, { passive: true });
+        window.addEventListener('wheel', onWheel, { passive: false });
+    });
+})();
+
+// ===================================
 // LIVE TIME
 // ===================================
 
