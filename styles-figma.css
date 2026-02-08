@@ -2125,9 +2125,6 @@ section {
         z-index: 10;
         background: #000000;
     }
-    body.about-me-open-mobile .experience {
-        padding-top: 0;
-    }
     
     .experience .container {
         padding: 0 48px;

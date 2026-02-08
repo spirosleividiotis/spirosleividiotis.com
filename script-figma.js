@@ -118,12 +118,14 @@ function updateScrollSpacerHeight() {
     const isMobile = checkIfMobile();
     const headerH = isMobile ? 86 : 104;
     const vh = window.innerHeight;
-    /* When about me is open on mobile, hero is in-flow so no spacer; on desktop keep overlay spacer */
+    /* When about me is open on mobile, hero is in-flow so no spacer; clear min-height so no white gap */
     if (heroSection.classList.contains('hero-about-open')) {
         if (isMobile) {
             spacer.style.height = '0';
+            spacer.style.minHeight = '0';
         } else {
             spacer.style.height = (vh - headerH) + 'px';
+            spacer.style.minHeight = '';
         }
         return;
     }
@@ -133,6 +135,7 @@ function updateScrollSpacerHeight() {
     const contentSpacer = vh - headerH - heroH + gap;
     const spacerH = Math.max(minSpacer, contentSpacer, heroH, 1);
     spacer.style.height = spacerH + 'px';
+    spacer.style.minHeight = '';
     if (window.__scrollDebug) {
         window.__scrollDebug.spacerHeight = spacerH;
         window.__scrollDebug.spacerUpdated = Date.now();
@@ -835,8 +838,7 @@ function initializeModalsAndPlayers() {
         if (!heroSection || !heroAbout) return;
         heroAbout.setAttribute('aria-hidden', 'false');
         heroSection.classList.add('hero-about-open');
-        if (checkIfMobile()) document.body.classList.add('about-me-open-mobile');
-        else document.body.style.overflow = 'hidden';
+        if (!checkIfMobile()) document.body.style.overflow = 'hidden';
         updateScrollSpacerHeight();
         requestParallaxTick();
         if (checkIfMobile()) setTimeout(requestParallaxTick, 100);
@@ -846,7 +848,6 @@ function initializeModalsAndPlayers() {
         if (!heroSection || !heroAbout) return;
         heroSection.classList.remove('hero-about-open');
         heroAbout.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('about-me-open-mobile');
         document.body.style.overflow = '';
         updateScrollSpacerHeight();
     }
