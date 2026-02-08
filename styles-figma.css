@@ -2670,9 +2670,18 @@ section {
     }
 }
 
+/* 769–1200: name left-aligned so no right-align gap at 1025–1200 */
 @media (min-width: 769px) and (max-width: 1200px) {
     .container {
         padding: 0 60px;
+    }
+    
+    .hero-name-wrapper {
+        justify-content: flex-start;
+        align-items: flex-end;
+    }
+    .hero-name {
+        text-align: left;
     }
     
     .hero-content {
