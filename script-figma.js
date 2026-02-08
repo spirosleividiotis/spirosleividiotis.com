@@ -10,8 +10,9 @@ function updateParallax() {
     if (typeof checkIfMobile === 'function' && checkIfMobile()) return;
     const hero = document.getElementById('heroSection');
     const heroContent = hero && hero.querySelector('.hero .container');
-    if (!hero || !heroContent || hero.classList.contains('hero-about-open') || hero.classList.contains('hero-about-step1') || hero.classList.contains('hero-about-step2')) {
-        if (heroContent) heroContent.style.transform = '';
+    if (!hero || !heroContent) return;
+    if (hero.classList.contains('hero-about-step1') || hero.classList.contains('hero-about-step2')) {
+        heroContent.style.transform = '';
         return;
     }
     const y = window.scrollY || window.pageYOffset;
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function smoothTick() {
         smoothRaf = null;
-        smoothCurrent += (smoothTarget - smoothCurrent) * 0.12;
+        smoothCurrent += (smoothTarget - smoothCurrent) * 0.32;
         if (Math.abs(smoothTarget - smoothCurrent) < 0.5) smoothCurrent = smoothTarget;
         window.scrollTo(0, smoothCurrent);
         if (smoothCurrent !== smoothTarget) smoothRaf = requestAnimationFrame(smoothTick);
@@ -172,12 +173,14 @@ function updateScrollSpacerHeight() {
     if (!heroSection) return;
     const headerH = 92;
     const vh = window.innerHeight;
-    const heroH = heroSection.offsetHeight;
+    /* Desktop: when About open, hero+about fixed layer = 1844px; when closed = 844px */
+    const aboutOpen = heroSection.classList.contains('hero-about-open');
+    const heroH = aboutOpen ? 1844 : heroSection.offsetHeight;
     const gap = getHeroScrollGap();
-    /* Ensure spacer is at least one viewport so hero is never covered by content on load */
     const minSpacer = vh - headerH;
     const contentSpacer = vh - headerH - heroH + gap;
-    const spacerH = Math.max(minSpacer, contentSpacer, 0);
+    /* Spacer must be at least hero height so z-B can scroll over full z-A */
+    const spacerH = Math.max(minSpacer, contentSpacer, heroH, 0);
     spacer.style.height = spacerH + 'px';
 }
 
@@ -1018,8 +1021,7 @@ function initializeModalsAndPlayers() {
                 // Step 3: show about (hero in flow, about visible)
                 heroSection.classList.remove('hero-about-step1', 'hero-about-step2');
                 heroSection.classList.add('hero-about-open');
-                var spacer = document.querySelector('.scroll-spacer');
-                if (spacer) spacer.style.height = '0';
+                updateScrollSpacerHeight();
                 aboutAnimationInProgress = false;
             }, 550);
         }, 400);
@@ -1033,8 +1035,7 @@ function initializeModalsAndPlayers() {
         // Step 1: hide about, hero back to fixed
         heroSection.classList.remove('hero-about-open');
         heroSection.classList.add('hero-about-closing');
-        var spacer = document.querySelector('.scroll-spacer');
-        if (spacer) spacer.style.height = '0';
+        updateScrollSpacerHeight();
         setTimeout(function() {
             // Step 2: name moves up, intro+tags fade in (handled by CSS)
             setTimeout(function() {

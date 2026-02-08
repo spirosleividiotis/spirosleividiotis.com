@@ -468,7 +468,7 @@ section {
     opacity: 0;
 }
 
-/* When About me is open: hero in flow so it’s always visible and page adjusts to content height */
+/* When About me is open: on mobile hero goes in flow; on desktop hero+about stay fixed (see min-width: 769px) */
 .hero.hero-about-open {
     position: relative !important;
     height: auto !important;
@@ -485,6 +485,71 @@ section {
 
 .hero.hero-about-open .hero-content {
     margin-top: auto;
+}
+
+/* ===================================
+   DESKTOP: Hero 844px (644 content + 100+100 padding), About 1000px (50+25 padding).
+   Hero + About = fixed layer (z-A); rest of site scrolls over (z-B); both get parallax.
+   =================================== */
+@media (min-width: 769px) {
+    /* Hero default: 1600×644 design → content 644px, vertical padding 100px → total 844px */
+    .hero:not(.hero-about-open):not(.hero-about-step1):not(.hero-about-step2):not(.hero-about-closing) {
+        height: 844px;
+        min-height: 844px;
+        padding: 100px 48px 100px;
+        box-sizing: border-box;
+    }
+    .hero:not(.hero-about-open):not(.hero-about-step1):not(.hero-about-step2):not(.hero-about-closing) .container {
+        height: 644px;
+        min-height: 644px;
+        flex: 0 0 auto;
+    }
+
+    /* When About open: hero stays fixed, total height 844 + 1000 = 1844px (z-A) */
+    .hero.hero-about-open {
+        position: fixed !important;
+        top: 92px;
+        left: 0;
+        right: 0;
+        height: 1844px !important;
+        min-height: 1844px !important;
+        padding: 100px 48px 100px;
+        overflow: visible;
+        z-index: 1;
+        box-sizing: border-box;
+    }
+    .hero.hero-about-open .container {
+        height: 1644px;
+        min-height: 1644px;
+        max-width: 1500px;
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+    }
+    /* Visual order: Hero block first (644px), then About block (1000px) */
+    .hero.hero-about-open .hero-content {
+        order: 1;
+        flex: 0 0 644px;
+        height: 644px;
+        margin-top: 0;
+        justify-content: flex-end;
+    }
+    .hero.hero-about-open .hero-about {
+        order: 2;
+        flex: 0 0 1000px;
+        height: 1000px;
+        padding: 50px 0 25px;
+        box-sizing: border-box;
+        position: relative;
+    }
+    .hero.hero-about-open .hero-about-row {
+        height: 100%;
+        min-height: 0;
+    }
+    .hero.hero-about-open .hero-about-photo {
+        height: 100%;
+        min-height: 0;
+    }
 }
 
 /* Name row: Figma justify-content center, align-items flex-end; name text right-aligned */
@@ -2252,6 +2317,34 @@ body.about-view-active .footer {
         width: 100%;
         max-width: 100%;
         align-items: flex-start;
+    }
+    
+    /* Ensure About me photo and X are visible on mobile when About is open */
+    .hero.hero-about-open .hero-about {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
+    .hero.hero-about-open .hero-about-photo {
+        display: block !important;
+        visibility: visible !important;
+        min-height: 200px;
+    }
+    .hero.hero-about-open .hero-about-close {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: absolute !important;
+        top: 0 !important;
+        right: 0 !important;
+        z-index: 10;
+        min-width: 44px;
+        min-height: 44px;
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
     }
     
     .hero-subtitle {
