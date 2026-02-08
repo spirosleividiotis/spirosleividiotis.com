@@ -2000,34 +2000,45 @@ section {
         display: none;
     }
     
-    /* About me mobile: in-flow, content-sized so it always adjusts to your text (change bio anytime, no spec changes) */
+    /* About me mobile: in-flow, content-sized – full bio visible, no clipping (CSS + JS) */
+    section.hero.hero-about-open {
+        overflow-x: hidden;
+        overflow-y: visible !important;
+        max-height: none !important;
+    }
     .hero.hero-about-open {
         position: relative !important;
-        top: auto;
-        left: auto;
-        right: auto;
-        overflow: visible;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        overflow: visible !important;
         padding-top: 0;
         padding-bottom: 0;
-        height: auto;
-        min-height: 0;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+    }
+    /* Collapse spacer so about section isn't pushed down; no reliance on JS timing */
+    .hero.hero-about-open + .scroll-spacer {
+        height: 0 !important;
+        min-height: 0 !important;
     }
     .hero.hero-about-open .container {
-        overflow: visible;
-        max-height: none;
-        height: auto;
+        overflow: visible !important;
+        max-height: none !important;
+        height: auto !important;
+        min-height: 0 !important;
     }
-    /* Override base .hero-about: no fixed height so full bio is visible and section grows with content */
     .hero.hero-about-open .hero-about {
         position: relative !important;
-        top: auto;
-        left: auto;
-        right: auto;
-        bottom: auto;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
         height: auto !important;
-        min-height: 0;
+        min-height: 0 !important;
         max-height: none !important;
-        overflow: visible;
+        overflow: visible !important;
         padding: 35px 0 56px !important;
         justify-content: flex-start;
         width: 100%;
@@ -2040,23 +2051,25 @@ section {
         padding: 0;
         width: 100%;
         max-width: 100%;
-        overflow: visible;
-        max-height: none;
-        height: auto;
+        overflow: visible !important;
+        max-height: none !important;
+        height: auto !important;
+        min-height: 0 !important;
     }
     .hero-about-text {
-        overflow: visible;
-        max-height: none;
-        height: auto;
-        min-height: 0;
+        overflow: visible !important;
+        max-height: none !important;
+        height: auto !important;
+        min-height: 0 !important;
     }
     .hero-about-row {
         flex-direction: column;
         align-items: center;
         gap: 20px;
         width: 100%;
-        height: auto;
-        max-height: none;
+        height: auto !important;
+        max-height: none !important;
+        min-height: 0 !important;
     }
     .hero-about-photo {
         width: 100%;
