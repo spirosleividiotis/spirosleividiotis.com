@@ -10,7 +10,7 @@ function updateParallax() {
     if (typeof checkIfMobile === 'function' && checkIfMobile()) return;
     const hero = document.getElementById('heroSection');
     const heroContent = hero && hero.querySelector('.hero .container');
-    if (!hero || !heroContent || hero.classList.contains('hero-about-open')) {
+    if (!hero || !heroContent || hero.classList.contains('hero-about-open') || hero.classList.contains('hero-about-step1') || hero.classList.contains('hero-about-step2')) {
         if (heroContent) heroContent.style.transform = '';
         return;
     }
@@ -107,9 +107,13 @@ function updateScrollSpacerHeight() {
     if (!heroSection || !spacer) return;
     const isMobile = checkIfMobile();
     const headerH = isMobile ? 70 : 92;
+    const vh = window.innerHeight;
     const heroH = heroSection.offsetHeight;
     const gap = getHeroScrollGap();
-    const spacerH = Math.max(0, window.innerHeight - headerH - heroH + gap);
+    /* Ensure spacer is at least one viewport so hero is never covered by content on load */
+    const minSpacer = vh - headerH;
+    const contentSpacer = vh - headerH - heroH + gap;
+    const spacerH = Math.max(minSpacer, contentSpacer, 0);
     spacer.style.height = spacerH + 'px';
 }
 
@@ -931,27 +935,50 @@ function initializeModalsAndPlayers() {
         }
     });
 
-    // About Me: transforms hero in-place (no modal, page keeps scrolling)
+    // About Me: JS-driven animation so sequence is reliable (no layout jump mid-animation)
     const heroSection = document.getElementById('heroSection');
+    const heroAbout = document.getElementById('heroAbout');
+    var aboutAnimationInProgress = false;
 
     function openAboutView() {
-        if (heroSection) {
-            heroSection.classList.add('hero-about-open');
-            document.getElementById('heroAbout')?.setAttribute('aria-hidden', 'false');
-            var spacer = document.querySelector('.scroll-spacer');
-            if (spacer) spacer.style.height = '0';
-        }
+        if (!heroSection || aboutAnimationInProgress) return;
+        aboutAnimationInProgress = true;
+        heroAbout?.setAttribute('aria-hidden', 'false');
+
+        // Step 1: fade out intro + tags
+        heroSection.classList.add('hero-about-step1');
+        setTimeout(function() {
+            // Step 2: move name down
+            heroSection.classList.add('hero-about-step2');
+            setTimeout(function() {
+                // Step 3: show about (hero in flow, about visible)
+                heroSection.classList.remove('hero-about-step1', 'hero-about-step2');
+                heroSection.classList.add('hero-about-open');
+                var spacer = document.querySelector('.scroll-spacer');
+                if (spacer) spacer.style.height = '0';
+                aboutAnimationInProgress = false;
+            }, 550);
+        }, 400);
     }
 
     function closeAboutView() {
-        if (!heroSection) return;
-        heroSection.classList.add('hero-about-closing', 'hero-content-reveal');
+        if (!heroSection || aboutAnimationInProgress) return;
+        aboutAnimationInProgress = true;
+        heroAbout?.setAttribute('aria-hidden', 'true');
+
+        // Step 1: hide about, hero back to fixed
         heroSection.classList.remove('hero-about-open');
-        document.getElementById('heroAbout')?.setAttribute('aria-hidden', 'true');
+        heroSection.classList.add('hero-about-closing');
+        var spacer = document.querySelector('.scroll-spacer');
+        if (spacer) spacer.style.height = '0';
         setTimeout(function() {
-            heroSection.classList.remove('hero-about-closing', 'hero-content-reveal');
-            updateScrollSpacerHeight();
-        }, 1400);
+            // Step 2: name moves up, intro+tags fade in (handled by CSS)
+            setTimeout(function() {
+                heroSection.classList.remove('hero-about-closing');
+                updateScrollSpacerHeight();
+                aboutAnimationInProgress = false;
+            }, 700);
+        }, 350);
     }
 
     // Use delegation so About me works when link is injected by content-loader after load
