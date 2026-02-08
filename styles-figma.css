@@ -1762,16 +1762,7 @@ section {
 
 /* Cursor password input */
 
-/* ===================================
-   FLUID ANIMATIONS (Scroll-based)
-   =================================== */
-
-@media (min-width: 769px) {
-    /* Parallax on hero */
-    .hero-name {
-        will-change: transform;
-    }
-}
+/* Scroll-based animations disabled for static fix */
 
 /* ===================================
    RESPONSIVE / MOBILE STYLES

@@ -18,46 +18,35 @@ function escapeAttr(s) {
         .replace(/>/g, '&gt;');
 }
 
+const FALLBACK_HERO = { name: 'Spiros Leividiotis', subtitle: 'Staff Product Motion Designer specializing in motion systems and design system implementation.', tags: { tools: ['Rive', 'Figma', 'LottieFiles'], skills: ['Product Motion', 'Design Systems', 'Interaction Design'] } };
+const FALLBACK_ABOUT = { photo: 'about-photo.png', bio: ["I'm Spiros, a Staff Product Motion Designer based in Amsterdam, working at the intersection of product design, animation, and design systems."] };
+
 async function loadContent() {
+    let content = {};
     try {
         const response = await fetch('content.json?v=' + Date.now());
-        const content = await response.json();
+        if (response.ok) content = await response.json();
+    } catch (error) {
+        console.error('Error loading content:', error);
+    }
+    try {
+        updateHero(content.hero || FALLBACK_HERO);
+        updateAboutMe(content.aboutMe || FALLBACK_ABOUT);
         
-        // Update Hero
-        updateHero(content.hero);
-        
-        // Update About Me
-        updateAboutMe(content.aboutMe);
-        
-        // Update Music Player
-        updateMusic(content.music);
-        
-        // Update Reel
-        updateReel(content.reel);
-        
-        // Update Header
-        updateHeader(content.header);
-        
-        // Update Projects
-        updateProjects(content.projects);
-        
-        // Update Experience
-        updateExperience(content.experience);
-        
-        // Update Footer
-        updateFooter(content.footer);
-        
-        // Inject analytics script if provided (GA, Plausible, etc.)
+        if (content.music) updateMusic(content.music);
+        if (content.reel) updateReel(content.reel);
+        if (content.header) updateHeader(content.header);
+        if (content.projects) updateProjects(content.projects);
+        if (content.experience) updateExperience(content.experience);
+        if (content.footer) updateFooter(content.footer);
         if (content.analytics && content.analytics.script && content.analytics.script.trim()) {
             injectAnalyticsScript(content.analytics.script.trim());
         }
-        
-        // Dispatch event to notify other scripts that content is loaded
         setTimeout(() => {
             window.dispatchEvent(new Event('contentLoaded'));
         }, 150);
     } catch (error) {
-        console.error('Error loading content:', error);
+        console.error('Error applying content:', error);
     }
 }
 
