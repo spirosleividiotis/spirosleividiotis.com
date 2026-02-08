@@ -2543,9 +2543,13 @@ section {
         padding-left: 24px;
         padding-right: 24px;
     }
-    .footer .container {
+    .footer {
         padding-left: 24px;
         padding-right: 24px;
+    }
+    .footer .container {
+        padding-left: 0;
+        padding-right: 0;
     }
     .hero.hero-about-open .hero-about {
         padding-left: 24px;
