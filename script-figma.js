@@ -81,7 +81,7 @@ function checkIfMobile() {
 }
 
 // Hero is content-height; spacer fills rest of viewport + gap so Experience doesn't sit under hero text
-var HERO_SCROLL_GAP = 160; /* px below hero before Experience starts – keeps content visible */
+var HERO_SCROLL_GAP = 350; /* px below hero before Experience starts – keeps content visible */
 function updateScrollSpacerHeight() {
     if (checkIfMobile()) return;
     const heroSection = document.getElementById('heroSection');
