@@ -1099,18 +1099,10 @@ section {
 
 .footer-left {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+    flex-direction: row;
+    align-items: center;
+    gap: 19px;
     flex-shrink: 0;
-}
-
-.footer-left .footer-entries {
-    order: 1;
-}
-
-.footer-left .footer-logo-wrap {
-    order: 2;
 }
 
 .footer-logo-wrap {
@@ -2552,16 +2544,20 @@ body.about-view-active .footer {
     }
     
     .footer-left {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
     }
     .footer-left .footer-entries {
-        order: 1;
         gap: 2px;
     }
-    .footer-left .footer-logo-wrap {
-        order: 2;
+    .footer-logo-wrap {
+        width: 36px;
+        height: 36px;
+    }
+    .footer-logo-circle {
+        width: 36px;
+        height: 36px;
     }
     
     .footer-right,
