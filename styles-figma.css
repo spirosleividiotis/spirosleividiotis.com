@@ -613,7 +613,6 @@ section {
     height: 38px;
     background: #777777;
     clip-path: polygon(0 0, 0 100%, 100% 50%);
-    transform: rotate(90deg);
 }
 
 /* ===================================
