@@ -2295,7 +2295,11 @@ section {
        =================================== */
     
     .footer {
-        padding: 24px 50px;
+        padding: 16px 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         position: relative !important;
         margin-top: 0 !important;
         background: #FFFFFF;
@@ -2303,10 +2307,48 @@ section {
     
     .footer .container {
         padding: 0;
+        width: 100%;
     }
     
+    .footer-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        gap: 0;
+        flex-wrap: nowrap;
+    }
+    
+    .footer-left {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0;
+        gap: 20px;
+    }
+    
+    .footer-entries {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+        gap: 4px;
+    }
+    
+    .footer-right,
+    .footer-center {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 0;
+        gap: 4px;
+    }
+    
+    /* Override touch-friendly rule so footer links don't get min-height 44px */
     .footer-entries .footer-link,
     .footer-right .footer-link {
+        min-height: auto !important;
         font-family: var(--font-primary);
         color: #000000;
         font-size: 14px;
@@ -2314,10 +2356,17 @@ section {
         font-weight: 700;
     }
     .footer-right .footer-link {
-        text-align: left;
+        text-align: right;
     }
     
+    .footer-logo-wrap {
+        width: 47px;
+        height: 47px;
+        min-height: auto !important;
+    }
     .footer-logo-circle {
+        width: 47px;
+        height: 47px;
         filter: none;
     }
     
@@ -2334,38 +2383,6 @@ section {
         justify-content: flex-start;
     }
     
-    .footer-content {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-items: flex-start;
-        gap: 40px;
-    }
-    
-    .footer-left {
-        flex-direction: row;
-        align-items: center;
-        gap: 12px;
-    }
-    .footer-left .footer-entries {
-        gap: 4px;
-    }
-    .footer-logo-wrap {
-        width: 36px;
-        height: 36px;
-    }
-    .footer-logo-circle {
-        width: 36px;
-        height: 36px;
-    }
-    
-    /* Align right block to start so footer doesn’t look split; consistent left alignment */
-    .footer-right,
-    .footer-center {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-    }
     
     .footer-label {
         font-size: 14px;
