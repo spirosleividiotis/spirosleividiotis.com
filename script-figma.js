@@ -129,7 +129,7 @@ function updateScrollSpacerHeight() {
 }
 
 // Experience accordion: one row expanded at a time
-// Desktop: switch on hover. Mobile: tap to expand/collapse (only one expanded).
+// Desktop: expand on hover. Mobile: expand on click only (no hover).
 function initializeExperienceAccordion() {
     const container = document.querySelector('.experience-rows');
     const rows = document.querySelectorAll('.experience-row');
@@ -141,6 +141,7 @@ function initializeExperienceAccordion() {
         rows.forEach((row) => {
             row.addEventListener('click', (e) => {
                 e.preventDefault();
+                e.stopPropagation();
                 const isExpanded = row.classList.contains('expanded');
                 rows.forEach((r) => r.classList.remove('expanded'));
                 if (!isExpanded) row.classList.add('expanded');

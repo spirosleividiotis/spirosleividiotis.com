@@ -2070,6 +2070,7 @@ section {
     .experience-row {
         flex-direction: column;
         align-items: stretch;
+        cursor: pointer;
         padding: 0 0 25px;
         gap: 15px;
         cursor: pointer;
