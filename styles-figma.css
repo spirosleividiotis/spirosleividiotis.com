@@ -2036,11 +2036,11 @@ section {
         transform: none !important;
     }
     
-    /* Tags - Figma: gap 12px / 16px, padding 5px 15px, 14px */
+    /* Tags - 8px between pills on mobile */
     .tags-grid {
         display: flex;
         flex-wrap: wrap;
-        gap: 12px 16px;
+        gap: 8px;
         transform: none !important;
     }
     
@@ -2586,7 +2586,7 @@ section {
    RESPONSIVE
    =================================== */
 
-@media (max-width: 1200px) {
+@media (min-width: 769px) and (max-width: 1200px) {
     .container {
         padding: 0 60px;
     }
