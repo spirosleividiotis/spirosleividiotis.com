@@ -120,12 +120,18 @@ function injectAnalyticsScript(scriptHtml) {
     });
 }
 
-// Update Reel
+// Update Reel (modal + inline reel area)
 function updateReel(reel) {
-    const videoPlayer = document.querySelector('#videoPlayerElement source');
-    if (videoPlayer) {
-        videoPlayer.src = reel.file;
-        document.getElementById('videoPlayerElement').load();
+    const modalSource = document.querySelector('#videoPlayerElement source');
+    if (modalSource && reel.file) {
+        modalSource.src = reel.file;
+        const modalVideo = document.getElementById('videoPlayerElement');
+        if (modalVideo) modalVideo.load();
+    }
+    const inlineVideo = document.getElementById('reelInlineVideo');
+    if (inlineVideo && reel.file) {
+        inlineVideo.src = reel.file;
+        inlineVideo.load();
     }
 }
 

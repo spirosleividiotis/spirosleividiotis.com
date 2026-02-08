@@ -829,37 +829,44 @@ function initializeModalsAndPlayers() {
         });
     }
 
-    // Reel Video Player
-    const reelLinkForVideo = document.getElementById('reelLink');
-    const videoPlayer = document.getElementById('videoPlayer');
-    const videoClose = document.getElementById('videoClose');
-    const videoPlayerElement = document.getElementById('videoPlayerElement');
+    // Reel: play within the reel area (inline)
+    const reelVideoWrap = document.getElementById('reelVideoWrap');
+    const reelInlineVideo = document.getElementById('reelInlineVideo');
+    const reelCloseBtn = document.getElementById('reelCloseBtn');
 
-    if (reelLinkForVideo) {
-        reelLinkForVideo.addEventListener('click', function(e) {
+    if (reelVideoWrap && reelInlineVideo) {
+        reelVideoWrap.addEventListener('click', function(e) {
             e.preventDefault();
-            e.stopPropagation();
-            if (videoPlayer) {
-                videoPlayer.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                document.body.classList.add('video-player-active');
-                if (videoPlayerElement) {
-                    videoPlayerElement.play();
-                }
-            }
+            if (e.target.closest('.reel-close-btn')) return;
+            if (reelVideoWrap.classList.contains('is-playing')) return;
+            reelVideoWrap.classList.add('is-playing');
+            reelInlineVideo.play().catch(function() {});
+        });
+        if (reelCloseBtn) {
+            reelCloseBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                reelVideoWrap.classList.remove('is-playing');
+                reelInlineVideo.pause();
+                reelInlineVideo.currentTime = 0;
+            });
+        }
+        reelInlineVideo.addEventListener('ended', function() {
+            reelVideoWrap.classList.remove('is-playing');
         });
     }
 
-    if (videoClose) {
+    const videoPlayer = document.getElementById('videoPlayer');
+    const videoClose = document.getElementById('videoClose');
+    const videoPlayerElement = document.getElementById('videoPlayerElement');
+    if (videoClose && videoPlayerElement) {
         videoClose.addEventListener('click', function() {
             if (videoPlayer) {
                 videoPlayer.classList.remove('active');
                 document.body.style.overflow = '';
                 document.body.classList.remove('video-player-active');
-                if (videoPlayerElement) {
-                    videoPlayerElement.pause();
-                    videoPlayerElement.currentTime = 0;
-                }
+                videoPlayerElement.pause();
+                videoPlayerElement.currentTime = 0;
             }
         });
     }
