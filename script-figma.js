@@ -820,6 +820,7 @@ function initializeModalsAndPlayers() {
 
     const heroAboutCloseBtn = document.getElementById('heroAboutClose');
 
+    var aboutTouchStartY = 0;
     function openAboutView() {
         if (!heroSection || !heroAbout) return;
         heroAbout.setAttribute('aria-hidden', 'false');
@@ -835,6 +836,35 @@ function initializeModalsAndPlayers() {
         heroAbout.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
         updateScrollSpacerHeight();
+    }
+
+    function isAboutAtBottom(el) {
+        if (!el) return false;
+        var scrollTop = el.scrollTop, clientHeight = el.clientHeight, scrollHeight = el.scrollHeight;
+        return scrollHeight - (scrollTop + clientHeight) <= 2;
+    }
+
+    function setupAboutScrollHandoff() {
+        if (!heroAbout || !checkIfMobile()) return;
+        heroAbout.removeEventListener('touchstart', onAboutTouchStart);
+        heroAbout.removeEventListener('touchmove', onAboutTouchMove, { passive: false });
+        heroAbout.addEventListener('touchstart', onAboutTouchStart, { passive: true });
+        heroAbout.addEventListener('touchmove', onAboutTouchMove, { passive: false });
+    }
+    function onAboutTouchStart(e) {
+        aboutTouchStartY = e.touches[0].clientY;
+    }
+    function onAboutTouchMove(e) {
+        if (!heroSection || !heroSection.classList.contains('hero-about-open')) return;
+        var el = heroAbout;
+        var atBottom = isAboutAtBottom(el);
+        var touch = e.touches[0];
+        var dy = touch.clientY - aboutTouchStartY;
+        aboutTouchStartY = touch.clientY;
+        if (atBottom && dy > 0) {
+            window.scrollBy(0, dy);
+            e.preventDefault();
+        }
     }
 
     // Use delegation so About me works when link is injected by content-loader after load
@@ -859,6 +889,8 @@ function initializeModalsAndPlayers() {
             closeAboutView();
         }
     });
+
+    setupAboutScrollHandoff();
     
     // Close video player when clicking outside (on modal background)
     if (videoPlayer) {

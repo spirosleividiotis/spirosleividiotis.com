@@ -1811,15 +1811,6 @@ section {
         -webkit-overflow-scrolling: touch;
         overflow-x: hidden !important;
     }
-    /* Overscroll past footer: show white only, not hero peeking through */
-    body::after {
-        content: '';
-        display: block;
-        min-height: 100vh;
-        background: #FFFFFF;
-        pointer-events: none;
-    }
-    
     html {
         overflow-x: hidden !important;
     }
@@ -1885,7 +1876,7 @@ section {
         flex-direction: column;
         align-items: flex-start;
         padding: 0;
-        gap: 6px;
+        gap: 8px;
         flex: none;
     }
     
@@ -1907,7 +1898,7 @@ section {
         flex-direction: column;
         align-items: flex-end;
         padding: 0;
-        gap: 6px;
+        gap: 8px;
         flex: none;
     }
     
@@ -1975,7 +1966,7 @@ section {
         display: none;
     }
     
-    /* About me mobile: fixed overlay; scroll moves the page (experience etc.) over it, not the about content */
+    /* About me mobile: scroll within panel first to read all text; at bottom, scroll hands off to document (JS) */
     .hero.hero-about-open .hero-about {
         position: fixed !important;
         top: 0;
@@ -1983,7 +1974,8 @@ section {
         right: 0;
         bottom: 0;
         height: auto;
-        overflow: hidden;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
         padding: 86px 50px 24px;
         justify-content: flex-start;
     }
@@ -2340,7 +2332,7 @@ section {
         flex-direction: column;
         align-items: flex-start;
         padding: 0;
-        gap: 6px;
+        gap: 8px;
     }
     
     .footer-right,
@@ -2349,7 +2341,7 @@ section {
         flex-direction: column;
         align-items: flex-end;
         padding: 0;
-        gap: 6px;
+        gap: 8px;
     }
     
     /* Override touch-friendly rule so footer links don't get min-height 44px */
