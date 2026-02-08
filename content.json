@@ -1,4 +1,15 @@
 {
+  "modules": {
+    "header": true,
+    "hero": true,
+    "aboutMe": true,
+    "experience": true,
+    "reel": true,
+    "projects": true,
+    "footer": true,
+    "music": true,
+    "analytics": true
+  },
   "hero": {
     "name": "Spiros Leividiotis",
     "subtitle": "Staff Product Motion Designer specializing in motion systems and design system implementation. I help teams ship motion that's consistent, scalable, and implementation ready, turning principles into patterns, guidelines, and Lottie ready handoff with design systems and engineering.\n",
@@ -18,6 +29,7 @@
     "navigation": [
       { "text": "about me", "href": "#" },
       { "text": "experience", "href": "#experience" },
+      { "text": "reel", "href": "#reel" },
       { "text": "projects", "href": "#work" }
     ],
     "location": {

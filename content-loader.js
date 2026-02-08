@@ -30,24 +30,37 @@ async function loadContent() {
         console.error('Error loading content:', error);
     }
     try {
+        const modules = content.modules || {};
         updateHero(content.hero || FALLBACK_HERO);
         updateAboutMe(content.aboutMe || FALLBACK_ABOUT);
-        
         if (content.music) updateMusic(content.music);
         if (content.reel) updateReel(content.reel);
         if (content.header) updateHeader(content.header);
         if (content.projects) updateProjects(content.projects);
         if (content.experience) updateExperience(content.experience);
         if (content.footer) updateFooter(content.footer);
-        if (content.analytics && content.analytics.script && content.analytics.script.trim()) {
+        if (modules.analytics !== false && content.analytics && content.analytics.script && content.analytics.script.trim()) {
             injectAnalyticsScript(content.analytics.script.trim());
         }
+        applyModules(modules);
         setTimeout(() => {
             window.dispatchEvent(new Event('contentLoaded'));
         }, 150);
     } catch (error) {
         console.error('Error applying content:', error);
     }
+}
+
+function applyModules(modules) {
+    if (!modules || typeof modules !== 'object') return;
+    document.querySelectorAll('[data-module]').forEach(function (el) {
+        const id = el.getAttribute('data-module');
+        if (id && modules[id] === false) {
+            el.style.display = 'none';
+        } else {
+            el.style.display = '';
+        }
+    });
 }
 
 // Update Hero Section (CMS only – no fallback to HTML)

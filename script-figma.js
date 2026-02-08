@@ -1029,9 +1029,21 @@ function loadProjectContent(projectData, projectName) {
     const modalBodyText = document.getElementById('projectBodyText');
     const modalGrid = document.getElementById('projectGrid');
     
-    // Check if this is a custom HTML project (like motion system)
+    // Prefer bodyHtml from CMS; else load from customUrl (legacy HTML file)
+    if (projectData && projectData.bodyHtml && projectData.bodyHtml.trim()) {
+        if (modalHero) modalHero.style.display = 'none';
+        if (modalGrid) modalGrid.style.display = 'none';
+        if (modalBodyText) {
+            modalBodyText.style.display = 'block';
+            modalBodyText.innerHTML = projectData.bodyHtml.trim();
+            if (projectData.id === 5) {
+                const videos = projectData.media && Array.isArray(projectData.media.videos) ? projectData.media.videos : [];
+                fillBrandVideos(modalBodyText, videos);
+            }
+        }
+        return;
+    }
     if (projectData && projectData.customUrl) {
-        // Load custom HTML content
         fetch(projectData.customUrl)
             .then(response => response.text())
             .then(html => {

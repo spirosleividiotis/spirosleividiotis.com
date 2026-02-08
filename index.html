@@ -13,7 +13,7 @@
 </head>
 <body>
     <!-- Header: nav left (About me, Experience, Reel, Projects) | right (Amsterdam, time) -->
-    <header class="site-header" data-scroll-section>
+    <header class="site-header" data-scroll-section data-module="header">
         <div class="container">
             <nav class="header-entries" id="heroNavLeft"><!-- 4 links from content-loader --></nav>
             <div class="header-meta">
@@ -24,10 +24,10 @@
     </header>
 
     <!-- Hero: Name, Intro, Tags (default) | About open: photo + text + name at bottom -->
-    <section class="hero" id="heroSection" data-scroll-section>
+    <section class="hero" id="heroSection" data-scroll-section data-module="hero">
         <div class="container">
             <!-- About layout: photo + text + X (visible when hero-about-open) -->
-            <div class="hero-about" id="heroAbout" aria-hidden="true">
+            <div class="hero-about" id="heroAbout" aria-hidden="true" data-module="aboutMe">
                 <div class="hero-about-inner">
                     <button type="button" class="hero-about-close" id="heroAboutClose" aria-label="Close About me">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -65,7 +65,7 @@
     <div class="scroll-spacer" aria-hidden="true"></div>
 
     <!-- Experience (scrolls on top of hero) -->
-    <section class="experience" id="experience" data-scroll-section>
+    <section class="experience" id="experience" data-scroll-section data-module="experience">
         <div class="container">
             <h2 class="experience-title-main">experience</h2>
             <div class="experience-rows"><!-- filled from content.json --></div>
@@ -73,7 +73,7 @@
     </section>
 
     <!-- Reel -->
-    <section class="reel-section" id="reel" data-scroll-section>
+    <section class="reel-section" id="reel" data-scroll-section data-module="reel">
         <div class="container">
             <h2 class="reel-section-title">Reel</h2>
             <a href="#" class="reel-video-wrap" id="reelVideoWrap">
@@ -89,7 +89,7 @@
     </section>
 
     <!-- Projects -->
-    <section class="selected-work" id="work" data-scroll-section>
+    <section class="selected-work" id="work" data-scroll-section data-module="projects">
         <div class="container">
             <h2 class="section-title">Projects</h2>
             <div class="work-grid"><!-- filled from content.json --></div>
@@ -156,7 +156,7 @@
     </div>
 
     <!-- Music Player -->
-    <div class="music-player" id="musicPlayer">
+    <div class="music-player" id="musicPlayer" data-module="music">
         <div class="player-content">
             <div class="player-info">
                 <span class="player-title">Lost in Amsterdam — Parov Stelar</span>
@@ -225,7 +225,7 @@
     </div>
 
     <!-- Footer: left = logo + Download CV + email | right = Linkedin, Dribbble -->
-    <footer class="footer" id="contact" data-scroll-section>
+    <footer class="footer" id="contact" data-scroll-section data-module="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-left">
