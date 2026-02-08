@@ -1950,7 +1950,7 @@ section {
     .hero-content {
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 20px;
         padding-top: 0;
     }
     
@@ -1972,13 +1972,15 @@ section {
         display: none;
     }
     
-    /* About me mobile: in-flow, same alignment as hero/header; no cut (padding-bottom), parallax applies via JS */
+    /* About me mobile: in-flow, same top padding as hero (35px) so name and about align; no cut; parallax via JS */
     .hero.hero-about-open {
         position: relative !important;
         top: auto;
         left: auto;
         right: auto;
         overflow: visible;
+        padding-top: 0;
+        padding-bottom: 0;
     }
     .hero.hero-about-open .hero-about {
         position: relative !important;
