@@ -1876,7 +1876,7 @@ section {
         flex-direction: column;
         align-items: flex-start;
         padding: 0;
-        gap: 4px;
+        gap: 6px;
         flex: none;
     }
     
@@ -1898,7 +1898,7 @@ section {
         flex-direction: column;
         align-items: flex-end;
         padding: 0;
-        gap: 4px;
+        gap: 6px;
         flex: none;
     }
     
@@ -1966,7 +1966,7 @@ section {
         display: none;
     }
     
-    /* About me mobile: same as desktop – fixed overlay, content scrolls over; 50px sides to match site */
+    /* About me mobile: fixed overlay; scroll moves the page (experience etc.) over it, not the about content */
     .hero.hero-about-open .hero-about {
         position: fixed !important;
         top: 0;
@@ -1974,8 +1974,7 @@ section {
         right: 0;
         bottom: 0;
         height: auto;
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
+        overflow: hidden;
         padding: 86px 50px 24px;
         justify-content: flex-start;
     }
@@ -2332,7 +2331,7 @@ section {
         flex-direction: column;
         align-items: flex-start;
         padding: 0;
-        gap: 4px;
+        gap: 6px;
     }
     
     .footer-right,
@@ -2341,7 +2340,7 @@ section {
         flex-direction: column;
         align-items: flex-end;
         padding: 0;
-        gap: 4px;
+        gap: 6px;
     }
     
     /* Override touch-friendly rule so footer links don't get min-height 44px */

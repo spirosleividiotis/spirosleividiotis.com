@@ -153,7 +153,6 @@ function initializeExperienceAccordion() {
                 else if (rows[0]) rows[0].classList.add('expanded');
             }
             row.addEventListener('click', toggleExpanded);
-            row.addEventListener('touchend', function(e) { toggleExpanded(e); }, { passive: false });
         });
     } else {
         rows.forEach((row) => {
