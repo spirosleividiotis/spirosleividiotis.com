@@ -66,11 +66,8 @@ function updateHero(hero) {
         const tools = (hero.tags && Array.isArray(hero.tags.tools)) ? hero.tags.tools : [];
         const skillsHardcoded = ['Product Motion', 'Design Systems', 'Interaction Design'];
         const toolTags = tools.map(tool => `<div class="tag tag-black">${escapeHtml(tool)}</div>`).join('');
-        const breakDiv = '<div style="flex-basis: 100%; height: 0;"></div>';
-        const firstSkill = skillsHardcoded[0];
-        const restSkills = skillsHardcoded.slice(1);
-        const skillTags = `<div class="tag">${escapeHtml(firstSkill)}</div>` + breakDiv + restSkills.map(skill => `<div class="tag">${escapeHtml(skill)}</div>`).join('');
-        tagsGrid.innerHTML = toolTags + breakDiv + skillTags;
+        const skillTags = skillsHardcoded.map(skill => `<div class="tag">${escapeHtml(skill)}</div>`).join('');
+        tagsGrid.innerHTML = toolTags + skillTags;
     }
 }
 
