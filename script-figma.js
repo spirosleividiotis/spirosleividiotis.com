@@ -138,15 +138,21 @@ function initializeExperienceAccordion() {
     const isMobile = checkIfMobile();
 
     if (isMobile) {
+        var lastToggle = 0;
         rows.forEach((row) => {
-            row.addEventListener('click', (e) => {
+            function toggleExpanded(e) {
                 e.preventDefault();
                 e.stopPropagation();
+                var now = Date.now();
+                if (now - lastToggle < 400) return;
+                lastToggle = now;
                 const isExpanded = row.classList.contains('expanded');
                 rows.forEach((r) => r.classList.remove('expanded'));
                 if (!isExpanded) row.classList.add('expanded');
                 else if (rows[0]) rows[0].classList.add('expanded');
-            });
+            }
+            row.addEventListener('click', toggleExpanded);
+            row.addEventListener('touchend', function(e) { toggleExpanded(e); }, { passive: false });
         });
     } else {
         rows.forEach((row) => {
@@ -818,7 +824,7 @@ function initializeModalsAndPlayers() {
         if (!heroSection || !heroAbout) return;
         heroAbout.setAttribute('aria-hidden', 'false');
         heroSection.classList.add('hero-about-open');
-        document.body.style.overflow = 'hidden';
+        if (!checkIfMobile()) document.body.style.overflow = 'hidden';
         requestParallaxTick();
     }
 
