@@ -2008,7 +2008,7 @@ section {
         bottom: auto;
         height: auto;
         overflow: visible;
-        padding: 35px 0 180px;
+        padding: 35px 0 35px;
         justify-content: flex-start;
         width: 100%;
     }
