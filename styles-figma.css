@@ -254,7 +254,7 @@ section {
     margin-bottom: 48px;
 }
 
-/* About me: popup overlay on top of hero – white bg, photo + text + X; fade in/out */
+/* About me: popup overlay – white bg, photo + text; X fixed top-right; one layout, no internal scroll */
 .hero-about {
     position: fixed;
     top: 0;
@@ -268,7 +268,7 @@ section {
     align-items: center;
     justify-content: center;
     padding: 92px 48px 48px;
-    overflow: auto;
+    overflow: hidden;
     box-sizing: border-box;
     opacity: 0;
     visibility: hidden;
@@ -335,6 +335,14 @@ section {
     flex-shrink: 0;
     z-index: 2;
     transition: opacity 0.25s ease;
+}
+
+/* X fixed to viewport so it’s always visible (no scroll-away); same layout at all times */
+.hero.hero-about-open .hero-about-close {
+    position: fixed !important;
+    top: 24px !important;
+    right: 24px !important;
+    z-index: 101;
 }
 
 .hero-about-close:hover {
@@ -2003,24 +2011,21 @@ body.about-view-active .footer {
         flex: none;
         display: flex;
         flex-direction: row;
-        align-items: center;
-        gap: 50px;
+        align-items: flex-start;
+        gap: 24px;
         padding: 0;
     }
     
+    /* Same width for both columns so About me/Experience and Reel/Projects align in two columns */
     .header-col {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         gap: 0;
+        min-width: 72px;
     }
     
-    /* Reel column: same width as Projects so Reel aligns in size with Projects */
-    .header-entries .header-col:nth-child(2) {
-        min-width: 54px;
-    }
     .header-entries .header-col:nth-child(2) .nav-link {
-        min-width: 54px;
         display: inline-flex;
     }
     
@@ -2448,6 +2453,9 @@ body.about-view-active .footer {
         line-height: 118.44%;
         font-weight: 700;
     }
+    .footer-right .footer-link {
+        text-align: left;
+    }
     
     .footer-logo-circle {
         filter: none;
@@ -2469,9 +2477,9 @@ body.about-view-active .footer {
     .footer-content {
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: flex-start;
-        gap: 32px;
+        gap: 40px;
     }
     
     .footer-left {
@@ -2491,10 +2499,11 @@ body.about-view-active .footer {
         height: 36px;
     }
     
+    /* Align right block to start so footer doesn’t look split; consistent left alignment */
     .footer-right,
     .footer-center {
         flex-direction: column;
-        align-items: flex-end;
+        align-items: flex-start;
         gap: 0;
     }
     
