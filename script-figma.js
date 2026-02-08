@@ -1218,16 +1218,17 @@ window.addEventListener('load', () => {
     });
 });
 
-// Chrome scroll debug: set window.__scrollDebug = {} in console to enable; then inspect __scrollDebug or listen for 'scrollSpacerUpdated'
-document.addEventListener('DOMContentLoaded', function scrollDebugInit() {
-    window.__scrollDebug = window.__scrollDebug || { enabled: true };
-    document.addEventListener('wheel', function(e) {
-        if (!window.__scrollDebug) return;
-        window.__scrollDebug.lastWheel = Date.now();
-        window.__scrollDebug.wheelTarget = (e.target && e.target.id) ? e.target.id : (e.target && e.target.className) ? e.target.className : e.target.tagName;
-        window.__scrollDebug.wheelTargetNode = e.target;
-    }, { passive: true });
-});
+// Chrome scroll debug: always on. In Console type: __scrollDebug (see lastWheel, wheelTarget, spacerHeight)
+window.__scrollDebug = { enabled: true, hint: 'Scroll the page or move mouse then type __scrollDebug in Console' };
+document.addEventListener('wheel', function(e) {
+    if (!window.__scrollDebug) return;
+    window.__scrollDebug.lastWheel = Date.now();
+    window.__scrollDebug.wheelTarget = (e.target && e.target.id) ? e.target.id : (e.target && e.target.className) ? String(e.target.className).slice(0, 80) : e.target.tagName;
+    window.__scrollDebug.wheelTargetNode = e.target;
+}, { passive: true });
+if (typeof console !== 'undefined' && console.log) {
+    console.log('[scroll debug] Type __scrollDebug in Console to inspect. Scroll or move mouse first to fill lastWheel / wheelTarget.');
+}
 
 // ===================================
 // PASSWORD INPUT IN CURSOR
