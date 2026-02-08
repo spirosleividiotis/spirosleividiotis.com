@@ -2008,6 +2008,7 @@ section {
         height: auto !important;
         min-height: 0 !important;
         max-height: none !important;
+        display: block !important; /* avoid flex constraining height on mobile */
     }
     /* Collapse spacer so about section isn't pushed down; no reliance on JS timing */
     .hero.hero-about-open + .scroll-spacer {
@@ -2019,6 +2020,7 @@ section {
         max-height: none !important;
         height: auto !important;
         min-height: 0 !important;
+        display: block !important;
     }
     .hero.hero-about-open .hero-about {
         position: relative !important;
@@ -2031,9 +2033,8 @@ section {
         max-height: none !important;
         overflow: visible !important;
         padding: 35px 0 56px !important;
-        justify-content: flex-start;
         width: 100%;
-        flex: 0 0 auto;
+        display: block !important; /* block flow so full bio never clipped */
     }
     .hero.hero-about-open .hero-content {
         display: none !important;
