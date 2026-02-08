@@ -23,8 +23,10 @@
     --ease: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
+/* Single scroll: document only, no inner scroll on hero or sections */
 html {
     scroll-behavior: auto;
+    overflow-x: hidden;
 }
 
 body {
@@ -35,48 +37,43 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    overflow-y: visible;
     max-width: 100vw;
+    min-height: 100%;
     padding-top: 92px; /* below fixed header */
 }
 
-/* Ensure all sections scale properly on large screens */
+/* Ensure all sections scale properly; no inner scroll */
 section {
     max-width: 100%;
     overflow-x: hidden;
+    overflow-y: visible;
 }
 
+/* Site-wide content width: align header, hero, experience, reel, projects, footer */
 .container {
-    max-width: 1600px;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 0 48px;
     width: 100%;
 }
 
-/* Large screens - ensure proper scaling */
+/* Large screens - keep 1500px for consistent alignment site-wide */
 @media (min-width: 1920px) {
     .container {
-        max-width: 1800px;
-        padding: 0 120px;
+        max-width: 1500px;
     }
 }
 
 @media (min-width: 2560px) {
     .container {
-        max-width: 2200px;
-        padding: 0 160px;
+        max-width: 1500px;
     }
 }
 
-/* Ultra-wide screens - prevent content from spreading too wide */
 @media (min-width: 3440px) {
     .container {
-        max-width: 2400px;
-        padding: 0 200px;
-    }
-    
-    .selected-work .section-title,
-    .experience-title-main {
-        margin-left: calc(400px * 1.6);
+        max-width: 1500px;
     }
 }
 
@@ -219,6 +216,8 @@ section {
     align-items: flex-start;
     box-sizing: border-box;
     overflow: visible;
+    min-height: auto;
+    height: auto;
 }
 
 /* Match header content width (1500px) so hero text aligns with nav */
@@ -391,6 +390,7 @@ section {
 .hero.hero-about-open .container {
     min-height: calc(100vh - 92px);
     max-width: 1500px;
+    overflow: visible;
 }
 
 .hero.hero-about-open .hero-content {

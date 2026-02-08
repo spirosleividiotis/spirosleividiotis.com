@@ -4,7 +4,7 @@
 
 let ticking = false;
 
-// Hero is fixed; sections scroll on top of it. No element parallax needed.
+// Hero scrolls with the page; single document scroll, no inner scroll.
 function updateParallax() {
     ticking = false;
 }
