@@ -202,20 +202,22 @@ section {
    HERO (fixed; intro+tags top, name bottom – stays visible with footer)
    =================================== */
 
-/* Spacer reserves space so content below can scroll up over the fixed hero */
+/* Spacer reserves remaining viewport height so content below can scroll up over the fixed hero (height set by JS to fill viewport minus hero content height) */
 .scroll-spacer {
-    height: calc(100vh - 92px);
+    height: calc(100vh - 92px); /* fallback; JS sets to (100vh - 92px - heroHeight) */
     width: 100%;
     pointer-events: none;
+    background: #FFFFFF;
 }
 
-/* Hero fixed so experience/reel/projects scroll above it */
+/* Hero fixed so experience/reel/projects scroll above it; height = content only (no bottom white) */
 .hero {
     position: fixed;
     top: 92px;
     left: 0;
     right: 0;
-    height: calc(100vh - 92px);
+    height: auto;
+    min-height: 0;
     padding: 100px 48px 100px;
     background: #FFFFFF;
     display: flex;

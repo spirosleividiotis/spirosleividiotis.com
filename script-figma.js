@@ -80,6 +80,18 @@ function checkIfMobile() {
     return window.innerWidth <= 768;
 }
 
+// Hero is content-height; spacer fills rest of viewport so scroll-over effect works without hero bottom white space
+function updateScrollSpacerHeight() {
+    if (checkIfMobile()) return;
+    const heroSection = document.getElementById('heroSection');
+    const spacer = document.querySelector('.scroll-spacer');
+    if (!heroSection || !spacer) return;
+    const headerH = 92;
+    const heroH = heroSection.offsetHeight;
+    const spacerH = Math.max(0, window.innerHeight - headerH - heroH);
+    spacer.style.height = spacerH + 'px';
+}
+
 // Experience accordion: one row expanded at a time
 // Desktop: switch on hover. Mobile: tap to expand/collapse (only one expanded).
 function initializeExperienceAccordion() {
@@ -917,6 +929,7 @@ function initializeModalsAndPlayers() {
             requestAnimationFrame(function() {
                 setTimeout(function() {
                     heroSection.classList.remove('hero-content-reveal');
+                    updateScrollSpacerHeight(); /* hero height may have changed */
                 }, 20);
             });
         });
@@ -1252,6 +1265,9 @@ function initializeAll() {
     initializeExperience();
     initializePortfolioRoles();
     initializeProjectCursors();
+    requestAnimationFrame(() => {
+        updateScrollSpacerHeight();
+    });
 }
 
 // Initialize on DOM ready
@@ -1268,7 +1284,13 @@ window.addEventListener('contentLoaded', () => {
         initializeExperience();
         initializePortfolioRoles();
         initializeProjectCursors();
+        updateScrollSpacerHeight();
     }, 300);
+});
+
+// Resize: recompute scroll-spacer so first screen stays correct
+window.addEventListener('resize', () => {
+    requestAnimationFrame(updateScrollSpacerHeight);
 });
 
 // ===================================
