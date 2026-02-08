@@ -1950,7 +1950,7 @@ section {
     .hero-content {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 16px;
         padding-top: 0;
     }
     
@@ -2541,14 +2541,6 @@ section {
     .password-error {
         font-size: 14px;
         padding: 16px 20px;
-    }
-    
-    /* ===================================
-       MUSIC PLAYER - HIDE on mobile
-       =================================== */
-    
-    .music-player {
-        display: none !important;
     }
 }
 
