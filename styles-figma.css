@@ -329,10 +329,10 @@ section {
     align-items: flex-end;
 }
 
-/* X in body; shown via JS when About open; always on top, black */
+/* X in body; shown via JS when About open; align top with photo/text (below header) */
 .hero-about-close {
     position: fixed;
-    top: 36px;
+    top: 92px;
     right: max(48px, calc((100vw - 1500px) / 2));
     width: 44px;
     height: 44px;
