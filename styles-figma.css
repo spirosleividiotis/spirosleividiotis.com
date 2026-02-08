@@ -214,12 +214,13 @@ section {
     top: 92px;
     left: 0;
     right: 0;
-    height: calc(100vh - 92px);
-    padding: 100px 48px 50px; /* 100px after header, 50px before next module */
+    height: auto;
+    padding: 100px 48px 100px; /* 100px after header, 100px after tags */
     background: #FFFFFF;
     z-index: 1; /* below scroll sections (z-index 10) */
     display: flex;
     align-items: flex-start;
+    box-sizing: border-box;
 }
 
 .hero .container {
