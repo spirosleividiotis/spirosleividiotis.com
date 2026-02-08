@@ -1970,12 +1970,13 @@ section {
         display: none;
     }
     
-    /* About me mobile: in-flow so one natural scroll – read about text, then site scrolls up over it */
+    /* About me mobile: in-flow, same horizontal alignment as hero/header (container 50px); one smooth scroll */
     .hero.hero-about-open {
         position: relative !important;
         top: auto;
         left: auto;
         right: auto;
+        overflow: visible;
     }
     .hero.hero-about-open .hero-about {
         position: relative !important;
@@ -1987,12 +1988,16 @@ section {
         overflow: visible;
         padding: 16px 0 35px;
         justify-content: flex-start;
+        width: 100%;
     }
     .hero.hero-about-open .hero-content {
         display: none !important;
     }
     .hero-about-inner {
         padding: 48px 0 0;
+        width: 100%;
+        max-width: 100%;
+        overflow: visible;
     }
     .hero-about-row {
         flex-direction: column;
@@ -2578,10 +2583,6 @@ section {
     .footer .container {
         padding-left: 0;
         padding-right: 0;
-    }
-    .hero.hero-about-open .hero-about {
-        padding-left: 24px;
-        padding-right: 24px;
     }
 }
 
