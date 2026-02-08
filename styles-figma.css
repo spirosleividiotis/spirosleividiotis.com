@@ -284,8 +284,9 @@ section {
     pointer-events: auto;
 }
 
-/* Same width as header/hero content (1500px max, centered) */
+/* Same width as header/hero content (1500px max, centered); relative for X position */
 .hero-about-inner {
+    position: relative;
     width: 100%;
     max-width: 1500px;
     margin: 0 auto;
@@ -329,11 +330,11 @@ section {
     align-items: flex-end;
 }
 
-/* X in body; shown via JS when About open; align top with photo/text (below header) */
+/* X part of about section: top-right of content, moves with photo/text on scroll */
 .hero-about-close {
-    position: fixed;
-    top: 92px;
-    right: max(48px, calc((100vw - 1500px) / 2));
+    position: absolute;
+    top: 0;
+    right: 0;
     width: 44px;
     height: 44px;
     padding: 0;
@@ -344,7 +345,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10002;
+    z-index: 2;
     transition: opacity 0.25s ease;
     box-sizing: border-box;
 }

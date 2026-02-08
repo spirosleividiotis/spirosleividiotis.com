@@ -19,14 +19,14 @@ function updateParallax() {
 
     if (hero.classList.contains('hero-about-open')) {
         heroContent.style.transform = '';
-        const aboutRow = document.querySelector('.hero-about .hero-about-row');
-        if (aboutRow) aboutRow.style.transform = translate;
+        const aboutInner = document.querySelector('.hero-about .hero-about-inner');
+        if (aboutInner) aboutInner.style.transform = translate;
         return;
     }
 
     heroContent.style.transform = translate;
-    const aboutRow = document.querySelector('.hero-about .hero-about-row');
-    if (aboutRow) aboutRow.style.transform = '';
+    const aboutInner = document.querySelector('.hero-about .hero-about-inner');
+    if (aboutInner) aboutInner.style.transform = '';
 }
 
 function requestParallaxTick() {
@@ -818,7 +818,6 @@ function initializeModalsAndPlayers() {
         heroAbout.setAttribute('aria-hidden', 'false');
         heroSection.classList.add('hero-about-open');
         document.body.style.overflow = 'hidden';
-        if (heroAboutCloseBtn) heroAboutCloseBtn.style.display = 'flex';
         requestParallaxTick();
     }
 
@@ -827,7 +826,6 @@ function initializeModalsAndPlayers() {
         heroSection.classList.remove('hero-about-open');
         heroAbout.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
-        if (heroAboutCloseBtn) heroAboutCloseBtn.style.display = 'none';
     }
 
     // Use delegation so About me works when link is injected by content-loader after load

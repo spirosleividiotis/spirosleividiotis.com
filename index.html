@@ -29,6 +29,11 @@
             <!-- About layout: photo + text + X (visible when hero-about-open) -->
             <div class="hero-about" id="heroAbout" aria-hidden="true">
                 <div class="hero-about-inner">
+                    <button type="button" class="hero-about-close" id="heroAboutClose" aria-label="Close About me">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M1 1L19 19M19 1L1 19" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
                     <div class="hero-about-row">
                         <div class="hero-about-photo">
                             <img id="heroAboutPhotoImg" src="about-photo.png" alt="Spiros Leividiotis">
@@ -243,12 +248,6 @@
             </div>
         </div>
     </footer>
-
-    <button type="button" class="hero-about-close" id="heroAboutClose" aria-label="Close About me" style="display: none;">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M1 1L19 19M19 1L1 19" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-    </button>
 
     <script src="content-loader.js?v=6"></script>
     <script src="script-figma.js?v=6"></script>
