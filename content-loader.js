@@ -197,13 +197,13 @@ function updateProjects(projects) {
                     isVideo ? 
                     `<video src="${project.cardPreview}" autoplay loop muted playsinline${lazyLoad ? ' loading="lazy"' : ''} style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;"></video>` :
                     `<img src="${previewUrl}" alt="${project.name}"${lazyLoad} decoding="async" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">`) : ''}
-                <div class="project-info" style="position: relative; z-index: 1;">
-                    <div class="project-text-mask">
-                        <h3 class="project-name">${project.name}</h3>
-                    </div>
-                    <div class="project-text-mask">
-                        <p class="project-company">${project.company}</p>
-                    </div>
+            </div>
+            <div class="project-info">
+                <div class="project-text-mask">
+                    <p class="project-company">${project.company}</p>
+                </div>
+                <div class="project-text-mask">
+                    <h3 class="project-name">${project.name}</h3>
                 </div>
             </div>
         </article>

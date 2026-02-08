@@ -633,16 +633,19 @@ section {
     font-size: 16px;
     line-height: 19px;
     color: #777777;
-    margin-bottom: 0;
-    text-transform: lowercase;
+    margin: 0 0 50px 0;
 }
 
 /* ===================================
-   SELECTED WORK / PROJECTS (Figma: 2-col grid, 15px gap, 50px row gap)
+   SELECTED WORK / PROJECTS (Figma: padding 25 48 100, gap 50, 2-col grid 15px/50px)
    =================================== */
 
 .selected-work {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     padding: 25px 48px 100px;
+    gap: 50px;
     background: #000000;
     position: relative;
     z-index: 10;
@@ -650,18 +653,24 @@ section {
 
 .selected-work .container {
     padding: 0 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 50px;
 }
 
 .selected-work .section-title {
     color: #777777;
-    margin-bottom: 50px;
-    margin-left: 0;
+    margin: 0;
 }
 
 .work-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 50px 15px;
+    width: 100%;
+    max-width: 1500px;
 }
 
 .work-card {
@@ -670,6 +679,7 @@ section {
     overflow: visible;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 10px;
 }
 
@@ -685,7 +695,6 @@ section {
     align-items: center;
     justify-content: center;
     background: #141414;
-    border-radius: 0;
     overflow: hidden;
 }
 
@@ -712,13 +721,10 @@ section {
     padding: 0;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 0;
     z-index: 2;
 }
-
-/* Figma: company above title */
-.project-info .project-text-mask:first-child { order: 2; }
-.project-info .project-text-mask:last-child { order: 1; }
 
 .project-info.hidden {
     opacity: 0;
