@@ -102,11 +102,15 @@ function getHeroScrollGap() {
     return 80; /* mobile: small gap so content scrolls over hero */
 }
 function updateScrollSpacerHeight() {
-    const heroSection = document.getElementById('heroSection');
     const spacer = document.querySelector('.scroll-spacer');
-    if (!heroSection || !spacer) return;
-    const isMobile = checkIfMobile();
-    const headerH = isMobile ? 70 : 92;
+    if (!spacer) return;
+    if (checkIfMobile()) {
+        spacer.style.height = '0';
+        return;
+    }
+    const heroSection = document.getElementById('heroSection');
+    if (!heroSection) return;
+    const headerH = 92;
     const vh = window.innerHeight;
     const heroH = heroSection.offsetHeight;
     const gap = getHeroScrollGap();

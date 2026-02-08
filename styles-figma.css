@@ -2134,7 +2134,7 @@ body.about-view-active .footer {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 2px;
+        gap: 0;
     }
     
     /* Reel column: same width as Projects so Reel aligns in size with Projects */
@@ -2157,7 +2157,7 @@ body.about-view-active .footer {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        gap: 2px;
+        gap: 0;
     }
     
     .header-meta .location,
@@ -2180,15 +2180,18 @@ body.about-view-active .footer {
        HERO SECTION - 33px 47px, gap 51px
        =================================== */
     
-    /* Spacer height set by JS so content scrolls over hero (same as desktop) */
+    /* Hero in flow on mobile so name + intro + tags all visible when scrolling (nothing cut) */
+    .scroll-spacer {
+        height: 0;
+    }
     
     .hero {
-        position: fixed !important;
-        top: 70px;
-        left: 0;
-        right: 0;
+        position: relative !important;
+        top: auto;
+        left: auto;
+        right: auto;
         height: auto;
-        min-height: 0;
+        min-height: auto;
         padding: 56px 0 20px;
     }
     
@@ -2568,7 +2571,7 @@ body.about-view-active .footer {
         gap: 12px;
     }
     .footer-left .footer-entries {
-        gap: 2px;
+        gap: 0;
     }
     .footer-logo-wrap {
         width: 36px;
@@ -2583,7 +2586,7 @@ body.about-view-active .footer {
     .footer-center {
         flex-direction: column;
         align-items: flex-end;
-        gap: 2px;
+        gap: 0;
     }
     
     .footer-label {
