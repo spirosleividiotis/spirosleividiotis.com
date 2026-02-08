@@ -24,7 +24,10 @@ function updateParallax() {
     if (isAboutOpen) {
         heroContent.style.transform = '';
         const aboutInner = document.querySelector('.hero-about .hero-about-inner');
-        if (aboutInner) aboutInner.style.transform = translate;
+        if (aboutInner) {
+            /* On mobile don't apply parallax – avoids any transform affecting layout/scroll so full bio is visible */
+            aboutInner.style.transform = (isMobile ? '' : translate);
+        }
         return;
     }
 
@@ -843,9 +846,13 @@ function initializeModalsAndPlayers() {
         heroAbout.setAttribute('aria-hidden', 'false');
         heroSection.classList.add('hero-about-open');
         if (!checkIfMobile()) document.body.style.overflow = 'hidden';
+        if (checkIfMobile()) {
+            const aboutInner = document.querySelector('.hero-about .hero-about-inner');
+            if (aboutInner) aboutInner.style.transform = '';
+        }
         updateScrollSpacerHeight();
         requestParallaxTick();
-        if (checkIfMobile()) setTimeout(requestParallaxTick, 100);
+        if (checkIfMobile()) setTimeout(updateScrollSpacerHeight, 50);
     }
 
     function closeAboutView() {

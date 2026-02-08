@@ -2047,6 +2047,7 @@ section {
         max-height: none !important;
         height: auto !important;
         min-height: 0 !important;
+        transform: none !important; /* no parallax on mobile – full bio visible, no clip */
     }
     .hero-about-text {
         overflow: visible !important;
