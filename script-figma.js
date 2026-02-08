@@ -80,22 +80,53 @@ function checkIfMobile() {
     return window.innerWidth <= 768;
 }
 
-// Experience accordion: one row expanded at a time, switch on hover
+// Experience accordion: one row expanded at a time, fade in/out descriptions
 function initializeExperienceAccordion() {
     const container = document.querySelector('.experience-rows');
     const rows = document.querySelectorAll('.experience-row');
     if (!container || rows.length === 0) return;
-    
+
+    let pendingExpandRow = null;
+
+    function finishCollapse(rowToCollapse, targetRow) {
+        rowToCollapse.classList.remove('expanded', 'collapsing');
+        if (targetRow) targetRow.classList.add('expanded');
+        pendingExpandRow = null;
+    }
+
+    function collapseRow(row, thenExpandRow) {
+        if (!row || !row.classList.contains('expanded')) {
+            if (thenExpandRow) thenExpandRow.classList.add('expanded');
+            return;
+        }
+        const desc = row.querySelector('.experience-description');
+        row.classList.remove('expanded');
+        row.classList.add('collapsing');
+        pendingExpandRow = thenExpandRow || null;
+
+        function onFadeOutEnd(e) {
+            if (e.target !== desc || e.propertyName !== 'opacity') return;
+            desc.removeEventListener('transitionend', onFadeOutEnd);
+            finishCollapse(row, pendingExpandRow);
+        }
+        desc.addEventListener('transitionend', onFadeOutEnd);
+    }
+
     rows.forEach((row) => {
         row.addEventListener('mouseenter', () => {
-            rows.forEach((r) => r.classList.remove('expanded'));
-            row.classList.add('expanded');
+            const expandedRow = Array.from(rows).find((r) => r.classList.contains('expanded'));
+            if (expandedRow === row) return;
+            if (expandedRow) {
+                collapseRow(expandedRow, row);
+            } else {
+                row.classList.add('expanded');
+            }
         });
     });
-    
+
     container.addEventListener('mouseleave', () => {
-        rows.forEach((r) => r.classList.remove('expanded'));
-        if (rows[0]) rows[0].classList.add('expanded');
+        const expandedRow = Array.from(rows).find((r) => r.classList.contains('expanded'));
+        if (expandedRow) collapseRow(expandedRow, rows[0] || null);
     });
 }
 

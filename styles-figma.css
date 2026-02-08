@@ -419,7 +419,7 @@ section {
     padding: 28px 0;
     border-bottom: 0.5px solid #FFFFFF;
     width: 100%;
-    transition: padding 0.5s var(--ease);
+    transition: padding 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .experience-row:not(:first-child) {
@@ -477,6 +477,7 @@ section {
     gap: 15px;
     min-width: 0;
     border-radius: 35px;
+    transition: grid-template-rows 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .experience-row.expanded .experience-job-block {
@@ -501,12 +502,22 @@ section {
     min-height: 0;
     overflow: hidden;
     opacity: 0;
-    transition: opacity 0.55s var(--ease);
-    will-change: opacity;
+    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .experience-row.expanded .experience-description {
     opacity: 1;
+    transition-delay: 0.12s;
+}
+
+/* Keep row open while description fades out, then collapse */
+.experience-row.collapsing .experience-job-block {
+    grid-template-rows: auto 1fr;
+}
+
+.experience-row.collapsing .experience-description {
+    opacity: 0;
+    transition-delay: 0s;
 }
 
 .experience-dates {
@@ -878,10 +889,8 @@ section {
 }
 
 .footer-logo-wrap {
-    width: 47.2px;
-    height: 47.2px;
-    border-radius: 50%;
-    background: #000000;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -890,9 +899,10 @@ section {
 }
 
 .footer-logo-circle {
-    width: 28px;
-    height: 28px;
+    width: 48px;
+    height: 48px;
     object-fit: contain;
+    display: block;
 }
 
 .footer-entries {
