@@ -11,7 +11,7 @@ function updateParallax() {
     const hero = document.getElementById('heroSection');
     const heroContent = hero && hero.querySelector('.hero .container');
     if (!hero || !heroContent) return;
-    if (hero.classList.contains('hero-about-step1') || hero.classList.contains('hero-about-step2')) {
+    if (hero.classList.contains('hero-about-open')) {
         heroContent.style.transform = '';
         return;
     }
@@ -113,9 +113,7 @@ function updateScrollSpacerHeight() {
     if (!heroSection) return;
     const headerH = 92;
     const vh = window.innerHeight;
-    /* Desktop: when About open, hero+about fixed layer = 1844px; when closed = 844px */
-    const aboutOpen = heroSection.classList.contains('hero-about-open');
-    const heroH = aboutOpen ? 1844 : heroSection.offsetHeight;
+    const heroH = heroSection.offsetHeight;
     const gap = getHeroScrollGap();
     const minSpacer = vh - headerH;
     const contentSpacer = vh - headerH - heroH + gap;
@@ -157,124 +155,8 @@ function initializeExperienceAccordion() {
     }
 }
 
-// Legacy experience (sidebar + detail) - no longer used
-let experienceInitialized = false;
-
 function initializeExperience() {
     initializeExperienceAccordion();
-    const experienceItems = document.querySelectorAll('.experience-item');
-    const experienceDetails = document.querySelectorAll('.experience-detail');
-    const visualPlaceholders = document.querySelectorAll('.visual-placeholder');
-    const isMobile = checkIfMobile();
-    
-    if (experienceItems.length === 0) {
-        return;
-    }
-    
-    console.log(`Found ${experienceItems.length} experience items`);
-    
-    // Keep track of the previous active index
-    let previousExperienceIndex = 0;
-    let isAnimating = false;
-
-    // Only enable hover switching on desktop
-    if (!isMobile) {
-        console.log('Adding experience hover listeners');
-        // Get fresh references after content load
-        const freshItems = document.querySelectorAll('.experience-item');
-        const freshDetails = document.querySelectorAll('.experience-detail');
-        const freshVisuals = document.querySelectorAll('.visual-placeholder');
-        
-        freshItems.forEach((item, currentIndex) => {
-            item.addEventListener('mouseenter', () => {
-                console.log(`Experience item ${currentIndex} hovered`);
-            // Prevent rapid transitions while animating
-            if (isAnimating) return;
-            
-            const targetExperience = item.getAttribute('data-experience');
-            
-            // Don't do anything if already active
-            if (item.classList.contains('active')) return;
-            
-            // Set animating flag
-            isAnimating = true;
-            
-            // Clear flag after animation completes (700ms + small buffer)
-            setTimeout(() => {
-                isAnimating = false;
-            }, 750);
-            
-            // Update active states for items
-            freshItems.forEach(i => i.classList.remove('active'));
-            item.classList.add('active');
-            
-            // Determine slide direction
-            const slideUp = currentIndex < previousExperienceIndex;
-            
-            // Switch content (text boxes) with vertical slide animation
-            freshDetails.forEach((detail) => {
-                if (detail.id === targetExperience) {
-                    // Remove any exit classes
-                    detail.classList.remove('exit-up', 'exit-down');
-                    
-                    // Add entrance class based on direction
-                    if (slideUp) {
-                        detail.classList.add('enter-from-top');
-                    } else {
-                        detail.classList.add('enter-from-bottom');
-                    }
-                    
-                    // Activate after a tick
-                    requestAnimationFrame(() => {
-                        detail.classList.add('active');
-                        detail.classList.remove('enter-from-top', 'enter-from-bottom');
-                    });
-                } else if (detail.classList.contains('active')) {
-                    // Exit current active detail
-                    detail.classList.remove('active');
-                    if (slideUp) {
-                        detail.classList.add('exit-down');
-                    } else {
-                        detail.classList.add('exit-up');
-                    }
-                }
-            });
-            
-            // Switch visuals (opposite direction)
-            freshVisuals.forEach((visual) => {
-                const visualTarget = visual.getAttribute('data-visual');
-                if (visualTarget === targetExperience) {
-                    // Remove any exit classes
-                    visual.classList.remove('exit-up', 'exit-down');
-                    
-                    // Add entrance class OPPOSITE to text direction
-                    if (slideUp) {
-                        visual.classList.add('enter-from-bottom');
-                    } else {
-                        visual.classList.add('enter-from-top');
-                    }
-                    
-                    // Activate after a tick
-                    requestAnimationFrame(() => {
-                        visual.classList.add('active');
-                        visual.classList.remove('enter-from-top', 'enter-from-bottom');
-                    });
-                } else if (visual.classList.contains('active')) {
-                    // Exit current active visual
-                    visual.classList.remove('active');
-                    if (slideUp) {
-                        visual.classList.add('exit-up');
-                    } else {
-                        visual.classList.add('exit-down');
-                    }
-                }
-            });
-            
-            // Update previous index
-            previousExperienceIndex = currentIndex;
-        });
-    });
-    }
 }
 
 // ===================================
@@ -282,17 +164,9 @@ function initializeExperience() {
 // ===================================
 
 function initializePortfolioRoles() {
-    console.log('initializePortfolioRoles called');
-    
     const portfolioDetail = document.getElementById('portfolio');
-    
-    if (!portfolioDetail) {
-        console.log('Portfolio detail not found, will retry on contentLoaded');
-        return;
-    }
-    
-    console.log('Portfolio detail found');
-    
+    if (!portfolioDetail) return;
+
     const jobTitle = portfolioDetail.querySelector('.job-title');
     const contentWrapper = portfolioDetail.querySelector('.experience-content-wrapper');
     const description = portfolioDetail.querySelector('.experience-description');
@@ -302,13 +176,8 @@ function initializePortfolioRoles() {
     const leftArrow = portfolioDetail.querySelector('.role-arrow-left');
     const rightArrow = portfolioDetail.querySelector('.role-arrow-right');
     
-    if (!leftArrow || !rightArrow) {
-        console.log('Arrows not found');
-        return;
-    }
-    
-    console.log('Arrows found, attaching listeners');
-    
+    if (!leftArrow || !rightArrow) return;
+
     // Portfolio role data (from experience data if available)
     const portfolioRoles = window.experienceData?.find(e => e.id === 'portfolio')?.roles || [
         {
@@ -365,8 +234,6 @@ function initializePortfolioRoles() {
     
     // Cycle through Portfolio roles
     function cyclePortfolioRole(direction) {
-        console.log(`Cycling role: ${direction}, current index: ${currentPortfolioRoleIndex}`);
-        
         // Update index
         if (direction === 'next' && currentPortfolioRoleIndex < portfolioRoles.length - 1) {
             currentPortfolioRoleIndex++;
@@ -407,21 +274,16 @@ function initializePortfolioRoles() {
     
     // Add click handlers to new arrows
     newLeftArrow.addEventListener('click', (e) => {
-        console.log('Left arrow clicked');
         e.stopPropagation();
         cyclePortfolioRole('prev');
     });
     
     newRightArrow.addEventListener('click', (e) => {
-        console.log('Right arrow clicked');
         e.stopPropagation();
         cyclePortfolioRole('next');
     });
     
-    // Initialize arrow states
     updateRoleArrowsLocal();
-    
-    console.log('Portfolio roles initialized successfully');
 }
 
 // ===================================
@@ -528,7 +390,6 @@ function cycleProjectImage(card) {
         }
     }
     
-    console.log(`${projectName}: showing image ${projectImageIndices[projectName] + 1}`);
 }
 
 // Function to reset cursor to default state (just dot, no text) - shared across all cursor handlers
@@ -743,7 +604,6 @@ function initializeModalsAndPlayers() {
             // Auto-play
             if (audioPlayer) {
                 audioPlayer.play().catch(err => {
-                    console.log('Audio autoplay prevented. Click play button to start:', err);
                 });
             }
         });
@@ -853,7 +713,6 @@ function initializeModalsAndPlayers() {
             const rect = progressBar.getBoundingClientRect();
             const percent = (e.clientX - rect.left) / rect.width;
             audioPlayer.currentTime = percent * audioPlayer.duration;
-            console.log(`Seeked to ${percent * 100}% - ${formatTime(audioPlayer.currentTime)}`);
         });
     }
     
@@ -1282,7 +1141,6 @@ document.addEventListener('click', function(e) {
 
 // Master initialization function
 function initializeAll() {
-    console.log('Initializing all event listeners');
     initializeSmoothScroll();
     initializeCursor();
     initializeCursorHoverEffects();
@@ -1297,15 +1155,12 @@ function initializeAll() {
 
 // Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, initializing');
     initializeAll();
 });
 
 // Reinitialize when content is loaded (from content-loader.js)
 window.addEventListener('contentLoaded', () => {
-    console.log('Content loaded event received, reinitializing');
     setTimeout(() => {
-        console.log('Running reinitialization now');
         initializeExperience();
         initializePortfolioRoles();
         initializeProjectCursors();
