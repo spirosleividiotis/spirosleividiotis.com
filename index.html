@@ -23,9 +23,25 @@
         </div>
     </header>
 
-    <!-- Hero: Name, Intro, Tags (Figma order) -->
-    <section class="hero" data-scroll-section>
+    <!-- Hero: Name, Intro, Tags (default) | About open: photo + text + name at bottom -->
+    <section class="hero" id="heroSection" data-scroll-section>
         <div class="container">
+            <!-- About layout: photo + text + X (visible when hero-about-open) -->
+            <div class="hero-about" id="heroAbout" aria-hidden="true">
+                <div class="hero-about-row">
+                    <div class="hero-about-photo">
+                        <img id="heroAboutPhotoImg" src="about-photo.png" alt="Spiros Leividiotis">
+                    </div>
+                    <div class="hero-about-right">
+                        <button type="button" class="hero-about-close" id="heroAboutClose" aria-label="Close About me">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L19 19M19 1L1 19" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <div class="hero-about-text" id="heroAboutText"></div>
+                    </div>
+                </div>
+            </div>
             <div class="hero-content">
                 <div class="hero-name-wrapper">
                     <h1 class="hero-name" id="heroName"></h1>

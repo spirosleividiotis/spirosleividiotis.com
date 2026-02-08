@@ -80,53 +80,22 @@ function checkIfMobile() {
     return window.innerWidth <= 768;
 }
 
-// Experience accordion: one row expanded at a time, fade in/out descriptions
+// Experience accordion: one row expanded at a time, switch on hover
 function initializeExperienceAccordion() {
     const container = document.querySelector('.experience-rows');
     const rows = document.querySelectorAll('.experience-row');
     if (!container || rows.length === 0) return;
 
-    let pendingExpandRow = null;
-
-    function finishCollapse(rowToCollapse, targetRow) {
-        rowToCollapse.classList.remove('expanded', 'collapsing');
-        if (targetRow) targetRow.classList.add('expanded');
-        pendingExpandRow = null;
-    }
-
-    function collapseRow(row, thenExpandRow) {
-        if (!row || !row.classList.contains('expanded')) {
-            if (thenExpandRow) thenExpandRow.classList.add('expanded');
-            return;
-        }
-        const desc = row.querySelector('.experience-description');
-        row.classList.remove('expanded');
-        row.classList.add('collapsing');
-        pendingExpandRow = thenExpandRow || null;
-
-        function onFadeOutEnd(e) {
-            if (e.target !== desc || e.propertyName !== 'opacity') return;
-            desc.removeEventListener('transitionend', onFadeOutEnd);
-            finishCollapse(row, pendingExpandRow);
-        }
-        desc.addEventListener('transitionend', onFadeOutEnd);
-    }
-
     rows.forEach((row) => {
         row.addEventListener('mouseenter', () => {
-            const expandedRow = Array.from(rows).find((r) => r.classList.contains('expanded'));
-            if (expandedRow === row) return;
-            if (expandedRow) {
-                collapseRow(expandedRow, row);
-            } else {
-                row.classList.add('expanded');
-            }
+            rows.forEach((r) => r.classList.remove('expanded'));
+            row.classList.add('expanded');
         });
     });
 
     container.addEventListener('mouseleave', () => {
-        const expandedRow = Array.from(rows).find((r) => r.classList.contains('expanded'));
-        if (expandedRow) collapseRow(expandedRow, rows[0] || null);
+        rows.forEach((r) => r.classList.remove('expanded'));
+        if (rows[0]) rows[0].classList.add('expanded');
     });
 }
 
@@ -915,24 +884,22 @@ function initializeModalsAndPlayers() {
         }
     });
 
-    // About Me: in-page view (homepage hides, smooth reveal, X to return)
-    const aboutView = document.getElementById('aboutModal');
+    // About Me: transforms hero in-place (no modal, page keeps scrolling)
+    const heroSection = document.getElementById('heroSection');
     const aboutMeLink = document.getElementById('aboutMeLink');
-    const aboutClose = document.getElementById('aboutClose');
+    const heroAboutClose = document.getElementById('heroAboutClose');
 
     function openAboutView() {
-        if (aboutView) {
-            document.body.classList.add('about-view-active');
-            aboutView.classList.add('active');
-            document.body.style.overflow = 'hidden';
+        if (heroSection) {
+            heroSection.classList.add('hero-about-open');
+            document.getElementById('heroAbout')?.setAttribute('aria-hidden', 'false');
         }
     }
 
     function closeAboutView() {
-        if (aboutView) {
-            document.body.classList.remove('about-view-active');
-            aboutView.classList.remove('active');
-            document.body.style.overflow = '';
+        if (heroSection) {
+            heroSection.classList.remove('hero-about-open');
+            document.getElementById('heroAbout')?.setAttribute('aria-hidden', 'true');
         }
     }
 
@@ -945,23 +912,17 @@ function initializeModalsAndPlayers() {
         });
     }
 
-    if (aboutClose) {
-        aboutClose.addEventListener('click', function() {
+    if (heroAboutClose) {
+        heroAboutClose.addEventListener('click', function() {
             closeAboutView();
         });
     }
 
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && aboutView && aboutView.classList.contains('active')) {
+        if (e.key === 'Escape' && heroSection && heroSection.classList.contains('hero-about-open')) {
             closeAboutView();
         }
     });
-
-    if (aboutView) {
-        aboutView.addEventListener('click', function(e) {
-            if (e.target === aboutView) closeAboutView();
-        });
-    }
     
     // Close video player when clicking outside (on modal background)
     if (videoPlayer) {

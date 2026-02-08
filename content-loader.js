@@ -84,14 +84,22 @@ function updateHero(hero) {
     }
 }
 
-// Update About Me Modal (CMS only)
+// Update About Me (hero-about block + legacy modal if present)
 function updateAboutMe(aboutMe) {
+    const heroAboutPhoto = document.getElementById('heroAboutPhotoImg');
+    if (heroAboutPhoto && aboutMe.photo) {
+        heroAboutPhoto.src = aboutMe.photo;
+        heroAboutPhoto.alt = 'Spiros Leividiotis';
+    }
+    const heroAboutText = document.getElementById('heroAboutText');
+    if (heroAboutText && Array.isArray(aboutMe.bio)) {
+        heroAboutText.innerHTML = aboutMe.bio.map(p => `<p>${escapeHtml(p)}</p>`).join('');
+    }
     const aboutPhoto = document.getElementById('aboutPhotoImg');
     if (aboutPhoto && aboutMe.photo) {
         aboutPhoto.src = aboutMe.photo;
         aboutPhoto.alt = 'Spiros Leividiotis';
     }
-    
     const aboutText = document.getElementById('aboutText');
     if (aboutText && Array.isArray(aboutMe.bio)) {
         aboutText.innerHTML = aboutMe.bio.map(p => `<p>${escapeHtml(p)}</p>`).join('');

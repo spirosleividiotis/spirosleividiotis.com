@@ -226,10 +226,15 @@ section {
 }
 
 .hero .container {
+    position: relative;
     padding: 0 0;
     max-width: 1600px;
     margin: 0 auto;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 50px;
 }
 
 .hero-content {
@@ -239,6 +244,133 @@ section {
     gap: 50px;
     max-width: 1205px;
     width: 100%;
+    transition: margin-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* About me layout (photo + text + X) – visible when hero has .hero-about-open */
+.hero-about {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 1504px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.5s step-end;
+}
+
+.hero.hero-about-open .hero-about {
+    position: relative;
+    top: auto;
+    left: auto;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.08s, visibility 0s step-start;
+}
+
+.hero-about-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 83px;
+    width: 100%;
+}
+
+.hero-about-photo {
+    width: 512px;
+    height: 655px;
+    flex-shrink: 0;
+    border-radius: 50px;
+    overflow: hidden;
+    background: #f0f0f0;
+}
+
+.hero-about-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-about-right {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    max-width: 806px;
+    padding-top: 83px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.hero-about-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: #000000;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: opacity 0.25s ease;
+}
+
+.hero-about-close:hover {
+    opacity: 0.6;
+}
+
+.hero-about-text {
+    width: 100%;
+    max-width: 806px;
+    padding-top: 0;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: -0.02em;
+    color: #000000;
+    text-align: left;
+}
+
+.hero-about-text p {
+    margin: 0 0 1em 0;
+}
+
+.hero-about-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* When About open: intro and tags fade out, name moves to bottom */
+.hero-intro,
+.hero-tags {
+    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.5s step-end;
+}
+
+.hero.hero-about-open .hero-intro,
+.hero.hero-about-open .hero-tags {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+.hero.hero-about-open .container {
+    min-height: calc(100vh - 92px);
+}
+
+.hero.hero-about-open .hero-content {
+    margin-top: auto;
 }
 
 /* Name row: Figma justify-content center, align-items flex-end; name text right-aligned */
@@ -419,7 +551,7 @@ section {
     padding: 28px 0;
     border-bottom: 0.5px solid #FFFFFF;
     width: 100%;
-    transition: padding 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: padding 0.5s var(--ease);
 }
 
 .experience-row:not(:first-child) {
@@ -477,7 +609,6 @@ section {
     gap: 15px;
     min-width: 0;
     border-radius: 35px;
-    transition: grid-template-rows 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .experience-row.expanded .experience-job-block {
@@ -502,22 +633,11 @@ section {
     min-height: 0;
     overflow: hidden;
     opacity: 0;
-    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: opacity 0.4s var(--ease);
 }
 
 .experience-row.expanded .experience-description {
     opacity: 1;
-    transition-delay: 0.12s;
-}
-
-/* Keep row open while description fades out, then collapse */
-.experience-row.collapsing .experience-job-block {
-    grid-template-rows: auto 1fr;
-}
-
-.experience-row.collapsing .experience-description {
-    opacity: 0;
-    transition-delay: 0s;
 }
 
 .experience-dates {
