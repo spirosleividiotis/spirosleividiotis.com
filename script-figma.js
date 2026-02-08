@@ -99,14 +99,14 @@ function getHeroScrollGap() {
     if (w >= 1200) return 400;
     if (w >= 900) return 350;
     if (w > 768) return 200;
-    return 0; /* mobile: spacer not used */
+    return 80; /* mobile: small gap so content scrolls over hero */
 }
 function updateScrollSpacerHeight() {
-    if (checkIfMobile()) return;
     const heroSection = document.getElementById('heroSection');
     const spacer = document.querySelector('.scroll-spacer');
     if (!heroSection || !spacer) return;
-    const headerH = 92;
+    const isMobile = checkIfMobile();
+    const headerH = isMobile ? 70 : 92;
     const heroH = heroSection.offsetHeight;
     const gap = getHeroScrollGap();
     const spacerH = Math.max(0, window.innerHeight - headerH - heroH + gap);

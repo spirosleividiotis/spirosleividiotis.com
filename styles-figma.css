@@ -2123,7 +2123,7 @@ body.about-view-active .footer {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 4px;
+        gap: 2px;
     }
     
     /* Reel column: same width as Projects so Reel aligns in size with Projects */
@@ -2146,7 +2146,7 @@ body.about-view-active .footer {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        gap: 4px;
+        gap: 2px;
     }
     
     .header-meta .location,
@@ -2169,18 +2169,16 @@ body.about-view-active .footer {
        HERO SECTION - 33px 47px, gap 51px
        =================================== */
     
-    .scroll-spacer {
-        height: 0;
-    }
+    /* Spacer height set by JS so content scrolls over hero (same as desktop) */
     
     .hero {
-        position: relative !important;
-        top: auto;
-        left: auto;
-        right: auto;
+        position: fixed !important;
+        top: 70px;
+        left: 0;
+        right: 0;
         height: auto;
-        min-height: auto;
-        padding: 56px 0 33px;
+        min-height: 0;
+        padding: 56px 0 20px;
     }
     
     .hero .container {
@@ -2212,18 +2210,26 @@ body.about-view-active .footer {
         display: none;
     }
     
-    /* About me mobile: photo centered, text below */
+    /* About me mobile: full width like header, photo scale/crop to fit */
     .hero-about-row {
         flex-direction: column;
         align-items: center;
         gap: 24px;
+        width: 100%;
     }
     .hero-about-photo {
         width: 100%;
-        max-width: 280px;
+        max-width: 100%;
         height: auto;
         aspect-ratio: 4/5;
         margin: 0 auto;
+        overflow: hidden;
+    }
+    .hero-about-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
     }
     .hero-about-right {
         width: 100%;
@@ -2260,13 +2266,14 @@ body.about-view-active .footer {
     }
     
     /* ===================================
-       EXPERIENCE - 50px 48px 100px, gap 50px, first expanded / rest collapsed
+       EXPERIENCE - less top padding (content scrolls over hero), first expanded / rest on click
        =================================== */
     
     .experience {
-        padding: 50px 0 100px;
+        padding: 24px 0 100px;
         margin-top: 0 !important;
         position: relative !important;
+        z-index: 10;
         background: #000000;
     }
     
@@ -2423,6 +2430,10 @@ body.about-view-active .footer {
         border-radius: 2px;
     }
     
+    .reel-close-btn {
+        display: none !important;
+    }
+    
     /* ===================================
        PROJECTS - 25px 48px 100px, gap 50px, single column
        =================================== */
@@ -2543,10 +2554,11 @@ body.about-view-active .footer {
     .footer-left {
         flex-direction: column;
         align-items: flex-start;
-        gap: 12px;
+        gap: 8px;
     }
     .footer-left .footer-entries {
         order: 1;
+        gap: 2px;
     }
     .footer-left .footer-logo-wrap {
         order: 2;
@@ -2556,7 +2568,7 @@ body.about-view-active .footer {
     .footer-center {
         flex-direction: column;
         align-items: flex-end;
-        gap: 4px;
+        gap: 2px;
     }
     
     .footer-label {
