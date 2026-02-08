@@ -221,6 +221,7 @@ section {
 }
 
 /* Hero fixed so experience/reel/projects scroll above it; above spacer so hero content is visible at top */
+/* pointer-events: none so Chrome gets wheel/scroll on content below; .hero .container restores clicks on name/tags */
 .hero {
     position: fixed;
     top: 104px;
@@ -235,9 +236,9 @@ section {
     box-sizing: border-box;
     overflow: visible;
     z-index: 2;
+    pointer-events: none;
 }
 
-/* Match header content width (1500px) so hero text aligns with nav */
 .hero .container {
     position: relative;
     padding: 0 0;
@@ -249,6 +250,7 @@ section {
     align-items: flex-start;
     gap: 50px;
     overflow: visible;
+    pointer-events: auto;
 }
 
 .hero-content {
