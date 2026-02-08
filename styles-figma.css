@@ -324,13 +324,18 @@ section {
     transition: opacity 0.25s ease;
 }
 
-/* Align X with header right (Amsterdam / time) when About is open */
+/* X within about me block only: never fixed; lower, right edge aligned with time column */
+.hero.hero-about-open .hero-about {
+    position: relative;
+}
+
 .hero.hero-about-open .hero-about-close {
-    position: fixed;
-    top: 36px;
-    right: 48px;
-    left: auto;
-    z-index: 101;
+    position: absolute !important;
+    top: 48px !important;
+    right: 0 !important;
+    left: auto !important;
+    bottom: auto !important;
+    z-index: 2;
 }
 
 .hero-about-close:hover {
@@ -1972,15 +1977,54 @@ body.about-view-active .footer {
     }
     
     /* ===================================
-       HEADER - 16px 48px, 70px height
+       HEADER - Figma: 16px 48px, 70px, space-between, attached
        =================================== */
     .site-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         padding: 16px 48px;
+        width: 100%;
         min-height: 70px;
+        height: 70px;
+        box-sizing: border-box;
+    }
+    
+    .site-header .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: none;
+        padding: 0;
+        margin: 0;
     }
     
     .header-entries {
+        flex: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
         gap: 50px;
+        padding: 0;
+    }
+    
+    .header-col {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    /* Reel column: same width as Projects so Reel aligns in size with Projects */
+    .header-entries .header-col:nth-child(2) {
+        min-width: 54px;
+    }
+    .header-entries .header-col:nth-child(2) .nav-link {
+        min-width: 54px;
+        display: inline-flex;
     }
     
     .header-entries .nav-link {
@@ -1990,17 +2034,27 @@ body.about-view-active .footer {
         color: #000000;
     }
     
-    /* Header meta - HIDE on mobile */
     .header-meta {
-        display: none !important;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 4px;
     }
     
+    .header-meta .location,
     .location-link {
-        display: none !important;
+        font-size: 14px;
+        line-height: 118.44%;
+        font-weight: 700;
+        color: #000000;
     }
     
     .time {
-        display: none !important;
+        font-size: 14px;
+        line-height: 118.44%;
+        font-weight: 700;
+        text-align: right;
+        color: #777777;
     }
     
     /* ===================================
@@ -2378,11 +2432,6 @@ body.about-view-active .footer {
         font-size: 16px;
     }
     
-    .hero.hero-about-open .hero-about-close {
-        top: 26px !important;
-        right: 48px !important;
-    }
-    
     .modal-close, .about-view-close, .project-modal-close {
         position: fixed !important;
         top: 20px !important;
@@ -2495,9 +2544,6 @@ body.about-view-active .footer {
     }
     .site-header {
         padding: 16px 24px;
-    }
-    .hero.hero-about-open .hero-about-close {
-        right: 24px !important;
     }
     .hero .container {
         padding-left: 24px;
