@@ -1944,11 +1944,11 @@ section {
         margin-left: 0;
     }
     
-    /* Hero content: tight gaps so name, intro and all tags fit in viewport */
+    /* Hero content: gaps so name, intro and all tags fit in viewport */
     .hero-content {
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        gap: 10px;
         padding-top: 0;
     }
     
@@ -2036,12 +2036,15 @@ section {
         transform: none !important;
     }
     
-    /* Tags - 8px between pills on mobile */
+    /* Tags - 8px between pills; 3 rows: tools, then Product Motion (indented), then Design Systems + Interaction Design */
     .tags-grid {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
         transform: none !important;
+    }
+    .tags-grid > *:nth-child(5) {
+        margin-left: 96px;
     }
     
     .tag {
