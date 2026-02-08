@@ -84,7 +84,7 @@ function checkIfMobile() {
 function getHeroScrollGap() {
     var w = window.innerWidth;
     if (w >= 1200) return 400;
-    if (w >= 900) return 300;
+    if (w >= 900) return 350;
     if (w > 768) return 200;
     return 0; /* mobile: spacer not used */
 }
