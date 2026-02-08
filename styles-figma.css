@@ -737,6 +737,10 @@ section {
     text-decoration: none;
     color: inherit;
 }
+.reel-video-wrap:hover,
+.reel-video-wrap:hover .reel-inline-video {
+    opacity: 1;
+}
 
 .reel-placeholder {
     position: absolute;

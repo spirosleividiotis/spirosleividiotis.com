@@ -791,6 +791,7 @@ function initializeModalsAndPlayers() {
             if (e.target.closest('.reel-close-btn')) return;
             if (reelVideoWrap.classList.contains('is-playing')) return;
             reelVideoWrap.classList.add('is-playing');
+            reelInlineVideo.setAttribute('controls', '');
             reelInlineVideo.play().catch(function() {});
         });
         if (reelCloseBtn) {
@@ -798,12 +799,14 @@ function initializeModalsAndPlayers() {
                 e.preventDefault();
                 e.stopPropagation();
                 reelVideoWrap.classList.remove('is-playing');
+                reelInlineVideo.removeAttribute('controls');
                 reelInlineVideo.pause();
                 reelInlineVideo.currentTime = 0;
             });
         }
         reelInlineVideo.addEventListener('ended', function() {
             reelVideoWrap.classList.remove('is-playing');
+            reelInlineVideo.removeAttribute('controls');
         });
     }
 
