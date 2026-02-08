@@ -200,10 +200,10 @@ function updateProjects(projects) {
             </div>
             <div class="project-info">
                 <div class="project-text-mask">
-                    <p class="project-company">${project.company}</p>
+                    <h3 class="project-name">${project.name}</h3>
                 </div>
                 <div class="project-text-mask">
-                    <h3 class="project-name">${project.name}</h3>
+                    <p class="project-company">${project.company}</p>
                 </div>
             </div>
         </article>
