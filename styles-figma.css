@@ -203,6 +203,8 @@ section {
 
 /* Spacer reserves remaining viewport height so content below can scroll up over the fixed hero (height set by JS to fill viewport minus hero content height) */
 .scroll-spacer {
+    position: relative;
+    z-index: 2;
     height: calc(100vh - 92px); /* fallback; JS sets to (100vh - 92px - heroHeight) */
     width: 100%;
     pointer-events: none;
@@ -984,7 +986,7 @@ section {
     background: #FFFFFF;
     color: #000000;
     position: relative;
-    z-index: 9;
+    z-index: 10;
 }
 
 .footer .container {
