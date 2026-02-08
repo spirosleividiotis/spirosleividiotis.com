@@ -540,11 +540,13 @@ section {
 
 .reel-video-wrap {
     display: block;
-    width: 100%;
-    max-width: 1500px;
+    width: 1500px;
+    max-width: 100%;
     height: 600px;
     margin: 0 auto;
     background: #141414;
+    border-radius: 50px;
+    overflow: hidden;
     position: relative;
     cursor: pointer;
     transition: opacity 0.2s ease;
