@@ -336,32 +336,22 @@ section {
     align-items: flex-end;
 }
 
-/* X part of about section: top-right of content, moves with photo/text on scroll */
-/* Fixed square so border-radius: 50% always renders a circle (never stretched) */
+/* X part of about section: top-right of content, moves with photo/text on scroll (circle shape only on mobile) */
 .hero-about-close {
     position: absolute;
     top: 0;
     right: 0;
-    width: 44px !important;
-    height: 44px !important;
-    min-width: 44px !important;
-    min-height: 44px !important;
-    max-width: 44px !important;
-    max-height: 44px !important;
+    width: 44px;
+    height: 44px;
     padding: 0;
     border: none;
-    background: #ffffff;
-    border-radius: 50%;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+    background: none;
     color: #000000;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    flex-grow: 0;
-    aspect-ratio: 1;
-    overflow: hidden;
     z-index: 2;
     transition: opacity 0.25s ease;
     box-sizing: border-box;
@@ -372,8 +362,6 @@ section {
     width: 20px;
     height: 20px;
     flex-shrink: 0;
-    max-width: 20px;
-    max-height: 20px;
 }
 
 /* X fixed to viewport so it’s always visible (no scroll-away); same layout at all times */
@@ -469,17 +457,23 @@ section {
     text-align: left;
 }
 
-/* Tags: two rows – row gap 18px, column gap 20px (Figma) */
+/* Tags: desktop = two categories (tools row, skills row); mobile = one mixed line via override */
 .hero-tags {
     width: 100%;
 }
 
 .tags-grid {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: flex-start;
+    gap: 18px;
+}
+
+.tags-grid > div {
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
+    align-items: flex-start;
 }
 
 .tags-grid .tag,
@@ -2058,6 +2052,7 @@ section {
         align-items: flex-start;
     }
     
+    /* Mobile only: white circle behind X for visibility */
     .hero-about-close {
         width: 36px !important;
         height: 36px !important;
@@ -2067,6 +2062,9 @@ section {
         max-height: 36px !important;
         top: 12px;
         right: 16px;
+        background: #ffffff !important;
+        border-radius: 50%;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
         aspect-ratio: 1;
         flex-shrink: 0;
         flex-grow: 0;
@@ -2087,13 +2085,16 @@ section {
         transform: none !important;
     }
     
-    /* Tags - one group, wraps naturally; 8px horizontal gap, 6px vertical gap */
+    /* Tags - mobile only: mixed software + skills in one line to save space */
     .tags-grid {
-        display: flex;
+        flex-direction: row;
         flex-wrap: wrap;
         column-gap: 8px;
         row-gap: 6px;
         transform: none !important;
+    }
+    .tags-grid > div {
+        display: contents;
     }
     
     .tag {
