@@ -331,7 +331,7 @@ section {
 
 .hero.hero-about-open .hero-about-close {
     position: absolute !important;
-    top: 48px !important;
+    top: 0 !important;
     right: 0 !important;
     left: auto !important;
     bottom: auto !important;
@@ -363,14 +363,14 @@ section {
     margin-bottom: 0;
 }
 
-/* When About open: intro and tags fade out, name moves to bottom. All three fade in together when closing. */
+/* When About open: intro and tags fade out, name moves to bottom. */
 .hero-name-wrapper {
-    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .hero-intro,
 .hero-tags {
-    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.5s step-end;
+    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.4s step-end;
 }
 
 .hero.hero-about-open .hero-intro,
@@ -385,10 +385,12 @@ section {
     clip: rect(0, 0, 0, 0);
 }
 
-/* When closing About: all hero content fades in together (JS adds .hero-content-reveal then removes it) */
-.hero.hero-content-reveal .hero-name-wrapper,
-.hero.hero-content-reveal .hero-intro,
-.hero.hero-content-reveal .hero-tags {
+/* When closing About: whole hero-content fades in as one (no stagger) */
+.hero-content {
+    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero.hero-content-reveal .hero-content {
     opacity: 0;
 }
 

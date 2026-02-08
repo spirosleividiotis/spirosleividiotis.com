@@ -915,7 +915,9 @@ function initializeModalsAndPlayers() {
         document.getElementById('heroAbout')?.setAttribute('aria-hidden', 'true');
         requestAnimationFrame(function() {
             requestAnimationFrame(function() {
-                heroSection.classList.remove('hero-content-reveal');
+                setTimeout(function() {
+                    heroSection.classList.remove('hero-content-reveal');
+                }, 20);
             });
         });
     }
