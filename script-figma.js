@@ -11,12 +11,14 @@ function updateParallax() {
     if (!hero || !heroContent) return;
 
     const y = window.scrollY || window.pageYOffset;
-    const factor = 0.12;
-    const max = 80;
+    const isMobile = window.innerWidth <= 768;
+    const isAboutOpen = hero.classList.contains('hero-about-open');
+    const factor = (isAboutOpen && isMobile) ? 0.22 : 0.12;
+    const max = (isAboutOpen && isMobile) ? 120 : 80;
     const move = Math.min(y * factor, max);
     const translate = move ? `translateY(${move}px)` : '';
 
-    if (hero.classList.contains('hero-about-open')) {
+    if (isAboutOpen) {
         heroContent.style.transform = '';
         const aboutInner = document.querySelector('.hero-about .hero-about-inner');
         if (aboutInner) aboutInner.style.transform = translate;
