@@ -1926,16 +1926,12 @@ section {
        HERO SECTION - 35px top/bottom, 47px horizontal
        =================================== */
     
-    /* Hero in flow on mobile so name + intro + tags all visible when scrolling (nothing cut) */
-    .scroll-spacer {
-        height: 0;
-    }
-    
+    /* Hero fixed on mobile too: same scroll-over effect and soft position-down (JS sets .scroll-spacer height) */
     .hero {
-        position: relative !important;
-        top: auto;
-        left: auto;
-        right: auto;
+        position: fixed !important;
+        top: 86px;
+        left: 0;
+        right: 0;
         height: auto;
         min-height: auto;
         padding: 35px 0;
@@ -1970,16 +1966,17 @@ section {
         display: none;
     }
     
-    /* About me mobile: in flow; horizontal padding from .hero .container (50px) only – no double */
+    /* About me mobile: same as desktop – fixed overlay, content scrolls over; 50px sides to match site */
     .hero.hero-about-open .hero-about {
-        position: relative !important;
-        top: auto;
-        left: auto;
-        right: auto;
-        bottom: auto;
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         height: auto;
-        overflow: visible;
-        padding: 16px 0 35px;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 86px 50px 24px;
         justify-content: flex-start;
     }
     .hero.hero-about-open .hero-content {
@@ -2569,6 +2566,10 @@ section {
     .footer .container {
         padding-left: 0;
         padding-right: 0;
+    }
+    .hero.hero-about-open .hero-about {
+        padding-left: 24px;
+        padding-right: 24px;
     }
 }
 

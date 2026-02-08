@@ -6,7 +6,6 @@ let parallaxTicking = false;
 
 function updateParallax() {
     parallaxTicking = false;
-    if (typeof checkIfMobile === 'function' && checkIfMobile()) return;
     const hero = document.getElementById('heroSection');
     const heroContent = hero && hero.querySelector('.hero .container');
     if (!hero || !heroContent) return;
@@ -111,19 +110,21 @@ function getHeroScrollGap() {
 function updateScrollSpacerHeight() {
     const spacer = document.querySelector('.scroll-spacer');
     if (!spacer) return;
-    if (checkIfMobile()) {
-        spacer.style.height = '0';
-        return;
-    }
     const heroSection = document.getElementById('heroSection');
     if (!heroSection) return;
-    const headerH = 104;
+    const isMobile = checkIfMobile();
+    const headerH = isMobile ? 86 : 104;
     const vh = window.innerHeight;
+    /* When about me is open, overlay is fixed so hero section has no height; use full viewport spacer */
+    if (heroSection.classList.contains('hero-about-open')) {
+        spacer.style.height = (vh - headerH) + 'px';
+        return;
+    }
     const heroH = heroSection.offsetHeight;
     const gap = getHeroScrollGap();
     const minSpacer = vh - headerH;
     const contentSpacer = vh - headerH - heroH + gap;
-    /* Spacer must be at least hero height so z-B can scroll over full z-A */
+    /* Spacer so content below scrolls over fixed hero (desktop and mobile) */
     const spacerH = Math.max(minSpacer, contentSpacer, heroH, 0);
     spacer.style.height = spacerH + 'px';
 }
@@ -825,6 +826,7 @@ function initializeModalsAndPlayers() {
         heroAbout.setAttribute('aria-hidden', 'false');
         heroSection.classList.add('hero-about-open');
         if (!checkIfMobile()) document.body.style.overflow = 'hidden';
+        updateScrollSpacerHeight();
         requestParallaxTick();
     }
 
@@ -833,6 +835,7 @@ function initializeModalsAndPlayers() {
         heroSection.classList.remove('hero-about-open');
         heroAbout.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
+        updateScrollSpacerHeight();
     }
 
     // Use delegation so About me works when link is injected by content-loader after load
