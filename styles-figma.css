@@ -398,12 +398,12 @@ section {
     margin-bottom: 0;
 }
 
-/* Name row: Figma justify-content center, align-items flex-end; name text right-aligned */
+/* Name row: left-aligned at all screen sizes */
 .hero-name-wrapper {
     position: relative;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-end;
     width: 100%;
     max-width: 1205px;
@@ -415,7 +415,7 @@ section {
     font-size: 128px;
     line-height: 152px;
     letter-spacing: -0.02em;
-    text-align: right;
+    text-align: left;
     color: #000000;
     margin: 0;
     cursor: pointer;
