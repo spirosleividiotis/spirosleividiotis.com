@@ -13,8 +13,9 @@ function updateParallax() {
     const y = window.scrollY || window.pageYOffset;
     const isMobile = window.innerWidth <= 768;
     const isAboutOpen = hero.classList.contains('hero-about-open');
-    const factor = (isAboutOpen && isMobile) ? 0.32 : 0.12;
-    const max = (isAboutOpen && isMobile) ? 160 : 80;
+    /* When about open on mobile: stronger parallax so content "lags" as you scroll (visible scroll effect) */
+    const factor = (isAboutOpen && isMobile) ? 0.45 : 0.12;
+    const max = (isAboutOpen && isMobile) ? 220 : 80;
     const move = Math.min(y * factor, max);
     const translate = move ? `translateY(${move}px)` : '';
 
@@ -117,7 +118,7 @@ function updateScrollSpacerHeight() {
     const isMobile = checkIfMobile();
     const headerH = isMobile ? 86 : 104;
     const vh = window.innerHeight;
-    /* When about me is open on mobile, hero is in-flow so no spacer; on desktop keep overlay spacer */
+    /* When about me is open (fixed overlay on both), no spacer; tag about-inflow-backup = in-flow mobile version to revert */
     if (heroSection.classList.contains('hero-about-open')) {
         if (isMobile) {
             spacer.style.height = '0';
@@ -830,7 +831,7 @@ function initializeModalsAndPlayers() {
         if (!heroSection || !heroAbout) return;
         heroAbout.setAttribute('aria-hidden', 'false');
         heroSection.classList.add('hero-about-open');
-        if (!checkIfMobile()) document.body.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
         updateScrollSpacerHeight();
         requestParallaxTick();
         if (checkIfMobile()) setTimeout(requestParallaxTick, 100);

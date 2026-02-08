@@ -16,3 +16,7 @@ Staff Motion Designer portfolio website.
 ## Tech Stack
 - HTML5, CSS3, JavaScript (Vanilla)
 - Deployed on Vercel
+
+## Revert: About me on mobile
+To restore the previous in-flow About me (one continuous scroll):  
+`git checkout about-inflow-backup -- styles-figma.css script-figma.js`

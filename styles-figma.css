@@ -343,6 +343,8 @@ section {
     right: 0;
     width: 44px;
     height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     padding: 0;
     border: none;
     background: #ffffff;
@@ -353,6 +355,9 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+    aspect-ratio: 1;
+    overflow: hidden;
     z-index: 2;
     transition: opacity 0.25s ease;
     box-sizing: border-box;
@@ -1976,36 +1981,34 @@ section {
         display: none;
     }
     
-    /* About me mobile: in-flow, same top padding as hero (35px) so name and about align; no cut; parallax via JS */
-    .hero.hero-about-open {
-        position: relative !important;
-        top: auto;
-        left: auto;
-        right: auto;
-        overflow: visible;
-        padding-top: 0;
-        padding-bottom: 0;
-    }
+    /* About me mobile: same as desktop – fixed overlay, scroll inside panel; inner scrollable so text never cut */
     .hero.hero-about-open .hero-about {
-        position: relative !important;
-        top: auto;
-        left: auto;
-        right: auto;
-        bottom: auto;
-        height: auto;
-        overflow: visible;
-        padding: 35px 0 180px;
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 0;
+        overflow: hidden;
         justify-content: flex-start;
-        width: 100%;
     }
     .hero.hero-about-open .hero-content {
         display: none !important;
     }
-    .hero-about-inner {
-        padding: 0;
+    .hero.hero-about-open .hero-about .hero-about-inner {
         width: 100%;
         max-width: 100%;
-        overflow: visible;
+        max-height: 100vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 50px 50px 180px;
+        box-sizing: border-box;
+    }
+    .hero.hero-about-open .hero-about-close {
+        position: fixed !important;
+        top: 12px;
+        right: 16px;
+        z-index: 101;
     }
     .hero-about-text {
         overflow: visible;
@@ -2041,16 +2044,19 @@ section {
     }
     
     .hero-about-close {
-        min-width: 36px;
-        min-height: 36px;
         width: 36px;
         height: 36px;
+        min-width: 36px;
+        min-height: 36px;
         top: 12px;
         right: 16px;
+        aspect-ratio: 1;
+        flex-shrink: 0;
     }
     .hero-about-close svg {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
     }
     
     .hero-subtitle {
