@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function smoothTick() {
         smoothRaf = null;
-        smoothCurrent += (smoothTarget - smoothCurrent) * 0.32;
+        smoothCurrent += (smoothTarget - smoothCurrent) * 0.4;
         if (Math.abs(smoothTarget - smoothCurrent) < 0.5) smoothCurrent = smoothTarget;
         window.scrollTo(0, smoothCurrent);
         if (smoothCurrent !== smoothTarget) smoothRaf = requestAnimationFrame(smoothTick);
