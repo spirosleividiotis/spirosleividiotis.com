@@ -1906,7 +1906,7 @@ body.about-view-active .footer {
 
 @media (max-width: 768px) {
     /* ===================================
-       MOBILE-FIRST: Clean, Simple, Consistent
+       MOBILE - Figma 478px spec
        =================================== */
     
     /* Base reset */
@@ -1916,6 +1916,7 @@ body.about-view-active .footer {
     
     body {
         cursor: auto !important;
+        padding-top: 70px; /* match mobile header height */
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
         -webkit-overflow-scrolling: touch;
         overflow-x: hidden !important;
@@ -1938,33 +1939,28 @@ body.about-view-active .footer {
         -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
     }
     
-    /* Consistent spacing */
+    /* Container: 48px horizontal to align with header (Figma) */
     .container {
-        padding: 0 20px;
+        padding: 0 48px;
     }
     
     /* ===================================
-       HERO SECTION
+       HEADER - 16px 48px, 70px height
        =================================== */
-    
-    .scroll-spacer {
-        height: 0;
+    .site-header {
+        padding: 16px 48px;
+        min-height: 70px;
     }
     
-    .hero {
-        position: relative !important;
-        top: auto;
-        left: auto;
-        right: auto;
-        height: auto;
-        min-height: auto;
-        padding: 32px 0 48px;
+    .header-entries {
+        gap: 50px;
     }
     
-    .hero .container {
-        padding-top: 0;
-        padding-bottom: 0;
-        margin-left: 0;
+    .header-entries .nav-link {
+        font-size: 14px;
+        line-height: 118.44%;
+        font-weight: 700;
+        color: #000000;
     }
     
     /* Header meta - HIDE on mobile */
@@ -1980,20 +1976,47 @@ body.about-view-active .footer {
         display: none !important;
     }
     
-    /* Hero content */
+    /* ===================================
+       HERO SECTION - 33px 47px, gap 51px
+       =================================== */
+    
+    .scroll-spacer {
+        height: 0;
+    }
+    
+    .hero {
+        position: relative !important;
+        top: auto;
+        left: auto;
+        right: auto;
+        height: auto;
+        min-height: auto;
+        padding: 33px 0;
+    }
+    
+    .hero .container {
+        padding: 0 47px;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-left: 0;
+    }
+    
+    /* Hero content: Name, Intro, Tags - gap 51px */
     .hero-content {
         display: flex;
         flex-direction: column;
-        gap: 32px;
+        gap: 51px;
         padding-top: 0;
     }
     
     .hero-name {
-        font-size: 48px;
-        line-height: 52px;
+        font-size: 64px;
+        line-height: 76px;
         text-align: left;
         margin-top: 0;
         transform: none !important;
+        display: flex;
+        align-items: flex-end;
     }
     
     .hero-photo {
@@ -2001,96 +2024,149 @@ body.about-view-active .footer {
     }
     
     .hero-subtitle {
-        font-size: 18px;
-        line-height: 26px;
-        margin-bottom: 24px;
+        font-size: 24px;
+        line-height: 28px;
+        font-weight: 600;
+        margin-bottom: 0;
         transform: none !important;
     }
     
-    /* Tags - wrap properly */
+    /* Tags - Figma: gap 12px / 16px, padding 5px 15px, 14px */
     .tags-grid {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 12px 16px;
         transform: none !important;
     }
     
     .tag {
-        padding: 8px 16px;
+        padding: 5px 15px;
         font-size: 14px;
+        line-height: 118.44%;
+        font-weight: 600;
         white-space: nowrap;
     }
     
     /* ===================================
-       EXPERIENCE SECTION - Simple Vertical List (PDF-style)
+       EXPERIENCE - 50px 48px 100px, gap 50px, first expanded / rest collapsed
        =================================== */
     
     .experience {
-        padding: 48px 0;
+        padding: 50px 0 100px;
         margin-top: 0 !important;
         position: relative !important;
         background: #000000;
     }
     
     .experience .container {
-        padding: 0 20px;
+        padding: 0 48px;
+        gap: 50px;
     }
     
     .experience-title-main {
         font-size: 16px;
+        line-height: 19px;
         font-weight: 700;
         color: #777777;
-        margin-bottom: 32px;
+        margin-bottom: 0;
         margin-left: 0;
+    }
+    
+    .experience-rows {
+        gap: 15px;
+    }
+    
+    .experience-row {
+        padding: 0 0 25px;
+        gap: 15px;
+    }
+    
+    .experience-row.expanded {
+        padding-top: 0;
+        padding-bottom: 25px;
+    }
+    
+    .experience-row.expanded:last-child {
+        padding-bottom: 25px;
     }
     
     .experience-description {
         font-size: 16px;
-        line-height: 1.32;
+        line-height: 19px;
         color: #777777;
-        margin-bottom: 12px;
+        margin-bottom: 0;
+    }
+    
+    .experience-row {
+        cursor: pointer;
     }
     
     /* ===================================
-       PROJECTS SECTION - Single Column
+       REEL - 25px 48px 100px, video 380×380, border-radius 50px
+       =================================== */
+    
+    .reel-section {
+        padding: 25px 48px 100px;
+    }
+    
+    .reel-section .container {
+        padding: 0 0;
+    }
+    
+    .reel-section-title {
+        font-size: 16px;
+        line-height: 19px;
+        font-weight: 700;
+        color: #777777;
+    }
+    
+    .reel-video-wrap {
+        max-width: 380px;
+        width: 100%;
+        height: 380px;
+        border-radius: 50px;
+        margin: 0 auto;
+    }
+    
+    .reel-placeholder,
+    .reel-inline-video {
+        border-radius: 50px;
+    }
+    
+    .reel-play-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 2px;
+    }
+    
+    /* ===================================
+       PROJECTS - 25px 48px 100px, gap 50px, single column
        =================================== */
     
     .selected-work {
-        padding: 48px 0;
+        padding: 25px 0 100px;
         position: relative !important;
         transform: none !important;
         background: #000000;
     }
     
     .selected-work .container {
-        padding: 0 20px;
+        padding: 0 48px;
     }
     
     .section-title {
         font-size: 16px;
-        font-weight: 400;
-        color: #757575;
-        margin-bottom: 32px;
+        line-height: 19px;
+        font-weight: 700;
+        color: #777777;
+        margin-bottom: 0;
         margin-left: 0 !important;
-    }
-    
-    /* Reel link (capsule) */
-    .reel-link {
-        margin-left: 0 !important;
-        margin-top: 24px !important;
-        font-size: 14px !important;
-        color: #ffffff !important;
-        padding: 10px 20px;
-    }
-    .reel-link .reel-arrow svg {
-        width: 12px;
-        height: 12px;
     }
     
     .work-grid {
         display: flex;
         flex-direction: column;
-        gap: 24px;
+        gap: 50px;
     }
     
     .work-card {
@@ -2103,57 +2179,67 @@ body.about-view-active .footer {
     }
     
     .work-visual {
-        height: 240px;
+        height: 480px;
+        border-radius: 50px;
     }
     
     .project-info {
         top: 24px;
-        right: 20px;
+        right: 0;
     }
     
     .project-text-mask {
         overflow: visible;
     }
     
-    .project-name {
-        font-size: 18px;
+    .project-company {
+        font-size: 16px;
+        line-height: 19px;
+        font-weight: 600;
+        color: #777777;
         transform: none !important;
     }
     
-    .project-company {
-        font-size: 14px;
+    .project-name {
+        font-size: 20px;
+        line-height: 118.44%;
+        font-weight: 700;
+        color: #FFFFFF;
         transform: none !important;
     }
     
     /* ===================================
-       FOOTER
+       FOOTER - 16px 48px, 14px links
        =================================== */
     
     .footer {
-        padding: 0 0 32px 0;
+        padding: 16px 0;
         position: relative !important;
-        margin-top: 48px !important;
-        background: #000000;
+        margin-top: 0 !important;
+        background: #FFFFFF;
     }
     
     .footer .container {
-        padding: 0 20px;
+        padding: 0 48px;
     }
     
     .footer-entries .footer-link,
     .footer-right .footer-link {
-        color: #FFFFFF;
+        color: #000000;
+        font-size: 14px;
+        line-height: 118.44%;
+        font-weight: 700;
     }
     
     .footer-logo-circle {
-        filter: brightness(0) invert(1);
+        filter: none;
     }
     
     .footer-content.footer-three-cols {
         grid-template-columns: 1fr;
         gap: 32px;
         align-items: flex-start;
-        margin-bottom: 40px;
+        margin-bottom: 0;
     }
     
     .footer-three-cols .footer-left,
@@ -2163,9 +2249,11 @@ body.about-view-active .footer {
     }
     
     .footer-content {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
         gap: 32px;
-        align-items: flex-start;
     }
     
     .footer-left,
@@ -2173,7 +2261,7 @@ body.about-view-active .footer {
     .footer-center {
         flex-direction: column;
         align-items: flex-start;
-        gap: 12px;
+        gap: 4px;
     }
     
     .footer-label {
@@ -2182,8 +2270,10 @@ body.about-view-active .footer {
     }
     
     .footer-link {
-        font-size: 16px;
-        color: #FFFFFF;
+        font-size: 14px;
+        line-height: 118.44%;
+        font-weight: 700;
+        color: #000000;
     }
     
     .footer-credit {
@@ -2364,6 +2454,37 @@ body.about-view-active .footer {
     .music-player {
         display: none !important;
     }
+}
+
+/* Very small phones: reduce horizontal padding from 48px */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 24px;
+    }
+    .site-header {
+        padding: 16px 24px;
+    }
+    .hero .container {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+    .experience .container {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+    .reel-section {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+    .selected-work .container {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+    .footer .container {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
 
 /* ===================================
    RESPONSIVE
@@ -2385,9 +2506,7 @@ body.about-view-active .footer {
 }
 
 @media (max-width: 768px) {
-    .container {
-        padding: 0 24px;
-    }
+    /* Container/hero/experience/footer overridden by Figma mobile block above */
     
     /* Grid link - hide on mobile or make smaller */
     .grid-link {
@@ -2418,30 +2537,6 @@ body.about-view-active .footer {
     .header-inner {
         flex-direction: column;
         gap: 16px;
-    }
-    
-    .hero {
-        padding: 160px 0 100px;
-    }
-    
-    .hero-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .hero-name {
-        font-size: 48px;
-    }
-    
-    .experience,
-    .selected-work {
-        padding: 80px 0;
-        margin-top: 0;
-    }
-    
-    .footer {
-        padding: 80px 0 48px;
-        margin-top: 80px;
     }
     
     .experience-grid {

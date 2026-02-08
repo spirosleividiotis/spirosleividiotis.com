@@ -80,23 +80,37 @@ function checkIfMobile() {
     return window.innerWidth <= 768;
 }
 
-// Experience accordion: one row expanded at a time, switch on hover
+// Experience accordion: one row expanded at a time
+// Desktop: switch on hover. Mobile: tap to expand/collapse (only one expanded).
 function initializeExperienceAccordion() {
     const container = document.querySelector('.experience-rows');
     const rows = document.querySelectorAll('.experience-row');
     if (!container || rows.length === 0) return;
 
-    rows.forEach((row) => {
-        row.addEventListener('mouseenter', () => {
-            rows.forEach((r) => r.classList.remove('expanded'));
-            row.classList.add('expanded');
-        });
-    });
+    const isMobile = checkIfMobile();
 
-    container.addEventListener('mouseleave', () => {
-        rows.forEach((r) => r.classList.remove('expanded'));
-        if (rows[0]) rows[0].classList.add('expanded');
-    });
+    if (isMobile) {
+        rows.forEach((row) => {
+            row.addEventListener('click', (e) => {
+                e.preventDefault();
+                const isExpanded = row.classList.contains('expanded');
+                rows.forEach((r) => r.classList.remove('expanded'));
+                if (!isExpanded) row.classList.add('expanded');
+                else if (rows[0]) rows[0].classList.add('expanded');
+            });
+        });
+    } else {
+        rows.forEach((row) => {
+            row.addEventListener('mouseenter', () => {
+                rows.forEach((r) => r.classList.remove('expanded'));
+                row.classList.add('expanded');
+            });
+        });
+        container.addEventListener('mouseleave', () => {
+            rows.forEach((r) => r.classList.remove('expanded'));
+            if (rows[0]) rows[0].classList.add('expanded');
+        });
+    }
 }
 
 // Legacy experience (sidebar + detail) - no longer used
