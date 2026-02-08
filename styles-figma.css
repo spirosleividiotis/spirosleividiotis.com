@@ -1807,22 +1807,9 @@ section {
     body {
         cursor: auto !important;
         padding-top: 86px; /* match mobile header height */
-        padding-bottom: 120px; /* room above fixed white bar so footer is visible */
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
         -webkit-overflow-scrolling: touch;
         overflow-x: hidden !important;
-    }
-    /* Fixed white bar at bottom (z above hero) so overscroll shows white, hero never peeks through */
-    body::after {
-        content: '';
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 120px;
-        background: #FFFFFF;
-        z-index: 11;
-        pointer-events: none;
     }
     html {
         overflow-x: hidden !important;
