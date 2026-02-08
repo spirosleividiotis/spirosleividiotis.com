@@ -435,15 +435,16 @@ section {
 }
 
 .experience-company {
-    width: 115px;
-    min-width: 115px;
-    max-width: 115px;
+    width: 120px;
+    min-width: 120px;
+    max-width: 120px;
     font-family: var(--font-primary);
     font-weight: 700;
     font-size: 18px;
     line-height: 118.44%;
     color: #FFFFFF;
     flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .experience-job-block {
@@ -467,7 +468,7 @@ section {
     font-family: var(--font-primary);
     font-weight: 600;
     font-size: 16px;
-    line-height: 118%;
+    line-height: 1.32;
     color: #777777;
     margin: 0;
     display: none;
@@ -1864,7 +1865,7 @@ body.about-view-active .footer {
     
     .experience-description {
         font-size: 16px;
-        line-height: 118%;
+        line-height: 1.32;
         color: #777777;
         margin-bottom: 12px;
     }
