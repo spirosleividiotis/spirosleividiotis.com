@@ -81,7 +81,13 @@ function checkIfMobile() {
 }
 
 // Hero is content-height; spacer fills rest of viewport + gap so Experience doesn't sit under hero text
-var HERO_SCROLL_GAP = 350; /* px below hero before Experience starts – keeps content visible */
+function getHeroScrollGap() {
+    var w = window.innerWidth;
+    if (w >= 1200) return 400;
+    if (w >= 900) return 300;
+    if (w > 768) return 200;
+    return 0; /* mobile: spacer not used */
+}
 function updateScrollSpacerHeight() {
     if (checkIfMobile()) return;
     const heroSection = document.getElementById('heroSection');
@@ -89,7 +95,8 @@ function updateScrollSpacerHeight() {
     if (!heroSection || !spacer) return;
     const headerH = 92;
     const heroH = heroSection.offsetHeight;
-    const spacerH = Math.max(0, window.innerHeight - headerH - heroH + HERO_SCROLL_GAP);
+    const gap = getHeroScrollGap();
+    const spacerH = Math.max(0, window.innerHeight - headerH - heroH + gap);
     spacer.style.height = spacerH + 'px';
 }
 
