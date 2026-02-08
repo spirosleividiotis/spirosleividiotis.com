@@ -115,9 +115,13 @@ function updateScrollSpacerHeight() {
     const isMobile = checkIfMobile();
     const headerH = isMobile ? 86 : 104;
     const vh = window.innerHeight;
-    /* When about me is open, overlay is fixed so hero section has no height; use full viewport spacer */
+    /* When about me is open on mobile, hero is in-flow so no spacer; on desktop keep overlay spacer */
     if (heroSection.classList.contains('hero-about-open')) {
-        spacer.style.height = (vh - headerH) + 'px';
+        if (isMobile) {
+            spacer.style.height = '0';
+        } else {
+            spacer.style.height = (vh - headerH) + 'px';
+        }
         return;
     }
     const heroH = heroSection.offsetHeight;
@@ -820,7 +824,6 @@ function initializeModalsAndPlayers() {
 
     const heroAboutCloseBtn = document.getElementById('heroAboutClose');
 
-    var aboutTouchStartY = 0;
     function openAboutView() {
         if (!heroSection || !heroAbout) return;
         heroAbout.setAttribute('aria-hidden', 'false');
@@ -838,34 +841,8 @@ function initializeModalsAndPlayers() {
         updateScrollSpacerHeight();
     }
 
-    function isAboutAtBottom(el) {
-        if (!el) return false;
-        var scrollTop = el.scrollTop, clientHeight = el.clientHeight, scrollHeight = el.scrollHeight;
-        return scrollHeight - (scrollTop + clientHeight) <= 2;
-    }
-
-    function setupAboutScrollHandoff() {
-        if (!heroAbout || !checkIfMobile()) return;
-        heroAbout.removeEventListener('touchstart', onAboutTouchStart);
-        heroAbout.removeEventListener('touchmove', onAboutTouchMove, { passive: false });
-        heroAbout.addEventListener('touchstart', onAboutTouchStart, { passive: true });
-        heroAbout.addEventListener('touchmove', onAboutTouchMove, { passive: false });
-    }
-    function onAboutTouchStart(e) {
-        aboutTouchStartY = e.touches[0].clientY;
-    }
-    function onAboutTouchMove(e) {
-        if (!heroSection || !heroSection.classList.contains('hero-about-open')) return;
-        var el = heroAbout;
-        var atBottom = isAboutAtBottom(el);
-        var touch = e.touches[0];
-        var dy = touch.clientY - aboutTouchStartY;
-        aboutTouchStartY = touch.clientY;
-        if (atBottom && dy > 0) {
-            window.scrollBy(0, dy);
-            e.preventDefault();
-        }
-    }
+    /* Mobile: about me is in-flow, one natural scroll (no handoff). Desktop: overlay, handoff not needed. */
+    function setupAboutScrollHandoff() { /* no-op: mobile uses in-flow about */ }
 
     // Use delegation so About me works when link is injected by content-loader after load
     document.addEventListener('click', function(e) {
