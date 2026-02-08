@@ -139,7 +139,7 @@ function updateHeader(header) {
     const location = document.querySelector('.location');
     if (location) {
         const locText = (header.location.text || '').trim();
-        location.textContent = locText ? locText.charAt(0).toUpperCase() + locText.slice(1).toLowerCase() : '';
+        location.textContent = locText;
         location.href = header.location.link;
     }
     
@@ -151,25 +151,30 @@ function updateHeader(header) {
         { text: 'experience', href: '#experience' },
         { text: 'projects', href: '#work' }
     ];
-    // Figma: two columns. Col1: About me, Experience. Col2: Reel, Projects. Display: proper case.
+    // Figma: two columns. Col1: About me, Experience. Col2: Reel, Projects. Use content as single source for label and href.
     const labelsLower = ['about me', 'experience', 'reel', 'projects'];
     const labelsDisplay = ['About me', 'Experience', 'Reel', 'Projects'];
     const defaultHrefs = ['#', '#experience', '#reel', '#work'];
     const linkByLabel = {};
+    const displayByLabel = {};
     nav.forEach((item) => {
         const t = (item.label || item.text || '').toLowerCase();
-        if (t) linkByLabel[t] = item.href || '#';
+        if (t) {
+            linkByLabel[t] = item.href || '#';
+            displayByLabel[t] = (item.text || item.label || '').trim() || labelsDisplay[labelsLower.indexOf(t)];
+        }
     });
     const entriesEl = document.getElementById('heroNavLeft');
     if (entriesEl) {
-        const link = (labelKey, displayText, i) => {
+        const link = (labelKey, i) => {
+            const displayText = displayByLabel[labelKey] || labelsDisplay[i];
             const href = linkByLabel[labelKey] || defaultHrefs[i];
             const isAbout = (href.replace(/^#/, '') === '' || href === '#') && i === 0;
             return `<a href="${escapeAttr(href)}" class="nav-link" ${isAbout ? 'id="aboutMeLink"' : ''}>${escapeHtml(displayText)}</a>`;
         };
         entriesEl.innerHTML = `
-            <div class="header-col">${link('about me', 'About me', 0)}${link('experience', 'Experience', 1)}</div>
-            <div class="header-col">${link('reel', 'Reel', 2)}${link('projects', 'Projects', 3)}</div>
+            <div class="header-col">${link('about me', 0)}${link('experience', 1)}</div>
+            <div class="header-col">${link('reel', 2)}${link('projects', 3)}</div>
         `;
     }
 }
@@ -265,8 +270,7 @@ function updateFooter(footer) {
     if (footer.social) footer.social.forEach((social, i) => {
         if (socialLinks[i]) {
             socialLinks[i].href = social.url;
-            const name = (social.name || '').toLowerCase();
-            socialLinks[i].textContent = name === 'linkedin' ? 'Linkedin' : name === 'dribbble' ? 'Dribbble' : (social.name || '');
+            socialLinks[i].textContent = social.name || '';
         }
     });
     

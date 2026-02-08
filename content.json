@@ -27,13 +27,13 @@
   },
   "header": {
     "navigation": [
-      { "text": "about me", "href": "#" },
-      { "text": "experience", "href": "#experience" },
-      { "text": "reel", "href": "#reel" },
-      { "text": "projects", "href": "#work" }
+      { "text": "About me", "href": "#" },
+      { "text": "Experience", "href": "#experience" },
+      { "text": "Reel", "href": "#reel" },
+      { "text": "Projects", "href": "#work" }
     ],
     "location": {
-      "text": "amsterdam",
+      "text": "Amsterdam",
       "link": "https://open.spotify.com/track/2KvbLliAjjZNOipthec7Fh?si=885ff3e35661451e"
     },
     "cvFile": "cv.pdf"

@@ -52,8 +52,9 @@
         <header class="topbar">
             <h1>Portfolio CMS – Module by module</h1>
             <div class="topbar-actions">
-                <button type="button" class="btn btn-secondary" id="btnDownload">Download JSON</button>
-                <button type="button" class="btn btn-primary" id="btnPublish">Save & Publish</button>
+                <span class="topbar-hint" style="font-size:12px;color:#888;margin-right:8px;">Save & Publish Live pushes to the live site (~1 min).</span>
+                <button type="button" class="btn btn-secondary" id="btnDownload">Save & Download JSON</button>
+                <button type="button" class="btn btn-primary" id="btnPublish">Save & Publish Live</button>
             </div>
         </header>
         <div class="main">
@@ -648,7 +649,7 @@
         link.download = 'content.json';
         link.click();
         URL.revokeObjectURL(url);
-        toast('Downloaded content.json');
+        toast('Downloaded content.json. Use Save & Publish Live to push to the live site.');
     });
 
     document.getElementById('btnPublish').addEventListener('click', async () => {
@@ -660,7 +661,7 @@
             });
             const data = await r.json().catch(() => ({}));
             if (r.ok && data.success) {
-                toast('Published successfully');
+                toast('Changes pushed. Live site updates in ~1 min.');
             } else {
                 toast('Publish failed: ' + (data.error || data.details || r.statusText));
             }
