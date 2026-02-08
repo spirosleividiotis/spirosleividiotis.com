@@ -64,9 +64,9 @@ function updateHero(hero) {
     const tagsGrid = document.getElementById('tagsGrid');
     if (tagsGrid) {
         const tools = (hero.tags && Array.isArray(hero.tags.tools)) ? hero.tags.tools : [];
-        const skills = (hero.tags && Array.isArray(hero.tags.skills)) ? hero.tags.skills : ['Product Motion', 'Design Systems', 'Interaction Design'];
+        const skillsLocked = ['Product Motion', 'Design Systems', 'Interaction Design'];
         const toolTags = tools.map(tool => `<div class="tag tag-black">${escapeHtml(tool)}</div>`).join('');
-        const skillTags = skills.map(skill => `<div class="tag">${escapeHtml(skill)}</div>`).join('');
+        const skillTags = skillsLocked.map(skill => `<div class="tag">${escapeHtml(skill)}</div>`).join('');
         tagsGrid.innerHTML = `<div class="tags-tools">${toolTags}</div><div class="tags-skills">${skillTags}</div>`;
     }
 }
