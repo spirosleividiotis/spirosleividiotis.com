@@ -1,13 +1,44 @@
 // ===================================
-// SCROLL ANIMATIONS (disabled for static fix – re-enable when ready)
+// SOFT POSITION-DOWN ON SCROLL (hero + about me, same animation)
 // ===================================
-// Parallax / soft position-down removed so hero and about are fully static.
 
-document.addEventListener('DOMContentLoaded', function() {
-    const heroContent = document.querySelector('.hero .container');
+let parallaxTicking = false;
+
+function updateParallax() {
+    parallaxTicking = false;
+    if (typeof checkIfMobile === 'function' && checkIfMobile()) return;
+    const hero = document.getElementById('heroSection');
+    const heroContent = hero && hero.querySelector('.hero .container');
+    if (!hero || !heroContent) return;
+
+    const y = window.scrollY || window.pageYOffset;
+    const factor = 0.12;
+    const max = 80;
+    const move = Math.min(y * factor, max);
+    const translate = move ? `translateY(${move}px)` : '';
+
+    if (hero.classList.contains('hero-about-open')) {
+        heroContent.style.transform = '';
+        const aboutRow = document.querySelector('.hero-about .hero-about-row');
+        if (aboutRow) aboutRow.style.transform = translate;
+        return;
+    }
+
+    heroContent.style.transform = translate;
     const aboutRow = document.querySelector('.hero-about .hero-about-row');
-    if (heroContent) heroContent.style.transform = '';
     if (aboutRow) aboutRow.style.transform = '';
+}
+
+function requestParallaxTick() {
+    if (!parallaxTicking) {
+        requestAnimationFrame(updateParallax);
+        parallaxTicking = true;
+    }
+}
+
+window.addEventListener('scroll', requestParallaxTick);
+document.addEventListener('DOMContentLoaded', function() {
+    requestAnimationFrame(updateParallax);
 });
 
 // ===================================
@@ -788,6 +819,7 @@ function initializeModalsAndPlayers() {
         heroSection.classList.add('hero-about-open');
         document.body.style.overflow = 'hidden';
         if (heroAboutCloseBtn) heroAboutCloseBtn.style.display = 'flex';
+        requestParallaxTick();
     }
 
     function closeAboutView() {

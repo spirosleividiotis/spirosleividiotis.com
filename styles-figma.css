@@ -1762,7 +1762,11 @@ section {
 
 /* Cursor password input */
 
-/* Scroll-based animations disabled for static fix */
+@media (min-width: 769px) {
+    .hero-name {
+        will-change: transform;
+    }
+}
 
 /* ===================================
    RESPONSIVE / MOBILE STYLES
