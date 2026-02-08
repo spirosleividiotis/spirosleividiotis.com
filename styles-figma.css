@@ -401,13 +401,12 @@ section {
     opacity: 0;
 }
 
-/* When About me is open: hero stays fixed so scroll-over effect works; scroll inside hero to see full about */
+/* When About me is open: hero in flow so it’s always visible and page adjusts to content height */
 .hero.hero-about-open {
-    position: fixed !important;
-    height: calc(100vh - 92px) !important;
-    min-height: 0;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    position: relative !important;
+    height: auto !important;
+    min-height: calc(100vh - 92px);
+    overflow: visible;
 }
 
 .hero.hero-about-open .container {
