@@ -52,8 +52,6 @@ async function loadContent() {
             injectAnalyticsScript(content.analytics.script.trim());
         }
         
-        console.log('✓ Content loaded successfully');
-        
         // Dispatch event to notify other scripts that content is loaded
         setTimeout(() => {
             window.dispatchEvent(new Event('contentLoaded'));
@@ -84,7 +82,7 @@ function updateHero(hero) {
     }
 }
 
-// Update About Me (hero-about block + legacy modal if present)
+// Update About Me (hero-about overlay only)
 function updateAboutMe(aboutMe) {
     const heroAboutPhoto = document.getElementById('heroAboutPhotoImg');
     if (heroAboutPhoto && aboutMe.photo) {
@@ -94,15 +92,6 @@ function updateAboutMe(aboutMe) {
     const heroAboutText = document.getElementById('heroAboutText');
     if (heroAboutText && Array.isArray(aboutMe.bio)) {
         heroAboutText.innerHTML = aboutMe.bio.map(p => `<p>${escapeHtml(p)}</p>`).join('');
-    }
-    const aboutPhoto = document.getElementById('aboutPhotoImg');
-    if (aboutPhoto && aboutMe.photo) {
-        aboutPhoto.src = aboutMe.photo;
-        aboutPhoto.alt = 'Spiros Leividiotis';
-    }
-    const aboutText = document.getElementById('aboutText');
-    if (aboutText && Array.isArray(aboutMe.bio)) {
-        aboutText.innerHTML = aboutMe.bio.map(p => `<p>${escapeHtml(p)}</p>`).join('');
     }
 }
 

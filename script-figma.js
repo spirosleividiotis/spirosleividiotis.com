@@ -5,21 +5,30 @@
 let ticking = false;
 
 // Hero: soft position-down (parallax) as content scrolls over it; desktop only, not when About open.
+// When About is open, apply same effect to about content only.
 function updateParallax() {
     ticking = false;
     if (typeof checkIfMobile === 'function' && checkIfMobile()) return;
     const hero = document.getElementById('heroSection');
     const heroContent = hero && hero.querySelector('.hero .container');
     if (!hero || !heroContent) return;
-    if (hero.classList.contains('hero-about-open')) {
-        heroContent.style.transform = '';
-        return;
-    }
+
     const y = window.scrollY || window.pageYOffset;
     const factor = 0.12;
     const max = 80;
     const move = Math.min(y * factor, max);
-    heroContent.style.transform = move ? `translateY(${move}px)` : '';
+    const translate = move ? `translateY(${move}px)` : '';
+
+    if (hero.classList.contains('hero-about-open')) {
+        heroContent.style.transform = '';
+        const aboutRow = document.querySelector('.hero-about .hero-about-row');
+        if (aboutRow) aboutRow.style.transform = translate;
+        return;
+    }
+
+    heroContent.style.transform = translate;
+    const aboutRow = document.querySelector('.hero-about .hero-about-row');
+    if (aboutRow) aboutRow.style.transform = '';
 }
 
 function requestTick() {
@@ -810,6 +819,7 @@ function initializeModalsAndPlayers() {
         heroAbout.setAttribute('aria-hidden', 'false');
         heroSection.classList.add('hero-about-open');
         document.body.style.overflow = 'hidden';
+        requestTick(); // apply soft position-down to about content for current scroll
     }
 
     function closeAboutView() {
