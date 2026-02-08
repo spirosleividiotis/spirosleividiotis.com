@@ -909,10 +909,15 @@ function initializeModalsAndPlayers() {
     }
 
     function closeAboutView() {
-        if (heroSection) {
-            heroSection.classList.remove('hero-about-open');
-            document.getElementById('heroAbout')?.setAttribute('aria-hidden', 'true');
-        }
+        if (!heroSection) return;
+        heroSection.classList.add('hero-content-reveal');
+        heroSection.classList.remove('hero-about-open');
+        document.getElementById('heroAbout')?.setAttribute('aria-hidden', 'true');
+        requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+                heroSection.classList.remove('hero-content-reveal');
+            });
+        });
     }
 
     // Use delegation so About me works when link is injected by content-loader after load
