@@ -1226,6 +1226,25 @@ document.addEventListener('wheel', function(e) {
     window.__scrollDebug.wheelTarget = (e.target && e.target.id) ? e.target.id : (e.target && e.target.className) ? String(e.target.className).slice(0, 80) : e.target.tagName;
     window.__scrollDebug.wheelTargetNode = e.target;
 }, { passive: true });
+
+// Chrome desktop: wheel over content below hero doesn't scroll. Forward wheel to body scroll when target is not body.
+(function chromeDesktopWheelFix() {
+    var ua = navigator.userAgent;
+    var isChromeDesktop = (/Chrome|Chromium/).test(ua) && !(/Mobile|Android|webOS|iPhone|iPad|Opera Mini/).test(ua);
+    if (!isChromeDesktop) return;
+    document.addEventListener('wheel', function(e) {
+        var scrollEl = document.scrollingElement || document.body;
+        var target = e.target;
+        if (target === document.body || target === document.documentElement) return;
+        var maxScroll = scrollEl.scrollHeight - scrollEl.clientHeight;
+        if (maxScroll <= 0) return;
+        var amount = e.deltaY;
+        if (amount === 0) return;
+        scrollEl.scrollTop += amount;
+        e.preventDefault();
+    }, { passive: false, capture: true });
+})();
+
 if (typeof console !== 'undefined' && console.log) {
     console.log('[scroll debug] Type __scrollDebug in Console to inspect. Scroll or move mouse first to fill lastWheel / wheelTarget.');
 }
