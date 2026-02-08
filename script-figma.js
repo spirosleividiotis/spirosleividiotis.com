@@ -117,7 +117,7 @@ function updateScrollSpacerHeight() {
     }
     const heroSection = document.getElementById('heroSection');
     if (!heroSection) return;
-    const headerH = 92;
+    const headerH = 104;
     const vh = window.innerHeight;
     const heroH = heroSection.offsetHeight;
     const gap = getHeroScrollGap();
