@@ -843,6 +843,7 @@ function initializeModalsAndPlayers() {
 
     function openAboutView() {
         if (!heroSection || !heroAbout) return;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         heroAbout.setAttribute('aria-hidden', 'false');
         heroSection.classList.add('hero-about-open');
         if (!checkIfMobile()) document.body.style.overflow = 'hidden';

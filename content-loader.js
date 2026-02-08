@@ -168,8 +168,9 @@ function updateHeader(header) {
     if (entriesEl) {
         const link = (labelKey, i) => {
             const displayText = displayByLabel[labelKey] || labelsDisplay[i];
-            const href = linkByLabel[labelKey] || defaultHrefs[i];
-            const isAbout = (href.replace(/^#/, '') === '' || href === '#') && i === 0;
+            // About me always goes to top (#) and gets id for script-figma.js overlay
+            const href = (i === 0 && labelKey === 'about me') ? '#' : (linkByLabel[labelKey] || defaultHrefs[i]);
+            const isAbout = (i === 0 && labelKey === 'about me');
             return `<a href="${escapeAttr(href)}" class="nav-link" ${isAbout ? 'id="aboutMeLink"' : ''}>${escapeHtml(displayText)}</a>`;
         };
         entriesEl.innerHTML = `
