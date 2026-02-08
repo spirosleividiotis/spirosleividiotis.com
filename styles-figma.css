@@ -2632,6 +2632,19 @@ section {
    RESPONSIVE
    =================================== */
 
+/* Tablet (769–1024): mobile-like – name left-aligned, experience click (JS). Smaller laptop (1025+): desktop. */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .hero-name-wrapper {
+        justify-content: flex-start;
+        align-items: flex-end;
+    }
+    .hero-name {
+        text-align: left;
+        font-size: 80px;
+        line-height: 96px;
+    }
+}
+
 @media (min-width: 769px) and (max-width: 1200px) {
     .container {
         padding: 0 60px;

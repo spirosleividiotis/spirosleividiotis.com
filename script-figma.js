@@ -101,6 +101,9 @@ function initializeSmoothScroll() {
 function checkIfMobile() {
     return window.innerWidth <= 768;
 }
+function checkIfTabletOrSmaller() {
+    return window.innerWidth <= 1024;
+}
 
 // Hero is content-height; spacer fills rest of viewport + gap so Experience doesn't sit under hero text
 function getHeroScrollGap() {
@@ -144,15 +147,15 @@ function updateScrollSpacerHeight() {
 }
 
 // Experience accordion: one row expanded at a time
-// Desktop: expand on hover. Mobile: expand on click only (no hover).
+// Desktop/smaller laptop (1025+): hover. Tablet & mobile (≤1024): click.
 function initializeExperienceAccordion() {
     const container = document.querySelector('.experience-rows');
     const rows = document.querySelectorAll('.experience-row');
     if (!container || rows.length === 0) return;
 
-    const isMobile = checkIfMobile();
+    const useClick = checkIfTabletOrSmaller();
 
-    if (isMobile) {
+    if (useClick) {
         var lastToggle = 0;
         rows.forEach((row) => {
             function toggleExpanded(e) {
