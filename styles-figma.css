@@ -339,12 +339,15 @@ section {
     font-size: 18px;
     line-height: 118.44%;
     color: #000000;
-    transition: opacity 0.2s ease;
+    transition: transform 0.25s var(--ease), background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease);
     cursor: pointer;
 }
 
 .tag:hover {
-    opacity: 0.7;
+    transform: scale(1.04);
+    background: #000000;
+    color: #FFFFFF;
+    border-color: #000000;
 }
 
 .tag-black {
@@ -352,10 +355,14 @@ section {
     border-color: #000000 !important;
     color: #FFFFFF !important;
     font-weight: 600;
+    transition: transform 0.25s var(--ease), background 0.25s var(--ease), border-color 0.25s var(--ease);
 }
 
 .tag-black:hover {
-    opacity: 0.85;
+    transform: scale(1.04);
+    background: #333333 !important;
+    border-color: #333333 !important;
+    color: #FFFFFF !important;
 }
 
 
@@ -409,27 +416,35 @@ section {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 25px 0;
+    padding: 28px 0;
     border-bottom: 0.5px solid #FFFFFF;
     width: 100%;
     transition: padding 0.5s var(--ease);
 }
 
+.experience-row:not(:first-child) {
+    align-items: center;
+    padding: 28px 0;
+}
+
 .experience-row.expanded {
-    padding-bottom: 50px;
+    padding-top: 28px;
+    padding-bottom: 56px;
 }
 
 .experience-row:last-child {
     border-bottom: none;
+}
+
+.experience-row:last-child:not(.expanded) {
     padding-bottom: 0;
 }
 
-.experience-row:not(:first-child) {
-    align-items: center;
-    padding: 25px 0;
+.experience-row.expanded:last-child {
+    padding-bottom: 56px;
 }
 
-.experience-row:not(:first-child):last-child {
+.experience-row:not(:first-child):last-child:not(.expanded) {
     padding-bottom: 0;
 }
 
@@ -486,7 +501,7 @@ section {
     min-height: 0;
     overflow: hidden;
     opacity: 0;
-    transition: opacity 0.4s var(--ease);
+    transition: opacity 0.55s var(--ease);
     will-change: opacity;
 }
 
