@@ -131,6 +131,13 @@ function updateReel(reel) {
     if (inlineVideo && reel.file) {
         inlineVideo.src = reel.file;
         inlineVideo.load();
+        inlineVideo.pause();
+        inlineVideo.currentTime = 0;
+        inlineVideo.addEventListener('loadeddata', function onReelLoaded() {
+            inlineVideo.pause();
+            inlineVideo.currentTime = 0;
+            inlineVideo.removeEventListener('loadeddata', onReelLoaded);
+        }, { once: true });
     }
 }
 
