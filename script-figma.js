@@ -133,6 +133,11 @@ function updateScrollSpacerHeight() {
     const contentSpacer = vh - headerH - heroH + gap;
     const spacerH = Math.max(minSpacer, contentSpacer, heroH, 1);
     spacer.style.height = spacerH + 'px';
+    if (window.__scrollDebug) {
+        window.__scrollDebug.spacerHeight = spacerH;
+        window.__scrollDebug.spacerUpdated = Date.now();
+        window.dispatchEvent(new CustomEvent('scrollSpacerUpdated', { detail: { height: spacerH } }));
+    }
 }
 
 // Experience accordion: one row expanded at a time
@@ -830,7 +835,8 @@ function initializeModalsAndPlayers() {
         if (!heroSection || !heroAbout) return;
         heroAbout.setAttribute('aria-hidden', 'false');
         heroSection.classList.add('hero-about-open');
-        if (!checkIfMobile()) document.body.style.overflow = 'hidden';
+        if (checkIfMobile()) document.body.classList.add('about-me-open-mobile');
+        else document.body.style.overflow = 'hidden';
         updateScrollSpacerHeight();
         requestParallaxTick();
         if (checkIfMobile()) setTimeout(requestParallaxTick, 100);
@@ -840,6 +846,7 @@ function initializeModalsAndPlayers() {
         if (!heroSection || !heroAbout) return;
         heroSection.classList.remove('hero-about-open');
         heroAbout.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('about-me-open-mobile');
         document.body.style.overflow = '';
         updateScrollSpacerHeight();
     }
@@ -1209,6 +1216,17 @@ window.addEventListener('load', () => {
         updateScrollSpacerHeight();
         setTimeout(updateScrollSpacerHeight, 50);
     });
+});
+
+// Chrome scroll debug: set window.__scrollDebug = {} in console to enable; then inspect __scrollDebug or listen for 'scrollSpacerUpdated'
+document.addEventListener('DOMContentLoaded', function scrollDebugInit() {
+    window.__scrollDebug = window.__scrollDebug || { enabled: true };
+    document.addEventListener('wheel', function(e) {
+        if (!window.__scrollDebug) return;
+        window.__scrollDebug.lastWheel = Date.now();
+        window.__scrollDebug.wheelTarget = (e.target && e.target.id) ? e.target.id : (e.target && e.target.className) ? e.target.className : e.target.tagName;
+        window.__scrollDebug.wheelTargetNode = e.target;
+    }, { passive: true });
 });
 
 // ===================================
