@@ -1988,40 +1988,36 @@ section {
         display: none;
     }
     
-    /* About me mobile: same as desktop – fixed overlay, scroll inside panel; inner scrollable so text never cut */
+    /* About me mobile: in-flow (locked version), same top padding as hero (35px), no cut; tags unchanged */
+    .hero.hero-about-open {
+        position: relative !important;
+        top: auto;
+        left: auto;
+        right: auto;
+        overflow: visible;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
     .hero.hero-about-open .hero-about {
-        position: fixed !important;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        padding: 0;
-        overflow: hidden;
+        position: relative !important;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        height: auto;
+        overflow: visible;
+        padding: 35px 0 180px;
         justify-content: flex-start;
+        width: 100%;
     }
     .hero.hero-about-open .hero-content {
         display: none !important;
     }
-    .hero.hero-about-open .hero-about .hero-about-inner {
+    .hero-about-inner {
+        padding: 0;
         width: 100%;
         max-width: 100%;
-        max-height: 100vh;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        padding: 50px 50px 180px;
-        box-sizing: border-box;
-    }
-    .hero.hero-about-open .hero-about-close {
-        position: fixed !important;
-        top: 12px;
-        right: 16px;
-        width: 36px !important;
-        height: 36px !important;
-        min-width: 36px !important;
-        min-height: 36px !important;
-        max-width: 36px !important;
-        max-height: 36px !important;
-        z-index: 101;
+        overflow: visible;
     }
     .hero-about-text {
         overflow: visible;

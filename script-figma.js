@@ -118,7 +118,7 @@ function updateScrollSpacerHeight() {
     const isMobile = checkIfMobile();
     const headerH = isMobile ? 86 : 104;
     const vh = window.innerHeight;
-    /* When about me is open (fixed overlay on both), no spacer; tag about-inflow-backup = in-flow mobile version to revert */
+    /* When about me is open on mobile, hero is in-flow so no spacer; on desktop keep overlay spacer */
     if (heroSection.classList.contains('hero-about-open')) {
         if (isMobile) {
             spacer.style.height = '0';
@@ -831,7 +831,7 @@ function initializeModalsAndPlayers() {
         if (!heroSection || !heroAbout) return;
         heroAbout.setAttribute('aria-hidden', 'false');
         heroSection.classList.add('hero-about-open');
-        document.body.style.overflow = 'hidden';
+        if (!checkIfMobile()) document.body.style.overflow = 'hidden';
         updateScrollSpacerHeight();
         requestParallaxTick();
         if (checkIfMobile()) setTimeout(requestParallaxTick, 100);
