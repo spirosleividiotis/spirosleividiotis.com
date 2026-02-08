@@ -1972,7 +1972,7 @@ section {
         display: none;
     }
     
-    /* About me mobile: in-flow, same horizontal alignment as hero/header (container 50px); one smooth scroll */
+    /* About me mobile: in-flow, same alignment as hero/header; no cut (padding-bottom), parallax applies via JS */
     .hero.hero-about-open {
         position: relative !important;
         top: auto;
@@ -1988,7 +1988,7 @@ section {
         bottom: auto;
         height: auto;
         overflow: visible;
-        padding: 16px 0 35px;
+        padding: 16px 0 80px;
         justify-content: flex-start;
         width: 100%;
     }
@@ -1999,6 +1999,9 @@ section {
         padding: 48px 0 0;
         width: 100%;
         max-width: 100%;
+        overflow: visible;
+    }
+    .hero-about-text {
         overflow: visible;
     }
     .hero-about-row {
