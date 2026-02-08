@@ -254,30 +254,32 @@ section {
     margin-bottom: 48px;
 }
 
-/* About me layout (photo + text + X) – same 1500px as header, left/right aligned with nav and Amsterdam */
+/* About me: popup overlay on top of hero – white bg, photo + text + X; fade in/out */
 .hero-about {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    max-width: 1500px;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 92px 48px 48px;
+    overflow: auto;
+    box-sizing: border-box;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.5s step-end;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
 }
 
 .hero.hero-about-open .hero-about {
-    position: relative;
-    top: auto;
-    left: 0;
-    align-self: stretch;
-    width: 100%;
-    max-width: 1500px;
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    /* delay set above so about fades in after name has moved down */
 }
 
 .hero-about-row {
@@ -318,8 +320,8 @@ section {
 
 .hero-about-close {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 24px;
+    right: 24px;
     width: 20px;
     height: 20px;
     padding: 0;
@@ -331,21 +333,8 @@ section {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    transition: opacity 0.25s ease;
-}
-
-/* X within about me block only: never fixed; lower, right edge aligned with time column */
-.hero.hero-about-open .hero-about {
-    position: relative;
-}
-
-.hero.hero-about-open .hero-about-close {
-    position: absolute !important;
-    top: 0 !important;
-    right: 0 !important;
-    left: auto !important;
-    bottom: auto !important;
     z-index: 2;
+    transition: opacity 0.25s ease;
 }
 
 .hero-about-close:hover {
@@ -371,198 +360,6 @@ section {
 
 .hero-about-text p:last-child {
     margin-bottom: 0;
-}
-
-/* When About open: intro and tags fade out, name moves to bottom. */
-.hero-name-wrapper {
-    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.hero-name {
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.hero-intro,
-.hero-tags {
-    transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.hero-about {
-    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* JS-driven open: step1 = fade out intro+tags (hero still fixed), step2 = name down, then hero-about-open */
-.hero.hero-about-step1 .hero-intro,
-.hero.hero-about-step1 .hero-tags {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.hero.hero-about-step2 .hero-name {
-    transform: translateY(72px);
-    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.hero.hero-about-open .hero-intro,
-.hero.hero-about-open .hero-tags {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-}
-
-.hero.hero-about-open .hero-name {
-    transform: translateY(72px);
-}
-
-.hero.hero-about-open .hero-about {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* Close (reverse): 1) photo+text+X fade out  2) name moves up  3) then intro+tags fade in */
-.hero.hero-about-closing .hero-about {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
-}
-
-.hero.hero-about-closing .hero-name {
-    transform: translateY(0);
-    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.35s;
-}
-
-.hero.hero-about-closing .hero-intro,
-.hero.hero-about-closing .hero-tags {
-    opacity: 1;
-    visibility: visible;
-    position: static;
-    width: auto;
-    height: auto;
-    overflow: visible;
-    clip: auto;
-    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s;
-}
-
-/* When closing About: whole hero-content fades in as one (no stagger) */
-.hero-content {
-    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.hero.hero-content-reveal .hero-content {
-    opacity: 0;
-}
-
-/* When About me is open: on mobile hero goes in flow; on desktop hero+about stay fixed (see min-width: 769px) */
-.hero.hero-about-open {
-    position: relative !important;
-    height: auto !important;
-    min-height: calc(100vh - 92px);
-    overflow: visible;
-    padding-top: 16px;
-}
-
-.hero.hero-about-open .container {
-    min-height: calc(100vh - 92px);
-    max-width: 1500px;
-    overflow: visible;
-}
-
-.hero.hero-about-open .hero-content {
-    margin-top: auto;
-}
-
-/* ===================================
-   DESKTOP: Hero 844px (644 content + 100+100 padding), About 1000px (50+25 padding).
-   Hero + About = fixed layer (z-A); rest of site scrolls over (z-B); both get parallax.
-   Height animates 844 ↔ 1844 when About opens/closes (no snap).
-   =================================== */
-@media (min-width: 769px) {
-    .hero {
-        transition: height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .hero .container {
-        transition: height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    /* Hero default + during step1/step2 + during closing: 844px so height can animate to 1844 when open */
-    .hero:not(.hero-about-open):not(.hero-about-step1):not(.hero-about-step2):not(.hero-about-closing),
-    .hero.hero-about-step1,
-    .hero.hero-about-step2,
-    .hero.hero-about-closing {
-        height: 844px;
-        min-height: 844px;
-        padding: 100px 48px 100px;
-        box-sizing: border-box;
-    }
-    .hero:not(.hero-about-open):not(.hero-about-step1):not(.hero-about-step2):not(.hero-about-closing) .container,
-    .hero.hero-about-step1 .container,
-    .hero.hero-about-step2 .container,
-    .hero.hero-about-closing .container {
-        height: 644px;
-        min-height: 644px;
-        flex: 0 0 auto;
-    }
-
-    /* When About open: hero stays fixed, total height 844 + 1000 = 1844px (z-A) */
-    .hero.hero-about-open {
-        position: fixed !important;
-        top: 92px;
-        left: 0;
-        right: 0;
-        height: 1844px !important;
-        min-height: 1844px !important;
-        padding: 100px 48px 100px;
-        overflow: visible;
-        z-index: 1;
-        box-sizing: border-box;
-    }
-    .hero.hero-about-open .container {
-        height: 1644px;
-        min-height: 1644px;
-        max-width: 1500px;
-        flex-direction: column;
-        gap: 0;
-        padding: 0;
-    }
-    /* Visual order: Hero block first (644px), then About block (1000px) */
-    .hero.hero-about-open .hero-content {
-        order: 1;
-        flex: 0 0 644px;
-        height: 644px;
-        margin-top: 0;
-        justify-content: flex-end;
-    }
-    .hero.hero-about-open .hero-about {
-        order: 2;
-        flex: 0 0 1000px;
-        height: 1000px;
-        padding: 50px 0 25px;
-        box-sizing: border-box;
-        position: relative;
-    }
-    .hero.hero-about-open .hero-about-row {
-        height: 100%;
-        min-height: 0;
-    }
-    .hero.hero-about-open .hero-about-photo {
-        height: 100%;
-        min-height: 0;
-    }
 }
 
 /* Name row: Figma justify-content center, align-items flex-end; name text right-aligned */

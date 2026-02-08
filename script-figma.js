@@ -942,48 +942,22 @@ function initializeModalsAndPlayers() {
         }
     });
 
-    // About Me: JS-driven animation so sequence is reliable (no layout jump mid-animation)
+    // About Me: popup overlay on top of hero – photo, text, X on white; fade in/out
     const heroSection = document.getElementById('heroSection');
     const heroAbout = document.getElementById('heroAbout');
-    var aboutAnimationInProgress = false;
 
     function openAboutView() {
-        if (!heroSection || aboutAnimationInProgress) return;
-        aboutAnimationInProgress = true;
-        heroAbout?.setAttribute('aria-hidden', 'false');
-
-        // Step 1: fade out intro + tags
-        heroSection.classList.add('hero-about-step1');
-        setTimeout(function() {
-            // Step 2: move name down
-            heroSection.classList.add('hero-about-step2');
-            setTimeout(function() {
-                // Step 3: show about (hero in flow, about visible)
-                heroSection.classList.remove('hero-about-step1', 'hero-about-step2');
-                heroSection.classList.add('hero-about-open');
-                updateScrollSpacerHeight();
-                aboutAnimationInProgress = false;
-            }, 550);
-        }, 400);
+        if (!heroSection || !heroAbout) return;
+        heroAbout.setAttribute('aria-hidden', 'false');
+        heroSection.classList.add('hero-about-open');
+        document.body.style.overflow = 'hidden';
     }
 
     function closeAboutView() {
-        if (!heroSection || aboutAnimationInProgress) return;
-        aboutAnimationInProgress = true;
-        heroAbout?.setAttribute('aria-hidden', 'true');
-
-        // Step 1: hide about, hero back to fixed
+        if (!heroSection || !heroAbout) return;
         heroSection.classList.remove('hero-about-open');
-        heroSection.classList.add('hero-about-closing');
-        updateScrollSpacerHeight();
-        setTimeout(function() {
-            // Step 2: name moves up, intro+tags fade in (handled by CSS)
-            setTimeout(function() {
-                heroSection.classList.remove('hero-about-closing');
-                updateScrollSpacerHeight();
-                aboutAnimationInProgress = false;
-            }, 700);
-        }, 350);
+        heroAbout.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
     }
 
     // Use delegation so About me works when link is injected by content-loader after load
