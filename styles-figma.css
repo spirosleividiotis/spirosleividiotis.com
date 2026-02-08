@@ -1889,6 +1889,7 @@ section {
         line-height: 118.44%;
         font-weight: 700;
         color: #000000;
+        min-height: auto !important;
     }
     
     .header-meta {
@@ -1907,6 +1908,7 @@ section {
         line-height: 118.44%;
         font-weight: 700;
         color: #000000;
+        min-height: auto !important;
     }
     
     .header-meta .time,
@@ -2542,6 +2544,10 @@ section {
         padding-right: 24px;
     }
     .footer .container {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+    .hero.hero-about-open .hero-about {
         padding-left: 24px;
         padding-right: 24px;
     }
