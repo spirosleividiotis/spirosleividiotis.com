@@ -1833,18 +1833,19 @@ section {
     }
     
     /* ===================================
-       HEADER - Figma: 16px 48px, 70px, space-between, attached
+       HEADER - Figma: 16px 48px, 70px, entries gap 50px, col gap 4px
        =================================== */
     .site-header {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding: 16px 48px 24px;
+        padding: 16px 48px;
         width: 100%;
         min-height: 70px;
-        height: auto;
+        height: 70px;
         box-sizing: border-box;
+        background: #FFFFFF;
     }
     
     .site-header .container {
@@ -1862,18 +1863,19 @@ section {
         flex: none;
         display: flex;
         flex-direction: row;
-        align-items: flex-start;
-        gap: 24px;
+        align-items: center;
+        gap: 50px;
         padding: 0;
+        margin: 0 auto;
     }
     
-    /* Same width for both columns so About me/Experience and Reel/Projects align in two columns */
     .header-col {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 0;
-        min-width: 72px;
+        padding: 0;
+        gap: 4px;
+        flex: none;
     }
     
     .header-entries .header-col:nth-child(2) .nav-link {
@@ -1881,6 +1883,7 @@ section {
     }
     
     .header-entries .nav-link {
+        font-family: var(--font-primary);
         font-size: 14px;
         line-height: 118.44%;
         font-weight: 700;
@@ -1891,18 +1894,23 @@ section {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        gap: 0;
+        padding: 0;
+        gap: 4px;
+        flex: none;
     }
     
     .header-meta .location,
     .location-link {
+        font-family: var(--font-primary);
         font-size: 14px;
         line-height: 118.44%;
         font-weight: 700;
         color: #000000;
     }
     
+    .header-meta .time,
     .time {
+        font-family: var(--font-primary);
         font-size: 14px;
         line-height: 118.44%;
         font-weight: 700;
@@ -1911,7 +1919,7 @@ section {
     }
     
     /* ===================================
-       HERO SECTION - 33px 47px, gap 51px
+       HERO SECTION - 35px top/bottom, 47px horizontal
        =================================== */
     
     /* Hero in flow on mobile so name + intro + tags all visible when scrolling (nothing cut) */
@@ -1926,7 +1934,7 @@ section {
         right: auto;
         height: auto;
         min-height: auto;
-        padding: 56px 0 20px;
+        padding: 35px 0;
     }
     
     .hero .container {
@@ -1958,7 +1966,16 @@ section {
         display: none;
     }
     
-    /* About me mobile: full width like header, photo scale/crop to fit */
+    /* About me mobile: same alignment as hero (35px top/bottom), not cut; scroll if needed */
+    .hero-about {
+        padding: 70px 47px 35px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        justify-content: flex-start;
+    }
+    .hero-about-inner {
+        padding: 0;
+    }
     .hero-about-row {
         flex-direction: column;
         align-items: center;
@@ -2262,22 +2279,23 @@ section {
     }
     
     /* ===================================
-       FOOTER - 16px 48px, 14px links
+       FOOTER - same gaps as header: 16px 48px, 14px links, 4px between entries
        =================================== */
     
     .footer {
-        padding: 16px 0;
+        padding: 16px 48px;
         position: relative !important;
         margin-top: 0 !important;
         background: #FFFFFF;
     }
     
     .footer .container {
-        padding: 0 48px;
+        padding: 0;
     }
     
     .footer-entries .footer-link,
     .footer-right .footer-link {
+        font-family: var(--font-primary);
         color: #000000;
         font-size: 14px;
         line-height: 118.44%;
@@ -2318,7 +2336,7 @@ section {
         gap: 12px;
     }
     .footer-left .footer-entries {
-        gap: 0;
+        gap: 4px;
     }
     .footer-logo-wrap {
         width: 36px;
@@ -2334,7 +2352,7 @@ section {
     .footer-center {
         flex-direction: column;
         align-items: flex-start;
-        gap: 0;
+        gap: 4px;
     }
     
     .footer-label {
