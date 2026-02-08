@@ -13,8 +13,8 @@ function updateParallax() {
     const y = window.scrollY || window.pageYOffset;
     const isMobile = window.innerWidth <= 768;
     const isAboutOpen = hero.classList.contains('hero-about-open');
-    const factor = (isAboutOpen && isMobile) ? 0.22 : 0.12;
-    const max = (isAboutOpen && isMobile) ? 120 : 80;
+    const factor = (isAboutOpen && isMobile) ? 0.32 : 0.12;
+    const max = (isAboutOpen && isMobile) ? 160 : 80;
     const move = Math.min(y * factor, max);
     const translate = move ? `translateY(${move}px)` : '';
 
@@ -833,6 +833,7 @@ function initializeModalsAndPlayers() {
         if (!checkIfMobile()) document.body.style.overflow = 'hidden';
         updateScrollSpacerHeight();
         requestParallaxTick();
+        if (checkIfMobile()) setTimeout(requestParallaxTick, 100);
     }
 
     function closeAboutView() {
