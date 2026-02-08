@@ -886,8 +886,6 @@ function initializeModalsAndPlayers() {
 
     // About Me: transforms hero in-place (no modal, page keeps scrolling)
     const heroSection = document.getElementById('heroSection');
-    const aboutMeLink = document.getElementById('aboutMeLink');
-    const heroAboutClose = document.getElementById('heroAboutClose');
 
     function openAboutView() {
         if (heroSection) {
@@ -903,15 +901,18 @@ function initializeModalsAndPlayers() {
         }
     }
 
-    if (aboutMeLink) {
-        aboutMeLink.addEventListener('click', function(e) {
+    // Use delegation so About me works when link is injected by content-loader after load
+    document.addEventListener('click', function(e) {
+        const aboutLink = e.target.closest('a#aboutMeLink');
+        if (aboutLink) {
             e.preventDefault();
             e.stopPropagation();
             openAboutView();
             return false;
-        });
-    }
+        }
+    });
 
+    const heroAboutClose = document.getElementById('heroAboutClose');
     if (heroAboutClose) {
         heroAboutClose.addEventListener('click', function() {
             closeAboutView();
