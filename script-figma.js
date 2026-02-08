@@ -925,6 +925,8 @@ function initializeModalsAndPlayers() {
         if (heroSection) {
             heroSection.classList.add('hero-about-open');
             document.getElementById('heroAbout')?.setAttribute('aria-hidden', 'false');
+            var spacer = document.querySelector('.scroll-spacer');
+            if (spacer) spacer.style.height = '0';
         }
     }
 

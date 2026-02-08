@@ -401,6 +401,13 @@ section {
     opacity: 0;
 }
 
+/* When About me is open: hero in flow so page can scroll and show full about content */
+.hero.hero-about-open {
+    position: relative !important;
+    height: auto;
+    min-height: calc(100vh - 92px);
+}
+
 .hero.hero-about-open .container {
     min-height: calc(100vh - 92px);
     max-width: 1500px;
