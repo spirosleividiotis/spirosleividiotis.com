@@ -80,7 +80,8 @@ function checkIfMobile() {
     return window.innerWidth <= 768;
 }
 
-// Hero is content-height; spacer fills rest of viewport so scroll-over effect works without hero bottom white space
+// Hero is content-height; spacer fills rest of viewport + gap so Experience doesn't sit under hero text
+var HERO_SCROLL_GAP = 160; /* px below hero before Experience starts – keeps content visible */
 function updateScrollSpacerHeight() {
     if (checkIfMobile()) return;
     const heroSection = document.getElementById('heroSection');
@@ -88,7 +89,7 @@ function updateScrollSpacerHeight() {
     if (!heroSection || !spacer) return;
     const headerH = 92;
     const heroH = heroSection.offsetHeight;
-    const spacerH = Math.max(0, window.innerHeight - headerH - heroH);
+    const spacerH = Math.max(0, window.innerHeight - headerH - heroH + HERO_SCROLL_GAP);
     spacer.style.height = spacerH + 'px';
 }
 
