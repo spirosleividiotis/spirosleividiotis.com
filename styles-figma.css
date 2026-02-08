@@ -204,14 +204,14 @@ section {
 /* Spacer reserves remaining viewport height so content below can scroll up over the fixed hero (height set by JS to fill viewport minus hero content height) */
 .scroll-spacer {
     position: relative;
-    z-index: 2;
+    z-index: 1;
     height: calc(100vh - 92px); /* fallback; JS sets to (100vh - 92px - heroHeight) */
     width: 100%;
     pointer-events: none;
     background: #FFFFFF;
 }
 
-/* Hero fixed so experience/reel/projects scroll above it; height = content only (no bottom white) */
+/* Hero fixed so experience/reel/projects scroll above it; above spacer so hero content is visible at top */
 .hero {
     position: fixed;
     top: 92px;
@@ -225,7 +225,7 @@ section {
     align-items: flex-start;
     box-sizing: border-box;
     overflow: visible;
-    z-index: 1;
+    z-index: 2;
 }
 
 /* Match header content width (1500px) so hero text aligns with nav */
