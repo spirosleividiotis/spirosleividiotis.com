@@ -4,9 +4,21 @@
 
 let ticking = false;
 
-// Hero scrolls with the page; single document scroll, no inner scroll.
+// Hero: soft position-down (parallax) as content scrolls over it; desktop only, not when About open.
 function updateParallax() {
     ticking = false;
+    if (typeof checkIfMobile === 'function' && checkIfMobile()) return;
+    const hero = document.getElementById('heroSection');
+    const heroContent = hero && hero.querySelector('.hero .container');
+    if (!hero || !heroContent || hero.classList.contains('hero-about-open')) {
+        if (heroContent) heroContent.style.transform = '';
+        return;
+    }
+    const y = window.scrollY || window.pageYOffset;
+    const factor = 0.12;
+    const max = 80;
+    const move = Math.min(y * factor, max);
+    heroContent.style.transform = move ? `translateY(${move}px)` : '';
 }
 
 function requestTick() {
@@ -16,10 +28,11 @@ function requestTick() {
     }
 }
 
-// Only enable parallax on desktop
-if (!checkIfMobile()) {
-    window.addEventListener('scroll', requestTick);
-}
+// Enable parallax on desktop (updateParallax bails on mobile)
+window.addEventListener('scroll', requestTick);
+document.addEventListener('DOMContentLoaded', function() {
+    requestAnimationFrame(updateParallax);
+});
 
 // ===================================
 // LIVE TIME
@@ -932,17 +945,13 @@ function initializeModalsAndPlayers() {
 
     function closeAboutView() {
         if (!heroSection) return;
-        heroSection.classList.add('hero-content-reveal');
+        heroSection.classList.add('hero-about-closing', 'hero-content-reveal');
         heroSection.classList.remove('hero-about-open');
         document.getElementById('heroAbout')?.setAttribute('aria-hidden', 'true');
-        requestAnimationFrame(function() {
-            requestAnimationFrame(function() {
-                setTimeout(function() {
-                    heroSection.classList.remove('hero-content-reveal');
-                    updateScrollSpacerHeight(); /* hero height may have changed */
-                }, 20);
-            });
-        });
+        setTimeout(function() {
+            heroSection.classList.remove('hero-about-closing', 'hero-content-reveal');
+            updateScrollSpacerHeight();
+        }, 950);
     }
 
     // Use delegation so About me works when link is injected by content-loader after load
