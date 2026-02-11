@@ -490,15 +490,12 @@ function initializeProjectCursors() {
             }
         });
         
-        // Add click handler - just open modal directly
+        // Click opens modal via document-level delegated listener (same for mobile)
         newCard.addEventListener('click', (e) => {
             cursorDot.classList.add('clicked');
             setTimeout(() => {
                 cursorDot.classList.remove('clicked');
             }, 300);
-            
-            // Open project modal (password handled inside)
-            openProjectModal(newCard);
         });
     });
 }
@@ -1187,8 +1184,14 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Close project modal when clicking outside (on the modal background)
+// Open project modal on card click (works on desktop + mobile; cards may be injected after content load)
 document.addEventListener('click', function(e) {
+    const card = e.target.closest('.work-card');
+    if (card) {
+        e.preventDefault();
+        openProjectModal(card);
+        return;
+    }
     const modal = document.getElementById('projectModal');
     const modalWrapper = document.querySelector('.project-modal-wrapper');
     if (modal && modal.classList.contains('active')) {
