@@ -1184,7 +1184,7 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Open project modal on card click (works on desktop + mobile; cards may be injected after content load)
+// Open project modal on card click; close on X or outside (works on desktop + mobile)
 document.addEventListener('click', function(e) {
     const card = e.target.closest('.work-card');
     if (card) {
@@ -1192,10 +1192,13 @@ document.addEventListener('click', function(e) {
         openProjectModal(card);
         return;
     }
+    if (e.target.closest('.project-modal-close') || e.target.closest('#projectModalClose')) {
+        closeProjectModal();
+        return;
+    }
     const modal = document.getElementById('projectModal');
     const modalWrapper = document.querySelector('.project-modal-wrapper');
     if (modal && modal.classList.contains('active')) {
-        // Check if click is on modal background (not on wrapper content)
         if (e.target === modal && !modalWrapper?.contains(e.target)) {
             closeProjectModal();
         }
