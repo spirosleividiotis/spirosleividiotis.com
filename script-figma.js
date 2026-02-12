@@ -1205,6 +1205,14 @@ document.addEventListener('click', function(e) {
     }
 });
 
+// Mobile: touchend on X (click can be delayed or not fire on touch)
+document.addEventListener('touchend', function(e) {
+    if (e.target.closest('.project-modal-close') || e.target.closest('#projectModalClose')) {
+        closeProjectModal();
+        e.preventDefault();
+    }
+}, { passive: false, capture: true });
+
 // ===================================
 // INITIALIZE ON LOAD
 // ===================================

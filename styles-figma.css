@@ -1346,11 +1346,15 @@ section {
     cursor: pointer;
     z-index: 10003;
     padding: 8px;
+    min-width: 44px;
+    min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: opacity 0.2s ease;
     pointer-events: auto;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
 .project-modal-close:hover {
