@@ -1170,12 +1170,8 @@ function toggleMotionExpand(idx = 0) {
     }
 }
 
-// Project modal close: button (desktop) and overlay (mobile – outside scroll wrapper so touch works)
-const projectModalClose = document.getElementById('projectModalClose');
+// Project modal close: single overlay (outside scroll wrapper so touch works on mobile)
 const projectModalCloseOverlay = document.getElementById('projectModalCloseOverlay');
-if (projectModalClose) {
-    projectModalClose.addEventListener('click', closeProjectModal);
-}
 if (projectModalCloseOverlay) {
     projectModalCloseOverlay.addEventListener('click', function(e) {
         e.preventDefault();
@@ -1204,7 +1200,7 @@ document.addEventListener('click', function(e) {
         openProjectModal(card);
         return;
     }
-    if (e.target.closest('.project-modal-close') || e.target.closest('#projectModalClose') || e.target.id === 'projectModalCloseOverlay' || e.target.closest('#projectModalCloseOverlay')) {
+    if (e.target.id === 'projectModalCloseOverlay' || e.target.closest('#projectModalCloseOverlay')) {
         closeProjectModal();
         return;
     }
@@ -1223,7 +1219,7 @@ document.addEventListener('click', function(e) {
     document.addEventListener('touchstart', function(e) {
         if (e.touches.length !== 1) return;
         var el = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY);
-        closeTouchActive = el && (el.id === 'projectModalCloseOverlay' || el.closest('#projectModalCloseOverlay'));
+        closeTouchActive = !!(el && (el.id === 'projectModalCloseOverlay' || el.closest('#projectModalCloseOverlay')));
     }, { passive: true, capture: true });
     document.addEventListener('touchend', function(e) {
         if (closeTouchActive) {
