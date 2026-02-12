@@ -1170,10 +1170,22 @@ function toggleMotionExpand(idx = 0) {
     }
 }
 
-// Project modal close button
+// Project modal close: button (desktop) and overlay (mobile – outside scroll wrapper so touch works)
 const projectModalClose = document.getElementById('projectModalClose');
+const projectModalCloseOverlay = document.getElementById('projectModalCloseOverlay');
 if (projectModalClose) {
     projectModalClose.addEventListener('click', closeProjectModal);
+}
+if (projectModalCloseOverlay) {
+    projectModalCloseOverlay.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeProjectModal();
+    });
+    projectModalCloseOverlay.addEventListener('touchend', function(e) {
+        closeProjectModal();
+        e.preventDefault();
+    }, { passive: false });
 }
 
 // Close project modal on Escape
@@ -1184,7 +1196,7 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Open project modal on card click; close on X or outside (works on desktop + mobile)
+// Open project modal on card click; close on overlay/X or outside (works on desktop + mobile)
 document.addEventListener('click', function(e) {
     const card = e.target.closest('.work-card');
     if (card) {
@@ -1192,7 +1204,7 @@ document.addEventListener('click', function(e) {
         openProjectModal(card);
         return;
     }
-    if (e.target.closest('.project-modal-close') || e.target.closest('#projectModalClose')) {
+    if (e.target.closest('.project-modal-close') || e.target.closest('#projectModalClose') || e.target.id === 'projectModalCloseOverlay' || e.target.closest('#projectModalCloseOverlay')) {
         closeProjectModal();
         return;
     }
@@ -1205,13 +1217,13 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Mobile: detect tap on X via touch coordinates (e.target can be wrong on touchend)
+// Mobile: touch on close overlay (element is outside scroll wrapper so elementFromPoint works)
 (function() {
     var closeTouchActive = false;
     document.addEventListener('touchstart', function(e) {
         if (e.touches.length !== 1) return;
         var el = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY);
-        closeTouchActive = el && (el.closest('.project-modal-close') || el.id === 'projectModalClose');
+        closeTouchActive = el && (el.id === 'projectModalCloseOverlay' || el.closest('#projectModalCloseOverlay'));
     }, { passive: true, capture: true });
     document.addEventListener('touchend', function(e) {
         if (closeTouchActive) {
