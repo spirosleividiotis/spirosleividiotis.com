@@ -1205,13 +1205,22 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Mobile: touchend on X (click can be delayed or not fire on touch)
-document.addEventListener('touchend', function(e) {
-    if (e.target.closest('.project-modal-close') || e.target.closest('#projectModalClose')) {
-        closeProjectModal();
-        e.preventDefault();
-    }
-}, { passive: false, capture: true });
+// Mobile: detect tap on X via touch coordinates (e.target can be wrong on touchend)
+(function() {
+    var closeTouchActive = false;
+    document.addEventListener('touchstart', function(e) {
+        if (e.touches.length !== 1) return;
+        var el = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY);
+        closeTouchActive = el && (el.closest('.project-modal-close') || el.id === 'projectModalClose');
+    }, { passive: true, capture: true });
+    document.addEventListener('touchend', function(e) {
+        if (closeTouchActive) {
+            closeTouchActive = false;
+            closeProjectModal();
+            e.preventDefault();
+        }
+    }, { passive: false, capture: true });
+})();
 
 // ===================================
 // INITIALIZE ON LOAD
