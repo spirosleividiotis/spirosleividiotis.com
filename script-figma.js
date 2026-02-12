@@ -1170,17 +1170,17 @@ function toggleMotionExpand(idx = 0) {
     }
 }
 
-// Project modal close: single overlay (outside scroll wrapper so touch works on mobile)
-const projectModalCloseOverlay = document.getElementById('projectModalCloseOverlay');
-if (projectModalCloseOverlay) {
-    projectModalCloseOverlay.addEventListener('click', function(e) {
+// Project modal close: one button (sibling of wrapper, like About me close)
+const projectModalClose = document.getElementById('projectModalClose');
+if (projectModalClose) {
+    projectModalClose.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
         closeProjectModal();
     });
-    projectModalCloseOverlay.addEventListener('touchend', function(e) {
-        closeProjectModal();
+    projectModalClose.addEventListener('touchend', function(e) {
         e.preventDefault();
+        closeProjectModal();
     }, { passive: false });
 }
 
@@ -1200,7 +1200,7 @@ document.addEventListener('click', function(e) {
         openProjectModal(card);
         return;
     }
-    if (e.target.id === 'projectModalCloseOverlay' || e.target.closest('#projectModalCloseOverlay')) {
+    if (e.target.closest('#projectModalClose') || e.target.closest('.project-modal-close')) {
         closeProjectModal();
         return;
     }
@@ -1213,22 +1213,6 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Mobile: touch on close overlay (element is outside scroll wrapper so elementFromPoint works)
-(function() {
-    var closeTouchActive = false;
-    document.addEventListener('touchstart', function(e) {
-        if (e.touches.length !== 1) return;
-        var el = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY);
-        closeTouchActive = !!(el && (el.id === 'projectModalCloseOverlay' || el.closest('#projectModalCloseOverlay')));
-    }, { passive: true, capture: true });
-    document.addEventListener('touchend', function(e) {
-        if (closeTouchActive) {
-            closeTouchActive = false;
-            closeProjectModal();
-            e.preventDefault();
-        }
-    }, { passive: false, capture: true });
-})();
 
 // ===================================
 // INITIALIZE ON LOAD

@@ -1306,28 +1306,6 @@ section {
     pointer-events: all;
 }
 
-/* Close overlay: outside wrapper so not affected by scroll layer on iOS; receives touch first */
-.project-modal-close-overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 80px;
-    height: 80px;
-    z-index: 100002;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFFFFF;
-}
-.project-modal-close-overlay svg {
-    width: 24px;
-    height: 24px;
-    pointer-events: none;
-}
-
 .project-modal-wrapper {
     width: 95%;
     height: 95%;
@@ -1340,8 +1318,9 @@ section {
     cursor: default;
     z-index: 10001;
 }
-.project-modal-wrapper .project-modal-close {
-    z-index: 99999;
+/* Close button: sibling of wrapper (not inside it) so it’s always on top and clickable */
+.project-modal .project-modal-close {
+    z-index: 100002;
 }
 
 .project-modal-wrapper::-webkit-scrollbar {
@@ -2591,13 +2570,6 @@ section {
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-    }
-    .project-modal-close-overlay {
-        top: 0 !important;
-        right: 0 !important;
-        width: 80px !important;
-        height: 80px !important;
-        z-index: 100006 !important;
     }
     
     .modal-close svg, .project-modal-close svg {
