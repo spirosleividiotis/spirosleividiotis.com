@@ -1305,7 +1305,7 @@ body.project-modal-open {
     pointer-events: none;
     transition: opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1);
     cursor: default;
-    padding: 100px 24px 50px;
+    padding: 100px 16px 50px;
     box-sizing: border-box;
     overflow: hidden;
 }
@@ -1399,7 +1399,7 @@ body.project-modal-open {
 .project-modal-content {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 34px 24px 100px;
+    padding: 34px 16px 100px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -1568,6 +1568,27 @@ body.project-modal-open {
     font-size: 14px;
     padding: 4px 12px;
     border-radius: 50px;
+}
+
+/* Force Figma white-card typography on any loaded project content (overrides embedded HTML styles) */
+#projectModalBody .motion-section-title,
+#projectModalBody .motion-step-title,
+#projectModalBody .motion-subsection-title,
+#projectModalBody .example-title {
+    color: #000000 !important;
+}
+#projectModalBody .motion-section-content,
+#projectModalBody .motion-step-content,
+#projectModalBody .motion-intro,
+#projectModalBody .motion-meta,
+#projectModalBody .motion-section-label,
+#projectModalBody .motion-step-number,
+#projectModalBody .token-name {
+    color: #555555 !important;
+}
+#projectModalBody .motion-section-content strong,
+#projectModalBody .motion-step-content strong {
+    color: #000000 !important;
 }
 
 /* Project grid: responsive masonry (column-count), even spacing horizontal + vertical */

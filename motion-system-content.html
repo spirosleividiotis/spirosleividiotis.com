@@ -1,25 +1,43 @@
-<!-- Motion System Content (loads inside project modal) -->
+<!-- Motion System Content (loads inside project modal) – Figma white card: grey/black text -->
 <style>
-    /* Motion System Styles (scoped to modal content) */
     #projectModalBody .motion-system-content {
         max-width: 1100px;
         margin: 0 auto;
         padding: 0;
     }
 
+    #projectModalBody .motion-tags {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 32px;
+        flex-wrap: wrap;
+    }
+
+    #projectModalBody .motion-tags span {
+        padding: 6px 14px;
+        background: transparent;
+        border: 1px solid #000000;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #000000;
+    }
+
     #projectModalBody .motion-intro {
         font-size: 16px;
-        line-height: 1.8;
-        color: #CCCCCC;
+        line-height: 19px;
+        font-weight: 600;
+        color: #555555;
         margin-bottom: 32px;
     }
 
     #projectModalBody .motion-meta {
-        font-size: 14px;
-        color: #999999;
+        font-size: 16px;
+        font-weight: 600;
+        color: #555555;
         margin-bottom: 60px;
         padding-bottom: 60px;
-        border-bottom: 1px solid #1a1a1a;
+        border-bottom: 1px solid #000000;
     }
 
     #projectModalBody .motion-section {
@@ -27,26 +45,26 @@
     }
 
     #projectModalBody .motion-section-label {
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: #999999;
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: 0;
+        color: #555555;
         margin-bottom: 16px;
     }
 
     #projectModalBody .motion-section-title {
-        font-size: 24px;
-        font-weight: 500;
+        font-size: 16px;
+        font-weight: 700;
         margin-bottom: 24px;
-        line-height: 1.3;
-        letter-spacing: -0.01em;
-        color: #FFFFFF;
+        line-height: 19px;
+        color: #000000;
     }
 
     #projectModalBody .motion-section-content {
         font-size: 16px;
-        line-height: 1.8;
-        color: #CCCCCC;
+        line-height: 19px;
+        font-weight: 600;
+        color: #555555;
         margin-bottom: 24px;
     }
 
@@ -55,8 +73,8 @@
     }
 
     #projectModalBody .motion-section-content strong {
-        color: #FFFFFF;
-        font-weight: 500;
+        color: #000000;
+        font-weight: 600;
     }
 
     #projectModalBody .motion-step {
@@ -72,21 +90,22 @@
 
     #projectModalBody .motion-step-number {
         font-size: 14px;
-        color: #999999;
+        color: #555555;
         font-weight: 400;
     }
 
     #projectModalBody .motion-step-title {
-        font-size: 20px;
-        font-weight: 500;
-        color: #FFFFFF;
-        letter-spacing: -0.01em;
+        font-size: 16px;
+        font-weight: 700;
+        color: #000000;
+        line-height: 19px;
     }
 
     #projectModalBody .motion-step-content {
         font-size: 16px;
-        line-height: 1.8;
-        color: #CCCCCC;
+        line-height: 19px;
+        font-weight: 600;
+        color: #555555;
         padding-left: 40px;
     }
 
@@ -95,14 +114,14 @@
     }
 
     #projectModalBody .motion-step-content strong {
-        color: #FFFFFF;
-        font-weight: 500;
+        color: #000000;
+        font-weight: 600;
     }
 
     #projectModalBody .motion-subsection-title {
         font-size: 16px;
-        font-weight: 500;
-        color: #FFFFFF;
+        font-weight: 700;
+        color: #000000;
         margin-top: 40px;
         margin-bottom: 24px;
     }
@@ -117,7 +136,7 @@
     #projectModalBody .principle-examples img {
         width: 100%;
         border-radius: 4px;
-        border: 1px solid #1a1a1a;
+        border: 1px solid #ddd;
     }
 
     #projectModalBody .token-grid {
@@ -132,8 +151,8 @@
         flex-direction: column;
         align-items: center;
         padding: 20px 16px;
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid #1a1a1a;
+        background: #f9f9f9;
+        border: 1px solid #ddd;
         border-radius: 4px;
     }
 
@@ -156,16 +175,16 @@
 
     #projectModalBody .token-name {
         font-size: 14px;
-        color: #CCCCCC;
+        color: #555555;
         text-align: center;
-        font-weight: 400;
+        font-weight: 600;
     }
 
     #projectModalBody .interactive-example {
         margin-top: 48px;
         padding: 32px;
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid #1a1a1a;
+        background: #f9f9f9;
+        border: 1px solid #ddd;
         border-radius: 4px;
     }
 
@@ -178,25 +197,25 @@
 
     #projectModalBody .example-title {
         font-size: 16px;
-        font-weight: 500;
-        color: #FFFFFF;
+        font-weight: 600;
+        color: #000000;
     }
 
     #projectModalBody .expand-btn {
         padding: 8px 16px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid #1a1a1a;
+        background: #fff;
+        border: 1px solid #000000;
         border-radius: 4px;
-        color: #CCCCCC;
-        font-family: 'Space Grotesk', sans-serif;
+        color: #000000;
         font-size: 14px;
+        font-weight: 600;
         cursor: pointer;
         transition: all 0.2s;
     }
 
     #projectModalBody .expand-btn:hover {
-        background: rgba(255, 255, 255, 0.08);
-        border-color: rgba(255, 255, 255, 0.2);
+        background: #f0f0f0;
+        border-color: #333;
     }
 
     #projectModalBody .iframe-container {
@@ -204,7 +223,7 @@
         height: 600px;
         border-radius: 4px;
         overflow: hidden;
-        border: 1px solid #1a1a1a;
+        border: 1px solid #ddd;
     }
 
     #projectModalBody .iframe-container iframe {
@@ -268,12 +287,12 @@
 </style>
 
 <div class="motion-system-content">
-    <!-- Tags -->
-    <div style="display: flex; gap: 12px; margin-bottom: 32px; flex-wrap: wrap;">
-        <span style="padding: 6px 14px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; font-size: 13px; color: #999;">Motion Design</span>
-        <span style="padding: 6px 14px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; font-size: 13px; color: #999;">Design System</span>
-        <span style="padding: 6px 14px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; font-size: 13px; color: #999;">Documentation</span>
-        <span style="padding: 6px 14px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; font-size: 13px; color: #999;">Platform</span>
+    <!-- Tags: black stroke, black text (Figma) -->
+    <div class="motion-tags">
+        <span>Motion Design</span>
+        <span>Design System</span>
+        <span>Documentation</span>
+        <span>Platform</span>
     </div>
 
     <!-- Intro -->
