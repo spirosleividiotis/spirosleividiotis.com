@@ -2928,11 +2928,6 @@ body.project-modal-open {
         right: 20px !important;
     }
     
-    /* Mobile: X scrolls with content (no sticky) */
-    .project-modal-close-sticky {
-        position: relative !important;
-    }
-    
     .project-modal-close {
         position: absolute !important;
         top: 12px !important;
