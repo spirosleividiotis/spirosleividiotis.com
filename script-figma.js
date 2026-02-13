@@ -411,8 +411,8 @@ function cycleProjectImage(card) {
     projectInfo.classList.add('hidden');
     projectImageIndices[projectName] = (projectImageIndices[projectName] + 1) % 3;
     
-    // Special handling for Portfolio Motion System (first project)
-    if (projectName === 'Portfolio Motion System') {
+    // Special handling for Motion Design System (first project)
+    if (projectName === 'Motion Design System') {
         if (projectImageIndices[projectName] === 1) {
             // Second image: gray shape in white
             workVisual.style.background = '#FFFFFF';
