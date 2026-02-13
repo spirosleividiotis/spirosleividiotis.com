@@ -138,51 +138,16 @@
 
         <!-- Tab bar (init from main script when this content loads) -->
         <div class="handoff-tabs" role="tablist">
-            <button type="button" class="handoff-tab active" data-tab="debit-card">Debit Card</button>
-            <button type="button" class="handoff-tab" data-tab="highlights">Highlights</button>
-            <button type="button" class="handoff-tab" data-tab="navigation">Navigation</button>
+            <button type="button" class="handoff-tab active" data-tab="highlights">Highlights</button>
             <button type="button" class="handoff-tab" data-tab="welcome-screen">Welcome Screen</button>
-            <button type="button" class="handoff-tab" data-tab="calculator">Calculator</button>
-            <button type="button" class="handoff-tab" data-tab="bulk-actions">Bulk Actions</button>
-            <button type="button" class="handoff-tab" data-tab="stepper">Stepper</button>
             <button type="button" class="handoff-tab" data-tab="usage-limits">Usage Limits</button>
             <button type="button" class="handoff-tab" data-tab="progressive-bar">Progressive Bar</button>
             <button type="button" class="handoff-tab" data-tab="button-arrow">Button Arrow</button>
             <button type="button" class="handoff-tab" data-tab="text-reveal">Text Reveal</button>
-            <button type="button" class="handoff-tab" data-tab="flow-transitions">Flow Transitions</button>
-        </div>
-
-        <!-- Panel: Debit Card -->
-        <div id="panel-debit-card" class="handoff-panel active" role="tabpanel">
-            <div class="case-wrapper">
-                <div class="case-header">
-                    <h3 class="case-title">Debit Card Microinteraction</h3>
-                    <p class="case-description">
-                        Loading state for card switching needs smooth transition. Card fade to 40% → spinner fade in/out → new card fade in + shine effect. Optimized for fast loading states to avoid glitchy appearance.
-                    </p>
-                </div>
-                <div class="specs-section">
-                    <details class="specs-toggle">
-                        <summary class="specs-toggle-summary">
-                            <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
-                            <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </summary>
-                        <div class="specs-toggle-content">
-                            <table class="specs-table">
-                                <tbody>
-                                    <tr><td>Duration</td><td>300ms</td></tr>
-                                    <tr><td>Easing</td><td>linear</td></tr>
-                                    <tr><td>Shine delay</td><td>150ms</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </details>
-                </div>
-            </div>
         </div>
 
         <!-- Panel: Highlights -->
-        <div id="panel-highlights" class="handoff-panel" role="tabpanel">
+        <div id="panel-highlights" class="handoff-panel active" role="tabpanel">
             <div class="case-wrapper">
                 <div class="case-header">
                     <h3 class="case-title">Highlights Animation</h3>
@@ -209,35 +174,6 @@
                                 <tbody>
                                     <tr><td>Title</td><td>400ms position + 150ms opacity</td></tr>
                                     <tr><td>Subtitle</td><td>400ms position + 150ms opacity with delays</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </details>
-                </div>
-            </div>
-        </div>
-
-        <!-- Panel: Navigation -->
-        <div id="panel-navigation" class="handoff-panel" role="tabpanel">
-            <div class="case-wrapper">
-                <div class="case-header">
-                    <h3 class="case-title">Collapsable Navigation</h3>
-                    <p class="case-description">
-                        Navigation expansion: position (500ms) + opacity fade + arrow rotation (300ms). Smooth expansion with clearer visual hierarchy. Hover effects with position and color changes.
-                    </p>
-                </div>
-                <div class="specs-section">
-                    <details class="specs-toggle">
-                        <summary class="specs-toggle-summary">
-                            <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
-                            <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </summary>
-                        <div class="specs-toggle-content">
-                            <table class="specs-table">
-                                <tbody>
-                                    <tr><td>Position</td><td>500ms cubic-bezier</td></tr>
-                                    <tr><td>Opacity</td><td>300ms linear, 100ms delay</td></tr>
-                                    <tr><td>Arrow</td><td>0→-180° rotation</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -276,42 +212,6 @@
                             </table>
                         </div>
                     </details>
-                </div>
-            </div>
-        </div>
-
-        <!-- Panel: Calculator -->
-        <div id="panel-calculator" class="handoff-panel" role="tabpanel">
-            <div class="case-wrapper">
-                <div class="case-header">
-                    <h3 class="case-title">Website Calculator Widget</h3>
-                    <p class="case-description">
-                        Interactive calculator interface with animated inputs and slider interactions for web.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Panel: Bulk Actions -->
-        <div id="panel-bulk-actions" class="handoff-panel" role="tabpanel">
-            <div class="case-wrapper">
-                <div class="case-header">
-                    <h3 class="case-title">Bulk Actions – Headline</h3>
-                    <p class="case-description">
-                        Bulk selection mode: header slide left/right + fade, tabs transition, body animation. V1: Slide + fade (300ms position, 200ms opacity), V2: Fade only (150ms). Headline always right → left.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Panel: Stepper -->
-        <div id="panel-stepper" class="handoff-panel" role="tabpanel">
-            <div class="case-wrapper">
-                <div class="case-header">
-                    <h3 class="case-title">Stepper</h3>
-                    <p class="case-description">
-                        Multi-step form navigation with animated step transitions.
-                    </p>
                 </div>
             </div>
         </div>
@@ -464,36 +364,6 @@
                                 <tbody>
                                     <tr><td>Text Position</td><td>300ms, translate Y</td></tr>
                                     <tr><td>Text Fade In</td><td>150ms, delay 150ms</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </details>
-                </div>
-            </div>
-        </div>
-
-        <!-- Panel: Flow Transitions (choreography: Start / Next / Previous / End-Dismiss) -->
-        <div id="panel-flow-transitions" class="handoff-panel" role="tabpanel">
-            <div class="case-wrapper">
-                <div class="case-header">
-                    <h3 class="case-title">Flow choreography</h3>
-                    <p class="case-description">
-                        Standard transition patterns for flows: how screens enter, step forward/back, and dismiss. Each pattern uses motion tokens (duration, alpha, easing) so implementation stays consistent across product.
-                    </p>
-                </div>
-                <div class="specs-section">
-                    <details class="specs-toggle">
-                        <summary class="specs-toggle-summary">
-                            <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
-                            <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </summary>
-                        <div class="specs-toggle-content">
-                            <table class="specs-table">
-                                <tbody>
-                                    <tr><td><strong>Start flow</strong></td><td>Bottom to top or Fade in — motion-duration-300</td></tr>
-                                    <tr><td><strong>Next step</strong></td><td>Right to left or Fade in — motion-duration-300</td></tr>
-                                    <tr><td><strong>Previous step</strong></td><td>Left to right or Fade in — motion-duration-200</td></tr>
-                                    <tr><td><strong>End/Dismiss flow</strong></td><td>Top to bottom or Fade out — motion-duration-200</td></tr>
                                 </tbody>
                             </table>
                         </div>
