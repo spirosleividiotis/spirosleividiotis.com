@@ -1402,31 +1402,34 @@ body.project-modal-open {
     padding: 34px 24px 100px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
+    text-align: left;
 }
 
 .project-modal-header {
-    margin-bottom: 0;
+    margin-bottom: 10px;
+    text-align: left;
 }
 
-/* Company name: grey semibold 16px */
+/* Company, then project name, then year/role (in content): 10px vertical, same padding */
 .project-modal-subtitle {
     font-family: var(--font-primary);
     font-weight: 600;
     font-size: 16px;
     line-height: 19px;
     color: #555555;
-    margin: 0 0 4px 0;
+    margin: 0 0 10px 0;
+    text-align: left;
 }
 
-/* Project name: black bold 20px */
 .project-modal-title {
     font-family: var(--font-primary);
     font-weight: 700;
     font-size: 20px;
     line-height: 118.44%;
     color: #000000;
-    margin: 0 0 4px 0;
+    margin: 0 0 10px 0;
+    text-align: left;
 }
 
 .project-modal-body {
@@ -1435,10 +1438,11 @@ body.project-modal-open {
     gap: 40px;
 }
 
-/* No white text on white card: force black as default, grey only where set */
+/* No white text on white card; all text align left */
 #projectModalBody,
 #projectModalBody .motion-system-content {
     color: #000000;
+    text-align: left;
 }
 
 /* Password Gate */

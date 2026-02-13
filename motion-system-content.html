@@ -9,7 +9,7 @@
     #projectModalBody .motion-tags {
         display: flex;
         gap: 12px;
-        margin-bottom: 32px;
+        margin-bottom: 10px;
         flex-wrap: wrap;
     }
 
@@ -28,36 +28,39 @@
         line-height: 19px;
         font-weight: 600;
         color: #555555;
-        margin-bottom: 32px;
+        margin-bottom: 10px;
+        text-align: left;
     }
 
     #projectModalBody .motion-meta {
         font-size: 16px;
         font-weight: 600;
         color: #555555;
-        margin-bottom: 60px;
-        padding-bottom: 60px;
-        border-bottom: 1px solid #000000;
+        margin-bottom: 10px;
+        padding: 0;
+        border: none;
+        text-align: left;
     }
 
     #projectModalBody .motion-section {
-        margin-bottom: 60px;
+        margin-bottom: 10px;
     }
 
     #projectModalBody .motion-section-label {
         font-size: 16px;
         font-weight: 400;
-        letter-spacing: 0;
         color: #555555;
-        margin-bottom: 16px;
+        margin-bottom: 10px;
+        text-align: left;
     }
 
     #projectModalBody .motion-section-title {
         font-size: 16px;
         font-weight: 700;
-        margin-bottom: 24px;
+        margin-bottom: 10px;
         line-height: 19px;
         color: #000000;
+        text-align: left;
     }
 
     #projectModalBody .motion-section-content {
@@ -65,11 +68,12 @@
         line-height: 19px;
         font-weight: 600;
         color: #555555;
-        margin-bottom: 24px;
+        margin-bottom: 10px;
+        text-align: left;
     }
 
     #projectModalBody .motion-section-content p {
-        margin-bottom: 16px;
+        margin-bottom: 10px;
     }
 
     #projectModalBody .motion-section-content strong {
@@ -78,20 +82,21 @@
     }
 
     #projectModalBody .motion-step {
-        margin-bottom: 60px;
+        margin-bottom: 10px;
     }
 
     #projectModalBody .motion-step-header {
         display: flex;
         align-items: baseline;
-        gap: 20px;
-        margin-bottom: 16px;
+        gap: 10px;
+        margin-bottom: 10px;
+        text-align: left;
     }
 
     #projectModalBody .motion-step-number {
-        font-size: 14px;
-        color: #555555;
-        font-weight: 400;
+        font-size: 16px;
+        font-weight: 700;
+        color: #000000;
     }
 
     #projectModalBody .motion-step-title {
@@ -106,11 +111,13 @@
         line-height: 19px;
         font-weight: 600;
         color: #555555;
-        padding-left: 40px;
+        padding-left: 0;
+        margin-bottom: 10px;
+        text-align: left;
     }
 
     #projectModalBody .motion-step-content p {
-        margin-bottom: 16px;
+        margin-bottom: 10px;
     }
 
     #projectModalBody .motion-step-content strong {
@@ -122,8 +129,9 @@
         font-size: 16px;
         font-weight: 700;
         color: #000000;
-        margin-top: 40px;
-        margin-bottom: 24px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: left;
     }
 
     #projectModalBody .principle-examples {
@@ -237,6 +245,9 @@
         #projectModalBody .motion-step-content {
             padding-left: 0;
         }
+        #projectModalBody .motion-system-content {
+            text-align: left;
+        }
 
         #projectModalBody .principle-examples {
             grid-template-columns: 1fr;
@@ -287,7 +298,10 @@
 </style>
 
 <div class="motion-system-content">
-    <!-- Tags: black stroke, black text (Figma) -->
+    <!-- Year/role: below company and project name, same padding -->
+    <div class="motion-meta">2025 Staff Motion Designer, Design System</div>
+
+    <!-- Tags -->
     <div class="motion-tags">
         <span>Motion Design</span>
         <span>Design System</span>
@@ -299,7 +313,6 @@
     <p class="motion-intro">
         Built a scalable motion language that bridges design and engineering—principles, patterns, tokens, documentation.
     </p>
-    <div class="motion-meta">2025 Staff Motion Designer, Design System</div>
 
     <!-- Problem -->
     <div class="motion-section">
