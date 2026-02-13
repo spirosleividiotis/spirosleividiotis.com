@@ -909,6 +909,7 @@ section {
     justify-content: center;
     background: #141414;
     overflow: hidden;
+    border-radius: 20px;
 }
 
 .work-visual::before {
