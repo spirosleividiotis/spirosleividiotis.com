@@ -1317,7 +1317,7 @@ body.project-modal-open {
 
 .project-modal-wrapper {
     width: 100%;
-    max-width: 1500px;
+    max-width: 1000px;
     max-height: 100%;
     background: #FFFFFF;
     border-radius: 20px;
@@ -1397,9 +1397,9 @@ body.project-modal-open {
 }
 
 .project-modal-content {
-    max-width: 1400px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 34px 16px 100px;
+    padding: 34px 24px 100px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -1433,6 +1433,12 @@ body.project-modal-open {
     display: flex;
     flex-direction: column;
     gap: 40px;
+}
+
+/* No white text on white card: force black as default, grey only where set */
+#projectModalBody,
+#projectModalBody .motion-system-content {
+    color: #000000;
 }
 
 /* Password Gate */
@@ -1570,7 +1576,7 @@ body.project-modal-open {
     border-radius: 50px;
 }
 
-/* Force Figma white-card typography on any loaded project content (overrides embedded HTML styles) */
+/* Force Figma white-card typography; no white text on white background */
 #projectModalBody .motion-section-title,
 #projectModalBody .motion-step-title,
 #projectModalBody .motion-subsection-title,
@@ -1588,6 +1594,16 @@ body.project-modal-open {
 }
 #projectModalBody .motion-section-content strong,
 #projectModalBody .motion-step-content strong {
+    color: #000000 !important;
+}
+#projectModalBody p,
+#projectModalBody div,
+#projectModalBody span {
+    color: inherit;
+}
+#projectModalBody [style*="color: white"],
+#projectModalBody [style*="color:#fff"],
+#projectModalBody [style*="color: #fff"] {
     color: #000000 !important;
 }
 
