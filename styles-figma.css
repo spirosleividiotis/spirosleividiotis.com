@@ -1399,18 +1399,18 @@ body.project-modal-open {
 .project-modal-content {
     max-width: 100%;
     margin: 0 auto;
-    padding: 34px 25px 100px;
+    padding: 34px 0 100px;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* 10px between header and body (title to year/role) */
+    gap: 8px; /* 8px between header and body (title to year/role) */
     text-align: left;
 }
 
-/* Header: no extra padding so it aligns with body (both use content 25px); tight space below title */
+/* Header: same left/right padding as body so they align */
 .project-modal-header {
     margin-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 25px;
+    padding-right: 25px;
     text-align: left;
 }
 
@@ -1439,8 +1439,8 @@ body.project-modal-open {
     display: flex;
     flex-direction: column;
     gap: 40px;
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 /* No extra top space so title–year/role gap stays 10px */
