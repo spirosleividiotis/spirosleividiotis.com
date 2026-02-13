@@ -1,7 +1,7 @@
 <!-- Motion System Content (loads inside project modal) – Figma white card: grey/black text -->
 <style>
     #projectModalBody .motion-system-content {
-        max-width: 1100px;
+        max-width: 100%;
         margin: 0 auto;
         padding: 0;
     }
@@ -32,18 +32,20 @@
         text-align: left;
     }
 
+    /* Description then "Context": 20px */
     #projectModalBody .motion-meta {
         font-size: 16px;
         font-weight: 600;
         color: #555555;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
         padding: 0;
         border: none;
         text-align: left;
     }
 
+    /* Body text and contexts: 20px between sections */
     #projectModalBody .motion-section {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
 
     #projectModalBody .motion-section-label {
@@ -68,7 +70,7 @@
         line-height: 19px;
         font-weight: 600;
         color: #555555;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
         text-align: left;
     }
 
@@ -81,29 +83,19 @@
         font-weight: 600;
     }
 
+    /* After a topic (e.g. 01 Motion Principles) after images: 20px */
     #projectModalBody .motion-step {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
 
-    #projectModalBody .motion-step-header {
-        display: flex;
-        align-items: baseline;
-        gap: 10px;
-        margin-bottom: 10px;
-        text-align: left;
-    }
-
-    #projectModalBody .motion-step-number {
-        font-size: 16px;
-        font-weight: 700;
-        color: #000000;
-    }
-
+    /* Step title: one line (e.g. "01 Motion Principles") so content below aligns left */
     #projectModalBody .motion-step-title {
         font-size: 16px;
         font-weight: 700;
         color: #000000;
         line-height: 19px;
+        margin-bottom: 10px;
+        text-align: left;
     }
 
     #projectModalBody .motion-step-content {
@@ -112,7 +104,7 @@
         font-weight: 600;
         color: #555555;
         padding-left: 0;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
         text-align: left;
     }
 
@@ -139,6 +131,7 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 16px;
         margin-top: 24px;
+        margin-bottom: 20px;
     }
 
     #projectModalBody .principle-examples img {
@@ -152,6 +145,7 @@
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 16px;
         margin-top: 24px;
+        margin-bottom: 20px;
     }
 
     #projectModalBody .token-card {
@@ -188,58 +182,6 @@
         font-weight: 600;
     }
 
-    #projectModalBody .interactive-example {
-        margin-top: 48px;
-        padding: 32px;
-        background: #f9f9f9;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-    }
-
-    #projectModalBody .example-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 24px;
-    }
-
-    #projectModalBody .example-title {
-        font-size: 16px;
-        font-weight: 600;
-        color: #000000;
-    }
-
-    #projectModalBody .expand-btn {
-        padding: 8px 16px;
-        background: #fff;
-        border: 1px solid #000000;
-        border-radius: 4px;
-        color: #000000;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s;
-    }
-
-    #projectModalBody .expand-btn:hover {
-        background: #f0f0f0;
-        border-color: #333;
-    }
-
-    #projectModalBody .iframe-container {
-        width: 100%;
-        height: 600px;
-        border-radius: 4px;
-        overflow: hidden;
-        border: 1px solid #ddd;
-    }
-
-    #projectModalBody .iframe-container iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-    }
-
     /* Mobile responsive */
     @media (max-width: 768px) {
         #projectModalBody .motion-step-content {
@@ -273,27 +215,6 @@
             margin-top: 32px;
         }
 
-        #projectModalBody .interactive-example {
-            padding: 20px;
-        }
-
-        #projectModalBody .example-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 12px;
-        }
-
-        #projectModalBody .example-title {
-            font-size: 14px;
-        }
-
-        #projectModalBody .expand-btn {
-            width: 100%;
-        }
-
-        #projectModalBody .iframe-container {
-            height: 400px;
-        }
     }
 </style>
 
@@ -338,10 +259,7 @@
         
         <!-- Step 1: Principles -->
         <div class="motion-step">
-            <div class="motion-step-header">
-                <span class="motion-step-number">01</span>
-                <h3 class="motion-step-title">Motion Principles</h3>
-            </div>
+            <h3 class="motion-step-title">01 Motion Principles</h3>
             <div class="motion-step-content">
                 <p>
                     We started by defining <strong>motion principles</strong>—the foundation for every 
@@ -363,10 +281,7 @@
 
         <!-- Step 2: Primitives -->
         <div class="motion-step">
-            <div class="motion-step-header">
-                <span class="motion-step-number">02</span>
-                <h3 class="motion-step-title">Primitives: Speaking the Same Language</h3>
-            </div>
+            <h3 class="motion-step-title">02 Primitives: Speaking the Same Language</h3>
             <div class="motion-step-content">
                 <p>
                     Next, we worked with engineers to define <strong>primitive tokens</strong>—the 
@@ -417,26 +332,12 @@
                         <div class="token-name">Spring</div>
                     </div>
                 </div>
-                
-                <!-- Interactive Example -->
-                <div class="interactive-example">
-                    <div class="example-header">
-                        <h4 class="example-title">Interactive Token Example: Duration</h4>
-                        <button class="expand-btn" onclick="toggleMotionExpand()">Click to expand →</button>
-                    </div>
-                    <div class="iframe-container" id="motionIframeContainer" style="display: none;">
-                        <iframe src="https://portfolio-motion-duration.netlify.app/" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                </div>
             </div>
         </div>
 
         <!-- Step 3: Semantics -->
         <div class="motion-step">
-            <div class="motion-step-header">
-                <span class="motion-step-number">03</span>
-                <h3 class="motion-step-title">Semantics: Scalable Behaviors</h3>
-            </div>
+            <h3 class="motion-step-title">03 Semantics: Scalable Behaviors</h3>
             <div class="motion-step-content">
                 <p>
                     Primitives alone weren't enough. Designers don't think in milliseconds and cubic-beziers—they 
@@ -534,4 +435,3 @@
     </div>
 </div>
 
-<!-- Note: toggleMotionExpand() function is now defined in script-figma.js -->

@@ -1317,7 +1317,7 @@ body.project-modal-open {
 
 .project-modal-wrapper {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1500px;
     max-height: 100%;
     background: #FFFFFF;
     border-radius: 20px;
@@ -1399,7 +1399,7 @@ body.project-modal-open {
 .project-modal-content {
     max-width: 100%;
     margin: 0 auto;
-    padding: 34px 24px 100px;
+    padding: 34px 25px 100px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -1411,7 +1411,7 @@ body.project-modal-open {
     text-align: left;
 }
 
-/* Company, then project name, then year/role (in content): 10px vertical, same padding */
+/* Company and role (subtitle / title): 10px between them */
 .project-modal-subtitle {
     font-family: var(--font-primary);
     font-weight: 600;
@@ -1520,9 +1520,9 @@ body.project-modal-open {
 }
 
 .project-body-text {
-    max-width: 1100px;
+    max-width: 100%;
     margin: 60px auto;
-    padding: 0 0;
+    padding: 0 25px;
     text-align: left;
 }
 
@@ -1587,6 +1587,13 @@ body.project-modal-open {
 #projectModalBody .example-title {
     color: #000000 !important;
 }
+#projectModalBody .interactive-example .example-header,
+#projectModalBody .expand-btn {
+    color: #000000 !important;
+}
+#projectModalBody .expand-btn:hover {
+    color: #555555 !important;
+}
 #projectModalBody .motion-section-content,
 #projectModalBody .motion-step-content,
 #projectModalBody .motion-intro,
@@ -1607,8 +1614,214 @@ body.project-modal-open {
 }
 #projectModalBody [style*="color: white"],
 #projectModalBody [style*="color:#fff"],
-#projectModalBody [style*="color: #fff"] {
+#projectModalBody [style*="color: #fff"],
+#projectModalBody [style*="color:#FFFFFF"],
+#projectModalBody [style*="color: #FFFFFF"] {
     color: #000000 !important;
+}
+
+/* Shared project style for all customUrl projects (same as motion-system-content) */
+#projectModalBody .tool-showcase,
+#projectModalBody .case-wrapper {
+    margin: 20px 0;
+    padding: 24px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+#projectModalBody .tool-showcase-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 8px;
+}
+#projectModalBody .tool-showcase-desc {
+    font-size: 14px;
+    color: #555555;
+    margin-bottom: 10px;
+}
+#projectModalBody .tool-placeholder,
+#projectModalBody .brand-placeholder {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    color: #555555;
+}
+#projectModalBody .lottie-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+#projectModalBody .lottie-card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 24px;
+}
+#projectModalBody .case-number,
+#projectModalBody .case-header {
+    color: #555555;
+    margin-bottom: 10px;
+}
+#projectModalBody .brand-placeholder-label {
+    color: #555555;
+}
+#projectModalBody .stat-number {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 8px;
+}
+#projectModalBody .stat-label {
+    font-size: 14px;
+    color: #555555;
+}
+#projectModalBody .lottie-name {
+    font-size: 13px;
+    color: #555555;
+    text-align: center;
+}
+#projectModalBody .brand-showcase {
+    margin: 20px 0;
+    padding: 24px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+#projectModalBody .deliverable-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 10px;
+}
+/* Spacing: description → Context 20px; body text and contexts 20px; after topic/images 20px */
+#projectModalBody .motion-meta { margin-bottom: 20px; }
+#projectModalBody .motion-section { margin-bottom: 20px; }
+#projectModalBody .motion-section-content { margin-bottom: 20px; }
+#projectModalBody .motion-step { margin-bottom: 20px; }
+#projectModalBody .motion-step-content { margin-bottom: 20px; }
+#projectModalBody .principle-examples,
+#projectModalBody .token-grid { margin-bottom: 20px; }
+#projectModalBody .motion-tldr-box {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+#projectModalBody .motion-tags {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+#projectModalBody .motion-tags span,
+#projectModalBody .motion-tag {
+    padding: 6px 14px;
+    background: transparent;
+    border: 1px solid #000;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #000;
+}
+#projectModalBody .case-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 10px;
+}
+#projectModalBody .case-description {
+    font-size: 16px;
+    font-weight: 600;
+    color: #555555;
+    margin-bottom: 10px;
+}
+#projectModalBody .case-preview {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 24px;
+    margin-bottom: 10px;
+}
+#projectModalBody .preview-label {
+    font-size: 14px;
+    color: #555555;
+    margin-bottom: 10px;
+}
+#projectModalBody .specs-toggle {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #f9f9f9;
+    margin: 10px 0;
+}
+#projectModalBody .specs-toggle:not([open]) .specs-toggle-content { display: none; }
+#projectModalBody .specs-toggle-summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    user-select: none;
+}
+#projectModalBody .specs-toggle-summary::-webkit-details-marker,
+#projectModalBody .specs-toggle-summary::marker { display: none; }
+#projectModalBody .specs-toggle-summary .specs-toggle-hint { color: #555555; }
+#projectModalBody .specs-toggle-summary .specs-toggle-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    stroke: #555;
+}
+#projectModalBody .specs-toggle[open] .specs-toggle-icon { transform: rotate(180deg); }
+#projectModalBody .specs-toggle-content {
+    padding: 0 20px 20px;
+    border-top: 1px solid #ddd;
+}
+#projectModalBody .specs-toggle-content .specs-table { margin-top: 20px; margin-bottom: 0; }
+#projectModalBody .specs-toggle-content .insight { margin-top: 24px; }
+#projectModalBody .specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+#projectModalBody .specs-table th,
+#projectModalBody .specs-table td {
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #555555;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+#projectModalBody .specs-table th { color: #000000; font-weight: 700; }
+#projectModalBody .specs-table tr:last-child td { border-bottom: none; }
+#projectModalBody .specs-table td:first-child { width: 140px; font-weight: 600; }
+#projectModalBody .insight {
+    background: #f5f5f5;
+    border-left: 3px solid #000;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 4px;
+}
+#projectModalBody .insight-label { color: #555555; }
+#projectModalBody .insight-text { color: #555555; }
+#projectModalBody .token,
+#projectModalBody .value {
+    background: #eee;
+    color: #000;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 13px;
 }
 
 /* Project grid: responsive masonry (column-count), even spacing horizontal + vertical */
