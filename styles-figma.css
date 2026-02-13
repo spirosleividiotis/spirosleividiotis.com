@@ -1406,11 +1406,11 @@ body.project-modal-open {
     text-align: left;
 }
 
-/* Header: align with body content (25px); 10px only between title and year/role */
+/* Header: no extra padding so it aligns with body (both use content 25px); tight space below title */
 .project-modal-header {
     margin-bottom: 0;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 0;
+    padding-right: 0;
     text-align: left;
 }
 
@@ -1439,7 +1439,13 @@ body.project-modal-open {
     display: flex;
     flex-direction: column;
     gap: 40px;
+    padding-left: 0;
+    padding-right: 0;
 }
+
+/* No extra top space so title–year/role gap stays 10px */
+#projectModalBody > *:first-child { margin-top: 0; }
+#projectModalBody .motion-system-content { margin-top: 0; }
 
 /* No white text on white card; all text align left */
 #projectModalBody,
