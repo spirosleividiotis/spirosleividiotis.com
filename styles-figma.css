@@ -1365,6 +1365,15 @@ section {
     opacity: 0.6;
 }
 
+/* Larger tap area on touch devices so elementFromPoint hits the button */
+@media (hover: none) and (pointer: coarse) {
+    .project-modal-close {
+        min-width: 72px;
+        min-height: 72px;
+        padding: 24px;
+    }
+}
+
 .project-modal-wrapper::-webkit-scrollbar {
     width: 6px;
 }

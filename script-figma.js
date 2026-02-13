@@ -1213,6 +1213,25 @@ document.addEventListener('click', function(e) {
     }
 });
 
+// Mobile: touch on X often never reaches the button (scroll layer steals it). Use capture + elementFromPoint.
+(function() {
+    var closeTouchStartedOnButton = false;
+    document.addEventListener('touchstart', function(e) {
+        if (e.touches.length !== 1) return;
+        var modal = document.getElementById('projectModal');
+        if (!modal || !modal.classList.contains('active')) return;
+        var x = e.touches[0].clientX, y = e.touches[0].clientY;
+        var el = document.elementFromPoint(x, y);
+        closeTouchStartedOnButton = !!(el && (el.id === 'projectModalClose' || el.closest('#projectModalClose')));
+    }, { passive: true, capture: true });
+    document.addEventListener('touchend', function(e) {
+        if (closeTouchStartedOnButton) {
+            closeTouchStartedOnButton = false;
+            closeProjectModal();
+            e.preventDefault();
+        }
+    }, { passive: false, capture: true });
+})();
 
 // ===================================
 // INITIALIZE ON LOAD
