@@ -1284,6 +1284,12 @@ section {
    PROJECT MODAL (Full-screen)
    =================================== */
 
+/* When project modal is open: only the modal scrolls, site is locked */
+body.project-modal-open {
+    overflow: hidden !important;
+    height: 100% !important;
+}
+
 .project-modal {
     position: fixed;
     top: 0;
@@ -1301,6 +1307,7 @@ section {
     cursor: default;
     padding: 100px 24px 50px;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .project-modal.active {
@@ -1316,11 +1323,13 @@ section {
     border-radius: 20px;
     overflow-y: auto;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
     position: relative;
     cursor: default;
     z-index: 10001;
     display: flex;
     flex-direction: column;
+    overscroll-behavior: contain;
 }
 /* Close button: sibling of wrapper (not inside it) so it’s always on top and clickable */
 .project-modal-wrapper::-webkit-scrollbar {
@@ -1363,7 +1372,7 @@ section {
     transition: opacity 0.2s ease;
     pointer-events: auto;
     -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
+    touch-action: none;
 }
 
 .project-modal-close svg {
@@ -1383,6 +1392,7 @@ section {
         padding: 15px;
         top: 16px;
         right: 16px;
+        touch-action: none;
     }
 }
 

@@ -996,10 +996,16 @@ function openProjectModal(card) {
         loadProjectContent(projectData, projectName);
     }
     
-    // Show modal
+    // Show modal: lock body scroll (desktop + mobile); on iOS position:fixed so background doesn't scroll
+    var scrollY = window.scrollY || window.pageYOffset;
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
     document.body.classList.add('project-modal-open');
+    document.body.style.position = 'fixed';
+    document.body.style.top = scrollY ? ('-' + scrollY + 'px') : '0';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    modal.dataset.scrollY = String(scrollY);
 }
 
 function fillBrandVideos(container, videos) {
@@ -1138,9 +1144,15 @@ function loadProjectContent(projectData, projectName) {
 function closeProjectModal() {
     const modal = document.getElementById('projectModal');
     if (modal) {
+        var scrollY = modal.dataset.scrollY ? parseInt(modal.dataset.scrollY, 10) : 0;
         modal.classList.remove('active');
         document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
         document.body.classList.remove('project-modal-open');
+        if (scrollY) window.scrollTo(0, scrollY);
     }
 }
 
@@ -1213,22 +1225,22 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Mobile: touch on X often never reaches the button (scroll layer steals it). Use capture + elementFromPoint.
+// Mobile (Safari/iOS): X close – use touchend release point (scroll layer often steals touchstart).
 (function() {
-    var closeTouchStartedOnButton = false;
-    document.addEventListener('touchstart', function(e) {
-        if (e.touches.length !== 1) return;
+    document.addEventListener('touchend', function(e) {
+        if (!e.changedTouches || e.changedTouches.length === 0) return;
         var modal = document.getElementById('projectModal');
         if (!modal || !modal.classList.contains('active')) return;
-        var x = e.touches[0].clientX, y = e.touches[0].clientY;
-        var el = document.elementFromPoint(x, y);
-        closeTouchStartedOnButton = !!(el && (el.id === 'projectModalClose' || el.closest('#projectModalClose')));
-    }, { passive: true, capture: true });
-    document.addEventListener('touchend', function(e) {
-        if (closeTouchStartedOnButton) {
-            closeTouchStartedOnButton = false;
+        var btn = document.getElementById('projectModalClose');
+        if (!btn) return;
+        var t = e.changedTouches[0];
+        var x = t.clientX, y = t.clientY;
+        var rect = btn.getBoundingClientRect();
+        var inside = (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom);
+        if (inside) {
             closeProjectModal();
             e.preventDefault();
+            e.stopPropagation();
         }
     }, { passive: false, capture: true });
 })();
