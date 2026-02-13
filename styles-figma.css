@@ -353,7 +353,9 @@ section {
     height: 44px;
     padding: 0;
     border: none;
-    background: none;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
     color: #000000;
     cursor: pointer;
     display: flex;
@@ -1292,13 +1294,13 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: #000000;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1);
     cursor: default;
+    padding: 100px 48px 50px;
+    box-sizing: border-box;
 }
 
 .project-modal.active {
@@ -1307,16 +1309,18 @@ section {
 }
 
 .project-modal-wrapper {
-    width: 95%;
-    height: 95%;
-    background: #000000;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 0;
+    width: 100%;
+    max-width: 1500px;
+    max-height: 100%;
+    background: #FFFFFF;
+    border-radius: 20px;
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
     cursor: default;
     z-index: 10001;
+    display: flex;
+    flex-direction: column;
 }
 /* Close button: sibling of wrapper (not inside it) so it’s always on top and clickable */
 .project-modal .project-modal-close {
@@ -1328,30 +1332,34 @@ section {
 }
 
 .project-modal-wrapper::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.06);
 }
 
 .project-modal-wrapper::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 3px;
 }
 
 .project-modal-wrapper::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(0, 0, 0, 0.3);
 }
 
 .project-modal-close {
     position: fixed;
     top: 30px;
     right: 50px;
-    background: transparent;
-    border: none;
-    color: #FFFFFF;
-    cursor: pointer;
-    z-index: 10003;
-    padding: 8px;
+    width: 44px;
+    height: 44px;
     min-width: 44px;
     min-height: 44px;
+    padding: 0;
+    background: #ffffff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+    color: #000000;
+    cursor: pointer;
+    z-index: 10003;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1361,60 +1369,55 @@ section {
     touch-action: manipulation;
 }
 
-.project-modal-close:hover {
-    opacity: 0.6;
+.project-modal-close svg {
+    stroke: #000000;
 }
 
-/* Larger tap area on touch devices so elementFromPoint hits the button */
+.project-modal-close:hover {
+    opacity: 0.85;
+}
+
 @media (hover: none) and (pointer: coarse) {
     .project-modal-close {
-        min-width: 72px;
-        min-height: 72px;
-        padding: 24px;
+        min-width: 54px;
+        min-height: 54px;
+        width: 54px;
+        height: 54px;
+        padding: 15px;
+        top: 20px;
+        right: 20px;
     }
-}
-
-.project-modal-wrapper::-webkit-scrollbar {
-    width: 6px;
-}
-
-.project-modal-wrapper::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.project-modal-wrapper::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 3px;
-}
-
-.project-modal-wrapper::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
 }
 
 .project-modal-content {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 80px 60px 100px;
+    padding: 34px 50px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .project-modal-header {
-    margin-bottom: 60px;
-}
-
-.project-modal-title {
-    font-size: 32px;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    color: #FFFFFF;
-    margin-bottom: 8px;
-    line-height: 1.2;
+    margin-bottom: 0;
 }
 
 .project-modal-subtitle {
+    font-family: var(--font-primary);
+    font-weight: 600;
     font-size: 16px;
-    font-weight: 400;
-    color: #999999;
-    letter-spacing: -0.01em;
+    line-height: 19px;
+    color: #777777;
+    margin: 0 0 4px 0;
+}
+
+.project-modal-title {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 118.44%;
+    color: #000000;
+    margin: 0 0 4px 0;
 }
 
 .project-modal-body {
@@ -1441,7 +1444,7 @@ section {
 
 .password-gate-label {
     font-size: 14px;
-    color: #999999;
+    color: #777777;
     margin-bottom: 16px;
     text-transform: lowercase;
 }
@@ -1449,10 +1452,10 @@ section {
 .password-gate-input {
     width: 100%;
     padding: 12px 16px;
-    background: #1a1a1a;
-    border: 1px solid #333;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
     border-radius: 4px;
-    color: #FFFFFF;
+    color: #000000;
     font-size: 16px;
     text-align: center;
     letter-spacing: 4px;
@@ -1461,12 +1464,12 @@ section {
 
 .password-gate-input:focus {
     outline: none;
-    border-color: #666;
+    border-color: #999;
 }
 
 .password-gate-error {
     font-size: 13px;
-    color: #999999;
+    color: #777777;
     line-height: 1.6;
     display: none;
 }
@@ -1476,7 +1479,7 @@ section {
 }
 
 .password-gate-error a {
-    color: #FFFFFF;
+    color: #000000;
     text-decoration: underline;
 }
 
@@ -1506,8 +1509,9 @@ section {
 
 .project-body-text p {
     font-size: 16px;
-    line-height: 1.8;
-    color: #CCCCCC;
+    line-height: 19px;
+    font-weight: 600;
+    color: #777777;
     margin: 0;
     text-align: left;
 }
@@ -1649,12 +1653,18 @@ section {
     position: absolute;
     top: 20px;
     right: 20px;
-    background: transparent;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0;
+    background: #ffffff;
     border: none;
-    color: #FFFFFF;
+    border-radius: 50%;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+    color: #000000;
     cursor: pointer;
     z-index: 10001 !important;
-    padding: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1662,8 +1672,12 @@ section {
     pointer-events: all !important;
 }
 
+.video-player .player-close svg {
+    stroke: #000000;
+}
+
 .video-player .player-close:hover {
-    opacity: 0.7;
+    opacity: 0.85;
 }
 
 .video-player .video-player-content {
@@ -2575,6 +2589,9 @@ section {
         min-width: 54px !important;
         min-height: 54px !important;
         padding: 15px !important;
+        background: #ffffff !important;
+        border-radius: 50% !important;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12) !important;
         z-index: 10005 !important;
         display: flex !important;
         align-items: center !important;
@@ -2582,31 +2599,39 @@ section {
     }
     
     .modal-close svg, .project-modal-close svg {
-        width: 20px !important;
-        height: 20px !important;
+        width: 24px !important;
+        height: 24px !important;
+        stroke: #000000 !important;
     }
     
-    /* Project modal - Full screen PDF-style */
+    /* Project modal - white card, 20px radius (Figma mobile) */
+    .project-modal {
+        padding: 20px 20px 24px !important;
+    }
+    
     .project-modal-wrapper {
         width: 100% !important;
-        height: 100vh !important;
-        max-height: none !important;
-        border-radius: 0 !important;
-        border: none !important;
+        max-height: calc(100vh - 44px) !important;
+        border-radius: 20px !important;
         overflow-y: auto !important;
         -webkit-overflow-scrolling: touch !important;
+        background: #FFFFFF !important;
+    }
+    
+    .project-modal-content {
+        padding: 34px 20px 80px !important;
     }
     
     .project-modal-header {
-        padding: 20px;
+        padding: 0 0 20px 0;
     }
     
     .project-modal-title {
         font-size: 20px !important;
     }
     
-    .project-modal-company {
-        font-size: 14px !important;
+    .project-modal-subtitle {
+        font-size: 16px !important;
     }
     
     .project-body-text {
@@ -2615,7 +2640,10 @@ section {
     }
     
     .project-body-text p {
-        font-size: 16px;
+        font-size: 14px !important;
+        line-height: 118.44% !important;
+        font-weight: 600 !important;
+        color: #777777 !important;
     }
     
     #projectHero img,
