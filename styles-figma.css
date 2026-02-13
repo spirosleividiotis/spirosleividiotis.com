@@ -1402,12 +1402,15 @@ body.project-modal-open {
     padding: 34px 25px 100px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 10px; /* 10px between header and body (title to year/role) */
     text-align: left;
 }
 
+/* Header: align with body content (25px); 10px only between title and year/role */
 .project-modal-header {
-    margin-bottom: 10px;
+    margin-bottom: 0;
+    padding-left: 25px;
+    padding-right: 25px;
     text-align: left;
 }
 
@@ -1428,7 +1431,7 @@ body.project-modal-open {
     font-size: 20px;
     line-height: 118.44%;
     color: #000000;
-    margin: 0 0 10px 0;
+    margin: 0 0 0 0;
     text-align: left;
 }
 
@@ -1695,6 +1698,7 @@ body.project-modal-open {
     margin-bottom: 10px;
 }
 /* Spacing: description → Context 20px; body text and contexts 20px; after topic/images 20px */
+#projectModalBody .motion-intro { margin-bottom: 20px; }
 #projectModalBody .motion-meta { margin-bottom: 20px; }
 #projectModalBody .motion-section { margin-bottom: 20px; }
 #projectModalBody .motion-section-content { margin-bottom: 20px; }
@@ -1702,6 +1706,7 @@ body.project-modal-open {
 #projectModalBody .motion-step-content { margin-bottom: 20px; }
 #projectModalBody .principle-examples,
 #projectModalBody .token-grid { margin-bottom: 20px; }
+#projectModalBody .principle-examples img { border: none; }
 #projectModalBody .motion-tldr-box {
     background: #f9f9f9;
     border: 1px solid #ddd;
