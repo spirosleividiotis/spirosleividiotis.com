@@ -1,299 +1,27 @@
-<!-- Project 4: Motion Handoff & Implementation (loads inside project modal) -->
+<!-- Project 4: Motion Handoff & Implementation – same project style (styles-figma.css) -->
 <style>
-    /* Reuse Motion System styles */
-    #projectModalBody .motion-system-content {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 0;
-    }
-
-    #projectModalBody .motion-intro {
-        font-size: 16px;
-        line-height: 1.8;
-        color: #CCCCCC;
-        margin-bottom: 32px;
-    }
-
-    #projectModalBody .motion-meta {
-        font-size: 14px;
-        color: #999999;
-        margin-bottom: 60px;
-        padding-bottom: 60px;
-        border-bottom: 1px solid #1a1a1a;
-    }
-
-    #projectModalBody .motion-section {
-        margin-bottom: 60px;
-    }
-
-    #projectModalBody .motion-section-label {
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: #999999;
-        margin-bottom: 16px;
-    }
-
-    #projectModalBody .motion-section-title {
-        font-size: 24px;
-        font-weight: 500;
-        margin-bottom: 24px;
-        line-height: 1.3;
-        letter-spacing: -0.01em;
-        color: #FFFFFF;
-    }
-
-    #projectModalBody .motion-section-content {
-        font-size: 16px;
-        line-height: 1.8;
-        color: #CCCCCC;
-        margin-bottom: 24px;
-    }
-
-    #projectModalBody .motion-section-content p {
-        margin-bottom: 16px;
-    }
-
-    #projectModalBody .motion-section-content strong {
-        color: #FFFFFF;
-        font-weight: 500;
-    }
-
-    #projectModalBody .case-wrapper {
-        margin-bottom: 80px;
-        padding: 40px;
-        background: rgba(255, 255, 255, 0.01);
-        border: 1px solid #1a1a1a;
-        border-radius: 8px;
-    }
-
-    #projectModalBody .case-header {
-        margin-bottom: 32px;
-    }
-
-    #projectModalBody .case-number {
-        font-size: 14px;
-        color: #999;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: 12px;
-    }
-
-    #projectModalBody .case-title {
-        font-size: 28px;
-        font-weight: 500;
-        color: #FFFFFF;
-        margin-bottom: 16px;
-        line-height: 1.2;
-    }
-
-    #projectModalBody .case-description {
-        font-size: 16px;
-        line-height: 1.7;
-        color: #CCCCCC;
-        margin-bottom: 32px;
-    }
-
-    #projectModalBody .case-preview {
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid #2a2a2a;
-        border-radius: 4px;
-        padding: 32px;
-        margin-bottom: 32px;
-    }
-
-    #projectModalBody .preview-label {
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: #757575;
-        margin-bottom: 16px;
-    }
-
     #projectModalBody .case-preview iframe,
     #projectModalBody .case-preview video {
         width: 100%;
         border-radius: 4px;
         margin-top: 8px;
     }
-
-    #projectModalBody .specs-section {
-        margin-top: 40px;
-    }
-
-    /* Toggle: Technical Specs hidden by default, click arrow to expand */
-    #projectModalBody .specs-toggle {
-        border: 1px solid #2a2a2a;
-        border-radius: 6px;
-        overflow: hidden;
-        background: rgba(255, 255, 255, 0.02);
-    }
-    #projectModalBody .specs-toggle:not([open]) .specs-toggle-content {
-        display: none;
-    }
-    #projectModalBody .specs-toggle-summary {
-        list-style: none;
-        cursor: pointer;
-        padding: 14px 20px;
-        font-size: 16px;
-        font-weight: 500;
-        color: #FFFFFF;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        user-select: none;
-        transition: background 0.2s ease;
-    }
-    #projectModalBody .specs-toggle-summary::-webkit-details-marker,
-    #projectModalBody .specs-toggle-summary::marker {
-        display: none;
-    }
-    #projectModalBody .specs-toggle-summary:hover {
-        background: rgba(255, 255, 255, 0.06);
-    }
-    #projectModalBody .specs-toggle-summary .specs-toggle-hint {
-        font-size: 12px;
-        font-weight: 400;
-        color: #757575;
-    }
-    #projectModalBody .specs-toggle-summary .specs-toggle-icon {
-        flex-shrink: 0;
-        width: 20px;
-        height: 20px;
-        stroke: #999;
-        transition: transform 0.2s ease;
-    }
-    #projectModalBody .specs-toggle[open] .specs-toggle-icon {
-        transform: rotate(180deg);
-    }
-    #projectModalBody .specs-toggle-content {
-        padding: 0 20px 20px;
-        border-top: 1px solid #1a1a1a;
-    }
-    #projectModalBody .specs-toggle-content .specs-table {
-        margin-top: 20px;
-        margin-bottom: 0;
-    }
-    #projectModalBody .specs-toggle-content .insight {
-        margin-top: 24px;
-    }
-
-    #projectModalBody .specs-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 24px 0;
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 4px;
-        overflow: hidden;
-    }
-
-    #projectModalBody .specs-table thead {
-        background: rgba(255, 255, 255, 0.05);
-    }
-
-    #projectModalBody .specs-table th {
-        padding: 16px;
-        text-align: left;
-        font-size: 13px;
-        font-weight: 500;
-        color: #FFFFFF;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        border-bottom: 1px solid #2a2a2a;
-    }
-
-    #projectModalBody .specs-table td {
-        padding: 20px 16px;
-        font-size: 14px;
-        line-height: 1.8;
-        color: #CCCCCC;
-        border-bottom: 1px solid #1a1a1a;
-        vertical-align: top;
-    }
-
-    #projectModalBody .specs-table tr:last-child td {
-        border-bottom: none;
-    }
-
-    #projectModalBody .specs-table td:first-child {
-        color: #999;
-        font-weight: 500;
-        width: 140px;
-    }
-
-    #projectModalBody .token {
-        background: rgba(0, 150, 136, 0.15);
-        color: #4DB6AC;
-        padding: 3px 8px;
-        border-radius: 3px;
-        font-family: 'Monaco', 'Menlo', monospace;
-        font-size: 13px;
-        white-space: nowrap;
-    }
-
-    #projectModalBody .value {
-        background: rgba(255, 255, 255, 0.05);
-        color: #E0E0E0;
-        padding: 3px 8px;
-        border-radius: 3px;
-        font-family: 'Monaco', 'Menlo', monospace;
-        font-size: 13px;
-    }
-
-    #projectModalBody .insight {
-        background: rgba(255, 193, 7, 0.08);
-        border-left: 3px solid rgba(255, 193, 7, 0.4);
-        padding: 20px;
-        margin: 24px 0;
-        border-radius: 4px;
-    }
-
-    #projectModalBody .insight-label {
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: #FFC107;
-        margin-bottom: 8px;
-        font-weight: 500;
-    }
-
-    #projectModalBody .insight-text {
-        font-size: 15px;
-        line-height: 1.7;
-        color: #E0E0E0;
-    }
-
-    /* Mobile responsive */
     @media (max-width: 768px) {
-        #projectModalBody .case-wrapper {
-            padding: 24px;
-        }
-
-        #projectModalBody .case-title {
-            font-size: 22px;
-        }
-
-        #projectModalBody .specs-table {
-            display: block;
-            overflow-x: auto;
-        }
-
-        #projectModalBody .specs-table td:first-child {
-            width: auto;
-            min-width: 120px;
-        }
+        #projectModalBody .case-wrapper { padding: 24px; }
+        #projectModalBody .case-title { font-size: 18px; }
+        #projectModalBody .specs-table { display: block; overflow-x: auto; }
+        #projectModalBody .specs-table td:first-child { width: auto; min-width: 120px; }
     }
 </style>
 
 <div class="motion-system-content">
     <!-- Tags -->
-    <div style="display: flex; gap: 12px; margin-bottom: 32px; flex-wrap: wrap;">
-        <span style="padding: 6px 14px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; font-size: 13px; color: #999;">Motion Design</span>
-        <span style="padding: 6px 14px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; font-size: 13px; color: #999;">Rive</span>
-        <span style="padding: 6px 14px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; font-size: 13px; color: #999;">Product Thinking</span>
-        <span style="padding: 6px 14px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; font-size: 13px; color: #999;">Implementation</span>
-        <span style="padding: 6px 14px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; font-size: 13px; color: #999;">QA</span>
+    <div class="motion-tags">
+        <span class="motion-tag">Motion Design</span>
+        <span class="motion-tag">Rive</span>
+        <span class="motion-tag">Product Thinking</span>
+        <span class="motion-tag">Implementation</span>
+        <span class="motion-tag">QA</span>
     </div>
 
     <!-- Intro -->
@@ -303,13 +31,11 @@
     <div class="motion-meta">2021–2025 Portfolio Motion Design & Implementation</div>
 
     <!-- TLDR -->
-    <div class="motion-section" style="background: rgba(255, 255, 255, 0.02); border: 1px solid #1a1a1a; border-radius: 4px; padding: 32px; margin-bottom: 48px;">
+    <div class="motion-section motion-tldr-box">
         <div class="motion-section-label">TLDR</div>
-        <h2 class="motion-section-title" style="margin-bottom: 20px;">Rive prototypes → production specs. Challenging UX thinking.</h2>
-        <div class="motion-section-content" style="margin-bottom: 0;">
-            <p style="margin-bottom: 0;">
-                Real product specs with custom timing curves, stagger patterns, and choreographed sequences. Implementation-ready, production-tested.
-            </p>
+        <h2 class="motion-section-title">Rive prototypes → production specs. Challenging UX thinking.</h2>
+        <div class="motion-section-content">
+            <p>Real product specs with custom timing curves, stagger patterns, and choreographed sequences. Implementation-ready, production-tested.</p>
         </div>
     </div>
 
@@ -321,8 +47,7 @@
         <!-- Case 1: Multi-Step Progressive Bar -->
         <div class="case-wrapper">
             <div class="case-header">
-                <div class="case-number">Case 01</div>
-                <h3 class="case-title">Multi-Step Progressive Bar</h3>
+                <h3 class="case-title">Case 01 Multi-Step Progressive Bar</h3>
                 <p class="case-description">
                     Progress indicator for multi-step flows. Steps overlap by 250ms for seamless progression. Custom cubic-beziers at three keyframes: quick start, smooth mid-transition, confident finish.
                 </p>
@@ -403,8 +128,7 @@
         <!-- Case 2: Tertiary Button Arrow -->
         <div class="case-wrapper">
             <div class="case-header">
-                <div class="case-number">Case 02</div>
-                <h3 class="case-title">Tertiary Button Arrow</h3>
+                <h3 class="case-title">Case 02 Tertiary Button Arrow</h3>
                 <p class="case-description">
                     Text link with animated arrow. On hover: arrow slides out and back in within a mask. On click: scales down/up for tactile feedback.
                 </p>
@@ -476,8 +200,7 @@
         <!-- Case 3: Real-time Usage Limits -->
         <div class="case-wrapper">
             <div class="case-header">
-                <div class="case-number">Case 03</div>
-                <h3 class="case-title">Real-time Usage Limits Upsell</h3>
+                <h3 class="case-title">Case 03 Real-time Usage Limits Upsell</h3>
                 <p class="case-description">
                     Upsell card that appears after 4 seconds on transactions screen. Card slides up with fade-in while transactions table pushes down—creating spatial awareness that content is being inserted, not overlaid.
                 </p>
@@ -539,8 +262,7 @@
         <!-- Case 4: Personalized Account Setup -->
         <div class="case-wrapper">
             <div class="case-header">
-                <div class="case-number">Case 04</div>
-                <h3 class="case-title">Animated Text Swipe Reveal</h3>
+                <h3 class="case-title">Case 04 Animated Text Swipe Reveal</h3>
                 <p class="case-description">
                     Continuous text reveal behind a mask for personalized account setup. Each text sequence displays for 2.5s minimum. Creates loading progression while maintaining readability.
                 </p>

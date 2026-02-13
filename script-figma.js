@@ -1156,32 +1156,6 @@ function closeProjectModal() {
     }
 }
 
-// Toggle Motion System interactive examples (globally accessible)
-function toggleMotionExpand(idx = 0) {
-    // Try with and without index suffix
-    let containerId = 'motionIframeContainer' + idx;
-    let container = document.getElementById(containerId);
-    
-    // If not found with index, try without
-    if (!container) {
-        containerId = 'motionIframeContainer';
-        container = document.getElementById(containerId);
-    }
-    
-    const btns = document.querySelectorAll('.expand-btn');
-    const btn = btns[idx] || document.querySelector('.expand-btn');
-    
-    if (container && btn) {
-        if (container.style.display === 'none' || container.style.display === '') {
-            container.style.display = 'block';
-            btn.textContent = 'Click to collapse ↑';
-        } else {
-            container.style.display = 'none';
-            btn.textContent = 'Click to expand →';
-        }
-    }
-}
-
 // Project modal close: one button (sibling of wrapper, like About me close)
 const projectModalClose = document.getElementById('projectModalClose');
 if (projectModalClose) {

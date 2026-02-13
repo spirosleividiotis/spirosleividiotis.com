@@ -1567,13 +1567,13 @@ body.project-modal-open {
     margin-top: 0;
 }
 
-/* Tags in project modal: black stroke */
+/* Tags in project modal: visible on white – light grey fill, dark border, black text */
 .project-body-text .tag,
 .project-modal-body .tag,
 #projectModalBody .tag {
-    border: 1px solid #000000;
+    border: 1px solid #333333;
     color: #000000;
-    background: transparent;
+    background: #f0f0f0;
     font-weight: 600;
     font-size: 14px;
     padding: 4px 12px;
@@ -1718,12 +1718,12 @@ body.project-modal-open {
 #projectModalBody .motion-tags span,
 #projectModalBody .motion-tag {
     padding: 6px 14px;
-    background: transparent;
-    border: 1px solid #000;
+    background: #f0f0f0;
+    border: 1px solid #333333;
     border-radius: 20px;
     font-size: 13px;
     font-weight: 600;
-    color: #000;
+    color: #000000;
 }
 #projectModalBody .case-title {
     font-size: 16px;
