@@ -114,7 +114,7 @@
       "password": "spiros2026",
       "customUrl": "project-6-flink-brand.html",
       "bodyText": "",
-      "media": { "hero": "", "grid": [], "videos": ["", "", ""] },
+      "media": { "hero": "", "grid": [], "videos": ["flink-logo.mp4", "flink-endscreen.mp4", "flink-splashscreen.mp4"] },
       "cardPreview": "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769887959/portfolio/cover-flink_nlzzjj.mp4"
     },
     {
