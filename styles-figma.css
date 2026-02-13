@@ -1308,7 +1308,7 @@ body.project-modal-open {
     pointer-events: none;
     transition: opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1);
     cursor: default;
-    padding: 100px 16px 50px;
+    padding: 100px 0 50px;
     box-sizing: border-box;
     overflow: hidden;
 }
@@ -1399,21 +1399,21 @@ body.project-modal-open {
     }
 }
 
+/* Single source of horizontal padding: 25px on content only (no double padding) */
 .project-modal-content {
     max-width: 100%;
     margin: 0 auto;
-    padding: 34px 0 100px;
+    padding: 34px 25px 100px;
     display: flex;
     flex-direction: column;
     gap: 8px; /* 8px between header and body (title to year/role) */
     text-align: left;
 }
 
-/* Header: same left/right padding as body so they align */
 .project-modal-header {
     margin-bottom: 0;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 0;
+    padding-right: 0;
     text-align: left;
 }
 
@@ -1442,8 +1442,8 @@ body.project-modal-open {
     display: flex;
     flex-direction: column;
     gap: 40px;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 /* No extra top space so title–year/role gap stays 10px */
@@ -2932,9 +2932,9 @@ body.project-modal-open {
         stroke: #000000 !important;
     }
     
-    /* Project modal - white card, 20px radius (Figma mobile) */
+    /* Project modal - single horizontal padding (content 20px) */
     .project-modal {
-        padding: 20px 16px 24px !important;
+        padding: 20px 0 24px !important;
     }
     
     .project-modal-wrapper {
@@ -2951,7 +2951,7 @@ body.project-modal-open {
     }
     
     .project-modal-header {
-        padding: 0 0 20px 0;
+        padding: 0 !important;
     }
     
     .project-modal-title {
