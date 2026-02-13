@@ -1353,7 +1353,21 @@ body.project-modal-open {
     background: rgba(0, 0, 0, 0.3);
 }
 
-/* Close button: inside white card, fixed top-right of card, always clickable */
+/* Desktop: sticky wrapper so X stays at top-right when modal content scrolls */
+.project-modal-close-sticky {
+    position: sticky;
+    top: 0;
+    height: 0;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 10002;
+    flex-shrink: 0;
+}
+.project-modal-close-sticky .project-modal-close {
+    pointer-events: auto;
+}
+
+/* Close button: inside white card, top-right; absolute so sticky wrapper can pin it on desktop */
 .project-modal-close {
     position: absolute;
     top: 16px;
@@ -2912,6 +2926,11 @@ body.project-modal-open {
         position: fixed !important;
         top: 20px !important;
         right: 20px !important;
+    }
+    
+    /* Mobile: X scrolls with content (no sticky) */
+    .project-modal-close-sticky {
+        position: relative !important;
     }
     
     .project-modal-close {
