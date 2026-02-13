@@ -1349,7 +1349,7 @@ body.project-modal-open {
     background: rgba(0, 0, 0, 0.3);
 }
 
-/* Close button: fixed so it stays visible when modal content scrolls */
+/* Close button: fixed so it stays visible when modal content scrolls; visible on white card */
 .project-modal-close {
     position: fixed;
     top: 20px;
@@ -1360,9 +1360,9 @@ body.project-modal-open {
     min-height: 44px;
     padding: 0;
     background: #ffffff;
-    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 50%;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
     color: #000000;
     cursor: pointer;
     z-index: 10002;
@@ -2917,8 +2917,9 @@ body.project-modal-open {
         min-height: 54px !important;
         padding: 15px !important;
         background: #ffffff !important;
+        border: 1px solid rgba(0, 0, 0, 0.15) !important;
         border-radius: 50% !important;
-        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12) !important;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15) !important;
         z-index: 10002 !important;
     }
     
