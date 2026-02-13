@@ -194,6 +194,7 @@
       { "name": "Dribbble", "url": "https://dribbble.com/spirosleividiotis" }
     ],
     "logo": "footer-logo.png",
+    "cvFile": "cv.pdf",
     "year": "2026"
   }
 }

@@ -273,6 +273,10 @@
                         <label>Year</label>
                         <input type="text" id="footerYear" placeholder="2026">
                     </div>
+                    <div class="form-group">
+                        <label>CV (filename or URL)</label>
+                        <input type="text" id="footerCvFile" placeholder="cv.pdf or URL">
+                    </div>
                 </div>
             </div>
 
@@ -363,6 +367,7 @@
             document.getElementById('footerLogo').value = contentData.footer.logo || '';
             showFilePreview('footerLogo', contentData.footer.logo, 'image');
             document.getElementById('footerYear').value = contentData.footer.year || '';
+            document.getElementById('footerCvFile').value = contentData.footer.cvFile || '';
         }
 
         // --- Hero tags ---
@@ -661,6 +666,7 @@
             contentData.footer.email = document.getElementById('footerEmail').value;
             contentData.footer.logo = document.getElementById('footerLogo').value;
             contentData.footer.year = document.getElementById('footerYear').value;
+            contentData.footer.cvFile = document.getElementById('footerCvFile').value.trim() || '';
             contentData.projects.forEach(p => {
                 if (document.getElementById('proj-name-' + p.id)) {
                     p.name = document.getElementById('proj-name-' + p.id).value;

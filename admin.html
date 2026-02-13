@@ -651,6 +651,10 @@
                 <input type="text" id="footerYear" value="${escapeHtml(f.year || '')}">
             </div>
             <div class="form-group">
+                <label>CV (filename or URL)</label>
+                <input type="text" id="footerCvFile" value="${escapeHtml(f.cvFile || '')}" placeholder="cv.pdf or URL">
+            </div>
+            <div class="form-group">
                 <label>Social links</label>
                 <div id="footerSocialList"></div>
                 <button type="button" class="add-btn" id="footerSocialAdd">+ Add link</button>
@@ -683,6 +687,7 @@
         document.getElementById('footerEmail').addEventListener('input', e => { content.footer.email = e.target.value; });
         document.getElementById('footerLogo').addEventListener('input', e => { content.footer.logo = e.target.value; });
         document.getElementById('footerYear').addEventListener('input', e => { content.footer.year = e.target.value; });
+        document.getElementById('footerCvFile').addEventListener('input', e => { content.footer.cvFile = e.target.value; });
         document.getElementById('footerSocialAdd').addEventListener('click', () => {
             content.footer.social = content.footer.social || [];
             content.footer.social.push({ name: '', url: '' });
