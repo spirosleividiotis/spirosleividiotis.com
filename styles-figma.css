@@ -1349,9 +1349,9 @@ body.project-modal-open {
     background: rgba(0, 0, 0, 0.3);
 }
 
-/* Close button: inside project card, top right, white circle + black X */
+/* Close button: fixed so it stays visible when modal content scrolls */
 .project-modal-close {
-    position: absolute;
+    position: fixed;
     top: 20px;
     right: 20px;
     width: 44px;
@@ -2902,7 +2902,7 @@ body.project-modal-open {
     }
     
     .project-modal-close {
-        position: absolute !important;
+        position: fixed !important;
         top: 16px !important;
         right: 16px !important;
         min-width: 54px !important;
