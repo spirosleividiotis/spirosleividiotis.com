@@ -1,21 +1,116 @@
 <!-- Project 4: Product Motion - Handoff and Implementation – same project style (styles-figma.css) -->
 <style>
+    /* Tabs: horizontal bar, compact panels */
+    #projectModalBody .handoff-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 24px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #ddd;
+    }
+    #projectModalBody .handoff-tab {
+        padding: 8px 14px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #555;
+        background: #f0f0f0;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+    }
+    #projectModalBody .handoff-tab:hover {
+        background: #e5e5e5;
+        color: #000;
+    }
+    #projectModalBody .handoff-tab.active {
+        background: #000;
+        color: #fff;
+        border-color: #000;
+    }
+    #projectModalBody .handoff-panel {
+        display: none;
+    }
+    #projectModalBody .handoff-panel.active {
+        display: block;
+    }
+    /* Smaller preview area */
+    #projectModalBody .case-preview {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 16px;
+        margin-bottom: 10px;
+    }
     #projectModalBody .case-preview iframe,
     #projectModalBody .case-preview video {
         width: 100%;
+        max-height: 280px;
         border-radius: 4px;
         margin-top: 8px;
+    }
+    #projectModalBody .case-preview img {
+        max-height: 280px;
+        width: auto;
+        max-width: 100%;
+        border-radius: 4px;
+        margin-top: 8px;
+    }
+    /* Mobile device frame: phone silhouette so context is clear */
+    #projectModalBody .device-frame {
+        display: inline-block;
+        position: relative;
+        margin-top: 8px;
+    }
+    #projectModalBody .device-frame--mobile {
+        max-width: 280px;
+        padding: 12px;
+        background: #1a1a1a;
+        border-radius: 28px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    #projectModalBody .device-frame--mobile::before {
+        content: 'Mobile';
+        display: block;
+        font-size: 11px;
+        font-weight: 600;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 8px;
+    }
+    #projectModalBody .device-frame--mobile .device-screen {
+        aspect-ratio: 9 / 19.5;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #000;
+    }
+    #projectModalBody .device-frame--mobile .device-screen iframe,
+    #projectModalBody .device-frame--mobile .device-screen video,
+    #projectModalBody .device-frame--mobile .device-screen img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    #projectModalBody .case-preview-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        align-items: flex-start;
     }
     @media (max-width: 768px) {
         #projectModalBody .case-wrapper { padding: 24px; }
         #projectModalBody .case-title { font-size: 18px; }
         #projectModalBody .specs-table { display: block; overflow-x: auto; }
         #projectModalBody .specs-table td:first-child { width: auto; min-width: 120px; }
+        #projectModalBody .handoff-tabs { gap: 4px; }
+        #projectModalBody .handoff-tab { padding: 6px 10px; font-size: 12px; }
     }
 </style>
 
 <div class="motion-system-content">
-    <!-- Tags -->
     <div class="motion-tags">
         <span class="motion-tag">Motion Design</span>
         <span class="motion-tag">Rive</span>
@@ -24,13 +119,11 @@
         <span class="motion-tag">QA</span>
     </div>
 
-    <!-- Intro -->
     <p class="motion-intro">
         Motion specs bridge design intent and user experience. I prototype in Rive, apply system tokens, create detailed specs, and QA on real devices. Each spec challenges: <strong>why this timing? why this easing? what's the user feeling?</strong>
     </p>
     <div class="motion-meta">2022 - 2026 Staff Motion Designer, Design System</div>
 
-    <!-- TLDR -->
     <div class="motion-section motion-tldr-box">
         <div class="motion-section-label">TLDR</div>
         <h2 class="motion-section-title">Rive prototypes → production specs. Challenging UX thinking.</h2>
@@ -39,290 +132,401 @@
         </div>
     </div>
 
-    <!-- Case Studies -->
     <div class="motion-section">
         <div class="motion-section-label">Selected Cases</div>
         <h2 class="motion-section-title">Product Animation Specs</h2>
 
-        <!-- Case 1: Multi-Step Progressive Bar -->
-        <div class="case-wrapper">
-            <div class="case-header">
-                <h3 class="case-title">Case 01 Multi-Step Progressive Bar</h3>
-                <p class="case-description">
-                    Progress indicator for multi-step flows. Steps overlap by 250ms for seamless progression. Custom cubic-beziers at three keyframes: quick start, smooth mid-transition, confident finish.
-                </p>
-            </div>
+        <!-- Tab bar (init from main script when this content loads) -->
+        <div class="handoff-tabs" role="tablist">
+            <button type="button" class="handoff-tab active" data-tab="debit-card">Debit Card</button>
+            <button type="button" class="handoff-tab" data-tab="highlights">Highlights</button>
+            <button type="button" class="handoff-tab" data-tab="navigation">Navigation</button>
+            <button type="button" class="handoff-tab" data-tab="welcome-screen">Welcome Screen</button>
+            <button type="button" class="handoff-tab" data-tab="calculator">Calculator</button>
+            <button type="button" class="handoff-tab" data-tab="bulk-actions">Bulk Actions</button>
+            <button type="button" class="handoff-tab" data-tab="stepper">Stepper</button>
+            <button type="button" class="handoff-tab" data-tab="usage-limits">Usage Limits</button>
+            <button type="button" class="handoff-tab" data-tab="progressive-bar">Progressive Bar</button>
+            <button type="button" class="handoff-tab" data-tab="button-arrow">Button Arrow</button>
+            <button type="button" class="handoff-tab" data-tab="text-reveal">Text Reveal</button>
+            <button type="button" class="handoff-tab" data-tab="flow-transitions">Flow Transitions</button>
+        </div>
 
-            <div class="case-preview">
-                <div class="preview-label">Interactive Preview</div>
-                <iframe src="https://rive.app/s/TO6xVZ1mg0yrAvC7jW5AOQ/embed?mode=preview&artboard=Desktop" frameborder="0" allowfullscreen style="height: 400px;"></iframe>
-            </div>
-
-            <div class="insight">
-                <div class="insight-label">UX Challenge</div>
-                <div class="insight-text">
-                    <strong>Why overlap steps?</strong> Users perceive discrete jumps as loading breaks. Starting step 2 before step 1 finishes makes progression feel continuous—the system is always working, never waiting.
+        <!-- Panel: Debit Card -->
+        <div id="panel-debit-card" class="handoff-panel active" role="tabpanel">
+            <div class="case-wrapper">
+                <div class="case-header">
+                    <h3 class="case-title">Debit Card Microinteraction</h3>
+                    <p class="case-description">
+                        Loading state for card switching needs smooth transition. Card fade to 40% → spinner fade in/out → new card fade in + shine effect. Optimized for fast loading states to avoid glitchy appearance.
+                    </p>
+                </div>
+                <div class="case-preview">
+                    <div class="preview-label">Preview</div>
+                    <p style="font-size:14px;color:#555;margin:0;">Rive or video placeholder — Card fade out to 40%, spinner, new card + shine. Specs: Duration 300ms, Easing linear, Delay 150ms for shine.</p>
+                </div>
+                <div class="specs-section">
+                    <details class="specs-toggle">
+                        <summary class="specs-toggle-summary">
+                            <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
+                            <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </summary>
+                        <div class="specs-toggle-content">
+                            <table class="specs-table">
+                                <tbody>
+                                    <tr><td>Duration</td><td>300ms</td></tr>
+                                    <tr><td>Easing</td><td>linear</td></tr>
+                                    <tr><td>Shine delay</td><td>150ms</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
                 </div>
             </div>
+        </div>
 
-            <div class="specs-section">
-                <details class="specs-toggle">
-                    <summary class="specs-toggle-summary">
-                        <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
-                        <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </summary>
-                    <div class="specs-toggle-content">
-                        <table class="specs-table">
-                            <thead>
-                                <tr>
-                                    <th>Property</th>
-                                    <th>Specification</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Duration</td>
-                                    <td>
-                                        <span class="token">motion-duration-1500</span> <span class="value">1500ms</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Delay</td>
-                                    <td>
-                                        <span class="token">motion-delay-0</span> for Step 1<br/>
-                                        Step 2: <span class="value">1250ms</span> (starts 250ms before Step 1 ends)<br/>
-                                        Step 3: <span class="value">2500ms</span> (same overlap pattern)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Easing</td>
-                                    <td>
-                                        <strong>Custom cubic-bezier keyframes:</strong><br/>
-                                        At start [0ms]: <span class="value">0.67, -0.02, 0.8, 0.15</span><br/>
-                                        At mid [600ms]: <span class="value">0.03, 0.07, 0, 1</span><br/>
-                                        At end [1500ms]: <span class="value">0, 0.8, 0.2, 1</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Scale</td>
-                                    <td>
-                                        <strong>Custom scale keyframes:</strong><br/>
-                                        At start [0ms]: <span class="value">0%</span><br/>
-                                        At mid [600ms]: <span class="value">75%</span><br/>
-                                        At end [1500ms]: <span class="value">100%</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="insight">
-                            <div class="insight-label">Multi-Step Rule</div>
-                            <div class="insight-text">
-                                Each step starts <strong>250ms before the previous ends</strong>. Step 1 ends at 1500ms → Step 2 delay = 1250ms.
+        <!-- Panel: Highlights -->
+        <div id="panel-highlights" class="handoff-panel" role="tabpanel">
+            <div class="case-wrapper">
+                <div class="case-header">
+                    <h3 class="case-title">Highlights Animation</h3>
+                    <p class="case-description">
+                        Carousel transition between highlights: title/subtitle position + opacity, asset transitions, background fade. Last highlight has only animation in, not out.
+                    </p>
+                </div>
+                <div class="case-preview">
+                    <div class="preview-label">Animation In</div>
+                    <iframe src="https://rive.app/s/bQPMF2ahgES275qVgE4wkg/embed?mode=preview" frameborder="0" allowfullscreen style="height: 260px;"></iframe>
+                </div>
+                <div class="case-preview">
+                    <div class="preview-label">Animation Out</div>
+                    <iframe src="https://rive.app/s/0Oiso2VODUu0UvMvXYHI2Q/embed?mode=preview" frameborder="0" allowfullscreen style="height: 260px;"></iframe>
+                </div>
+                <div class="specs-section">
+                    <details class="specs-toggle">
+                        <summary class="specs-toggle-summary">
+                            <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
+                            <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </summary>
+                        <div class="specs-toggle-content">
+                            <table class="specs-table">
+                                <tbody>
+                                    <tr><td>Title</td><td>400ms position + 150ms opacity</td></tr>
+                                    <tr><td>Subtitle</td><td>400ms position + 150ms opacity with delays</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel: Navigation -->
+        <div id="panel-navigation" class="handoff-panel" role="tabpanel">
+            <div class="case-wrapper">
+                <div class="case-header">
+                    <h3 class="case-title">Collapsable Navigation</h3>
+                    <p class="case-description">
+                        Navigation expansion: position (500ms) + opacity fade + arrow rotation (300ms). Smooth expansion with clearer visual hierarchy. Hover effects with position and color changes.
+                    </p>
+                </div>
+                <div class="case-preview">
+                    <div class="preview-label">Preview</div>
+                    <p style="font-size:14px;color:#555;margin:0;">Rive or video placeholder — Position 500ms cubic-bezier, Opacity 300ms linear 100ms delay, Arrow 0→-180° rotation.</p>
+                </div>
+                <div class="specs-section">
+                    <details class="specs-toggle">
+                        <summary class="specs-toggle-summary">
+                            <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
+                            <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </summary>
+                        <div class="specs-toggle-content">
+                            <table class="specs-table">
+                                <tbody>
+                                    <tr><td>Position</td><td>500ms cubic-bezier</td></tr>
+                                    <tr><td>Opacity</td><td>300ms linear, 100ms delay</td></tr>
+                                    <tr><td>Arrow</td><td>0→-180° rotation</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel: Welcome Screen -->
+        <div id="panel-welcome-screen" class="handoff-panel" role="tabpanel">
+            <div class="case-wrapper">
+                <div class="case-header">
+                    <h3 class="case-title">Welcome Screen</h3>
+                    <p class="case-description">
+                        Splash to welcome: logo slide up + fade → background fade → sequential content reveal. Logo 250ms slide + fade, Photo delay 0, Wordmark delay 250ms, CTAs delay 600ms.
+                    </p>
+                </div>
+                <div class="case-preview">
+                    <div class="preview-label">Interactive Preview</div>
+                    <iframe src="https://rive.app/s/Ya-buNMRVkWqAOVPJrhZbA/embed?mode=preview" frameborder="0" allowfullscreen style="height: 260px;"></iframe>
+                </div>
+                <div class="specs-section">
+                    <details class="specs-toggle">
+                        <summary class="specs-toggle-summary">
+                            <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
+                            <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </summary>
+                        <div class="specs-toggle-content">
+                            <table class="specs-table">
+                                <tbody>
+                                    <tr><td>Logo</td><td>250ms slide + fade</td></tr>
+                                    <tr><td>Photo</td><td>250ms, delay 0</td></tr>
+                                    <tr><td>Wordmark</td><td>350ms, delay 250ms</td></tr>
+                                    <tr><td>CTAs</td><td>350ms, delay 600ms</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel: Calculator -->
+        <div id="panel-calculator" class="handoff-panel" role="tabpanel">
+            <div class="case-wrapper">
+                <div class="case-header">
+                    <h3 class="case-title">Website Calculator Widget</h3>
+                    <p class="case-description">
+                        Interactive calculator interface with animated inputs and slider interactions for web.
+                    </p>
+                </div>
+                <div class="case-preview">
+                    <div class="preview-label">Preview</div>
+                    <p style="font-size:14px;color:#555;margin:0;">Video or Rive placeholder — Calculator widget with animated inputs and slider.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel: Bulk Actions -->
+        <div id="panel-bulk-actions" class="handoff-panel" role="tabpanel">
+            <div class="case-wrapper">
+                <div class="case-header">
+                    <h3 class="case-title">Bulk Actions – Headline</h3>
+                    <p class="case-description">
+                        Bulk selection mode: header slide left/right + fade, tabs transition, body animation. V1: Slide + fade (300ms position, 200ms opacity), V2: Fade only (150ms). Headline always right → left.
+                    </p>
+                </div>
+                <div class="case-preview">
+                    <div class="preview-label">Preview</div>
+                    <p style="font-size:14px;color:#555;margin:0;">Video or Rive placeholder — Fade-only transition, headline and tabs animation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel: Stepper -->
+        <div id="panel-stepper" class="handoff-panel" role="tabpanel">
+            <div class="case-wrapper">
+                <div class="case-header">
+                    <h3 class="case-title">Stepper</h3>
+                    <p class="case-description">
+                        Multi-step form navigation with animated step transitions.
+                    </p>
+                </div>
+                <div class="case-preview">
+                    <div class="preview-label">Preview</div>
+                    <p style="font-size:14px;color:#555;margin:0;">Video or Rive placeholder — Stepper component step transitions.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel: Usage Limits (mobile + desktop placeholders) -->
+        <div id="panel-usage-limits" class="handoff-panel" role="tabpanel">
+            <div class="case-wrapper">
+                <div class="case-header">
+                    <h3 class="case-title">Real-time Usage Limits &amp; Upsell</h3>
+                    <p class="case-description">
+                        Upsell card appears after 4 seconds. Card slides up with fade; transactions table pushes down for spatial awareness. Mobile: 800ms position + 350ms opacity. Desktop: 1000ms position + 350ms opacity.
+                    </p>
+                </div>
+                <div class="case-preview-row">
+                    <div class="case-preview">
+                        <div class="device-frame device-frame--mobile">
+                            <div class="device-screen">
+                                <img src="limits-upsell.gif" alt="Usage limits upsell – Mobile">
                             </div>
                         </div>
                     </div>
-                </details>
-            </div>
-        </div>
-
-        <!-- Case 2: Tertiary Button Arrow -->
-        <div class="case-wrapper">
-            <div class="case-header">
-                <h3 class="case-title">Case 02 Tertiary Button Arrow</h3>
-                <p class="case-description">
-                    Text link with animated arrow. On hover: arrow slides out and back in within a mask. On click: scales down/up for tactile feedback.
-                </p>
-            </div>
-
-            <div class="case-preview">
-                <div class="preview-label">Interactive Preview</div>
-                <iframe src="https://rive.app/s/5qg5O04RL0Cj12XRMP7QXw/embed?mode=preview" frameborder="0" allowfullscreen style="height: 400px;"></iframe>
-            </div>
-
-            <div class="insight">
-                <div class="insight-label">UX Challenge</div>
-                <div class="insight-text">
-                    <strong>Why dual arrows?</strong> Two arrows in sequence create the illusion of continuous motion. 150ms stagger prevents overlap. Scale down/up provides haptic-like feedback without physical press.
+                    <div class="case-preview">
+                        <div class="preview-label">Desktop flow</div>
+                        <img src="limits-upsell.gif" alt="Usage limits upsell – Desktop" style="max-height: 260px; width: auto;">
+                    </div>
+                </div>
+                <div class="insight">
+                    <div class="insight-label">UX Challenge</div>
+                    <div class="insight-text">
+                        <strong>Why push the table down?</strong> By translating the table down simultaneously, we show that the card is <em>part of the content</em>, not floating above it.
+                    </div>
+                </div>
+                <div class="specs-section">
+                    <details class="specs-toggle">
+                        <summary class="specs-toggle-summary">
+                            <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
+                            <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </summary>
+                        <div class="specs-toggle-content">
+                            <table class="specs-table">
+                                <tbody>
+                                    <tr><td>Mobile</td><td>800ms position + 350ms opacity</td></tr>
+                                    <tr><td>Desktop</td><td>1000ms position + 350ms opacity, Delay 4s after landing</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
                 </div>
             </div>
-
-            <div class="specs-section">
-                <details class="specs-toggle">
-                    <summary class="specs-toggle-summary">
-                        <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
-                        <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </summary>
-                    <div class="specs-toggle-content">
-                        <table class="specs-table">
-                            <thead>
-                                <tr>
-                                    <th>Interaction</th>
-                                    <th>Specification</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Click Scale</td>
-                                    <td>
-                                        <strong>Duration:</strong> <span class="token">motion-duration-300</span> <span class="value">300ms</span><br/>
-                                        <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
-                                        <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.6, 1</span><br/>
-                                        <strong>Scale:</strong> <span class="value">100%</span> → <span class="value">90%</span> (15 frames) → <span class="value">100%</span> (30 frames)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Hover In<br/>(First Arrow)</td>
-                                    <td>
-                                        <strong>Duration:</strong> <span class="token">motion-duration-300</span> <span class="value">300ms</span><br/>
-                                        <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
-                                        <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.6, 1</span><br/>
-                                        <strong>Translate X:</strong> <span class="value">0px → 18px</span><br/>
-                                        <strong>Translate Y:</strong> <span class="value">0px → -18px</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Hover In<br/>(Second Arrow)</td>
-                                    <td>
-                                        <strong>Duration:</strong> <span class="token">motion-duration-300</span> <span class="value">300ms</span><br/>
-                                        <strong>Delay:</strong> <span class="token">motion-delay-150</span> <span class="value">150ms</span><br/>
-                                        <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.6, 1</span><br/>
-                                        <strong>Translate X:</strong> <span class="value">18px → 0px</span><br/>
-                                        <strong>Translate Y:</strong> <span class="value">-18px → 0px</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </details>
-            </div>
         </div>
 
-        <!-- Case 3: Real-time Usage Limits -->
-        <div class="case-wrapper">
-            <div class="case-header">
-                <h3 class="case-title">Case 03 Real-time Usage Limits Upsell</h3>
-                <p class="case-description">
-                    Upsell card that appears after 4 seconds on transactions screen. Card slides up with fade-in while transactions table pushes down—creating spatial awareness that content is being inserted, not overlaid.
-                </p>
-            </div>
-
-            <div class="case-preview">
-                <div class="preview-label">Animation Preview</div>
-                <img src="limits-upsell.gif" alt="Usage limits upsell animation" style="width: 100%; border-radius: 4px;">
-            </div>
-
-            <div class="insight">
-                <div class="insight-label">UX Challenge</div>
-                <div class="insight-text">
-                    <strong>Why push the table down?</strong> Z-index alone would overlay the card, but users would miss the spatial relationship. By translating the table down simultaneously, we show that the card is <em>part of the content</em>, not floating above it.
+        <!-- Panel: Progressive Bar (existing) -->
+        <div id="panel-progressive-bar" class="handoff-panel" role="tabpanel">
+            <div class="case-wrapper">
+                <div class="case-header">
+                    <h3 class="case-title">Multi-Step Progressive Bar</h3>
+                    <p class="case-description">
+                        Progress indicator for multi-step flows. Steps overlap by 250ms. Custom cubic-beziers at three keyframes: quick start, smooth mid-transition, confident finish.
+                    </p>
+                </div>
+                <div class="case-preview">
+                    <div class="preview-label">Interactive Preview</div>
+                    <iframe src="https://rive.app/s/TO6xVZ1mg0yrAvC7jW5AOQ/embed?mode=preview&artboard=Desktop" frameborder="0" allowfullscreen style="height: 260px;"></iframe>
+                </div>
+                <div class="insight">
+                    <div class="insight-label">UX Challenge</div>
+                    <div class="insight-text">
+                        <strong>Why overlap steps?</strong> Starting step 2 before step 1 finishes makes progression feel continuous—the system is always working, never waiting.
+                    </div>
+                </div>
+                <div class="specs-section">
+                    <details class="specs-toggle">
+                        <summary class="specs-toggle-summary">
+                            <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
+                            <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </summary>
+                        <div class="specs-toggle-content">
+                            <table class="specs-table">
+                                <tbody>
+                                    <tr><td>Duration</td><td>motion-duration-1500 1500ms</td></tr>
+                                    <tr><td>Step overlap</td><td>250ms before previous ends</td></tr>
+                                    <tr><td>Easing</td><td>Custom cubic-bezier keyframes</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
                 </div>
             </div>
-
-            <div class="specs-section">
-                <details class="specs-toggle">
-                    <summary class="specs-toggle-summary">
-                        <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
-                        <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </summary>
-                    <div class="specs-toggle-content">
-                        <table class="specs-table">
-                            <thead>
-                                <tr>
-                                    <th>Element</th>
-                                    <th>Specification</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Upsell Card<br/>Display</td>
-                                    <td>
-                                        <strong>Duration:</strong> <span class="token">motion-duration-800</span> <span class="value">800ms</span><br/>
-                                        <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
-                                        <strong>Easing:</strong> <span class="token">motion-easing-default</span> <span class="value">0.4, 0, 0.2, 1</span><br/>
-                                        <strong>Translate Y:</strong> <span class="value">-50px → 0px</span><br/>
-                                        <strong>Opacity:</strong> <span class="value">0 → 100</span> (350ms, delay 100ms, linear)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Transactions<br/>Table Push</td>
-                                    <td>
-                                        <strong>Duration:</strong> <span class="token">motion-duration-800</span> <span class="value">800ms</span><br/>
-                                        <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
-                                        <strong>Easing:</strong> <span class="token">motion-easing-default</span> <span class="value">0.4, 0, 0.2, 1</span><br/>
-                                        <strong>Translate Y:</strong> <span class="value">0px → 164px</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </details>
-            </div>
         </div>
 
-        <!-- Case 4: Personalized Account Setup -->
-        <div class="case-wrapper">
-            <div class="case-header">
-                <h3 class="case-title">Case 04 Animated Text Swipe Reveal</h3>
-                <p class="case-description">
-                    Continuous text reveal behind a mask for personalized account setup. Each text sequence displays for 2.5s minimum. Creates loading progression while maintaining readability.
-                </p>
-            </div>
-
-            <div class="case-preview">
-                <div class="preview-label">Interactive Preview</div>
-                <iframe src="https://rive.app/s/-fFrKbEosUWHv0C3Qvwmqw/embed?mode=preview" frameborder="0" allowfullscreen style="height: 400px;"></iframe>
-            </div>
-
-            <div class="insight">
-                <div class="insight-label">UX Challenge</div>
-                <div class="insight-text">
-                    <strong>Why mask the text?</strong> A simple cross-fade would be faster, but masking creates the sense of content "loading" from below—reinforcing the system is working. The 300ms position + 150ms fade-in (delayed 150ms) creates smooth sequential reveals.
+        <!-- Panel: Button Arrow (existing) -->
+        <div id="panel-button-arrow" class="handoff-panel" role="tabpanel">
+            <div class="case-wrapper">
+                <div class="case-header">
+                    <h3 class="case-title">Tertiary Button Arrow</h3>
+                    <p class="case-description">
+                        Text link with animated arrow. Hover: arrow slides out and back in. Click: scale down/up for tactile feedback.
+                    </p>
+                </div>
+                <div class="case-preview">
+                    <div class="preview-label">Interactive Preview</div>
+                    <iframe src="https://rive.app/s/5qg5O04RL0Cj12XRMP7QXw/embed?mode=preview" frameborder="0" allowfullscreen style="height: 260px;"></iframe>
+                </div>
+                <div class="specs-section">
+                    <details class="specs-toggle">
+                        <summary class="specs-toggle-summary">
+                            <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
+                            <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </summary>
+                        <div class="specs-toggle-content">
+                            <table class="specs-table">
+                                <tbody>
+                                    <tr><td>Click Scale</td><td>motion-duration-300, 100%→90%→100%</td></tr>
+                                    <tr><td>Hover arrows</td><td>300ms, 150ms stagger</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
                 </div>
             </div>
+        </div>
 
-            <div class="specs-section">
-                <details class="specs-toggle">
-                    <summary class="specs-toggle-summary">
-                        <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
-                        <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </summary>
-                    <div class="specs-toggle-content">
-                        <table class="specs-table">
-                            <thead>
-                                <tr>
-                                    <th>Animation</th>
-                                    <th>Specification</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Text Position</td>
-                                    <td>
-                                        <strong>Duration:</strong> <span class="token">motion-duration-300</span> <span class="value">300ms</span><br/>
-                                        <strong>Delay:</strong> <span class="token">motion-delay-0</span><br/>
-                                        <strong>Easing:</strong> <span class="token">motion-easing-smooth</span> <span class="value">0.4, 0, 0.6, 1</span><br/>
-                                        <strong>Translate Y:</strong> <span class="value">187px → 117px</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Text Fade In</td>
-                                    <td>
-                                        <strong>Duration:</strong> <span class="token">motion-duration-150</span> <span class="value">150ms</span><br/>
-                                        <strong>Delay:</strong> <span class="token">motion-delay-150</span> <span class="value">150ms</span><br/>
-                                        <strong>Easing:</strong> <span class="token">motion-easing-linear</span><br/>
-                                        <strong>Alpha:</strong> <span class="value">0 → 100</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+        <!-- Panel: Text Reveal (existing) -->
+        <div id="panel-text-reveal" class="handoff-panel" role="tabpanel">
+            <div class="case-wrapper">
+                <div class="case-header">
+                    <h3 class="case-title">Animated Text Swipe Reveal</h3>
+                    <p class="case-description">
+                        Continuous text reveal behind a mask for personalized account setup. Each sequence 2.5s minimum. 300ms position + 150ms fade-in (delay 150ms).
+                    </p>
+                </div>
+                <div class="case-preview">
+                    <div class="preview-label">Interactive Preview</div>
+                    <iframe src="https://rive.app/s/-fFrKbEosUWHv0C3Qvwmqw/embed?mode=preview" frameborder="0" allowfullscreen style="height: 260px;"></iframe>
+                </div>
+                <div class="insight">
+                    <div class="insight-label">UX Challenge</div>
+                    <div class="insight-text">
+                        <strong>Why mask the text?</strong> Masking creates the sense of content "loading" from below—reinforcing the system is working.
                     </div>
-                </details>
+                </div>
+                <div class="specs-section">
+                    <details class="specs-toggle">
+                        <summary class="specs-toggle-summary">
+                            <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
+                            <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </summary>
+                        <div class="specs-toggle-content">
+                            <table class="specs-table">
+                                <tbody>
+                                    <tr><td>Text Position</td><td>300ms, translate Y</td></tr>
+                                    <tr><td>Text Fade In</td><td>150ms, delay 150ms</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+                </div>
             </div>
         </div>
 
+        <!-- Panel: Flow Transitions (choreography: Start / Next / Previous / End-Dismiss) -->
+        <div id="panel-flow-transitions" class="handoff-panel" role="tabpanel">
+            <div class="case-wrapper">
+                <div class="case-header">
+                    <h3 class="case-title">Flow choreography</h3>
+                    <p class="case-description">
+                        Standard transition patterns for flows: how screens enter, step forward/back, and dismiss. Each pattern uses motion tokens (duration, alpha, easing) so implementation stays consistent across product.
+                    </p>
+                </div>
+                <div class="case-preview">
+                    <div class="preview-label">Patterns</div>
+                    <p style="font-size:14px;color:#555;margin:0 0 12px 0;">Start flow (bottom to top / fade in), Next step (right to left / fade in), Previous step (left to right / fade in), End/Dismiss flow (top to bottom / fade out).</p>
+                </div>
+                <div class="specs-section">
+                    <details class="specs-toggle">
+                        <summary class="specs-toggle-summary">
+                            <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
+                            <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </summary>
+                        <div class="specs-toggle-content">
+                            <table class="specs-table">
+                                <tbody>
+                                    <tr><td><strong>Start flow</strong></td><td>Bottom to top or Fade in — motion-duration-300</td></tr>
+                                    <tr><td><strong>Next step</strong></td><td>Right to left or Fade in — motion-duration-300</td></tr>
+                                    <tr><td><strong>Previous step</strong></td><td>Left to right or Fade in — motion-duration-200</td></tr>
+                                    <tr><td><strong>End/Dismiss flow</strong></td><td>Top to bottom or Fade out — motion-duration-200</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Impact -->
     <div class="motion-section">
         <div class="motion-section-label">Impact</div>
         <h2 class="motion-section-title">Challenging UX, Shipping Quality</h2>
@@ -333,3 +537,4 @@
         </div>
     </div>
 </div>
+

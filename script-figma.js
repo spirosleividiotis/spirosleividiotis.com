@@ -1058,6 +1058,7 @@ function loadProjectContent(projectData, projectName) {
                 const videos = projectData.media && Array.isArray(projectData.media.videos) ? projectData.media.videos : [];
                 fillBrandVideos(modalBodyText, videos);
             }
+            initHandoffTabs();
         }
         return;
     }
@@ -1073,6 +1074,7 @@ function loadProjectContent(projectData, projectName) {
                 if (modalBodyText) {
                     modalBodyText.style.display = 'block';
                     modalBodyText.innerHTML = html;
+                    initHandoffTabs();
                     // Brand Guidelines (project 5): always fetch content.json so live site shows latest videos (avoids stale projectsData / CDN cache)
                     if (projectData.id === 5) {
                         fetch('content.json?v=' + Date.now())
@@ -1150,6 +1152,25 @@ function loadProjectContent(projectData, projectName) {
             }).join('');
         }
     }
+}
+
+function initHandoffTabs() {
+    const container = document.getElementById('projectModalBody');
+    if (!container) return;
+    const tabs = container.querySelectorAll('.handoff-tab');
+    const panels = container.querySelectorAll('.handoff-panel');
+    if (!tabs.length || !panels.length) return;
+    tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            if (!tabId) return;
+            tabs.forEach(function(t) { t.classList.remove('active'); });
+            panels.forEach(function(p) { p.classList.remove('active'); });
+            this.classList.add('active');
+            const panel = container.querySelector('#panel-' + tabId);
+            if (panel) panel.classList.add('active');
+        });
+    });
 }
 
 function closeProjectModal() {
