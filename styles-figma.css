@@ -1288,7 +1288,7 @@ section {
    PROJECT MODAL (Full-screen)
    =================================== */
 
-/* When project modal is open: only the modal scrolls, site is locked */
+/* Lock: when modal is open, body scroll is locked (script sets overflow/position); only modal scrolls */
 body.project-modal-open {
     overflow: hidden !important;
     height: 100% !important;
