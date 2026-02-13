@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header: nav left (About me, Experience, Reel, Projects) | right (Amsterdam, time) -->
+    <!-- Header: nav left (About me, Reel, Experience, Projects) | right (Amsterdam, time) -->
     <header class="site-header" data-scroll-section data-module="header">
         <div class="container">
             <nav class="header-entries" id="heroNavLeft"><!-- 4 links from content-loader --></nav>
@@ -64,15 +64,7 @@
 
     <div class="scroll-spacer" aria-hidden="true"></div>
 
-    <!-- Experience (scrolls on top of hero) -->
-    <section class="experience" id="experience" data-scroll-section data-module="experience">
-        <div class="container">
-            <h2 class="experience-title-main">experience</h2>
-            <div class="experience-rows"><!-- filled from content.json --></div>
-        </div>
-    </section>
-
-    <!-- Reel -->
+    <!-- Reel (first) -->
     <section class="reel-section" id="reel" data-scroll-section data-module="reel">
         <div class="container">
             <h2 class="reel-section-title">Reel</h2>
@@ -80,11 +72,19 @@
                 <div class="reel-placeholder" id="reelPlaceholder">
                     <span class="reel-play-circle" aria-hidden="true"><span class="reel-play-icon"></span></span>
                 </div>
-                <video id="reelInlineVideo" class="reel-inline-video" playsinline preload="auto"><source src="reel.mp4" type="video/mp4"></video>
+                <video id="reelInlineVideo" class="reel-inline-video" playsinline preload="auto"><source src="Reel-4K-2026.mp4" type="video/mp4"></video>
                 <button type="button" class="reel-close-btn" id="reelCloseBtn" aria-label="Close video">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
             </a>
+        </div>
+    </section>
+
+    <!-- Experience (scrolls on top of hero) -->
+    <section class="experience" id="experience" data-scroll-section data-module="experience">
+        <div class="container">
+            <h2 class="experience-title-main">experience</h2>
+            <div class="experience-rows"><!-- filled from content.json --></div>
         </div>
     </section>
 
@@ -219,7 +219,7 @@
         </button>
         <div class="video-player-content">
             <video id="videoPlayerElement" controls>
-                <source src="reel.mp4" type="video/mp4">
+                <source src="Reel-4K-2026.mp4" type="video/mp4">
             </video>
         </div>
     </div>

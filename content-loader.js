@@ -158,10 +158,10 @@ function updateHeader(header) {
         { text: 'experience', href: '#experience' },
         { text: 'projects', href: '#work' }
     ];
-    // Figma: two columns. Col1: About me, Experience. Col2: Reel, Projects. Use content as single source for label and href.
-    const labelsLower = ['about me', 'experience', 'reel', 'projects'];
-    const labelsDisplay = ['About me', 'Experience', 'Reel', 'Projects'];
-    const defaultHrefs = ['#', '#experience', '#reel', '#work'];
+    // Figma: two columns. Col1: About me, Reel. Col2: Experience, Projects. Use content as single source for label and href.
+    const labelsLower = ['about me', 'reel', 'experience', 'projects'];
+    const labelsDisplay = ['About me', 'Reel', 'Experience', 'Projects'];
+    const defaultHrefs = ['#', '#reel', '#experience', '#work'];
     const linkByLabel = {};
     const displayByLabel = {};
     nav.forEach((item) => {
@@ -181,8 +181,8 @@ function updateHeader(header) {
             return `<a href="${escapeAttr(href)}" class="nav-link" ${isAbout ? 'id="aboutMeLink"' : ''}>${escapeHtml(displayText)}</a>`;
         };
         entriesEl.innerHTML = `
-            <div class="header-col">${link('about me', 0)}${link('experience', 1)}</div>
-            <div class="header-col">${link('reel', 2)}${link('projects', 3)}</div>
+            <div class="header-col">${link('about me', 0)}${link('reel', 1)}</div>
+            <div class="header-col">${link('experience', 2)}${link('projects', 3)}</div>
         `;
     }
 }

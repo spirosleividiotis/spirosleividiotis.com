@@ -100,8 +100,8 @@
                 <a href="#" data-panel="header" class="nav-link">Header</a>
                 <a href="#" data-panel="hero" class="nav-link">Hero</a>
                 <a href="#" data-panel="aboutMe" class="nav-link">About Me</a>
-                <a href="#" data-panel="experience" class="nav-link">Experience</a>
                 <a href="#" data-panel="reel" class="nav-link">Reel</a>
+                <a href="#" data-panel="experience" class="nav-link">Experience</a>
                 <a href="#" data-panel="projects" class="nav-link">Projects</a>
                 <a href="#" data-panel="footer" class="nav-link">Footer</a>
                 <a href="#" data-panel="music" class="nav-link">Music</a>
@@ -156,7 +156,7 @@
     </script>
     <script>
 (function() {
-    const MODULE_IDS = ['header', 'hero', 'aboutMe', 'experience', 'reel', 'projects', 'footer', 'music', 'analytics'];
+    const MODULE_IDS = ['header', 'hero', 'aboutMe', 'reel', 'experience', 'projects', 'footer', 'music', 'analytics'];
     const DEFAULT_MODULES = Object.fromEntries(MODULE_IDS.map(m => [m, true]));
 
     let content = { modules: { ...DEFAULT_MODULES } };
@@ -188,8 +188,8 @@
         renderHeaderPanel();
         renderHeroPanel();
         renderAboutMePanel();
-        renderExperiencePanel();
         renderReelPanel();
+        renderExperiencePanel();
         renderProjectsPanel();
         renderFooterPanel();
         renderMusicPanel();

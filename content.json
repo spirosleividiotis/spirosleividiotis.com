@@ -28,8 +28,8 @@
   "header": {
     "navigation": [
       { "text": "About me", "href": "#" },
-      { "text": "Experience", "href": "#experience" },
       { "text": "Reel", "href": "#reel" },
+      { "text": "Experience", "href": "#experience" },
       { "text": "Projects", "href": "#work" }
     ],
     "location": {
@@ -51,7 +51,7 @@
     "file": "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769694887/Parov_Stelar_-_Lost_In_Amsterdam_Official_Audio_z6lurq.mp3"
   },
   "reel": {
-    "file": "https://res.cloudinary.com/dnbmyyc9x/video/upload/v1769694877/Motion_reel_copy_sfrcru.mp4"
+    "file": "Reel-4K-2026.mp4"
   },
   "analytics": {
     "script": " \n \n \n window.dataLayer = window.dataLayer || [];\n function gtag(){dataLayer.push(arguments);}\n gtag('js', new Date());\n gtag('config', 'G-BBHPPJKL50');\n "
