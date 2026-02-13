@@ -459,22 +459,33 @@ function initializeProjectCursors() {
         const newCard = card.cloneNode(true);
         card.parentNode.replaceChild(newCard, card);
         
-        newCard.addEventListener('mouseenter', () => {
-            // Always show "come on, click" on hover
-            cursorDot.classList.add('cursor-project');
-            const cursorText = cursorDot.querySelector('.cursor-text');
-            if (cursorText) {
-                cursorText.textContent = 'come on, click';
-                cursorText.style.display = 'block';
-                cursorText.style.opacity = '1';
-            }
-            const cursorArrow = cursorDot.querySelector('.cursor-arrow');
-            if (cursorArrow) {
-                cursorArrow.style.display = '';
-                cursorArrow.style.opacity = '';
-            }
-            cursorDot.classList.remove('cursor-hover', 'cursor-arrow-only', 'cursor-password');
-        });
+        const workVisual = newCard.querySelector('.work-visual');
+        if (workVisual) {
+            workVisual.addEventListener('mouseenter', () => {
+                cursorDot.classList.add('cursor-project');
+                const cursorText = cursorDot.querySelector('.cursor-text');
+                if (cursorText) {
+                    cursorText.textContent = 'come on, click';
+                    cursorText.style.display = 'block';
+                    cursorText.style.opacity = '1';
+                }
+                const cursorArrow = cursorDot.querySelector('.cursor-arrow');
+                if (cursorArrow) {
+                    cursorArrow.style.display = '';
+                    cursorArrow.style.opacity = '';
+                }
+                cursorDot.classList.remove('cursor-hover', 'cursor-arrow-only', 'cursor-password');
+            });
+            workVisual.addEventListener('mouseleave', () => {
+                cursorDot.classList.remove('cursor-project');
+                const cursorText = cursorDot.querySelector('.cursor-text');
+                if (cursorText) {
+                    cursorText.style.display = 'none';
+                    cursorText.style.opacity = '0';
+                }
+                resetCursorToDefault();
+            });
+        }
         
         newCard.addEventListener('mouseleave', () => {
             resetCursorToDefault();
@@ -1178,10 +1189,10 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Open project modal on card click; close on overlay/X or outside (works on desktop + mobile)
+// Open project modal only when clicking the preview image (.work-visual), not the text
 document.addEventListener('click', function(e) {
     const card = e.target.closest('.work-card');
-    if (card) {
+    if (card && e.target.closest('.work-visual')) {
         e.preventDefault();
         openProjectModal(card);
         return;

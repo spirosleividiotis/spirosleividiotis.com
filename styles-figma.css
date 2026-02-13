@@ -938,6 +938,7 @@ section {
     align-items: flex-start;
     gap: 0;
     z-index: 2;
+    cursor: default;
 }
 
 .project-info.hidden {
@@ -1328,6 +1329,7 @@ body.project-modal-open {
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
     position: relative;
     cursor: default;
     z-index: 10001;
@@ -1466,11 +1468,14 @@ body.project-modal-open {
 #projectModalBody .motion-system-content { margin-top: 0; }
 .project-modal-body .project-body-text { margin-top: 0; }
 
-/* No white text on white card; all text align left */
+/* No white text on white card; all text align left; touch-action so scroll works on text and images */
 #projectModalBody,
 #projectModalBody .motion-system-content {
     color: #000000;
     text-align: left;
+}
+#projectModalBody {
+    touch-action: pan-y;
 }
 
 /* Password Gate */
@@ -2953,13 +2958,18 @@ body.project-modal-open {
         padding: 20px 0 24px !important;
     }
     
+    /* Single scroll container: touch-action pan-y so scroll starts immediately on text and images */
     .project-modal-wrapper {
         width: 100% !important;
         max-height: calc(100vh - 44px) !important;
         border-radius: 20px !important;
         overflow-y: auto !important;
         -webkit-overflow-scrolling: touch !important;
+        touch-action: pan-y !important;
         background: #FFFFFF !important;
+    }
+    #projectModalBody {
+        touch-action: pan-y;
     }
     
     .project-modal-content {
