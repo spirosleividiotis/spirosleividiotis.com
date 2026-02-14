@@ -1168,9 +1168,22 @@ function initHandoffTabs() {
             panels.forEach(function(p) { p.classList.remove('active'); });
             this.classList.add('active');
             const panel = container.querySelector('#panel-' + tabId);
-            if (panel) panel.classList.add('active');
+            if (panel) {
+                panel.classList.add('active');
+                // Autoplay MP4s in panel (behave like GIFs: loop, play when visible)
+                panel.querySelectorAll('video[autoplay]').forEach(function(v) {
+                    v.play().catch(function() {});
+                });
+            }
         });
     });
+    // Play videos in initially active panel (e.g. when modal opens)
+    const activePanel = container.querySelector('.handoff-panel.active');
+    if (activePanel) {
+        activePanel.querySelectorAll('video[autoplay]').forEach(function(v) {
+            v.play().catch(function() {});
+        });
+    }
 }
 
 function closeProjectModal() {

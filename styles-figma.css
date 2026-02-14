@@ -815,9 +815,14 @@ section {
     width: 32px;
     height: 32px;
     margin-left: 4px;
-    background: #141414;
-    clip-path: polygon(0 0, 0 100%, 100% 50%);
-    border-radius: 2px;
+    color: #141414;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.reel-play-icon svg {
+    width: 100%;
+    height: 100%;
 }
 
 /* ===================================
@@ -2702,6 +2707,10 @@ body.project-modal-open {
         width: 32px;
         height: 32px;
         margin-left: 4px;
+    }
+    .reel-play-icon svg {
+        width: 100%;
+        height: 100%;
     }
     
     /* Reel close (X) visible only when playing, same as desktop */
