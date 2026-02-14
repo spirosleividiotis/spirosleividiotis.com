@@ -183,6 +183,42 @@
         font-weight: 600;
     }
 
+    /* Tabs: Motion system / Motion tokens library */
+    #projectModalBody .motion-system-content .handoff-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 24px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #ddd;
+    }
+    #projectModalBody .motion-system-content .handoff-tab {
+        padding: 8px 14px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #555;
+        background: #f0f0f0;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+    }
+    #projectModalBody .motion-system-content .handoff-tab:hover {
+        background: #e5e5e5;
+        color: #000;
+    }
+    #projectModalBody .motion-system-content .handoff-tab.active {
+        background: #000;
+        color: #fff;
+        border-color: #000;
+    }
+    #projectModalBody .motion-system-content .handoff-panel {
+        display: none;
+    }
+    #projectModalBody .motion-system-content .handoff-panel.active {
+        display: block;
+    }
+
     /* Mobile responsive */
     @media (max-width: 768px) {
         #projectModalBody .motion-step-content {
@@ -236,6 +272,13 @@
         Built a scalable motion language that bridges design and engineering—principles, patterns, tokens, documentation.
     </p>
 
+    <div class="handoff-tabs" role="tablist">
+        <button type="button" class="handoff-tab active" data-tab="overview">Motion system</button>
+        <button type="button" class="handoff-tab" data-tab="tokens-library">Motion tokens library</button>
+    </div>
+
+    <!-- Panel: Overview -->
+    <div id="panel-overview" class="handoff-panel active" role="tabpanel">
     <!-- Problem -->
     <div class="motion-section">
         <div class="motion-section-label">Context</div>
@@ -325,112 +368,7 @@
                     Primitives include: <strong>Duration</strong>, <strong>Easing</strong>, 
                     <strong>Scale</strong>, <strong>Alpha</strong>, <strong>Blur</strong>, 
                     <strong>Translate</strong>, <strong>Delay</strong>, and <strong>Spring</strong>. 
-                    The full set with previews lives in the Motion tokens library below.
-                </p>
-            </div>
-        </div>
-
-        <!-- Motion tokens library: full library with previews -->
-        <div class="motion-step">
-            <h3 class="motion-step-title">Motion tokens library</h3>
-            <div class="motion-step-content">
-                <p>
-                    The tokens library is a shared source of truth—documented with live previews so design and engineering use the same values. Primitives (timing and values) and semantics (behaviors) are all in one place, with specs and code.
-                </p>
-                <h4 class="motion-subsection-title">Primitive tokens</h4>
-                <p style="margin-bottom:12px;">Duration, easing, scale, alpha, blur, translate, delay, spring—the building blocks used across the product.</p>
-                <div class="token-grid">
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/duration.gif" alt="Duration"></div>
-                        <div class="token-name">Duration</div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/easing.gif" alt="Easing"></div>
-                        <div class="token-name">Easing</div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/scale.gif" alt="Scale"></div>
-                        <div class="token-name">Scale</div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/alpha.gif" alt="Alpha"></div>
-                        <div class="token-name">Alpha</div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/blur.gif" alt="Blur"></div>
-                        <div class="token-name">Blur</div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/rotation.gif" alt="Translate"></div>
-                        <div class="token-name">Translate</div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/delay.gif" alt="Delay"></div>
-                        <div class="token-name">Delay</div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/spring.gif" alt="Spring"></div>
-                        <div class="token-name">Spring</div>
-                    </div>
-                </div>
-                <h4 class="motion-subsection-title">Semantic tokens (Base)</h4>
-                <p style="margin-bottom:12px;">Entry, exit, reveal, transition—purpose-driven combinations for flows and overlays.</p>
-                <div class="token-grid">
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/entry.gif" alt="Entry"></div>
-                        <div class="token-name">Entry</div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/exit.gif" alt="Exit"></div>
-                        <div class="token-name">Exit</div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/reveal.gif" alt="Reveal"></div>
-                        <div class="token-name">Reveal</div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/transition.gif" alt="Transition"></div>
-                        <div class="token-name">Transition</div>
-                    </div>
-                </div>
-                <h4 class="motion-subsection-title">Semantic tokens (Common)</h4>
-                <p style="margin-bottom:12px;">Press/Tap, Hover/Lift, Expand/Collapse, Slide, Scale Fade, Shimmer Loading, Stagger, Page Transition.</p>
-                <div class="token-grid">
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/tap.gif" alt="Press/Tap"></div>
-                        <div class="token-name">Press/Tap</div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/hover.gif" alt="Hover/Lift"></div>
-                        <div class="token-name">Hover/Lift</div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/expand.gif" alt="Expand/Collapse"></div>
-                        <div class="token-name">Expand/Collapse</div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/slide_fade.gif" alt="Slide"></div>
-                        <div class="token-name">Slide</div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/scalefade.gif" alt="Scale Fade"></div>
-                        <div class="token-name">Scale Fade</div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/loading.gif" alt="Shimmer Loading"></div>
-                        <div class="token-name">Shimmer Loading</div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/staggered.gif" alt="Stagger"></div>
-                        <div class="token-name">Stagger</div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-icon"><img src="motion-system/tokens/Motion tokens/transition-patterns.gif" alt="Page Transition"></div>
-                        <div class="token-name">Page Transition</div>
-                    </div>
-                </div>
-                <p>
-                    These tokens power flow patterns (Start, Next, Previous, End/Dismiss) and component specs across the product—one library, one source of truth.
+                    The full set with previews is in the <strong>Motion tokens library</strong> tab.
                 </p>
             </div>
         </div>
