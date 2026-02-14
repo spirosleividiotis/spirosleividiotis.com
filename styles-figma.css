@@ -2966,20 +2966,24 @@ body.project-modal-open {
         padding: 20px 0 24px !important;
     }
     
-    /* Single scroll container: touch-action pan-y so scroll starts immediately; overscroll none so scroll doesn't leak to body */
+    /* Single scroll container: improved mobile scroll performance */
     .project-modal-wrapper {
         width: 100% !important;
         max-height: calc(100vh - 44px) !important;
         border-radius: 20px !important;
         overflow-y: auto !important;
+        overflow-x: hidden !important;
         -webkit-overflow-scrolling: touch !important;
         touch-action: pan-y !important;
         overscroll-behavior-y: contain !important;
         background: #FFFFFF !important;
+        will-change: scroll-position !important;
+        transform: translateZ(0) !important;
     }
     #projectModalBody {
         touch-action: pan-y;
         overscroll-behavior-y: contain;
+        min-height: 100%;
     }
     
     .project-modal-content {
