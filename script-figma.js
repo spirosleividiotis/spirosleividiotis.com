@@ -1265,23 +1265,35 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Mobile (Safari/iOS): X close – use touchend release point (scroll layer often steals touchstart).
+// Safari / iOS: X close – pointerdown + touchend so close works when click doesn't fire (Safari quirk).
 (function() {
-    document.addEventListener('touchend', function(e) {
-        if (!e.changedTouches || e.changedTouches.length === 0) return;
-        var modal = document.getElementById('projectModal');
-        if (!modal || !modal.classList.contains('active')) return;
+    function maybeCloseFromButton(e) {
         var btn = document.getElementById('projectModalClose');
-        if (!btn) return;
-        var t = e.changedTouches[0];
-        var x = t.clientX, y = t.clientY;
+        if (!btn) return false;
+        var x = e.clientX != null ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : (e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : 0));
+        var y = e.clientY != null ? e.clientY : (e.touches && e.touches[0] ? e.touches[0].clientY : (e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientY : 0));
         var rect = btn.getBoundingClientRect();
-        var inside = (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom);
-        if (inside) {
+        if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+            closeProjectModal();
+            e.preventDefault();
+            e.stopPropagation();
+            return true;
+        }
+        return false;
+    }
+    document.addEventListener('pointerdown', function(e) {
+        if (!document.getElementById('projectModal') || !document.getElementById('projectModal').classList.contains('active')) return;
+        if (e.target.closest('#projectModalClose') || e.target.closest('.project-modal-close')) {
             closeProjectModal();
             e.preventDefault();
             e.stopPropagation();
         }
+    }, true);
+    document.addEventListener('touchend', function(e) {
+        if (!e.changedTouches || e.changedTouches.length === 0) return;
+        var modal = document.getElementById('projectModal');
+        if (!modal || !modal.classList.contains('active')) return;
+        if (maybeCloseFromButton(e)) return;
     }, { passive: false, capture: true });
 })();
 

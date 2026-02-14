@@ -1393,8 +1393,10 @@ body.project-modal-open {
     transition: opacity 0.2s ease;
     pointer-events: auto;
     -webkit-tap-highlight-color: transparent;
-    touch-action: none;
+    touch-action: manipulation;
     flex-shrink: 0;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .project-modal-close svg {

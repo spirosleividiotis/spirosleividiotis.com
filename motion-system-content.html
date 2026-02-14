@@ -237,8 +237,17 @@
         color: #fff;
         border-color: #000;
     }
+    #projectModalBody .motion-system-content .handoff-panels {
+        width: 100%;
+        max-width: 100%;
+        min-height: 60vh;
+        text-align: left;
+    }
     #projectModalBody .motion-system-content .handoff-panel {
         display: none;
+        width: 100%;
+        max-width: 100%;
+        text-align: left;
     }
     #projectModalBody .motion-system-content .handoff-panel.active {
         display: block;
@@ -302,6 +311,7 @@
         <button type="button" class="handoff-tab" data-tab="tokens-library">Motion tokens library</button>
     </div>
 
+    <div class="handoff-panels">
     <!-- Panel: Overview -->
     <div id="panel-overview" class="handoff-panel active" role="tabpanel">
     <!-- Problem -->
@@ -528,6 +538,7 @@
                 <div class="token-preview-cell"><iframe src="https://qonto-motion-pagetransition.netlify.app/?autoplay=1" loading="lazy" title="Page transition"></iframe><span class="token-preview-name">Page transition</span></div>
             </div>
         </div>
+    </div>
     </div>
 </div>
 
