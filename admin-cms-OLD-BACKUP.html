@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio CMS – Edit everything</title>
+    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d0d0d; color: #e5e5e5; min-height: 100vh; }
+        .app { display: flex; flex-direction: column; min-height: 100vh; }
+        .topbar { background: #1a1a1a; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2a2a2a; }
+        .topbar h1 { font-size: 18px; font-weight: 600; }
+        .topbar-actions { display: flex; gap: 12px; }
+        .btn { padding: 10px 20px; border-radius: 6px; border: none; cursor: pointer; font-size: 14px; font-weight: 500; }
+        .btn-primary { background: #fff; color: #000; }
+        .btn-primary:hover { background: #e5e5e5; }
+        .btn-secondary { background: #2a2a2a; color: #fff; }
+        .btn-secondary:hover { background: #333; }
+        .main { display: flex; flex: 1; overflow: hidden; }
+        .sidebar { width: 260px; background: #141414; border-right: 1px solid #2a2a2a; padding: 16px 0; overflow-y: auto; }
+        .sidebar h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #666; padding: 8px 20px; margin-bottom: 8px; }
+        .sidebar a { display: flex; align-items: center; gap: 10px; padding: 12px 20px; color: #999; text-decoration: none; font-size: 14px; border-left: 3px solid transparent; }
+        .sidebar a:hover { color: #fff; background: rgba(255,255,255,0.04); }
+        .sidebar a.active { color: #fff; background: rgba(255,255,255,0.06); border-left-color: #fff; }
+        .sidebar .module-toggle { margin-left: auto; }
+        .content { flex: 1; overflow-y: auto; padding: 32px; }
+        .panel { display: none; background: #1a1a1a; border-radius: 8px; padding: 28px; margin-bottom: 24px; max-width: 800px; }
+        .panel.active { display: block; }
+        .panel h3 { font-size: 20px; margin-bottom: 24px; font-weight: 500; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 6px; color: #888; font-size: 13px; }
+        .form-group input[type="text"], .form-group input[type="email"], .form-group input[type="url"], .form-group input[type="number"], .form-group textarea { width: 100%; padding: 12px 14px; background: #0d0d0d; border: 1px solid #333; border-radius: 6px; color: #fff; font-size: 14px; font-family: inherit; }
+        .form-group textarea { min-height: 100px; resize: vertical; }
+        .form-group textarea.bodyHtml { min-height: 280px; font-family: ui-monospace, monospace; font-size: 12px; }
+        .form-row { display: flex; gap: 12px; align-items: flex-end; margin-bottom: 12px; }
+        .form-row .form-group { flex: 1; margin-bottom: 0; }
+        .item-card { background: #0d0d0d; border: 1px solid #2a2a2a; border-radius: 6px; padding: 16px; margin-bottom: 12px; }
+        .item-card h4 { font-size: 14px; margin-bottom: 12px; color: #ccc; }
+        .add-btn { padding: 8px 14px; background: #2a2a2a; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; margin-top: 8px; }
+        .add-btn:hover { background: #333; }
+        .remove-btn { padding: 6px 12px; background: transparent; color: #888; border: 1px solid #444; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 8px; }
+        .remove-btn:hover { color: #f44; border-color: #f44; }
+        .file-upload-row { display: flex; gap: 8px; align-items: center; }
+        .file-upload-row input { flex: 1; }
+        .btn-upload { padding: 10px 16px; background: #333; color: #fff; border: 1px solid #444; border-radius: 6px; cursor: pointer; font-size: 13px; white-space: nowrap; }
+        .btn-upload:hover { background: #444; }
+        .toast { position: fixed; bottom: 24px; right: 24px; background: #1a1a1a; border: 1px solid #333; padding: 14px 20px; border-radius: 8px; font-size: 14px; z-index: 9999; display: none; }
+        .toast.show { display: block; animation: fadeIn 0.2s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .module-checkbox { accent-color: #fff; width: 18px; height: 18px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <header class="topbar">
+            <h1>Portfolio CMS – Module by module</h1>
+            <div class="topbar-actions">
+                <button type="button" class="btn btn-secondary" id="btnDownload">Download JSON</button>
+                <button type="button" class="btn btn-primary" id="btnPublish">Save & Publish</button>
+            </div>
+        </header>
+        <div class="main">
+            <nav class="sidebar">
+                <h2>Modules on site</h2>
+                <a href="#" data-panel="modules" class="nav-link active">Modules (on/off)</a>
+                <h2>Edit content</h2>
+                <a href="#" data-panel="header" class="nav-link">Header</a>
+                <a href="#" data-panel="hero" class="nav-link">Hero</a>
+                <a href="#" data-panel="aboutMe" class="nav-link">About Me</a>
+                <a href="#" data-panel="reel" class="nav-link">Reel</a>
+                <a href="#" data-panel="experience" class="nav-link">Experience</a>
+                <a href="#" data-panel="projects" class="nav-link">Projects</a>
+                <a href="#" data-panel="media" class="nav-link">Media Manager</a>
+                <a href="#" data-panel="footer" class="nav-link">Footer</a>
+                <a href="#" data-panel="music" class="nav-link">Music</a>
+                <a href="#" data-panel="analytics" class="nav-link">Analytics</a>
+            </nav>
+            <main class="content" id="cmsContent"></main>
+        </div>
+    </div>
+    <div class="toast" id="toast"></div>
+
+    <script>
+(function() {
+    const MODULE_IDS = ['header', 'hero', 'aboutMe', 'reel', 'experience', 'projects', 'footer', 'music', 'analytics'];
+    const DEFAULT_MODULES = Object.fromEntries(MODULE_IDS.map(m => [m, true]));
+
+    let content = { modules: { ...DEFAULT_MODULES } };
+
+    function escapeHtml(s) {
+        if (s == null) return '';
+        const d = document.createElement('div');
+        d.textContent = s;
+        return d.innerHTML;
+    }
+
+    async function loadContent() {
+        try {
+            const r = await fetch('content.json?v=' + Date.now());
+            if (r.ok) {
+                const data = await r.json();
+                content = data;
+                if (!content.modules) content.modules = { ...DEFAULT_MODULES };
+                MODULE_IDS.forEach(m => { if (content.modules[m] === undefined) content.modules[m] = true; });
+            }
+        } catch (e) {
+            console.error('Load content:', e);
+        }
+        renderAll();
+    }
+
+    function renderAll() {
+        renderModulesPanel();
+        renderHeaderPanel();
+        renderHeroPanel();
+        renderAboutMePanel();
+        renderReelPanel();
+        renderExperiencePanel();
+        renderProjectsPanel();
+        renderMediaPanel();
+        renderFooterPanel();
+        renderMusicPanel();
+        renderAnalyticsPanel();
+        showPanel('modules');
+    }
+
+    function showPanel(id) {
+        document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
+        document.querySelector(`[data-panel="${id}"]`)?.classList.add('active');
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        const el = document.getElementById('panel-' + id);
+        if (el) el.classList.add('active');
+    }
+
+    function renderModulesPanel() {
+        const el = document.getElementById('panel-modules');
+        if (!el) return;
+        el.innerHTML = `
+            <h3>Show / hide modules on the site</h3>
+            <p style="color:#888;margin-bottom:24px;font-size:14px;">Turn modules on or off. When off, the section is hidden on the live site.</p>
+            ${MODULE_IDS.map(m => `
+                <div class="form-row" style="align-items:center;">
+                    <label style="margin:0;flex:1;color:#e5e5e5;">${m === 'aboutMe' ? 'About Me' : m.charAt(0).toUpperCase() + m.slice(1)}</label>
+                    <input type="checkbox" class="module-checkbox" data-module="${m}" ${content.modules[m] ? 'checked' : ''}>
+                </div>
+            `).join('')}
+        `;
+        el.querySelectorAll('.module-checkbox').forEach(cb => {
+            cb.addEventListener('change', () => { content.modules[cb.dataset.module] = cb.checked; });
+        });
+    }
+
+    function renderHeaderPanel() {
+        content.header = content.header || {};
+        const h = content.header;
+        if (!h.navigation || !h.navigation.length) h.navigation = [
+            { text: 'about me', href: '#' },
+            { text: 'experience', href: '#experience' },
+            { text: 'reel', href: '#reel' },
+            { text: 'projects', href: '#work' }
+        ];
+        h.location = h.location || {};
+        const loc = h.location;
+        const el = document.getElementById('panel-header');
+        if (!el) return;
+        el.innerHTML = `
+            <h3>Header</h3>
+            <div class="form-group">
+                <label>Location text</label>
+                <input type="text" id="headerLocationText" value="${escapeHtml(loc.text || '')}" placeholder="e.g. amsterdam">
+            </div>
+            <div class="form-group">
+                <label>Location link (URL)</label>
+                <input type="url" id="headerLocationLink" value="${escapeHtml(loc.link || '')}" placeholder="https://...">
+            </div>
+            <div class="form-group">
+                <label>CV file (Download CV link)</label>
+                <div class="file-upload-row">
+                    <input type="text" id="headerCvFile" value="${escapeHtml(h.cvFile || '')}" placeholder="cv.pdf or full URL">
+                    <button type="button" class="btn-upload" onclick="uploadCV()">Upload PDF</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Navigation links</label>
+                <div id="headerNavList"></div>
+                <button type="button" class="add-btn" id="headerNavAdd">+ Add link</button>
+            </div>
+        `;
+        function renderNavList() {
+            const list = document.getElementById('headerNavList');
+            list.innerHTML = (h.navigation || []).map((item, i) => `
+                <div class="item-card">
+                    <h4>Link ${i + 1}</h4>
+                    <div class="form-row">
+                        <div class="form-group"><label>Label</label><input type="text" data-nav-i="${i}" data-key="text" value="${escapeHtml(item.text || '')}"></div>
+                        <div class="form-group"><label>URL / hash</label><input type="text" data-nav-i="${i}" data-key="href" value="${escapeHtml(item.href || '')}"></div>
+                        <button type="button" class="remove-btn" data-nav-i="${i}">Remove</button>
+                    </div>
+                </div>
+            `).join('');
+            list.querySelectorAll('input').forEach(inp => {
+                inp.addEventListener('input', () => {
+                    const i = parseInt(inp.dataset.navI, 10);
+                    if (!content.header.navigation[i]) return;
+                    content.header.navigation[i][inp.dataset.key] = inp.value;
+                });
+            });
+            list.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    content.header.navigation.splice(parseInt(btn.dataset.navI, 10), 1);
+                    renderNavList();
+                });
+            });
+        }
+        document.getElementById('headerNavAdd').addEventListener('click', () => {
+            content.header.navigation.push({ text: '', href: '#' });
+            renderNavList();
+        });
+        renderNavList();
+        document.getElementById('headerLocationText').addEventListener('input', e => {
+            if (!content.header.location) content.header.location = {};
+            content.header.location.text = e.target.value;
+        });
+        document.getElementById('headerLocationLink').addEventListener('input', e => {
+            if (!content.header.location) content.header.location = {};
+            content.header.location.link = e.target.value;
+        });
+        document.getElementById('headerCvFile').addEventListener('input', e => { content.header.cvFile = e.target.value; });
+    }
+
+    function renderHeroPanel() {
+        content.hero = content.hero || {};
+        const h = content.hero;
+        h.tags = h.tags || { tools: [], skills: [] };
+        const tags = h.tags;
+        if (!Array.isArray(tags.tools)) tags.tools = [];
+        if (!Array.isArray(tags.skills)) tags.skills = [];
+        const el = document.getElementById('panel-hero');
+        if (!el) return;
+        el.innerHTML = `
+            <h3>Hero</h3>
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" id="heroName" value="${escapeHtml(h.name || '')}">
+            </div>
+            <div class="form-group">
+                <label>Subtitle</label>
+                <textarea id="heroSubtitle" rows="3">${escapeHtml(h.subtitle || '')}</textarea>
+            </div>
+            <div class="form-group">
+                <label>Photo (URL)</label>
+                <input type="url" id="heroPhoto" value="${escapeHtml(h.photo || '')}">
+            </div>
+            <div class="form-group">
+                <label>Tools (one per line or comma-separated)</label>
+                <textarea id="heroTools" rows="3">${(tags.tools || []).join('\n')}</textarea>
+            </div>
+            <div class="form-group">
+                <label>Skills (one per line or comma-separated)</label>
+                <textarea id="heroSkills" rows="3">${(tags.skills || []).join('\n')}</textarea>
+            </div>
+        `;
+        document.getElementById('heroName').addEventListener('input', e => { content.hero.name = e.target.value; });
+        document.getElementById('heroSubtitle').addEventListener('input', e => { content.hero.subtitle = e.target.value; });
+        document.getElementById('heroPhoto').addEventListener('input', e => { content.hero.photo = e.target.value; });
+        document.getElementById('heroTools').addEventListener('input', e => {
+            content.hero.tags = content.hero.tags || {};
+            content.hero.tags.tools = e.target.value.split(/[\n,]/).map(s => s.trim()).filter(Boolean);
+        });
+        document.getElementById('heroSkills').addEventListener('input', e => {
+            content.hero.tags = content.hero.tags || {};
+            content.hero.tags.skills = e.target.value.split(/[\n,]/).map(s => s.trim()).filter(Boolean);
+        });
+    }
+
+    function renderAboutMePanel() {
+        content.aboutMe = content.aboutMe || {};
+        const a = content.aboutMe;
+        if (!Array.isArray(a.bio)) a.bio = [];
+        const el = document.getElementById('panel-aboutMe');
+        if (!el) return;
+        el.innerHTML = `
+            <h3>About Me</h3>
+            <div class="form-group">
+                <label>Photo (URL)</label>
+                <input type="url" id="aboutPhoto" value="${escapeHtml(a.photo || '')}">
+            </div>
+            <div class="form-group">
+                <label>Bio paragraphs (one paragraph per textarea)</label>
+                <div id="aboutBioList"></div>
+                <button type="button" class="add-btn" id="aboutBioAdd">+ Add paragraph</button>
+            </div>
+        `;
+        function renderBioList() {
+            const list = document.getElementById('aboutBioList');
+            list.innerHTML = (content.aboutMe.bio || []).map((p, i) => `
+                <div class="item-card">
+                    <h4>Paragraph ${i + 1}</h4>
+                    <textarea data-bio-i="${i}" rows="4">${escapeHtml(p)}</textarea>
+                    <button type="button" class="remove-btn" data-bio-i="${i}">Remove</button>
+                </div>
+            `).join('');
+            list.querySelectorAll('textarea').forEach(ta => {
+                ta.addEventListener('input', () => {
+                    const i = parseInt(ta.dataset.bioI, 10);
+                    content.aboutMe.bio[i] = ta.value;
+                });
+            });
+            list.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    content.aboutMe.bio.splice(parseInt(btn.dataset.bioI, 10), 1);
+                    renderBioList();
+                });
+            });
+        }
+        document.getElementById('aboutPhoto').addEventListener('input', e => { content.aboutMe.photo = e.target.value; });
+        document.getElementById('aboutBioAdd').addEventListener('click', () => {
+            content.aboutMe.bio = content.aboutMe.bio || [];
+            content.aboutMe.bio.push('');
+            renderBioList();
+        });
+        renderBioList();
+    }
+
+    function renderExperiencePanel() {
+        content.experience = Array.isArray(content.experience) ? content.experience : [];
+        const el = document.getElementById('panel-experience');
+        if (!el) return;
+        el.innerHTML = `
+            <h3>Experience</h3>
+            <p style="color:#888;margin-bottom:20px;font-size:14px;">Each company can have multiple roles. Add/remove companies and roles.</p>
+            <div id="experienceList"></div>
+            <button type="button" class="add-btn" id="expAddCompany">+ Add company</button>
+        `;
+        function renderExpList() {
+            const list = document.getElementById('experienceList');
+            list.innerHTML = (content.experience || []).map((company, ci) => `
+                <div class="item-card" style="margin-bottom:20px;">
+                    <h4>Company: ${escapeHtml(company.company || '')}</h4>
+                    <div class="form-group">
+                        <label>Company name</label>
+                        <input type="text" data-ci="${ci}" data-key="company" value="${escapeHtml(company.company || '')}">
+                    </div>
+                    <div class="form-group">
+                        <label>Image (filename or URL)</label>
+                        <input type="text" data-ci="${ci}" data-key="image" value="${escapeHtml(company.image || '')}">
+                    </div>
+                    <div class="form-group">
+                        <label>Roles</label>
+                        <div class="roles-list-${ci}"></div>
+                        <button type="button" class="add-btn exp-add-role" data-ci="${ci}">+ Add role</button>
+                    </div>
+                    <button type="button" class="remove-btn" data-remove-ci="${ci}">Remove company</button>
+                </div>
+            `).join('');
+            list.querySelectorAll('input[data-ci]').forEach(inp => {
+                inp.addEventListener('input', () => {
+                    const ci = parseInt(inp.dataset.ci, 10);
+                    content.experience[ci] = content.experience[ci] || {};
+                    content.experience[ci][inp.dataset.key] = inp.value;
+                });
+            });
+            (content.experience || []).forEach((company, ci) => {
+                const rolesEl = list.querySelector('.roles-list-' + ci);
+                if (!rolesEl) return;
+                const roles = company.roles || [];
+                rolesEl.innerHTML = roles.map((role, ri) => `
+                    <div class="item-card" style="margin-top:8px;">
+                        <div class="form-row"><div class="form-group"><label>Title</label><input type="text" data-ci="${ci}" data-ri="${ri}" data-key="title" value="${escapeHtml(role.title || '')}"></div></div>
+                        <div class="form-row">
+                            <div class="form-group"><label>Start</label><input type="text" data-ci="${ci}" data-ri="${ri}" data-key="start" value="${escapeHtml((role.period && role.period.start) || '')}" placeholder="2024"></div>
+                            <div class="form-group"><label>End</label><input type="text" data-ci="${ci}" data-ri="${ri}" data-key="end" value="${escapeHtml((role.period && role.period.end) || '')}" placeholder="Now"></div>
+                        </div>
+                        <div class="form-group"><label>Description</label><textarea data-ci="${ci}" data-ri="${ri}" data-key="description" rows="3">${escapeHtml(role.description || '')}</textarea></div>
+                        <button type="button" class="remove-btn exp-remove-role" data-ci="${ci}" data-ri="${ri}">Remove role</button>
+                    </div>
+                `).join('');
+                rolesEl.querySelectorAll('input, textarea').forEach(inp => {
+                    inp.addEventListener('input', () => {
+                        const ri = parseInt(inp.dataset.ri, 10);
+                        content.experience[ci].roles = content.experience[ci].roles || [];
+                        if (inp.dataset.key === 'start' || inp.dataset.key === 'end') {
+                            content.experience[ci].roles[ri].period = content.experience[ci].roles[ri].period || {};
+                            content.experience[ci].roles[ri].period[inp.dataset.key === 'start' ? 'start' : 'end'] = inp.value;
+                        } else {
+                            content.experience[ci].roles[ri][inp.dataset.key] = inp.value;
+                        }
+                    });
+                });
+                rolesEl.querySelectorAll('.exp-remove-role').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        content.experience[ci].roles.splice(parseInt(btn.dataset.ri, 10), 1);
+                        renderExpList();
+                    });
+                });
+            });
+            list.querySelectorAll('.exp-add-role').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const ci = parseInt(btn.dataset.ci, 10);
+                    content.experience[ci].roles = content.experience[ci].roles || [];
+                    content.experience[ci].roles.push({ title: '', period: { start: '', end: '' }, description: '' });
+                    renderExpList();
+                });
+            });
+            list.querySelectorAll('[data-remove-ci]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    content.experience.splice(parseInt(btn.dataset.removeCi, 10), 1);
+                    renderExpList();
+                });
+            });
+        }
+        document.getElementById('expAddCompany').addEventListener('click', () => {
+            content.experience = content.experience || [];
+            content.experience.push({ company: '', image: '', roles: [{ title: '', period: { start: '', end: '' }, description: '' }] });
+            renderExpList();
+        });
+        renderExpList();
+    }
+
+    function renderReelPanel() {
+        content.reel = content.reel || {};
+        const r = content.reel;
+        const el = document.getElementById('panel-reel');
+        if (!el) return;
+        el.innerHTML = `
+            <h3>Reel</h3>
+            <div class="form-group">
+                <label>Video URL</label>
+                <input type="url" id="reelFile" value="${escapeHtml(r.file || '')}">
+            </div>
+        `;
+        document.getElementById('reelFile').addEventListener('input', e => { content.reel.file = e.target.value; });
+    }
+
+    // Enhanced Projects Panel with Structured Content Editor
+    function renderProjectsPanel() {
+        content.projects = content.projects || [];
+        const el = document.getElementById('panel-projects');
+        if (!el) return;
+        
+        el.innerHTML = `
+            <h3>Projects</h3>
+            <p style="color:#888;margin-bottom:20px;font-size:14px;">Click on a project to edit its content visually. Add/remove sections, upload media, edit text.</p>
+            <div id="projectsList"></div>
+            <button type="button" class="add-btn" id="projectsAdd">+ Add new project</button>
+        `;
+        
+        function renderProjectsList() {
+            const list = document.getElementById('projectsList');
+            list.innerHTML = content.projects.map((proj, pi) => `
+                <div class="item-card" style="margin-bottom:16px;cursor:pointer;" data-expand-project="${pi}">
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <h4 style="margin:0;">${escapeHtml(proj.name || 'Untitled Project')}</h4>
+                        <span style="color:#666;font-size:12px;">${proj.company || 'No company'}</span>
+                    </div>
+                    <div id="project-editor-${pi}" style="display:none;margin-top:20px;"></div>
+                </div>
+            `).join('');
+            
+            // Add click handlers to expand/collapse
+            list.querySelectorAll('[data-expand-project]').forEach(card => {
+                const pi = parseInt(card.dataset.expandProject, 10);
+                const editorDiv = card.querySelector(`#project-editor-${pi}`);
+                
+                card.addEventListener('click', (e) => {
+                    // Don't trigger if clicking inside editor
+                    if (e.target.closest(`#project-editor-${pi}`)) return;
+                    
+                    const isExpanded = editorDiv.style.display !== 'none';
+                    if (isExpanded) {
+                        editorDiv.style.display = 'none';
+                    } else {
+                        // Close all others
+                        list.querySelectorAll('[id^="project-editor-"]').forEach(ed => ed.style.display = 'none');
+                        editorDiv.style.display = 'block';
+                        renderProjectEditor(pi, editorDiv);
+                    }
+                });
+            });
+        }
+        
+        function renderProjectEditor(pi, container) {
+            const proj = content.projects[pi];
+            const hasStructured = proj.structuredContent && typeof proj.structuredContent === 'object';
+            
+            container.innerHTML = `
+                <div style="background:#0d0d0d;padding:20px;border-radius:6px;border:1px solid #2a2a2a;">
+                    
+                    <!-- Basic Info -->
+                    <div style="margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid #2a2a2a;">
+                        <h4 style="font-size:14px;color:#ccc;margin-bottom:16px;">Basic Information</h4>
+                        <div class="form-group">
+                            <label>Project Name</label>
+                            <input type="text" id="proj-${pi}-name" value="${escapeHtml(proj.name || '')}" placeholder="Motion Design System">
+                        </div>
+                        <div class="form-group">
+                            <label>Company</label>
+                            <input type="text" id="proj-${pi}-company" value="${escapeHtml(proj.company || '')}" placeholder="Qonto">
+                        </div>
+                        <div class="form-group">
+                            <label>Card Preview (cover image/video)</label>
+                            <div class="file-upload-row">
+                                <input type="url" id="proj-${pi}-preview" value="${escapeHtml(proj.cardPreview || '')}" placeholder="URL">
+                                <button type="button" class="btn-upload" onclick="uploadProjectMedia(${pi}, 'cardPreview')">Upload</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Color (hex)</label>
+                            <input type="text" id="proj-${pi}-color" value="${escapeHtml(proj.color || '#141414')}" placeholder="#141414">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><input type="checkbox" id="proj-${pi}-password-enabled" ${proj.passwordProtected ? 'checked' : ''}> Password protected</label>
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="text" id="proj-${pi}-password" value="${escapeHtml(proj.password || '')}">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Content Editor Mode Toggle -->
+                    <div style="margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid #2a2a2a;">
+                        <h4 style="font-size:14px;color:#ccc;margin-bottom:12px;">Content Mode</h4>
+                        <div style="display:flex;gap:12px;">
+                            <button type="button" class="btn ${hasStructured ? 'btn-primary' : 'btn-secondary'}" onclick="switchToStructured(${pi})" style="padding:8px 16px;font-size:13px;">
+                                ✨ Visual Editor ${hasStructured ? '(Active)' : ''}
+                            </button>
+                            <button type="button" class="btn ${!hasStructured ? 'btn-primary' : 'btn-secondary'}" onclick="switchToHTML(${pi})" style="padding:8px 16px;font-size:13px;">
+                                </> HTML Mode ${!hasStructured ? '(Active)' : ''}
+                            </button>
+                        </div>
+                        <p style="color:#666;font-size:12px;margin-top:8px;">Visual Editor: Add/remove sections visually. HTML Mode: For advanced projects.</p>
+                    </div>
+                    
+                    <!-- Content Editor -->
+                    <div id="content-editor-${pi}">
+                        ${hasStructured ? renderStructuredEditor(pi) : renderHTMLEditor(pi)}
+                    </div>
+                    
+                    <!-- Actions -->
+                    <div style="margin-top:24px;padding-top:24px;border-top:1px solid #2a2a2a;display:flex;gap:12px;">
+                        <button type="button" class="remove-btn" onclick="removeProject(${pi})">Delete Project</button>
+                        <button type="button" class="btn btn-secondary" onclick="duplicateProject(${pi})" style="padding:8px 16px;font-size:13px;">Duplicate</button>
+                    </div>
+                </div>
+            `;
+            
+            // Attach basic info handlers
+            document.getElementById(`proj-${pi}-name`).addEventListener('input', e => {
+                content.projects[pi].name = e.target.value;
+            });
+            document.getElementById(`proj-${pi}-company`).addEventListener('input', e => {
+                content.projects[pi].company = e.target.value;
+            });
+            document.getElementById(`proj-${pi}-preview`).addEventListener('input', e => {
+                content.projects[pi].cardPreview = e.target.value;
+            });
+            document.getElementById(`proj-${pi}-color`).addEventListener('input', e => {
+                content.projects[pi].color = e.target.value;
+            });
+            document.getElementById(`proj-${pi}-password-enabled`).addEventListener('change', e => {
+                content.projects[pi].passwordProtected = e.target.checked;
+            });
+        document.getElementById(`proj-${pi}-password`).addEventListener('input', e => {
+            content.projects[pi].password = e.target.value;
+        });
+        
+        // Attach structured content handlers if in structured mode
+        const tagsInput = document.getElementById(`proj-${pi}-tags`);
+        const introInput = document.getElementById(`proj-${pi}-intro`);
+        const metaInput = document.getElementById(`proj-${pi}-meta`);
+        
+        if (tagsInput) {
+            tagsInput.addEventListener('input', e => {
+                if (!content.projects[pi].structuredContent) content.projects[pi].structuredContent = {};
+                content.projects[pi].structuredContent.tags = e.target.value.split(',').map(t => t.trim()).filter(Boolean);
+            });
+        }
+        if (introInput) {
+            introInput.addEventListener('input', e => {
+                if (!content.projects[pi].structuredContent) content.projects[pi].structuredContent = {};
+                content.projects[pi].structuredContent.intro = e.target.value;
+            });
+        }
+        if (metaInput) {
+            metaInput.addEventListener('input', e => {
+                if (!content.projects[pi].structuredContent) content.projects[pi].structuredContent = {};
+                content.projects[pi].structuredContent.meta = e.target.value;
+            });
+        }
+        
+        // Attach HTML mode handlers
+        const customUrlInput = document.getElementById(`proj-${pi}-customUrl`);
+        const bodyHtmlInput = document.getElementById(`proj-${pi}-bodyHtml`);
+        
+        if (customUrlInput) {
+            customUrlInput.addEventListener('input', e => {
+                content.projects[pi].customUrl = e.target.value;
+            });
+        }
+        if (bodyHtmlInput) {
+            bodyHtmlInput.addEventListener('input', e => {
+                content.projects[pi].bodyHtml = e.target.value;
+            });
+        }
+    }
+        
+        function renderStructuredEditor(pi) {
+            const proj = content.projects[pi];
+            const sc = proj.structuredContent || { tags: [], intro: '', meta: '', sections: [] };
+            
+            return `
+                <div style="background:#1a1a1a;padding:20px;border-radius:6px;">
+                    <h4 style="font-size:14px;color:#ccc;margin-bottom:16px;">Project Content</h4>
+                    
+                    <!-- Tags -->
+                    <div class="form-group">
+                        <label>Tags (comma separated)</label>
+                        <input type="text" id="proj-${pi}-tags" value="${(sc.tags || []).join(', ')}" placeholder="Motion Design, Design System">
+                    </div>
+                    
+                    <!-- Intro -->
+                    <div class="form-group">
+                        <label>Introduction</label>
+                        <textarea id="proj-${pi}-intro" rows="3">${escapeHtml(sc.intro || '')}</textarea>
+                    </div>
+                    
+                    <!-- Meta -->
+                    <div class="form-group">
+                        <label>Meta (role and year)</label>
+                        <input type="text" id="proj-${pi}-meta" value="${escapeHtml(sc.meta || '')}" placeholder="2025 - 2026 Staff Motion Designer">
+                    </div>
+                    
+                    <!-- Sections -->
+                    <div style="margin-top:24px;padding-top:24px;border-top:1px solid #2a2a2a;">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                            <h4 style="font-size:14px;color:#ccc;margin:0;">Sections</h4>
+                            <button type="button" class="add-btn" onclick="addSection(${pi})">+ Add Section</button>
+                        </div>
+                        <div id="sections-list-${pi}">
+                            ${(sc.sections || []).map((section, si) => renderSectionEditor(pi, si, section)).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderSectionEditor(pi, si, section) {
+            const type = section.type || 'text';
+            
+            return `
+                <div class="item-card" style="margin-bottom:16px;background:#0d0d0d;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                        <select id="proj-${pi}-sec-${si}-type" style="background:#1a1a1a;color:#fff;border:1px solid #333;padding:8px;border-radius:4px;">
+                            <option value="text" ${type === 'text' ? 'selected' : ''}>Text Section</option>
+                            <option value="showcase" ${type === 'showcase' ? 'selected' : ''}>Showcase (with media)</option>
+                            <option value="stats" ${type === 'stats' ? 'selected' : ''}>Stats Grid</option>
+                            <option value="step" ${type === 'step' ? 'selected' : ''}>Step (numbered)</option>
+                        </select>
+                        <div style="display:flex;gap:8px;">
+                            ${si > 0 ? `<button type="button" class="btn-secondary" onclick="moveSection(${pi}, ${si}, -1)" style="padding:4px 8px;font-size:12px;">↑</button>` : ''}
+                            <button type="button" class="btn-secondary" onclick="moveSection(${pi}, ${si}, 1)" style="padding:4px 8px;font-size:12px;">↓</button>
+                            <button type="button" class="remove-btn" onclick="removeSection(${pi}, ${si})" style="padding:4px 8px;font-size:12px;">Remove</button>
+                        </div>
+                    </div>
+                    <div id="section-content-${pi}-${si}">
+                        ${renderSectionContentEditor(pi, si, section)}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderSectionContentEditor(pi, si, section) {
+            const type = section.type || 'text';
+            
+            if (type === 'text') {
+                return `
+                    <div class="form-group">
+                        <label>Label</label>
+                        <input type="text" id="proj-${pi}-sec-${si}-label" value="${escapeHtml(section.label || '')}" placeholder="Context">
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="proj-${pi}-sec-${si}-title" value="${escapeHtml(section.title || '')}" placeholder="The Problem">
+                    </div>
+                    <div class="form-group">
+                        <label>Paragraphs (one per line)</label>
+                        <textarea id="proj-${pi}-sec-${si}-paragraphs" rows="6">${(section.paragraphs || []).join('\n\n')}</textarea>
+                        <small style="color:#666;">Each paragraph on a new line. Use &lt;strong&gt; for bold text.</small>
+                    </div>
+                `;
+            }
+            
+            if (type === 'showcase') {
+                return `
+                    <div class="form-group">
+                        <label>Label</label>
+                        <input type="text" id="proj-${pi}-sec-${si}-label" value="${escapeHtml(section.label || '')}" placeholder="Deliverables">
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="proj-${pi}-sec-${si}-title" value="${escapeHtml(section.title || '')}" placeholder="Core Brand Animations">
+                    </div>
+                    <p style="color:#888;font-size:12px;margin:16px 0;">Showcase items coming soon - for now use HTML mode for complex showcases</p>
+                `;
+            }
+            
+            if (type === 'stats') {
+                return `
+                    <div class="form-group">
+                        <label>Stats (format: "1,000+|Lottie Files" one per line)</label>
+                        <textarea id="proj-${pi}-sec-${si}-stats" rows="4">${(section.items || []).map(s => `${s.number}|${s.label}`).join('\n')}</textarea>
+                        <small style="color:#666;">Format: Number|Label (one per line)</small>
+                    </div>
+                `;
+            }
+            
+            if (type === 'step') {
+                return `
+                    <div class="form-group">
+                        <label>Number</label>
+                        <input type="text" id="proj-${pi}-sec-${si}-number" value="${escapeHtml(section.number || '')}" placeholder="01">
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="proj-${pi}-sec-${si}-title" value="${escapeHtml(section.title || '')}" placeholder="Motion Principles">
+                    </div>
+                    <div class="form-group">
+                        <label>Paragraphs (one per line)</label>
+                        <textarea id="proj-${pi}-sec-${si}-paragraphs" rows="6">${(section.paragraphs || []).join('\n\n')}</textarea>
+                    </div>
+                `;
+            }
+            
+            return '<p style="color:#888;">Unknown section type</p>';
+        }
+        
+        function renderHTMLEditor(pi) {
+            const proj = content.projects[pi];
+            return `
+                <div style="background:#1a1a1a;padding:20px;border-radius:6px;">
+                    <h4 style="font-size:14px;color:#ccc;margin-bottom:16px;">HTML Content</h4>
+                    <div class="form-group">
+                        <label>Custom URL (legacy HTML file)</label>
+                        <input type="text" id="proj-${pi}-customUrl" value="${escapeHtml(proj.customUrl || '')}" placeholder="project-1.html">
+                    </div>
+                    <div class="form-group">
+                        <label>Body HTML</label>
+                        <textarea class="bodyHtml" id="proj-${pi}-bodyHtml">${escapeHtml(proj.bodyHtml || '')}</textarea>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Global helper functions
+        window.switchToStructured = function(pi) {
+            const proj = content.projects[pi];
+            if (!proj.structuredContent) {
+                proj.structuredContent = {
+                    tags: [],
+                    intro: '',
+                    meta: '',
+                    sections: []
+                };
+            }
+            const editorDiv = document.querySelector(`#project-editor-${pi}`);
+            if (editorDiv) renderProjectEditor(pi, editorDiv);
+        };
+        
+        window.switchToHTML = function(pi) {
+            const proj = content.projects[pi];
+            delete proj.structuredContent;
+            const editorDiv = document.querySelector(`#project-editor-${pi}`);
+            if (editorDiv) renderProjectEditor(pi, editorDiv);
+        };
+        
+        window.addSection = function(pi) {
+            const proj = content.projects[pi];
+            if (!proj.structuredContent) proj.structuredContent = { sections: [] };
+            if (!proj.structuredContent.sections) proj.structuredContent.sections = [];
+            proj.structuredContent.sections.push({
+                type: 'text',
+                label: '',
+                title: '',
+                paragraphs: []
+            });
+            const editorDiv = document.querySelector(`#project-editor-${pi}`);
+            if (editorDiv) renderProjectEditor(pi, editorDiv);
+        };
+        
+        window.removeSection = function(pi, si) {
+            const proj = content.projects[pi];
+            if (proj.structuredContent && proj.structuredContent.sections) {
+                proj.structuredContent.sections.splice(si, 1);
+                const editorDiv = document.querySelector(`#project-editor-${pi}`);
+                if (editorDiv) renderProjectEditor(pi, editorDiv);
+            }
+        };
+        
+        window.moveSection = function(pi, si, direction) {
+            const proj = content.projects[pi];
+            if (proj.structuredContent && proj.structuredContent.sections) {
+                const sections = proj.structuredContent.sections;
+                const newIndex = si + direction;
+                if (newIndex >= 0 && newIndex < sections.length) {
+                    [sections[si], sections[newIndex]] = [sections[newIndex], sections[si]];
+                    const editorDiv = document.querySelector(`#project-editor-${pi}`);
+                    if (editorDiv) renderProjectEditor(pi, editorDiv);
+                }
+            }
+        };
+        
+        window.removeProject = function(pi) {
+            if (confirm('Delete this project?')) {
+                content.projects.splice(pi, 1);
+                renderProjectsList();
+            }
+        };
+        
+        window.duplicateProject = function(pi) {
+            const proj = JSON.parse(JSON.stringify(content.projects[pi]));
+            proj.name = (proj.name || 'Untitled') + ' (Copy)';
+            proj.id = content.projects.length ? Math.max(...content.projects.map(p => p.id || 0)) + 1 : 1;
+            content.projects.push(proj);
+            renderProjectsList();
+        };
+        
+        window.uploadProjectMedia = function(pi, field) {
+            const widget = cloudinary.createUploadWidget({
+                cloudName: 'dnbmyyc9x',
+                uploadPreset: 'portfolio_preset',
+                sources: ['local', 'url'],
+                multiple: false
+            }, (error, result) => {
+                if (error) {
+                    console.error('Upload error:', error);
+                    toast('Upload failed');
+                    return;
+                }
+                if (result.event === 'success') {
+                    const url = result.info.secure_url;
+                    content.projects[pi][field] = url;
+                    const input = document.getElementById(`proj-${pi}-preview`);
+                    if (input) input.value = url;
+                    toast('Uploaded!');
+                }
+            });
+            widget.open();
+        };
+        
+        document.getElementById('projectsAdd').addEventListener('click', () => {
+            const nextId = content.projects.length ? Math.max(...content.projects.map(p => p.id || 0)) + 1 : 1;
+            content.projects.push({
+                id: nextId,
+                name: 'New Project',
+                company: '',
+                color: '#141414',
+                passwordProtected: false,
+                password: '',
+                cardPreview: '',
+                structuredContent: {
+                    tags: [],
+                    intro: '',
+                    meta: '',
+                    sections: []
+                }
+            });
+            renderProjectsList();
+        });
+        
+        renderProjectsList();
+    }
+
+    function renderMediaPanel() {
+        const el = document.getElementById('panel-media');
+        if (!el) return;
+        
+        // Extract all media files from projects
+        const mediaFiles = new Map();
+        
+        content.projects.forEach((proj, projIndex) => {
+            const projName = proj.name || `Project ${proj.id}`;
+            
+            // Card preview
+            if (proj.cardPreview) {
+                mediaFiles.set(proj.cardPreview, {
+                    url: proj.cardPreview,
+                    project: projName,
+                    type: 'Card Preview',
+                    path: `projects[${projIndex}].cardPreview`
+                });
+            }
+            
+            // Extract from bodyHtml (videos and images)
+            if (proj.bodyHtml) {
+                const srcMatches = proj.bodyHtml.matchAll(/(?:src|href)=["']([^"']+\.(?:mp4|gif|webm|png|jpg|jpeg|mov))["']/gi);
+                for (const match of srcMatches) {
+                    const url = match[1];
+                    if (!mediaFiles.has(url)) {
+                        mediaFiles.set(url, {
+                            url: url,
+                            project: projName,
+                            type: 'In Body',
+                            path: `projects[${projIndex}].bodyHtml`
+                        });
+                    }
+                }
+            }
+            
+            // Grid media
+            if (proj.media && Array.isArray(proj.media.grid)) {
+                proj.media.grid.forEach((url, idx) => {
+                    if (!mediaFiles.has(url)) {
+                        mediaFiles.set(url, {
+                            url: url,
+                            project: projName,
+                            type: 'Grid Media',
+                            path: `projects[${projIndex}].media.grid[${idx}]`
+                        });
+                    }
+                });
+            }
+            
+            // Hero media
+            if (proj.media && proj.media.hero) {
+                if (!mediaFiles.has(proj.media.hero)) {
+                    mediaFiles.set(proj.media.hero, {
+                        url: proj.media.hero,
+                        project: projName,
+                        type: 'Hero',
+                        path: `projects[${projIndex}].media.hero`
+                    });
+                }
+            }
+        });
+        
+        const mediaArray = Array.from(mediaFiles.values());
+        
+        el.innerHTML = `
+            <h3>Media Manager</h3>
+            <p style="color:#888;margin-bottom:20px;font-size:14px;">
+                All images and videos used across your projects. Use "Replace" to upload a new file to Cloudinary and automatically update all references.
+            </p>
+            <div style="margin-bottom:16px;">
+                <input type="text" id="mediaSearch" placeholder="Search files..." style="width:100%;padding:10px;background:#0d0d0d;border:1px solid #333;border-radius:6px;color:#fff;font-size:14px;">
+            </div>
+            <div id="mediaList" style="max-height:calc(100vh - 280px);overflow-y:auto;"></div>
+        `;
+        
+        function renderMediaList(filter = '') {
+            const list = document.getElementById('mediaList');
+            const filtered = filter ? mediaArray.filter(m => 
+                m.url.toLowerCase().includes(filter.toLowerCase()) || 
+                m.project.toLowerCase().includes(filter.toLowerCase())
+            ) : mediaArray;
+            
+            list.innerHTML = filtered.map((media, idx) => {
+                const filename = media.url.split('/').pop().split('?')[0];
+                const isExternal = media.url.startsWith('http');
+                return `
+                    <div class="item-card">
+                        <div style="display:flex;gap:12px;align-items:flex-start;">
+                            <div style="flex:1;min-width:0;">
+                                <div style="font-size:14px;color:#e5e5e5;font-weight:500;margin-bottom:4px;word-break:break-all;">${filename}</div>
+                                <div style="font-size:12px;color:#888;margin-bottom:4px;">${media.project} • ${media.type}</div>
+                                <div style="font-size:11px;color:#666;font-family:monospace;word-break:break-all;">${media.url}</div>
+                            </div>
+                            <button type="button" class="btn-upload" data-media-idx="${idx}" style="flex-shrink:0;">Replace</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Bind replace buttons to Cloudinary upload
+            list.querySelectorAll('[data-media-idx]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const idx = parseInt(btn.dataset.mediaIdx, 10);
+                    const mediaInfo = filtered[idx];
+                    uploadAndReplaceMedia(mediaInfo);
+                });
+            });
+        }
+        
+        document.getElementById('mediaSearch').addEventListener('input', (e) => {
+            renderMediaList(e.target.value);
+        });
+        
+        renderMediaList();
+    }
+    
+    function uploadAndReplaceMedia(mediaInfo) {
+        const widget = cloudinary.createUploadWidget({
+            cloudName: 'dnbmyyc9x',
+            uploadPreset: 'portfolio_preset',
+            sources: ['local', 'url'],
+            multiple: false,
+            resourceType: 'auto',
+            clientAllowedFormats: ['mp4', 'webm', 'mov', 'gif', 'png', 'jpg', 'jpeg', 'webp']
+        }, (error, result) => {
+            if (!error && result && result.event === 'success') {
+                const newUrl = result.info.secure_url;
+                const oldUrl = mediaInfo.url;
+                
+                // Replace in all projects
+                content.projects.forEach((proj, projIdx) => {
+                    // Card preview
+                    if (proj.cardPreview === oldUrl) {
+                        proj.cardPreview = newUrl;
+                    }
+                    // bodyHtml - replace all occurrences
+                    if (proj.bodyHtml && proj.bodyHtml.includes(oldUrl)) {
+                        proj.bodyHtml = proj.bodyHtml.replaceAll(oldUrl, newUrl);
+                    }
+                    // Grid media
+                    if (proj.media && Array.isArray(proj.media.grid)) {
+                        proj.media.grid = proj.media.grid.map(url => url === oldUrl ? newUrl : url);
+                    }
+                    // Hero
+                    if (proj.media && proj.media.hero === oldUrl) {
+                        proj.media.hero = newUrl;
+                    }
+                });
+                
+                showToast(`Media replaced: ${newUrl.split('/').pop()}`);
+                renderMediaPanel();
+            }
+        });
+        widget.open();
+    }
+
+    function renderFooterPanel() {
+        content.footer = content.footer || {};
+        const f = content.footer;
+        if (!Array.isArray(f.social)) f.social = [];
+        const el = document.getElementById('panel-footer');
+        if (!el) return;
+        el.innerHTML = `
+            <h3>Footer</h3>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="footerEmail" value="${escapeHtml(f.email || '')}">
+            </div>
+            <div class="form-group">
+                <label>Logo (filename or URL)</label>
+                <input type="text" id="footerLogo" value="${escapeHtml(f.logo || '')}">
+            </div>
+            <div class="form-group">
+                <label>Year</label>
+                <input type="text" id="footerYear" value="${escapeHtml(f.year || '')}">
+            </div>
+            <div class="form-group">
+                <label>CV (filename or URL)</label>
+                <div class="file-upload-row">
+                    <input type="text" id="footerCvFile" value="${escapeHtml(f.cvFile || '')}" placeholder="cv.pdf or URL">
+                    <button type="button" class="btn-upload" onclick="uploadCV()">Upload PDF</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Social links</label>
+                <div id="footerSocialList"></div>
+                <button type="button" class="add-btn" id="footerSocialAdd">+ Add link</button>
+            </div>
+        `;
+        function renderSocialList() {
+            const list = document.getElementById('footerSocialList');
+            list.innerHTML = (content.footer.social || []).map((s, i) => `
+                <div class="item-card">
+                    <div class="form-row">
+                        <div class="form-group"><label>Name</label><input type="text" data-si="${i}" data-key="name" value="${escapeHtml(s.name || '')}"></div>
+                        <div class="form-group"><label>URL</label><input type="url" data-si="${i}" data-key="url" value="${escapeHtml(s.url || '')}"></div>
+                        <button type="button" class="remove-btn" data-si="${i}">Remove</button>
+                    </div>
+                </div>
+            `).join('');
+            list.querySelectorAll('input').forEach(inp => {
+                inp.addEventListener('input', () => {
+                    const i = parseInt(inp.dataset.si, 10);
+                    content.footer.social[i][inp.dataset.key] = inp.value;
+                });
+            });
+            list.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    content.footer.social.splice(parseInt(btn.dataset.si, 10), 1);
+                    renderSocialList();
+                });
+            });
+        }
+        document.getElementById('footerEmail').addEventListener('input', e => { content.footer.email = e.target.value; });
+        document.getElementById('footerLogo').addEventListener('input', e => { content.footer.logo = e.target.value; });
+        document.getElementById('footerYear').addEventListener('input', e => { content.footer.year = e.target.value; });
+        document.getElementById('footerCvFile').addEventListener('input', e => { content.footer.cvFile = e.target.value; });
+        document.getElementById('footerSocialAdd').addEventListener('click', () => {
+            content.footer.social = content.footer.social || [];
+            content.footer.social.push({ name: '', url: '' });
+            renderSocialList();
+        });
+        renderSocialList();
+    }
+
+    function renderMusicPanel() {
+        content.music = content.music || {};
+        const m = content.music;
+        const el = document.getElementById('panel-music');
+        if (!el) return;
+        el.innerHTML = `
+            <h3>Music</h3>
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" id="musicTitle" value="${escapeHtml(m.title || '')}">
+            </div>
+            <div class="form-group">
+                <label>Audio file URL</label>
+                <input type="url" id="musicFile" value="${escapeHtml(m.file || '')}">
+            </div>
+        `;
+        document.getElementById('musicTitle').addEventListener('input', e => { content.music.title = e.target.value; });
+        document.getElementById('musicFile').addEventListener('input', e => { content.music.file = e.target.value; });
+    }
+
+    function renderAnalyticsPanel() {
+        content.analytics = content.analytics || {};
+        const a = content.analytics;
+        const el = document.getElementById('panel-analytics');
+        if (!el) return;
+        el.innerHTML = `
+            <h3>Analytics</h3>
+            <div class="form-group">
+                <label>Script (e.g. Google Analytics)</label>
+                <textarea id="analyticsScript" rows="8" placeholder="Paste script tag(s) or tracking code">${escapeHtml(a.script || '')}</textarea>
+            </div>
+        `;
+        document.getElementById('analyticsScript').addEventListener('input', e => { content.analytics.script = e.target.value; });
+    }
+
+    function buildContentPanels() {
+        const container = document.getElementById('cmsContent');
+        container.innerHTML = '<div class="panel active" id="panel-modules"></div>' + MODULE_IDS.filter(m => m !== 'modules').map(m => `<div class="panel" id="panel-${m}"></div>`).join('');
+    }
+
+    document.querySelectorAll('.nav-link').forEach(a => {
+        a.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPanel(a.dataset.panel);
+        });
+    });
+
+    document.getElementById('btnDownload').addEventListener('click', () => {
+        const json = JSON.stringify(content, null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'content.json';
+        link.click();
+        URL.revokeObjectURL(url);
+        toast('Downloaded content.json');
+    });
+
+    document.getElementById('btnPublish').addEventListener('click', async () => {
+        try {
+            const r = await fetch('/api/publish', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content })
+            });
+            const data = await r.json().catch(() => ({}));
+            if (r.ok && data.success) {
+                toast('Published successfully');
+            } else {
+                toast('Publish failed: ' + (data.error || data.details || r.statusText));
+            }
+        } catch (e) {
+            toast('Publish failed: ' + e.message);
+        }
+    });
+
+    function toast(msg) {
+        const el = document.getElementById('toast');
+        el.textContent = msg;
+        el.classList.add('show');
+        setTimeout(() => el.classList.remove('show'), 3000);
+    }
+
+    function openCloudinaryUpload(fieldId, resourceType) {
+        const rt = (resourceType === 'video') ? 'video' : (resourceType === 'auto') ? 'auto' : 'image';
+        if (typeof cloudinary === 'undefined') { toast('Cloudinary loading…'); return; }
+        const widget = cloudinary.createUploadWidget({
+            cloudName: 'dnbmyyc9x',
+            uploadPreset: 'ml_default',
+            sources: ['local', 'url', 'camera'],
+            resourceType: rt,
+            multiple: false
+        }, (err, result) => {
+            if (err) return;
+            if (result && result.event === 'success') {
+                const url = result.info.secure_url;
+                const el = document.getElementById(fieldId);
+                if (el) {
+                    el.value = url;
+                    el.dispatchEvent(new Event('input'));
+                }
+                toast('Uploaded');
+            }
+        });
+        widget.open();
+    }
+    
+    // Upload CV PDF to Cloudinary
+    window.uploadCV = function() {
+        const widget = cloudinary.createUploadWidget({
+            cloudName: 'dnbmyyc9x',
+            uploadPreset: 'portfolio_preset',
+            sources: ['local', 'url'],
+            multiple: false,
+            resourceType: 'raw',
+            clientAllowedFormats: ['pdf'],
+            maxFileSize: 10000000
+        }, (error, result) => {
+            if (error) {
+                console.error('Upload error:', error);
+                toast('Upload failed');
+                return;
+            }
+            if (result.event === 'success') {
+                const url = result.info.secure_url;
+                // Update both header and footer CV fields
+                const headerInput = document.getElementById('headerCvFile');
+                const footerInput = document.getElementById('footerCvFile');
+                if (headerInput) {
+                    headerInput.value = url;
+                    content.header.cvFile = url;
+                }
+                if (footerInput) {
+                    footerInput.value = url;
+                    content.footer.cvFile = url;
+                }
+                toast('CV uploaded successfully!');
+            }
+        });
+        widget.open();
+    };
+
+    document.getElementById('cmsContent').addEventListener('click', function(e) {
+        const btn = e.target.closest('.btn-upload');
+        if (btn && btn.dataset.upload) openCloudinaryUpload(btn.dataset.upload, btn.dataset.type || 'image');
+    });
+
+    buildContentPanels();
+    loadContent();
+})();
+    </script>
+</body>
+</html>

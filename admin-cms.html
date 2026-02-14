@@ -3,862 +3,645 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio CMS – Edit everything</title>
-    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+    <title>Portfolio CMS - Visual Editor</title>
+    <script src="https://upload-widget.cloudinary.com/global/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d0d0d; color: #e5e5e5; min-height: 100vh; }
-        .app { display: flex; flex-direction: column; min-height: 100vh; }
-        .topbar { background: #1a1a1a; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2a2a2a; }
-        .topbar h1 { font-size: 18px; font-weight: 600; }
-        .topbar-actions { display: flex; gap: 12px; }
-        .btn { padding: 10px 20px; border-radius: 6px; border: none; cursor: pointer; font-size: 14px; font-weight: 500; }
-        .btn-primary { background: #fff; color: #000; }
-        .btn-primary:hover { background: #e5e5e5; }
-        .btn-secondary { background: #2a2a2a; color: #fff; }
-        .btn-secondary:hover { background: #333; }
-        .main { display: flex; flex: 1; overflow: hidden; }
-        .sidebar { width: 260px; background: #141414; border-right: 1px solid #2a2a2a; padding: 16px 0; overflow-y: auto; }
-        .sidebar h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #666; padding: 8px 20px; margin-bottom: 8px; }
-        .sidebar a { display: flex; align-items: center; gap: 10px; padding: 12px 20px; color: #999; text-decoration: none; font-size: 14px; border-left: 3px solid transparent; }
-        .sidebar a:hover { color: #fff; background: rgba(255,255,255,0.04); }
-        .sidebar a.active { color: #fff; background: rgba(255,255,255,0.06); border-left-color: #fff; }
-        .sidebar .module-toggle { margin-left: auto; }
-        .content { flex: 1; overflow-y: auto; padding: 32px; }
-        .panel { display: none; background: #1a1a1a; border-radius: 8px; padding: 28px; margin-bottom: 24px; max-width: 800px; }
-        .panel.active { display: block; }
-        .panel h3 { font-size: 20px; margin-bottom: 24px; font-weight: 500; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 6px; color: #888; font-size: 13px; }
-        .form-group input[type="text"], .form-group input[type="email"], .form-group input[type="url"], .form-group input[type="number"], .form-group textarea { width: 100%; padding: 12px 14px; background: #0d0d0d; border: 1px solid #333; border-radius: 6px; color: #fff; font-size: 14px; font-family: inherit; }
-        .form-group textarea { min-height: 100px; resize: vertical; }
-        .form-group textarea.bodyHtml { min-height: 280px; font-family: ui-monospace, monospace; font-size: 12px; }
-        .form-row { display: flex; gap: 12px; align-items: flex-end; margin-bottom: 12px; }
-        .form-row .form-group { flex: 1; margin-bottom: 0; }
-        .item-card { background: #0d0d0d; border: 1px solid #2a2a2a; border-radius: 6px; padding: 16px; margin-bottom: 12px; }
-        .item-card h4 { font-size: 14px; margin-bottom: 12px; color: #ccc; }
-        .add-btn { padding: 8px 14px; background: #2a2a2a; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; margin-top: 8px; }
-        .add-btn:hover { background: #333; }
-        .remove-btn { padding: 6px 12px; background: transparent; color: #888; border: 1px solid #444; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 8px; }
-        .remove-btn:hover { color: #f44; border-color: #f44; }
-        .file-upload-row { display: flex; gap: 8px; align-items: center; }
-        .file-upload-row input { flex: 1; }
-        .btn-upload { padding: 10px 16px; background: #333; color: #fff; border: 1px solid #444; border-radius: 6px; cursor: pointer; font-size: 13px; white-space: nowrap; }
-        .btn-upload:hover { background: #444; }
-        .toast { position: fixed; bottom: 24px; right: 24px; background: #1a1a1a; border: 1px solid #333; padding: 14px 20px; border-radius: 8px; font-size: 14px; z-index: 9999; display: none; }
-        .toast.show { display: block; animation: fadeIn 0.2s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .module-checkbox { accent-color: #fff; width: 18px; height: 18px; cursor: pointer; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+        }
+        
+        /* Top Bar */
+        .topbar {
+            background: white;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .topbar h1 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        
+        .topbar-nav {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .topbar-nav button {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            color: #666;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .topbar-nav button:hover {
+            background: #f5f5f5;
+            color: #1a1a1a;
+        }
+        
+        .topbar-nav button.active {
+            background: #f5f5f5;
+            color: #1a1a1a;
+        }
+        
+        .topbar-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: #1a1a1a;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #000;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #1a1a1a;
+            border: 1px solid #e5e5e5;
+        }
+        
+        .btn-secondary:hover {
+            background: #f5f5f5;
+        }
+        
+        /* Main Layout */
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+        
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+        
+        .project-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .project-card:hover {
+            border-color: #1a1a1a;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+        
+        .project-card-preview {
+            width: 100%;
+            height: 160px;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .project-card-preview img,
+        .project-card-preview video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .project-card-content {
+            padding: 16px;
+        }
+        
+        .project-card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+        
+        .project-card-company {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .add-project-card {
+            border: 2px dashed #d0d0d0;
+            background: #fafafa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 240px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .add-project-card:hover {
+            border-color: #1a1a1a;
+            background: white;
+        }
+        
+        .add-project-card span {
+            font-size: 32px;
+            color: #d0d0d0;
+            margin-bottom: 8px;
+        }
+        
+        .add-project-card:hover span {
+            color: #1a1a1a;
+        }
+        
+        .add-project-card p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        /* Project Editor Modal */
+        .project-editor {
+            background: white;
+            width: 90%;
+            max-width: 1200px;
+            height: 90vh;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .editor-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid #e5e5e5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .editor-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .editor-header-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .editor-body {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+        
+        /* Canvas Area */
+        .editor-canvas {
+            flex: 1;
+            overflow-y: auto;
+            background: #fafafa;
+            padding: 32px;
+        }
+        
+        .canvas-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            min-height: 400px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        /* Properties Sidebar */
+        .editor-sidebar {
+            width: 320px;
+            background: white;
+            border-left: 1px solid #e5e5e5;
+            overflow-y: auto;
+            padding: 24px;
+        }
+        
+        .sidebar-section {
+            margin-bottom: 24px;
+        }
+        
+        .sidebar-section h3 {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #666;
+            margin-bottom: 12px;
+        }
+        
+        .form-field {
+            margin-bottom: 16px;
+        }
+        
+        .form-field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #666;
+            margin-bottom: 6px;
+        }
+        
+        .form-field input[type="text"],
+        .form-field input[type="url"],
+        .form-field textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+        
+        .form-field input:focus,
+        .form-field textarea:focus {
+            outline: none;
+            border-color: #1a1a1a;
+            box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+        }
+        
+        .form-field textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        /* Module Pills */
+        .module-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .module-pill {
+            padding: 8px 14px;
+            border: 1px solid #e5e5e5;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            background: white;
+            color: #1a1a1a;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .module-pill:hover {
+            background: #1a1a1a;
+            color: white;
+            border-color: #1a1a1a;
+            transform: translateY(-1px);
+        }
+        
+        .module-pill span {
+            font-size: 16px;
+        }
+        
+        /* Content Blocks */
+        .content-block {
+            background: #fafafa;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+            position: relative;
+            cursor: move;
+            transition: all 0.2s;
+        }
+        
+        .content-block:hover {
+            border-color: #1a1a1a;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .content-block.dragging {
+            opacity: 0.5;
+        }
+        
+        .block-handle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .block-type {
+            display: inline-block;
+            padding: 4px 10px;
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #666;
+        }
+        
+        .block-actions {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .block-btn {
+            padding: 6px 10px;
+            border: none;
+            background: white;
+            color: #666;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        
+        .block-btn:hover {
+            background: #1a1a1a;
+            color: white;
+        }
+        
+        /* Inline Editable */
+        .editable {
+            padding: 8px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            transition: all 0.2s;
+            cursor: text;
+        }
+        
+        .editable:hover {
+            background: white;
+            border-color: #e5e5e5;
+        }
+        
+        .editable:focus {
+            outline: none;
+            background: white;
+            border-color: #1a1a1a;
+            box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+        }
+        
+        .editable[contenteditable="true"]:empty:before {
+            content: attr(data-placeholder);
+            color: #999;
+        }
+        
+        /* Tags */
+        .tags-input {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 8px;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            min-height: 40px;
+            background: white;
+        }
+        
+        .tag {
+            padding: 4px 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .tag-remove {
+            cursor: pointer;
+            color: #999;
+            font-weight: bold;
+        }
+        
+        .tag-remove:hover {
+            color: #666;
+        }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #1a1a1a;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 9999;
+            display: none;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+        
+        .toast.show {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* Upload Button */
+        .btn-upload {
+            padding: 8px 14px;
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .btn-upload:hover {
+            background: #1a1a1a;
+            color: white;
+            border-color: #1a1a1a;
+        }
     </style>
 </head>
 <body>
-    <div class="app">
-        <header class="topbar">
-            <h1>Portfolio CMS – Module by module</h1>
-            <div class="topbar-actions">
-                <button type="button" class="btn btn-secondary" id="btnDownload">Download JSON</button>
-                <button type="button" class="btn btn-primary" id="btnPublish">Save & Publish</button>
+    <!-- Top Bar -->
+    <div class="topbar">
+        <div class="topbar-left">
+            <h1>Portfolio CMS</h1>
+            <div class="topbar-nav">
+                <button class="active" data-section="projects">Projects</button>
+                <button data-section="hero">Hero</button>
+                <button data-section="about">About</button>
+                <button data-section="experience">Experience</button>
+                <button data-section="footer">Footer</button>
             </div>
-        </header>
-        <div class="main">
-            <nav class="sidebar">
-                <h2>Modules on site</h2>
-                <a href="#" data-panel="modules" class="nav-link active">Modules (on/off)</a>
-                <h2>Edit content</h2>
-                <a href="#" data-panel="header" class="nav-link">Header</a>
-                <a href="#" data-panel="hero" class="nav-link">Hero</a>
-                <a href="#" data-panel="aboutMe" class="nav-link">About Me</a>
-                <a href="#" data-panel="reel" class="nav-link">Reel</a>
-                <a href="#" data-panel="experience" class="nav-link">Experience</a>
-                <a href="#" data-panel="projects" class="nav-link">Projects</a>
-                <a href="#" data-panel="media" class="nav-link">Media Manager</a>
-                <a href="#" data-panel="footer" class="nav-link">Footer</a>
-                <a href="#" data-panel="music" class="nav-link">Music</a>
-                <a href="#" data-panel="analytics" class="nav-link">Analytics</a>
-            </nav>
-            <main class="content" id="cmsContent"></main>
+        </div>
+        <div class="topbar-actions">
+            <button class="btn btn-secondary" id="btnDownload">Download JSON</button>
+            <button class="btn btn-primary" id="btnPublish">Save & Publish</button>
         </div>
     </div>
+
+    <!-- Main Content -->
+    <div class="main" id="mainContent">
+        <!-- Projects Grid (default view) -->
+        <div id="projectsView">
+            <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Your Projects</h2>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects will be rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Editor Modal -->
+    <div class="modal-overlay" id="editorModal">
+        <div class="project-editor">
+            <div class="editor-header">
+                <h2 id="editorTitle">Edit Project</h2>
+                <div class="editor-header-actions">
+                    <button class="btn btn-secondary" id="btnDeleteProject">Delete</button>
+                    <button class="btn btn-secondary" id="btnCloseEditor">Close</button>
+                </div>
+            </div>
+            <div class="editor-body">
+                <div class="editor-canvas" id="editorCanvas">
+                    <div class="canvas-inner" id="canvasInner">
+                        <!-- Project content will be rendered here -->
+                    </div>
+                </div>
+                <div class="editor-sidebar" id="editorSidebar">
+                    <!-- Properties will be rendered here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="toast" id="toast"></div>
 
     <script>
-(function() {
-    const MODULE_IDS = ['header', 'hero', 'aboutMe', 'reel', 'experience', 'projects', 'footer', 'music', 'analytics'];
-    const DEFAULT_MODULES = Object.fromEntries(MODULE_IDS.map(m => [m, true]));
+        let content = { projects: [] };
+        let currentProjectIndex = null;
 
-    let content = { modules: { ...DEFAULT_MODULES } };
-
-    function escapeHtml(s) {
-        if (s == null) return '';
-        const d = document.createElement('div');
-        d.textContent = s;
-        return d.innerHTML;
-    }
-
-    async function loadContent() {
-        try {
-            const r = await fetch('content.json?v=' + Date.now());
-            if (r.ok) {
-                const data = await r.json();
-                content = data;
-                if (!content.modules) content.modules = { ...DEFAULT_MODULES };
-                MODULE_IDS.forEach(m => { if (content.modules[m] === undefined) content.modules[m] = true; });
+        // Load content
+        async function loadContent() {
+            try {
+                const r = await fetch('content.json?v=' + Date.now());
+                if (r.ok) {
+                    content = await r.json();
+                }
+            } catch (e) {
+                console.error('Load error:', e);
             }
-        } catch (e) {
-            console.error('Load content:', e);
+            renderProjects();
         }
-        renderAll();
-    }
 
-    function renderAll() {
-        renderModulesPanel();
-        renderHeaderPanel();
-        renderHeroPanel();
-        renderAboutMePanel();
-        renderReelPanel();
-        renderExperiencePanel();
-        renderProjectsPanel();
-        renderMediaPanel();
-        renderFooterPanel();
-        renderMusicPanel();
-        renderAnalyticsPanel();
-        showPanel('modules');
-    }
-
-    function showPanel(id) {
-        document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
-        document.querySelector(`[data-panel="${id}"]`)?.classList.add('active');
-        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-        const el = document.getElementById('panel-' + id);
-        if (el) el.classList.add('active');
-    }
-
-    function renderModulesPanel() {
-        const el = document.getElementById('panel-modules');
-        if (!el) return;
-        el.innerHTML = `
-            <h3>Show / hide modules on the site</h3>
-            <p style="color:#888;margin-bottom:24px;font-size:14px;">Turn modules on or off. When off, the section is hidden on the live site.</p>
-            ${MODULE_IDS.map(m => `
-                <div class="form-row" style="align-items:center;">
-                    <label style="margin:0;flex:1;color:#e5e5e5;">${m === 'aboutMe' ? 'About Me' : m.charAt(0).toUpperCase() + m.slice(1)}</label>
-                    <input type="checkbox" class="module-checkbox" data-module="${m}" ${content.modules[m] ? 'checked' : ''}>
-                </div>
-            `).join('')}
-        `;
-        el.querySelectorAll('.module-checkbox').forEach(cb => {
-            cb.addEventListener('change', () => { content.modules[cb.dataset.module] = cb.checked; });
-        });
-    }
-
-    function renderHeaderPanel() {
-        content.header = content.header || {};
-        const h = content.header;
-        if (!h.navigation || !h.navigation.length) h.navigation = [
-            { text: 'about me', href: '#' },
-            { text: 'experience', href: '#experience' },
-            { text: 'reel', href: '#reel' },
-            { text: 'projects', href: '#work' }
-        ];
-        h.location = h.location || {};
-        const loc = h.location;
-        const el = document.getElementById('panel-header');
-        if (!el) return;
-        el.innerHTML = `
-            <h3>Header</h3>
-            <div class="form-group">
-                <label>Location text</label>
-                <input type="text" id="headerLocationText" value="${escapeHtml(loc.text || '')}" placeholder="e.g. amsterdam">
-            </div>
-            <div class="form-group">
-                <label>Location link (URL)</label>
-                <input type="url" id="headerLocationLink" value="${escapeHtml(loc.link || '')}" placeholder="https://...">
-            </div>
-            <div class="form-group">
-                <label>CV file (Download CV link)</label>
-                <div class="file-upload-row">
-                    <input type="text" id="headerCvFile" value="${escapeHtml(h.cvFile || '')}" placeholder="cv.pdf or full URL">
-                    <button type="button" class="btn-upload" onclick="uploadCV()">Upload PDF</button>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Navigation links</label>
-                <div id="headerNavList"></div>
-                <button type="button" class="add-btn" id="headerNavAdd">+ Add link</button>
-            </div>
-        `;
-        function renderNavList() {
-            const list = document.getElementById('headerNavList');
-            list.innerHTML = (h.navigation || []).map((item, i) => `
-                <div class="item-card">
-                    <h4>Link ${i + 1}</h4>
-                    <div class="form-row">
-                        <div class="form-group"><label>Label</label><input type="text" data-nav-i="${i}" data-key="text" value="${escapeHtml(item.text || '')}"></div>
-                        <div class="form-group"><label>URL / hash</label><input type="text" data-nav-i="${i}" data-key="href" value="${escapeHtml(item.href || '')}"></div>
-                        <button type="button" class="remove-btn" data-nav-i="${i}">Remove</button>
-                    </div>
-                </div>
-            `).join('');
-            list.querySelectorAll('input').forEach(inp => {
-                inp.addEventListener('input', () => {
-                    const i = parseInt(inp.dataset.navI, 10);
-                    if (!content.header.navigation[i]) return;
-                    content.header.navigation[i][inp.dataset.key] = inp.value;
-                });
-            });
-            list.querySelectorAll('.remove-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    content.header.navigation.splice(parseInt(btn.dataset.navI, 10), 1);
-                    renderNavList();
-                });
-            });
-        }
-        document.getElementById('headerNavAdd').addEventListener('click', () => {
-            content.header.navigation.push({ text: '', href: '#' });
-            renderNavList();
-        });
-        renderNavList();
-        document.getElementById('headerLocationText').addEventListener('input', e => {
-            if (!content.header.location) content.header.location = {};
-            content.header.location.text = e.target.value;
-        });
-        document.getElementById('headerLocationLink').addEventListener('input', e => {
-            if (!content.header.location) content.header.location = {};
-            content.header.location.link = e.target.value;
-        });
-        document.getElementById('headerCvFile').addEventListener('input', e => { content.header.cvFile = e.target.value; });
-    }
-
-    function renderHeroPanel() {
-        content.hero = content.hero || {};
-        const h = content.hero;
-        h.tags = h.tags || { tools: [], skills: [] };
-        const tags = h.tags;
-        if (!Array.isArray(tags.tools)) tags.tools = [];
-        if (!Array.isArray(tags.skills)) tags.skills = [];
-        const el = document.getElementById('panel-hero');
-        if (!el) return;
-        el.innerHTML = `
-            <h3>Hero</h3>
-            <div class="form-group">
-                <label>Name</label>
-                <input type="text" id="heroName" value="${escapeHtml(h.name || '')}">
-            </div>
-            <div class="form-group">
-                <label>Subtitle</label>
-                <textarea id="heroSubtitle" rows="3">${escapeHtml(h.subtitle || '')}</textarea>
-            </div>
-            <div class="form-group">
-                <label>Photo (URL)</label>
-                <input type="url" id="heroPhoto" value="${escapeHtml(h.photo || '')}">
-            </div>
-            <div class="form-group">
-                <label>Tools (one per line or comma-separated)</label>
-                <textarea id="heroTools" rows="3">${(tags.tools || []).join('\n')}</textarea>
-            </div>
-            <div class="form-group">
-                <label>Skills (one per line or comma-separated)</label>
-                <textarea id="heroSkills" rows="3">${(tags.skills || []).join('\n')}</textarea>
-            </div>
-        `;
-        document.getElementById('heroName').addEventListener('input', e => { content.hero.name = e.target.value; });
-        document.getElementById('heroSubtitle').addEventListener('input', e => { content.hero.subtitle = e.target.value; });
-        document.getElementById('heroPhoto').addEventListener('input', e => { content.hero.photo = e.target.value; });
-        document.getElementById('heroTools').addEventListener('input', e => {
-            content.hero.tags = content.hero.tags || {};
-            content.hero.tags.tools = e.target.value.split(/[\n,]/).map(s => s.trim()).filter(Boolean);
-        });
-        document.getElementById('heroSkills').addEventListener('input', e => {
-            content.hero.tags = content.hero.tags || {};
-            content.hero.tags.skills = e.target.value.split(/[\n,]/).map(s => s.trim()).filter(Boolean);
-        });
-    }
-
-    function renderAboutMePanel() {
-        content.aboutMe = content.aboutMe || {};
-        const a = content.aboutMe;
-        if (!Array.isArray(a.bio)) a.bio = [];
-        const el = document.getElementById('panel-aboutMe');
-        if (!el) return;
-        el.innerHTML = `
-            <h3>About Me</h3>
-            <div class="form-group">
-                <label>Photo (URL)</label>
-                <input type="url" id="aboutPhoto" value="${escapeHtml(a.photo || '')}">
-            </div>
-            <div class="form-group">
-                <label>Bio paragraphs (one paragraph per textarea)</label>
-                <div id="aboutBioList"></div>
-                <button type="button" class="add-btn" id="aboutBioAdd">+ Add paragraph</button>
-            </div>
-        `;
-        function renderBioList() {
-            const list = document.getElementById('aboutBioList');
-            list.innerHTML = (content.aboutMe.bio || []).map((p, i) => `
-                <div class="item-card">
-                    <h4>Paragraph ${i + 1}</h4>
-                    <textarea data-bio-i="${i}" rows="4">${escapeHtml(p)}</textarea>
-                    <button type="button" class="remove-btn" data-bio-i="${i}">Remove</button>
-                </div>
-            `).join('');
-            list.querySelectorAll('textarea').forEach(ta => {
-                ta.addEventListener('input', () => {
-                    const i = parseInt(ta.dataset.bioI, 10);
-                    content.aboutMe.bio[i] = ta.value;
-                });
-            });
-            list.querySelectorAll('.remove-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    content.aboutMe.bio.splice(parseInt(btn.dataset.bioI, 10), 1);
-                    renderBioList();
-                });
-            });
-        }
-        document.getElementById('aboutPhoto').addEventListener('input', e => { content.aboutMe.photo = e.target.value; });
-        document.getElementById('aboutBioAdd').addEventListener('click', () => {
-            content.aboutMe.bio = content.aboutMe.bio || [];
-            content.aboutMe.bio.push('');
-            renderBioList();
-        });
-        renderBioList();
-    }
-
-    function renderExperiencePanel() {
-        content.experience = Array.isArray(content.experience) ? content.experience : [];
-        const el = document.getElementById('panel-experience');
-        if (!el) return;
-        el.innerHTML = `
-            <h3>Experience</h3>
-            <p style="color:#888;margin-bottom:20px;font-size:14px;">Each company can have multiple roles. Add/remove companies and roles.</p>
-            <div id="experienceList"></div>
-            <button type="button" class="add-btn" id="expAddCompany">+ Add company</button>
-        `;
-        function renderExpList() {
-            const list = document.getElementById('experienceList');
-            list.innerHTML = (content.experience || []).map((company, ci) => `
-                <div class="item-card" style="margin-bottom:20px;">
-                    <h4>Company: ${escapeHtml(company.company || '')}</h4>
-                    <div class="form-group">
-                        <label>Company name</label>
-                        <input type="text" data-ci="${ci}" data-key="company" value="${escapeHtml(company.company || '')}">
-                    </div>
-                    <div class="form-group">
-                        <label>Image (filename or URL)</label>
-                        <input type="text" data-ci="${ci}" data-key="image" value="${escapeHtml(company.image || '')}">
-                    </div>
-                    <div class="form-group">
-                        <label>Roles</label>
-                        <div class="roles-list-${ci}"></div>
-                        <button type="button" class="add-btn exp-add-role" data-ci="${ci}">+ Add role</button>
-                    </div>
-                    <button type="button" class="remove-btn" data-remove-ci="${ci}">Remove company</button>
-                </div>
-            `).join('');
-            list.querySelectorAll('input[data-ci]').forEach(inp => {
-                inp.addEventListener('input', () => {
-                    const ci = parseInt(inp.dataset.ci, 10);
-                    content.experience[ci] = content.experience[ci] || {};
-                    content.experience[ci][inp.dataset.key] = inp.value;
-                });
-            });
-            (content.experience || []).forEach((company, ci) => {
-                const rolesEl = list.querySelector('.roles-list-' + ci);
-                if (!rolesEl) return;
-                const roles = company.roles || [];
-                rolesEl.innerHTML = roles.map((role, ri) => `
-                    <div class="item-card" style="margin-top:8px;">
-                        <div class="form-row"><div class="form-group"><label>Title</label><input type="text" data-ci="${ci}" data-ri="${ri}" data-key="title" value="${escapeHtml(role.title || '')}"></div></div>
-                        <div class="form-row">
-                            <div class="form-group"><label>Start</label><input type="text" data-ci="${ci}" data-ri="${ri}" data-key="start" value="${escapeHtml((role.period && role.period.start) || '')}" placeholder="2024"></div>
-                            <div class="form-group"><label>End</label><input type="text" data-ci="${ci}" data-ri="${ri}" data-key="end" value="${escapeHtml((role.period && role.period.end) || '')}" placeholder="Now"></div>
-                        </div>
-                        <div class="form-group"><label>Description</label><textarea data-ci="${ci}" data-ri="${ri}" data-key="description" rows="3">${escapeHtml(role.description || '')}</textarea></div>
-                        <button type="button" class="remove-btn exp-remove-role" data-ci="${ci}" data-ri="${ri}">Remove role</button>
-                    </div>
-                `).join('');
-                rolesEl.querySelectorAll('input, textarea').forEach(inp => {
-                    inp.addEventListener('input', () => {
-                        const ri = parseInt(inp.dataset.ri, 10);
-                        content.experience[ci].roles = content.experience[ci].roles || [];
-                        if (inp.dataset.key === 'start' || inp.dataset.key === 'end') {
-                            content.experience[ci].roles[ri].period = content.experience[ci].roles[ri].period || {};
-                            content.experience[ci].roles[ri].period[inp.dataset.key === 'start' ? 'start' : 'end'] = inp.value;
-                        } else {
-                            content.experience[ci].roles[ri][inp.dataset.key] = inp.value;
-                        }
-                    });
-                });
-                rolesEl.querySelectorAll('.exp-remove-role').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        content.experience[ci].roles.splice(parseInt(btn.dataset.ri, 10), 1);
-                        renderExpList();
-                    });
-                });
-            });
-            list.querySelectorAll('.exp-add-role').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const ci = parseInt(btn.dataset.ci, 10);
-                    content.experience[ci].roles = content.experience[ci].roles || [];
-                    content.experience[ci].roles.push({ title: '', period: { start: '', end: '' }, description: '' });
-                    renderExpList();
-                });
-            });
-            list.querySelectorAll('[data-remove-ci]').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    content.experience.splice(parseInt(btn.dataset.removeCi, 10), 1);
-                    renderExpList();
-                });
-            });
-        }
-        document.getElementById('expAddCompany').addEventListener('click', () => {
-            content.experience = content.experience || [];
-            content.experience.push({ company: '', image: '', roles: [{ title: '', period: { start: '', end: '' }, description: '' }] });
-            renderExpList();
-        });
-        renderExpList();
-    }
-
-    function renderReelPanel() {
-        content.reel = content.reel || {};
-        const r = content.reel;
-        const el = document.getElementById('panel-reel');
-        if (!el) return;
-        el.innerHTML = `
-            <h3>Reel</h3>
-            <div class="form-group">
-                <label>Video URL</label>
-                <input type="url" id="reelFile" value="${escapeHtml(r.file || '')}">
-            </div>
-        `;
-        document.getElementById('reelFile').addEventListener('input', e => { content.reel.file = e.target.value; });
-    }
-
-    // Enhanced Projects Panel with Structured Content Editor
-    function renderProjectsPanel() {
-        content.projects = content.projects || [];
-        const el = document.getElementById('panel-projects');
-        if (!el) return;
-        
-        el.innerHTML = `
-            <h3>Projects</h3>
-            <p style="color:#888;margin-bottom:20px;font-size:14px;">Click on a project to edit its content visually. Add/remove sections, upload media, edit text.</p>
-            <div id="projectsList"></div>
-            <button type="button" class="add-btn" id="projectsAdd">+ Add new project</button>
-        `;
-        
-        function renderProjectsList() {
-            const list = document.getElementById('projectsList');
-            list.innerHTML = content.projects.map((proj, pi) => `
-                <div class="item-card" style="margin-bottom:16px;cursor:pointer;" data-expand-project="${pi}">
-                    <div style="display:flex;justify-content:space-between;align-items:center;">
-                        <h4 style="margin:0;">${escapeHtml(proj.name || 'Untitled Project')}</h4>
-                        <span style="color:#666;font-size:12px;">${proj.company || 'No company'}</span>
-                    </div>
-                    <div id="project-editor-${pi}" style="display:none;margin-top:20px;"></div>
-                </div>
-            `).join('');
+        // Render projects grid
+        function renderProjects() {
+            const grid = document.getElementById('projectsGrid');
             
-            // Add click handlers to expand/collapse
-            list.querySelectorAll('[data-expand-project]').forEach(card => {
-                const pi = parseInt(card.dataset.expandProject, 10);
-                const editorDiv = card.querySelector(`#project-editor-${pi}`);
+            const projectCards = content.projects.map((proj, i) => {
+                const previewUrl = proj.cardPreview || '';
+                const isVideo = previewUrl.match(/\.(mp4|webm|mov)$/i);
                 
-                card.addEventListener('click', (e) => {
-                    // Don't trigger if clicking inside editor
-                    if (e.target.closest(`#project-editor-${pi}`)) return;
-                    
-                    const isExpanded = editorDiv.style.display !== 'none';
-                    if (isExpanded) {
-                        editorDiv.style.display = 'none';
-                    } else {
-                        // Close all others
-                        list.querySelectorAll('[id^="project-editor-"]').forEach(ed => ed.style.display = 'none');
-                        editorDiv.style.display = 'block';
-                        renderProjectEditor(pi, editorDiv);
-                    }
-                });
-            });
-        }
-        
-        function renderProjectEditor(pi, container) {
-            const proj = content.projects[pi];
-            const hasStructured = proj.structuredContent && typeof proj.structuredContent === 'object';
+                return `
+                    <div class="project-card" onclick="openEditor(${i})">
+                        <div class="project-card-preview" style="background: ${proj.color || '#f5f5f5'}">
+                            ${previewUrl ? (isVideo 
+                                ? `<video src="${previewUrl}" autoplay loop muted playsinline></video>`
+                                : `<img src="${previewUrl}" alt="${proj.name}">`
+                            ) : ''}
+                        </div>
+                        <div class="project-card-content">
+                            <div class="project-card-title">${proj.name || 'Untitled'}</div>
+                            <div class="project-card-company">${proj.company || 'No company'}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
             
-            container.innerHTML = `
-                <div style="background:#0d0d0d;padding:20px;border-radius:6px;border:1px solid #2a2a2a;">
-                    
-                    <!-- Basic Info -->
-                    <div style="margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid #2a2a2a;">
-                        <h4 style="font-size:14px;color:#ccc;margin-bottom:16px;">Basic Information</h4>
-                        <div class="form-group">
-                            <label>Project Name</label>
-                            <input type="text" id="proj-${pi}-name" value="${escapeHtml(proj.name || '')}" placeholder="Motion Design System">
-                        </div>
-                        <div class="form-group">
-                            <label>Company</label>
-                            <input type="text" id="proj-${pi}-company" value="${escapeHtml(proj.company || '')}" placeholder="Qonto">
-                        </div>
-                        <div class="form-group">
-                            <label>Card Preview (cover image/video)</label>
-                            <div class="file-upload-row">
-                                <input type="url" id="proj-${pi}-preview" value="${escapeHtml(proj.cardPreview || '')}" placeholder="URL">
-                                <button type="button" class="btn-upload" onclick="uploadProjectMedia(${pi}, 'cardPreview')">Upload</button>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Color (hex)</label>
-                            <input type="text" id="proj-${pi}-color" value="${escapeHtml(proj.color || '#141414')}" placeholder="#141414">
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label><input type="checkbox" id="proj-${pi}-password-enabled" ${proj.passwordProtected ? 'checked' : ''}> Password protected</label>
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="text" id="proj-${pi}-password" value="${escapeHtml(proj.password || '')}">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Content Editor Mode Toggle -->
-                    <div style="margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid #2a2a2a;">
-                        <h4 style="font-size:14px;color:#ccc;margin-bottom:12px;">Content Mode</h4>
-                        <div style="display:flex;gap:12px;">
-                            <button type="button" class="btn ${hasStructured ? 'btn-primary' : 'btn-secondary'}" onclick="switchToStructured(${pi})" style="padding:8px 16px;font-size:13px;">
-                                ✨ Visual Editor ${hasStructured ? '(Active)' : ''}
-                            </button>
-                            <button type="button" class="btn ${!hasStructured ? 'btn-primary' : 'btn-secondary'}" onclick="switchToHTML(${pi})" style="padding:8px 16px;font-size:13px;">
-                                </> HTML Mode ${!hasStructured ? '(Active)' : ''}
-                            </button>
-                        </div>
-                        <p style="color:#666;font-size:12px;margin-top:8px;">Visual Editor: Add/remove sections visually. HTML Mode: For advanced projects.</p>
-                    </div>
-                    
-                    <!-- Content Editor -->
-                    <div id="content-editor-${pi}">
-                        ${hasStructured ? renderStructuredEditor(pi) : renderHTMLEditor(pi)}
-                    </div>
-                    
-                    <!-- Actions -->
-                    <div style="margin-top:24px;padding-top:24px;border-top:1px solid #2a2a2a;display:flex;gap:12px;">
-                        <button type="button" class="remove-btn" onclick="removeProject(${pi})">Delete Project</button>
-                        <button type="button" class="btn btn-secondary" onclick="duplicateProject(${pi})" style="padding:8px 16px;font-size:13px;">Duplicate</button>
-                    </div>
-                </div>
-            `;
-            
-            // Attach basic info handlers
-            document.getElementById(`proj-${pi}-name`).addEventListener('input', e => {
-                content.projects[pi].name = e.target.value;
-            });
-            document.getElementById(`proj-${pi}-company`).addEventListener('input', e => {
-                content.projects[pi].company = e.target.value;
-            });
-            document.getElementById(`proj-${pi}-preview`).addEventListener('input', e => {
-                content.projects[pi].cardPreview = e.target.value;
-            });
-            document.getElementById(`proj-${pi}-color`).addEventListener('input', e => {
-                content.projects[pi].color = e.target.value;
-            });
-            document.getElementById(`proj-${pi}-password-enabled`).addEventListener('change', e => {
-                content.projects[pi].passwordProtected = e.target.checked;
-            });
-        document.getElementById(`proj-${pi}-password`).addEventListener('input', e => {
-            content.projects[pi].password = e.target.value;
-        });
-        
-        // Attach structured content handlers if in structured mode
-        const tagsInput = document.getElementById(`proj-${pi}-tags`);
-        const introInput = document.getElementById(`proj-${pi}-intro`);
-        const metaInput = document.getElementById(`proj-${pi}-meta`);
-        
-        if (tagsInput) {
-            tagsInput.addEventListener('input', e => {
-                if (!content.projects[pi].structuredContent) content.projects[pi].structuredContent = {};
-                content.projects[pi].structuredContent.tags = e.target.value.split(',').map(t => t.trim()).filter(Boolean);
-            });
-        }
-        if (introInput) {
-            introInput.addEventListener('input', e => {
-                if (!content.projects[pi].structuredContent) content.projects[pi].structuredContent = {};
-                content.projects[pi].structuredContent.intro = e.target.value;
-            });
-        }
-        if (metaInput) {
-            metaInput.addEventListener('input', e => {
-                if (!content.projects[pi].structuredContent) content.projects[pi].structuredContent = {};
-                content.projects[pi].structuredContent.meta = e.target.value;
-            });
-        }
-        
-        // Attach HTML mode handlers
-        const customUrlInput = document.getElementById(`proj-${pi}-customUrl`);
-        const bodyHtmlInput = document.getElementById(`proj-${pi}-bodyHtml`);
-        
-        if (customUrlInput) {
-            customUrlInput.addEventListener('input', e => {
-                content.projects[pi].customUrl = e.target.value;
-            });
-        }
-        if (bodyHtmlInput) {
-            bodyHtmlInput.addEventListener('input', e => {
-                content.projects[pi].bodyHtml = e.target.value;
-            });
-        }
-    }
-        
-        function renderStructuredEditor(pi) {
-            const proj = content.projects[pi];
-            const sc = proj.structuredContent || { tags: [], intro: '', meta: '', sections: [] };
-            
-            return `
-                <div style="background:#1a1a1a;padding:20px;border-radius:6px;">
-                    <h4 style="font-size:14px;color:#ccc;margin-bottom:16px;">Project Content</h4>
-                    
-                    <!-- Tags -->
-                    <div class="form-group">
-                        <label>Tags (comma separated)</label>
-                        <input type="text" id="proj-${pi}-tags" value="${(sc.tags || []).join(', ')}" placeholder="Motion Design, Design System">
-                    </div>
-                    
-                    <!-- Intro -->
-                    <div class="form-group">
-                        <label>Introduction</label>
-                        <textarea id="proj-${pi}-intro" rows="3">${escapeHtml(sc.intro || '')}</textarea>
-                    </div>
-                    
-                    <!-- Meta -->
-                    <div class="form-group">
-                        <label>Meta (role and year)</label>
-                        <input type="text" id="proj-${pi}-meta" value="${escapeHtml(sc.meta || '')}" placeholder="2025 - 2026 Staff Motion Designer">
-                    </div>
-                    
-                    <!-- Sections -->
-                    <div style="margin-top:24px;padding-top:24px;border-top:1px solid #2a2a2a;">
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-                            <h4 style="font-size:14px;color:#ccc;margin:0;">Sections</h4>
-                            <button type="button" class="add-btn" onclick="addSection(${pi})">+ Add Section</button>
-                        </div>
-                        <div id="sections-list-${pi}">
-                            ${(sc.sections || []).map((section, si) => renderSectionEditor(pi, si, section)).join('')}
-                        </div>
-                    </div>
+            grid.innerHTML = projectCards + `
+                <div class="project-card add-project-card" onclick="addNewProject()">
+                    <span>+</span>
+                    <p>Add new project</p>
                 </div>
             `;
         }
-        
-        function renderSectionEditor(pi, si, section) {
-            const type = section.type || 'text';
-            
-            return `
-                <div class="item-card" style="margin-bottom:16px;background:#0d0d0d;">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-                        <select id="proj-${pi}-sec-${si}-type" style="background:#1a1a1a;color:#fff;border:1px solid #333;padding:8px;border-radius:4px;">
-                            <option value="text" ${type === 'text' ? 'selected' : ''}>Text Section</option>
-                            <option value="showcase" ${type === 'showcase' ? 'selected' : ''}>Showcase (with media)</option>
-                            <option value="stats" ${type === 'stats' ? 'selected' : ''}>Stats Grid</option>
-                            <option value="step" ${type === 'step' ? 'selected' : ''}>Step (numbered)</option>
-                        </select>
-                        <div style="display:flex;gap:8px;">
-                            ${si > 0 ? `<button type="button" class="btn-secondary" onclick="moveSection(${pi}, ${si}, -1)" style="padding:4px 8px;font-size:12px;">↑</button>` : ''}
-                            <button type="button" class="btn-secondary" onclick="moveSection(${pi}, ${si}, 1)" style="padding:4px 8px;font-size:12px;">↓</button>
-                            <button type="button" class="remove-btn" onclick="removeSection(${pi}, ${si})" style="padding:4px 8px;font-size:12px;">Remove</button>
-                        </div>
-                    </div>
-                    <div id="section-content-${pi}-${si}">
-                        ${renderSectionContentEditor(pi, si, section)}
-                    </div>
-                </div>
-            `;
-        }
-        
-        function renderSectionContentEditor(pi, si, section) {
-            const type = section.type || 'text';
-            
-            if (type === 'text') {
-                return `
-                    <div class="form-group">
-                        <label>Label</label>
-                        <input type="text" id="proj-${pi}-sec-${si}-label" value="${escapeHtml(section.label || '')}" placeholder="Context">
-                    </div>
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" id="proj-${pi}-sec-${si}-title" value="${escapeHtml(section.title || '')}" placeholder="The Problem">
-                    </div>
-                    <div class="form-group">
-                        <label>Paragraphs (one per line)</label>
-                        <textarea id="proj-${pi}-sec-${si}-paragraphs" rows="6">${(section.paragraphs || []).join('\n\n')}</textarea>
-                        <small style="color:#666;">Each paragraph on a new line. Use &lt;strong&gt; for bold text.</small>
-                    </div>
-                `;
-            }
-            
-            if (type === 'showcase') {
-                return `
-                    <div class="form-group">
-                        <label>Label</label>
-                        <input type="text" id="proj-${pi}-sec-${si}-label" value="${escapeHtml(section.label || '')}" placeholder="Deliverables">
-                    </div>
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" id="proj-${pi}-sec-${si}-title" value="${escapeHtml(section.title || '')}" placeholder="Core Brand Animations">
-                    </div>
-                    <p style="color:#888;font-size:12px;margin:16px 0;">Showcase items coming soon - for now use HTML mode for complex showcases</p>
-                `;
-            }
-            
-            if (type === 'stats') {
-                return `
-                    <div class="form-group">
-                        <label>Stats (format: "1,000+|Lottie Files" one per line)</label>
-                        <textarea id="proj-${pi}-sec-${si}-stats" rows="4">${(section.items || []).map(s => `${s.number}|${s.label}`).join('\n')}</textarea>
-                        <small style="color:#666;">Format: Number|Label (one per line)</small>
-                    </div>
-                `;
-            }
-            
-            if (type === 'step') {
-                return `
-                    <div class="form-group">
-                        <label>Number</label>
-                        <input type="text" id="proj-${pi}-sec-${si}-number" value="${escapeHtml(section.number || '')}" placeholder="01">
-                    </div>
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" id="proj-${pi}-sec-${si}-title" value="${escapeHtml(section.title || '')}" placeholder="Motion Principles">
-                    </div>
-                    <div class="form-group">
-                        <label>Paragraphs (one per line)</label>
-                        <textarea id="proj-${pi}-sec-${si}-paragraphs" rows="6">${(section.paragraphs || []).join('\n\n')}</textarea>
-                    </div>
-                `;
-            }
-            
-            return '<p style="color:#888;">Unknown section type</p>';
-        }
-        
-        function renderHTMLEditor(pi) {
-            const proj = content.projects[pi];
-            return `
-                <div style="background:#1a1a1a;padding:20px;border-radius:6px;">
-                    <h4 style="font-size:14px;color:#ccc;margin-bottom:16px;">HTML Content</h4>
-                    <div class="form-group">
-                        <label>Custom URL (legacy HTML file)</label>
-                        <input type="text" id="proj-${pi}-customUrl" value="${escapeHtml(proj.customUrl || '')}" placeholder="project-1.html">
-                    </div>
-                    <div class="form-group">
-                        <label>Body HTML</label>
-                        <textarea class="bodyHtml" id="proj-${pi}-bodyHtml">${escapeHtml(proj.bodyHtml || '')}</textarea>
-                    </div>
-                </div>
-            `;
-        }
-        
-        // Global helper functions
-        window.switchToStructured = function(pi) {
-            const proj = content.projects[pi];
-            if (!proj.structuredContent) {
-                proj.structuredContent = {
-                    tags: [],
-                    intro: '',
-                    meta: '',
-                    sections: []
-                };
-            }
-            const editorDiv = document.querySelector(`#project-editor-${pi}`);
-            if (editorDiv) renderProjectEditor(pi, editorDiv);
-        };
-        
-        window.switchToHTML = function(pi) {
-            const proj = content.projects[pi];
-            delete proj.structuredContent;
-            const editorDiv = document.querySelector(`#project-editor-${pi}`);
-            if (editorDiv) renderProjectEditor(pi, editorDiv);
-        };
-        
-        window.addSection = function(pi) {
-            const proj = content.projects[pi];
-            if (!proj.structuredContent) proj.structuredContent = { sections: [] };
-            if (!proj.structuredContent.sections) proj.structuredContent.sections = [];
-            proj.structuredContent.sections.push({
-                type: 'text',
-                label: '',
-                title: '',
-                paragraphs: []
-            });
-            const editorDiv = document.querySelector(`#project-editor-${pi}`);
-            if (editorDiv) renderProjectEditor(pi, editorDiv);
-        };
-        
-        window.removeSection = function(pi, si) {
-            const proj = content.projects[pi];
-            if (proj.structuredContent && proj.structuredContent.sections) {
-                proj.structuredContent.sections.splice(si, 1);
-                const editorDiv = document.querySelector(`#project-editor-${pi}`);
-                if (editorDiv) renderProjectEditor(pi, editorDiv);
-            }
-        };
-        
-        window.moveSection = function(pi, si, direction) {
-            const proj = content.projects[pi];
-            if (proj.structuredContent && proj.structuredContent.sections) {
-                const sections = proj.structuredContent.sections;
-                const newIndex = si + direction;
-                if (newIndex >= 0 && newIndex < sections.length) {
-                    [sections[si], sections[newIndex]] = [sections[newIndex], sections[si]];
-                    const editorDiv = document.querySelector(`#project-editor-${pi}`);
-                    if (editorDiv) renderProjectEditor(pi, editorDiv);
-                }
-            }
-        };
-        
-        window.removeProject = function(pi) {
-            if (confirm('Delete this project?')) {
-                content.projects.splice(pi, 1);
-                renderProjectsList();
-            }
-        };
-        
-        window.duplicateProject = function(pi) {
-            const proj = JSON.parse(JSON.stringify(content.projects[pi]));
-            proj.name = (proj.name || 'Untitled') + ' (Copy)';
-            proj.id = content.projects.length ? Math.max(...content.projects.map(p => p.id || 0)) + 1 : 1;
-            content.projects.push(proj);
-            renderProjectsList();
-        };
-        
-        window.uploadProjectMedia = function(pi, field) {
-            const widget = cloudinary.createUploadWidget({
-                cloudName: 'dnbmyyc9x',
-                uploadPreset: 'portfolio_preset',
-                sources: ['local', 'url'],
-                multiple: false
-            }, (error, result) => {
-                if (error) {
-                    console.error('Upload error:', error);
-                    toast('Upload failed');
-                    return;
-                }
-                if (result.event === 'success') {
-                    const url = result.info.secure_url;
-                    content.projects[pi][field] = url;
-                    const input = document.getElementById(`proj-${pi}-preview`);
-                    if (input) input.value = url;
-                    toast('Uploaded!');
-                }
-            });
-            widget.open();
-        };
-        
-        document.getElementById('projectsAdd').addEventListener('click', () => {
+
+        // Add new project
+        function addNewProject() {
             const nextId = content.projects.length ? Math.max(...content.projects.map(p => p.id || 0)) + 1 : 1;
             content.projects.push({
                 id: nextId,
                 name: 'New Project',
                 company: '',
-                color: '#141414',
-                passwordProtected: false,
-                password: '',
+                color: '#f5f5f5',
                 cardPreview: '',
                 structuredContent: {
                     tags: [],
@@ -867,389 +650,1025 @@
                     sections: []
                 }
             });
-            renderProjectsList();
-        });
-        
-        renderProjectsList();
-    }
+            renderProjects();
+            openEditor(content.projects.length - 1);
+        }
 
-    function renderMediaPanel() {
-        const el = document.getElementById('panel-media');
-        if (!el) return;
-        
-        // Extract all media files from projects
-        const mediaFiles = new Map();
-        
-        content.projects.forEach((proj, projIndex) => {
-            const projName = proj.name || `Project ${proj.id}`;
+        // Open editor
+        function openEditor(index) {
+            currentProjectIndex = index;
+            const proj = content.projects[index];
             
-            // Card preview
-            if (proj.cardPreview) {
-                mediaFiles.set(proj.cardPreview, {
-                    url: proj.cardPreview,
-                    project: projName,
-                    type: 'Card Preview',
-                    path: `projects[${projIndex}].cardPreview`
+            document.getElementById('editorModal').classList.add('active');
+            document.getElementById('editorTitle').textContent = proj.name || 'Edit Project';
+            
+            renderEditorCanvas(proj);
+            renderEditorSidebar(proj);
+        }
+
+        // Render editor canvas (visual content preview)
+        function renderEditorCanvas(proj) {
+            const canvas = document.getElementById('canvasInner');
+            const sc = proj.structuredContent || { tags: [], intro: '', meta: '', sections: [] };
+            
+            canvas.innerHTML = `
+                <!-- Add Module Pills -->
+                <div class="module-pills">
+                    <button class="module-pill" onclick="addSection('text')">
+                        <span>+</span> Text
+                    </button>
+                    <button class="module-pill" onclick="addSection('showcase')">
+                        <span>+</span> Showcase
+                    </button>
+                    <button class="module-pill" onclick="addSection('stats')">
+                        <span>+</span> Stats
+                    </button>
+                    <button class="module-pill" onclick="addSection('step')">
+                        <span>+</span> Step
+                    </button>
+                </div>
+                
+                <!-- Tags -->
+                ${sc.tags && sc.tags.length > 0 ? `
+                    <div style="margin-bottom: 20px;">
+                        ${sc.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}
+                    </div>
+                ` : ''}
+                
+                <!-- Intro -->
+                ${sc.intro ? `<p style="font-size: 16px; color: #666; margin-bottom: 16px;">${sc.intro}</p>` : ''}
+                
+                <!-- Meta -->
+                ${sc.meta ? `<p style="font-size: 14px; color: #999; margin-bottom: 32px;">${sc.meta}</p>` : ''}
+                
+                <!-- Sections -->
+                <div id="sectionsContainer">
+                    ${(sc.sections || []).map((section, i) => renderSectionBlock(section, i)).join('')}
+                </div>
+            `;
+            
+            // Make sections sortable
+            if (sc.sections && sc.sections.length > 0) {
+                new Sortable(document.getElementById('sectionsContainer'), {
+                    animation: 150,
+                    handle: '.block-handle',
+                    onEnd: function(evt) {
+                        const sections = content.projects[currentProjectIndex].structuredContent.sections;
+                        const [removed] = sections.splice(evt.oldIndex, 1);
+                        sections.splice(evt.newIndex, 0, removed);
+                        renderEditorCanvas(content.projects[currentProjectIndex]);
+                    }
                 });
             }
+        }
+
+        // Render section block
+        function renderSectionBlock(section, index) {
+            const type = section.type || 'text';
             
-            // Extract from bodyHtml (videos and images)
-            if (proj.bodyHtml) {
-                const srcMatches = proj.bodyHtml.matchAll(/(?:src|href)=["']([^"']+\.(?:mp4|gif|webm|png|jpg|jpeg|mov))["']/gi);
-                for (const match of srcMatches) {
-                    const url = match[1];
-                    if (!mediaFiles.has(url)) {
-                        mediaFiles.set(url, {
-                            url: url,
-                            project: projName,
-                            type: 'In Body',
-                            path: `projects[${projIndex}].bodyHtml`
-                        });
-                    }
-                }
-            }
-            
-            // Grid media
-            if (proj.media && Array.isArray(proj.media.grid)) {
-                proj.media.grid.forEach((url, idx) => {
-                    if (!mediaFiles.has(url)) {
-                        mediaFiles.set(url, {
-                            url: url,
-                            project: projName,
-                            type: 'Grid Media',
-                            path: `projects[${projIndex}].media.grid[${idx}]`
-                        });
-                    }
-                });
-            }
-            
-            // Hero media
-            if (proj.media && proj.media.hero) {
-                if (!mediaFiles.has(proj.media.hero)) {
-                    mediaFiles.set(proj.media.hero, {
-                        url: proj.media.hero,
-                        project: projName,
-                        type: 'Hero',
-                        path: `projects[${projIndex}].media.hero`
-                    });
-                }
-            }
-        });
-        
-        const mediaArray = Array.from(mediaFiles.values());
-        
-        el.innerHTML = `
-            <h3>Media Manager</h3>
-            <p style="color:#888;margin-bottom:20px;font-size:14px;">
-                All images and videos used across your projects. Use "Replace" to upload a new file to Cloudinary and automatically update all references.
-            </p>
-            <div style="margin-bottom:16px;">
-                <input type="text" id="mediaSearch" placeholder="Search files..." style="width:100%;padding:10px;background:#0d0d0d;border:1px solid #333;border-radius:6px;color:#fff;font-size:14px;">
-            </div>
-            <div id="mediaList" style="max-height:calc(100vh - 280px);overflow-y:auto;"></div>
-        `;
-        
-        function renderMediaList(filter = '') {
-            const list = document.getElementById('mediaList');
-            const filtered = filter ? mediaArray.filter(m => 
-                m.url.toLowerCase().includes(filter.toLowerCase()) || 
-                m.project.toLowerCase().includes(filter.toLowerCase())
-            ) : mediaArray;
-            
-            list.innerHTML = filtered.map((media, idx) => {
-                const filename = media.url.split('/').pop().split('?')[0];
-                const isExternal = media.url.startsWith('http');
-                return `
-                    <div class="item-card">
-                        <div style="display:flex;gap:12px;align-items:flex-start;">
-                            <div style="flex:1;min-width:0;">
-                                <div style="font-size:14px;color:#e5e5e5;font-weight:500;margin-bottom:4px;word-break:break-all;">${filename}</div>
-                                <div style="font-size:12px;color:#888;margin-bottom:4px;">${media.project} • ${media.type}</div>
-                                <div style="font-size:11px;color:#666;font-family:monospace;word-break:break-all;">${media.url}</div>
-                            </div>
-                            <button type="button" class="btn-upload" data-media-idx="${idx}" style="flex-shrink:0;">Replace</button>
+            return `
+                <div class="content-block" data-index="${index}">
+                    <div class="block-handle">
+                        <span class="block-type">${type}</span>
+                        <div class="block-actions">
+                            <button class="block-btn" onclick="editSection(${index})">Edit</button>
+                            <button class="block-btn" onclick="removeSection(${index})">Remove</button>
                         </div>
+                    </div>
+                    ${renderSectionPreview(section)}
+                </div>
+            `;
+        }
+
+        // Render section preview
+        function renderSectionPreview(section) {
+            if (section.type === 'text') {
+                return `
+                    <div>
+                        ${section.label ? `<p style="font-size: 12px; color: #999; margin-bottom: 4px;">${section.label}</p>` : ''}
+                        ${section.title ? `<h3 style="font-size: 18px; font-weight: 600; margin-bottom: 12px;">${section.title}</h3>` : ''}
+                        ${section.paragraphs && section.paragraphs.length > 0 ? section.paragraphs.map(p => `<p style="margin-bottom: 8px;">${p}</p>`).join('') : '<p style="color: #999;">No content yet</p>'}
+                    </div>
+                `;
+            }
+            
+            if (section.type === 'stats') {
+                return `
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                        ${section.items && section.items.length > 0 ? section.items.map(item => `
+                            <div style="text-align: center; padding: 16px; background: white; border-radius: 8px;">
+                                <div style="font-size: 24px; font-weight: 700;">${item.number}</div>
+                                <div style="font-size: 13px; color: #666;">${item.label}</div>
+                            </div>
+                        `).join('') : '<p style="color: #999;">No stats yet</p>'}
+                    </div>
+                `;
+            }
+            
+            return '<p style="color: #999;">Section content</p>';
+        }
+
+        // Render editor sidebar (properties)
+        function renderEditorSidebar(proj) {
+            const sidebar = document.getElementById('editorSidebar');
+            
+            sidebar.innerHTML = `
+                <div class="sidebar-section">
+                    <h3>Basic Info</h3>
+                    <div class="form-field">
+                        <label>Project Name</label>
+                        <input type="text" id="projName" value="${proj.name || ''}" placeholder="Motion Design System">
+                    </div>
+                    <div class="form-field">
+                        <label>Company</label>
+                        <input type="text" id="projCompany" value="${proj.company || ''}" placeholder="Qonto">
+                    </div>
+                    <div class="form-field">
+                        <label>Color</label>
+                        <input type="text" id="projColor" value="${proj.color || '#f5f5f5'}" placeholder="#f5f5f5">
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3>Cover Media</h3>
+                    <div class="form-field">
+                        <label>Preview URL</label>
+                        <input type="url" id="projPreview" value="${proj.cardPreview || ''}" placeholder="URL">
+                    </div>
+                    <button class="btn-upload" onclick="uploadCover()">Upload Cover</button>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3>Content</h3>
+                    <div class="form-field">
+                        <label>Tags (comma separated)</label>
+                        <input type="text" id="projTags" value="${(proj.structuredContent?.tags || []).join(', ')}" placeholder="Motion Design, Design System">
+                    </div>
+                    <div class="form-field">
+                        <label>Introduction</label>
+                        <textarea id="projIntro" rows="3">${proj.structuredContent?.intro || ''}</textarea>
+                    </div>
+                    <div class="form-field">
+                        <label>Meta (role & year)</label>
+                        <input type="text" id="projMeta" value="${proj.structuredContent?.meta || ''}" placeholder="2025 - 2026 Staff Motion Designer">
+                    </div>
+                </div>
+            `;
+            
+            // Attach listeners
+            document.getElementById('projName').addEventListener('input', e => {
+                content.projects[currentProjectIndex].name = e.target.value;
+                document.getElementById('editorTitle').textContent = e.target.value || 'Edit Project';
+            });
+            
+            document.getElementById('projCompany').addEventListener('input', e => {
+                content.projects[currentProjectIndex].company = e.target.value;
+            });
+            
+            document.getElementById('projColor').addEventListener('input', e => {
+                content.projects[currentProjectIndex].color = e.target.value;
+            });
+            
+            document.getElementById('projPreview').addEventListener('input', e => {
+                content.projects[currentProjectIndex].cardPreview = e.target.value;
+            });
+            
+            document.getElementById('projTags').addEventListener('input', e => {
+                if (!content.projects[currentProjectIndex].structuredContent) {
+                    content.projects[currentProjectIndex].structuredContent = {};
+                }
+                content.projects[currentProjectIndex].structuredContent.tags = 
+                    e.target.value.split(',').map(t => t.trim()).filter(Boolean);
+                renderEditorCanvas(content.projects[currentProjectIndex]);
+            });
+            
+            document.getElementById('projIntro').addEventListener('input', e => {
+                if (!content.projects[currentProjectIndex].structuredContent) {
+                    content.projects[currentProjectIndex].structuredContent = {};
+                }
+                content.projects[currentProjectIndex].structuredContent.intro = e.target.value;
+                renderEditorCanvas(content.projects[currentProjectIndex]);
+            });
+            
+            document.getElementById('projMeta').addEventListener('input', e => {
+                if (!content.projects[currentProjectIndex].structuredContent) {
+                    content.projects[currentProjectIndex].structuredContent = {};
+                }
+                content.projects[currentProjectIndex].structuredContent.meta = e.target.value;
+                renderEditorCanvas(content.projects[currentProjectIndex]);
+            });
+        }
+
+        // Add section
+        window.addSection = function(type) {
+            const proj = content.projects[currentProjectIndex];
+            if (!proj.structuredContent) proj.structuredContent = { sections: [] };
+            if (!proj.structuredContent.sections) proj.structuredContent.sections = [];
+            
+            const newSection = {
+                type: type,
+                label: '',
+                title: '',
+                paragraphs: []
+            };
+            
+            if (type === 'stats') {
+                newSection.items = [];
+            }
+            
+            proj.structuredContent.sections.push(newSection);
+            renderEditorCanvas(proj);
+            toast('Section added');
+        };
+
+        // Remove section
+        window.removeSection = function(index) {
+            if (confirm('Remove this section?')) {
+                content.projects[currentProjectIndex].structuredContent.sections.splice(index, 1);
+                renderEditorCanvas(content.projects[currentProjectIndex]);
+                toast('Section removed');
+            }
+        };
+
+        // Edit section (opens more detailed editor)
+        window.editSection = function(index) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[index];
+            const type = section.type || 'text';
+            
+            // Render detailed editor in sidebar
+            const sidebar = document.getElementById('editorSidebar');
+            
+            sidebar.innerHTML = `
+                <div class="sidebar-section">
+                    <h3>Edit ${type.toUpperCase()} Section</h3>
+                    <button class="btn-secondary" onclick="renderEditorSidebar(content.projects[${currentProjectIndex}])" style="width: 100%; margin-bottom: 20px;">← Back to Project</button>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="form-field">
+                        <label>Section Type</label>
+                        <select id="sectionType" style="width: 100%; padding: 10px; border: 1px solid #e5e5e5; border-radius: 8px;">
+                            <option value="text" ${type === 'text' ? 'selected' : ''}>Text</option>
+                            <option value="showcase" ${type === 'showcase' ? 'selected' : ''}>Showcase</option>
+                            <option value="stats" ${type === 'stats' ? 'selected' : ''}>Stats</option>
+                            <option value="step" ${type === 'step' ? 'selected' : ''}>Step</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Label</label>
+                        <input type="text" id="sectionLabel" value="${section.label || ''}" placeholder="Context">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Title</label>
+                        <input type="text" id="sectionTitle" value="${section.title || ''}" placeholder="The Challenge">
+                    </div>
+                    
+                    ${type === 'text' || type === 'step' ? `
+                        <div class="form-field">
+                            <label>Paragraphs (one per line)</label>
+                            <textarea id="sectionParagraphs" rows="8">${(section.paragraphs || []).join('\n\n')}</textarea>
+                            <small style="color: #999; font-size: 12px;">Use &lt;strong&gt; for bold</small>
+                        </div>
+                    ` : ''}
+                    
+                    ${type === 'step' ? `
+                        <div class="form-field">
+                            <label>Step Number</label>
+                            <input type="text" id="sectionNumber" value="${section.number || ''}" placeholder="01">
+                        </div>
+                    ` : ''}
+                    
+                    ${type === 'showcase' ? `
+                        <div class="sidebar-section">
+                            <h3>Showcase Items</h3>
+                            <div id="showcaseItems"></div>
+                            <button class="btn-secondary" onclick="addShowcaseItem(${index})" style="width: 100%; margin-top: 12px;">+ Add Item</button>
+                        </div>
+                    ` : ''}
+                    
+                    ${type === 'stats' ? `
+                        <div class="sidebar-section">
+                            <h3>Stats</h3>
+                            <div id="statsItems"></div>
+                            <button class="btn-secondary" onclick="addStatItem(${index})" style="width: 100%; margin-top: 12px;">+ Add Stat</button>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            // Attach listeners
+            document.getElementById('sectionType').addEventListener('change', e => {
+                section.type = e.target.value;
+                renderEditorCanvas(content.projects[currentProjectIndex]);
+                editSection(index);
+            });
+            
+            const labelInput = document.getElementById('sectionLabel');
+            if (labelInput) {
+                labelInput.addEventListener('input', e => {
+                    section.label = e.target.value;
+                    renderEditorCanvas(content.projects[currentProjectIndex]);
+                });
+            }
+            
+            const titleInput = document.getElementById('sectionTitle');
+            if (titleInput) {
+                titleInput.addEventListener('input', e => {
+                    section.title = e.target.value;
+                    renderEditorCanvas(content.projects[currentProjectIndex]);
+                });
+            }
+            
+            const paragraphsInput = document.getElementById('sectionParagraphs');
+            if (paragraphsInput) {
+                paragraphsInput.addEventListener('input', e => {
+                    section.paragraphs = e.target.value.split('\n\n').map(p => p.trim()).filter(Boolean);
+                    renderEditorCanvas(content.projects[currentProjectIndex]);
+                });
+            }
+            
+            const numberInput = document.getElementById('sectionNumber');
+            if (numberInput) {
+                numberInput.addEventListener('input', e => {
+                    section.number = e.target.value;
+                    renderEditorCanvas(content.projects[currentProjectIndex]);
+                });
+            }
+            
+            // Render showcase items if showcase type
+            if (type === 'showcase') {
+                renderShowcaseItems(index);
+            }
+            
+            // Render stats items if stats type
+            if (type === 'stats') {
+                renderStatsItems(index);
+            }
+        };
+        
+        // Render showcase items
+        function renderShowcaseItems(sectionIndex) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            const items = section.items || [];
+            const container = document.getElementById('showcaseItems');
+            
+            container.innerHTML = items.map((item, itemIndex) => `
+                <div style="background: #fafafa; padding: 16px; border-radius: 8px; margin-bottom: 12px;">
+                    <div class="form-field">
+                        <label>Item Title</label>
+                        <input type="text" value="${item.title || ''}" onchange="updateShowcaseItem(${sectionIndex}, ${itemIndex}, 'title', this.value)">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Description</label>
+                        <textarea rows="3" onchange="updateShowcaseItem(${sectionIndex}, ${itemIndex}, 'description', this.value)">${item.description || ''}</textarea>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Layout</label>
+                        <select onchange="updateShowcaseItem(${sectionIndex}, ${itemIndex}, 'layout', this.value)" style="width: 100%; padding: 8px; border: 1px solid #e5e5e5; border-radius: 6px;">
+                            <option value="full" ${item.layout === 'full' ? 'selected' : ''}>Full Width</option>
+                            <option value="grid-2" ${item.layout === 'grid-2' ? 'selected' : ''}>2 Columns</option>
+                            <option value="grid-3" ${item.layout === 'grid-3' ? 'selected' : ''}>3 Columns</option>
+                            <option value="grid-6" ${item.layout === 'grid-6' ? 'selected' : ''}>6 Columns</option>
+                            <option value="lottie-grid" ${item.layout === 'lottie-grid' ? 'selected' : ''}>Lottie Grid</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Media (${(item.media || []).length} files)</label>
+                        <div id="mediaList-${sectionIndex}-${itemIndex}"></div>
+                        <button class="btn-secondary" onclick="addMediaToItem(${sectionIndex}, ${itemIndex})" style="width: 100%; margin-top: 8px; padding: 8px;">+ Add Media</button>
+                    </div>
+                    
+                    <button class="btn-secondary" onclick="removeShowcaseItem(${sectionIndex}, ${itemIndex})" style="width: 100%; margin-top: 12px; padding: 6px; font-size: 13px;">Remove Item</button>
+                </div>
+            `).join('');
+            
+            // Render media lists for each item
+            items.forEach((item, itemIndex) => {
+                renderMediaList(sectionIndex, itemIndex);
+            });
+        }
+        
+        // Render media list for a showcase item
+        function renderMediaList(sectionIndex, itemIndex) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            const item = section.items[itemIndex];
+            const media = item.media || [];
+            const container = document.getElementById(`mediaList-${sectionIndex}-${itemIndex}`);
+            
+            if (!container) return;
+            
+            container.innerHTML = media.map((url, mediaIndex) => {
+                const isVideo = url.match(/\.(mp4|webm|mov)$/i);
+                const isImage = url.match(/\.(jpg|jpeg|png|gif|webp)$/i);
+                
+                return `
+                    <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px; padding: 8px; background: white; border-radius: 6px;">
+                        <div style="width: 60px; height: 60px; background: #f5f5f5; border-radius: 4px; overflow: hidden; flex-shrink: 0;">
+                            ${isVideo ? `<video src="${url}" style="width: 100%; height: 100%; object-fit: cover;"></video>` : 
+                              isImage ? `<img src="${url}" style="width: 100%; height: 100%; object-fit: cover;">` : 
+                              '<div style="display: flex; align-items: center; justify-content: center; height: 100%; font-size: 24px;">📄</div>'}
+                        </div>
+                        <input type="url" value="${url}" onchange="updateMedia(${sectionIndex}, ${itemIndex}, ${mediaIndex}, this.value)" style="flex: 1; padding: 8px; border: 1px solid #e5e5e5; border-radius: 4px; font-size: 13px;">
+                        <button class="btn-upload" onclick="replaceMedia(${sectionIndex}, ${itemIndex}, ${mediaIndex})" style="padding: 8px 12px; font-size: 12px;">Replace</button>
+                        <button class="btn-secondary" onclick="removeMedia(${sectionIndex}, ${itemIndex}, ${mediaIndex})" style="padding: 8px 12px; font-size: 12px;">×</button>
                     </div>
                 `;
             }).join('');
-            
-            // Bind replace buttons to Cloudinary upload
-            list.querySelectorAll('[data-media-idx]').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const idx = parseInt(btn.dataset.mediaIdx, 10);
-                    const mediaInfo = filtered[idx];
-                    uploadAndReplaceMedia(mediaInfo);
-                });
-            });
         }
         
-        document.getElementById('mediaSearch').addEventListener('input', (e) => {
-            renderMediaList(e.target.value);
-        });
+        // Update showcase item
+        window.updateShowcaseItem = function(sectionIndex, itemIndex, field, value) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            section.items[itemIndex][field] = value;
+            renderEditorCanvas(content.projects[currentProjectIndex]);
+        };
         
-        renderMediaList();
-    }
-    
-    function uploadAndReplaceMedia(mediaInfo) {
-        const widget = cloudinary.createUploadWidget({
-            cloudName: 'dnbmyyc9x',
-            uploadPreset: 'portfolio_preset',
-            sources: ['local', 'url'],
-            multiple: false,
-            resourceType: 'auto',
-            clientAllowedFormats: ['mp4', 'webm', 'mov', 'gif', 'png', 'jpg', 'jpeg', 'webp']
-        }, (error, result) => {
-            if (!error && result && result.event === 'success') {
-                const newUrl = result.info.secure_url;
-                const oldUrl = mediaInfo.url;
-                
-                // Replace in all projects
-                content.projects.forEach((proj, projIdx) => {
-                    // Card preview
-                    if (proj.cardPreview === oldUrl) {
-                        proj.cardPreview = newUrl;
-                    }
-                    // bodyHtml - replace all occurrences
-                    if (proj.bodyHtml && proj.bodyHtml.includes(oldUrl)) {
-                        proj.bodyHtml = proj.bodyHtml.replaceAll(oldUrl, newUrl);
-                    }
-                    // Grid media
-                    if (proj.media && Array.isArray(proj.media.grid)) {
-                        proj.media.grid = proj.media.grid.map(url => url === oldUrl ? newUrl : url);
-                    }
-                    // Hero
-                    if (proj.media && proj.media.hero === oldUrl) {
-                        proj.media.hero = newUrl;
-                    }
-                });
-                
-                showToast(`Media replaced: ${newUrl.split('/').pop()}`);
-                renderMediaPanel();
+        // Add showcase item
+        window.addShowcaseItem = function(sectionIndex) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            if (!section.items) section.items = [];
+            section.items.push({
+                title: '',
+                description: '',
+                media: [],
+                layout: 'full'
+            });
+            renderShowcaseItems(sectionIndex);
+            renderEditorCanvas(content.projects[currentProjectIndex]);
+            toast('Item added');
+        };
+        
+        // Remove showcase item
+        window.removeShowcaseItem = function(sectionIndex, itemIndex) {
+            if (confirm('Remove this item?')) {
+                const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+                section.items.splice(itemIndex, 1);
+                renderShowcaseItems(sectionIndex);
+                renderEditorCanvas(content.projects[currentProjectIndex]);
+                toast('Item removed');
             }
-        });
-        widget.open();
-    }
-
-    function renderFooterPanel() {
-        content.footer = content.footer || {};
-        const f = content.footer;
-        if (!Array.isArray(f.social)) f.social = [];
-        const el = document.getElementById('panel-footer');
-        if (!el) return;
-        el.innerHTML = `
-            <h3>Footer</h3>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="footerEmail" value="${escapeHtml(f.email || '')}">
-            </div>
-            <div class="form-group">
-                <label>Logo (filename or URL)</label>
-                <input type="text" id="footerLogo" value="${escapeHtml(f.logo || '')}">
-            </div>
-            <div class="form-group">
-                <label>Year</label>
-                <input type="text" id="footerYear" value="${escapeHtml(f.year || '')}">
-            </div>
-            <div class="form-group">
-                <label>CV (filename or URL)</label>
-                <div class="file-upload-row">
-                    <input type="text" id="footerCvFile" value="${escapeHtml(f.cvFile || '')}" placeholder="cv.pdf or URL">
-                    <button type="button" class="btn-upload" onclick="uploadCV()">Upload PDF</button>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Social links</label>
-                <div id="footerSocialList"></div>
-                <button type="button" class="add-btn" id="footerSocialAdd">+ Add link</button>
-            </div>
-        `;
-        function renderSocialList() {
-            const list = document.getElementById('footerSocialList');
-            list.innerHTML = (content.footer.social || []).map((s, i) => `
-                <div class="item-card">
-                    <div class="form-row">
-                        <div class="form-group"><label>Name</label><input type="text" data-si="${i}" data-key="name" value="${escapeHtml(s.name || '')}"></div>
-                        <div class="form-group"><label>URL</label><input type="url" data-si="${i}" data-key="url" value="${escapeHtml(s.url || '')}"></div>
-                        <button type="button" class="remove-btn" data-si="${i}">Remove</button>
+        };
+        
+        // Add media to item
+        window.addMediaToItem = function(sectionIndex, itemIndex) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            const item = section.items[itemIndex];
+            if (!item.media) item.media = [];
+            
+            // Open Cloudinary uploader
+            const widget = cloudinary.createUploadWidget({
+                cloudName: 'dnbmyyc9x',
+                uploadPreset: 'portfolio_preset',
+                sources: ['local', 'url'],
+                multiple: false
+            }, (error, result) => {
+                if (result.event === 'success') {
+                    item.media.push(result.info.secure_url);
+                    renderMediaList(sectionIndex, itemIndex);
+                    renderEditorCanvas(content.projects[currentProjectIndex]);
+                    toast('Media added!');
+                }
+            });
+            widget.open();
+        };
+        
+        // Update media URL
+        window.updateMedia = function(sectionIndex, itemIndex, mediaIndex, value) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            section.items[itemIndex].media[mediaIndex] = value;
+            renderEditorCanvas(content.projects[currentProjectIndex]);
+        };
+        
+        // Replace media
+        window.replaceMedia = function(sectionIndex, itemIndex, mediaIndex) {
+            const widget = cloudinary.createUploadWidget({
+                cloudName: 'dnbmyyc9x',
+                uploadPreset: 'portfolio_preset',
+                sources: ['local', 'url'],
+                multiple: false
+            }, (error, result) => {
+                if (result.event === 'success') {
+                    const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+                    section.items[itemIndex].media[mediaIndex] = result.info.secure_url;
+                    renderMediaList(sectionIndex, itemIndex);
+                    renderEditorCanvas(content.projects[currentProjectIndex]);
+                    toast('Media replaced!');
+                }
+            });
+            widget.open();
+        };
+        
+        // Remove media
+        window.removeMedia = function(sectionIndex, itemIndex, mediaIndex) {
+            if (confirm('Remove this media?')) {
+                const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+                section.items[itemIndex].media.splice(mediaIndex, 1);
+                renderMediaList(sectionIndex, itemIndex);
+                renderEditorCanvas(content.projects[currentProjectIndex]);
+                toast('Media removed');
+            }
+        };
+        
+        // Render stats items
+        function renderStatsItems(sectionIndex) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            const items = section.items || [];
+            const container = document.getElementById('statsItems');
+            
+            container.innerHTML = items.map((item, itemIndex) => `
+                <div style="background: #fafafa; padding: 12px; border-radius: 8px; margin-bottom: 8px;">
+                    <div style="display: grid; grid-template-columns: 1fr 2fr auto; gap: 8px; align-items: center;">
+                        <input type="text" placeholder="1,000+" value="${item.number || ''}" onchange="updateStatItem(${sectionIndex}, ${itemIndex}, 'number', this.value)" style="padding: 8px; border: 1px solid #e5e5e5; border-radius: 4px;">
+                        <input type="text" placeholder="Label" value="${item.label || ''}" onchange="updateStatItem(${sectionIndex}, ${itemIndex}, 'label', this.value)" style="padding: 8px; border: 1px solid #e5e5e5; border-radius: 4px;">
+                        <button class="btn-secondary" onclick="removeStatItem(${sectionIndex}, ${itemIndex})" style="padding: 8px 12px;">×</button>
                     </div>
                 </div>
             `).join('');
-            list.querySelectorAll('input').forEach(inp => {
-                inp.addEventListener('input', () => {
-                    const i = parseInt(inp.dataset.si, 10);
-                    content.footer.social[i][inp.dataset.key] = inp.value;
-                });
+        }
+        
+        // Add stat item
+        window.addStatItem = function(sectionIndex) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            if (!section.items) section.items = [];
+            section.items.push({ number: '', label: '' });
+            renderStatsItems(sectionIndex);
+            renderEditorCanvas(content.projects[currentProjectIndex]);
+            toast('Stat added');
+        };
+        
+        // Update stat item
+        window.updateStatItem = function(sectionIndex, itemIndex, field, value) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            section.items[itemIndex][field] = value;
+            renderEditorCanvas(content.projects[currentProjectIndex]);
+        };
+        
+        // Remove stat item
+        window.removeStatItem = function(sectionIndex, itemIndex) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            section.items.splice(itemIndex, 1);
+            renderStatsItems(sectionIndex);
+            renderEditorCanvas(content.projects[currentProjectIndex]);
+            toast('Stat removed');
+        };
+
+        // Upload cover
+        window.uploadCover = function() {
+            const widget = cloudinary.createUploadWidget({
+                cloudName: 'dnbmyyc9x',
+                uploadPreset: 'portfolio_preset',
+                sources: ['local', 'url'],
+                multiple: false
+            }, (error, result) => {
+                if (result.event === 'success') {
+                    content.projects[currentProjectIndex].cardPreview = result.info.secure_url;
+                    document.getElementById('projPreview').value = result.info.secure_url;
+                    toast('Cover uploaded!');
+                }
             });
-            list.querySelectorAll('.remove-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    content.footer.social.splice(parseInt(btn.dataset.si, 10), 1);
-                    renderSocialList();
-                });
+            widget.open();
+        };
+
+        // Close editor
+        document.getElementById('btnCloseEditor').addEventListener('click', () => {
+            document.getElementById('editorModal').classList.remove('active');
+            currentProjectIndex = null;
+            renderProjects();
+        });
+
+        // Delete project
+        document.getElementById('btnDeleteProject').addEventListener('click', () => {
+            if (confirm('Delete this project?')) {
+                content.projects.splice(currentProjectIndex, 1);
+                document.getElementById('editorModal').classList.remove('active');
+                currentProjectIndex = null;
+                renderProjects();
+                toast('Project deleted');
+            }
+        });
+
+        // Save & Publish
+        document.getElementById('btnPublish').addEventListener('click', async () => {
+            const blob = new Blob([JSON.stringify(content, null, 2)], { type: 'application/json' });
+            const formData = new FormData();
+            formData.append('file', blob, 'content.json');
+            
+            try {
+                const r = await fetch('save-content.php', { method: 'POST', body: formData });
+                if (r.ok) {
+                    toast('✓ Published successfully!');
+                } else {
+                    toast('Save to download manually');
+                    downloadJSON();
+                }
+            } catch {
+                toast('Save to download manually');
+                downloadJSON();
+            }
+        });
+
+        // Download JSON
+        document.getElementById('btnDownload').addEventListener('click', downloadJSON);
+        
+        function downloadJSON() {
+            const blob = new Blob([JSON.stringify(content, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'content.json';
+            a.click();
+        }
+
+        // Toast notification
+        function toast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        // Tab Navigation
+        let currentSection = 'projects';
+        
+        document.querySelectorAll('.topbar-nav button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const section = btn.dataset.section;
+                switchSection(section);
+            });
+        });
+        
+        function switchSection(section) {
+            currentSection = section;
+            
+            // Update active tab
+            document.querySelectorAll('.topbar-nav button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.section === section);
+            });
+            
+            // Render appropriate view
+            const mainContent = document.getElementById('mainContent');
+            
+            if (section === 'projects') {
+                mainContent.innerHTML = `
+                    <div id="projectsView">
+                        <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Your Projects</h2>
+                        <div class="projects-grid" id="projectsGrid"></div>
+                    </div>
+                `;
+                renderProjects();
+            } else if (section === 'hero') {
+                renderHeroSection();
+            } else if (section === 'about') {
+                renderAboutSection();
+            } else if (section === 'experience') {
+                renderExperienceSection();
+            } else if (section === 'footer') {
+                renderFooterSection();
+            }
+        }
+        
+        // Render Hero Section
+        function renderHeroSection() {
+            const hero = content.hero || {};
+            const mainContent = document.getElementById('mainContent');
+            
+            mainContent.innerHTML = `
+                <div style="max-width: 800px;">
+                    <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Hero Section</h2>
+                    
+                    <div style="background: white; padding: 32px; border-radius: 12px; border: 1px solid #e5e5e5;">
+                        <div class="form-field">
+                            <label>Name</label>
+                            <input type="text" id="heroName" value="${hero.name || ''}" placeholder="Spiros Leividiotis">
+                        </div>
+                        
+                        <div class="form-field">
+                            <label>Subtitle</label>
+                            <textarea id="heroSubtitle" rows="3">${hero.subtitle || ''}</textarea>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label>Photo URL</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="url" id="heroPhoto" value="${hero.photo || ''}" placeholder="https://...">
+                                <button class="btn-upload" onclick="uploadHeroPhoto()">Upload</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label>Tools (comma separated)</label>
+                            <input type="text" id="heroTools" value="${(hero.tags?.tools || []).join(', ')}" placeholder="Rive, Figma, LottieFiles">
+                        </div>
+                        
+                        <div class="form-field">
+                            <label>Skills (comma separated)</label>
+                            <input type="text" id="heroSkills" value="${(hero.tags?.skills || []).join(', ')}" placeholder="Product Motion, Design Systems">
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Attach listeners
+            document.getElementById('heroName').addEventListener('input', e => {
+                if (!content.hero) content.hero = {};
+                content.hero.name = e.target.value;
+            });
+            
+            document.getElementById('heroSubtitle').addEventListener('input', e => {
+                if (!content.hero) content.hero = {};
+                content.hero.subtitle = e.target.value;
+            });
+            
+            document.getElementById('heroPhoto').addEventListener('input', e => {
+                if (!content.hero) content.hero = {};
+                content.hero.photo = e.target.value;
+            });
+            
+            document.getElementById('heroTools').addEventListener('input', e => {
+                if (!content.hero) content.hero = {};
+                if (!content.hero.tags) content.hero.tags = {};
+                content.hero.tags.tools = e.target.value.split(',').map(t => t.trim()).filter(Boolean);
+            });
+            
+            document.getElementById('heroSkills').addEventListener('input', e => {
+                if (!content.hero) content.hero = {};
+                if (!content.hero.tags) content.hero.tags = {};
+                content.hero.tags.skills = e.target.value.split(',').map(t => t.trim()).filter(Boolean);
             });
         }
-        document.getElementById('footerEmail').addEventListener('input', e => { content.footer.email = e.target.value; });
-        document.getElementById('footerLogo').addEventListener('input', e => { content.footer.logo = e.target.value; });
-        document.getElementById('footerYear').addEventListener('input', e => { content.footer.year = e.target.value; });
-        document.getElementById('footerCvFile').addEventListener('input', e => { content.footer.cvFile = e.target.value; });
-        document.getElementById('footerSocialAdd').addEventListener('click', () => {
-            content.footer.social = content.footer.social || [];
-            content.footer.social.push({ name: '', url: '' });
-            renderSocialList();
-        });
-        renderSocialList();
-    }
-
-    function renderMusicPanel() {
-        content.music = content.music || {};
-        const m = content.music;
-        const el = document.getElementById('panel-music');
-        if (!el) return;
-        el.innerHTML = `
-            <h3>Music</h3>
-            <div class="form-group">
-                <label>Title</label>
-                <input type="text" id="musicTitle" value="${escapeHtml(m.title || '')}">
-            </div>
-            <div class="form-group">
-                <label>Audio file URL</label>
-                <input type="url" id="musicFile" value="${escapeHtml(m.file || '')}">
-            </div>
-        `;
-        document.getElementById('musicTitle').addEventListener('input', e => { content.music.title = e.target.value; });
-        document.getElementById('musicFile').addEventListener('input', e => { content.music.file = e.target.value; });
-    }
-
-    function renderAnalyticsPanel() {
-        content.analytics = content.analytics || {};
-        const a = content.analytics;
-        const el = document.getElementById('panel-analytics');
-        if (!el) return;
-        el.innerHTML = `
-            <h3>Analytics</h3>
-            <div class="form-group">
-                <label>Script (e.g. Google Analytics)</label>
-                <textarea id="analyticsScript" rows="8" placeholder="Paste script tag(s) or tracking code">${escapeHtml(a.script || '')}</textarea>
-            </div>
-        `;
-        document.getElementById('analyticsScript').addEventListener('input', e => { content.analytics.script = e.target.value; });
-    }
-
-    function buildContentPanels() {
-        const container = document.getElementById('cmsContent');
-        container.innerHTML = '<div class="panel active" id="panel-modules"></div>' + MODULE_IDS.filter(m => m !== 'modules').map(m => `<div class="panel" id="panel-${m}"></div>`).join('');
-    }
-
-    document.querySelectorAll('.nav-link').forEach(a => {
-        a.addEventListener('click', (e) => {
-            e.preventDefault();
-            showPanel(a.dataset.panel);
-        });
-    });
-
-    document.getElementById('btnDownload').addEventListener('click', () => {
-        const json = JSON.stringify(content, null, 2);
-        const blob = new Blob([json], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'content.json';
-        link.click();
-        URL.revokeObjectURL(url);
-        toast('Downloaded content.json');
-    });
-
-    document.getElementById('btnPublish').addEventListener('click', async () => {
-        try {
-            const r = await fetch('/api/publish', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content })
+        
+        // Upload hero photo
+        window.uploadHeroPhoto = function() {
+            const widget = cloudinary.createUploadWidget({
+                cloudName: 'dnbmyyc9x',
+                uploadPreset: 'portfolio_preset',
+                sources: ['local', 'url'],
+                multiple: false
+            }, (error, result) => {
+                if (result.event === 'success') {
+                    content.hero.photo = result.info.secure_url;
+                    document.getElementById('heroPhoto').value = result.info.secure_url;
+                    toast('Photo uploaded!');
+                }
             });
-            const data = await r.json().catch(() => ({}));
-            if (r.ok && data.success) {
-                toast('Published successfully');
+            widget.open();
+        };
+        
+        // Render About Section
+        function renderAboutSection() {
+            const about = content.aboutMe || {};
+            const mainContent = document.getElementById('mainContent');
+            
+            mainContent.innerHTML = `
+                <div style="max-width: 800px;">
+                    <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">About Me</h2>
+                    
+                    <div style="background: white; padding: 32px; border-radius: 12px; border: 1px solid #e5e5e5;">
+                        <div class="form-field">
+                            <label>Photo URL</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="url" id="aboutPhoto" value="${about.photo || ''}" placeholder="https://...">
+                                <button class="btn-upload" onclick="uploadAboutPhoto()">Upload</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label>Bio (one paragraph per line)</label>
+                            <textarea id="aboutBio" rows="8">${(about.bio || []).join('\n\n')}</textarea>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('aboutPhoto').addEventListener('input', e => {
+                if (!content.aboutMe) content.aboutMe = {};
+                content.aboutMe.photo = e.target.value;
+            });
+            
+            document.getElementById('aboutBio').addEventListener('input', e => {
+                if (!content.aboutMe) content.aboutMe = {};
+                content.aboutMe.bio = e.target.value.split('\n\n').map(p => p.trim()).filter(Boolean);
+            });
+        }
+        
+        window.uploadAboutPhoto = function() {
+            const widget = cloudinary.createUploadWidget({
+                cloudName: 'dnbmyyc9x',
+                uploadPreset: 'portfolio_preset',
+                sources: ['local', 'url'],
+                multiple: false
+            }, (error, result) => {
+                if (result.event === 'success') {
+                    content.aboutMe.photo = result.info.secure_url;
+                    document.getElementById('aboutPhoto').value = result.info.secure_url;
+                    toast('Photo uploaded!');
+                }
+            });
+            widget.open();
+        };
+        
+        // Render Experience Section
+        function renderExperienceSection() {
+            const mainContent = document.getElementById('mainContent');
+            
+            mainContent.innerHTML = `
+                <div style="max-width: 800px;">
+                    <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Experience</h2>
+                    <div id="experienceList"></div>
+                    <button class="btn btn-secondary" onclick="addExperience()" style="margin-top: 16px;">+ Add Company</button>
+                </div>
+            `;
+            
+            renderExperienceList();
+        }
+        
+        function renderExperienceList() {
+            const list = document.getElementById('experienceList');
+            const experiences = content.experience || [];
+            
+            list.innerHTML = experiences.map((exp, i) => `
+                <div style="background: white; padding: 24px; border-radius: 12px; border: 1px solid #e5e5e5; margin-bottom: 16px;">
+                    <div class="form-field">
+                        <label>Company</label>
+                        <input type="text" value="${exp.company || ''}" onchange="updateExperience(${i}, 'company', this.value)">
+                    </div>
+                    <h4 style="font-size: 14px; margin: 16px 0 8px;">Roles</h4>
+                    ${(exp.roles || []).map((role, ri) => `
+                        <div style="background: #fafafa; padding: 16px; border-radius: 8px; margin-bottom: 8px;">
+                            <div class="form-field">
+                                <label>Title</label>
+                                <input type="text" value="${role.title || ''}" onchange="updateRole(${i}, ${ri}, 'title', this.value)">
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                                <div class="form-field">
+                                    <label>Start</label>
+                                    <input type="text" value="${role.period?.start || ''}" onchange="updateRole(${i}, ${ri}, 'start', this.value)">
+                                </div>
+                                <div class="form-field">
+                                    <label>End</label>
+                                    <input type="text" value="${role.period?.end || ''}" onchange="updateRole(${i}, ${ri}, 'end', this.value)">
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label>Description</label>
+                                <textarea rows="3" onchange="updateRole(${i}, ${ri}, 'description', this.value)">${role.description || ''}</textarea>
+                            </div>
+                            <button class="btn-secondary" onclick="removeRole(${i}, ${ri})" style="padding: 6px 12px; font-size: 13px;">Remove Role</button>
+                        </div>
+                    `).join('')}
+                    <button class="btn-secondary" onclick="addRole(${i})" style="padding: 8px 14px; font-size: 13px; margin-top: 8px;">+ Add Role</button>
+                    <hr style="margin: 16px 0; border: none; border-top: 1px solid #e5e5e5;">
+                    <button class="btn-secondary" onclick="removeExperience(${i})" style="padding: 6px 12px; font-size: 13px;">Remove Company</button>
+                </div>
+            `).join('');
+        }
+        
+        window.addExperience = function() {
+            if (!content.experience) content.experience = [];
+            content.experience.push({
+                company: '',
+                roles: [{ title: '', period: { start: '', end: '' }, description: '' }]
+            });
+            renderExperienceList();
+        };
+        
+        window.removeExperience = function(i) {
+            if (confirm('Remove this company?')) {
+                content.experience.splice(i, 1);
+                renderExperienceList();
+            }
+        };
+        
+        window.addRole = function(i) {
+            if (!content.experience[i].roles) content.experience[i].roles = [];
+            content.experience[i].roles.push({ title: '', period: { start: '', end: '' }, description: '' });
+            renderExperienceList();
+        };
+        
+        window.removeRole = function(i, ri) {
+            content.experience[i].roles.splice(ri, 1);
+            renderExperienceList();
+        };
+        
+        window.updateExperience = function(i, field, value) {
+            content.experience[i][field] = value;
+        };
+        
+        window.updateRole = function(i, ri, field, value) {
+            if (field === 'start' || field === 'end') {
+                if (!content.experience[i].roles[ri].period) content.experience[i].roles[ri].period = {};
+                content.experience[i].roles[ri].period[field] = value;
             } else {
-                toast('Publish failed: ' + (data.error || data.details || r.statusText));
+                content.experience[i].roles[ri][field] = value;
             }
-        } catch (e) {
-            toast('Publish failed: ' + e.message);
+        };
+        
+        // Render Footer Section
+        function renderFooterSection() {
+            const footer = content.footer || {};
+            const mainContent = document.getElementById('mainContent');
+            
+            mainContent.innerHTML = `
+                <div style="max-width: 800px;">
+                    <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Footer</h2>
+                    
+                    <div style="background: white; padding: 32px; border-radius: 12px; border: 1px solid #e5e5e5;">
+                        <div class="form-field">
+                            <label>Email</label>
+                            <input type="email" id="footerEmail" value="${footer.email || ''}" placeholder="hello@example.com">
+                        </div>
+                        
+                        <div class="form-field">
+                            <label>CV File (PDF)</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="url" id="footerCV" value="${footer.cvFile || ''}" placeholder="https://...">
+                                <button class="btn-upload" onclick="uploadCV()">Upload PDF</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label>Logo URL</label>
+                            <input type="url" id="footerLogo" value="${footer.logo || ''}">
+                        </div>
+                        
+                        <h4 style="font-size: 14px; margin: 24px 0 12px;">Social Links</h4>
+                        <div id="socialLinks"></div>
+                        <button class="btn-secondary" onclick="addSocialLink()" style="margin-top: 12px;">+ Add Link</button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('footerEmail').addEventListener('input', e => {
+                if (!content.footer) content.footer = {};
+                content.footer.email = e.target.value;
+            });
+            
+            document.getElementById('footerCV').addEventListener('input', e => {
+                if (!content.footer) content.footer = {};
+                content.footer.cvFile = e.target.value;
+            });
+            
+            document.getElementById('footerLogo').addEventListener('input', e => {
+                if (!content.footer) content.footer = {};
+                content.footer.logo = e.target.value;
+            });
+            
+            renderSocialLinks();
         }
-    });
-
-    function toast(msg) {
-        const el = document.getElementById('toast');
-        el.textContent = msg;
-        el.classList.add('show');
-        setTimeout(() => el.classList.remove('show'), 3000);
-    }
-
-    function openCloudinaryUpload(fieldId, resourceType) {
-        const rt = (resourceType === 'video') ? 'video' : (resourceType === 'auto') ? 'auto' : 'image';
-        if (typeof cloudinary === 'undefined') { toast('Cloudinary loading…'); return; }
-        const widget = cloudinary.createUploadWidget({
-            cloudName: 'dnbmyyc9x',
-            uploadPreset: 'ml_default',
-            sources: ['local', 'url', 'camera'],
-            resourceType: rt,
-            multiple: false
-        }, (err, result) => {
-            if (err) return;
-            if (result && result.event === 'success') {
-                const url = result.info.secure_url;
-                const el = document.getElementById(fieldId);
-                if (el) {
-                    el.value = url;
-                    el.dispatchEvent(new Event('input'));
+        
+        function renderSocialLinks() {
+            const container = document.getElementById('socialLinks');
+            const social = content.footer?.social || [];
+            
+            container.innerHTML = social.map((link, i) => `
+                <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                    <input type="text" placeholder="Name" value="${link.name || ''}" onchange="updateSocial(${i}, 'name', this.value)" style="flex: 1;">
+                    <input type="url" placeholder="URL" value="${link.url || ''}" onchange="updateSocial(${i}, 'url', this.value)" style="flex: 2;">
+                    <button class="btn-secondary" onclick="removeSocial(${i})" style="padding: 8px 12px;">Remove</button>
+                </div>
+            `).join('');
+        }
+        
+        window.addSocialLink = function() {
+            if (!content.footer) content.footer = {};
+            if (!content.footer.social) content.footer.social = [];
+            content.footer.social.push({ name: '', url: '' });
+            renderSocialLinks();
+        };
+        
+        window.removeSocial = function(i) {
+            content.footer.social.splice(i, 1);
+            renderSocialLinks();
+        };
+        
+        window.updateSocial = function(i, field, value) {
+            content.footer.social[i][field] = value;
+        };
+        
+        window.uploadCV = function() {
+            const widget = cloudinary.createUploadWidget({
+                cloudName: 'dnbmyyc9x',
+                uploadPreset: 'portfolio_preset',
+                sources: ['local', 'url'],
+                multiple: false,
+                resourceType: 'raw',
+                clientAllowedFormats: ['pdf']
+            }, (error, result) => {
+                if (result.event === 'success') {
+                    content.footer.cvFile = result.info.secure_url;
+                    document.getElementById('footerCV').value = result.info.secure_url;
+                    toast('CV uploaded!');
                 }
-                toast('Uploaded');
-            }
-        });
-        widget.open();
-    }
-    
-    // Upload CV PDF to Cloudinary
-    window.uploadCV = function() {
-        const widget = cloudinary.createUploadWidget({
-            cloudName: 'dnbmyyc9x',
-            uploadPreset: 'portfolio_preset',
-            sources: ['local', 'url'],
-            multiple: false,
-            resourceType: 'raw',
-            clientAllowedFormats: ['pdf'],
-            maxFileSize: 10000000
-        }, (error, result) => {
-            if (error) {
-                console.error('Upload error:', error);
-                toast('Upload failed');
-                return;
-            }
-            if (result.event === 'success') {
-                const url = result.info.secure_url;
-                // Update both header and footer CV fields
-                const headerInput = document.getElementById('headerCvFile');
-                const footerInput = document.getElementById('footerCvFile');
-                if (headerInput) {
-                    headerInput.value = url;
-                    content.header.cvFile = url;
-                }
-                if (footerInput) {
-                    footerInput.value = url;
-                    content.footer.cvFile = url;
-                }
-                toast('CV uploaded successfully!');
-            }
-        });
-        widget.open();
-    };
+            });
+            widget.open();
+        };
 
-    document.getElementById('cmsContent').addEventListener('click', function(e) {
-        const btn = e.target.closest('.btn-upload');
-        if (btn && btn.dataset.upload) openCloudinaryUpload(btn.dataset.upload, btn.dataset.type || 'image');
-    });
-
-    buildContentPanels();
-    loadContent();
-})();
+        // Load content on start
+        loadContent();
     </script>
 </body>
 </html>
