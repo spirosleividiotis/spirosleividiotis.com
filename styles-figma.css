@@ -1134,6 +1134,7 @@ section {
     cursor: none !important;
 }
 
+/* Above project modal (10000/10001) so cursor stays visible in Safari/Chrome when modal is open */
 .cursor-dot {
     width: 16px;
     height: 16px;
@@ -1143,7 +1144,7 @@ section {
     top: 0;
     left: 0;
     pointer-events: none;
-    z-index: 10000;
+    z-index: 10002;
     transform: translate(-50%, -50%);
     mix-blend-mode: difference;
     transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease, padding 0.3s ease;
@@ -1323,16 +1324,6 @@ body.project-modal-open {
 .project-modal.active {
     opacity: 1;
     pointer-events: all;
-    z-index: 99999;
-}
-
-.project-modal.active .project-modal-close {
-    z-index: 100000;
-}
-
-.project-modal:not(.active) .project-modal-close {
-    visibility: hidden;
-    pointer-events: none;
 }
 
 .project-modal-wrapper {
@@ -1352,7 +1343,20 @@ body.project-modal-open {
     flex-direction: column;
     overscroll-behavior: contain;
 }
-/* Close button: sibling of wrapper (not inside it) so it’s always on top and clickable */
+/* X inside white card: sticky wrapper so it stays top-right when content scrolls */
+.project-modal-close-sticky {
+    position: sticky;
+    top: 0;
+    height: 0;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 10;
+    flex-shrink: 0;
+}
+.project-modal-close-sticky .project-modal-close {
+    pointer-events: auto;
+}
+
 .project-modal-wrapper::-webkit-scrollbar {
     width: 6px;
 }
@@ -1370,11 +1374,11 @@ body.project-modal-open {
     background: rgba(0, 0, 0, 0.3);
 }
 
-/* Close button: fixed so it's always on top and clickable, never covered by modal content */
+/* Close button: inside white card, top-right; absolute so sticky pins it */
 .project-modal-close {
-    position: fixed;
-    top: 24px;
-    right: 24px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
     width: 44px;
     height: 44px;
     min-width: 44px;
@@ -1386,12 +1390,10 @@ body.project-modal-open {
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
     color: #000000;
     cursor: pointer;
-    z-index: 10002;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: opacity 0.2s ease;
-    pointer-events: auto;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     flex-shrink: 0;
@@ -2941,7 +2943,7 @@ body.project-modal-open {
     }
     
     .project-modal-close {
-        position: fixed !important;
+        position: absolute !important;
         top: 12px !important;
         right: 12px !important;
         min-width: 54px !important;
@@ -2951,7 +2953,6 @@ body.project-modal-open {
         border: 1px solid rgba(0, 0, 0, 0.15) !important;
         border-radius: 50% !important;
         box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15) !important;
-        z-index: 100000 !important;
     }
     
     .modal-close svg, .project-modal-close svg {
