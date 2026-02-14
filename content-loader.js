@@ -290,5 +290,18 @@ function updateFooter(footer) {
     if (cvLink && footer.cvFile) cvLink.href = footer.cvFile;
 }
 
+// Helper: Render project body (structured or fallback to bodyHtml)
+function renderProjectBody(project) {
+    // If project has structured content, use the renderer
+    if (project.structuredContent && window.renderStructuredProject) {
+        return window.renderStructuredProject(project);
+    }
+    // Otherwise fall back to bodyHtml
+    return project.bodyHtml || '';
+}
+
+// Make available globally for script-figma.js
+window.renderProjectBody = renderProjectBody;
+
 // Load content on page load
 window.addEventListener('DOMContentLoaded', loadContent);

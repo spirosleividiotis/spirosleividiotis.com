@@ -1156,21 +1156,29 @@ function loadProjectContent(projectData, projectName) {
     const modalBodyText = document.getElementById('projectBodyText');
     const modalGrid = document.getElementById('projectGrid');
     
-    // Prefer bodyHtml from CMS; else load from customUrl (legacy HTML file)
-    if (projectData && projectData.bodyHtml && projectData.bodyHtml.trim()) {
-        if (modalHero) modalHero.style.display = 'none';
-        if (modalGrid) modalGrid.style.display = 'none';
-        if (modalBodyText) {
-            modalBodyText.style.display = 'block';
-            modalBodyText.innerHTML = projectData.bodyHtml.trim();
-            if (projectData.id === 5) {
-                const videos = projectData.media && Array.isArray(projectData.media.videos) ? projectData.media.videos : [];
-                fillBrandVideos(modalBodyText, videos);
+    // Use the new renderer if available
+    if (projectData && (projectData.structuredContent || projectData.bodyHtml)) {
+        const renderedHtml = window.renderProjectBody 
+            ? window.renderProjectBody(projectData) 
+            : (projectData.bodyHtml || '');
+        
+        if (renderedHtml && renderedHtml.trim()) {
+            if (modalHero) modalHero.style.display = 'none';
+            if (modalGrid) modalGrid.style.display = 'none';
+            if (modalBodyText) {
+                modalBodyText.style.display = 'block';
+                modalBodyText.innerHTML = renderedHtml.trim();
+                if (projectData.id === 5) {
+                    const videos = projectData.media && Array.isArray(projectData.media.videos) ? projectData.media.videos : [];
+                    fillBrandVideos(modalBodyText, videos);
+                }
+                initHandoffTabs();
             }
-            initHandoffTabs();
+            return;
         }
-        return;
     }
+    
+    // Legacy: load from customUrl if specified
     if (projectData && projectData.customUrl) {
         fetch(projectData.customUrl)
             .then(response => response.text())
