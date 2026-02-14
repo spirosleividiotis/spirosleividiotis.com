@@ -1,26 +1,60 @@
-<!-- Project 5: Brand Guidelines – same project style (styles-figma.css) -->
+<!-- Project 6: Flink Brand – same project style (styles-figma.css) -->
 <style>
-    #projectModalBody .brand-placeholder {
+    #projectModalBody .flink-video-full {
         width: 100%;
-        height: 350px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
-        margin-top: 10px;
+        aspect-ratio: 16 / 9;
+        max-height: 420px;
         overflow: hidden;
+        margin-top: 10px;
+        background: #f5f5f5;
+        border-radius: 4px;
     }
-    #projectModalBody .brand-placeholder:has(video),
-    #projectModalBody .brand-placeholder:has(img) { padding: 0; }
-    #projectModalBody .brand-placeholder video,
-    #projectModalBody .brand-placeholder img {
+    #projectModalBody .flink-video-full video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+    }
+    #projectModalBody .flink-alt-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 10px;
+    }
+    #projectModalBody .flink-alt-box {
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background: #f5f5f5;
+        border-radius: 4px;
+    }
+    #projectModalBody .flink-alt-box video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+    }
+    #projectModalBody .flink-explorations {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 8px;
+        margin-top: 10px;
+    }
+    #projectModalBody .flink-exploration-cell {
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background: #f5f5f5;
+        border-radius: 4px;
+    }
+    #projectModalBody .flink-exploration-cell video {
         width: 100%;
         height: 100%;
         object-fit: contain;
         display: block;
     }
     @media (max-width: 768px) {
-        #projectModalBody .brand-placeholder { height: 250px; }
+        #projectModalBody .flink-video-full { max-height: 280px; }
+        #projectModalBody .flink-alt-row { grid-template-columns: 1fr; }
+        #projectModalBody .flink-explorations { grid-template-columns: repeat(2, 1fr); }
     }
 </style>
 
@@ -50,14 +84,22 @@
         <div class="motion-section-label">Deliverables</div>
         <h2 class="motion-section-title">Core Brand Animations</h2>
 
-        <!-- Logo Animation -->
+        <!-- Final Logo (full screen) -->
         <div class="brand-showcase">
             <h4 class="deliverable-title">Logo Animation</h4>
             <p class="motion-section-content">
                 A quick, energetic reveal for brand moments—ads, presentations, app launches. The animation reinforces Flink's speed and energy without overstaying its welcome.
             </p>
-            <div class="brand-placeholder brand-video" id="brand-video-0" data-index="0">
-                <span class="brand-placeholder-label">Logo Animation</span>
+            <div class="flink-video-full">
+                <video src="flink-finallogo.mp4" autoplay loop muted playsinline></video>
+            </div>
+        </div>
+
+        <!-- Overview -->
+        <div class="brand-showcase">
+            <h4 class="deliverable-title">Overview</h4>
+            <div class="flink-video-full">
+                <video src="flink-overview.mp4" autoplay loop muted playsinline></video>
             </div>
         </div>
 
@@ -67,8 +109,8 @@
             <p class="motion-section-content">
                 A versatile end card for commercials, YouTube videos, social content, and other video formats. Reinforces the brand at the close of any spot.
             </p>
-            <div class="brand-placeholder brand-video" id="brand-video-1" data-index="1">
-                <span class="brand-placeholder-label">Endscreen Animation</span>
+            <div class="flink-video-full">
+                <video src="flink-endscreen.mp4" autoplay loop muted playsinline></video>
             </div>
         </div>
 
@@ -78,8 +120,46 @@
             <p class="motion-section-content">
                 An optimized launch animation that loads instantly and feels fast—even during network delays. Reinforces brand identity without creating perceived slowness.
             </p>
-            <div class="brand-placeholder brand-video" id="brand-video-2" data-index="2">
-                <span class="brand-placeholder-label">Splashscreen Animation</span>
+            <div class="flink-video-full">
+                <video src="flink-splashscreen.mp4" autoplay loop muted playsinline></video>
+            </div>
+        </div>
+
+        <!-- Alternative (2 boxes next to each other) -->
+        <div class="brand-showcase">
+            <h4 class="deliverable-title">Alternative</h4>
+            <div class="flink-alt-row">
+                <div class="flink-alt-box">
+                    <video src="flink-logo-alt1.mp4" autoplay loop muted playsinline></video>
+                </div>
+                <div class="flink-alt-box">
+                    <video src="flink-logo-alt2.mp4" autoplay loop muted playsinline></video>
+                </div>
+            </div>
+        </div>
+
+        <!-- Explorations (6 small) -->
+        <div class="brand-showcase">
+            <h4 class="deliverable-title">Explorations</h4>
+            <div class="flink-explorations">
+                <div class="flink-exploration-cell">
+                    <video src="explorations/exp-corporate-white.mp4" autoplay loop muted playsinline></video>
+                </div>
+                <div class="flink-exploration-cell">
+                    <video src="explorations/exp-corporate.mp4" autoplay loop muted playsinline></video>
+                </div>
+                <div class="flink-exploration-cell">
+                    <video src="explorations/exp-logo-appscreen.mp4" autoplay loop muted playsinline></video>
+                </div>
+                <div class="flink-exploration-cell">
+                    <video src="explorations/exp-transition-2.mp4" autoplay loop muted playsinline></video>
+                </div>
+                <div class="flink-exploration-cell">
+                    <video src="explorations/exp-typography-smooth.mp4" autoplay loop muted playsinline></video>
+                </div>
+                <div class="flink-exploration-cell">
+                    <video src="explorations/exp-test.mp4" autoplay loop muted playsinline></video>
+                </div>
             </div>
         </div>
     </div>
@@ -115,4 +195,3 @@
         </div>
     </div>
 </div>
-
