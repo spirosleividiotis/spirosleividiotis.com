@@ -1170,20 +1170,24 @@ function initHandoffTabs() {
     });
 }
 
-// Handoff tabs: delegate on document so clicks/taps are never blocked by modal structure or fixed elements
+// Handoff tabs: capture phase so we run before anything else; only when modal is open
 function handleHandoffTabClick(e) {
-    const tab = e.target.closest('.handoff-tab');
+    var modal = document.getElementById('projectModal');
+    if (!modal || !modal.classList.contains('active')) return;
+    var tab = e.target.closest('.handoff-tab');
     if (!tab) return;
-    const container = document.getElementById('projectModalBody');
+    var container = document.getElementById('projectModalBody');
     if (!container || !container.contains(tab)) return;
-    const tabId = tab.getAttribute('data-tab');
+    var tabId = tab.getAttribute('data-tab');
     if (!tabId) return;
-    const tabs = container.querySelectorAll('.handoff-tab');
-    const panels = container.querySelectorAll('.handoff-panel');
+    e.preventDefault();
+    e.stopPropagation();
+    var tabs = container.querySelectorAll('.handoff-tab');
+    var panels = container.querySelectorAll('.handoff-panel');
     tabs.forEach(function(t) { t.classList.remove('active'); });
     panels.forEach(function(p) { p.classList.remove('active'); });
     tab.classList.add('active');
-    const panel = container.querySelector('#panel-' + tabId);
+    var panel = container.querySelector('#panel-' + tabId);
     if (panel) {
         panel.classList.add('active');
         panel.querySelectorAll('video[autoplay]').forEach(function(v) {
@@ -1191,8 +1195,8 @@ function handleHandoffTabClick(e) {
         });
     }
 }
-document.addEventListener('click', handleHandoffTabClick);
-document.addEventListener('touchend', handleHandoffTabClick, { passive: false });
+document.addEventListener('click', handleHandoffTabClick, true);
+document.addEventListener('touchend', handleHandoffTabClick, { passive: false, capture: true });
 
 function closeProjectModal() {
     const modal = document.getElementById('projectModal');
@@ -1235,24 +1239,29 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Open project modal only when clicking the preview image (.work-visual), not the text
+// Close modal when clicking X or backdrop – use capture so it runs before other handlers
 document.addEventListener('click', function(e) {
-    const card = e.target.closest('.work-card');
-    if (card && e.target.closest('.work-visual')) {
-        e.preventDefault();
-        openProjectModal(card);
-        return;
-    }
     if (e.target.closest('#projectModalClose') || e.target.closest('.project-modal-close')) {
+        e.preventDefault();
+        e.stopPropagation();
         closeProjectModal();
         return;
     }
-    const modal = document.getElementById('projectModal');
-    const modalWrapper = document.querySelector('.project-modal-wrapper');
-    if (modal && modal.classList.contains('active')) {
-        if (e.target === modal && !modalWrapper?.contains(e.target)) {
-            closeProjectModal();
-        }
+    var modal = document.getElementById('projectModal');
+    var modalWrapper = document.querySelector('.project-modal-wrapper');
+    if (modal && modal.classList.contains('active') && e.target === modal && modalWrapper && !modalWrapper.contains(e.target)) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeProjectModal();
+    }
+}, true);
+
+// Open project modal only when clicking the preview image (.work-visual), not the text (bubble)
+document.addEventListener('click', function(e) {
+    var card = e.target.closest('.work-card');
+    if (card && e.target.closest('.work-visual')) {
+        e.preventDefault();
+        openProjectModal(card);
     }
 });
 
