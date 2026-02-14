@@ -1170,29 +1170,29 @@ function initHandoffTabs() {
     });
 }
 
-// Handoff tabs: use delegation so clicks work after dynamic content load (e.g. Motion system / Motion tokens library)
-(function() {
+// Handoff tabs: delegate on document so clicks/taps are never blocked by modal structure or fixed elements
+function handleHandoffTabClick(e) {
+    const tab = e.target.closest('.handoff-tab');
+    if (!tab) return;
     const container = document.getElementById('projectModalBody');
-    if (!container) return;
-    container.addEventListener('click', function(e) {
-        const tab = e.target.closest('.handoff-tab');
-        if (!tab) return;
-        const tabId = tab.getAttribute('data-tab');
-        if (!tabId) return;
-        const tabs = container.querySelectorAll('.handoff-tab');
-        const panels = container.querySelectorAll('.handoff-panel');
-        tabs.forEach(function(t) { t.classList.remove('active'); });
-        panels.forEach(function(p) { p.classList.remove('active'); });
-        tab.classList.add('active');
-        const panel = container.querySelector('#panel-' + tabId);
-        if (panel) {
-            panel.classList.add('active');
-            panel.querySelectorAll('video[autoplay]').forEach(function(v) {
-                v.play().catch(function() {});
-            });
-        }
-    });
-})();
+    if (!container || !container.contains(tab)) return;
+    const tabId = tab.getAttribute('data-tab');
+    if (!tabId) return;
+    const tabs = container.querySelectorAll('.handoff-tab');
+    const panels = container.querySelectorAll('.handoff-panel');
+    tabs.forEach(function(t) { t.classList.remove('active'); });
+    panels.forEach(function(p) { p.classList.remove('active'); });
+    tab.classList.add('active');
+    const panel = container.querySelector('#panel-' + tabId);
+    if (panel) {
+        panel.classList.add('active');
+        panel.querySelectorAll('video[autoplay]').forEach(function(v) {
+            v.play().catch(function() {});
+        });
+    }
+}
+document.addEventListener('click', handleHandoffTabClick);
+document.addEventListener('touchend', handleHandoffTabClick, { passive: false });
 
 function closeProjectModal() {
     const modal = document.getElementById('projectModal');
