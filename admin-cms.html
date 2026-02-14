@@ -999,12 +999,12 @@
             
             // Render showcase items if showcase type
             if (type === 'showcase') {
-                renderShowcaseItems(index);
+                setTimeout(() => renderShowcaseItems(index), 0);
             }
             
             // Render stats items if stats type
             if (type === 'stats') {
-                renderStatsItems(index);
+                setTimeout(() => renderStatsItems(index), 0);
             }
         };
         
@@ -1013,6 +1013,13 @@
             const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
             const items = section.items || [];
             const container = document.getElementById('showcaseItems');
+            
+            if (!container) {
+                console.error('showcaseItems container not found');
+                return;
+            }
+            
+            console.log('Rendering', items.length, 'showcase items');
             
             container.innerHTML = items.map((item, itemIndex) => `
                 <div style="background: #fafafa; padding: 16px; border-radius: 8px; margin-bottom: 12px;">
