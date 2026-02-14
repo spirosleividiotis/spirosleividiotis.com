@@ -1160,31 +1160,43 @@ function initHandoffTabs() {
     const tabs = container.querySelectorAll('.handoff-tab');
     const panels = container.querySelectorAll('.handoff-panel');
     if (!tabs.length || !panels.length) return;
-    tabs.forEach(function(tab) {
-        tab.addEventListener('click', function() {
-            const tabId = this.getAttribute('data-tab');
-            if (!tabId) return;
-            tabs.forEach(function(t) { t.classList.remove('active'); });
-            panels.forEach(function(p) { p.classList.remove('active'); });
-            this.classList.add('active');
-            const panel = container.querySelector('#panel-' + tabId);
-            if (panel) {
-                panel.classList.add('active');
-                // Autoplay MP4s in panel (behave like GIFs: loop, play when visible)
-                panel.querySelectorAll('video[autoplay]').forEach(function(v) {
-                    v.play().catch(function() {});
-                });
-            }
-        });
-    });
-    // Play videos in initially active panel (e.g. when modal opens)
+    tabs.forEach(function(t) { t.classList.remove('active'); });
+    panels.forEach(function(p) { p.classList.remove('active'); });
+    const activeTab = container.querySelector('.handoff-tab.active');
     const activePanel = container.querySelector('.handoff-panel.active');
+    if (activeTab) activeTab.classList.add('active');
+    if (activePanel) activePanel.classList.add('active');
+    // Play videos in initially active panel (e.g. when modal opens)
     if (activePanel) {
         activePanel.querySelectorAll('video[autoplay]').forEach(function(v) {
             v.play().catch(function() {});
         });
     }
 }
+
+// Handoff tabs: use delegation so clicks work after dynamic content load (e.g. Motion system / Motion tokens library)
+(function() {
+    const container = document.getElementById('projectModalBody');
+    if (!container) return;
+    container.addEventListener('click', function(e) {
+        const tab = e.target.closest('.handoff-tab');
+        if (!tab) return;
+        const tabId = tab.getAttribute('data-tab');
+        if (!tabId) return;
+        const tabs = container.querySelectorAll('.handoff-tab');
+        const panels = container.querySelectorAll('.handoff-panel');
+        tabs.forEach(function(t) { t.classList.remove('active'); });
+        panels.forEach(function(p) { p.classList.remove('active'); });
+        tab.classList.add('active');
+        const panel = container.querySelector('#panel-' + tabId);
+        if (panel) {
+            panel.classList.add('active');
+            panel.querySelectorAll('video[autoplay]').forEach(function(v) {
+                v.play().catch(function() {});
+            });
+        }
+    });
+})();
 
 function closeProjectModal() {
     const modal = document.getElementById('projectModal');

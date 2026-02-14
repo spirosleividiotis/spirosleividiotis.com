@@ -1372,6 +1372,7 @@ body.project-modal-open {
 }
 .project-modal-close-sticky .project-modal-close {
     pointer-events: auto;
+    z-index: 10;
 }
 
 /* Close button: inside white card, top-right; absolute so sticky wrapper can pin it on desktop */

@@ -41,6 +41,10 @@
         .add-btn:hover { background: #333; }
         .remove-btn { padding: 6px 12px; background: transparent; color: #888; border: 1px solid #444; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 8px; }
         .remove-btn:hover { color: #f44; border-color: #f44; }
+        .file-upload-row { display: flex; gap: 8px; align-items: center; }
+        .file-upload-row input { flex: 1; }
+        .btn-upload { padding: 10px 16px; background: #333; color: #fff; border: 1px solid #444; border-radius: 6px; cursor: pointer; font-size: 13px; white-space: nowrap; }
+        .btn-upload:hover { background: #444; }
         .toast { position: fixed; bottom: 24px; right: 24px; background: #1a1a1a; border: 1px solid #333; padding: 14px 20px; border-radius: 8px; font-size: 14px; z-index: 9999; display: none; }
         .toast.show { display: block; animation: fadeIn 0.2s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -449,7 +453,10 @@
                     </div>
                     <div class="form-group">
                         <label>Card preview (image/video URL)</label>
-                        <input type="url" data-pi="${pi}" data-key="cardPreview" value="${escapeHtml(proj.cardPreview || '')}">
+                        <div class="file-upload-row">
+                            <input type="url" id="proj-preview-${pi}" data-pi="${pi}" data-key="cardPreview" value="${escapeHtml(proj.cardPreview || '')}" placeholder="URL or upload">
+                            <button type="button" class="btn-upload" data-upload="proj-preview-${pi}" data-type="auto">Upload</button>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Color (hex)</label>
@@ -680,6 +687,35 @@
         el.classList.add('show');
         setTimeout(() => el.classList.remove('show'), 3000);
     }
+
+    function openCloudinaryUpload(fieldId, resourceType) {
+        const rt = (resourceType === 'video') ? 'video' : (resourceType === 'auto') ? 'auto' : 'image';
+        if (typeof cloudinary === 'undefined') { toast('Cloudinary loading…'); return; }
+        const widget = cloudinary.createUploadWidget({
+            cloudName: 'dnbmyyc9x',
+            uploadPreset: 'ml_default',
+            sources: ['local', 'url', 'camera'],
+            resourceType: rt,
+            multiple: false
+        }, (err, result) => {
+            if (err) return;
+            if (result && result.event === 'success') {
+                const url = result.info.secure_url;
+                const el = document.getElementById(fieldId);
+                if (el) {
+                    el.value = url;
+                    el.dispatchEvent(new Event('input'));
+                }
+                toast('Uploaded');
+            }
+        });
+        widget.open();
+    }
+
+    document.getElementById('cmsContent').addEventListener('click', function(e) {
+        const btn = e.target.closest('.btn-upload');
+        if (btn && btn.dataset.upload) openCloudinaryUpload(btn.dataset.upload, btn.dataset.type || 'image');
+    });
 
     buildContentPanels();
     loadContent();
