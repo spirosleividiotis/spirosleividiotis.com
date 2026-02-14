@@ -154,6 +154,16 @@
         height: 100%;
         min-height: 380px;
     }
+    /* Text Reveal: wider preview */
+    #projectModalBody .device-frame--text-reveal .device-screen {
+        max-width: 960px;
+    }
+    #projectModalBody .device-frame--text-reveal .device-screen:has(iframe) {
+        min-height: 420px;
+    }
+    #projectModalBody .device-frame--text-reveal .device-screen:has(iframe) iframe {
+        min-height: 420px;
+    }
     #projectModalBody .case-preview-row {
         display: flex;
         flex-wrap: wrap;
@@ -503,7 +513,7 @@
             </div>
         </div>
 
-        <!-- Panel: Progressive Bar (existing) -->
+        <!-- Panel: Progressive Bar (Stepper) -->
         <div id="panel-progressive-bar" class="handoff-panel" role="tabpanel">
             <div class="case-wrapper">
                 <div class="case-header">
@@ -512,11 +522,21 @@
                         Progress indicator for multi-step flows. Steps overlap by 250ms. Custom cubic-beziers at three keyframes: quick start, smooth mid-transition, confident finish.
                     </p>
                 </div>
-                <div class="case-preview">
-                    <div class="preview-label">Interactive Preview</div>
-                    <div class="device-frame device-frame--desktop">
-                        <div class="device-screen">
-                            <iframe src="https://rive.app/s/TO6xVZ1mg0yrAvC7jW5AOQ/embed?mode=preview&artboard=Desktop" frameborder="0" allowfullscreen allow="fullscreen; autoplay" loading="lazy"></iframe>
+                <div class="case-preview-row">
+                    <div class="case-preview">
+                        <div class="preview-label">Desktop</div>
+                        <div class="device-frame device-frame--desktop">
+                            <div class="device-screen">
+                                <video src="stepper-desktop.mp4" autoplay loop muted playsinline></video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="case-preview">
+                        <div class="preview-label">Mobile</div>
+                        <div class="device-frame device-frame--mobile">
+                            <div class="device-screen">
+                                <video src="stepper-mobile.mp4" autoplay loop muted playsinline></video>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -560,7 +580,7 @@
                         <div class="preview-label">Expansion</div>
                         <div class="device-frame device-frame--desktop">
                             <div class="device-screen">
-                                <img src="nav-expansion.png" alt="Collapsable nav expansion">
+                                <video src="nav-expansion.mp4" poster="nav-expansion.png" autoplay loop muted playsinline></video>
                             </div>
                         </div>
                     </div>
@@ -568,7 +588,7 @@
                         <div class="preview-label">Expansion (alt)</div>
                         <div class="device-frame device-frame--desktop">
                             <div class="device-screen">
-                                <img src="nav-expansion-2.png" alt="Collapsable nav expansion (alt)">
+                                <video src="nav-expansion-2.mp4" poster="nav-expansion-2.png" autoplay loop muted playsinline></video>
                             </div>
                         </div>
                     </div>
@@ -662,7 +682,7 @@
                 </div>
                 <div class="case-preview">
                     <div class="preview-label">Interactive Preview</div>
-                    <div class="device-frame device-frame--desktop">
+                    <div class="device-frame device-frame--desktop device-frame--text-reveal">
                         <div class="device-screen">
                             <iframe src="https://rive.app/s/-fFrKbEosUWHv0C3Qvwmqw/embed?mode=preview" frameborder="0" allowfullscreen allow="fullscreen; autoplay" loading="lazy"></iframe>
                         </div>
