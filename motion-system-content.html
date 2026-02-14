@@ -197,23 +197,24 @@
         display: flex;
         flex-direction: column;
     }
-    /* Fixed-height window so we only show the center of the iframe (shape preview area), not top-left of doc */
-    #projectModalBody .token-preview-iframe-wrap {
+    /* Shape preview only: image (GIF) per token, no full-page iframes */
+    #projectModalBody .token-preview-img-wrap {
         position: relative;
         height: 120px;
         overflow: hidden;
         flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f0f0f0;
     }
-    #projectModalBody .token-preview-cell iframe {
-        position: absolute;
-        width: 420px;
-        height: 360px;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        border: none;
+    #projectModalBody .token-preview-cell img.token-preview-img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
         display: block;
-        pointer-events: none;
     }
     #projectModalBody .token-preview-cell .token-preview-name {
         font-size: 12px;
@@ -321,11 +322,6 @@
         Built a scalable motion language that bridges design and engineering—principles, patterns, tokens, documentation.
     </p>
 
-    <div class="handoff-tabs" role="tablist">
-        <button type="button" class="handoff-tab active" data-tab="overview">Motion system</button>
-        <button type="button" class="handoff-tab" data-tab="tokens-library">Motion tokens library</button>
-    </div>
-
     <div class="handoff-panels">
     <!-- Panel: Overview -->
     <div id="panel-overview" class="handoff-panel active" role="tabpanel">
@@ -417,8 +413,7 @@
                 <p>
                     Primitives include: <strong>Duration</strong>, <strong>Easing</strong>, 
                     <strong>Scale</strong>, <strong>Alpha</strong>, <strong>Blur</strong>, 
-                    <strong>Translate</strong>, <strong>Delay</strong>, and <strong>Spring</strong>. 
-                    The full set with previews is in the <strong>Motion tokens library</strong> tab.
+                    <strong>Translate</strong>, <strong>Delay</strong>, and <strong>Spring</strong>.
                 </p>
             </div>
         </div>
@@ -521,38 +516,6 @@
             </p>
         </div>
     </div>
-    </div>
-    <!-- Panel: Motion tokens library (one Netlify preview per token) -->
-    <div id="panel-tokens-library" class="handoff-panel" role="tabpanel">
-        <div class="motion-section">
-            <h2 class="motion-section-title">Motion tokens library</h2>
-            <p class="motion-section-content">Live previews from the token docs.</p>
-            <!-- autoplay=1: play shape preview in loop without clicking; preview=N: which example (1-based) -->
-            <div class="token-preview-grid">
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-duration.netlify.app/?autoplay=1&amp;preview=2" loading="lazy" title="Duration"></iframe></div><span class="token-preview-name">Duration</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-easing.netlify.app/?autoplay=1&amp;preview=1" loading="lazy" title="Easing"></iframe></div><span class="token-preview-name">Easing</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-delay.netlify.app/?autoplay=1&amp;preview=3" loading="lazy" title="Delay"></iframe></div><span class="token-preview-name">Delay</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-scale.netlify.app/?autoplay=1&amp;preview=5" loading="lazy" title="Scale"></iframe></div><span class="token-preview-name">Scale</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-alpha.netlify.app/?autoplay=1&amp;preview=4" loading="lazy" title="Alpha"></iframe></div><span class="token-preview-name">Alpha</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-rotation.netlify.app/?autoplay=1&amp;preview=4" loading="lazy" title="Rotation"></iframe></div><span class="token-preview-name">Rotation</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-blur.netlify.app/?autoplay=1&amp;preview=4" loading="lazy" title="Blur"></iframe></div><span class="token-preview-name">Blur</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-spring.netlify.app/?autoplay=1&amp;preview=3" loading="lazy" title="Spring"></iframe></div><span class="token-preview-name">Spring</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-translate.netlify.app/?autoplay=1&amp;preview=3" loading="lazy" title="Translate"></iframe></div><span class="token-preview-name">Translate</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-entry.netlify.app/?autoplay=1&amp;preview=1" loading="lazy" title="Entry"></iframe></div><span class="token-preview-name">Entry</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://motion-qonto-exit.netlify.app/?autoplay=1&amp;preview=1" loading="lazy" title="Exit"></iframe></div><span class="token-preview-name">Exit</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-transition.netlify.app/?autoplay=1&amp;preview=1" loading="lazy" title="Transition"></iframe></div><span class="token-preview-name">Transition</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-reveal.netlify.app/?autoplay=1&amp;preview=1" loading="lazy" title="Reveal"></iframe></div><span class="token-preview-name">Reveal</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-slide.netlify.app/?autoplay=1&amp;preview=1" loading="lazy" title="Slide"></iframe></div><span class="token-preview-name">Slide</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-fade.netlify.app/?autoplay=1&amp;preview=1" loading="lazy" title="Fade"></iframe></div><span class="token-preview-name">Fade</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-scalefade.netlify.app/?autoplay=1&amp;preview=1" loading="lazy" title="Scale fade"></iframe></div><span class="token-preview-name">Scale fade</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-expandcollapse.netlify.app/?autoplay=1&amp;preview=1" loading="lazy" title="Expand collapse"></iframe></div><span class="token-preview-name">Expand collapse</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-presstap.netlify.app/?autoplay=1&amp;preview=1" loading="lazy" title="Press tap"></iframe></div><span class="token-preview-name">Press tap</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-hoverlift.netlify.app/?autoplay=1&amp;preview=2" loading="lazy" title="Hover lift"></iframe></div><span class="token-preview-name">Hover lift</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-shimmerloading.netlify.app/?autoplay=1&amp;preview=3" loading="lazy" title="Shimmer loading"></iframe></div><span class="token-preview-name">Shimmer loading</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-stagger.netlify.app/?autoplay=1&amp;preview=1" loading="lazy" title="Stagger"></iframe></div><span class="token-preview-name">Stagger</span></div>
-                <div class="token-preview-cell"><div class="token-preview-iframe-wrap"><iframe src="https://qonto-motion-pagetransition.netlify.app/?autoplay=1&amp;preview=2" loading="lazy" title="Page transition"></iframe></div><span class="token-preview-name">Page transition</span></div>
-            </div>
-        </div>
     </div>
     </div>
 </div>
