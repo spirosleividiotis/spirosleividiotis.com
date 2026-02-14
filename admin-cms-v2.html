@@ -970,6 +970,382 @@
             setTimeout(() => t.classList.remove('show'), 3000);
         }
 
+        // Tab Navigation
+        let currentSection = 'projects';
+        
+        document.querySelectorAll('.topbar-nav button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const section = btn.dataset.section;
+                switchSection(section);
+            });
+        });
+        
+        function switchSection(section) {
+            currentSection = section;
+            
+            // Update active tab
+            document.querySelectorAll('.topbar-nav button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.section === section);
+            });
+            
+            // Render appropriate view
+            const mainContent = document.getElementById('mainContent');
+            
+            if (section === 'projects') {
+                mainContent.innerHTML = `
+                    <div id="projectsView">
+                        <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Your Projects</h2>
+                        <div class="projects-grid" id="projectsGrid"></div>
+                    </div>
+                `;
+                renderProjects();
+            } else if (section === 'hero') {
+                renderHeroSection();
+            } else if (section === 'about') {
+                renderAboutSection();
+            } else if (section === 'experience') {
+                renderExperienceSection();
+            } else if (section === 'footer') {
+                renderFooterSection();
+            }
+        }
+        
+        // Render Hero Section
+        function renderHeroSection() {
+            const hero = content.hero || {};
+            const mainContent = document.getElementById('mainContent');
+            
+            mainContent.innerHTML = `
+                <div style="max-width: 800px;">
+                    <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Hero Section</h2>
+                    
+                    <div style="background: white; padding: 32px; border-radius: 12px; border: 1px solid #e5e5e5;">
+                        <div class="form-field">
+                            <label>Name</label>
+                            <input type="text" id="heroName" value="${hero.name || ''}" placeholder="Spiros Leividiotis">
+                        </div>
+                        
+                        <div class="form-field">
+                            <label>Subtitle</label>
+                            <textarea id="heroSubtitle" rows="3">${hero.subtitle || ''}</textarea>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label>Photo URL</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="url" id="heroPhoto" value="${hero.photo || ''}" placeholder="https://...">
+                                <button class="btn-upload" onclick="uploadHeroPhoto()">Upload</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label>Tools (comma separated)</label>
+                            <input type="text" id="heroTools" value="${(hero.tags?.tools || []).join(', ')}" placeholder="Rive, Figma, LottieFiles">
+                        </div>
+                        
+                        <div class="form-field">
+                            <label>Skills (comma separated)</label>
+                            <input type="text" id="heroSkills" value="${(hero.tags?.skills || []).join(', ')}" placeholder="Product Motion, Design Systems">
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Attach listeners
+            document.getElementById('heroName').addEventListener('input', e => {
+                if (!content.hero) content.hero = {};
+                content.hero.name = e.target.value;
+            });
+            
+            document.getElementById('heroSubtitle').addEventListener('input', e => {
+                if (!content.hero) content.hero = {};
+                content.hero.subtitle = e.target.value;
+            });
+            
+            document.getElementById('heroPhoto').addEventListener('input', e => {
+                if (!content.hero) content.hero = {};
+                content.hero.photo = e.target.value;
+            });
+            
+            document.getElementById('heroTools').addEventListener('input', e => {
+                if (!content.hero) content.hero = {};
+                if (!content.hero.tags) content.hero.tags = {};
+                content.hero.tags.tools = e.target.value.split(',').map(t => t.trim()).filter(Boolean);
+            });
+            
+            document.getElementById('heroSkills').addEventListener('input', e => {
+                if (!content.hero) content.hero = {};
+                if (!content.hero.tags) content.hero.tags = {};
+                content.hero.tags.skills = e.target.value.split(',').map(t => t.trim()).filter(Boolean);
+            });
+        }
+        
+        // Upload hero photo
+        window.uploadHeroPhoto = function() {
+            const widget = cloudinary.createUploadWidget({
+                cloudName: 'dnbmyyc9x',
+                uploadPreset: 'portfolio_preset',
+                sources: ['local', 'url'],
+                multiple: false
+            }, (error, result) => {
+                if (result.event === 'success') {
+                    content.hero.photo = result.info.secure_url;
+                    document.getElementById('heroPhoto').value = result.info.secure_url;
+                    toast('Photo uploaded!');
+                }
+            });
+            widget.open();
+        };
+        
+        // Render About Section
+        function renderAboutSection() {
+            const about = content.aboutMe || {};
+            const mainContent = document.getElementById('mainContent');
+            
+            mainContent.innerHTML = `
+                <div style="max-width: 800px;">
+                    <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">About Me</h2>
+                    
+                    <div style="background: white; padding: 32px; border-radius: 12px; border: 1px solid #e5e5e5;">
+                        <div class="form-field">
+                            <label>Photo URL</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="url" id="aboutPhoto" value="${about.photo || ''}" placeholder="https://...">
+                                <button class="btn-upload" onclick="uploadAboutPhoto()">Upload</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label>Bio (one paragraph per line)</label>
+                            <textarea id="aboutBio" rows="8">${(about.bio || []).join('\n\n')}</textarea>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('aboutPhoto').addEventListener('input', e => {
+                if (!content.aboutMe) content.aboutMe = {};
+                content.aboutMe.photo = e.target.value;
+            });
+            
+            document.getElementById('aboutBio').addEventListener('input', e => {
+                if (!content.aboutMe) content.aboutMe = {};
+                content.aboutMe.bio = e.target.value.split('\n\n').map(p => p.trim()).filter(Boolean);
+            });
+        }
+        
+        window.uploadAboutPhoto = function() {
+            const widget = cloudinary.createUploadWidget({
+                cloudName: 'dnbmyyc9x',
+                uploadPreset: 'portfolio_preset',
+                sources: ['local', 'url'],
+                multiple: false
+            }, (error, result) => {
+                if (result.event === 'success') {
+                    content.aboutMe.photo = result.info.secure_url;
+                    document.getElementById('aboutPhoto').value = result.info.secure_url;
+                    toast('Photo uploaded!');
+                }
+            });
+            widget.open();
+        };
+        
+        // Render Experience Section
+        function renderExperienceSection() {
+            const mainContent = document.getElementById('mainContent');
+            
+            mainContent.innerHTML = `
+                <div style="max-width: 800px;">
+                    <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Experience</h2>
+                    <div id="experienceList"></div>
+                    <button class="btn btn-secondary" onclick="addExperience()" style="margin-top: 16px;">+ Add Company</button>
+                </div>
+            `;
+            
+            renderExperienceList();
+        }
+        
+        function renderExperienceList() {
+            const list = document.getElementById('experienceList');
+            const experiences = content.experience || [];
+            
+            list.innerHTML = experiences.map((exp, i) => `
+                <div style="background: white; padding: 24px; border-radius: 12px; border: 1px solid #e5e5e5; margin-bottom: 16px;">
+                    <div class="form-field">
+                        <label>Company</label>
+                        <input type="text" value="${exp.company || ''}" onchange="updateExperience(${i}, 'company', this.value)">
+                    </div>
+                    <h4 style="font-size: 14px; margin: 16px 0 8px;">Roles</h4>
+                    ${(exp.roles || []).map((role, ri) => `
+                        <div style="background: #fafafa; padding: 16px; border-radius: 8px; margin-bottom: 8px;">
+                            <div class="form-field">
+                                <label>Title</label>
+                                <input type="text" value="${role.title || ''}" onchange="updateRole(${i}, ${ri}, 'title', this.value)">
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                                <div class="form-field">
+                                    <label>Start</label>
+                                    <input type="text" value="${role.period?.start || ''}" onchange="updateRole(${i}, ${ri}, 'start', this.value)">
+                                </div>
+                                <div class="form-field">
+                                    <label>End</label>
+                                    <input type="text" value="${role.period?.end || ''}" onchange="updateRole(${i}, ${ri}, 'end', this.value)">
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label>Description</label>
+                                <textarea rows="3" onchange="updateRole(${i}, ${ri}, 'description', this.value)">${role.description || ''}</textarea>
+                            </div>
+                            <button class="btn-secondary" onclick="removeRole(${i}, ${ri})" style="padding: 6px 12px; font-size: 13px;">Remove Role</button>
+                        </div>
+                    `).join('')}
+                    <button class="btn-secondary" onclick="addRole(${i})" style="padding: 8px 14px; font-size: 13px; margin-top: 8px;">+ Add Role</button>
+                    <hr style="margin: 16px 0; border: none; border-top: 1px solid #e5e5e5;">
+                    <button class="btn-secondary" onclick="removeExperience(${i})" style="padding: 6px 12px; font-size: 13px;">Remove Company</button>
+                </div>
+            `).join('');
+        }
+        
+        window.addExperience = function() {
+            if (!content.experience) content.experience = [];
+            content.experience.push({
+                company: '',
+                roles: [{ title: '', period: { start: '', end: '' }, description: '' }]
+            });
+            renderExperienceList();
+        };
+        
+        window.removeExperience = function(i) {
+            if (confirm('Remove this company?')) {
+                content.experience.splice(i, 1);
+                renderExperienceList();
+            }
+        };
+        
+        window.addRole = function(i) {
+            if (!content.experience[i].roles) content.experience[i].roles = [];
+            content.experience[i].roles.push({ title: '', period: { start: '', end: '' }, description: '' });
+            renderExperienceList();
+        };
+        
+        window.removeRole = function(i, ri) {
+            content.experience[i].roles.splice(ri, 1);
+            renderExperienceList();
+        };
+        
+        window.updateExperience = function(i, field, value) {
+            content.experience[i][field] = value;
+        };
+        
+        window.updateRole = function(i, ri, field, value) {
+            if (field === 'start' || field === 'end') {
+                if (!content.experience[i].roles[ri].period) content.experience[i].roles[ri].period = {};
+                content.experience[i].roles[ri].period[field] = value;
+            } else {
+                content.experience[i].roles[ri][field] = value;
+            }
+        };
+        
+        // Render Footer Section
+        function renderFooterSection() {
+            const footer = content.footer || {};
+            const mainContent = document.getElementById('mainContent');
+            
+            mainContent.innerHTML = `
+                <div style="max-width: 800px;">
+                    <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Footer</h2>
+                    
+                    <div style="background: white; padding: 32px; border-radius: 12px; border: 1px solid #e5e5e5;">
+                        <div class="form-field">
+                            <label>Email</label>
+                            <input type="email" id="footerEmail" value="${footer.email || ''}" placeholder="hello@example.com">
+                        </div>
+                        
+                        <div class="form-field">
+                            <label>CV File (PDF)</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="url" id="footerCV" value="${footer.cvFile || ''}" placeholder="https://...">
+                                <button class="btn-upload" onclick="uploadCV()">Upload PDF</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label>Logo URL</label>
+                            <input type="url" id="footerLogo" value="${footer.logo || ''}">
+                        </div>
+                        
+                        <h4 style="font-size: 14px; margin: 24px 0 12px;">Social Links</h4>
+                        <div id="socialLinks"></div>
+                        <button class="btn-secondary" onclick="addSocialLink()" style="margin-top: 12px;">+ Add Link</button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('footerEmail').addEventListener('input', e => {
+                if (!content.footer) content.footer = {};
+                content.footer.email = e.target.value;
+            });
+            
+            document.getElementById('footerCV').addEventListener('input', e => {
+                if (!content.footer) content.footer = {};
+                content.footer.cvFile = e.target.value;
+            });
+            
+            document.getElementById('footerLogo').addEventListener('input', e => {
+                if (!content.footer) content.footer = {};
+                content.footer.logo = e.target.value;
+            });
+            
+            renderSocialLinks();
+        }
+        
+        function renderSocialLinks() {
+            const container = document.getElementById('socialLinks');
+            const social = content.footer?.social || [];
+            
+            container.innerHTML = social.map((link, i) => `
+                <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                    <input type="text" placeholder="Name" value="${link.name || ''}" onchange="updateSocial(${i}, 'name', this.value)" style="flex: 1;">
+                    <input type="url" placeholder="URL" value="${link.url || ''}" onchange="updateSocial(${i}, 'url', this.value)" style="flex: 2;">
+                    <button class="btn-secondary" onclick="removeSocial(${i})" style="padding: 8px 12px;">Remove</button>
+                </div>
+            `).join('');
+        }
+        
+        window.addSocialLink = function() {
+            if (!content.footer) content.footer = {};
+            if (!content.footer.social) content.footer.social = [];
+            content.footer.social.push({ name: '', url: '' });
+            renderSocialLinks();
+        };
+        
+        window.removeSocial = function(i) {
+            content.footer.social.splice(i, 1);
+            renderSocialLinks();
+        };
+        
+        window.updateSocial = function(i, field, value) {
+            content.footer.social[i][field] = value;
+        };
+        
+        window.uploadCV = function() {
+            const widget = cloudinary.createUploadWidget({
+                cloudName: 'dnbmyyc9x',
+                uploadPreset: 'portfolio_preset',
+                sources: ['local', 'url'],
+                multiple: false,
+                resourceType: 'raw',
+                clientAllowedFormats: ['pdf']
+            }, (error, result) => {
+                if (result.event === 'success') {
+                    content.footer.cvFile = result.info.secure_url;
+                    document.getElementById('footerCV').value = result.info.secure_url;
+                    toast('CV uploaded!');
+                }
+            });
+            widget.open();
+        };
+
         // Load content on start
         loadContent();
     </script>
