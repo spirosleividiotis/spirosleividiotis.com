@@ -171,7 +171,8 @@
 
         <!-- Tab bar (init from main script when this content loads) -->
         <div class="handoff-tabs" role="tablist">
-            <button type="button" class="handoff-tab active" data-tab="highlights">Highlights</button>
+            <button type="button" class="handoff-tab active" data-tab="credit-debit">Credit / Debit</button>
+            <button type="button" class="handoff-tab" data-tab="highlights">Highlights</button>
             <button type="button" class="handoff-tab" data-tab="welcome-screen">Welcome Screen</button>
             <button type="button" class="handoff-tab" data-tab="usage-limits">Usage Limits</button>
             <button type="button" class="handoff-tab" data-tab="progressive-bar">Progressive Bar</button>
@@ -179,8 +180,77 @@
             <button type="button" class="handoff-tab" data-tab="text-reveal">Text Reveal</button>
         </div>
 
+        <!-- Panel: Credit / Debit (card switching) -->
+        <div id="panel-credit-debit" class="handoff-panel active" role="tabpanel">
+            <div class="case-wrapper">
+                <div class="case-header">
+                    <h3 class="case-title">Credit / Debit — Card switching</h3>
+                    <p class="case-description">
+                        Loading state for card switching: existing card fades out to 40% → spinner fades in and out → new card fades in with shine effect. Spinner on card only (best for short load times, already used on platform). Spec uses motion tokens throughout.
+                    </p>
+                </div>
+                <div class="case-preview-row">
+                    <div class="case-preview">
+                        <div class="preview-label">Card out 40%</div>
+                        <div class="device-frame device-frame--mobile">
+                            <div class="device-screen">
+                                <img src="credit-cards-out-40.png" alt="Card fade to 40%">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="case-preview">
+                        <div class="preview-label">Spinner fade in</div>
+                        <div class="device-frame device-frame--mobile">
+                            <div class="device-screen">
+                                <img src="credit-spinner-fadein.png" alt="Spinner fade in">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="case-preview">
+                        <div class="preview-label">New card + shine</div>
+                        <div class="device-frame device-frame--mobile">
+                            <div class="device-screen">
+                                <img src="credit-cards-in.png" alt="New card fade in">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="case-preview">
+                    <div class="preview-label">Shine effect</div>
+                    <img src="credit-shine.png" alt="Shine effect" style="max-height: 200px; width: auto; border-radius: 4px;">
+                </div>
+                <div class="case-preview">
+                    <div class="preview-label">Screen context</div>
+                    <div class="device-frame device-frame--mobile">
+                        <div class="device-screen">
+                            <img src="credit-debit-screen.png" alt="Credit Debit screen">
+                        </div>
+                    </div>
+                </div>
+                <div class="specs-section">
+                    <details class="specs-toggle">
+                        <summary class="specs-toggle-summary">
+                            <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
+                            <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </summary>
+                        <div class="specs-toggle-content">
+                            <table class="specs-table">
+                                <tbody>
+                                    <tr><td><strong>Existing card 40% fade out</strong></td><td>Duration motion-duration-300, Easing motion-easing-linear, Alpha 100→40</td></tr>
+                                    <tr><td><strong>Spinner fade in</strong></td><td>Duration 300ms, Easing linear, Alpha 0→100</td></tr>
+                                    <tr><td><strong>Spinner fade out</strong></td><td>Duration 300ms, Easing linear, Alpha 100→0</td></tr>
+                                    <tr><td><strong>New card fade in</strong></td><td>Duration 300ms, Easing linear, Alpha 0→100</td></tr>
+                                    <tr><td><strong>Shine effect</strong></td><td>Duration motion-duration-1000, Easing motion-easing-smooth, Delay motion-delay-150 (after new card), Translate 32px→88px</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+
         <!-- Panel: Highlights -->
-        <div id="panel-highlights" class="handoff-panel active" role="tabpanel">
+        <div id="panel-highlights" class="handoff-panel" role="tabpanel">
             <div class="case-wrapper">
                 <div class="case-header">
                     <h3 class="case-title">Highlights Animation</h3>
