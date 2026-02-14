@@ -12,7 +12,7 @@
   },
   "hero": {
     "name": "Spiros Leividiotis",
-    "subtitle": "Staff Product Motion Designer specializing in motion systems and design system implementation. I help teams ship motion that's consistent, scalable, and implementation ready, turning principles into patterns, guidelines, and Lottie ready handoff with design systems and engineering.\n",
+    "subtitle": "Product Motion Designer specializing in motion systems and design system implementation. I help teams ship motion that's consistent, scalable, and implementation ready, turning principles into patterns, guidelines, and Lottie ready handoff with design systems and engineering.\n",
     "photo": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694889/photo_vf6t7t.jpg",
     "tags": {
       "tools": [
@@ -57,7 +57,7 @@
   "aboutMe": {
     "photo": "https://res.cloudinary.com/dnbmyyc9x/image/upload/v1769694889/photo_vf6t7t.jpg",
     "bio": [
-      "I'm Spiros, a Staff Product Motion Designer based in Amsterdam, working at the intersection of product design, animation, and design systems. I use motion as a functional tool to clarify interactions, reinforce hierarchy, and improve usability at scale.",
+      "I'm Spiros, a Product Motion Designer based in Amsterdam, working at the intersection of product design, animation, and design systems. I use motion as a functional tool to clarify interactions, reinforce hierarchy, and improve usability at scale.",
       "Currently at Qonto, I built the motion design system from scratch and collaborate closely with product designers, design systems leads, and engineers. I focus on building reusable, well-documented motion patterns that teams can confidently use across complex products from Rive prototypes and Lottie pipelines to motion tokens and implementation specs.",
       "Outside of work, I spend a lot of time cycling and hanging out with Finn, my westie - who has strong opinions about walk schedules and absolutely none about motion design. I care deeply about craft, consistency, and pragmatism, and I believe great motion should feel invisible: intentional, purposeful, and grounded in real user needs.\n"
     ]
