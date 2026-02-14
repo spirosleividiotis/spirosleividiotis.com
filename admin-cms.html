@@ -433,113 +433,443 @@
         document.getElementById('reelFile').addEventListener('input', e => { content.reel.file = e.target.value; });
     }
 
+    // Enhanced Projects Panel with Structured Content Editor
     function renderProjectsPanel() {
         content.projects = content.projects || [];
         const el = document.getElementById('panel-projects');
         if (!el) return;
+        
         el.innerHTML = `
             <h3>Projects</h3>
-            <p style="color:#888;margin-bottom:20px;font-size:14px;">Card preview, name, company, optional password, and project body HTML (paste from existing project page to move content into CMS).</p>
+            <p style="color:#888;margin-bottom:20px;font-size:14px;">Click on a project to edit its content visually. Add/remove sections, upload media, edit text.</p>
             <div id="projectsList"></div>
-            <button type="button" class="add-btn" id="projectsAdd">+ Add project</button>
+            <button type="button" class="add-btn" id="projectsAdd">+ Add new project</button>
         `;
+        
         function renderProjectsList() {
             const list = document.getElementById('projectsList');
             list.innerHTML = content.projects.map((proj, pi) => `
-                <div class="item-card" style="margin-bottom:24px;">
-                    <h4>${escapeHtml(proj.name || 'Project ' + (pi + 1))}</h4>
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" data-pi="${pi}" data-key="name" value="${escapeHtml(proj.name || '')}">
+                <div class="item-card" style="margin-bottom:16px;cursor:pointer;" data-expand-project="${pi}">
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <h4 style="margin:0;">${escapeHtml(proj.name || 'Untitled Project')}</h4>
+                        <span style="color:#666;font-size:12px;">${proj.company || 'No company'}</span>
                     </div>
-                    <div class="form-group">
-                        <label>Company</label>
-                        <input type="text" data-pi="${pi}" data-key="company" value="${escapeHtml(proj.company || '')}">
-                    </div>
-                    <div class="form-group">
-                        <label>Card preview (image/video URL)</label>
-                        <div class="file-upload-row">
-                            <input type="url" id="proj-preview-${pi}" data-pi="${pi}" data-key="cardPreview" value="${escapeHtml(proj.cardPreview || '')}" placeholder="URL or upload">
-                            <button type="button" class="btn-upload" data-upload="proj-preview-${pi}" data-type="auto">Upload</button>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Color (hex)</label>
-                        <input type="text" data-pi="${pi}" data-key="color" value="${escapeHtml(proj.color || '#141414')}" placeholder="#141414">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label><input type="checkbox" data-pi="${pi}" data-key="passwordProtected" ${proj.passwordProtected ? 'checked' : ''}> Password protected</label>
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="text" data-pi="${pi}" data-key="password" value="${escapeHtml(proj.password || '')}">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Custom URL (legacy HTML file, e.g. motion-system-content.html)</label>
-                        <input type="text" data-pi="${pi}" data-key="customUrl" value="${escapeHtml(proj.customUrl || '')}" placeholder="Leave empty if using Body HTML below">
-                    </div>
-                    <div class="form-group">
-                        <label>Media: Hero (HTML file or image/video URL)</label>
-                        <input type="text" data-pi="${pi}" data-key="mediaHero" value="${escapeHtml((proj.media && proj.media.hero) || '')}">
-                    </div>
-                    <div class="form-group">
-                        <label>Body HTML (paste full content from project page to store in CMS; overrides Custom URL when set)</label>
-                        <textarea class="bodyHtml" data-pi="${pi}" data-key="bodyHtml" placeholder="Optional: paste HTML from project-*.html">${escapeHtml(proj.bodyHtml || '')}</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Grid media (one URL per line)</label>
-                        <textarea data-pi="${pi}" data-key="grid" rows="2" placeholder="selection-01.gif\nselection-02.mp4">${(proj.media && Array.isArray(proj.media.grid)) ? proj.media.grid.join('\n') : ''}</textarea>
-                    </div>
-                    <button type="button" class="remove-btn" data-remove-pi="${pi}">Remove project</button>
+                    <div id="project-editor-${pi}" style="display:none;margin-top:20px;"></div>
                 </div>
             `).join('');
-            list.querySelectorAll('input[data-pi], textarea[data-pi]').forEach(inp => {
-                const pi = parseInt(inp.dataset.pi, 10);
-                const key = inp.dataset.key;
-                const isCheck = inp.type === 'checkbox';
-                const handler = () => {
-                    content.projects[pi] = content.projects[pi] || {};
-                    if (key === 'mediaHero') {
-                        content.projects[pi].media = content.projects[pi].media || {};
-                        content.projects[pi].media.hero = inp.value;
-                    } else if (key === 'grid') {
-                        content.projects[pi].media = content.projects[pi].media || {};
-                        content.projects[pi].media.grid = inp.value.split('\n').map(s => s.trim()).filter(Boolean);
-                    } else if (key === 'bodyHtml') {
-                        content.projects[pi].bodyHtml = inp.value;
-                    } else if (key === 'passwordProtected') {
-                        content.projects[pi].passwordProtected = inp.checked;
+            
+            // Add click handlers to expand/collapse
+            list.querySelectorAll('[data-expand-project]').forEach(card => {
+                const pi = parseInt(card.dataset.expandProject, 10);
+                const editorDiv = card.querySelector(`#project-editor-${pi}`);
+                
+                card.addEventListener('click', (e) => {
+                    // Don't trigger if clicking inside editor
+                    if (e.target.closest(`#project-editor-${pi}`)) return;
+                    
+                    const isExpanded = editorDiv.style.display !== 'none';
+                    if (isExpanded) {
+                        editorDiv.style.display = 'none';
                     } else {
-                        content.projects[pi][key] = isCheck ? inp.checked : inp.value;
+                        // Close all others
+                        list.querySelectorAll('[id^="project-editor-"]').forEach(ed => ed.style.display = 'none');
+                        editorDiv.style.display = 'block';
+                        renderProjectEditor(pi, editorDiv);
                     }
-                };
-                if (isCheck) inp.addEventListener('change', handler); else inp.addEventListener('input', handler);
-            });
-            list.querySelectorAll('[data-remove-pi]').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    content.projects.splice(parseInt(btn.dataset.removePi, 10), 1);
-                    renderProjectsList();
                 });
             });
         }
+        
+        function renderProjectEditor(pi, container) {
+            const proj = content.projects[pi];
+            const hasStructured = proj.structuredContent && typeof proj.structuredContent === 'object';
+            
+            container.innerHTML = `
+                <div style="background:#0d0d0d;padding:20px;border-radius:6px;border:1px solid #2a2a2a;">
+                    
+                    <!-- Basic Info -->
+                    <div style="margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid #2a2a2a;">
+                        <h4 style="font-size:14px;color:#ccc;margin-bottom:16px;">Basic Information</h4>
+                        <div class="form-group">
+                            <label>Project Name</label>
+                            <input type="text" id="proj-${pi}-name" value="${escapeHtml(proj.name || '')}" placeholder="Motion Design System">
+                        </div>
+                        <div class="form-group">
+                            <label>Company</label>
+                            <input type="text" id="proj-${pi}-company" value="${escapeHtml(proj.company || '')}" placeholder="Qonto">
+                        </div>
+                        <div class="form-group">
+                            <label>Card Preview (cover image/video)</label>
+                            <div class="file-upload-row">
+                                <input type="url" id="proj-${pi}-preview" value="${escapeHtml(proj.cardPreview || '')}" placeholder="URL">
+                                <button type="button" class="btn-upload" onclick="uploadProjectMedia(${pi}, 'cardPreview')">Upload</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Color (hex)</label>
+                            <input type="text" id="proj-${pi}-color" value="${escapeHtml(proj.color || '#141414')}" placeholder="#141414">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><input type="checkbox" id="proj-${pi}-password-enabled" ${proj.passwordProtected ? 'checked' : ''}> Password protected</label>
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="text" id="proj-${pi}-password" value="${escapeHtml(proj.password || '')}">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Content Editor Mode Toggle -->
+                    <div style="margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid #2a2a2a;">
+                        <h4 style="font-size:14px;color:#ccc;margin-bottom:12px;">Content Mode</h4>
+                        <div style="display:flex;gap:12px;">
+                            <button type="button" class="btn ${hasStructured ? 'btn-primary' : 'btn-secondary'}" onclick="switchToStructured(${pi})" style="padding:8px 16px;font-size:13px;">
+                                ✨ Visual Editor ${hasStructured ? '(Active)' : ''}
+                            </button>
+                            <button type="button" class="btn ${!hasStructured ? 'btn-primary' : 'btn-secondary'}" onclick="switchToHTML(${pi})" style="padding:8px 16px;font-size:13px;">
+                                </> HTML Mode ${!hasStructured ? '(Active)' : ''}
+                            </button>
+                        </div>
+                        <p style="color:#666;font-size:12px;margin-top:8px;">Visual Editor: Add/remove sections visually. HTML Mode: For advanced projects.</p>
+                    </div>
+                    
+                    <!-- Content Editor -->
+                    <div id="content-editor-${pi}">
+                        ${hasStructured ? renderStructuredEditor(pi) : renderHTMLEditor(pi)}
+                    </div>
+                    
+                    <!-- Actions -->
+                    <div style="margin-top:24px;padding-top:24px;border-top:1px solid #2a2a2a;display:flex;gap:12px;">
+                        <button type="button" class="remove-btn" onclick="removeProject(${pi})">Delete Project</button>
+                        <button type="button" class="btn btn-secondary" onclick="duplicateProject(${pi})" style="padding:8px 16px;font-size:13px;">Duplicate</button>
+                    </div>
+                </div>
+            `;
+            
+            // Attach basic info handlers
+            document.getElementById(`proj-${pi}-name`).addEventListener('input', e => {
+                content.projects[pi].name = e.target.value;
+            });
+            document.getElementById(`proj-${pi}-company`).addEventListener('input', e => {
+                content.projects[pi].company = e.target.value;
+            });
+            document.getElementById(`proj-${pi}-preview`).addEventListener('input', e => {
+                content.projects[pi].cardPreview = e.target.value;
+            });
+            document.getElementById(`proj-${pi}-color`).addEventListener('input', e => {
+                content.projects[pi].color = e.target.value;
+            });
+            document.getElementById(`proj-${pi}-password-enabled`).addEventListener('change', e => {
+                content.projects[pi].passwordProtected = e.target.checked;
+            });
+        document.getElementById(`proj-${pi}-password`).addEventListener('input', e => {
+            content.projects[pi].password = e.target.value;
+        });
+        
+        // Attach structured content handlers if in structured mode
+        const tagsInput = document.getElementById(`proj-${pi}-tags`);
+        const introInput = document.getElementById(`proj-${pi}-intro`);
+        const metaInput = document.getElementById(`proj-${pi}-meta`);
+        
+        if (tagsInput) {
+            tagsInput.addEventListener('input', e => {
+                if (!content.projects[pi].structuredContent) content.projects[pi].structuredContent = {};
+                content.projects[pi].structuredContent.tags = e.target.value.split(',').map(t => t.trim()).filter(Boolean);
+            });
+        }
+        if (introInput) {
+            introInput.addEventListener('input', e => {
+                if (!content.projects[pi].structuredContent) content.projects[pi].structuredContent = {};
+                content.projects[pi].structuredContent.intro = e.target.value;
+            });
+        }
+        if (metaInput) {
+            metaInput.addEventListener('input', e => {
+                if (!content.projects[pi].structuredContent) content.projects[pi].structuredContent = {};
+                content.projects[pi].structuredContent.meta = e.target.value;
+            });
+        }
+        
+        // Attach HTML mode handlers
+        const customUrlInput = document.getElementById(`proj-${pi}-customUrl`);
+        const bodyHtmlInput = document.getElementById(`proj-${pi}-bodyHtml`);
+        
+        if (customUrlInput) {
+            customUrlInput.addEventListener('input', e => {
+                content.projects[pi].customUrl = e.target.value;
+            });
+        }
+        if (bodyHtmlInput) {
+            bodyHtmlInput.addEventListener('input', e => {
+                content.projects[pi].bodyHtml = e.target.value;
+            });
+        }
+    }
+        
+        function renderStructuredEditor(pi) {
+            const proj = content.projects[pi];
+            const sc = proj.structuredContent || { tags: [], intro: '', meta: '', sections: [] };
+            
+            return `
+                <div style="background:#1a1a1a;padding:20px;border-radius:6px;">
+                    <h4 style="font-size:14px;color:#ccc;margin-bottom:16px;">Project Content</h4>
+                    
+                    <!-- Tags -->
+                    <div class="form-group">
+                        <label>Tags (comma separated)</label>
+                        <input type="text" id="proj-${pi}-tags" value="${(sc.tags || []).join(', ')}" placeholder="Motion Design, Design System">
+                    </div>
+                    
+                    <!-- Intro -->
+                    <div class="form-group">
+                        <label>Introduction</label>
+                        <textarea id="proj-${pi}-intro" rows="3">${escapeHtml(sc.intro || '')}</textarea>
+                    </div>
+                    
+                    <!-- Meta -->
+                    <div class="form-group">
+                        <label>Meta (role and year)</label>
+                        <input type="text" id="proj-${pi}-meta" value="${escapeHtml(sc.meta || '')}" placeholder="2025 - 2026 Staff Motion Designer">
+                    </div>
+                    
+                    <!-- Sections -->
+                    <div style="margin-top:24px;padding-top:24px;border-top:1px solid #2a2a2a;">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                            <h4 style="font-size:14px;color:#ccc;margin:0;">Sections</h4>
+                            <button type="button" class="add-btn" onclick="addSection(${pi})">+ Add Section</button>
+                        </div>
+                        <div id="sections-list-${pi}">
+                            ${(sc.sections || []).map((section, si) => renderSectionEditor(pi, si, section)).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderSectionEditor(pi, si, section) {
+            const type = section.type || 'text';
+            
+            return `
+                <div class="item-card" style="margin-bottom:16px;background:#0d0d0d;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                        <select id="proj-${pi}-sec-${si}-type" style="background:#1a1a1a;color:#fff;border:1px solid #333;padding:8px;border-radius:4px;">
+                            <option value="text" ${type === 'text' ? 'selected' : ''}>Text Section</option>
+                            <option value="showcase" ${type === 'showcase' ? 'selected' : ''}>Showcase (with media)</option>
+                            <option value="stats" ${type === 'stats' ? 'selected' : ''}>Stats Grid</option>
+                            <option value="step" ${type === 'step' ? 'selected' : ''}>Step (numbered)</option>
+                        </select>
+                        <div style="display:flex;gap:8px;">
+                            ${si > 0 ? `<button type="button" class="btn-secondary" onclick="moveSection(${pi}, ${si}, -1)" style="padding:4px 8px;font-size:12px;">↑</button>` : ''}
+                            <button type="button" class="btn-secondary" onclick="moveSection(${pi}, ${si}, 1)" style="padding:4px 8px;font-size:12px;">↓</button>
+                            <button type="button" class="remove-btn" onclick="removeSection(${pi}, ${si})" style="padding:4px 8px;font-size:12px;">Remove</button>
+                        </div>
+                    </div>
+                    <div id="section-content-${pi}-${si}">
+                        ${renderSectionContentEditor(pi, si, section)}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderSectionContentEditor(pi, si, section) {
+            const type = section.type || 'text';
+            
+            if (type === 'text') {
+                return `
+                    <div class="form-group">
+                        <label>Label</label>
+                        <input type="text" id="proj-${pi}-sec-${si}-label" value="${escapeHtml(section.label || '')}" placeholder="Context">
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="proj-${pi}-sec-${si}-title" value="${escapeHtml(section.title || '')}" placeholder="The Problem">
+                    </div>
+                    <div class="form-group">
+                        <label>Paragraphs (one per line)</label>
+                        <textarea id="proj-${pi}-sec-${si}-paragraphs" rows="6">${(section.paragraphs || []).join('\n\n')}</textarea>
+                        <small style="color:#666;">Each paragraph on a new line. Use &lt;strong&gt; for bold text.</small>
+                    </div>
+                `;
+            }
+            
+            if (type === 'showcase') {
+                return `
+                    <div class="form-group">
+                        <label>Label</label>
+                        <input type="text" id="proj-${pi}-sec-${si}-label" value="${escapeHtml(section.label || '')}" placeholder="Deliverables">
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="proj-${pi}-sec-${si}-title" value="${escapeHtml(section.title || '')}" placeholder="Core Brand Animations">
+                    </div>
+                    <p style="color:#888;font-size:12px;margin:16px 0;">Showcase items coming soon - for now use HTML mode for complex showcases</p>
+                `;
+            }
+            
+            if (type === 'stats') {
+                return `
+                    <div class="form-group">
+                        <label>Stats (format: "1,000+|Lottie Files" one per line)</label>
+                        <textarea id="proj-${pi}-sec-${si}-stats" rows="4">${(section.items || []).map(s => `${s.number}|${s.label}`).join('\n')}</textarea>
+                        <small style="color:#666;">Format: Number|Label (one per line)</small>
+                    </div>
+                `;
+            }
+            
+            if (type === 'step') {
+                return `
+                    <div class="form-group">
+                        <label>Number</label>
+                        <input type="text" id="proj-${pi}-sec-${si}-number" value="${escapeHtml(section.number || '')}" placeholder="01">
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="proj-${pi}-sec-${si}-title" value="${escapeHtml(section.title || '')}" placeholder="Motion Principles">
+                    </div>
+                    <div class="form-group">
+                        <label>Paragraphs (one per line)</label>
+                        <textarea id="proj-${pi}-sec-${si}-paragraphs" rows="6">${(section.paragraphs || []).join('\n\n')}</textarea>
+                    </div>
+                `;
+            }
+            
+            return '<p style="color:#888;">Unknown section type</p>';
+        }
+        
+        function renderHTMLEditor(pi) {
+            const proj = content.projects[pi];
+            return `
+                <div style="background:#1a1a1a;padding:20px;border-radius:6px;">
+                    <h4 style="font-size:14px;color:#ccc;margin-bottom:16px;">HTML Content</h4>
+                    <div class="form-group">
+                        <label>Custom URL (legacy HTML file)</label>
+                        <input type="text" id="proj-${pi}-customUrl" value="${escapeHtml(proj.customUrl || '')}" placeholder="project-1.html">
+                    </div>
+                    <div class="form-group">
+                        <label>Body HTML</label>
+                        <textarea class="bodyHtml" id="proj-${pi}-bodyHtml">${escapeHtml(proj.bodyHtml || '')}</textarea>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Global helper functions
+        window.switchToStructured = function(pi) {
+            const proj = content.projects[pi];
+            if (!proj.structuredContent) {
+                proj.structuredContent = {
+                    tags: [],
+                    intro: '',
+                    meta: '',
+                    sections: []
+                };
+            }
+            const editorDiv = document.querySelector(`#project-editor-${pi}`);
+            if (editorDiv) renderProjectEditor(pi, editorDiv);
+        };
+        
+        window.switchToHTML = function(pi) {
+            const proj = content.projects[pi];
+            delete proj.structuredContent;
+            const editorDiv = document.querySelector(`#project-editor-${pi}`);
+            if (editorDiv) renderProjectEditor(pi, editorDiv);
+        };
+        
+        window.addSection = function(pi) {
+            const proj = content.projects[pi];
+            if (!proj.structuredContent) proj.structuredContent = { sections: [] };
+            if (!proj.structuredContent.sections) proj.structuredContent.sections = [];
+            proj.structuredContent.sections.push({
+                type: 'text',
+                label: '',
+                title: '',
+                paragraphs: []
+            });
+            const editorDiv = document.querySelector(`#project-editor-${pi}`);
+            if (editorDiv) renderProjectEditor(pi, editorDiv);
+        };
+        
+        window.removeSection = function(pi, si) {
+            const proj = content.projects[pi];
+            if (proj.structuredContent && proj.structuredContent.sections) {
+                proj.structuredContent.sections.splice(si, 1);
+                const editorDiv = document.querySelector(`#project-editor-${pi}`);
+                if (editorDiv) renderProjectEditor(pi, editorDiv);
+            }
+        };
+        
+        window.moveSection = function(pi, si, direction) {
+            const proj = content.projects[pi];
+            if (proj.structuredContent && proj.structuredContent.sections) {
+                const sections = proj.structuredContent.sections;
+                const newIndex = si + direction;
+                if (newIndex >= 0 && newIndex < sections.length) {
+                    [sections[si], sections[newIndex]] = [sections[newIndex], sections[si]];
+                    const editorDiv = document.querySelector(`#project-editor-${pi}`);
+                    if (editorDiv) renderProjectEditor(pi, editorDiv);
+                }
+            }
+        };
+        
+        window.removeProject = function(pi) {
+            if (confirm('Delete this project?')) {
+                content.projects.splice(pi, 1);
+                renderProjectsList();
+            }
+        };
+        
+        window.duplicateProject = function(pi) {
+            const proj = JSON.parse(JSON.stringify(content.projects[pi]));
+            proj.name = (proj.name || 'Untitled') + ' (Copy)';
+            proj.id = content.projects.length ? Math.max(...content.projects.map(p => p.id || 0)) + 1 : 1;
+            content.projects.push(proj);
+            renderProjectsList();
+        };
+        
+        window.uploadProjectMedia = function(pi, field) {
+            const widget = cloudinary.createUploadWidget({
+                cloudName: 'dnbmyyc9x',
+                uploadPreset: 'portfolio_preset',
+                sources: ['local', 'url'],
+                multiple: false
+            }, (error, result) => {
+                if (error) {
+                    console.error('Upload error:', error);
+                    toast('Upload failed');
+                    return;
+                }
+                if (result.event === 'success') {
+                    const url = result.info.secure_url;
+                    content.projects[pi][field] = url;
+                    const input = document.getElementById(`proj-${pi}-preview`);
+                    if (input) input.value = url;
+                    toast('Uploaded!');
+                }
+            });
+            widget.open();
+        };
+        
         document.getElementById('projectsAdd').addEventListener('click', () => {
             const nextId = content.projects.length ? Math.max(...content.projects.map(p => p.id || 0)) + 1 : 1;
             content.projects.push({
                 id: nextId,
-                name: '',
+                name: 'New Project',
                 company: '',
                 color: '#141414',
                 passwordProtected: false,
                 password: '',
-                customUrl: '',
-                bodyText: '',
                 cardPreview: '',
-                media: { hero: '', grid: [] }
+                structuredContent: {
+                    tags: [],
+                    intro: '',
+                    meta: '',
+                    sections: []
+                }
             });
             renderProjectsList();
         });
+        
         renderProjectsList();
     }
 
