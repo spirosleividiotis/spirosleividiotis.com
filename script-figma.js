@@ -1160,18 +1160,14 @@ function initHandoffTabs() {
     const tabs = container.querySelectorAll('.handoff-tab');
     const panels = container.querySelectorAll('.handoff-panel');
     if (!tabs.length || !panels.length) return;
+    // Always show first panel: clear active then set first tab + first panel (works for Product Motion & Motion system)
     tabs.forEach(function(t) { t.classList.remove('active'); });
     panels.forEach(function(p) { p.classList.remove('active'); });
-    const activeTab = container.querySelector('.handoff-tab.active');
-    const activePanel = container.querySelector('.handoff-panel.active');
-    if (activeTab) activeTab.classList.add('active');
-    if (activePanel) activePanel.classList.add('active');
-    // Play videos in initially active panel (e.g. when modal opens)
-    if (activePanel) {
-        activePanel.querySelectorAll('video[autoplay]').forEach(function(v) {
-            v.play().catch(function() {});
-        });
-    }
+    tabs[0].classList.add('active');
+    panels[0].classList.add('active');
+    panels[0].querySelectorAll('video[autoplay]').forEach(function(v) {
+        v.play().catch(function() {});
+    });
 }
 
 // Handoff tabs: use delegation so clicks work after dynamic content load (e.g. Motion system / Motion tokens library)
@@ -1213,18 +1209,22 @@ function closeProjectModal() {
     }
 }
 
-// Project modal close: one button (sibling of wrapper, like About me close)
-const projectModalClose = document.getElementById('projectModalClose');
-if (projectModalClose) {
-    projectModalClose.addEventListener('click', function(e) {
+// Project modal close: use capture so it runs before any other handler; also bind when DOM ready
+function bindProjectModalClose() {
+    const btn = document.getElementById('projectModalClose');
+    if (!btn) return;
+    function doClose(e) {
         e.preventDefault();
         e.stopPropagation();
         closeProjectModal();
-    });
-    projectModalClose.addEventListener('touchend', function(e) {
-        e.preventDefault();
-        closeProjectModal();
-    }, { passive: false });
+    }
+    btn.addEventListener('click', doClose, true);
+    btn.addEventListener('touchend', doClose, { passive: false, capture: true });
+}
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindProjectModalClose);
+} else {
+    bindProjectModalClose();
 }
 
 // Close project modal on Escape
