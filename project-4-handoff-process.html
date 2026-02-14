@@ -94,6 +94,39 @@
         object-fit: cover;
         display: block;
     }
+    /* Desktop device frame: browser/window style */
+    #projectModalBody .device-frame--desktop {
+        max-width: 100%;
+        width: 560px;
+        padding: 12px;
+        background: #1a1a1a;
+        border-radius: 10px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    #projectModalBody .device-frame--desktop::before {
+        content: 'Desktop';
+        display: block;
+        font-size: 11px;
+        font-weight: 600;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 8px;
+    }
+    #projectModalBody .device-frame--desktop .device-screen {
+        aspect-ratio: 16 / 10;
+        border-radius: 6px;
+        overflow: hidden;
+        background: #000;
+    }
+    #projectModalBody .device-frame--desktop .device-screen iframe,
+    #projectModalBody .device-frame--desktop .device-screen video,
+    #projectModalBody .device-frame--desktop .device-screen img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+    }
     #projectModalBody .case-preview-row {
         display: flex;
         flex-wrap: wrap;
@@ -155,13 +188,23 @@
                         Carousel transition between highlights: title/subtitle position + opacity, asset transitions, background fade. Last highlight has only animation in, not out.
                     </p>
                 </div>
-                <div class="case-preview">
-                    <div class="preview-label">Animation In</div>
-                    <iframe src="https://rive.app/s/bQPMF2ahgES275qVgE4wkg/embed?mode=preview" frameborder="0" allowfullscreen allow="fullscreen; autoplay" loading="lazy" style="height: 260px; width: 100%;"></iframe>
-                </div>
-                <div class="case-preview">
-                    <div class="preview-label">Animation Out</div>
-                    <iframe src="https://rive.app/s/0Oiso2VODUu0UvMvXYHI2Q/embed?mode=preview" frameborder="0" allowfullscreen allow="fullscreen; autoplay" loading="lazy" style="height: 260px; width: 100%;"></iframe>
+                <div class="case-preview-row">
+                    <div class="case-preview">
+                        <div class="preview-label">Animation In</div>
+                        <div class="device-frame device-frame--mobile">
+                            <div class="device-screen">
+                                <iframe src="https://rive.app/s/bQPMF2ahgES275qVgE4wkg/embed?mode=preview" frameborder="0" allowfullscreen allow="fullscreen; autoplay" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="case-preview">
+                        <div class="preview-label">Animation Out</div>
+                        <div class="device-frame device-frame--mobile">
+                            <div class="device-screen">
+                                <iframe src="https://rive.app/s/0Oiso2VODUu0UvMvXYHI2Q/embed?mode=preview" frameborder="0" allowfullscreen allow="fullscreen; autoplay" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="specs-section">
                     <details class="specs-toggle">
@@ -193,7 +236,11 @@
                 </div>
                 <div class="case-preview">
                     <div class="preview-label">Interactive Preview</div>
-                    <iframe src="https://rive.app/s/Ya-buNMRVkWqAOVPJrhZbA/embed?mode=preview" frameborder="0" allowfullscreen allow="fullscreen; autoplay" loading="lazy" style="height: 260px; width: 100%;"></iframe>
+                    <div class="device-frame device-frame--mobile">
+                        <div class="device-screen">
+                            <iframe src="https://rive.app/s/Ya-buNMRVkWqAOVPJrhZbA/embed?mode=preview" frameborder="0" allowfullscreen allow="fullscreen; autoplay" loading="lazy"></iframe>
+                        </div>
+                    </div>
                 </div>
                 <div class="specs-section">
                     <details class="specs-toggle">
@@ -227,6 +274,7 @@
                 </div>
                 <div class="case-preview-row">
                     <div class="case-preview">
+                        <div class="preview-label">Mobile</div>
                         <div class="device-frame device-frame--mobile">
                             <div class="device-screen">
                                 <img src="limits-upsell.gif" alt="Usage limits upsell – Mobile">
@@ -234,8 +282,12 @@
                         </div>
                     </div>
                     <div class="case-preview">
-                        <div class="preview-label">Desktop flow</div>
-                        <img src="limits-upsell.gif" alt="Usage limits upsell – Desktop" style="max-height: 260px; width: auto;">
+                        <div class="preview-label">Desktop</div>
+                        <div class="device-frame device-frame--desktop">
+                            <div class="device-screen">
+                                <img src="limits-upsell.gif" alt="Usage limits upsell – Desktop">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="insight">
@@ -274,7 +326,11 @@
                 </div>
                 <div class="case-preview">
                     <div class="preview-label">Interactive Preview</div>
-                    <iframe src="https://rive.app/s/TO6xVZ1mg0yrAvC7jW5AOQ/embed?mode=preview&artboard=Desktop" frameborder="0" allowfullscreen allow="fullscreen; autoplay" loading="lazy" style="height: 260px; width: 100%;"></iframe>
+                    <div class="device-frame device-frame--desktop">
+                        <div class="device-screen">
+                            <iframe src="https://rive.app/s/TO6xVZ1mg0yrAvC7jW5AOQ/embed?mode=preview&artboard=Desktop" frameborder="0" allowfullscreen allow="fullscreen; autoplay" loading="lazy"></iframe>
+                        </div>
+                    </div>
                 </div>
                 <div class="insight">
                     <div class="insight-label">UX Challenge</div>
@@ -345,7 +401,11 @@
                 </div>
                 <div class="case-preview">
                     <div class="preview-label">Interactive Preview</div>
-                    <iframe src="https://rive.app/s/-fFrKbEosUWHv0C3Qvwmqw/embed?mode=preview" frameborder="0" allowfullscreen allow="fullscreen; autoplay" loading="lazy" style="height: 260px; width: 100%;"></iframe>
+                    <div class="device-frame device-frame--desktop">
+                        <div class="device-screen">
+                            <iframe src="https://rive.app/s/-fFrKbEosUWHv0C3Qvwmqw/embed?mode=preview" frameborder="0" allowfullscreen allow="fullscreen; autoplay" loading="lazy"></iframe>
+                        </div>
+                    </div>
                 </div>
                 <div class="insight">
                     <div class="insight-label">UX Challenge</div>
