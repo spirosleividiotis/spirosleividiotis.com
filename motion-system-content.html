@@ -183,6 +183,31 @@
         font-weight: 600;
     }
 
+    #projectModalBody .token-preview-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+        margin-top: 16px;
+    }
+    #projectModalBody .token-preview-cell {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #f9f9f9;
+    }
+    #projectModalBody .token-preview-cell iframe {
+        width: 100%;
+        height: 120px;
+        border: none;
+        display: block;
+    }
+    #projectModalBody .token-preview-cell .token-preview-name {
+        font-size: 12px;
+        padding: 6px 8px;
+        color: #555;
+        font-weight: 600;
+    }
+
     /* Tabs: Motion system / Motion tokens library */
     #projectModalBody .motion-system-content .handoff-tabs {
         display: flex;
@@ -469,6 +494,38 @@
                 Most importantly, we have a <strong>common motion language</strong>. Designers, engineers, and 
                 product teams can discuss animation with precision, using the same vocabulary.
             </p>
+        </div>
+    </div>
+    </div>
+    <!-- Panel: Motion tokens library (one Netlify preview per token) -->
+    <div id="panel-tokens-library" class="handoff-panel" role="tabpanel">
+        <div class="motion-section">
+            <h2 class="motion-section-title">Motion tokens library</h2>
+            <p class="motion-section-content">Live previews from the token docs.</p>
+            <div class="token-preview-grid">
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-duration.netlify.app/" loading="lazy" title="Duration"></iframe><span class="token-preview-name">Duration</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-easing.netlify.app/" loading="lazy" title="Easing"></iframe><span class="token-preview-name">Easing</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-delay.netlify.app/" loading="lazy" title="Delay"></iframe><span class="token-preview-name">Delay</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-scale.netlify.app/" loading="lazy" title="Scale"></iframe><span class="token-preview-name">Scale</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-alpha.netlify.app/" loading="lazy" title="Alpha"></iframe><span class="token-preview-name">Alpha</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-rotation.netlify.app/" loading="lazy" title="Rotation"></iframe><span class="token-preview-name">Rotation</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-blur.netlify.app/" loading="lazy" title="Blur"></iframe><span class="token-preview-name">Blur</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-spring.netlify.app/" loading="lazy" title="Spring"></iframe><span class="token-preview-name">Spring</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-translate.netlify.app/" loading="lazy" title="Translate"></iframe><span class="token-preview-name">Translate</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-entry.netlify.app/" loading="lazy" title="Entry"></iframe><span class="token-preview-name">Entry</span></div>
+                <div class="token-preview-cell"><iframe src="https://motion-qonto-exit.netlify.app/" loading="lazy" title="Exit"></iframe><span class="token-preview-name">Exit</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-transition.netlify.app/" loading="lazy" title="Transition"></iframe><span class="token-preview-name">Transition</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-reveal.netlify.app/" loading="lazy" title="Reveal"></iframe><span class="token-preview-name">Reveal</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-slide.netlify.app/" loading="lazy" title="Slide"></iframe><span class="token-preview-name">Slide</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-fade.netlify.app/" loading="lazy" title="Fade"></iframe><span class="token-preview-name">Fade</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-scalefade.netlify.app/" loading="lazy" title="Scale fade"></iframe><span class="token-preview-name">Scale fade</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-expandcollapse.netlify.app/" loading="lazy" title="Expand collapse"></iframe><span class="token-preview-name">Expand collapse</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-presstap.netlify.app/" loading="lazy" title="Press tap"></iframe><span class="token-preview-name">Press tap</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-hoverlift.netlify.app/" loading="lazy" title="Hover lift"></iframe><span class="token-preview-name">Hover lift</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-shimmerloading.netlify.app/" loading="lazy" title="Shimmer loading"></iframe><span class="token-preview-name">Shimmer loading</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-stagger.netlify.app/" loading="lazy" title="Stagger"></iframe><span class="token-preview-name">Stagger</span></div>
+                <div class="token-preview-cell"><iframe src="https://qonto-motion-pagetransition.netlify.app/" loading="lazy" title="Page transition"></iframe><span class="token-preview-name">Page transition</span></div>
+            </div>
         </div>
     </div>
 </div>
