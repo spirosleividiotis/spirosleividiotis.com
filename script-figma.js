@@ -921,6 +921,112 @@ function initializeModalsAndPlayers() {
 }
 
 // ===================================
+// URL ROUTING - Projects and Sections
+// ===================================
+
+// Map URL paths to project IDs
+const PROJECT_ROUTES = {
+    '/motion-system': 1,
+    '/motion-tool': 2,
+    '/lotties': 3,
+    '/product-motion': 4,
+    '/flink': 5,
+    '/selection': 6
+};
+
+// Map URL paths to section IDs
+const SECTION_ROUTES = {
+    '/about': 'heroSection',
+    '/reel': 'reelSection',
+    '/experience': 'experienceSection',
+    '/projects': 'workSection',
+    '/contact': 'footerSection'
+};
+
+function handleRoute() {
+    const path = window.location.pathname;
+    
+    // Check if path matches a project route
+    if (PROJECT_ROUTES[path]) {
+        const projectId = PROJECT_ROUTES[path];
+        // Wait for content to be loaded
+        if (window.projectsData) {
+            openProjectByIdFromRoute(projectId);
+        } else {
+            // Content not loaded yet, wait for contentLoaded event
+            window.addEventListener('contentLoaded', () => openProjectByIdFromRoute(projectId), { once: true });
+        }
+        return;
+    }
+    
+    // Check if path matches a section route
+    if (SECTION_ROUTES[path]) {
+        const sectionId = SECTION_ROUTES[path];
+        // Wait for DOM to be ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => scrollToSection(sectionId), { once: true });
+        } else {
+            scrollToSection(sectionId);
+        }
+        return;
+    }
+}
+
+function openProjectByIdFromRoute(projectId) {
+    const card = document.querySelector(`[data-project-id="${projectId}"]`);
+    if (card) {
+        setTimeout(() => openProjectModal(card), 300);
+    }
+}
+
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        const headerOffset = 120;
+        const elementPosition = section.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+        setTimeout(() => {
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }, 100);
+    }
+}
+
+// Update URL when project opens (without page reload)
+function updateProjectUrl(projectId) {
+    const routePath = Object.keys(PROJECT_ROUTES).find(key => PROJECT_ROUTES[key] === parseInt(projectId));
+    if (routePath && window.history) {
+        window.history.pushState({ projectId }, '', routePath);
+    }
+}
+
+// Update URL when project closes (back to root)
+function clearProjectUrl() {
+    if (window.history) {
+        window.history.pushState({}, '', '/');
+    }
+}
+
+// Handle browser back/forward buttons
+window.addEventListener('popstate', (e) => {
+    if (e.state && e.state.projectId) {
+        openProjectByIdFromRoute(e.state.projectId);
+    } else {
+        // Close modal if open
+        const modal = document.getElementById('projectModal');
+        if (modal && modal.classList.contains('active')) {
+            closeProjectModal();
+        }
+    }
+});
+
+// Initialize routing on page load
+handleRoute();
+
+// ===================================
 // PROJECT MODAL (Full-screen)
 // ===================================
 
@@ -1017,6 +1123,9 @@ function openProjectModal(card) {
     document.body.style.left = '0';
     document.body.style.right = '0';
     modal.dataset.scrollY = String(scrollY);
+    
+    // Update URL to project route
+    updateProjectUrl(projectId);
 }
 
 function fillBrandVideos(container, videos) {
@@ -1219,6 +1328,9 @@ function closeProjectModal() {
         document.body.style.right = '';
         document.body.classList.remove('project-modal-open');
         if (scrollY) window.scrollTo(0, scrollY);
+        
+        // Clear URL back to root
+        clearProjectUrl();
     }
 }
 
