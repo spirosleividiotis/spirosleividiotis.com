@@ -1154,6 +1154,19 @@ function loadProjectContent(projectData, projectName) {
     }
 }
 
+// Play all videos in a panel after it is visible; load() ensures video is ready
+function playVideosInPanel(panel) {
+    if (!panel) return;
+    var videos = panel.querySelectorAll('video');
+    if (!videos.length) return;
+    setTimeout(function() {
+        videos.forEach(function(v) {
+            v.load();
+            v.play().catch(function() {});
+        });
+    }, 450);
+}
+
 function initHandoffTabs() {
     const container = document.getElementById('projectModalBody');
     if (!container) return;
@@ -1165,13 +1178,7 @@ function initHandoffTabs() {
     panels.forEach(function(p) { p.classList.remove('active'); });
     tabs[0].classList.add('active');
     panels[0].classList.add('active');
-    requestAnimationFrame(function() {
-        requestAnimationFrame(function() {
-            panels[0].querySelectorAll('video').forEach(function(v) {
-                v.play().catch(function() {});
-            });
-        });
-    });
+    playVideosInPanel(panels[0]);
 }
 
 // Handoff tabs: capture phase so we run before anything else; only when modal is open
@@ -1194,14 +1201,7 @@ function handleHandoffTabClick(e) {
     var panel = container.querySelector('#panel-' + tabId);
     if (panel) {
         panel.classList.add('active');
-        // Defer play so panel is visible; play all videos in panel (limits/collapsable nav desktop etc.)
-        requestAnimationFrame(function() {
-            requestAnimationFrame(function() {
-                panel.querySelectorAll('video').forEach(function(v) {
-                    v.play().catch(function() {});
-                });
-            });
-        });
+        playVideosInPanel(panel);
     }
 }
 document.addEventListener('click', handleHandoffTabClick, true);

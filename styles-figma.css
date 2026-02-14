@@ -2966,7 +2966,7 @@ body.project-modal-open {
         padding: 20px 0 24px !important;
     }
     
-    /* Single scroll container: touch-action pan-y so scroll starts immediately on text and images */
+    /* Single scroll container: touch-action pan-y so scroll starts immediately; overscroll none so scroll doesn't leak to body */
     .project-modal-wrapper {
         width: 100% !important;
         max-height: calc(100vh - 44px) !important;
@@ -2974,10 +2974,12 @@ body.project-modal-open {
         overflow-y: auto !important;
         -webkit-overflow-scrolling: touch !important;
         touch-action: pan-y !important;
+        overscroll-behavior-y: contain !important;
         background: #FFFFFF !important;
     }
     #projectModalBody {
         touch-action: pan-y;
+        overscroll-behavior-y: contain;
     }
     
     .project-modal-content {
