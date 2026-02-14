@@ -892,8 +892,329 @@
 
         // Edit section (opens more detailed editor)
         window.editSection = function(index) {
-            // For now, just show in sidebar - we can enhance this later
-            toast('Use the sidebar to edit basic properties. Advanced editing coming soon!');
+            const section = content.projects[currentProjectIndex].structuredContent.sections[index];
+            const type = section.type || 'text';
+            
+            // Render detailed editor in sidebar
+            const sidebar = document.getElementById('editorSidebar');
+            
+            sidebar.innerHTML = `
+                <div class="sidebar-section">
+                    <h3>Edit ${type.toUpperCase()} Section</h3>
+                    <button class="btn-secondary" onclick="renderEditorSidebar(content.projects[${currentProjectIndex}])" style="width: 100%; margin-bottom: 20px;">← Back to Project</button>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="form-field">
+                        <label>Section Type</label>
+                        <select id="sectionType" style="width: 100%; padding: 10px; border: 1px solid #e5e5e5; border-radius: 8px;">
+                            <option value="text" ${type === 'text' ? 'selected' : ''}>Text</option>
+                            <option value="showcase" ${type === 'showcase' ? 'selected' : ''}>Showcase</option>
+                            <option value="stats" ${type === 'stats' ? 'selected' : ''}>Stats</option>
+                            <option value="step" ${type === 'step' ? 'selected' : ''}>Step</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Label</label>
+                        <input type="text" id="sectionLabel" value="${section.label || ''}" placeholder="Context">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Title</label>
+                        <input type="text" id="sectionTitle" value="${section.title || ''}" placeholder="The Challenge">
+                    </div>
+                    
+                    ${type === 'text' || type === 'step' ? `
+                        <div class="form-field">
+                            <label>Paragraphs (one per line)</label>
+                            <textarea id="sectionParagraphs" rows="8">${(section.paragraphs || []).join('\n\n')}</textarea>
+                            <small style="color: #999; font-size: 12px;">Use &lt;strong&gt; for bold</small>
+                        </div>
+                    ` : ''}
+                    
+                    ${type === 'step' ? `
+                        <div class="form-field">
+                            <label>Step Number</label>
+                            <input type="text" id="sectionNumber" value="${section.number || ''}" placeholder="01">
+                        </div>
+                    ` : ''}
+                    
+                    ${type === 'showcase' ? `
+                        <div class="sidebar-section">
+                            <h3>Showcase Items</h3>
+                            <div id="showcaseItems"></div>
+                            <button class="btn-secondary" onclick="addShowcaseItem(${index})" style="width: 100%; margin-top: 12px;">+ Add Item</button>
+                        </div>
+                    ` : ''}
+                    
+                    ${type === 'stats' ? `
+                        <div class="sidebar-section">
+                            <h3>Stats</h3>
+                            <div id="statsItems"></div>
+                            <button class="btn-secondary" onclick="addStatItem(${index})" style="width: 100%; margin-top: 12px;">+ Add Stat</button>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            // Attach listeners
+            document.getElementById('sectionType').addEventListener('change', e => {
+                section.type = e.target.value;
+                renderEditorCanvas(content.projects[currentProjectIndex]);
+                editSection(index);
+            });
+            
+            const labelInput = document.getElementById('sectionLabel');
+            if (labelInput) {
+                labelInput.addEventListener('input', e => {
+                    section.label = e.target.value;
+                    renderEditorCanvas(content.projects[currentProjectIndex]);
+                });
+            }
+            
+            const titleInput = document.getElementById('sectionTitle');
+            if (titleInput) {
+                titleInput.addEventListener('input', e => {
+                    section.title = e.target.value;
+                    renderEditorCanvas(content.projects[currentProjectIndex]);
+                });
+            }
+            
+            const paragraphsInput = document.getElementById('sectionParagraphs');
+            if (paragraphsInput) {
+                paragraphsInput.addEventListener('input', e => {
+                    section.paragraphs = e.target.value.split('\n\n').map(p => p.trim()).filter(Boolean);
+                    renderEditorCanvas(content.projects[currentProjectIndex]);
+                });
+            }
+            
+            const numberInput = document.getElementById('sectionNumber');
+            if (numberInput) {
+                numberInput.addEventListener('input', e => {
+                    section.number = e.target.value;
+                    renderEditorCanvas(content.projects[currentProjectIndex]);
+                });
+            }
+            
+            // Render showcase items if showcase type
+            if (type === 'showcase') {
+                renderShowcaseItems(index);
+            }
+            
+            // Render stats items if stats type
+            if (type === 'stats') {
+                renderStatsItems(index);
+            }
+        };
+        
+        // Render showcase items
+        function renderShowcaseItems(sectionIndex) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            const items = section.items || [];
+            const container = document.getElementById('showcaseItems');
+            
+            container.innerHTML = items.map((item, itemIndex) => `
+                <div style="background: #fafafa; padding: 16px; border-radius: 8px; margin-bottom: 12px;">
+                    <div class="form-field">
+                        <label>Item Title</label>
+                        <input type="text" value="${item.title || ''}" onchange="updateShowcaseItem(${sectionIndex}, ${itemIndex}, 'title', this.value)">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Description</label>
+                        <textarea rows="3" onchange="updateShowcaseItem(${sectionIndex}, ${itemIndex}, 'description', this.value)">${item.description || ''}</textarea>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Layout</label>
+                        <select onchange="updateShowcaseItem(${sectionIndex}, ${itemIndex}, 'layout', this.value)" style="width: 100%; padding: 8px; border: 1px solid #e5e5e5; border-radius: 6px;">
+                            <option value="full" ${item.layout === 'full' ? 'selected' : ''}>Full Width</option>
+                            <option value="grid-2" ${item.layout === 'grid-2' ? 'selected' : ''}>2 Columns</option>
+                            <option value="grid-3" ${item.layout === 'grid-3' ? 'selected' : ''}>3 Columns</option>
+                            <option value="grid-6" ${item.layout === 'grid-6' ? 'selected' : ''}>6 Columns</option>
+                            <option value="lottie-grid" ${item.layout === 'lottie-grid' ? 'selected' : ''}>Lottie Grid</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Media (${(item.media || []).length} files)</label>
+                        <div id="mediaList-${sectionIndex}-${itemIndex}"></div>
+                        <button class="btn-secondary" onclick="addMediaToItem(${sectionIndex}, ${itemIndex})" style="width: 100%; margin-top: 8px; padding: 8px;">+ Add Media</button>
+                    </div>
+                    
+                    <button class="btn-secondary" onclick="removeShowcaseItem(${sectionIndex}, ${itemIndex})" style="width: 100%; margin-top: 12px; padding: 6px; font-size: 13px;">Remove Item</button>
+                </div>
+            `).join('');
+            
+            // Render media lists for each item
+            items.forEach((item, itemIndex) => {
+                renderMediaList(sectionIndex, itemIndex);
+            });
+        }
+        
+        // Render media list for a showcase item
+        function renderMediaList(sectionIndex, itemIndex) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            const item = section.items[itemIndex];
+            const media = item.media || [];
+            const container = document.getElementById(`mediaList-${sectionIndex}-${itemIndex}`);
+            
+            if (!container) return;
+            
+            container.innerHTML = media.map((url, mediaIndex) => {
+                const isVideo = url.match(/\.(mp4|webm|mov)$/i);
+                const isImage = url.match(/\.(jpg|jpeg|png|gif|webp)$/i);
+                
+                return `
+                    <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px; padding: 8px; background: white; border-radius: 6px;">
+                        <div style="width: 60px; height: 60px; background: #f5f5f5; border-radius: 4px; overflow: hidden; flex-shrink: 0;">
+                            ${isVideo ? `<video src="${url}" style="width: 100%; height: 100%; object-fit: cover;"></video>` : 
+                              isImage ? `<img src="${url}" style="width: 100%; height: 100%; object-fit: cover;">` : 
+                              '<div style="display: flex; align-items: center; justify-content: center; height: 100%; font-size: 24px;">📄</div>'}
+                        </div>
+                        <input type="url" value="${url}" onchange="updateMedia(${sectionIndex}, ${itemIndex}, ${mediaIndex}, this.value)" style="flex: 1; padding: 8px; border: 1px solid #e5e5e5; border-radius: 4px; font-size: 13px;">
+                        <button class="btn-upload" onclick="replaceMedia(${sectionIndex}, ${itemIndex}, ${mediaIndex})" style="padding: 8px 12px; font-size: 12px;">Replace</button>
+                        <button class="btn-secondary" onclick="removeMedia(${sectionIndex}, ${itemIndex}, ${mediaIndex})" style="padding: 8px 12px; font-size: 12px;">×</button>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Update showcase item
+        window.updateShowcaseItem = function(sectionIndex, itemIndex, field, value) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            section.items[itemIndex][field] = value;
+            renderEditorCanvas(content.projects[currentProjectIndex]);
+        };
+        
+        // Add showcase item
+        window.addShowcaseItem = function(sectionIndex) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            if (!section.items) section.items = [];
+            section.items.push({
+                title: '',
+                description: '',
+                media: [],
+                layout: 'full'
+            });
+            renderShowcaseItems(sectionIndex);
+            renderEditorCanvas(content.projects[currentProjectIndex]);
+            toast('Item added');
+        };
+        
+        // Remove showcase item
+        window.removeShowcaseItem = function(sectionIndex, itemIndex) {
+            if (confirm('Remove this item?')) {
+                const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+                section.items.splice(itemIndex, 1);
+                renderShowcaseItems(sectionIndex);
+                renderEditorCanvas(content.projects[currentProjectIndex]);
+                toast('Item removed');
+            }
+        };
+        
+        // Add media to item
+        window.addMediaToItem = function(sectionIndex, itemIndex) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            const item = section.items[itemIndex];
+            if (!item.media) item.media = [];
+            
+            // Open Cloudinary uploader
+            const widget = cloudinary.createUploadWidget({
+                cloudName: 'dnbmyyc9x',
+                uploadPreset: 'portfolio_preset',
+                sources: ['local', 'url'],
+                multiple: false
+            }, (error, result) => {
+                if (result.event === 'success') {
+                    item.media.push(result.info.secure_url);
+                    renderMediaList(sectionIndex, itemIndex);
+                    renderEditorCanvas(content.projects[currentProjectIndex]);
+                    toast('Media added!');
+                }
+            });
+            widget.open();
+        };
+        
+        // Update media URL
+        window.updateMedia = function(sectionIndex, itemIndex, mediaIndex, value) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            section.items[itemIndex].media[mediaIndex] = value;
+            renderEditorCanvas(content.projects[currentProjectIndex]);
+        };
+        
+        // Replace media
+        window.replaceMedia = function(sectionIndex, itemIndex, mediaIndex) {
+            const widget = cloudinary.createUploadWidget({
+                cloudName: 'dnbmyyc9x',
+                uploadPreset: 'portfolio_preset',
+                sources: ['local', 'url'],
+                multiple: false
+            }, (error, result) => {
+                if (result.event === 'success') {
+                    const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+                    section.items[itemIndex].media[mediaIndex] = result.info.secure_url;
+                    renderMediaList(sectionIndex, itemIndex);
+                    renderEditorCanvas(content.projects[currentProjectIndex]);
+                    toast('Media replaced!');
+                }
+            });
+            widget.open();
+        };
+        
+        // Remove media
+        window.removeMedia = function(sectionIndex, itemIndex, mediaIndex) {
+            if (confirm('Remove this media?')) {
+                const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+                section.items[itemIndex].media.splice(mediaIndex, 1);
+                renderMediaList(sectionIndex, itemIndex);
+                renderEditorCanvas(content.projects[currentProjectIndex]);
+                toast('Media removed');
+            }
+        };
+        
+        // Render stats items
+        function renderStatsItems(sectionIndex) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            const items = section.items || [];
+            const container = document.getElementById('statsItems');
+            
+            container.innerHTML = items.map((item, itemIndex) => `
+                <div style="background: #fafafa; padding: 12px; border-radius: 8px; margin-bottom: 8px;">
+                    <div style="display: grid; grid-template-columns: 1fr 2fr auto; gap: 8px; align-items: center;">
+                        <input type="text" placeholder="1,000+" value="${item.number || ''}" onchange="updateStatItem(${sectionIndex}, ${itemIndex}, 'number', this.value)" style="padding: 8px; border: 1px solid #e5e5e5; border-radius: 4px;">
+                        <input type="text" placeholder="Label" value="${item.label || ''}" onchange="updateStatItem(${sectionIndex}, ${itemIndex}, 'label', this.value)" style="padding: 8px; border: 1px solid #e5e5e5; border-radius: 4px;">
+                        <button class="btn-secondary" onclick="removeStatItem(${sectionIndex}, ${itemIndex})" style="padding: 8px 12px;">×</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Add stat item
+        window.addStatItem = function(sectionIndex) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            if (!section.items) section.items = [];
+            section.items.push({ number: '', label: '' });
+            renderStatsItems(sectionIndex);
+            renderEditorCanvas(content.projects[currentProjectIndex]);
+            toast('Stat added');
+        };
+        
+        // Update stat item
+        window.updateStatItem = function(sectionIndex, itemIndex, field, value) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            section.items[itemIndex][field] = value;
+            renderEditorCanvas(content.projects[currentProjectIndex]);
+        };
+        
+        // Remove stat item
+        window.removeStatItem = function(sectionIndex, itemIndex) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            section.items.splice(itemIndex, 1);
+            renderStatsItems(sectionIndex);
+            renderEditorCanvas(content.projects[currentProjectIndex]);
+            toast('Stat removed');
         };
 
         // Upload cover
