@@ -896,7 +896,13 @@
             const section = content.projects[currentProjectIndex].structuredContent.sections[index];
             const type = section.type || 'text';
             
-            // Render detailed editor in sidebar
+            // For showcase type, render full-width editor in canvas
+            if (type === 'showcase') {
+                renderShowcaseFullEditor(index);
+                return;
+            }
+            
+            // For other types, render in sidebar
             const sidebar = document.getElementById('editorSidebar');
             
             sidebar.innerHTML = `
@@ -938,14 +944,6 @@
                         <div class="form-field">
                             <label>Step Number</label>
                             <input type="text" id="sectionNumber" value="${section.number || ''}" placeholder="01">
-                        </div>
-                    ` : ''}
-                    
-                    ${type === 'showcase' ? `
-                        <div class="sidebar-section">
-                            <h3>Showcase Items</h3>
-                            <div id="showcaseItems"></div>
-                            <button class="btn-secondary" onclick="addShowcaseItem(${index})" style="width: 100%; margin-top: 12px;">+ Add Item</button>
                         </div>
                     ` : ''}
                     
@@ -998,16 +996,126 @@
                 });
             }
             
-            // Render showcase items if showcase type
-            if (type === 'showcase') {
-                setTimeout(() => renderShowcaseItems(index), 0);
-            }
-            
             // Render stats items if stats type
             if (type === 'stats') {
                 setTimeout(() => renderStatsItems(index), 0);
             }
         };
+        
+        // Render full-width showcase editor
+        function renderShowcaseFullEditor(sectionIndex) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            const items = section.items || [];
+            const canvas = document.getElementById('canvasInner');
+            
+            canvas.innerHTML = `
+                <div style="margin-bottom: 24px;">
+                    <button class="btn-secondary" onclick="renderEditorCanvas(content.projects[${currentProjectIndex}]); renderEditorSidebar(content.projects[${currentProjectIndex}]);">← Back to Project</button>
+                    <h2 style="font-size: 24px; font-weight: 600; margin: 20px 0;">Edit Showcase: ${section.title || 'Untitled'}</h2>
+                </div>
+                
+                <div style="display: grid; gap: 24px;">
+                    ${items.map((item, itemIndex) => `
+                        <div style="background: #fafafa; padding: 24px; border-radius: 12px; border: 1px solid #e5e5e5;">
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
+                                <h3 style="font-size: 18px; font-weight: 600;">Item ${itemIndex + 1}: ${item.title || 'Untitled'}</h3>
+                                <button class="btn-secondary" onclick="removeShowcaseItem(${sectionIndex}, ${itemIndex})" style="padding: 8px 16px;">Remove Item</button>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+                                <div class="form-field">
+                                    <label>Item Title</label>
+                                    <input type="text" value="${item.title || ''}" onchange="updateShowcaseItem(${sectionIndex}, ${itemIndex}, 'title', this.value)" placeholder="Logo Animation">
+                                </div>
+                                
+                                <div class="form-field">
+                                    <label>Layout</label>
+                                    <select onchange="updateShowcaseItem(${sectionIndex}, ${itemIndex}, 'layout', this.value)" style="width: 100%; padding: 10px; border: 1px solid #e5e5e5; border-radius: 8px;">
+                                        <option value="full" ${item.layout === 'full' ? 'selected' : ''}>Full Width</option>
+                                        <option value="grid-2" ${item.layout === 'grid-2' ? 'selected' : ''}>2 Columns</option>
+                                        <option value="grid-3" ${item.layout === 'grid-3' ? 'selected' : ''}>3 Columns</option>
+                                        <option value="grid-6" ${item.layout === 'grid-6' ? 'selected' : ''}>6 Columns (Explorations)</option>
+                                        <option value="lottie-grid" ${item.layout === 'lottie-grid' ? 'selected' : ''}>Lottie Grid</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-field" style="margin-bottom: 20px;">
+                                <label>Description</label>
+                                <textarea rows="2" onchange="updateShowcaseItem(${sectionIndex}, ${itemIndex}, 'description', this.value)" placeholder="A quick, energetic reveal...">${item.description || ''}</textarea>
+                            </div>
+                            
+                            <div class="form-field">
+                                <label style="font-size: 14px; font-weight: 600; margin-bottom: 12px; display: block;">Media (${(item.media || []).length} files)</label>
+                                <div id="mediaList-${sectionIndex}-${itemIndex}" style="display: grid; gap: 12px;"></div>
+                                <button class="btn btn-secondary" onclick="addMediaToItem(${sectionIndex}, ${itemIndex})" style="width: 100%; margin-top: 12px; padding: 12px;">+ Add Media (Upload or URL)</button>
+                            </div>
+                        </div>
+                    `).join('')}
+                    
+                    <button class="btn btn-primary" onclick="addShowcaseItem(${sectionIndex})" style="padding: 16px; font-size: 15px;">+ Add New Showcase Item</button>
+                </div>
+            `;
+            
+            // Render media lists for each item
+            items.forEach((item, itemIndex) => {
+                renderMediaListFullWidth(sectionIndex, itemIndex);
+            });
+            
+            // Update sidebar with basic section info
+            const sidebar = document.getElementById('editorSidebar');
+            sidebar.innerHTML = `
+                <div class="sidebar-section">
+                    <h3>Section Settings</h3>
+                    
+                    <div class="form-field">
+                        <label>Label</label>
+                        <input type="text" id="sectionLabel" value="${section.label || ''}" placeholder="Deliverables">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label>Title</label>
+                        <input type="text" id="sectionTitle" value="${section.title || ''}" placeholder="Core Brand Animations">
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('sectionLabel').addEventListener('input', e => {
+                section.label = e.target.value;
+            });
+            
+            document.getElementById('sectionTitle').addEventListener('input', e => {
+                section.title = e.target.value;
+            });
+        }
+        
+        // Render media list with full width
+        function renderMediaListFullWidth(sectionIndex, itemIndex) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+            const item = section.items[itemIndex];
+            const media = item.media || [];
+            const container = document.getElementById(`mediaList-${sectionIndex}-${itemIndex}`);
+            
+            if (!container) return;
+            
+            container.innerHTML = media.map((url, mediaIndex) => {
+                const isVideo = url.match(/\.(mp4|webm|mov)$/i);
+                const isImage = url.match(/\.(jpg|jpeg|png|gif|webp)$/i);
+                
+                return `
+                    <div style="display: grid; grid-template-columns: 120px 1fr auto auto; gap: 12px; align-items: center; padding: 12px; background: white; border-radius: 8px; border: 1px solid #e5e5e5;">
+                        <div style="width: 120px; height: 80px; background: #f5f5f5; border-radius: 6px; overflow: hidden;">
+                            ${isVideo ? `<video src="${url}" style="width: 100%; height: 100%; object-fit: cover;"></video>` : 
+                              isImage ? `<img src="${url}" style="width: 100%; height: 100%; object-fit: cover;">` : 
+                              '<div style="display: flex; align-items: center; justify-content: center; height: 100%; font-size: 32px;">📄</div>'}
+                        </div>
+                        <input type="url" value="${url}" onchange="updateMedia(${sectionIndex}, ${itemIndex}, ${mediaIndex}, this.value)" style="padding: 10px; border: 1px solid #e5e5e5; border-radius: 6px; font-size: 13px;">
+                        <button class="btn-upload" onclick="replaceMedia(${sectionIndex}, ${itemIndex}, ${mediaIndex})" style="padding: 10px 16px; white-space: nowrap;">Replace</button>
+                        <button class="btn-secondary" onclick="removeMedia(${sectionIndex}, ${itemIndex}, ${mediaIndex})" style="padding: 10px 16px; color: #f44; border-color: #fdd;">Remove</button>
+                    </div>
+                `;
+            }).join('');
+        }
         
         // Render showcase items
         function renderShowcaseItems(sectionIndex) {
@@ -1093,7 +1201,7 @@
         window.updateShowcaseItem = function(sectionIndex, itemIndex, field, value) {
             const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
             section.items[itemIndex][field] = value;
-            renderEditorCanvas(content.projects[currentProjectIndex]);
+            toast('Updated');
         };
         
         // Add showcase item
@@ -1106,8 +1214,7 @@
                 media: [],
                 layout: 'full'
             });
-            renderShowcaseItems(sectionIndex);
-            renderEditorCanvas(content.projects[currentProjectIndex]);
+            renderShowcaseFullEditor(sectionIndex);
             toast('Item added');
         };
         
@@ -1116,8 +1223,7 @@
             if (confirm('Remove this item?')) {
                 const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
                 section.items.splice(itemIndex, 1);
-                renderShowcaseItems(sectionIndex);
-                renderEditorCanvas(content.projects[currentProjectIndex]);
+                renderShowcaseFullEditor(sectionIndex);
                 toast('Item removed');
             }
         };
@@ -1149,7 +1255,7 @@
         window.updateMedia = function(sectionIndex, itemIndex, mediaIndex, value) {
             const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
             section.items[itemIndex].media[mediaIndex] = value;
-            renderEditorCanvas(content.projects[currentProjectIndex]);
+            toast('Updated');
         };
         
         // Replace media
@@ -1163,8 +1269,7 @@
                 if (result.event === 'success') {
                     const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
                     section.items[itemIndex].media[mediaIndex] = result.info.secure_url;
-                    renderMediaList(sectionIndex, itemIndex);
-                    renderEditorCanvas(content.projects[currentProjectIndex]);
+                    renderMediaListFullWidth(sectionIndex, itemIndex);
                     toast('Media replaced!');
                 }
             });
@@ -1176,8 +1281,7 @@
             if (confirm('Remove this media?')) {
                 const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
                 section.items[itemIndex].media.splice(mediaIndex, 1);
-                renderMediaList(sectionIndex, itemIndex);
-                renderEditorCanvas(content.projects[currentProjectIndex]);
+                renderMediaListFullWidth(sectionIndex, itemIndex);
                 toast('Media removed');
             }
         };
