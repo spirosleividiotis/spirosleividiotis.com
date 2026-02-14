@@ -177,6 +177,7 @@
             <button type="button" class="handoff-tab" data-tab="bulk-actions">Bulk Actions</button>
             <button type="button" class="handoff-tab" data-tab="usage-limits">Usage Limits</button>
             <button type="button" class="handoff-tab" data-tab="progressive-bar">Progressive Bar</button>
+            <button type="button" class="handoff-tab" data-tab="collapsable-nav">Collapsable Navigation</button>
             <button type="button" class="handoff-tab" data-tab="button-arrow">Button Arrow</button>
             <button type="button" class="handoff-tab" data-tab="text-reveal">Text Reveal</button>
         </div>
@@ -510,6 +511,79 @@
                                     <tr><td>Duration</td><td>motion-duration-1500 1500ms</td></tr>
                                     <tr><td>Step overlap</td><td>250ms before previous ends</td></tr>
                                     <tr><td>Easing</td><td>Custom cubic-bezier keyframes</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel: Collapsable Navigation (desktop component) -->
+        <div id="panel-collapsable-nav" class="handoff-panel" role="tabpanel">
+            <div class="case-wrapper">
+                <div class="case-header">
+                    <h3 class="case-title">Collapsable Navigation</h3>
+                    <p class="case-description">
+                        Sidebar expand/collapse: position (500ms cubic-bezier) and optionally opacity (300ms linear, 100ms delay). Arrow: simple opacity swap or rotation 0→−180° (300ms) following navbar. Hover: opacity or color + position (arrow out/in). Goal: purposeful, clean motion that enhances usability.
+                    </p>
+                </div>
+                <div class="case-preview-row">
+                    <div class="case-preview">
+                        <div class="preview-label">Expansion</div>
+                        <div class="device-frame device-frame--desktop">
+                            <div class="device-screen">
+                                <img src="nav-expansion.png" alt="Collapsable nav expansion">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="case-preview">
+                        <div class="preview-label">Expansion (alt)</div>
+                        <div class="device-frame device-frame--desktop">
+                            <div class="device-screen">
+                                <img src="nav-expansion-2.png" alt="Collapsable nav expansion 2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="case-preview-row">
+                    <div class="case-preview">
+                        <div class="preview-label">Arrow rotation</div>
+                        <video src="nav-arrow-rotation.mp4" autoplay loop muted playsinline style="max-height: 260px; width: auto; border-radius: 4px;"></video>
+                    </div>
+                    <div class="case-preview">
+                        <div class="preview-label">Arrow opacity</div>
+                        <video src="nav-arrow-opacity.mp4" autoplay loop muted playsinline style="max-height: 260px; width: auto; border-radius: 4px;"></video>
+                    </div>
+                </div>
+                <div class="case-preview">
+                    <div class="preview-label">Arrow hover</div>
+                    <div class="device-frame device-frame--desktop">
+                        <div class="device-screen">
+                            <img src="nav-arrow-hover.png" alt="Arrow hover state">
+                        </div>
+                    </div>
+                </div>
+                <div class="specs-section">
+                    <details class="specs-toggle">
+                        <summary class="specs-toggle-summary">
+                            <span>Technical Specs <span class="specs-toggle-hint">— click to expand</span></span>
+                            <svg class="specs-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </summary>
+                        <div class="specs-toggle-content">
+                            <table class="specs-table">
+                                <tbody>
+                                    <tr><td colspan="2"><strong>Navbar expansion</strong></td></tr>
+                                    <tr><td>V1 Position only</td><td>Position X −61.5→190, 500ms, cubic-bezier(0.33, 0, 0.12, 1)</td></tr>
+                                    <tr><td>V2 Position + opacity</td><td>Same position; Opacity 0→100% 300ms linear, delay 100ms</td></tr>
+                                    <tr><td colspan="2"><strong>Arrow — simple (opacity)</strong></td></tr>
+                                    <tr><td>Opacity out (collapsed)</td><td>100%→0% 150ms linear</td></tr>
+                                    <tr><td>Opacity in (expanded)</td><td>0→100% 300ms linear; position follows navbar</td></tr>
+                                    <tr><td colspan="2"><strong>Arrow — with rotation</strong></td></tr>
+                                    <tr><td>Rotation</td><td>0→−180° 300ms cubic-bezier(0.33, 0, 0.22, 1); position follows navbar</td></tr>
+                                    <tr><td colspan="2"><strong>Hover (collapsed &amp; expanded)</strong></td></tr>
+                                    <tr><td>Simple</td><td>Fade 0→100% 300ms linear</td></tr>
+                                    <tr><td>With position</td><td>Fade 300ms linear; Arrow out X 8→24 300ms delay 150ms; Arrow in X −8→8 300ms delay 250ms cubic-bezier</td></tr>
                                 </tbody>
                             </table>
                         </div>
