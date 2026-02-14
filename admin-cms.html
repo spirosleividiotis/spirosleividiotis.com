@@ -71,6 +71,7 @@
                 <a href="#" data-panel="reel" class="nav-link">Reel</a>
                 <a href="#" data-panel="experience" class="nav-link">Experience</a>
                 <a href="#" data-panel="projects" class="nav-link">Projects</a>
+                <a href="#" data-panel="media" class="nav-link">Media Manager</a>
                 <a href="#" data-panel="footer" class="nav-link">Footer</a>
                 <a href="#" data-panel="music" class="nav-link">Music</a>
                 <a href="#" data-panel="analytics" class="nav-link">Analytics</a>
@@ -117,6 +118,7 @@
         renderReelPanel();
         renderExperiencePanel();
         renderProjectsPanel();
+        renderMediaPanel();
         renderFooterPanel();
         renderMusicPanel();
         renderAnalyticsPanel();
@@ -536,6 +538,163 @@
             renderProjectsList();
         });
         renderProjectsList();
+    }
+
+    function renderMediaPanel() {
+        const el = document.getElementById('panel-media');
+        if (!el) return;
+        
+        // Extract all media files from projects
+        const mediaFiles = new Map();
+        
+        content.projects.forEach((proj, projIndex) => {
+            const projName = proj.name || `Project ${proj.id}`;
+            
+            // Card preview
+            if (proj.cardPreview) {
+                mediaFiles.set(proj.cardPreview, {
+                    url: proj.cardPreview,
+                    project: projName,
+                    type: 'Card Preview',
+                    path: `projects[${projIndex}].cardPreview`
+                });
+            }
+            
+            // Extract from bodyHtml (videos and images)
+            if (proj.bodyHtml) {
+                const srcMatches = proj.bodyHtml.matchAll(/(?:src|href)=["']([^"']+\.(?:mp4|gif|webm|png|jpg|jpeg|mov))["']/gi);
+                for (const match of srcMatches) {
+                    const url = match[1];
+                    if (!mediaFiles.has(url)) {
+                        mediaFiles.set(url, {
+                            url: url,
+                            project: projName,
+                            type: 'In Body',
+                            path: `projects[${projIndex}].bodyHtml`
+                        });
+                    }
+                }
+            }
+            
+            // Grid media
+            if (proj.media && Array.isArray(proj.media.grid)) {
+                proj.media.grid.forEach((url, idx) => {
+                    if (!mediaFiles.has(url)) {
+                        mediaFiles.set(url, {
+                            url: url,
+                            project: projName,
+                            type: 'Grid Media',
+                            path: `projects[${projIndex}].media.grid[${idx}]`
+                        });
+                    }
+                });
+            }
+            
+            // Hero media
+            if (proj.media && proj.media.hero) {
+                if (!mediaFiles.has(proj.media.hero)) {
+                    mediaFiles.set(proj.media.hero, {
+                        url: proj.media.hero,
+                        project: projName,
+                        type: 'Hero',
+                        path: `projects[${projIndex}].media.hero`
+                    });
+                }
+            }
+        });
+        
+        const mediaArray = Array.from(mediaFiles.values());
+        
+        el.innerHTML = `
+            <h3>Media Manager</h3>
+            <p style="color:#888;margin-bottom:20px;font-size:14px;">
+                All images and videos used across your projects. Use "Replace" to upload a new file to Cloudinary and automatically update all references.
+            </p>
+            <div style="margin-bottom:16px;">
+                <input type="text" id="mediaSearch" placeholder="Search files..." style="width:100%;padding:10px;background:#0d0d0d;border:1px solid #333;border-radius:6px;color:#fff;font-size:14px;">
+            </div>
+            <div id="mediaList" style="max-height:calc(100vh - 280px);overflow-y:auto;"></div>
+        `;
+        
+        function renderMediaList(filter = '') {
+            const list = document.getElementById('mediaList');
+            const filtered = filter ? mediaArray.filter(m => 
+                m.url.toLowerCase().includes(filter.toLowerCase()) || 
+                m.project.toLowerCase().includes(filter.toLowerCase())
+            ) : mediaArray;
+            
+            list.innerHTML = filtered.map((media, idx) => {
+                const filename = media.url.split('/').pop().split('?')[0];
+                const isExternal = media.url.startsWith('http');
+                return `
+                    <div class="item-card">
+                        <div style="display:flex;gap:12px;align-items:flex-start;">
+                            <div style="flex:1;min-width:0;">
+                                <div style="font-size:14px;color:#e5e5e5;font-weight:500;margin-bottom:4px;word-break:break-all;">${filename}</div>
+                                <div style="font-size:12px;color:#888;margin-bottom:4px;">${media.project} • ${media.type}</div>
+                                <div style="font-size:11px;color:#666;font-family:monospace;word-break:break-all;">${media.url}</div>
+                            </div>
+                            <button type="button" class="btn-upload" data-media-idx="${idx}" style="flex-shrink:0;">Replace</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Bind replace buttons to Cloudinary upload
+            list.querySelectorAll('[data-media-idx]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const idx = parseInt(btn.dataset.mediaIdx, 10);
+                    const mediaInfo = filtered[idx];
+                    uploadAndReplaceMedia(mediaInfo);
+                });
+            });
+        }
+        
+        document.getElementById('mediaSearch').addEventListener('input', (e) => {
+            renderMediaList(e.target.value);
+        });
+        
+        renderMediaList();
+    }
+    
+    function uploadAndReplaceMedia(mediaInfo) {
+        const widget = cloudinary.createUploadWidget({
+            cloudName: 'dnbmyyc9x',
+            uploadPreset: 'portfolio_preset',
+            sources: ['local', 'url'],
+            multiple: false,
+            resourceType: 'auto',
+            clientAllowedFormats: ['mp4', 'webm', 'mov', 'gif', 'png', 'jpg', 'jpeg', 'webp']
+        }, (error, result) => {
+            if (!error && result && result.event === 'success') {
+                const newUrl = result.info.secure_url;
+                const oldUrl = mediaInfo.url;
+                
+                // Replace in all projects
+                content.projects.forEach((proj, projIdx) => {
+                    // Card preview
+                    if (proj.cardPreview === oldUrl) {
+                        proj.cardPreview = newUrl;
+                    }
+                    // bodyHtml - replace all occurrences
+                    if (proj.bodyHtml && proj.bodyHtml.includes(oldUrl)) {
+                        proj.bodyHtml = proj.bodyHtml.replaceAll(oldUrl, newUrl);
+                    }
+                    // Grid media
+                    if (proj.media && Array.isArray(proj.media.grid)) {
+                        proj.media.grid = proj.media.grid.map(url => url === oldUrl ? newUrl : url);
+                    }
+                    // Hero
+                    if (proj.media && proj.media.hero === oldUrl) {
+                        proj.media.hero = newUrl;
+                    }
+                });
+                
+                showToast(`Media replaced: ${newUrl.split('/').pop()}`);
+                renderMediaPanel();
+            }
+        });
+        widget.open();
     }
 
     function renderFooterPanel() {
