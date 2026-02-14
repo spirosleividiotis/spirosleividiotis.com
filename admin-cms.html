@@ -673,73 +673,142 @@
             const sc = proj.structuredContent || { tags: [], intro: '', meta: '', sections: [] };
             
             canvas.innerHTML = `
-                <!-- Add Module Pills -->
-                <div class="module-pills">
-                    <button class="module-pill" onclick="addSection('text')">
+                <!-- Top meta info -->
+                <div style="margin-bottom: 32px;">
+                    <!-- Tags -->
+                    ${sc.tags && sc.tags.length > 0 ? `
+                        <div style="margin-bottom: 16px;">
+                            ${sc.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}
+                        </div>
+                    ` : ''}
+                    
+                    <!-- Intro -->
+                    ${sc.intro ? `<p style="font-size: 16px; color: #666; margin-bottom: 12px;">${sc.intro}</p>` : ''}
+                    
+                    <!-- Meta -->
+                    ${sc.meta ? `<p style="font-size: 14px; color: #999; margin-bottom: 24px;">${sc.meta}</p>` : ''}
+                </div>
+                
+                <!-- Add first section -->
+                <div style="text-align: center; padding: 20px; margin-bottom: 16px;">
+                    <button class="module-pill" onclick="insertSectionAt(0, 'text')">
                         <span>+</span> Text
                     </button>
-                    <button class="module-pill" onclick="addSection('showcase')">
-                        <span>+</span> Showcase
+                    <button class="module-pill" onclick="insertSectionAt(0, 'showcase')">
+                        <span>+</span> Media/Videos
                     </button>
-                    <button class="module-pill" onclick="addSection('stats')">
+                    <button class="module-pill" onclick="insertSectionAt(0, 'stats')">
                         <span>+</span> Stats
                     </button>
-                    <button class="module-pill" onclick="addSection('step')">
+                    <button class="module-pill" onclick="insertSectionAt(0, 'step')">
                         <span>+</span> Step
                     </button>
                 </div>
                 
-                <!-- Tags -->
-                ${sc.tags && sc.tags.length > 0 ? `
-                    <div style="margin-bottom: 20px;">
-                        ${sc.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}
-                    </div>
-                ` : ''}
+                <hr style="border: none; border-top: 2px dashed #e5e5e5; margin: 24px 0;">
                 
-                <!-- Intro -->
-                ${sc.intro ? `<p style="font-size: 16px; color: #666; margin-bottom: 16px;">${sc.intro}</p>` : ''}
-                
-                <!-- Meta -->
-                ${sc.meta ? `<p style="font-size: 14px; color: #999; margin-bottom: 32px;">${sc.meta}</p>` : ''}
-                
-                <!-- Sections -->
+                <!-- Sections with add buttons between -->
                 <div id="sectionsContainer">
-                    ${(sc.sections || []).map((section, i) => renderSectionBlock(section, i)).join('')}
+                    ${(sc.sections || []).map((section, i) => renderSectionInline(section, i)).join('')}
                 </div>
             `;
-            
-            // Make sections sortable
-            if (sc.sections && sc.sections.length > 0) {
-                new Sortable(document.getElementById('sectionsContainer'), {
-                    animation: 150,
-                    handle: '.block-handle',
-                    onEnd: function(evt) {
-                        const sections = content.projects[currentProjectIndex].structuredContent.sections;
-                        const [removed] = sections.splice(evt.oldIndex, 1);
-                        sections.splice(evt.newIndex, 0, removed);
-                        renderEditorCanvas(content.projects[currentProjectIndex]);
-                    }
-                });
-            }
         }
 
-        // Render section block
-        function renderSectionBlock(section, index) {
+        // Render section inline (editable in canvas)
+        function renderSectionInline(section, index) {
             const type = section.type || 'text';
             
             return `
-                <div class="content-block" data-index="${index}">
-                    <div class="block-handle">
-                        <span class="block-type">${type}</span>
-                        <div class="block-actions">
-                            <button class="block-btn" onclick="editSection(${index})">Edit</button>
-                            <button class="block-btn" onclick="removeSection(${index})">Remove</button>
+                <div style="margin-bottom: 24px;">
+                    <!-- Section content -->
+                    <div class="content-block" data-index="${index}">
+                        <div class="block-handle">
+                            <span class="block-type">${type}</span>
+                            <div class="block-actions">
+                                <button class="block-btn" onclick="editSectionInline(${index})">✏️ Edit</button>
+                                <button class="block-btn" onclick="moveSection(${index}, -1)">↑</button>
+                                <button class="block-btn" onclick="moveSection(${index}, 1)">↓</button>
+                                <button class="block-btn" onclick="removeSection(${index})">Remove</button>
+                            </div>
                         </div>
+                        ${renderSectionPreview(section)}
                     </div>
-                    ${renderSectionPreview(section)}
+                    
+                    <!-- Add section after this one -->
+                    <div style="text-align: center; padding: 16px; margin-top: 16px;">
+                        <button class="module-pill" onclick="insertSectionAt(${index + 1}, 'text')" style="font-size: 13px; padding: 6px 12px;">
+                            <span>+</span> Text
+                        </button>
+                        <button class="module-pill" onclick="insertSectionAt(${index + 1}, 'showcase')" style="font-size: 13px; padding: 6px 12px;">
+                            <span>+</span> Media
+                        </button>
+                        <button class="module-pill" onclick="insertSectionAt(${index + 1}, 'stats')" style="font-size: 13px; padding: 6px 12px;">
+                            <span>+</span> Stats
+                        </button>
+                        <button class="module-pill" onclick="insertSectionAt(${index + 1}, 'step')" style="font-size: 13px; padding: 6px 12px;">
+                            <span>+</span> Step
+                        </button>
+                    </div>
+                    
+                    <hr style="border: none; border-top: 2px dashed #e5e5e5; margin: 16px 0;">
                 </div>
             `;
         }
+        
+        // Insert section at specific position
+        window.insertSectionAt = function(position, type) {
+            const proj = content.projects[currentProjectIndex];
+            if (!proj.structuredContent) proj.structuredContent = { sections: [] };
+            if (!proj.structuredContent.sections) proj.structuredContent.sections = [];
+            
+            const newSection = {
+                type: type,
+                label: '',
+                title: '',
+                paragraphs: []
+            };
+            
+            if (type === 'showcase') {
+                newSection.items = [];
+            } else if (type === 'stats') {
+                newSection.items = [];
+            } else if (type === 'step') {
+                newSection.number = '';
+            }
+            
+            proj.structuredContent.sections.splice(position, 0, newSection);
+            renderEditorCanvas(proj);
+            toast(`${type} section added`);
+            
+            // Auto-open editor for new section
+            setTimeout(() => editSectionInline(position), 100);
+        };
+        
+        // Move section up/down
+        window.moveSection = function(index, direction) {
+            const sections = content.projects[currentProjectIndex].structuredContent.sections;
+            const newIndex = index + direction;
+            if (newIndex >= 0 && newIndex < sections.length) {
+                [sections[index], sections[newIndex]] = [sections[newIndex], sections[index]];
+                renderEditorCanvas(content.projects[currentProjectIndex]);
+                toast('Section moved');
+            }
+        };
+        
+        // Edit section inline (opens in sidebar OR full canvas for showcase)
+        window.editSectionInline = function(index) {
+            const section = content.projects[currentProjectIndex].structuredContent.sections[index];
+            const type = section.type || 'text';
+            
+            // For showcase, use full-width editor
+            if (type === 'showcase') {
+                renderShowcaseFullEditor(index);
+                return;
+            }
+            
+            // For other types, use sidebar editor
+            editSection(index);
+        };
 
         // Render section preview
         function renderSectionPreview(section) {
@@ -860,33 +929,12 @@
             });
         }
 
-        // Add section
-        window.addSection = function(type) {
-            const proj = content.projects[currentProjectIndex];
-            if (!proj.structuredContent) proj.structuredContent = { sections: [] };
-            if (!proj.structuredContent.sections) proj.structuredContent.sections = [];
-            
-            const newSection = {
-                type: type,
-                label: '',
-                title: '',
-                paragraphs: []
-            };
-            
-            if (type === 'stats') {
-                newSection.items = [];
-            }
-            
-            proj.structuredContent.sections.push(newSection);
-            renderEditorCanvas(proj);
-            toast('Section added');
-        };
-
         // Remove section
         window.removeSection = function(index) {
             if (confirm('Remove this section?')) {
                 content.projects[currentProjectIndex].structuredContent.sections.splice(index, 1);
                 renderEditorCanvas(content.projects[currentProjectIndex]);
+                renderEditorSidebar(content.projects[currentProjectIndex]);
                 toast('Section removed');
             }
         };
