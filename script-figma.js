@@ -1165,8 +1165,12 @@ function initHandoffTabs() {
     panels.forEach(function(p) { p.classList.remove('active'); });
     tabs[0].classList.add('active');
     panels[0].classList.add('active');
-    panels[0].querySelectorAll('video[autoplay]').forEach(function(v) {
-        v.play().catch(function() {});
+    requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+            panels[0].querySelectorAll('video').forEach(function(v) {
+                v.play().catch(function() {});
+            });
+        });
     });
 }
 
@@ -1190,8 +1194,13 @@ function handleHandoffTabClick(e) {
     var panel = container.querySelector('#panel-' + tabId);
     if (panel) {
         panel.classList.add('active');
-        panel.querySelectorAll('video[autoplay]').forEach(function(v) {
-            v.play().catch(function() {});
+        // Defer play so panel is visible; play all videos in panel (limits/collapsable nav desktop etc.)
+        requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+                panel.querySelectorAll('video').forEach(function(v) {
+                    v.play().catch(function() {});
+                });
+            });
         });
     }
 }
