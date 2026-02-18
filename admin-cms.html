@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio CMS - Visual Editor</title>
-    <script src="https://upload-widget.cloudinary.com/global/all.js"></script>
+    <!-- Cloudinary removed: uploads now go to GitHub repo via /api/upload-file -->
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1479,27 +1479,55 @@
             }
         };
         
+        // Shared GitHub uploader — picks a file locally and commits it to the repo
+        function openFileUpload(callback, opts) {
+            opts = opts || {};
+            const input = document.createElement('input');
+            input.type = 'file';
+            if (opts.accept) input.accept = opts.accept;
+            input.onchange = async () => {
+                const file = input.files && input.files[0];
+                if (!file) return;
+                toast('Uploading…');
+                try {
+                    const b64 = await new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onload = () => resolve(reader.result.split(',')[1]);
+                        reader.onerror = reject;
+                        reader.readAsDataURL(file);
+                    });
+                    const res = await fetch('/api/upload-file', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            fileName: file.name,
+                            fileBase64: b64,
+                            contentType: file.type || 'application/octet-stream',
+                            subfolder: opts.subfolder || 'uploads'
+                        })
+                    });
+                    const data = await res.json().catch(() => ({}));
+                    if (!res.ok) throw new Error(data.error || res.statusText);
+                    toast('Uploaded!');
+                    callback(data.url, data.path);
+                } catch(e) {
+                    toast('Upload failed: ' + e.message);
+                }
+            };
+            input.click();
+        }
+
         // Add media to item
         window.addMediaToItem = function(sectionIndex, itemIndex) {
             const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
             const item = section.items[itemIndex];
             if (!item.media) item.media = [];
-            
-            // Open Cloudinary uploader
-            const widget = cloudinary.createUploadWidget({
-                cloudName: 'dnbmyyc9x',
-                uploadPreset: 'portfolio_preset',
-                sources: ['local', 'url'],
-                multiple: false
-            }, (error, result) => {
-                if (result.event === 'success') {
-                    item.media.push(result.info.secure_url);
-                    renderMediaList(sectionIndex, itemIndex);
-                    renderEditorCanvas(content.projects[currentProjectIndex]);
-                    toast('Media added!');
-                }
-            });
-            widget.open();
+            openFileUpload((url) => {
+                item.media.push(url);
+                renderMediaList(sectionIndex, itemIndex);
+                renderEditorCanvas(content.projects[currentProjectIndex]);
+                toast('Media added!');
+            }, { subfolder: 'uploads/projects' });
         };
         
         // Update media URL
@@ -1511,20 +1539,12 @@
         
         // Replace media
         window.replaceMedia = function(sectionIndex, itemIndex, mediaIndex) {
-            const widget = cloudinary.createUploadWidget({
-                cloudName: 'dnbmyyc9x',
-                uploadPreset: 'portfolio_preset',
-                sources: ['local', 'url'],
-                multiple: false
-            }, (error, result) => {
-                if (result.event === 'success') {
-                    const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
-                    section.items[itemIndex].media[mediaIndex] = result.info.secure_url;
-                    renderMediaListFullWidth(sectionIndex, itemIndex);
-                    toast('Media replaced!');
-                }
-            });
-            widget.open();
+            openFileUpload((url) => {
+                const section = content.projects[currentProjectIndex].structuredContent.sections[sectionIndex];
+                section.items[itemIndex].media[mediaIndex] = url;
+                renderMediaListFullWidth(sectionIndex, itemIndex);
+                toast('Media replaced!');
+            }, { subfolder: 'uploads/projects' });
         };
         
         // Remove media
@@ -1582,19 +1602,11 @@
 
         // Upload cover
         window.uploadCover = function() {
-            const widget = cloudinary.createUploadWidget({
-                cloudName: 'dnbmyyc9x',
-                uploadPreset: 'portfolio_preset',
-                sources: ['local', 'url'],
-                multiple: false
-            }, (error, result) => {
-                if (result.event === 'success') {
-                    content.projects[currentProjectIndex].cardPreview = result.info.secure_url;
-                    document.getElementById('projPreview').value = result.info.secure_url;
-                    toast('Cover uploaded!');
-                }
-            });
-            widget.open();
+            openFileUpload((url) => {
+                content.projects[currentProjectIndex].cardPreview = url;
+                document.getElementById('projPreview').value = url;
+                toast('Cover uploaded!');
+            }, { subfolder: 'uploads/covers' });
         };
 
         // Close editor
@@ -1775,19 +1787,11 @@
         
         // Upload hero photo
         window.uploadHeroPhoto = function() {
-            const widget = cloudinary.createUploadWidget({
-                cloudName: 'dnbmyyc9x',
-                uploadPreset: 'portfolio_preset',
-                sources: ['local', 'url'],
-                multiple: false
-            }, (error, result) => {
-                if (result.event === 'success') {
-                    content.hero.photo = result.info.secure_url;
-                    document.getElementById('heroPhoto').value = result.info.secure_url;
-                    toast('Photo uploaded!');
-                }
-            });
-            widget.open();
+            openFileUpload((url) => {
+                content.hero.photo = url;
+                document.getElementById('heroPhoto').value = url;
+                toast('Photo uploaded!');
+            }, { subfolder: 'uploads/photos', accept: 'image/*' });
         };
         
         // Render About Section
@@ -1828,19 +1832,11 @@
         }
         
         window.uploadAboutPhoto = function() {
-            const widget = cloudinary.createUploadWidget({
-                cloudName: 'dnbmyyc9x',
-                uploadPreset: 'portfolio_preset',
-                sources: ['local', 'url'],
-                multiple: false
-            }, (error, result) => {
-                if (result.event === 'success') {
-                    content.aboutMe.photo = result.info.secure_url;
-                    document.getElementById('aboutPhoto').value = result.info.secure_url;
-                    toast('Photo uploaded!');
-                }
-            });
-            widget.open();
+            openFileUpload((url) => {
+                content.aboutMe.photo = url;
+                document.getElementById('aboutPhoto').value = url;
+                toast('Photo uploaded!');
+            }, { subfolder: 'uploads/photos', accept: 'image/*' });
         };
         
         // Render Reel Section
@@ -1879,22 +1875,13 @@
         }
         
         window.uploadReel = function() {
-            const widget = cloudinary.createUploadWidget({
-                cloudName: 'dnbmyyc9x',
-                uploadPreset: 'portfolio_preset',
-                sources: ['local', 'url'],
-                multiple: false,
-                resourceType: 'video'
-            }, (error, result) => {
-                if (result.event === 'success') {
-                    if (!content.reel) content.reel = {};
-                    content.reel.file = result.info.secure_url;
-                    document.getElementById('reelFile').value = result.info.secure_url;
-                    renderReelSection();
-                    toast('Reel uploaded!');
-                }
-            });
-            widget.open();
+            openFileUpload((url) => {
+                if (!content.reel) content.reel = {};
+                content.reel.file = url;
+                document.getElementById('reelFile').value = url;
+                renderReelSection();
+                toast('Reel uploaded!');
+            }, { subfolder: 'uploads/videos', accept: 'video/*' });
         };
         
         // Render Music Section
@@ -1943,22 +1930,13 @@
         }
         
         window.uploadMusic = function() {
-            const widget = cloudinary.createUploadWidget({
-                cloudName: 'dnbmyyc9x',
-                uploadPreset: 'portfolio_preset',
-                sources: ['local', 'url'],
-                multiple: false,
-                resourceType: 'video'
-            }, (error, result) => {
-                if (result.event === 'success') {
-                    if (!content.music) content.music = {};
-                    content.music.file = result.info.secure_url;
-                    document.getElementById('musicFile').value = result.info.secure_url;
-                    renderMusicSection();
-                    toast('Music uploaded!');
-                }
-            });
-            widget.open();
+            openFileUpload((url) => {
+                if (!content.music) content.music = {};
+                content.music.file = url;
+                document.getElementById('musicFile').value = url;
+                renderMusicSection();
+                toast('Music uploaded!');
+            }, { subfolder: 'uploads/audio', accept: 'audio/*,video/*' });
         };
         
         // Render Experience Section
@@ -2140,21 +2118,11 @@
         };
         
         window.uploadCV = function() {
-            const widget = cloudinary.createUploadWidget({
-                cloudName: 'dnbmyyc9x',
-                uploadPreset: 'portfolio_preset',
-                sources: ['local', 'url'],
-                multiple: false,
-                resourceType: 'raw',
-                clientAllowedFormats: ['pdf']
-            }, (error, result) => {
-                if (result.event === 'success') {
-                    content.footer.cvFile = result.info.secure_url;
-                    document.getElementById('footerCV').value = result.info.secure_url;
-                    toast('CV uploaded!');
-                }
-            });
-            widget.open();
+            openFileUpload((url) => {
+                content.footer.cvFile = url;
+                document.getElementById('footerCV').value = url;
+                toast('CV uploaded!');
+            }, { subfolder: 'uploads/docs', accept: '.pdf,application/pdf' });
         };
         
         // Render Header Section
@@ -2233,39 +2201,21 @@
         };
         
         window.uploadHeaderLogo = function() {
-            const widget = cloudinary.createUploadWidget({
-                cloudName: 'dnbmyyc9x',
-                uploadPreset: 'portfolio_preset',
-                sources: ['local', 'url'],
-                multiple: false
-            }, (error, result) => {
-                if (result.event === 'success') {
-                    if (!content.header) content.header = {};
-                    content.header.logo = result.info.secure_url;
-                    document.getElementById('headerLogo').value = result.info.secure_url;
-                    toast('Logo uploaded!');
-                }
-            });
-            widget.open();
+            openFileUpload((url) => {
+                if (!content.header) content.header = {};
+                content.header.logo = url;
+                document.getElementById('headerLogo').value = url;
+                toast('Logo uploaded!');
+            }, { subfolder: 'uploads/photos', accept: 'image/*,.svg' });
         };
         
         window.uploadHeaderCV = function() {
-            const widget = cloudinary.createUploadWidget({
-                cloudName: 'dnbmyyc9x',
-                uploadPreset: 'portfolio_preset',
-                sources: ['local', 'url'],
-                multiple: false,
-                resourceType: 'raw',
-                clientAllowedFormats: ['pdf']
-            }, (error, result) => {
-                if (result.event === 'success') {
-                    if (!content.header) content.header = {};
-                    content.header.cvFile = result.info.secure_url;
-                    document.getElementById('headerCvFile').value = result.info.secure_url;
-                    toast('CV uploaded!');
-                }
-            });
-            widget.open();
+            openFileUpload((url) => {
+                if (!content.header) content.header = {};
+                content.header.cvFile = url;
+                document.getElementById('headerCvFile').value = url;
+                toast('CV uploaded!');
+            }, { subfolder: 'uploads/docs', accept: '.pdf,application/pdf' });
         };
 
         // Load content on start
