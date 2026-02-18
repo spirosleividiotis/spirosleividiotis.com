@@ -134,8 +134,22 @@ function updateMusic(music, mediaBaseUrl) {
     if (audioPlayer) audioPlayer.src = resolveMediaUrl(music.file, mediaBaseUrl);
 }
 
-// Inject analytics script (views & location visible in your GA/Plausible dashboard)
+// Inject analytics script — skips if GA is already loaded statically in <head>
 function injectAnalyticsScript(scriptHtml) {
+    if (!scriptHtml) return;
+
+    // Extract GA4 measurement ID from the script block
+    const idMatch = scriptHtml.match(/G-[A-Z0-9]+/);
+    const gaId = idMatch && idMatch[0];
+
+    // If gtag is already initialised (loaded statically in index.html), just
+    // send a config call so the ID from content.json takes effect if different.
+    if (typeof window.gtag === 'function') {
+        if (gaId) gtag('config', gaId);
+        return;
+    }
+
+    // Fallback: inject full script block (for any page that doesn't have GA in <head>)
     const wrap = document.createElement('div');
     wrap.innerHTML = scriptHtml;
     wrap.querySelectorAll('script').forEach(oldScript => {
