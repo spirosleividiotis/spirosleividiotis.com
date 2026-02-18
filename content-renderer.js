@@ -3,6 +3,28 @@
  * Renders structured project content into HTML
  */
 
+function isAbsoluteMediaUrl(s) {
+    if (!s) return false;
+    const v = String(s).trim().toLowerCase();
+    return v.startsWith('http://') || v.startsWith('https://') || v.startsWith('data:') || v.startsWith('blob:');
+}
+
+function joinUrl(base, path) {
+    const b = String(base || '').trim().replace(/\/+$/, '');
+    const p = String(path || '').trim().replace(/^\/+/, '');
+    if (!b) return p;
+    if (!p) return b;
+    return `${b}/${p}`;
+}
+
+function resolveMediaUrl(value) {
+    if (value == null) return '';
+    const v = String(value).trim();
+    if (!v) return '';
+    if (isAbsoluteMediaUrl(v) || v.startsWith('#')) return v;
+    return joinUrl(window.MEDIA_BASE_URL, v);
+}
+
 function renderStructuredProject(project) {
     if (!project.structuredContent) {
         // Fallback to bodyHtml if no structured content
@@ -493,12 +515,13 @@ function renderShowcaseItem(item) {
 }
 
 function renderMediaElement(mediaUrl) {
-    const ext = mediaUrl.split('.').pop().toLowerCase();
+    const resolved = resolveMediaUrl(mediaUrl);
+    const ext = resolved.split('?')[0].split('#')[0].split('.').pop().toLowerCase();
     
     if (['mp4', 'webm', 'mov', 'gif'].includes(ext)) {
-        return `<video src="${mediaUrl}" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:contain;"></video>`;
+        return `<video src="${resolved}" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:contain;"></video>`;
     } else if (['jpg', 'jpeg', 'png', 'webp'].includes(ext)) {
-        return `<img src="${mediaUrl}" alt="" style="width:100%;height:100%;object-fit:contain;" />`;
+        return `<img src="${resolved}" alt="" style="width:100%;height:100%;object-fit:contain;" />`;
     } else {
         return '';
     }

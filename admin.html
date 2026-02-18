@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio CMS - Admin</title>
-    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d0d0d; color: #e5e5e5; min-height: 100vh; }
@@ -86,7 +85,7 @@
         <header class="topbar">
             <h1>Portfolio CMS – Module by module</h1>
             <div class="topbar-actions">
-                <a href="https://console.cloudinary.com/console/c-dnbmyyc9x/media_library" target="_blank" rel="noopener" class="btn btn-secondary" style="text-decoration:none;">Open Cloudinary</a>
+                <a href="https://console.cloud.google.com/storage/browser" target="_blank" rel="noopener" class="btn btn-secondary" style="text-decoration:none;">Open Google Storage</a>
                 <span class="topbar-hint" style="font-size:12px;color:#888;margin-right:8px;">Save & Publish Live pushes to the live site (~1 min).</span>
                 <button type="button" class="btn btn-secondary" id="btnDownload">Save & Download JSON</button>
                 <button type="button" class="btn btn-primary" id="btnPublish">Save & Publish Live</button>
@@ -176,6 +175,7 @@
                 content = data;
                 if (!content.modules) content.modules = { ...DEFAULT_MODULES };
                 MODULE_IDS.forEach(m => { if (content.modules[m] === undefined) content.modules[m] = true; });
+                if (content.mediaBaseUrl == null) content.mediaBaseUrl = '';
             }
         } catch (e) {
             console.error('Load content:', e);
@@ -211,6 +211,13 @@
         el.innerHTML = `
             <h3>Show / hide modules on the site</h3>
             <p style="color:#888;margin-bottom:24px;font-size:14px;">Turn modules on or off. When off, the section is hidden on the live site.</p>
+            <div class="form-group" style="margin-bottom:24px;">
+                <label>Media base URL (optional)</label>
+                <input type="url" id="mediaBaseUrl" value="${escapeHtml(content.mediaBaseUrl || '')}" placeholder="https://storage.googleapis.com/YOUR_BUCKET">
+                <p style="color:#777;font-size:12px;margin-top:8px;line-height:1.4;">
+                    If you use filenames like <code style="color:#bbb;">portfolio/uploads/images/.../file.png</code> in the CMS, the live site will automatically prefix them with this base URL.
+                </p>
+            </div>
             ${MODULE_IDS.map(m => `
                 <div class="form-row" style="align-items:center;">
                     <label style="margin:0;flex:1;color:#e5e5e5;">${m === 'aboutMe' ? 'About Me' : m.charAt(0).toUpperCase() + m.slice(1)}</label>
@@ -218,6 +225,8 @@
                 </div>
             `).join('')}
         `;
+        const baseInput = el.querySelector('#mediaBaseUrl');
+        if (baseInput) baseInput.addEventListener('input', () => { content.mediaBaseUrl = baseInput.value; });
         el.querySelectorAll('.module-checkbox').forEach(cb => {
             cb.addEventListener('change', () => { content.modules[cb.dataset.module] = cb.checked; });
         });
@@ -249,7 +258,7 @@
             <div class="form-group">
                 <label>CV file (Download CV link)</label>
                 <div class="file-upload-row">
-                    <input type="text" id="headerCvFile" value="${escapeHtml(h.cvFile || '')}" placeholder="cv.pdf or Cloudinary URL">
+                    <input type="text" id="headerCvFile" value="${escapeHtml(h.cvFile || '')}" placeholder="cv.pdf, portfolio/... or full URL">
                     <button type="button" class="btn-upload" data-upload="headerCvFile" data-type="raw">Upload</button>
                 </div>
             </div>
@@ -791,33 +800,57 @@
         setTimeout(() => el.classList.remove('show'), 3000);
     }
 
-    function openCloudinaryUpload(fieldId, resourceType) {
-        const rt = (resourceType === 'raw') ? 'raw' : (resourceType === 'video') ? 'video' : (resourceType === 'auto') ? 'auto' : 'image';
-        if (typeof cloudinary === 'undefined') { toast('Cloudinary loading…'); return; }
-        const widget = cloudinary.createUploadWidget({
-            cloudName: 'dnbmyyc9x',
-            uploadPreset: 'ml_default',
-            sources: ['local', 'url', 'camera'],
-            resourceType: rt,
-            multiple: false
-        }, (err, result) => {
-            if (err) return;
-            if (result && result.event === 'success') {
-                const url = result.info.secure_url;
+    async function openGoogleUpload(fieldId, resourceType) {
+        const input = document.createElement('input');
+        input.type = 'file';
+        if (resourceType === 'image') input.accept = 'image/*';
+        else if (resourceType === 'video') input.accept = 'video/*,audio/*';
+        else if (resourceType === 'raw') input.accept = '*/*';
+        else input.accept = '*/*';
+
+        input.onchange = async () => {
+            const file = input.files && input.files[0];
+            if (!file) return;
+            try {
+                toast('Signing upload…');
+                const signRes = await fetch('/api/gcs-sign', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        fileName: file.name,
+                        contentType: file.type || 'application/octet-stream',
+                        resourceType: resourceType || 'raw'
+                    })
+                });
+                const signed = await signRes.json().catch(() => ({}));
+                if (!signRes.ok) throw new Error(signed.error || signed.details || signRes.statusText);
+                if (!signed.uploadUrl || !signed.path) throw new Error('Invalid signed upload response');
+
+                toast('Uploading…');
+                const putRes = await fetch(signed.uploadUrl, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': file.type || 'application/octet-stream' },
+                    body: file
+                });
+                if (!putRes.ok) throw new Error('Upload failed (' + putRes.status + ')');
+
                 const el = document.getElementById(fieldId);
                 if (el) {
-                    el.value = url;
+                    // Store path (relative) so it works with mediaBaseUrl
+                    el.value = signed.path;
                     el.dispatchEvent(new Event('input'));
                 }
                 toast('Uploaded');
+            } catch (e) {
+                toast('Upload failed: ' + e.message);
             }
-        });
-        widget.open();
+        };
+        input.click();
     }
 
     document.getElementById('cmsContent').addEventListener('click', function(e) {
         const btn = e.target.closest('.btn-upload');
-        if (btn && btn.dataset.upload) openCloudinaryUpload(btn.dataset.upload, btn.dataset.type || 'image');
+        if (btn && btn.dataset.upload) openGoogleUpload(btn.dataset.upload, btn.dataset.type || 'image');
     });
 
     buildContentPanels();

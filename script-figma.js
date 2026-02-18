@@ -2,6 +2,28 @@
 // LOCKED PRODUCTION VERSION – hero parallax, scroll spacer, about me, experience
 // ===================================
 
+function isAbsoluteMediaUrl(s) {
+    if (!s) return false;
+    const v = String(s).trim().toLowerCase();
+    return v.startsWith('http://') || v.startsWith('https://') || v.startsWith('data:') || v.startsWith('blob:');
+}
+
+function joinUrl(base, path) {
+    const b = String(base || '').trim().replace(/\/+$/, '');
+    const p = String(path || '').trim().replace(/^\/+/, '');
+    if (!b) return p;
+    if (!p) return b;
+    return `${b}/${p}`;
+}
+
+function resolveMediaUrl(value) {
+    if (value == null) return '';
+    const v = String(value).trim();
+    if (!v) return '';
+    if (isAbsoluteMediaUrl(v) || v.startsWith('#')) return v;
+    return joinUrl(window.MEDIA_BASE_URL, v);
+}
+
 // SOFT POSITION-DOWN ON SCROLL (hero + about me, same animation)
 
 let parallaxTicking = false;
@@ -1231,7 +1253,7 @@ function loadProjectContent(projectData, projectName) {
         if (projectData.media.hero && projectData.media.hero.trim()) {
             if (modalHero) {
                 modalHero.style.display = 'block';
-                const heroFile = projectData.media.hero.trim();
+                const heroFile = resolveMediaUrl(projectData.media.hero.trim());
                 const heroPath = heroFile.split('?')[0].split('#')[0];
                 const heroExt = heroPath.split('.').pop().toLowerCase();
                 
@@ -1253,7 +1275,7 @@ function loadProjectContent(projectData, projectName) {
         if (projectData.media.grid && projectData.media.grid.length > 0 && modalGrid) {
             modalGrid.style.display = 'block';
             modalGrid.innerHTML = projectData.media.grid.map(file => {
-                const url = (file || '').trim();
+                const url = resolveMediaUrl((file || '').trim());
                 const pathOnly = url.split('?')[0].split('#')[0];
                 const ext = pathOnly ? pathOnly.split('.').pop().toLowerCase() : '';
                 const isVideo = ext === 'mp4' || ext === 'webm' || ext === 'mov';

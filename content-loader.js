@@ -2,6 +2,28 @@
 // CONTENT LOADER (locked) – content.json, hero, about me, experience, projects, footer
 // ===================================
 
+function isAbsoluteMediaUrl(s) {
+    if (!s) return false;
+    const v = String(s).trim().toLowerCase();
+    return v.startsWith('http://') || v.startsWith('https://') || v.startsWith('data:') || v.startsWith('blob:');
+}
+
+function joinUrl(base, path) {
+    const b = String(base || '').trim().replace(/\/+$/, '');
+    const p = String(path || '').trim().replace(/^\/+/, '');
+    if (!b) return p;
+    if (!p) return b;
+    return `${b}/${p}`;
+}
+
+function resolveMediaUrl(value, mediaBaseUrl) {
+    if (value == null) return '';
+    const v = String(value).trim();
+    if (!v) return '';
+    if (isAbsoluteMediaUrl(v) || v.startsWith('#')) return v;
+    return joinUrl(mediaBaseUrl, v);
+}
+
 function escapeHtml(s) {
     if (s == null) return '';
     const div = document.createElement('div');
@@ -30,15 +52,17 @@ async function loadContent() {
         console.error('Error loading content:', error);
     }
     try {
+        const mediaBaseUrl = (content.mediaBaseUrl || '').trim();
+        window.MEDIA_BASE_URL = mediaBaseUrl;
         const modules = content.modules || {};
-        updateHero(content.hero || FALLBACK_HERO);
-        updateAboutMe(content.aboutMe || FALLBACK_ABOUT);
-        if (content.music) updateMusic(content.music);
-        if (content.reel) updateReel(content.reel);
-        if (content.header) updateHeader(content.header);
-        if (content.projects) updateProjects(content.projects);
+        updateHero(content.hero || FALLBACK_HERO, mediaBaseUrl);
+        updateAboutMe(content.aboutMe || FALLBACK_ABOUT, mediaBaseUrl);
+        if (content.music) updateMusic(content.music, mediaBaseUrl);
+        if (content.reel) updateReel(content.reel, mediaBaseUrl);
+        if (content.header) updateHeader(content.header, mediaBaseUrl);
+        if (content.projects) updateProjects(content.projects, mediaBaseUrl);
         if (content.experience) updateExperience(content.experience);
-        if (content.footer) updateFooter(content.footer);
+        if (content.footer) updateFooter(content.footer, mediaBaseUrl);
         if (modules.analytics !== false && content.analytics && content.analytics.script && content.analytics.script.trim()) {
             injectAnalyticsScript(content.analytics.script.trim());
         }
@@ -64,7 +88,7 @@ function applyModules(modules) {
 }
 
 // Update Hero Section (CMS only – no fallback to HTML)
-function updateHero(hero) {
+function updateHero(hero, mediaBaseUrl) {
     const heroName = document.getElementById('heroName');
     if (heroName && hero.name) heroName.innerHTML = escapeHtml(hero.name);
     
@@ -72,7 +96,10 @@ function updateHero(hero) {
     if (heroSubtitle && hero.subtitle != null) heroSubtitle.textContent = hero.subtitle;
     
     const heroPhoto = document.getElementById('heroPhoto');
-    if (heroPhoto && hero.photo) heroPhoto.style.backgroundImage = `url('${escapeAttr(hero.photo)}')`;
+    if (heroPhoto && hero.photo) {
+        const url = resolveMediaUrl(hero.photo, mediaBaseUrl);
+        heroPhoto.style.backgroundImage = `url('${escapeAttr(url)}')`;
+    }
     
     const tagsGrid = document.getElementById('tagsGrid');
     if (tagsGrid) {
@@ -86,10 +113,10 @@ function updateHero(hero) {
 }
 
 // Update About Me (hero-about overlay only)
-function updateAboutMe(aboutMe) {
+function updateAboutMe(aboutMe, mediaBaseUrl) {
     const heroAboutPhoto = document.getElementById('heroAboutPhotoImg');
     if (heroAboutPhoto && aboutMe.photo) {
-        heroAboutPhoto.src = aboutMe.photo;
+        heroAboutPhoto.src = resolveMediaUrl(aboutMe.photo, mediaBaseUrl);
         heroAboutPhoto.alt = 'Spiros Leividiotis';
     }
     const heroAboutText = document.getElementById('heroAboutText');
@@ -99,12 +126,12 @@ function updateAboutMe(aboutMe) {
 }
 
 // Update Music Player
-function updateMusic(music) {
+function updateMusic(music, mediaBaseUrl) {
     const musicTitle = document.querySelector('.player-title');
     if (musicTitle) musicTitle.textContent = music.title;
     
     const audioPlayer = document.getElementById('audioPlayer');
-    if (audioPlayer) audioPlayer.src = music.file;
+    if (audioPlayer) audioPlayer.src = resolveMediaUrl(music.file, mediaBaseUrl);
 }
 
 // Inject analytics script (views & location visible in your GA/Plausible dashboard)
@@ -121,16 +148,17 @@ function injectAnalyticsScript(scriptHtml) {
 }
 
 // Update Reel (modal + inline reel area)
-function updateReel(reel) {
+function updateReel(reel, mediaBaseUrl) {
+    const reelUrl = reel && reel.file ? resolveMediaUrl(reel.file, mediaBaseUrl) : '';
     const modalSource = document.querySelector('#videoPlayerElement source');
-    if (modalSource && reel.file) {
-        modalSource.src = reel.file;
+    if (modalSource && reelUrl) {
+        modalSource.src = reelUrl;
         const modalVideo = document.getElementById('videoPlayerElement');
         if (modalVideo) modalVideo.load();
     }
     const inlineVideo = document.getElementById('reelInlineVideo');
-    if (inlineVideo && reel.file) {
-        inlineVideo.src = reel.file;
+    if (inlineVideo && reelUrl) {
+        inlineVideo.src = reelUrl;
         inlineVideo.load();
         inlineVideo.pause();
         inlineVideo.currentTime = 0;
@@ -143,7 +171,7 @@ function updateReel(reel) {
 }
 
 // Update Header (4 links: About me, Experience, Reel, Projects)
-function updateHeader(header) {
+function updateHeader(header, mediaBaseUrl) {
     const location = document.querySelector('.location');
     if (location) {
         const locText = (header.location.text || '').trim();
@@ -152,7 +180,7 @@ function updateHeader(header) {
     }
     
     const footerCvLink = document.querySelector('.footer-left a[href*="cv"], .footer-left a[href*=".pdf"]');
-    if (footerCvLink && header.cvFile) footerCvLink.href = header.cvFile;
+    if (footerCvLink && header.cvFile) footerCvLink.href = resolveMediaUrl(header.cvFile, mediaBaseUrl);
     
     const nav = header.navigation && header.navigation.length ? header.navigation : [
         { text: 'about me', href: '#' },
@@ -189,26 +217,27 @@ function updateHeader(header) {
 }
 
 // Update Projects
-function updateProjects(projects) {
+function updateProjects(projects, mediaBaseUrl) {
     const workGrid = document.querySelector('.work-grid');
     if (!workGrid) return;
     
     workGrid.innerHTML = projects.map((project, index) => {
         const hasPreview = project.cardPreview && project.cardPreview.trim();
         // Strip query/hash for extension (e.g. Cloudinary URLs) so .gif?x=y is treated as image
-        const pathOnly = hasPreview ? project.cardPreview.split('?')[0].split('#')[0] : '';
+        const resolvedPreview = hasPreview ? resolveMediaUrl(project.cardPreview, mediaBaseUrl) : '';
+        const pathOnly = resolvedPreview ? resolvedPreview.split('?')[0].split('#')[0] : '';
         const fileExt = pathOnly ? pathOnly.split('.').pop().toLowerCase() : '';
         const isVideo = fileExt === 'mp4' || fileExt === 'webm' || fileExt === 'mov';
         const isHtml = fileExt === 'html';
-        const previewUrl = project.cardPreview || '';
+        const previewUrl = resolvedPreview || '';
         const lazyLoad = index >= 2 ? ' loading="lazy"' : '';
         return `
         <article class="work-card" ${project.passwordProtected ? 'data-password-protected="true"' : ''} data-project-id="${project.id}">
             <div class="work-visual work-color-${index + 1}" style="background: ${hasPreview ? 'transparent' : project.color};">
                 ${hasPreview ? (isHtml ?
-                    `<iframe src="${project.cardPreview}"${lazyLoad} style="width: 100%; height: 100%; border: none; position: absolute; top: 0; left: 0; pointer-events: none;"></iframe>` :
+                    `<iframe src="${previewUrl}"${lazyLoad} style="width: 100%; height: 100%; border: none; position: absolute; top: 0; left: 0; pointer-events: none;"></iframe>` :
                     isVideo ? 
-                    `<video src="${project.cardPreview}" autoplay loop muted playsinline${lazyLoad ? ' loading="lazy"' : ''} style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;"></video>` :
+                    `<video src="${previewUrl}" autoplay loop muted playsinline${lazyLoad ? ' loading="lazy"' : ''} style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;"></video>` :
                     `<img src="${previewUrl}" alt="${project.name}"${lazyLoad} decoding="async" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">`) : ''}
             </div>
             <div class="project-info">
@@ -268,7 +297,7 @@ function updateExperience(experience) {
 }
 
 // Update Footer (left = logo + cv + email, right = social)
-function updateFooter(footer) {
+function updateFooter(footer, mediaBaseUrl) {
     const footerEmail = document.querySelector('.footer-email');
     if (footerEmail) {
         footerEmail.textContent = footer.email;
@@ -284,10 +313,10 @@ function updateFooter(footer) {
     });
     
     const footerLogo = document.querySelector('.footer-logo-circle');
-    if (footerLogo && footer.logo) footerLogo.src = footer.logo;
+    if (footerLogo && footer.logo) footerLogo.src = resolveMediaUrl(footer.logo, mediaBaseUrl);
     
     const cvLink = document.querySelector('.footer-left a[href*="cv"], .footer-left a[href*=".pdf"]');
-    if (cvLink && footer.cvFile) cvLink.href = footer.cvFile;
+    if (cvLink && footer.cvFile) cvLink.href = resolveMediaUrl(footer.cvFile, mediaBaseUrl);
 }
 
 // Helper: Render project body (structured or fallback to bodyHtml)
