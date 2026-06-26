@@ -53,7 +53,7 @@
       "text": "Amsterdam",
       "link": "https://open.spotify.com/track/2KvbLliAjjZNOipthec7Fh?si=885ff3e35661451e"
     },
-    "cvFile": "cv.pdf"
+    "cvFile": "/uploads/docs/Spiros_Leividiotis_CV_2026.pdf"
   },
   "aboutMe": {
     "photo": "about-photo.png",
@@ -604,7 +604,7 @@
       }
     ],
     "logo": "footer-logo.png",
-    "cvFile": "cv.pdf",
+    "cvFile": "/uploads/docs/Spiros_Leividiotis_CV_2026.pdf",
     "year": "2026"
   }
 }
