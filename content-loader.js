@@ -61,7 +61,7 @@ async function loadContent() {
         if (content.reel) updateReel(content.reel, mediaBaseUrl);
         if (content.header) updateHeader(content.header, mediaBaseUrl);
         if (content.projects) updateProjects(content.projects, mediaBaseUrl);
-        if (content.experience) updateExperience(content.experience);
+        if (content.experience) updateExperience(content.experience, content.experienceLink);
         if (content.footer) updateFooter(content.footer, mediaBaseUrl);
         if (modules.analytics !== false && content.analytics && content.analytics.script && content.analytics.script.trim()) {
             injectAnalyticsScript(content.analytics.script.trim());
@@ -271,7 +271,7 @@ function updateProjects(projects, mediaBaseUrl) {
 }
 
 // Update Experience (flat list: one row per role, description on first row only)
-function updateExperience(experience) {
+function updateExperience(experience, experienceLink) {
     const rowsEl = document.querySelector('.experience-rows');
     if (!rowsEl || !experience.length) return;
     
@@ -306,6 +306,14 @@ function updateExperience(experience) {
             `);
         });
     });
+    if (experienceLink && experienceLink.url) {
+        const linkText = escapeHtml(experienceLink.text || 'Earlier experience');
+        const linkUrl = escapeAttr(experienceLink.url);
+        rows.push(`
+            <a class="experience-more-link" href="${linkUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>
+        `);
+    }
+
     rowsEl.innerHTML = rows.join('');
     window.experienceData = experience;
 }

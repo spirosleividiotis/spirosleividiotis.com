@@ -701,6 +701,24 @@ section {
     flex-shrink: 0;
 }
 
+.experience-more-link {
+    display: block;
+    width: 100%;
+    padding: 28px 0 0;
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 118.44%;
+    color: #FFFFFF;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: opacity 0.2s ease;
+}
+
+.experience-more-link:hover {
+    opacity: 0.6;
+}
+
 /* ===================================
    REEL SECTION (Figma: 25px 48px 100px, title + video placeholder)
    =================================== */
