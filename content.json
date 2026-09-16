@@ -58,9 +58,11 @@
   "aboutMe": {
     "photo": "about-photo.png",
     "bio": [
-      "I'm Spiros, a Staff Product Motion Designer based in Amsterdam, working at the intersection of product design, animation, and design systems. I use motion as a functional tool to clarify interactions, reinforce hierarchy, and improve usability at scale.",
-      "Currently at Qonto, I built the motion design system from scratch and collaborate closely with product designers, design systems leads, and engineers. I focus on building reusable, well-documented motion patterns that teams can confidently use across complex products from Rive prototypes and Lottie pipelines to motion tokens and implementation specs.",
-      "Outside of work, I spend a lot of time cycling and hanging out with Finn, my westie - who has strong opinions about walk schedules and absolutely none about motion design. I care deeply about craft, consistency, and pragmatism, and I believe great motion should feel invisible: intentional, purposeful, and grounded in real user needs.\n"
+      "I'm a Motion Designer working across brand, product, and storytelling.",
+      "I create motion experiences that help companies communicate ideas, launch products, and build memorable customer experiences \u2014 from campaign films and product storytelling to web experiences, motion systems, and implementation-ready animations.",
+      "My work combines creative direction, motion design, and scalable frameworks, helping teams move consistently across every touchpoint while keeping craft and clarity at the centre.",
+      "Currently at Mollie, shaping how the company moves across brand, product, web, and marketing experiences.",
+      "Previously at Qonto, where I built the motion design system from scratch and established the foundations for motion at scale."
     ]
   },
   "music": {
