@@ -530,6 +530,21 @@
   ],
   "experience": [
     {
+      "id": "mollie",
+      "company": "Mollie",
+      "image": "experience-mollie.png",
+      "roles": [
+        {
+          "title": "Senior Brand Design Manager - Motion",
+          "period": {
+            "start": "2026",
+            "end": "Now"
+          },
+          "description": "- Defining and scaling Mollie's motion language across product, brand, web, marketing\n- Building foundational motion guidelines, systems, and reusable animation frameworks\n- Creating launch videos, campaign assets, product storytelling, and implementation-ready motion experiences"
+        }
+      ]
+    },
+    {
       "id": "portfolio",
       "company": "Qonto",
       "image": "experience-portfolio.png",
@@ -538,7 +553,7 @@
           "title": "Staff Motion Designer, Design System",
           "period": {
             "start": "2025",
-            "end": "Now"
+            "end": "2026"
           },
           "description": "- Built motion design system: interaction patterns, timing tokens, easing curves, semantic language\n- Established Lottie/Rive pipelines enabling autonomous adoption across 20+ designers and 50+ engineers\n- Partnered with design systems and engineering on implementation, QA, and performance optimization\n- Co-led vibe coding initiative; built internal tools with AI-assisted workflows for faster iteration"
         },
