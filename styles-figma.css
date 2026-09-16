@@ -401,6 +401,17 @@ section {
     margin-bottom: 0;
 }
 
+.hero-about-inline-link {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity 0.2s ease;
+}
+
+.hero-about-inline-link:hover {
+    opacity: 0.6;
+}
+
 /* Name row: left-aligned at all screen sizes */
 .hero-name-wrapper {
     position: relative;

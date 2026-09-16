@@ -121,7 +121,19 @@ function updateAboutMe(aboutMe, mediaBaseUrl) {
     }
     const heroAboutText = document.getElementById('heroAboutText');
     if (heroAboutText && Array.isArray(aboutMe.bio)) {
-        heroAboutText.innerHTML = aboutMe.bio.map(p => `<p>${escapeHtml(p)}</p>`).join('');
+        const bioLinks = aboutMe.bioLinks || {};
+        heroAboutText.innerHTML = aboutMe.bio.map(p => {
+            let escaped = escapeHtml(p);
+            Object.keys(bioLinks).forEach((word) => {
+                const url = bioLinks[word];
+                if (!url) return;
+                const escapedWord = escapeHtml(word);
+                const safeUrl = escapeAttr(url);
+                const wordRe = new RegExp('\\b' + escapedWord.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b');
+                escaped = escaped.replace(wordRe, `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="hero-about-inline-link">${escapedWord}</a>`);
+            });
+            return `<p>${escaped}</p>`;
+        }).join('');
     }
 }
 

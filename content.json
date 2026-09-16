@@ -64,7 +64,11 @@
       "Currently at Mollie, shaping how the company moves across brand, product, web, and marketing experiences, while building the foundations of its motion system.",
       "Previously at Qonto, where I built the motion design system from scratch and established the foundations for motion at scale.",
       "Outside of work, I spend a lot of time cycling and hanging out with Finn, my westie - who has strong opinions about walk schedules and absolutely none about motion design. I care deeply about craft, consistency, and pragmatism, and I believe great motion should feel invisible: intentional, purposeful, and grounded in real user needs."
-    ]
+    ],
+    "bioLinks": {
+      "Mollie": "https://www.mollie.com/",
+      "Qonto": "https://www.qonto.com"
+    }
   },
   "music": {
     "title": "Lost in Amsterdam \u2014 Parov Stelar",
