@@ -310,7 +310,12 @@ function updateExperience(experience, experienceLink) {
         const linkText = escapeHtml(experienceLink.text || 'Earlier experience');
         const linkUrl = escapeAttr(experienceLink.url);
         rows.push(`
-            <a class="experience-more-link" href="${linkUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>
+            <a class="experience-more-link" href="${linkUrl}" target="_blank" rel="noopener noreferrer">
+                <span>${linkText}</span>
+                <svg class="experience-more-link-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M3 11L11 3M11 3H4M11 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
         `);
     }
 

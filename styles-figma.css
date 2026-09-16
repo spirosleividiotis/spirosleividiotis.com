@@ -702,21 +702,26 @@ section {
 }
 
 .experience-more-link {
-    display: block;
-    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: auto;
     padding: 28px 0 0;
     font-family: var(--font-primary);
     font-weight: 700;
-    font-size: 18px;
-    line-height: 118.44%;
-    color: #FFFFFF;
-    text-decoration: underline;
-    text-underline-offset: 4px;
+    font-size: 16px;
+    line-height: 19px;
+    color: #777777;
+    text-decoration: none;
     transition: opacity 0.2s ease;
 }
 
 .experience-more-link:hover {
     opacity: 0.6;
+}
+
+.experience-more-link-arrow {
+    flex-shrink: 0;
 }
 
 /* ===================================
